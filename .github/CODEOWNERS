@@ -1,0 +1,20 @@
+# Pull requests that touch these paths need Robin's approval before merging.
+# Everything else can be merged by its author once the checks pass.
+# Why: these files can break every page, the database or the checks themselves.
+# See AGENTS.md, "Reserved areas".
+
+/.github/                   @doodsito
+/supabase/                  @doodsito
+/package.json               @doodsito
+/.gitattributes             @doodsito
+/.gitignore                 @doodsito
+/.nvmrc                     @doodsito
+/AGENTS.md                  @doodsito
+/CLAUDE.md                  @doodsito
+/LICENSE                    @doodsito
+/apps/web/eslint.config.js  @doodsito
+/apps/web/tsconfig.json     @doodsito
+/apps/web/vite.config.ts    @doodsito
+/apps/web/components.json   @doodsito
+/apps/web/.prettierrc       @doodsito
+/apps/web/.prettierignore   @doodsito
