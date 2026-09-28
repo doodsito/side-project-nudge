@@ -101,6 +101,10 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 - Reuse before adding: look in `components/ui/` and the atomic folders before
   creating a component, and in `apps/web/package.json` before adding a
   dependency. Justify any new dependency in the pull request.
+- `components/ui/` only holds the primitives the site uses. If you need a
+  standard one (dialog, tabs, select...), add it with
+  `npx shadcn@latest add <name>` inside `apps/web/` instead of writing it by
+  hand.
 
 ## Product rules
 
