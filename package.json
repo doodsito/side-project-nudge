@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm run dev -w @nudge/web",
     "build": "npm run build -w @nudge/web",
-    "preview": "npm run preview -w @nudge/web",
+    "start": "npm run start -w @nudge/web",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "format": "npm run format --workspaces --if-present"
