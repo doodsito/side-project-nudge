@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789447297726,
+      "tag": "0000_create_beta_signups",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789447409951,
+      "tag": "0001_add_beta_profile_capture",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789447423414,
+      "tag": "0002_add_beta_signup_capture_function",
+      "breakpoints": true
+    }
+  ]
+}
