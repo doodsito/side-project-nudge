@@ -2,14 +2,12 @@
 node_modules/
 
 # Build output
-dist/
-dist-ssr/
-.output/
-.vinxi/
-.nitro/
-.tanstack/
+.next/
+out/
+build/
 .vercel/
 *.tsbuildinfo
+next-env.d.ts
 
 # Environment variables: only .env.example files are committed
 .env

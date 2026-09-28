@@ -15,8 +15,5 @@
   },
   "engines": {
     "node": ">=22"
-  },
-  "overrides": {
-    "rolldown": "1.2.1"
   }
 }

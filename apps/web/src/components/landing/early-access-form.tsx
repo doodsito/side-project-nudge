@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, type FormEvent } from "react";
 import { Check, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { BrainCircuit, CircleDollarSign, Flame, ShieldCheck, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,14 +18,11 @@ export function AnimatedNumber({
 }) {
   const [value, setValue] = useState(from);
   useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setValue(to);
-      return;
-    }
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const started = performance.now();
     let frame = 0;
     const tick = (now: number) => {
-      const progress = Math.min((now - started) / 1100, 1);
+      const progress = reduceMotion ? 1 : Math.min((now - started) / 1100, 1);
       setValue(Math.round(from + (to - from) * (1 - Math.pow(1 - progress, 3))));
       if (progress < 1) frame = requestAnimationFrame(tick);
     };

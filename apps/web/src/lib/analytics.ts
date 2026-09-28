@@ -57,8 +57,7 @@ export function track(event: AnalyticsEvent, props: Props = {}) {
     /* analytics must never break the page */
   }
 
-  if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
+  if (process.env.NODE_ENV === "development") {
     console.info(`[analytics] ${event}`, payload);
   }
 }

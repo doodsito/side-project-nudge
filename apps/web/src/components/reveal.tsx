@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,10 +10,6 @@ export function useInView<T extends HTMLElement>(threshold = 0.15) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
