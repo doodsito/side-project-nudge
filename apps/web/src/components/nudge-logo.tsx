@@ -1,5 +1,3 @@
-import iconAsset from "@/assets/nudge-icon.png.asset.json";
-import fullAsset from "@/assets/nudge-logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
 type NudgeLogoProps = {
@@ -11,7 +9,7 @@ type NudgeLogoProps = {
 export function NudgeLogo({ iconOnly = false, small = false, className }: NudgeLogoProps) {
   return (
     <img
-      src={iconOnly ? iconAsset.url : fullAsset.url}
+      src={iconOnly ? "/brand/nudge-icon.png" : "/brand/nudge-logo.png"}
       alt={iconOnly ? "Nudge" : "Nudge logo"}
       width={iconOnly ? 447 : 885}
       height={iconOnly ? 434 : 266}
