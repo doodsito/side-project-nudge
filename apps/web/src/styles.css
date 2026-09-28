@@ -237,10 +237,18 @@
   animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.hero-stagger > *:nth-child(2) { animation-delay: 80ms; }
-.hero-stagger > *:nth-child(3) { animation-delay: 150ms; }
-.hero-stagger > *:nth-child(4) { animation-delay: 220ms; }
-.hero-stagger > *:nth-child(5) { animation-delay: 290ms; }
+.hero-stagger > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.hero-stagger > *:nth-child(3) {
+  animation-delay: 150ms;
+}
+.hero-stagger > *:nth-child(4) {
+  animation-delay: 220ms;
+}
+.hero-stagger > *:nth-child(5) {
+  animation-delay: 290ms;
+}
 
 .chart-line {
   stroke-dasharray: 1;
@@ -269,9 +277,22 @@
   animation: ready 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes chart-appear { to { opacity: 1; } }
-@keyframes stat-appear { to { opacity: 1; transform: translateY(0); } }
-@keyframes ready { 50% { transform: scale(1.015); } }
+@keyframes chart-appear {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes stat-appear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ready {
+  50% {
+    transform: scale(1.015);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
