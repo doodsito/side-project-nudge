@@ -1,29 +1,65 @@
-# Welcome to your Lovable project
+# Nudge
 
-This project was built with [Lovable](https://lovable.dev).
+Nudge is a gamified investing-education app for young working adults who know
+they should invest but have never started. You practise real investing
+decisions with virtual money, then get feedback on your reasoning. It is
+education, never financial advice: Nudge does not recommend securities, take
+commissions or touch real money.
 
-## Build with Lovable
+This repository holds everything: the website (the landing page today, the web
+app and dashboards later), the database schema and the team docs. A native
+mobile app will join it later. The website will live at
+https://nudge.doodsito.com.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Where things are
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+| Folder | What it holds |
+|---|---|
+| `apps/web/` | The website: landing page now, web app and dashboards later |
+| `packages/` | Code shared between apps. Empty until the mobile app starts |
+| `supabase/` | Database schema and migrations (arrives with the waitlist) |
+| `docs/` | How we work: workflow, UI rules, roadmap and journal |
+| `.github/` | Automatic checks, pull request template and code owners |
 
-## Development
+## Run it on your computer
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js 22 or later and npm. Run every command from the repository
+root.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
 
-## Built with
+The site opens at http://localhost:8080. To try the waitlist form, copy
+`apps/web/.env.example` to `apps/web/.env.local` and fill in the two values
+(ask Robin: they are public, not secret). Without them the site works and only
+the form shows an error.
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+| Command | What it does |
+|---|---|
+| `npm run dev` | Starts the site with live reload at http://localhost:8080 |
+| `npm run build` | Builds the production version |
+| `npm start` | Serves that build at http://localhost:3000 |
+| `npm run lint` | Checks code style and the UI import rules |
+| `npm run typecheck` | Checks TypeScript types |
+| `npm run format` | Reformats the code with Prettier |
+
+## Working on Nudge
+
+Read [docs/workflow.md](docs/workflow.md) before your first change. In short:
+every change goes through a branch and a pull request, the automatic checks must
+pass, and each pull request adds a short entry to the [journal](docs/journal/).
+
+AI agents (Claude Code, Codex) follow [AGENTS.md](AGENTS.md).
+
+## Stack
+
+- [TanStack Start](https://tanstack.com/start) with React 19 and Vite (not Next.js)
+- Tailwind CSS v4, with the design tokens in `apps/web/src/styles.css`
+- shadcn/ui components built on Radix
+- Supabase for the database, Vercel for hosting
+
+## License
+
+All rights reserved. See [LICENSE](LICENSE).
