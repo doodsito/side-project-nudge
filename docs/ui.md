@@ -67,6 +67,11 @@ level.
 
 ## Current state
 
+`components/ui/` only holds what the site uses today (accordion, button,
+input); add the others from shadcn when you need them. The atomic folders are
+empty apart from a README each: the first components will land there when the
+landing page is split.
+
 The landing page and the practice flow were built before these rules, in
 `components/landing/` and `components/practice/`. They will be split into the
 levels above in a dedicated task (see the [roadmap](roadmap.md)). Until then, do
