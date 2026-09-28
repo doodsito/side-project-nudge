@@ -31,14 +31,14 @@ npm install
 npm run dev
 ```
 
-The site opens at http://localhost:8080. To try the waitlist form, copy
+The site opens at http://localhost:3000. To try the waitlist form, copy
 `apps/web/.env.example` to `apps/web/.env.local` and fill in the two values
 (ask Robin: they are public, not secret). Without them the site works and only
 the form shows an error.
 
 | Command | What it does |
 |---|---|
-| `npm run dev` | Starts the site with live reload at http://localhost:8080 |
+| `npm run dev` | Starts the site with live reload at http://localhost:3000 |
 | `npm run build` | Builds the production version |
 | `npm start` | Serves that build at http://localhost:3000 |
 | `npm run lint` | Checks code style and the UI import rules |
@@ -55,7 +55,7 @@ AI agents (Claude Code, Codex) follow [AGENTS.md](AGENTS.md).
 
 ## Stack
 
-- [TanStack Start](https://tanstack.com/start) with React 19 and Vite (not Next.js)
+- [Next.js](https://nextjs.org) 16 (App Router) with React 19
 - Tailwind CSS v4, with the design tokens in `apps/web/src/styles.css`
 - shadcn/ui components built on Radix
 - Supabase for the database, Vercel for hosting

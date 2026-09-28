@@ -23,7 +23,7 @@ you read what it did, open the preview and decide to merge.
 
 6. Copy `apps/web/.env.example` to `apps/web/.env.local` and fill in the two
    values. Ask Robin for them: they are public, not secret.
-7. Run `npm run dev` and check that the site opens at http://localhost:8080.
+7. Run `npm run dev` and check that the site opens at http://localhost:3000.
 
 ## Making a change, step by step
 
@@ -57,10 +57,5 @@ you read what it did, open the preview and decide to merge.
 
 ## Troubleshooting
 
-- **The build fails with "SyntaxError: Unexpected token" on route files
-  (Windows).** The folder path contains an apostrophe, for example a Windows
-  user name like `Rob'1`. The TanStack Router plugin writes file paths inside
-  quotes and breaks on it. Clone the repository into a folder whose path has no
-  apostrophe, such as `C:\dev\side-project-nudge`.
 - **The waitlist form shows an error on your computer.** `apps/web/.env.local`
   is missing or incomplete: see step 6 of the setup.
