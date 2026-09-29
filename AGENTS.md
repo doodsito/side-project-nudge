@@ -35,10 +35,6 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 | Documentation | `docs/` |
 | Code shared by several apps | `packages/`, only once the mobile app exists |
 
-`components/landing/` and `components/practice/` predate these rules and will
-be split into atomic levels in a dedicated task. Do not add files there; edit
-the existing ones only when the task requires it.
-
 ## Commands
 
 Run everything from the repository root.
