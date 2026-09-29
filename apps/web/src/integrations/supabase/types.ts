@@ -8,26 +8,26 @@ export type Database = {
   };
   public: {
     Tables: {
-      beta_signups: {
+      waitlist_signups: {
         Row: {
           created_at: string;
           email: string;
-          id: string;
-          profile: string | null;
+          id: number;
+          profile: string;
           source: string;
         };
         Insert: {
           created_at?: string;
           email: string;
-          id?: string;
-          profile?: string | null;
-          source?: string;
+          id?: never;
+          profile: string;
+          source: string;
         };
         Update: {
           created_at?: string;
           email?: string;
-          id?: string;
-          profile?: string | null;
+          id?: never;
+          profile?: string;
           source?: string;
         };
         Relationships: [];
@@ -37,12 +37,8 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      capture_beta_signup: {
-        Args: { _email: string; _source: string };
-        Returns: string;
-      };
-      set_beta_signup_profile: {
-        Args: { _profile: string; _signup_id: string };
+      join_waitlist: {
+        Args: { email: string; profile: string; source: string };
         Returns: undefined;
       };
     };

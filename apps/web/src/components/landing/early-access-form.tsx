@@ -4,26 +4,44 @@ import { useState, type FormEvent } from "react";
 import { Check, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/integrations/supabase/client";
+import { getSupabase } from "@/integrations/supabase/client";
 import { track } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
+
+const PROFILES = [
+  ["student", "Student"],
+  ["young_professional", "Young professional"],
+  ["other", "Other"],
+] as const;
+type Profile = (typeof PROFILES)[number][0];
 
 export function EarlyAccessForm() {
   const [email, setEmail] = useState("");
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profileMissing, setProfileMissing] = useState(false);
   const [status, setStatus] = useState<"idle" | "saving" | "complete" | "error">("idle");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.trim() || status === "saving") return;
+    if (!profile) {
+      setProfileMissing(true);
+      return;
+    }
     setStatus("saving");
     track("beta_signup_submitted", { source: "early_access" });
-    const { error } = await supabase.rpc("capture_beta_signup", {
-      _email: email.trim().toLowerCase(),
-      _source: "early_access",
-    });
-    if (error) {
+    try {
+      const { error } = await getSupabase().rpc("join_waitlist", {
+        email: email.trim().toLowerCase(),
+        profile,
+        source: "early_access",
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.error(error);
       setStatus("error");
       return;
     }
-    track("beta_signup_completed", { source: "early_access", profile: "not_shared" });
+    track("beta_signup_completed", { source: "early_access", profile });
     setStatus("complete");
   }
   if (status === "complete")
@@ -40,6 +58,40 @@ export function EarlyAccessForm() {
     );
   return (
     <form onSubmit={submit} className="w-full max-w-xl">
+      <fieldset className="mb-3">
+        <legend className="mb-2 text-sm font-bold">Which describes you best?</legend>
+        <div className="flex flex-wrap gap-2">
+          {PROFILES.map(([value, label]) => (
+            <label key={value} className="cursor-pointer">
+              <input
+                type="radio"
+                name="profile"
+                value={value}
+                checked={profile === value}
+                onChange={() => {
+                  setProfile(value);
+                  setProfileMissing(false);
+                }}
+                className="peer sr-only"
+              />
+              <span
+                className={cn(
+                  "inline-flex h-10 items-center rounded-full border border-border-strong bg-surface px-4 text-sm font-bold transition-colors",
+                  "peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground",
+                  "peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2",
+                )}
+              >
+                {label}
+              </span>
+            </label>
+          ))}
+        </div>
+        {profileMissing && (
+          <p className="mt-2 text-sm text-destructive" role="alert">
+            Choose the option that describes you best.
+          </p>
+        )}
+      </fieldset>
       <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
         <label htmlFor="early-access-email" className="sr-only">
           Email address
