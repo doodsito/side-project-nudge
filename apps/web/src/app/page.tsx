@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
-import {
-  BeforeAfter,
-  Benefits,
-  EarlyAccessSection,
-  FAQSection,
-  FinalCTA,
-  Footer,
-  HeroSection,
-  HowItWorks,
-  MiniChallenge,
-  Navbar,
-  ProblemStory,
-} from "@/components/landing/home-sections";
+import { BeforeAfter } from "@/components/organisms/before-after";
+import { Benefits } from "@/components/organisms/benefits";
+import { EarlyAccessSection } from "@/components/organisms/early-access-section";
+import { FAQSection } from "@/components/organisms/faq-section";
+import { FinalCTA } from "@/components/organisms/final-cta";
+import { HeroSection } from "@/components/organisms/hero-section";
+import { HowItWorks } from "@/components/organisms/how-it-works";
+import { MiniChallenge } from "@/components/organisms/mini-challenge";
+import { ProblemStory } from "@/components/organisms/problem-story";
+import { MarketingTemplate } from "@/components/templates/marketing-template";
 import { BRAND, SITE_URL } from "@/lib/brand";
 
-// Lives here rather than in home-sections.tsx: the FAQ structured data below is
+// Lives here rather than in faq-section.tsx: the FAQ structured data below is
 // built on the server, which cannot read values from a "use client" file.
 const FAQS: Array<[string, string]> = [
   [
@@ -66,8 +63,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Navbar />
-      <main>
+      <MarketingTemplate>
         <HeroSection />
         <ProblemStory />
         <Benefits />
@@ -77,8 +73,7 @@ export default function HomePage() {
         <FAQSection faqs={FAQS} />
         <FinalCTA />
         <EarlyAccessSection />
-      </main>
-      <Footer />
+      </MarketingTemplate>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

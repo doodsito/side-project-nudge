@@ -25,7 +25,9 @@ default metadata.
   `<head>` tag.
 - Link between pages with `Link` from `next/link`.
 - A page holds content and assembles components; the components themselves live
-  in `src/components/` (see `docs/ui.md`).
+  in `src/components/` (see `docs/ui.md`). The one exception is state that a
+  single page needs, such as `practice/practice-flow.tsx`: it sits next to that
+  page.
 - Next.js 16 changed some APIs: check the matching guide in
   `node_modules/next/dist/docs/` (at the repository root) before writing
   Next.js code.
