@@ -31,7 +31,7 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 | A helper that is not a component | `apps/web/src/lib/` |
 | Supabase access | `apps/web/src/integrations/supabase/` |
 | An image or other static file | `apps/web/public/` |
-| A database change | `supabase/migrations/` (reserved: ask Robin) |
+| A database change | `supabase/migrations/` (reserved: ask Robin): read `supabase/README.md` |
 | Documentation | `docs/` |
 | Code shared by several apps | `packages/`, only once the mobile app exists |
 

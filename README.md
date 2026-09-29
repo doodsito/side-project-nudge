@@ -17,7 +17,7 @@ https://nudge.doodsito.com.
 |---|---|
 | `apps/web/` | The website: landing page now, web app and dashboards later |
 | `packages/` | Code shared between apps. Empty until the mobile app starts |
-| `supabase/` | Database schema and migrations (arrives with the waitlist) |
+| `supabase/` | Database schema and migrations: see [supabase/README.md](supabase/README.md) |
 | `docs/` | How we work: workflow, UI rules, roadmap and journal |
 | `.github/` | Automatic checks, pull request template and code owners |
 

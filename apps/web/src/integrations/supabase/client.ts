@@ -1,69 +1,25 @@
 // Supabase client for the browser and the server. It only uses the publishable
 // key, which is public by design: it can do no more than the database's row
 // level security and functions allow. Never use a secret key in this app.
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-function isNewSupabaseApiKey(value: string): boolean {
-  return value.startsWith("sb_publishable_") || value.startsWith("sb_secret_");
-}
+let client: SupabaseClient<Database> | undefined;
 
-function createSupabaseFetch(supabaseKey: string): typeof fetch {
-  return (input, init) => {
-    const headers = new Headers(
-      typeof Request !== "undefined" && input instanceof Request ? input.headers : undefined,
-    );
-
-    if (init?.headers) {
-      new Headers(init.headers).forEach((value, key) => headers.set(key, value));
+// The client is created on first use, so pages still render when the variables
+// are missing; only the features that call Supabase fail. Use it like this:
+// import { getSupabase } from "@/integrations/supabase/client";
+export function getSupabase(): SupabaseClient<Database> {
+  if (!client) {
+    // Next.js inlines NEXT_PUBLIC_ variables at build time, for both the browser and the server.
+    const url = process.env["NEXT_PUBLIC_SUPABASE_URL"];
+    const publishableKey = process.env["NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"];
+    if (!url || !publishableKey) {
+      throw new Error(
+        "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY. See apps/web/.env.example.",
+      );
     }
-
-    // New Supabase API keys are opaque strings, not bearer JWTs.
-    if (
-      isNewSupabaseApiKey(supabaseKey) &&
-      headers.get("Authorization") === `Bearer ${supabaseKey}`
-    ) {
-      headers.delete("Authorization");
-    }
-
-    headers.set("apikey", supabaseKey);
-    return fetch(input, { ...init, headers });
-  };
-}
-
-function createSupabaseClient() {
-  // Next.js inlines NEXT_PUBLIC_ variables at build time, for both the browser and the server.
-  const SUPABASE_URL = process.env["NEXT_PUBLIC_SUPABASE_URL"];
-  const SUPABASE_PUBLISHABLE_KEY = process.env["NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"];
-
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    const missing = [
-      ...(!SUPABASE_URL ? ["NEXT_PUBLIC_SUPABASE_URL"] : []),
-      ...(!SUPABASE_PUBLISHABLE_KEY ? ["NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"] : []),
-    ];
-    const message = `Missing Supabase environment variable(s): ${missing.join(", ")}. See apps/web/.env.example.`;
-    console.error(`[Supabase] ${message}`);
-    throw new Error(message);
+    client = createClient<Database>(url, publishableKey);
   }
-
-  return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-    global: {
-      fetch: createSupabaseFetch(SUPABASE_PUBLISHABLE_KEY),
-    },
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-    },
-  });
+  return client;
 }
-
-let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
-
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
-  get(_, prop, receiver) {
-    if (!_supabase) _supabase = createSupabaseClient();
-    return Reflect.get(_supabase, prop, receiver);
-  },
-});
