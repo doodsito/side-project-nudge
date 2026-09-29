@@ -14,7 +14,8 @@
 /LICENSE                    @doodsito
 /apps/web/eslint.config.js  @doodsito
 /apps/web/tsconfig.json     @doodsito
-/apps/web/vite.config.ts    @doodsito
+/apps/web/next.config.ts    @doodsito
+/apps/web/postcss.config.mjs @doodsito
 /apps/web/components.json   @doodsito
 /apps/web/.prettierrc       @doodsito
 /apps/web/.prettierignore   @doodsito

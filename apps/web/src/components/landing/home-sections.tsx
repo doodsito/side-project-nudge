@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowDown, ArrowRight, Check, ChevronRight, Menu, X } from "lucide-react";
 import {
   Accordion,
@@ -96,7 +98,7 @@ function PracticeButton({
         className,
       )}
     >
-      <Link to="/practice" onClick={() => track("demo_started", { location: "homepage_cta" })}>
+      <Link href="/practice" onClick={() => track("demo_started", { location: "homepage_cta" })}>
         {children}
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
       </Link>
@@ -623,29 +625,7 @@ export function BeforeAfter() {
   );
 }
 
-export const FAQS: Array<[string, string]> = [
-  [
-    "Do I need investing experience?",
-    "No. Nudge starts with the decisions first-time investors face and explains the concepts as they become useful.",
-  ],
-  [
-    "Will I use real money?",
-    "No. Nudge uses simulated portfolios and virtual money for educational practice.",
-  ],
-  [
-    "Does Nudge tell me what to buy?",
-    "No. Nudge helps you understand the reasoning behind investment decisions rather than recommending specific financial products.",
-  ],
-  [
-    "How is this different from a finance video?",
-    "Videos explain concepts. Nudge asks you to make the decision first, then teaches the concepts through the consequences and reasoning behind that choice.",
-  ],
-  [
-    "Is this financial advice?",
-    "No. Nudge is designed for educational purposes and simulated practice. It does not provide personalised investment recommendations.",
-  ],
-];
-export function FAQSection() {
+export function FAQSection({ faqs }: { faqs: Array<[string, string]> }) {
   return (
     <Section id="faq" className="bg-surface-2">
       <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
@@ -656,7 +636,7 @@ export function FAQSection() {
         />
         <Reveal delay={100}>
           <Accordion type="single" collapsible>
-            {FAQS.map(([q, a]) => (
+            {faqs.map(([q, a]) => (
               <AccordionItem key={q} value={q}>
                 <AccordionTrigger
                   onClick={() => track("faq_opened", { question: q })}

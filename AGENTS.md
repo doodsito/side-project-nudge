@@ -23,7 +23,7 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 
 | You are adding | Put it in |
 |---|---|
-| A page (a URL) | `apps/web/src/routes/`, file-based routing: read `apps/web/src/routes/README.md` |
+| A page (a URL) | `apps/web/src/app/<url>/page.tsx` (Next.js App Router): read `apps/web/src/app/README.md` |
 | A component downloaded from the web (shadcn, motion...) | `apps/web/src/components/ui/` |
 | One of our own components | `apps/web/src/components/{atoms,molecules,organisms,templates}/`: read `docs/ui.md` |
 | A colour, font, radius, shadow or animation | A token in `apps/web/src/styles.css` |
@@ -44,7 +44,7 @@ the existing ones only when the task requires it.
 Run everything from the repository root.
 
 - `npm install`: install dependencies
-- `npm run dev`: local site at http://localhost:8080
+- `npm run dev`: local site at http://localhost:3000
 - `npm run lint`, `npm run typecheck`, `npm run build`: the three checks
 - `npm install <package> -w @nudge/web`: add a dependency to the website (never at the root)
 
@@ -68,8 +68,8 @@ Run everything from the repository root.
 
 `.github/`, `supabase/`, the root `package.json`, `AGENTS.md`, `CLAUDE.md`,
 `LICENSE`, `.gitignore`, `.gitattributes`, `.nvmrc`, and the configs in
-`apps/web/` (`vite.config.ts`, `tsconfig.json`, `eslint.config.js`,
-`components.json`, `.prettierrc`, `.prettierignore`). `.github/CODEOWNERS`
+`apps/web/` (`next.config.ts`, `postcss.config.mjs`, `tsconfig.json`,
+`eslint.config.js`, `components.json`, `.prettierrc`, `.prettierignore`). `.github/CODEOWNERS`
 enforces this.
 
 Never weaken a check to make it pass: do not disable lint rules, loosen
@@ -87,8 +87,11 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 
 ## Code rules
 
-- Stack: TanStack Start with React and Vite. This is not Next.js: no `app/`
-  router, `next/*` imports, `"use client"` directives or `server-only` package.
+- Stack: Next.js 16 (App Router) with React. Next.js 16 changed some APIs, so
+  read the matching guide in `node_modules/next/dist/docs/` before writing
+  Next.js code.
+- Components are Server Components by default. Add `"use client";` at the top
+  of a file only when it uses state, effects, event handlers or browser APIs.
 - TypeScript is strict; do not use `any` to silence an error.
 - Styling: Tailwind classes backed by design tokens (`bg-primary`,
   `text-muted-foreground`...). Never hard-code a colour in a component.

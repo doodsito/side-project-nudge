@@ -17,7 +17,7 @@ may only use the levels below it.
 | Molecules | `components/molecules/` | A few atoms combined into something with its own behaviour | waitlist form, FAQ item, stat card |
 | Organisms | `components/organisms/` | Molecules and atoms forming a full section, still independent and reusable | navbar, hero, FAQ section, footer |
 | Templates | `components/templates/` | The layout of a kind of page, without its content | marketing layout (navbar and footer), app layout (sidebar) |
-| Pages | `routes/` | A template filled with real content, at a URL | `/`, `/practice` |
+| Pages | `app/` | A template filled with real content, at a URL | `/`, `/practice` |
 
 Design tokens (colours, fonts, radii, shadows, animations) sit under everything,
 in `src/styles.css`.
@@ -34,7 +34,7 @@ template filled with real content.
 | `components/molecules/` | `ui`, `atoms` |
 | `components/organisms/` | `ui`, `atoms`, `molecules` |
 | `components/templates/` | `ui`, `atoms`, `molecules`, `organisms` |
-| `routes/` | anything |
+| `app/` | anything |
 
 `lib/`, `hooks/` and `integrations/` hold no UI and can be imported from any
 level.
