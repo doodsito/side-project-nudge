@@ -9,13 +9,41 @@ import { PersonalizedFeedback } from "@/components/organisms/personalized-feedba
 import { PracticeScenario } from "@/components/organisms/practice-scenario";
 import { PracticeTemplate } from "@/components/templates/practice-template";
 import { track } from "@/lib/analytics";
-import type { Decision, Profile, Step } from "@/lib/practice-scenario";
+import {
+  isCompleteProfile,
+  resolveStep,
+  updateProfile,
+  type Decision,
+  type Profile,
+  type Step,
+} from "@/lib/practice-scenario";
 
 export function PracticeFlow() {
   const [step, setStep] = useState<Step>("profile");
   const [profile, setProfile] = useState<Profile>({});
   const [decision, setDecision] = useState<Decision | null>(null);
   const content = useRef<HTMLDivElement>(null);
+  const complete = isCompleteProfile(profile);
+  useEffect(() => {
+    // A direct link or refresh starts a new session; no personal answers go in the URL.
+    window.history.replaceState(window.history.state, "", "#profile");
+  }, []);
+  useEffect(() => {
+    function restoreStep() {
+      const target = resolveStep(window.location.hash.slice(1), profile, decision);
+      setStep(target);
+      if (window.location.hash !== `#${target}`) {
+        window.history.replaceState(window.history.state, "", `#${target}`);
+      }
+    }
+    window.addEventListener("popstate", restoreStep);
+    return () => window.removeEventListener("popstate", restoreStep);
+  }, [profile, decision]);
+  function navigate(target: Step) {
+    const next = resolveStep(target, profile, decision);
+    if (next !== step) window.history.pushState(window.history.state, "", `#${next}`);
+    setStep(next);
+  }
   useEffect(() => {
     const heading = content.current?.querySelector("h1");
     heading?.setAttribute("tabindex", "-1");
@@ -27,7 +55,12 @@ export function PracticeFlow() {
   }, [step]);
   function reset() {
     setDecision(null);
-    setStep("scenario");
+    navigate("scenario");
+  }
+  function startOver() {
+    setProfile({});
+    setDecision(null);
+    navigate("profile");
   }
   return (
     <PracticeTemplate step={step}>
@@ -35,39 +68,44 @@ export function PracticeFlow() {
         {step === "profile" && (
           <LearningProfile
             profile={profile}
-            onSelect={(k, v) => setProfile((p) => ({ ...p, [k]: v }))}
-            onContinue={() => setStep("scenario")}
-          />
-        )}{" "}
-        {step === "scenario" && (
-          <PracticeScenario
-            decision={decision}
-            onSelect={setDecision}
-            onBack={() => setStep("profile")}
+            onSelect={(k, v) => setProfile((p) => updateProfile(p, k, v))}
             onContinue={() => {
-              if (decision) {
-                track("demo_decision_confirmed", { decision });
-                setStep("feedback");
+              if (complete) {
+                track("practice_profile_completed");
+                navigate("scenario");
               }
             }}
           />
         )}{" "}
-        {step === "feedback" && decision && (
-          <PersonalizedFeedback
-            profile={profile as Required<Profile>}
+        {step === "scenario" && complete && (
+          <PracticeScenario
             decision={decision}
-            onBack={() => setStep("scenario")}
+            onSelect={setDecision}
+            onBack={() => navigate("profile")}
             onContinue={() => {
-              track("demo_completed", { decision });
-              setStep("summary");
+              if (decision) {
+                track("demo_decision_confirmed", { decision });
+                navigate("feedback");
+              }
             }}
           />
         )}{" "}
-        {step === "summary" && (
+        {step === "feedback" && decision && complete && (
+          <PersonalizedFeedback
+            profile={profile}
+            decision={decision}
+            onBack={() => navigate("scenario")}
+            onContinue={() => {
+              track("practice_explanation_read");
+              navigate("summary");
+            }}
+          />
+        )}{" "}
+        {step === "summary" && complete && (
           <LearningSummary
-            profile={profile as Required<Profile>}
             onReset={reset}
-            onEdit={() => setStep("profile")}
+            onEdit={() => navigate("profile")}
+            onStartOver={startOver}
           />
         )}
       </div>

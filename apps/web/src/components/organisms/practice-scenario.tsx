@@ -4,7 +4,7 @@ import { ChoiceButton, ChoiceMarker } from "@/components/atoms/choice-button";
 import { EducationalNote } from "@/components/atoms/educational-note";
 import { Eyebrow } from "@/components/atoms/eyebrow";
 import { VirtualPortfolio } from "@/components/molecules/virtual-portfolio";
-import { DECISIONS, type Decision } from "@/lib/practice-scenario";
+import { DECISIONS, PRACTICE_CASE, type Decision } from "@/lib/practice-case";
 
 export function PracticeScenario({
   decision,
@@ -24,7 +24,7 @@ export function PracticeScenario({
       </Button>
       <div className="grid items-start gap-6 lg:grid-cols-[.85fr_1.15fr]">
         <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-8 lg:col-start-2 lg:row-start-1">
-          <Eyebrow>Investing scenario</Eyebrow>
+          <Eyebrow>Fictional practice case</Eyebrow>
           <p className="mt-3 text-sm font-semibold text-foreground">
             Markets have just fallen 10%.
           </p>
@@ -32,12 +32,9 @@ export function PracticeScenario({
             id="practice-question"
             className="mt-2 scroll-mt-32 font-display text-2xl font-extrabold sm:text-4xl"
           >
-            You planned to invest €500 this month. What would you do?
+            {PRACTICE_CASE.title}
           </h1>
-          <p className="mt-3 text-muted-foreground">
-            There is no universally correct answer. Choose the action you would be most likely to
-            take.
-          </p>
+          <p className="mt-3 text-muted-foreground">{PRACTICE_CASE.context}</p>
           <div className="mt-6 grid gap-3" role="radiogroup" aria-labelledby="practice-question">
             {DECISIONS.map((o, i) => (
               <ChoiceButton
@@ -63,7 +60,12 @@ export function PracticeScenario({
               </ChoiceButton>
             ))}
           </div>
-          <Button size="xl" disabled={!decision} onClick={onContinue} className="mt-6 w-full">
+          <Button
+            size="xl"
+            disabled={!decision}
+            onClick={onContinue}
+            className="mt-6 w-full h-auto min-h-13 whitespace-normal py-3"
+          >
             Understand my decision <ArrowRight />
           </Button>
           <EducationalNote />

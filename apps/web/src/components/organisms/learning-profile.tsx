@@ -36,7 +36,8 @@ export function LearningProfile({
         Start where you are.
       </h1>
       <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-        Four quick questions. Use your own situation or imagined answers.
+        Four quick questions. Use your own situation or imagined answers. Answers stay in this page
+        session; refreshing starts over.
       </p>
       <div className="mt-6">
         <p className="text-sm font-bold text-primary" aria-live="polite">
