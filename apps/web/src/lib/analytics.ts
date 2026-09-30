@@ -10,6 +10,9 @@
 export const GA_MEASUREMENT_ID = "G-G0TDDC3RS5";
 
 export type AnalyticsEvent =
+  | "practice_profile_completed"
+  | "practice_explanation_read"
+  | "practice_understanding_checked"
   | "navbar_beta_click"
   | "hero_beta_click"
   | "midpage_beta_click"

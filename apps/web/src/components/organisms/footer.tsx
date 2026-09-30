@@ -20,8 +20,7 @@ export function Footer() {
         <nav className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm" aria-label="Footer navigation">
           {(
             [
-              ["Why now", "/#why-now"],
-              ["Benefits", "/#benefits"],
+              ["Try a challenge", "/#challenge"],
               ["How it works", "/#how-it-works"],
               ["FAQ", "/#faq"],
               ["Cookie policy", "/cookies"],

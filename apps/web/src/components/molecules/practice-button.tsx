@@ -9,8 +9,10 @@ import { cn } from "@/lib/utils";
 
 export function PracticeButton({
   className,
-  children = "Try your first investing decision",
+  children = "Try the practice case",
+  location = "homepage_cta",
 }: {
+  location?: string;
   className?: string;
   children?: ReactNode;
 }) {
@@ -19,11 +21,11 @@ export function PracticeButton({
       asChild
       size="lg"
       className={cn(
-        "group transition-all hover:-translate-y-px hover:shadow-lift active:scale-[.98]",
+        "group h-auto min-h-12 max-w-full whitespace-normal py-3 transition-all hover:-translate-y-px hover:shadow-lift active:scale-[.98]",
         className,
       )}
     >
-      <Link href="/practice" onClick={() => track("demo_started", { location: "homepage_cta" })}>
+      <Link href="/practice" onClick={() => track("demo_started", { location })}>
         {children}
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
       </Link>

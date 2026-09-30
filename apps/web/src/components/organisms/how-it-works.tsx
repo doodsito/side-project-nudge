@@ -7,28 +7,24 @@ import { SectionIntro } from "@/components/molecules/section-intro";
 const STEPS = [
   [
     "01",
-    "Meet a real investing moment.",
-    "A market fall, a new contribution or a portfolio that drifted away from its target.",
+    "Meet a fictional situation.",
+    "Alex planned a contribution. Markets have fallen. Explore what changes and what does not.",
   ],
   [
     "02",
     "Choose with virtual money.",
-    "Act on a €10,000 portfolio without exposing your savings to a single euro of risk.",
+    "Choose an action in the case. The amounts are fictional and no transaction takes place.",
   ],
   [
     "03",
-    "Understand the consequence.",
-    "Get personalised feedback on what fits your situation, what could go wrong and what to review next.",
+    "Explain your reasoning.",
+    "Compare the trade-offs, see how your answers shape the explanation and check your understanding.",
   ],
 ];
 export function HowItWorks() {
   return (
     <Section id="how-it-works" className="bg-ink text-ink-foreground">
-      <SectionIntro
-        inverse
-        label="How Nudge works"
-        title="From “I don’t know what I’d do” to a decision you can explain."
-      />
+      <SectionIntro inverse label="How Nudge works" title="Choose. Understand. Try again." />
       <div className="mt-14 grid gap-4 md:grid-cols-3">
         {STEPS.map(([n, title, copy], i) => (
           <Reveal
@@ -46,7 +42,7 @@ export function HowItWorks() {
         ))}
       </div>
       <Reveal className="mt-10">
-        <PracticeButton />
+        <PracticeButton location="how_it_works" />
       </Reveal>
     </Section>
   );

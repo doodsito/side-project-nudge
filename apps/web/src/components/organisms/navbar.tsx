@@ -17,8 +17,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   const items = [
-    ["Why now", "/#why-now"],
-    ["What you gain", "/#benefits"],
+    ["Try a challenge", "/#challenge"],
     ["How it works", "/#how-it-works"],
   ] as const;
   return (

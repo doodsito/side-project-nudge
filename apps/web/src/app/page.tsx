@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { BeforeAfter } from "@/components/organisms/before-after";
-import { Benefits } from "@/components/organisms/benefits";
 import { EarlyAccessSection } from "@/components/organisms/early-access-section";
 import { FAQSection } from "@/components/organisms/faq-section";
-import { FinalCTA } from "@/components/organisms/final-cta";
 import { HeroSection } from "@/components/organisms/hero-section";
 import { HowItWorks } from "@/components/organisms/how-it-works";
 import { MiniChallenge } from "@/components/organisms/mini-challenge";
-import { ProblemStory } from "@/components/organisms/problem-story";
 import { MarketingTemplate } from "@/components/templates/marketing-template";
 import { BRAND, SITE_URL } from "@/lib/brand";
 
@@ -65,13 +61,9 @@ export default function HomePage() {
     <>
       <MarketingTemplate>
         <HeroSection />
-        <ProblemStory />
-        <Benefits />
-        <HowItWorks />
         <MiniChallenge />
-        <BeforeAfter />
+        <HowItWorks />
         <FAQSection faqs={FAQS} />
-        <FinalCTA />
         <EarlyAccessSection />
       </MarketingTemplate>
       <script
