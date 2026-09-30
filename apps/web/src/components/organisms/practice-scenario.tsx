@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChoiceButton, ChoiceMarker } from "@/components/atoms/choice-button";
 import { EducationalNote } from "@/components/atoms/educational-note";
@@ -19,28 +19,31 @@ export function PracticeScenario({
 }) {
   return (
     <div className="animate-rise">
-      <Button variant="ghost" onClick={onBack} className="mb-5 -ml-3">
+      <Button variant="ghost" onClick={onBack} className="mb-5 -ml-3 min-h-11">
         <ArrowLeft /> Edit learning profile
       </Button>
       <div className="grid items-start gap-6 lg:grid-cols-[.85fr_1.15fr]">
-        <VirtualPortfolio />
-        <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-8">
+        <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-8 lg:col-start-2 lg:row-start-1">
           <Eyebrow>Investing scenario</Eyebrow>
-          <p className="mt-3 text-sm font-semibold text-market-down">
+          <p className="mt-3 text-sm font-semibold text-foreground">
             Markets have just fallen 10%.
           </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
+          <h1
+            id="practice-question"
+            className="mt-2 scroll-mt-32 font-display text-2xl font-extrabold sm:text-4xl"
+          >
             You planned to invest €500 this month. What would you do?
           </h1>
           <p className="mt-3 text-muted-foreground">
             There is no universally correct answer. Choose the action you would be most likely to
             take.
           </p>
-          <div className="mt-6 grid gap-3" role="radiogroup">
+          <div className="mt-6 grid gap-3" role="radiogroup" aria-labelledby="practice-question">
             {DECISIONS.map((o, i) => (
               <ChoiceButton
                 key={o.value}
                 selected={decision === o.value}
+                tabIndex={decision === o.value || (!decision && i === 0) ? 0 : -1}
                 onClick={() => onSelect(o.value)}
                 className="min-h-20 p-4"
               >
@@ -53,7 +56,7 @@ export function PracticeScenario({
                 </ChoiceMarker>
                 <span>
                   <strong className="block">{o.title}</strong>
-                  <span className="mt-1 block text-xs font-normal text-muted-foreground">
+                  <span className="mt-1 block text-sm font-normal text-muted-foreground">
                     {o.detail}
                   </span>
                 </span>
@@ -69,6 +72,20 @@ export function PracticeScenario({
           </Button>
           <EducationalNote />
         </section>
+        <details className="group rounded-3xl border border-border bg-surface p-4 lg:col-start-1 lg:row-start-1">
+          <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 font-semibold text-primary focus-visible:ring-2 focus-visible:ring-ring">
+            View the illustrative portfolio
+            <ChevronDown
+              aria-hidden="true"
+              className="size-5 shrink-0 transition-transform group-open:rotate-180"
+            />
+          </summary>
+          <p className="my-3 text-sm leading-relaxed text-muted-foreground">
+            Background illustration only. The six-month chart does not show the 10% fall in this
+            case.
+          </p>
+          <VirtualPortfolio />
+        </details>
       </div>
     </div>
   );

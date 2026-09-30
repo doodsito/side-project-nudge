@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { EducationalNote } from "@/components/atoms/educational-note";
 import { Eyebrow } from "@/components/atoms/eyebrow";
 import { FACTORS, type Profile } from "@/lib/practice-scenario";
+import { BRAND } from "@/lib/brand";
 
 export function LearningSummary({
   profile,
@@ -30,7 +31,7 @@ export function LearningSummary({
           <Eyebrow>Decision complete</Eyebrow>
         </div>
         <h1 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold sm:text-5xl">
-          You just practised a decision before it cost you anything.
+          One decision. A clearer way to think.
         </h1>
         <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-border bg-surface-2 p-5 text-left">
           <p className="text-xs font-bold uppercase text-primary">What you considered</p>
@@ -38,7 +39,7 @@ export function LearningSummary({
             {["Timeline", "Safety buffer", "Risk reaction", "Investing routine"].map((n, i) => (
               <div
                 key={n}
-                className="flex items-center justify-between rounded-xl bg-surface px-4 py-3"
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-surface px-4 py-3"
               >
                 <span className="text-sm font-semibold">{n}</span>
                 <span className="text-xs font-extrabold text-primary">{labels[i]}</span>
@@ -46,19 +47,25 @@ export function LearningSummary({
             ))}
           </div>
         </div>
-        <p className="mx-auto mt-8 max-w-2xl font-display text-2xl font-extrabold">
-          Nudge does not tell you what to buy.
-          <br />
-          <span className="text-primary">It teaches you what to think about before deciding.</span>
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+          Try another choice to compare the explanation. Your learning profile stays the same, so
+          you can focus on what changes.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button asChild className="h-13 rounded-xl px-6 text-base font-bold">
-            <Link href="/#early-access">
-              Join Nudge early access <ArrowRight />
-            </Link>
+          <Button
+            onClick={onReset}
+            className="min-h-13 h-auto whitespace-normal rounded-xl px-6 py-3 text-base font-bold"
+          >
+            <RotateCcw aria-hidden="true" /> Try another choice
           </Button>
-          <Button variant="outline" onClick={onReset} className="h-13 rounded-xl px-6">
-            <RotateCcw /> Try the scenario again
+          <Button
+            asChild
+            variant="outline"
+            className="min-h-13 h-auto whitespace-normal rounded-xl px-6 py-3 text-base font-bold"
+          >
+            <Link href="/#early-access">
+              Join {BRAND} early access <ArrowRight aria-hidden="true" />
+            </Link>
           </Button>
           <Button variant="ghost" onClick={onEdit} className="h-13">
             <Pencil /> Edit learning profile
