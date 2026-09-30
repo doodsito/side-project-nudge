@@ -29,6 +29,7 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 | A colour, font, radius, shadow or animation | A token in `apps/web/src/styles.css` |
 | A React hook | `apps/web/src/hooks/` |
 | A helper that is not a component | `apps/web/src/lib/` |
+| An analytics or tracking script (Google Analytics, a pixel...) | The `scripts` list in `apps/web/src/components/organisms/consent-manager.tsx`, so it only loads after consent; never a `<script>` tag or `next/script` |
 | Supabase access | `apps/web/src/integrations/supabase/` |
 | An image or other static file | `apps/web/public/` |
 | A database change | `supabase/migrations/` (reserved: ask Robin): read `supabase/README.md` |
