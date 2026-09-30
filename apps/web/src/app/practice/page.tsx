@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PracticeExperience } from "@/components/practice/practice-experience";
 import { BRAND, SITE_URL } from "@/lib/brand";
+import { PracticeFlow } from "./practice-flow";
 
 export const metadata: Metadata = {
   title: `Practice an Investing Decision | ${BRAND}`,
@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function PracticePage() {
-  return <PracticeExperience />;
+  return <PracticeFlow />;
 }

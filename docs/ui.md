@@ -51,7 +51,7 @@ level.
 - **Radii**: `rounded-sm` to `rounded-4xl`, all derived from `--radius`.
 - **Shadows**: `shadow-soft`, `shadow-lift`, `shadow-device`.
 - **Motion**: `animate-rise`, `animate-slide-up`, `animate-float`, and the
-  `reveal` utility through `components/reveal.tsx`. `styles.css` already turns
+  `reveal` utility through `components/atoms/reveal.tsx`. `styles.css` already turns
   animations off for people who ask for reduced motion; keep it that way.
 - A new token goes in `src/styles.css`, in both the light (`:root`) and the
   dark (`.dark`) blocks.
@@ -68,11 +68,12 @@ level.
 ## Current state
 
 `components/ui/` only holds what the site uses today (accordion, button,
-input); add the others from shadcn when you need them. The atomic folders are
-empty apart from a README each: the first components will land there when the
-landing page is split.
+input); add the others from shadcn when you need them.
 
-The landing page and the practice flow were built before these rules, in
-`components/landing/` and `components/practice/`. They will be split into the
-levels above in a dedicated task (see the [roadmap](roadmap.md)). Until then, do
-not add files to those folders: new components go into the atomic folders.
+The landing page (`/`) and the practice flow (`/practice`) are built from the
+atomic folders: look there before creating a component. `/` uses
+`templates/marketing-template.tsx` (navbar and footer) and `/practice` uses
+`templates/practice-template.tsx`. The practice questions, answers and feedback
+rules are data in `lib/practice-scenario.ts`, and the state of the flow (step,
+profile, decision) lives in `app/practice/practice-flow.tsx`, next to its page,
+because no other page uses it.
