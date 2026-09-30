@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NudgeLogo } from "@/components/atoms/nudge-logo";
@@ -16,9 +17,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   const items = [
-    ["Why now", "#why-now"],
-    ["What you gain", "#benefits"],
-    ["How it works", "#how-it-works"],
+    ["Why now", "/#why-now"],
+    ["What you gain", "/#benefits"],
+    ["How it works", "/#how-it-works"],
   ] as const;
   return (
     <header
@@ -30,27 +31,27 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8">
-        <a href="#top" aria-label="Nudge home">
+        <Link href="/#top" aria-label="Nudge home">
           <NudgeLogo small />
-        </a>
+        </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
           {items.map(([label, href]) => (
-            <a
+            <Link
               key={href}
               href={href}
               className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
             >
               {label}
-            </a>
+            </Link>
           ))}
           <Button
             asChild
             className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
           >
-            <a href="#early-access">
+            <Link href="/#early-access">
               Join early access{" "}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </Button>
         </nav>
         <Button
@@ -71,19 +72,19 @@ export function Navbar() {
         >
           <div className="mx-auto flex max-w-6xl flex-col">
             {items.map(([label, href]) => (
-              <a
+              <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-3 text-base font-semibold hover:bg-muted"
               >
                 {label}
-              </a>
+              </Link>
             ))}
             <Button asChild size="lg" className="mt-2">
-              <a href="#early-access" onClick={() => setOpen(false)}>
+              <Link href="/#early-access" onClick={() => setOpen(false)}>
                 Join early access <ArrowRight />
-              </a>
+              </Link>
             </Button>
           </div>
         </nav>

@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@c15t/nextjs/styles.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -222,6 +223,9 @@
     font-family: var(--font-sans);
     font-feature-settings: "cv02", "cv03", "cv04", "ss01";
     overflow-x: hidden;
+    /* Links in the cookie banner (c15t) use the brand colour instead of c15t's blue. */
+    --legal-links-color: var(--primary);
+    --legal-links-focus-color: var(--primary);
   }
 
   h1,

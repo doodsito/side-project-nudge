@@ -2,9 +2,12 @@
  * Lightweight analytics shim.
  *
  * Events are pushed to a queue on `window` and forwarded to PostHog or GA4 if
- * either is present. No third-party provider is bundled — this only makes the
- * important interactions trivial to instrument later.
+ * either is present. GA4 is only present once the visitor has accepted
+ * analytics cookies: components/organisms/consent-manager.tsx loads it.
  */
+
+/** Google Analytics 4 property "Nudge". A public ID, not a secret. */
+export const GA_MEASUREMENT_ID = "G-G0TDDC3RS5";
 
 export type AnalyticsEvent =
   | "navbar_beta_click"
@@ -33,7 +36,7 @@ type Props = Record<string, unknown>;
 declare global {
   interface Window {
     posthog?: { capture: (event: string, props?: Props) => void };
-    gtag?: (command: string, event: string, props?: Props) => void;
+    gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
     __npEvents?: Array<{ event: string; props: Props }>;
   }
