@@ -1,62 +1,68 @@
 // Fictional case data is independent of the learner's answers.
 export const PRACTICE_CASE = {
-  id: "market-fall",
-  version: 1,
-  title: "Alex planned to invest €500. What changes after a market fall?",
+  id: "first-paycheque",
+  version: 2,
+  title: "Alex has €100 to set aside. Where should it go?",
   context:
-    "Alex is a fictional investor with €10,000 already invested and a €500 contribution planned this month. Markets have just fallen 10%. These are case assumptions, not your finances or a suggested amount.",
-  objective: "Separate a change in market prices from a change in someone's circumstances.",
+    "Alex just started a first job and is considering investing. Upcoming costs are still unknown.",
+  facts: [
+    { label: "After essentials", value: "€100" },
+    { label: "Accessible savings", value: "€200" },
+    { label: "Markets this week", value: "Down 10%" },
+  ],
+  objective: "Compare accessible savings with a first investment before reacting to market prices.",
   takeaway:
-    "A price fall alone does not settle a decision. The money's purpose, when it is needed, available cash and tolerance for losses all matter. No option guarantees a return.",
+    "Money you may need soon serves a different purpose from money you can leave invested. Before reacting to a market fall, check your cash buffer, upcoming needs and time horizon. Lower prices do not guarantee future gains.",
   decisions: [
     {
       value: "planned",
-      title: "Keep Alex's €500 contribution",
-      detail: "Use the amount already planned in this fictional case",
-      consequence: "€500 moves from available cash into investments that can rise or fall.",
+      title: "Invest the €100 now",
+      detail: "Put this month's remaining money into a first investment",
+      consequence: "€100 leaves Alex's available cash and becomes exposed to market movements.",
       tradeoff:
-        "The scheduled amount stays the same, but that does not establish whether the plan fits the person's needs.",
+        "Alex can start practising an investing routine, but the €200 emergency buffer stays unchanged. A market fall alone does not show whether this is the right time for Alex to invest.",
     },
     {
       value: "wait",
-      title: "Keep the €500 in cash for now",
-      detail: "Postpone Alex's contribution",
-      consequence: "The €500 stays available in cash rather than being added to investments.",
+      title: "Keep the €100 in accessible savings",
+      detail: "Add it to the cash available for unexpected costs",
+      consequence: "Alex's accessible savings rise from €200 to €300; this €100 is not invested.",
       tradeoff:
-        "That contribution avoids market movements while it stays in cash, including any rise. Waiting does not make the next entry point predictable.",
+        "Alex has more cash for an unexpected expense, but this amount does not take part in any market recovery while it stays in savings.",
     },
     {
-      value: "more",
-      title: "Increase Alex's contribution",
-      detail: "Invest more than the planned €500",
-      consequence: "More than €500 leaves available cash and becomes exposed to market movements.",
+      value: "split",
+      title: "Split the €100 between both",
+      detail: "Keep €50 in savings and invest €50",
+      consequence:
+        "Alex's accessible savings rise to €250, while €50 becomes exposed to market movements.",
       tradeoff:
-        "A lower price is not a guarantee of recovery. Increasing the amount also changes the cash available for other needs.",
+        "This starts investing with a smaller amount and adds some cash. It still leaves questions about upcoming costs and how much accessible savings Alex needs.",
     },
   ],
   checkpoint: {
-    question: "What would change the context of Alex's decision?",
+    question: "Which detail would help Alex think through this choice?",
     options: [
       {
         value: "headline",
-        title: "A prediction that prices will recover tomorrow",
+        title: "A prediction that markets will recover next week",
         correct: false,
         explanation:
-          "A prediction does not guarantee what markets will do. Look for a change in Alex's needs or circumstances.",
+          "A prediction cannot tell Alex what will happen. Look for a detail about when this money might be needed.",
       },
       {
         value: "need",
-        title: "Alex now needs this money for an unexpected expense",
+        title: "Whether Alex has an upcoming expense or might need the cash soon",
         correct: true,
         explanation:
-          "Exactly. A new need for the money changes the decision's context. The same price movement can mean different things in different situations.",
+          "Yes. The timing of Alex's needs helps explain what should stay accessible and what could be left invested. The market fall alone cannot answer that question.",
       },
       {
         value: "crowd",
-        title: "More people online say they are investing",
+        title: "Whether friends are investing after the fall",
         correct: false,
         explanation:
-          "Other people's choices do not tell us whether Alex can still set this money aside. Look at Alex's circumstances.",
+          "Friends may have different needs and savings. Their choices do not tell Alex when this €100 might be needed.",
       },
     ],
   },

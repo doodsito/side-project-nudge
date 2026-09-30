@@ -25,6 +25,7 @@ export function EarlyAccessForm() {
     if (!email.trim() || status === "saving") return;
     if (!profile) {
       setProfileMissing(true);
+      event.currentTarget.querySelector<HTMLInputElement>('input[name="profile"]')?.focus();
       return;
     }
     setStatus("saving");
@@ -58,7 +59,7 @@ export function EarlyAccessForm() {
     );
   return (
     <form onSubmit={submit} className="w-full max-w-xl">
-      <fieldset className="mb-3">
+      <fieldset className="mb-3" aria-describedby={profileMissing ? "profile-error" : undefined}>
         <legend className="mb-2 text-sm font-bold">Which describes you best?</legend>
         <div className="flex flex-wrap gap-2">
           {PROFILES.map(([value, label]) => (
@@ -68,6 +69,7 @@ export function EarlyAccessForm() {
                 name="profile"
                 value={value}
                 checked={profile === value}
+                aria-describedby={profileMissing ? "profile-error" : undefined}
                 onChange={() => {
                   setProfile(value);
                   setProfileMissing(false);
@@ -76,7 +78,7 @@ export function EarlyAccessForm() {
               />
               <span
                 className={cn(
-                  "inline-flex h-10 items-center rounded-full border border-border-strong bg-surface px-4 text-sm font-bold transition-colors",
+                  "inline-flex min-h-11 items-center rounded-full border border-muted-foreground bg-surface px-4 py-2 text-sm font-bold transition-colors",
                   "peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground",
                   "peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2",
                 )}
@@ -87,15 +89,15 @@ export function EarlyAccessForm() {
           ))}
         </div>
         {profileMissing && (
-          <p className="mt-2 text-sm text-destructive" role="alert">
+          <p id="profile-error" className="mt-2 text-sm text-destructive" role="alert">
             Choose the option that describes you best.
           </p>
         )}
       </fieldset>
+      <label htmlFor="early-access-email" className="mb-2 block text-sm font-bold">
+        Email address
+      </label>
       <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
-        <label htmlFor="early-access-email" className="sr-only">
-          Email address
-        </label>
         <Input
           id="early-access-email"
           type="email"
@@ -104,7 +106,7 @@ export function EarlyAccessForm() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="you@example.com"
-          className="h-14 rounded-xl border-border-strong bg-surface px-4 text-base placeholder:text-muted-foreground"
+          className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base placeholder:text-muted-foreground"
         />
         <Button
           type="submit"

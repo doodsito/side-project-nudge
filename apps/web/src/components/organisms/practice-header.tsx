@@ -5,12 +5,13 @@ import type { Step } from "@/lib/practice-scenario";
 
 export function PracticeHeader({ step }: { step: Step }) {
   const steps = [
-    { key: "profile", label: "Profile" },
     { key: "scenario", label: "Decide" },
     { key: "feedback", label: "Learn" },
     { key: "summary", label: "Recap" },
   ];
-  const index = steps.findIndex((item) => item.key === step);
+  const visibleSteps =
+    step === "profile" ? [{ key: "profile", label: "Reflect" }, ...steps] : steps;
+  const index = visibleSteps.findIndex((item) => item.key === step);
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 sm:px-8">
@@ -30,9 +31,9 @@ export function PracticeHeader({ step }: { step: Step }) {
       </div>
       <ol
         aria-label="Practice steps"
-        className="mx-auto grid max-w-5xl grid-cols-4 gap-2 px-5 pb-3 text-xs sm:px-8"
+        className={`mx-auto grid max-w-5xl gap-2 px-5 pb-3 text-xs sm:px-8 ${step === "profile" ? "grid-cols-4" : "grid-cols-3"}`}
       >
-        {steps.map((item, i) => (
+        {visibleSteps.map((item, i) => (
           <li
             key={item.key}
             aria-current={step === item.key ? "step" : undefined}

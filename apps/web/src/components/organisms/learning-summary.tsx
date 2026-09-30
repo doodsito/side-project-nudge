@@ -14,10 +14,12 @@ export function LearningSummary({
   onReset,
   onEdit,
   onStartOver,
+  hasProfile,
 }: {
   onReset: () => void;
   onEdit: () => void;
   onStartOver: () => void;
+  hasProfile: boolean;
 }) {
   const [answer, setAnswer] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
@@ -25,11 +27,17 @@ export function LearningSummary({
   return (
     <div className="mx-auto max-w-3xl animate-rise">
       <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-9">
-        <Eyebrow>One idea to take with you</Eyebrow>
+        <Eyebrow>Your first case, completed</Eyebrow>
         <h1 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">
-          Look beyond the price.
+          Check the cash need before the market price.
         </h1>
         <p className="mt-4 leading-relaxed text-muted-foreground">{PRACTICE_CASE.takeaway}</p>
+        <div className="mt-6 rounded-2xl border border-border bg-surface-2 p-4 sm:p-6">
+          <h2 className="font-display text-lg font-bold">A question to use again</h2>
+          <p className="mt-2 leading-relaxed text-muted-foreground">
+            “When might I need this money, and what would cover an unexpected cost?”
+          </p>
+        </div>
         <div className="mt-7 rounded-2xl bg-surface-2 p-4 sm:p-6">
           <p className="text-sm font-bold text-primary">Quick understanding check</p>
           <h2 id="checkpoint-question" className="mt-2 font-display text-xl font-bold">
@@ -77,11 +85,15 @@ export function LearningSummary({
           </div>
         </div>
         <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-          Try another choice with the same profile, or change your answers to explore a different
-          situation.
+          You can compare another choice, then explore how different needs change the explanation.
         </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <Button size="xl" onClick={onReset} className="h-auto min-h-13 whitespace-normal py-3">
+          <Button
+            size="xl"
+            variant="outline"
+            onClick={onReset}
+            className="h-auto min-h-13 whitespace-normal py-3"
+          >
             <RotateCcw aria-hidden="true" /> Try another choice
           </Button>
           <Button
@@ -90,17 +102,26 @@ export function LearningSummary({
             onClick={onEdit}
             className="h-auto min-h-13 whitespace-normal py-3"
           >
-            <Pencil aria-hidden="true" /> Edit learning profile
+            <Pencil aria-hidden="true" />{" "}
+            {hasProfile ? "Edit your reflection" : "Explore your own context"}
           </Button>
         </div>
+        {checked && (
+          <div className="mt-8 rounded-2xl bg-primary-soft p-5 sm:p-6">
+            <h2 className="font-display text-xl font-extrabold">Want more cases like this?</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Join the early access list for future practice on saving and investing.
+            </p>
+            <Button asChild size="lg" className="mt-4 h-auto min-h-12 whitespace-normal py-3">
+              <Link href="/#early-access">
+                Join early access <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+        )}
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <Button variant="ghost" onClick={onStartOver} className="min-h-11">
-            Start over with new answers
-          </Button>
-          <Button asChild variant="link" className="min-h-11">
-            <Link href="/#early-access">
-              Hear about future cases <ArrowRight aria-hidden="true" />
-            </Link>
+            Start the case over
           </Button>
         </div>
         <EducationalNote />

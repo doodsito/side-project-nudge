@@ -129,7 +129,7 @@ export function MiniChallenge() {
                   Want to see how this changes based on your situation?
                 </p>
                 <PracticeButton location="mini_challenge" className="mt-3 w-full sm:w-auto">
-                  Build my learning profile
+                  Try the full practice case
                 </PracticeButton>
               </div>
             )}

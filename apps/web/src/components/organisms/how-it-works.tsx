@@ -8,17 +8,17 @@ const STEPS = [
   [
     "01",
     "Meet a fictional situation.",
-    "Alex planned a contribution. Markets have fallen. Explore what changes and what does not.",
+    "Alex has €100 left after essentials. Decide what to do with it before answering any personal questions.",
   ],
   [
     "02",
     "Choose with virtual money.",
-    "Choose an action in the case. The amounts are fictional and no transaction takes place.",
+    "Compare accessible savings, a first investment or a split. The amounts are fictional.",
   ],
   [
     "03",
-    "Explain your reasoning.",
-    "Compare the trade-offs, see how your answers shape the explanation and check your understanding.",
+    "Take one idea away.",
+    "See the cash consequence, check your understanding and optionally explore how your context changes the explanation.",
   ],
 ];
 export function HowItWorks() {

@@ -11,10 +11,12 @@ export function LearningProfile({
   profile,
   onSelect,
   onContinue,
+  onBack,
 }: {
   profile: Profile;
   onSelect: (k: keyof Profile, v: string) => void;
   onContinue: () => void;
+  onBack: () => void;
 }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const question = QUESTIONS[questionIndex]!;
@@ -31,13 +33,16 @@ export function LearningProfile({
 
   return (
     <div className="mx-auto max-w-2xl animate-rise">
-      <Eyebrow>Your learning profile</Eyebrow>
+      <Button variant="ghost" onClick={onBack} className="mb-5 -ml-3 min-h-11">
+        <ArrowLeft aria-hidden="true" /> Back to recap
+      </Button>
+      <Eyebrow>Optional reflection</Eyebrow>
       <h1 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">
-        Start where you are.
+        What changes in your situation?
       </h1>
       <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-        Four quick questions. Use your own situation or imagined answers. Answers stay in this page
-        session; refreshing starts over.
+        You have seen Alex’s case. Answer four questions to explore how a different context changes
+        the explanation. You can use imagined answers. Refreshing starts over.
       </p>
       <div className="mt-6">
         <p className="text-sm font-bold text-primary" aria-live="polite">
@@ -77,7 +82,7 @@ export function LearningProfile({
           onClick={() => (lastQuestion ? onContinue() : goToQuestion(questionIndex + 1))}
           className="h-auto min-h-13 min-w-0 flex-1 whitespace-normal px-5 py-3"
         >
-          {lastQuestion ? "Try the practice case" : "Continue"} <ArrowRight aria-hidden="true" />
+          {lastQuestion ? "Revisit the decision" : "Continue"} <ArrowRight aria-hidden="true" />
         </Button>
       </div>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
