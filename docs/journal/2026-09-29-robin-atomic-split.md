@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-29
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/5
 
 **Why:** two large files held every section of the site; split into small
 components, the pieces can be found, reused and changed one at a time.
