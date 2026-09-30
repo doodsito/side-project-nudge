@@ -52,15 +52,15 @@ export function LearningSummary({
           <span className="text-primary">It teaches you what to think about before deciding.</span>
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button asChild className="h-13 rounded-xl px-6 text-base font-bold">
+          <Button asChild size="xl">
             <Link href="/#early-access">
               Join Nudge early access <ArrowRight />
             </Link>
           </Button>
-          <Button variant="outline" onClick={onReset} className="h-13 rounded-xl px-6">
+          <Button variant="outline" size="xl" onClick={onReset}>
             <RotateCcw /> Try the scenario again
           </Button>
-          <Button variant="ghost" onClick={onEdit} className="h-13">
+          <Button variant="ghost" size="xl" onClick={onEdit}>
             <Pencil /> Edit learning profile
           </Button>
         </div>

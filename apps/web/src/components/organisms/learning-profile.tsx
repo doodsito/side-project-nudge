@@ -54,12 +54,10 @@ export function LearningProfile({
         this demo.
       </p>
       <Button
+        size="xl"
         disabled={answered < 4}
         onClick={onContinue}
-        className={cn(
-          "mt-5 h-13 w-full rounded-xl px-6 text-base font-bold sm:w-auto",
-          answered === 4 && "animate-ready",
-        )}
+        className={cn("mt-5 w-full sm:w-auto", answered === 4 && "animate-ready")}
       >
         Build my learning profile <ArrowRight />
       </Button>

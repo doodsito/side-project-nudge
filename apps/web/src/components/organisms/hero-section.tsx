@@ -1,4 +1,5 @@
 import { ArrowDown, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/atoms/eyebrow";
 import { HeroProductWindow } from "@/components/molecules/hero-product-window";
 import { PracticeButton } from "@/components/molecules/practice-button";
@@ -24,12 +25,14 @@ export function HeroSection() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <PracticeButton />
-              <a
-                href="#early-access"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-border-strong bg-surface px-6 text-base font-bold transition-all hover:-translate-y-px hover:bg-muted"
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-border-strong bg-surface transition-all hover:-translate-y-px hover:bg-muted"
               >
-                Join the early access list
-              </a>
+                <a href="#early-access">Join the early access list</a>
+              </Button>
             </div>
             <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-muted-foreground">
               {["Free", "Takes 2 minutes", "No account required"].map((item) => (

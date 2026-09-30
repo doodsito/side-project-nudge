@@ -17,8 +17,9 @@ export function PracticeButton({
   return (
     <Button
       asChild
+      size="lg"
       className={cn(
-        "group h-12 rounded-xl px-6 text-base font-bold shadow-soft transition-all hover:-translate-y-px hover:shadow-lift active:scale-[.98]",
+        "group transition-all hover:-translate-y-px hover:shadow-lift active:scale-[.98]",
         className,
       )}
     >
