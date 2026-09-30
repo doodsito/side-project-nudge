@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Check, LoaderCircle } from "lucide-react";
+import { ArrowRight, Check, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getSupabase } from "@/integrations/supabase/client";
@@ -108,8 +108,9 @@ export function EarlyAccessForm() {
         />
         <Button
           type="submit"
+          size="lg"
           disabled={status === "saving"}
-          className="group h-14 rounded-xl px-6 text-base font-bold shadow-soft active:scale-[.98]"
+          className="group h-14 active:scale-[.98]"
         >
           {status === "saving" ? (
             <>
@@ -118,7 +119,7 @@ export function EarlyAccessForm() {
           ) : (
             <>
               Join early access{" "}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
             </>
           )}
         </Button>

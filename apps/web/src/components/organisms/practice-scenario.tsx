@@ -63,11 +63,7 @@ export function PracticeScenario({
               </ChoiceButton>
             ))}
           </div>
-          <Button
-            disabled={!decision}
-            onClick={onContinue}
-            className="mt-6 h-13 w-full rounded-xl text-base font-bold"
-          >
+          <Button size="xl" disabled={!decision} onClick={onContinue} className="mt-6 w-full">
             Understand my decision <ArrowRight />
           </Button>
           <EducationalNote />

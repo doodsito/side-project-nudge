@@ -53,6 +53,10 @@ level.
 - **Motion**: `animate-rise`, `animate-slide-up`, `animate-float`, and the
   `reveal` utility through `components/atoms/reveal.tsx`. `styles.css` already turns
   animations off for people who ask for reduced motion; keep it that way.
+- **Buttons**: use `Button` from `components/ui/button.tsx` with a size rather
+  than repeating classes: `size="lg"` for call-to-action buttons (48 px) and
+  `size="xl"` for the large buttons of the practice flow (52 px). A link that
+  looks like a button is `<Button asChild>` around the link.
 - A new token goes in `src/styles.css`, in both the light (`:root`) and the
   dark (`.dark`) blocks.
 

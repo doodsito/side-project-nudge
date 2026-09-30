@@ -67,10 +67,7 @@ export function PersonalizedFeedback({
         <p className="mt-6 text-sm font-semibold">
           The same market event can mean different things depending on the investor.
         </p>
-        <Button
-          onClick={onContinue}
-          className="mt-6 h-13 w-full rounded-xl text-base font-bold sm:w-auto"
-        >
+        <Button size="xl" onClick={onContinue} className="mt-6 w-full sm:w-auto">
           See my reasoning summary <ArrowRight />
         </Button>
         <EducationalNote />

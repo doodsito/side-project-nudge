@@ -43,13 +43,15 @@ export function Navbar() {
               {label}
             </a>
           ))}
-          <a
-            href="#early-access"
-            className="group inline-flex h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground shadow-soft transition-all hover:-translate-y-px"
+          <Button
+            asChild
+            className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
           >
-            Join early access{" "}
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </a>
+            <a href="#early-access">
+              Join early access{" "}
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </Button>
         </nav>
         <Button
           size="icon"
@@ -78,13 +80,11 @@ export function Navbar() {
                 {label}
               </a>
             ))}
-            <a
-              href="#early-access"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-xl bg-primary px-4 py-3 text-center font-bold text-primary-foreground"
-            >
-              Join early access →
-            </a>
+            <Button asChild size="lg" className="mt-2">
+              <a href="#early-access" onClick={() => setOpen(false)}>
+                Join early access <ArrowRight />
+              </a>
+            </Button>
           </div>
         </nav>
       )}

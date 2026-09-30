@@ -63,16 +63,18 @@ export function LearningProfile({
         {questionIndex > 0 && (
           <Button
             variant="outline"
+            size="xl"
             onClick={() => goToQuestion(questionIndex - 1)}
-            className="h-13 rounded-xl px-5"
+            className="px-5"
           >
             <ArrowLeft aria-hidden="true" /> Back
           </Button>
         )}
         <Button
+          size="xl"
           disabled={!profile[question.key]}
           onClick={() => (lastQuestion ? onContinue() : goToQuestion(questionIndex + 1))}
-          className="h-auto min-h-13 min-w-0 flex-1 whitespace-normal rounded-xl px-5 py-3 text-base font-bold"
+          className="h-auto min-h-13 min-w-0 flex-1 whitespace-normal px-5 py-3"
         >
           {lastQuestion ? "Try the practice case" : "Continue"} <ArrowRight aria-hidden="true" />
         </Button>

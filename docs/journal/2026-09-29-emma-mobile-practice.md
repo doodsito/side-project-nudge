@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-29
 - **Author:** Emma, with Codex
-- **Pull request:** See the pull request containing this entry.
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/7
 
 **Why:** The first case required a long profile form and put an illustrative chart before the decision on phones.
 **What changed:**

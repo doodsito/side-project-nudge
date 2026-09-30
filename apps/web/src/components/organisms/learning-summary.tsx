@@ -52,22 +52,20 @@ export function LearningSummary({
           you can focus on what changes.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button
-            onClick={onReset}
-            className="min-h-13 h-auto whitespace-normal rounded-xl px-6 py-3 text-base font-bold"
-          >
+          <Button size="xl" onClick={onReset} className="min-h-13 h-auto whitespace-normal py-3">
             <RotateCcw aria-hidden="true" /> Try another choice
           </Button>
           <Button
             asChild
             variant="outline"
-            className="min-h-13 h-auto whitespace-normal rounded-xl px-6 py-3 text-base font-bold"
+            size="xl"
+            className="min-h-13 h-auto whitespace-normal py-3"
           >
             <Link href="/#early-access">
               Join {BRAND} early access <ArrowRight aria-hidden="true" />
             </Link>
           </Button>
-          <Button variant="ghost" onClick={onEdit} className="h-13">
+          <Button variant="ghost" size="xl" onClick={onEdit}>
             <Pencil /> Edit learning profile
           </Button>
         </div>
