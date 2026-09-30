@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { ConsentManager } from "@/components/organisms/consent-manager";
 import "@/styles.css";
 
 const manrope = Manrope({
@@ -30,7 +31,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${manrope.variable} ${inter.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <ConsentManager>{children}</ConsentManager>
+      </body>
     </html>
   );
 }

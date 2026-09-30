@@ -1,3 +1,5 @@
+import { ConsentDialogLink } from "@c15t/nextjs/components/consent-dialog-link";
+import Link from "next/link";
 import { NudgeLogo } from "@/components/atoms/nudge-logo";
 import { BRAND } from "@/lib/brand";
 
@@ -16,15 +18,21 @@ export function Footer() {
           </p>
         </div>
         <nav className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm" aria-label="Footer navigation">
-          {[
-            ["Try a challenge", "#challenge"],
-            ["How it works", "#how-it-works"],
-            ["FAQ", "#faq"],
-          ].map(([label, href]) => (
-            <a key={href} href={href} className="text-muted-foreground hover:text-foreground">
+          {(
+            [
+              ["Try a challenge", "/#challenge"],
+              ["How it works", "/#how-it-works"],
+              ["FAQ", "/#faq"],
+              ["Cookie policy", "/cookies"],
+            ] as const
+          ).map(([label, href]) => (
+            <Link key={href} href={href} className="text-muted-foreground hover:text-foreground">
               {label}
-            </a>
+            </Link>
           ))}
+          <ConsentDialogLink className="cursor-pointer self-start text-left text-muted-foreground hover:text-foreground">
+            Cookie settings
+          </ConsentDialogLink>
         </nav>
       </div>
     </footer>

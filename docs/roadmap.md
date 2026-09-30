@@ -14,14 +14,14 @@ changes through a pull request.
 
 ## Next
 
-- [ ] **Priority:** split the landing page and the practice flow into atomic
+- [x] **Priority:** split the landing page and the practice flow into atomic
       design levels, and restyle `components/ui/` with our tokens, without
       changing how the pages look
 - [ ] Remove AI-writing tics from the landing copy (em dashes, inconsistencies)
 - [ ] Custom 404 page
-- [ ] Legal pages: legal notice, privacy policy, cookie policy with a consent
-      banner
-- [ ] Google Analytics with a new GA4 property, behind the consent banner
+- [x] Cookie policy (`/cookies`) with a consent banner
+- [ ] Legal pages: legal notice, privacy policy
+- [x] Google Analytics with a new GA4 property, behind the consent banner
 - [ ] Logo options for the team to choose from
 
 ## Later
