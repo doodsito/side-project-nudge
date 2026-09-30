@@ -1,13 +1,13 @@
-# Make the first practice case easier to use on a phone
+# Make the first case reliable and easier to use on a phone
 
 - **Date:** 2026-09-29
 - **Author:** Emma, with Codex
 - **Pull request:** https://github.com/doodsito/side-project-nudge/pull/7
 
-**Why:** The first case required a long profile form and put an illustrative chart before the decision on phones.
+**Why:** Some explanations contradicted profile answers, and the mobile journey delayed practice.
 **What changed:**
-- Ask one question at a time, keep answers on Back, label the practice steps and support keyboard choices.
-- Put the decision first, explain the optional chart and let learners try another choice with the same profile.
-**Files:** `apps/web/src/app/practice/`, `apps/web/src/components/`
-**Checked:** lint, typecheck and build pass; local phone (375px), landscape and desktop views checked; back, replay and keyboard flows tested.
-**Next:** Review the preview, then define the three learning levels for students and young professionals.
+- Separate the fictional case from the learner, validate answers and explain each choice with a comprehension check.
+- Shorten the home page; guide mobile questions, preserve answers on replay and support keyboard and browser navigation.
+**Files:** `apps/web/src/`, `apps/web/tests/practice-scenario.test.mjs`
+**Checked:** lint, typecheck, build and 243 profile/decision combinations pass; local mobile, landscape and desktop checked.
+**Next:** Verify the Vercel preview, then build a second savings case and persistent progress.

@@ -40,13 +40,13 @@ export function MiniChallenge() {
     );
   }
   return (
-    <Section className="bg-surface-2">
+    <Section id="challenge" className="bg-surface-2">
       <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr]">
         <div>
           <SectionIntro
             label="Learn by deciding"
-            title="One decision teaches you more than another hour of scrolling."
-            text="Nudge turns passive knowledge into active judgement. You choose first, then learn from the reasoning behind the choice."
+            title="Start with a small decision."
+            text="Try this question before the full case. Choose an answer to explore the reasoning."
           />{" "}
           <Reveal className="mt-8 space-y-3">
             {[
@@ -83,6 +83,7 @@ export function MiniChallenge() {
                 <ChoiceButton
                   key={key}
                   selected={answer === key}
+                  tabIndex={answer === key || (!answer && key === "A") ? 0 : -1}
                   onClick={() => choose(key)}
                   className="group min-h-16 px-4 py-3"
                 >
@@ -127,7 +128,7 @@ export function MiniChallenge() {
                 <p className="mt-5 text-sm font-semibold">
                   Want to see how this changes based on your situation?
                 </p>
-                <PracticeButton className="mt-3 w-full sm:w-auto">
+                <PracticeButton location="mini_challenge" className="mt-3 w-full sm:w-auto">
                   Build my learning profile
                 </PracticeButton>
               </div>
