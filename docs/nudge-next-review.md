@@ -1,8 +1,10 @@
 # Nudge — revue du prototype, phase 2
 
+**Mise à jour du 1er octobre 2026 :** la PR #9 a ensuite été fusionnée. La nouvelle direction est publiée sur `/nudge-next` ; une nouvelle PR propose de l’afficher aussi sur la page d’accueil. Les notes ci-dessous décrivent la première revue du prototype.
+
 Preview Vercel de la branche : https://side-project-nudge-git-emma-nudge-next-doodsito.vercel.app/nudge-next (connexion Vercel requise). La preview locale reste disponible sur http://127.0.0.1:3002/nudge-next tant que le serveur local est ouvert.
 
-Le site public n’a pas été modifié. La publication concerne uniquement la preview de la branche `emma/nudge-next`, sans fusion dans `main`. L’ouverture de la pull request a été refusée par les permissions du connecteur GitHub. L’unique ajout à un fichier existant est un bloc de variables CSS limité au sélecteur `.nx-page` ; il ne s’applique qu’à la preview. Les composants, le favicon et la feuille de style de cette route sont distincts de ceux du site actuel.
+À la date de cette revue, le site public n’avait pas été modifié. La première publication concernait uniquement la preview de la branche `emma/nudge-next`, avant sa fusion dans `main`. L’ouverture de la pull request avait d’abord été refusée par les permissions du connecteur GitHub. Le bloc de variables CSS était limité au sélecteur `.nx-page` et ne s’appliquait alors qu’à la preview. Les composants, le favicon et la feuille de style de cette route étaient distincts de ceux du site principal de l’époque.
 
 ## Direction
 
