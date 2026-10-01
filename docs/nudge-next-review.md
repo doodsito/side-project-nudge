@@ -1,8 +1,8 @@
 # Nudge — revue du prototype, phase 2
 
-Route de preview : `/nudge-next`. La branche est publiée par une pull request et reçoit une URL Vercel distincte du site de production. La preview locale reste disponible sur http://127.0.0.1:3002/nudge-next tant que le serveur local est ouvert.
+Preview Vercel de la branche : https://side-project-nudge-git-emma-nudge-next-doodsito.vercel.app/nudge-next (connexion Vercel requise). La preview locale reste disponible sur http://127.0.0.1:3002/nudge-next tant que le serveur local est ouvert.
 
-Le site public n’a pas été modifié. La publication concerne uniquement la preview de la pull request, sans fusion dans `main`. Le travail est dans la branche `emma/nudge-next`. L’unique ajout à un fichier existant est un bloc de variables CSS limité au sélecteur `.nx-page` ; il ne s’applique qu’à la preview. Les composants, le favicon et la feuille de style de cette route sont distincts de ceux du site actuel.
+Le site public n’a pas été modifié. La publication concerne uniquement la preview de la branche `emma/nudge-next`, sans fusion dans `main`. L’ouverture de la pull request a été refusée par les permissions du connecteur GitHub. L’unique ajout à un fichier existant est un bloc de variables CSS limité au sélecteur `.nx-page` ; il ne s’applique qu’à la preview. Les composants, le favicon et la feuille de style de cette route sont distincts de ceux du site actuel.
 
 ## Direction
 
