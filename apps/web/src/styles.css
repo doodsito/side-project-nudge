@@ -5,6 +5,27 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Preview-only tokens. These apply exclusively inside /nudge-next. */
+.nx-page {
+  --nx-purple: #6236e8;
+  --nx-deep-purple: #4521b2;
+  --nx-ink: #231b32;
+  --nx-paper: #faf9f6;
+  --nx-white: #ffffff;
+  --nx-lilac: #d8cbff;
+  --nx-pale: #eee8fb;
+  --nx-lime: #e9f28a;
+  --nx-muted: #6b6277;
+  --nx-line: #dcd6e5;
+  --nx-hero-line: #8b69ef;
+  --nx-fold-shadow: #4521b2;
+  --nx-display: var(--font-nudge-next-display), sans-serif;
+  --nx-body: var(--font-nudge-next-body), sans-serif;
+  --nx-radius: 14px;
+  --nx-fast: 180ms;
+  --nx-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
