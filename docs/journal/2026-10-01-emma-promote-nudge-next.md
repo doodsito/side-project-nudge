@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-01
 - **Author:** Emma, with Codex
-- **Pull request:** pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/10
 
 **Why:** Make the approved Nudge direction the first page visitors see while keeping `/nudge-next` available for public previews.
 **What changed:**
