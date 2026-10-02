@@ -9,8 +9,10 @@ changes through a pull request.
 - [x] Lovable code cleaned up; checks, code owners and team docs in place
 - [x] Website moved from TanStack Start to Next.js, the team's usual framework
 - [x] Waitlist on a new Supabase project, with email and profile both required
-- [ ] Website live on nudge.doodsito.com through Vercel, with a preview for
+- [x] Website live on nudge.doodsito.com through Vercel, with a preview for
       every pull request
+- [x] `main` protected: every change goes through a pull request, merged only
+      once the checks pass on an up-to-date branch
 
 ## Next
 
@@ -20,7 +22,9 @@ changes through a pull request.
 - [ ] Remove AI-writing tics from the landing copy (em dashes, inconsistencies)
 - [ ] Custom 404 page
 - [x] Cookie policy (`/cookies`) with a consent banner
-- [ ] Legal pages: legal notice, privacy policy
+- [x] Legal pages: legal notice, privacy policy, terms of service, with a footer
+      on every page
+- [x] `llms.txt`, sitemap and robots.txt for search engines and AI crawlers
 - [x] Google Analytics with a new GA4 property, behind the consent banner
 - [ ] Logo options for the team to choose from
 

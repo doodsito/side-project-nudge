@@ -56,8 +56,11 @@ Run everything from the repository root.
 4. Add a journal entry in the same pull request (see "Journal" below).
 5. Open the pull request with the template filled in, then point the human to
    the Vercel preview link that appears on it.
-6. Merge with "Squash and merge" once the checks are green. Pull requests that
-   touch a reserved area wait for Robin's approval.
+6. Merge with "Squash and merge" once the checks are green: the author merges,
+   no approval is needed. If GitHub says the branch is out of date, click
+   "Update branch" and wait for the checks again. GitHub refuses direct pushes
+   to `main` and merges with red checks. Pull requests that touch a reserved
+   area wait for Robin's approval.
 7. Never force-push, never rewrite pushed history, never delete someone else's
    branch.
 
@@ -67,7 +70,8 @@ Run everything from the repository root.
 `LICENSE`, `.gitignore`, `.gitattributes`, `.nvmrc`, and the configs in
 `apps/web/` (`next.config.ts`, `postcss.config.mjs`, `tsconfig.json`,
 `eslint.config.js`, `components.json`, `.prettierrc`, `.prettierignore`). `.github/CODEOWNERS`
-enforces this.
+requests his review automatically; GitHub does not block the merge, so wait
+for it.
 
 Never weaken a check to make it pass: do not disable lint rules, loosen
 TypeScript settings or edit the CI. Fix the code, or stop and ask.
@@ -111,7 +115,8 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 - Nudge teaches. It never gives investment advice, recommends a security or
   promises returns.
 - No invented social proof: no fake numbers, testimonials, reviews or logos.
-- Site copy is in English and amounts are in euros.
+- Site copy is in English and French; legal pages are in English only for now.
+  Amounts are in euros.
 - Use `BRAND` and `SITE_URL` from `apps/web/src/lib/brand.ts` instead of
   writing the name or the address by hand.
 

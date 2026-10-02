@@ -38,7 +38,11 @@ you read what it did, open the preview and decide to merge.
 6. Open the pull request on GitHub. After a minute or two, Vercel posts a
    preview link: open it on your computer and on your phone.
 7. When the checks are green and the preview looks right, click "Squash and
-   merge". If the pull request touches a reserved area, it waits for Robin.
+   merge" yourself: no approval is needed. If the pull request touches a
+   reserved area, it waits for Robin.
+   - If GitHub shows "This branch is out-of-date", someone merged in the
+     meantime: click "Update branch" and wait for the checks to turn green
+     again. GitHub does not let you merge before that.
 8. A few minutes after the merge, the change is live on nudge.doodsito.com.
 
 ## When a check is red
@@ -50,7 +54,8 @@ you read what it did, open the preview and decide to merge.
 
 ## Never
 
-- Commit to `main` directly, force-push or rewrite history.
+- Commit to `main` directly, force-push or rewrite history (GitHub refuses
+  the first two on `main`).
 - Put a key, password or token in a file, a commit message or a pull request.
 - Change a reserved area without Robin (the list is in `AGENTS.md`).
 - Merge a pull request without opening its preview.
