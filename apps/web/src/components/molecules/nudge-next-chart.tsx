@@ -3,9 +3,9 @@ import {
   caseResult,
   formatters,
   nudgeCopy,
+  type Decision,
   type NudgeLocale,
 } from "@/lib/nudge-next-copy";
-import type { Decision } from "@/lib/practice-case";
 
 export function NudgeNextChart({
   locale,
