@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-02
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/11
 
 **Why:** since #8, `main` no longer compiled: #8 renamed a /practice choice that the homepage (Nudge Next, #10) reused. Vercel kept serving #10, so the legal pages and #8 never went live.
 
