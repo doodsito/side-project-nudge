@@ -25,8 +25,9 @@ changes through a pull request.
 - [x] `llms.txt`, sitemap and robots.txt for search engines and AI crawlers
 - [x] Google Analytics with a new GA4 property, behind the consent banner
 - [ ] Logo options for the team to choose from
-- [x] Private beta: "Get started" asks for an access code, then sign-in with
-      Google or an email link, then a dashboard (Courses, Portfolio, Account)
+- [x] Private beta: "Get started" asks for an access code, then an account with
+      an email and a password, then a dashboard (Courses, Portfolio, Account)
+- [ ] Sign in with Google (ready in the code, set up in Google Cloud and Supabase)
 
 ## Later
 

@@ -56,9 +56,9 @@ export default function TermsOfServicePage() {
       <h2>Your beta account</h2>
       <p>
         The beta is by invitation: you need an access code from the {BRAND} team, and you must be at
-        least 15. Sign in with a Google account or an email address that is yours, and keep it
-        secure: anyone who can read that email can sign in. Please don’t share your access code
-        without our permission.
+        least 15. Use an email address or a Google account that is yours, keep your password to
+        yourself, and keep that email secure: anyone who can read it can reset your password. Please
+        don’t share your access code without our permission.
       </p>
       <p>
         You can delete your account at any time by writing to{" "}

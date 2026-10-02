@@ -35,7 +35,8 @@ const COOKIES = [
   },
   {
     name: "sb-…-auth-token-code-verifier",
-    purpose: "Secures your sign-in while you go through Google or the email link.",
+    purpose:
+      "Secures your sign-in while you go through Google or an email link (confirming your email, resetting your password).",
     duration: "Deleted once you are signed in",
     category: "Strictly necessary",
   },

@@ -8,12 +8,12 @@
 
 **What changed:**
 - `/` shows the previous landing page again (with the waitlist); Emma's version stays at `/nudge-next`, which builds again.
-- "Get started" opens `/get-started`: enter the beta code, then sign in with Google or an email link (no password). New `access_codes` and `profiles` tables decide who gets in.
+- "Get started" opens `/get-started`: enter the beta code, then create an account with an email and a password (confirmed by email; "Forgot your password?" included). Google sign-in is ready but hidden until it is set up. New `access_codes` and `profiles` tables decide who gets in.
 - `/dashboard` has three tabs: Courses (the practice case), Portfolio (coming soon) and Account (details, sign out, how to delete).
 - Privacy, cookie and terms pages describe the accounts. New dependency `@supabase/ssr`, Supabase's official package for sessions in Next.js.
 
 **Files:** `apps/web/src/app/`, `apps/web/src/lib/auth.ts`, `apps/web/src/integrations/supabase/`, `supabase/migrations/`
 
-**Checked:** lint, typecheck and build pass; 24 database tests; 52 browser checks of the sign-in journey against a stand-in for Supabase.
+**Checked:** lint, typecheck and build pass; 24 database tests; 48 browser checks of the password journey (sign-up, confirmation, wrong password, reset) against a stand-in for Supabase.
 
-**Next:** Robin applies the migration, adds the code, sets up Google sign-in and the allowed addresses in Supabase.
+**Next:** Robin applies the migration, adds the code and sets the email and address settings in Supabase; Google sign-in, step by step.

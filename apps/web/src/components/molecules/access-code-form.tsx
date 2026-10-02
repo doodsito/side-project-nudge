@@ -1,13 +1,15 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { SubmitButton } from "@/components/atoms/submit-button";
 import { Input } from "@/components/ui/input";
-import type { AuthFormAction } from "@/lib/auth";
+import type { AuthFormAction } from "@/lib/auth-rules";
 
 export function AccessCodeForm({ action }: { action: AuthFormAction }) {
   const [state, formAction] = useActionState(action, {});
+  // Kept in state: React empties a form's fields after its action runs.
+  const [code, setCode] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (state.error) inputRef.current?.focus();
@@ -21,6 +23,8 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
         ref={inputRef}
         id="access-code"
         name="code"
+        value={code}
+        onChange={(event) => setCode(event.target.value)}
         required
         autoComplete="off"
         autoCapitalize="characters"

@@ -15,6 +15,20 @@ is a reserved area: changes wait for Robin's approval.
 | `check_access_code(code)` | Says whether a code can be used now, so `/get-started` can refuse a wrong code before sign-in. |
 | `redeem_access_code(code)` | Gives the signed-in user beta access with a code (creates their `profiles` row). Only ever acts on the caller's own account. |
 
+## Sign-in settings (Robin, Supabase dashboard)
+
+The website's password rules are in `apps/web/src/lib/auth-rules.ts`; keep the
+dashboard in step with them.
+
+- Authentication > Providers > Email: on, "Confirm email" on, minimum password
+  length 8.
+- Authentication > URL Configuration: Site URL `https://nudge.doodsito.com`;
+  Redirect URLs `https://nudge.doodsito.com/**`, `http://localhost:3000/**` and
+  `https://*-doodsito.vercel.app/**`.
+- Emails (confirmation, password reset) use Supabase's built-in sender until a
+  custom SMTP is set: it only writes to members of the Supabase team, about 2
+  emails an hour.
+
 ## Beta access codes (Robin)
 
 Codes are never written in a migration, because this repository is public. Add

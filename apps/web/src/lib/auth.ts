@@ -1,16 +1,34 @@
 // Who is signed in, and do they have beta access? Every signed-in page and
 // Server Action asks here, so the check is never forgotten. Server only.
 import { cache } from "react";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
 
 // Holds the access code between the code step and the sign-in (httpOnly).
 export const ACCESS_CODE_COOKIE = "nudge_access_code";
-export const ACCESS_CODE_PATTERN = /^[A-Z0-9-]{4,32}$/;
 
-// What the sign-in forms show after a Server Action: an error, or the address an email went to.
-export type AuthFormState = { error?: string; sentTo?: string };
-export type AuthFormAction = (state: AuthFormState, formData: FormData) => Promise<AuthFormState>;
+/**
+ * Runs after every sign-in. Gives beta access with the code typed on
+ * /get-started (from the cookie, or saved with the account at sign-up); an
+ * account that still has no access is signed out again. True for a member.
+ */
+export async function finishSignIn(
+  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
+): Promise<boolean> {
+  const cookieStore = await cookies();
+  const { data } = await supabase.auth.getClaims();
+  const saved = data?.claims.user_metadata?.["access_code"];
+  const code =
+    cookieStore.get(ACCESS_CODE_COOKIE)?.value ?? (typeof saved === "string" ? saved : "");
+  const { data: isMember } = await supabase.rpc("redeem_access_code", { code });
+  if (!isMember) {
+    await supabase.auth.signOut();
+    return false;
+  }
+  cookieStore.delete(ACCESS_CODE_COOKIE);
+  return true;
+}
 
 export type Member = {
   id: string;

@@ -38,8 +38,9 @@ export default function PrivacyPolicyPage() {
         </li>
         <li>
           <strong>Your beta account.</strong> When you create an account with an access code, we
-          keep your email address, how you sign in (Google or an email link), the access code you
-          used, when you joined and when you last signed in. If you sign in with Google, Google also
+          keep your email address, how you sign in (password or Google), the access code you used,
+          when you joined and when you last signed in. Your password is stored only in a scrambled
+          form (hashed) that nobody, us included, can read. If you sign in with Google, Google also
           shares your name and profile picture with us. We use this only to let you sign in and use
           the beta. Legal basis: the terms you accept when you create the account.
         </li>

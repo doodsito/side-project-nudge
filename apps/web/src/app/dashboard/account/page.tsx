@@ -17,7 +17,7 @@ export default async function AccountPage() {
   }).format(new Date(member.memberSince));
   const rows: Array<[string, string]> = [
     ["Email", member.email],
-    ["Signed in with", member.provider === "google" ? "Google" : "Email link"],
+    ["Signed in with", member.provider === "google" ? "Google" : "Email and password"],
     ["Access code", member.accessCode],
     ["Member since", memberSince],
   ];
