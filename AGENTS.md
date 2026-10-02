@@ -111,7 +111,8 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 - Nudge teaches. It never gives investment advice, recommends a security or
   promises returns.
 - No invented social proof: no fake numbers, testimonials, reviews or logos.
-- Site copy is in English and amounts are in euros.
+- Site copy is in English and French; legal pages are in English only for now.
+  Amounts are in euros.
 - Use `BRAND` and `SITE_URL` from `apps/web/src/lib/brand.ts` instead of
   writing the name or the address by hand.
 
