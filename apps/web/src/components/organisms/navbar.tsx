@@ -58,8 +58,8 @@ export function Navbar() {
             asChild
             className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
           >
-            <Link href="/#early-access">
-              Join early access{" "}
+            <Link href="/get-started">
+              Get started{" "}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -95,8 +95,8 @@ export function Navbar() {
               </Link>
             ))}
             <Button asChild size="lg" className="mt-2">
-              <Link href="/#early-access" onClick={() => setOpen(false)}>
-                Join early access <ArrowRight />
+              <Link href="/get-started" onClick={() => setOpen(false)}>
+                Get started <ArrowRight />
               </Link>
             </Button>
           </div>

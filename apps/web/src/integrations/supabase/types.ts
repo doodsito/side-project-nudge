@@ -8,6 +8,62 @@ export type Database = {
   };
   public: {
     Tables: {
+      access_codes: {
+        Row: {
+          code: string;
+          created_at: string;
+          expires_at: string | null;
+          is_active: boolean;
+          max_uses: number | null;
+          note: string | null;
+          used_count: number;
+        };
+        Insert: {
+          code: string;
+          created_at?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          max_uses?: number | null;
+          note?: string | null;
+          used_count?: number;
+        };
+        Update: {
+          code?: string;
+          created_at?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          max_uses?: number | null;
+          note?: string | null;
+          used_count?: number;
+        };
+        Relationships: [];
+      };
+      profiles: {
+        Row: {
+          access_code: string;
+          created_at: string;
+          id: string;
+        };
+        Insert: {
+          access_code: string;
+          created_at?: string;
+          id: string;
+        };
+        Update: {
+          access_code?: string;
+          created_at?: string;
+          id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_access_code_fkey";
+            columns: ["access_code"];
+            isOneToOne: false;
+            referencedRelation: "access_codes";
+            referencedColumns: ["code"];
+          },
+        ];
+      };
       waitlist_signups: {
         Row: {
           created_at: string;
@@ -37,10 +93,12 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      check_access_code: { Args: { code: string }; Returns: boolean };
       join_waitlist: {
         Args: { email: string; profile: string; source: string };
         Returns: undefined;
       };
+      redeem_access_code: { Args: { code: string }; Returns: boolean };
     };
     Enums: {
       [_ in never]: never;

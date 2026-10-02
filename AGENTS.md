@@ -31,6 +31,7 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 | A helper that is not a component | `apps/web/src/lib/` |
 | An analytics or tracking script (Google Analytics, a pixel...) | The `scripts` list in `apps/web/src/components/organisms/consent-manager.tsx`, so it only loads after consent; never a `<script>` tag or `next/script` |
 | Supabase access | `apps/web/src/integrations/supabase/` |
+| A page or Server Action for signed-in members | Call `requireMember()` from `apps/web/src/lib/auth.ts` inside it, every time |
 | An image or other static file | `apps/web/public/` |
 | A database change | `supabase/migrations/` (reserved: ask Robin): read `supabase/README.md` |
 | Documentation | `docs/` |
