@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-02
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/12
 
 **Why:** since #10 the waitlist form was shown nowhere, and the "Join early access" links pointed to sections that no longer existed. Robin chose to put the previous landing page back on `/`.
 
