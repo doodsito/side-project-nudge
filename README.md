@@ -8,7 +8,7 @@ commissions or touch real money.
 
 This repository holds everything: the website (the landing page today, the web
 app and dashboards later), the database schema and the team docs. A native
-mobile app will join it later. The website will live at
+mobile app will join it later. The website lives at
 https://nudge.doodsito.com.
 
 ## Where things are

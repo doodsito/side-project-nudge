@@ -9,8 +9,10 @@ changes through a pull request.
 - [x] Lovable code cleaned up; checks, code owners and team docs in place
 - [x] Website moved from TanStack Start to Next.js, the team's usual framework
 - [x] Waitlist on a new Supabase project, with email and profile both required
-- [ ] Website live on nudge.doodsito.com through Vercel, with a preview for
+- [x] Website live on nudge.doodsito.com through Vercel, with a preview for
       every pull request
+- [x] `main` protected: every change goes through a pull request, merged only
+      once the checks pass on an up-to-date branch
 
 ## Next
 
