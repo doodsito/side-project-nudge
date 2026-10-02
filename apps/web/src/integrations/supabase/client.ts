@@ -12,8 +12,8 @@ let client: SupabaseClient<Database> | undefined;
 export function getSupabase(): SupabaseClient<Database> {
   if (!client) {
     // Next.js inlines NEXT_PUBLIC_ variables at build time, for both the browser and the server.
-    const url = process.env["NEXT_PUBLIC_SUPABASE_URL"];
-    const publishableKey = process.env["NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"];
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     if (!url || !publishableKey) {
       throw new Error(
         "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY. See apps/web/.env.example.",

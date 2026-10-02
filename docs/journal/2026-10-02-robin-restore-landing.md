@@ -9,8 +9,9 @@
 **What changed:**
 - `/` shows the landing page again: hero, mini challenge, how it works, FAQ, early access form (saved to Supabase).
 - Nudge Next stays available at `/nudge-next`.
+- The waitlist form works again in the browser: it read the Supabase address in a way Next.js does not fill in, so every signup failed since #4.
 
-**Files:** `apps/web/src/app/page.tsx`, `docs/ui.md`
+**Files:** `apps/web/src/app/page.tsx`, `apps/web/src/integrations/supabase/client.ts`, `apps/web/src/integrations/supabase/env.d.ts`, `docs/ui.md`
 
 **Checked:** lint and typecheck pass locally; build by the CI; Robin tests the waitlist form on the Vercel preview.
 
