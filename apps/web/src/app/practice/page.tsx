@@ -3,13 +3,12 @@ import { BRAND, SITE_URL } from "@/lib/brand";
 import { PracticeFlow } from "./practice-flow";
 
 export const metadata: Metadata = {
-  title: `Practice an Investing Decision | ${BRAND}`,
+  title: `Practise a First Money Decision | ${BRAND}`,
   description:
-    "Build a learning profile, make a simulated investing decision and receive a personalised educational explanation.",
+    "Make a simulated first saving or investing decision, compare the trade-offs and check what you learned. No account required.",
   openGraph: {
-    title: `Practice an Investing Decision | ${BRAND}`,
-    description:
-      "Make a realistic investing decision with virtual money and understand the factors behind it.",
+    title: `Practise a First Money Decision | ${BRAND}`,
+    description: "Help Alex weigh accessible savings and a first investment in one fictional case.",
     type: "website",
   },
   twitter: { card: "summary_large_image" },

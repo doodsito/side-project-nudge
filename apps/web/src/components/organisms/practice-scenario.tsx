@@ -1,40 +1,49 @@
-import { ArrowLeft, ArrowRight, Check, ChevronDown } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChoiceButton, ChoiceMarker } from "@/components/atoms/choice-button";
 import { EducationalNote } from "@/components/atoms/educational-note";
 import { Eyebrow } from "@/components/atoms/eyebrow";
-import { VirtualPortfolio } from "@/components/molecules/virtual-portfolio";
 import { DECISIONS, PRACTICE_CASE, type Decision } from "@/lib/practice-case";
 
 export function PracticeScenario({
   decision,
   onSelect,
-  onBack,
+  onEditProfile,
   onContinue,
 }: {
   decision: Decision | null;
   onSelect: (d: Decision) => void;
-  onBack: () => void;
+  onEditProfile: (() => void) | undefined;
   onContinue: () => void;
 }) {
   return (
     <div className="animate-rise">
-      <Button variant="ghost" onClick={onBack} className="mb-5 -ml-3 min-h-11">
-        <ArrowLeft /> Edit learning profile
-      </Button>
-      <div className="grid items-start gap-6 lg:grid-cols-[.85fr_1.15fr]">
-        <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-8 lg:col-start-2 lg:row-start-1">
+      {onEditProfile && (
+        <Button variant="ghost" onClick={onEditProfile} className="mb-5 -ml-3 min-h-11">
+          <ArrowLeft aria-hidden="true" /> Edit reflection
+        </Button>
+      )}
+      <div className="mx-auto max-w-3xl">
+        <section className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-8">
           <Eyebrow>Fictional practice case</Eyebrow>
-          <p className="mt-3 text-sm font-semibold text-foreground">
-            Markets have just fallen 10%.
-          </p>
           <h1
             id="practice-question"
-            className="mt-2 scroll-mt-32 font-display text-2xl font-extrabold sm:text-4xl"
+            className="mt-3 scroll-mt-32 font-display text-2xl font-extrabold sm:text-4xl"
           >
             {PRACTICE_CASE.title}
           </h1>
           <p className="mt-3 text-muted-foreground">{PRACTICE_CASE.context}</p>
+          <dl className="mt-5 grid grid-cols-2 gap-2">
+            {PRACTICE_CASE.facts.map((fact, index) => (
+              <div
+                key={fact.label}
+                className={`rounded-xl bg-surface-2 p-3 ${index === 2 ? "col-span-2" : ""}`}
+              >
+                <dt className="text-xs font-semibold text-muted-foreground">{fact.label}</dt>
+                <dd className="mt-1 font-display text-lg font-extrabold">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
           <div className="mt-6 grid gap-3" role="radiogroup" aria-labelledby="practice-question">
             {DECISIONS.map((o, i) => (
               <ChoiceButton
@@ -66,24 +75,10 @@ export function PracticeScenario({
             onClick={onContinue}
             className="mt-6 w-full h-auto min-h-13 whitespace-normal py-3"
           >
-            Understand my decision <ArrowRight />
+            See what each choice changes <ArrowRight aria-hidden="true" />
           </Button>
           <EducationalNote />
         </section>
-        <details className="group rounded-3xl border border-border bg-surface p-4 lg:col-start-1 lg:row-start-1">
-          <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 font-semibold text-primary focus-visible:ring-2 focus-visible:ring-ring">
-            View the illustrative portfolio
-            <ChevronDown
-              aria-hidden="true"
-              className="size-5 shrink-0 transition-transform group-open:rotate-180"
-            />
-          </summary>
-          <p className="my-3 text-sm leading-relaxed text-muted-foreground">
-            Background illustration only. The six-month chart does not show the 10% fall in this
-            case.
-          </p>
-          <VirtualPortfolio />
-        </details>
       </div>
     </div>
   );

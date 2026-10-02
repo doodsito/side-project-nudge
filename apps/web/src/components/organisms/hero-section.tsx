@@ -18,8 +18,8 @@ export function HeroSection() {
               Your first money decisions. <span className="text-primary">A little clearer.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              New to investing? Start with one fictional case. Make a choice, explore the trade-offs
-              and check what you learned — without using real money.
+              New to saving or investing? Start with Alex’s first paycheque. Choose what to do with
+              €100, explore the trade-offs and check what you learned — without using real money.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <PracticeButton location="hero">Try the practice case</PracticeButton>

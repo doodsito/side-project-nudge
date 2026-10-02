@@ -36,11 +36,11 @@ export function updateProfile(profile: Profile, key: keyof Profile, value: strin
   return { ...profile, [key]: value };
 }
 
-export function resolveStep(step: string, profile: Profile, decision: Decision | null): Step {
-  if (!isCompleteProfile(profile)) return "profile";
+export function resolveStep(step: string, _profile: Profile, decision: Decision | null): Step {
   if (step === "scenario") return "scenario";
-  if (step === "feedback" || step === "summary") return decision ? step : "scenario";
-  return "profile";
+  if (step === "feedback" || step === "summary" || step === "profile")
+    return decision ? step : "scenario";
+  return "scenario";
 }
 export const QUESTIONS: Question[] = [
   {
@@ -154,21 +154,21 @@ export function makeFeedback(p: Required<Profile>, d: Decision) {
   if (p.reaction === "low") constraints.push("You said a 20% fall would feel intolerable.");
 
   const titles: Record<Decision, string> = {
-    planned: "Keeping the amount is still a decision.",
-    wait: "Keeping cash changes the trade-off.",
-    more: "Investing more also means exposing more.",
+    planned: "Starting to invest changes the cash available.",
+    wait: "Adding to savings keeps the money accessible.",
+    split: "Splitting the money changes both balances.",
   };
   return {
     title: constraints.length ? "Look at the constraints before the price." : titles[d],
     body: constraints.length
       ? constraints.join(" ") +
-        " These answers raise questions about cash needs or potential losses before changing a contribution."
+        " These answers raise questions about cash needs or potential losses before choosing what to do with the €100."
       : "Your answers are shown below. They help explore the case; they do not establish that any contribution is right for you.",
     close:
       p.style === "regular"
-        ? "You described a regular routine. Alex's €500 is a fictional amount, not a recommendation for that routine."
+        ? "You described a regular routine. Alex's €100 is a fictional amount, not a recommendation for that routine."
         : p.style === "occasional"
-          ? "You described occasional contributions. Alex's monthly plan is a case assumption, not the routine you described."
-          : "You said you do not have a plan yet. Alex's scheduled contribution belongs to the fictional case, not to you.",
+          ? "You described occasional contributions. Alex's €100 is a case assumption, not the routine you described."
+          : "You said you do not have a plan yet. Alex's €100 belongs to the fictional case, not to you.",
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 18);
@@ -22,6 +23,16 @@ export function Navbar() {
   ] as const;
   return (
     <header
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          event.preventDefault();
+          setOpen(false);
+          toggleRef.current?.focus();
+        }
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-all duration-300",
         scrolled
@@ -54,10 +65,12 @@ export function Navbar() {
           </Button>
         </nav>
         <Button
+          ref={toggleRef}
           size="icon"
           variant="outline"
           aria-label="Toggle navigation"
           aria-expanded={open}
+          aria-controls="mobile-navigation"
           onClick={() => setOpen(!open)}
           className="min-h-11 min-w-11 md:hidden"
         >
@@ -66,6 +79,7 @@ export function Navbar() {
       </div>
       {open && (
         <nav
+          id="mobile-navigation"
           className="animate-slide-up border-t border-border bg-background px-5 py-4 shadow-lift md:hidden"
           aria-label="Mobile navigation"
         >

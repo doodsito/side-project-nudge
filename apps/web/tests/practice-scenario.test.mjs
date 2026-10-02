@@ -60,7 +60,7 @@ test("the reported medium-horizon / no-plan regression remains truthful", () => 
   const result = makeFeedback(complete, "planned");
   assert.match(result.close, /do not have a plan yet/);
   assert.doesNotMatch(result.title, /consistent with the plan you described/);
-  const limited = makeFeedback({ ...complete, savings: "limited", reaction: "high" }, "more");
+  const limited = makeFeedback({ ...complete, savings: "limited", reaction: "high" }, "split");
   assert.match(limited.body, /less than one month/);
   assert.doesNotMatch(limited.body, /intolerable|sensitive response/);
 });
@@ -84,25 +84,22 @@ test("partial, malformed and mismatched profile answers cannot pass validation",
 });
 
 test("navigation guards reject unavailable steps after reset, refresh or replay", () => {
-  for (const step of ["scenario", "feedback", "summary"])
-    assert.equal(resolveStep(step, {}, "planned"), "profile");
+  assert.equal(resolveStep("scenario", {}, null), "scenario");
+  for (const step of ["feedback", "summary", "profile"])
+    assert.equal(resolveStep(step, {}, null), "scenario");
   assert.equal(resolveStep("summary", complete, null), "scenario");
   assert.equal(resolveStep("feedback", complete, null), "scenario");
+  assert.equal(resolveStep("summary", {}, "wait"), "summary");
+  assert.equal(resolveStep("profile", {}, "wait"), "profile");
   assert.equal(resolveStep("summary", complete, "wait"), "summary");
-  assert.equal(resolveStep("unexpected", complete, "planned"), "profile");
+  assert.equal(resolveStep("unexpected", complete, "planned"), "scenario");
 });
 
 test("each action has a distinct cash consequence and the checkpoint has one explained answer", () => {
   assert.equal(new Set(DECISIONS.map((option) => option.consequence)).size, 3);
-  assert.match(DECISIONS.find((option) => option.value === "planned").consequence, /€500 moves/);
-  assert.match(
-    DECISIONS.find((option) => option.value === "wait").consequence,
-    /stays available in cash/,
-  );
-  assert.match(
-    DECISIONS.find((option) => option.value === "more").consequence,
-    /More than €500 leaves/,
-  );
+  assert.match(DECISIONS.find((option) => option.value === "planned").consequence, /€100 leaves/);
+  assert.match(DECISIONS.find((option) => option.value === "wait").consequence, /€200 to €300/);
+  assert.match(DECISIONS.find((option) => option.value === "split").consequence, /€250.*€50/);
   assert.equal(PRACTICE_CASE.checkpoint.options.filter((option) => option.correct).length, 1);
   assert.ok(PRACTICE_CASE.checkpoint.options.every((option) => option.explanation));
 });

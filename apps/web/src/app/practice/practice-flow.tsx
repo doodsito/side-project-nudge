@@ -19,14 +19,14 @@ import {
 } from "@/lib/practice-scenario";
 
 export function PracticeFlow() {
-  const [step, setStep] = useState<Step>("profile");
+  const [step, setStep] = useState<Step>("scenario");
   const [profile, setProfile] = useState<Profile>({});
   const [decision, setDecision] = useState<Decision | null>(null);
   const content = useRef<HTMLDivElement>(null);
   const complete = isCompleteProfile(profile);
   useEffect(() => {
     // A direct link or refresh starts a new session; no personal answers go in the URL.
-    window.history.replaceState(window.history.state, "", "#profile");
+    window.history.replaceState(window.history.state, "", "#scenario");
   }, []);
   useEffect(() => {
     function restoreStep() {
@@ -60,7 +60,7 @@ export function PracticeFlow() {
   function startOver() {
     setProfile({});
     setDecision(null);
-    navigate("profile");
+    navigate("scenario");
   }
   return (
     <PracticeTemplate step={step}>
@@ -69,6 +69,7 @@ export function PracticeFlow() {
           <LearningProfile
             profile={profile}
             onSelect={(k, v) => setProfile((p) => updateProfile(p, k, v))}
+            onBack={() => navigate("summary")}
             onContinue={() => {
               if (complete) {
                 track("practice_profile_completed");
@@ -77,11 +78,11 @@ export function PracticeFlow() {
             }}
           />
         )}{" "}
-        {step === "scenario" && complete && (
+        {step === "scenario" && (
           <PracticeScenario
             decision={decision}
             onSelect={setDecision}
-            onBack={() => navigate("profile")}
+            onEditProfile={complete ? () => navigate("profile") : undefined}
             onContinue={() => {
               if (decision) {
                 track("demo_decision_confirmed", { decision });
@@ -90,9 +91,9 @@ export function PracticeFlow() {
             }}
           />
         )}{" "}
-        {step === "feedback" && decision && complete && (
+        {step === "feedback" && decision && (
           <PersonalizedFeedback
-            profile={profile}
+            profile={complete ? profile : null}
             decision={decision}
             onBack={() => navigate("scenario")}
             onContinue={() => {
@@ -101,8 +102,9 @@ export function PracticeFlow() {
             }}
           />
         )}{" "}
-        {step === "summary" && complete && (
+        {step === "summary" && decision && (
           <LearningSummary
+            hasProfile={complete}
             onReset={reset}
             onEdit={() => navigate("profile")}
             onStartOver={startOver}

@@ -59,7 +59,7 @@ export function ChoiceMarker({
       aria-hidden="true"
       className={cn(
         "grid shrink-0 place-items-center rounded-full border",
-        selected ? "border-primary bg-primary text-primary-foreground" : "border-border-strong",
+        selected ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground",
         className,
       )}
     >

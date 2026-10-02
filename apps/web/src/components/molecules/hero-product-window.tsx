@@ -16,9 +16,9 @@ export function HeroProductWindow() {
             <Wallet aria-hidden="true" />
           </span>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Meet Alex. A contribution is planned.
+            Alex has €100 left after essentials.
             <br />
-            Then the market moves.
+            Accessible savings: €200.
           </p>
         </div>
         <div className="mt-5 flex items-center gap-3 rounded-2xl bg-surface-2 p-4">
@@ -47,7 +47,7 @@ export function HeroProductWindow() {
           ))}
         </ul>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-          Explore each choice in the practice case. No real money, no stock tips.
+          Compare savings and investing in the practice case. No real money, no stock tips.
         </p>
       </div>
     </div>
