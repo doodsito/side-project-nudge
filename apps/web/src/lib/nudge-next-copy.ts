@@ -1,5 +1,9 @@
 import { BRAND } from "./brand";
-import { PRACTICE_CASE, type Decision } from "./practice-case";
+
+// The decisions of the case on this page. It has its own amounts (see
+// CASE_VALUES), so it does not reuse the /practice case.
+export const DECISIONS = ["planned", "wait", "more"] as const;
+export type Decision = (typeof DECISIONS)[number];
 
 export type NudgeLocale = "en" | "fr";
 export type Topic = "markets" | "time" | "spread";
@@ -95,23 +99,27 @@ export const nudgeCopy: Record<NudgeLocale, Copy> = {
       planned: {
         title: "Keep the planned contribution",
         detail: "Add {planned} to the invested amount",
-        explanation: PRACTICE_CASE.decisions[0].tradeoff,
+        explanation:
+          "The scheduled amount stays the same, but that does not establish whether the plan fits the person's needs.",
       },
       wait: {
         title: "Wait for now",
         detail: "Keep {planned} available in cash",
-        explanation: PRACTICE_CASE.decisions[1].tradeoff,
+        explanation:
+          "That contribution avoids market movements while it stays in cash, including any rise. Waiting does not make the next entry point predictable.",
       },
       more: {
         title: "Increase the contribution",
         detail: "Explore adding {extra} instead",
-        explanation: PRACTICE_CASE.decisions[2].tradeoff,
+        explanation:
+          "A lower price is not a guarantee of recovery. Increasing the amount also changes the cash available for other needs.",
       },
     },
     see: "See what changes",
     reset: "Try another choice",
     result: "Here’s the trade-off.",
-    takeaway: PRACTICE_CASE.takeaway,
+    takeaway:
+      "A price fall alone does not settle a decision. The money's purpose, when it is needed, available cash and tolerance for losses all matter. No option guarantees a return.",
     checkpoint: "What changes the context most?",
     answers: [
       "A prediction of a quick recovery",
