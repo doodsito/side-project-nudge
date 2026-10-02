@@ -37,7 +37,10 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
       src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
     },
   ],
-  legalLinks: { cookiePolicy: { href: "/cookies", target: "_self", label: "Cookie policy" } },
+  legalLinks: {
+    privacyPolicy: { href: "/privacy-policy", target: "_self", label: "Privacy policy" },
+    cookiePolicy: { href: "/cookies", target: "_self", label: "Cookie policy" },
+  },
   i18n: {
     locale: "en",
     messages: {
@@ -101,8 +104,8 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
 export function ConsentManager({ children }: { children: ReactNode }) {
   return (
     <ConsentManagerProvider options={options}>
-      <ConsentBanner hideBranding legalLinks={["cookiePolicy"]} />
-      <ConsentDialog hideBranding legalLinks={["cookiePolicy"]} />
+      <ConsentBanner hideBranding legalLinks={["privacyPolicy", "cookiePolicy"]} />
+      <ConsentDialog hideBranding legalLinks={["privacyPolicy", "cookiePolicy"]} />
       {children}
     </ConsentManagerProvider>
   );

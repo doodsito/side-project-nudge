@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BRAND, SITE_URL } from "@/lib/brand";
+import { llmsTxtAlternate } from "@/lib/metadata";
 import { PracticeFlow } from "./practice-flow";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary_large_image" },
-  alternates: { canonical: `${SITE_URL}/practice` },
+  alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/practice` },
 };
 
 export default function PracticePage() {

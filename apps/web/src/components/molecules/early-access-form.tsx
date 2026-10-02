@@ -2,10 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, LoaderCircle } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getSupabase } from "@/integrations/supabase/client";
 import { track } from "@/lib/analytics";
+import { BRAND } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const PROFILES = [
@@ -132,8 +134,14 @@ export function EarlyAccessForm() {
         </p>
       )}
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        Receive product and early-access updates from Nudge. You will be able to unsubscribe at any
-        time.
+        We’ll only email you about early access and the launch of {BRAND}. You can leave the list at
+        any time. You must be 15 or older.{" "}
+        <Link
+          href="/privacy-policy"
+          className="font-semibold text-primary underline-offset-4 hover:underline"
+        >
+          Privacy policy
+        </Link>
       </p>
     </form>
   );

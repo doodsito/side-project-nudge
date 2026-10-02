@@ -64,9 +64,7 @@ type Copy = {
   completed: string;
   milestones: string[];
   session: string;
-  footer: string;
   brand: string;
-  prototype: string;
 };
 
 export const nudgeCopy: Record<NudgeLocale, Copy> = {
@@ -177,8 +175,6 @@ export const nudgeCopy: Record<NudgeLocale, Copy> = {
     completed: "Your first connections are in place.",
     milestones: ["Make a decision", "Check your reasoning", "Explore an idea"],
     session: "Your trail in this session. Refreshing starts a new session.",
-    footer: "An educational experience. No real transactions or personalised investment advice.",
-    prototype: "Direction study / 2026",
   },
   fr: {
     brand: BRAND,
@@ -292,9 +288,6 @@ export const nudgeCopy: Record<NudgeLocale, Copy> = {
     completed: "Vos premiers liens prennent forme.",
     milestones: ["Faire un choix", "Vérifier son raisonnement", "Explorer une idée"],
     session: "Votre parcours dans cette session. Actualiser démarre une nouvelle session.",
-    footer:
-      "Une expérience pédagogique. Aucune transaction réelle ni aucun conseil d’investissement personnalisé.",
-    prototype: "Étude de direction / 2026",
   },
 };
 

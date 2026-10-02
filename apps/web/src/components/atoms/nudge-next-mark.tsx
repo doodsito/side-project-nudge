@@ -1,6 +1,9 @@
+import { BRAND } from "@/lib/brand";
+import { cn } from "@/lib/utils";
+
 export function NudgeNextMark({ className = "" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <svg className={cn("nx-mark", className)} viewBox="0 0 64 64" fill="none" aria-hidden="true">
       <rect width="64" height="64" rx="13" className="nx-mark-tile" />
       <g transform="translate(1.6 7) scale(.095)">
         <path d="M35 448 134 52h121L156 448Z" className="nx-fill-lilac" />
@@ -20,6 +23,21 @@ export function NudgeNextMark({ className = "" }: { className?: string }) {
         <path d="m492 18 5-10h121l-5 10Z" className="nx-fill-lime" />
       </g>
     </svg>
+  );
+}
+
+/** The mark with the lowercase name, for pages outside the homepage (footer, legal pages). */
+export function NudgeNextLogo({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 font-display text-2xl font-bold tracking-[-0.04em] text-foreground",
+        className,
+      )}
+    >
+      <NudgeNextMark className="size-7" />
+      {BRAND.toLowerCase()}
+    </span>
   );
 }
 

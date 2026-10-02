@@ -3,6 +3,7 @@ import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { NudgeNextFlow } from "./nudge-next/nudge-next-flow";
 import "./nudge-next/nudge-next.css";
 import { BRAND, SITE_URL } from "@/lib/brand";
+import { llmsTxtAlternate } from "@/lib/metadata";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: `${BRAND} — Get a feel for investing`,
   description:
     "Practise investing decisions with fictional situations and virtual money, then understand the reasoning behind your choices.",
-  alternates: { canonical: `${SITE_URL}/` },
+  alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/` },
   openGraph: {
     title: `${BRAND} — Get a feel for investing`,
     description:

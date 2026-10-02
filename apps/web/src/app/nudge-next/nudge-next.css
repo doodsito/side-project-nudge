@@ -228,18 +228,6 @@
   z-index: 1;
   transform: rotate(-7deg);
 }
-.nx-fill-lilac {
-  fill: var(--nx-lilac);
-}
-.nx-fill-white {
-  fill: var(--nx-paper);
-}
-.nx-fill-lime {
-  fill: var(--nx-lime);
-}
-.nx-fill-shadow {
-  fill: var(--nx-fold-shadow);
-}
 .nx-fold-back,
 .nx-fold-lines {
   animation: nx-unfold 1000ms var(--nx-ease) both;
@@ -928,29 +916,6 @@
   font-size: 11px;
   margin-top: 28px;
 }
-.nx-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 50px;
-  align-items: center;
-  padding: 36px 48px;
-}
-.nx-footer .nx-brand {
-  font-size: 24px;
-}
-.nx-footer .nx-brand svg {
-  width: 28px;
-  height: 28px;
-}
-.nx-footer > p {
-  font-size: 11px;
-  color: var(--nx-muted);
-  max-width: 430px;
-}
-.nx-footer > span:last-child {
-  font-size: 11px;
-  color: var(--nx-muted);
-}
 @keyframes nx-unfold {
   from {
     transform: translate(16px, 24px) rotate(5deg);
@@ -1234,14 +1199,6 @@
   .nx-trail li > span {
     padding-right: 4px;
   }
-  .nx-footer {
-    padding: 30px 24px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  .nx-footer > p {
-    order: 3;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .nx-page *,
@@ -1256,13 +1213,6 @@
 /* Refinements from the first visual review. */
 .nx-page .nx-art-white-line {
   stroke: var(--nx-paper);
-}
-.nx-mark-tile {
-  fill: var(--nx-purple);
-}
-.nx-mark-ribs {
-  stroke: var(--nx-purple);
-  opacity: 0.55;
 }
 .nx-year-short > i {
   width: calc((100% - 33px) / 12);

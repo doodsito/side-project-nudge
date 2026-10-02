@@ -15,13 +15,6 @@ export function PracticeTemplate({ step, children }: { step: Step; children: Rea
       >
         {children}
       </main>
-      <footer className="border-t border-border px-5 py-7">
-        <p className="mx-auto max-w-5xl text-xs leading-relaxed text-muted-foreground">
-          This is an educational simulation using virtual money. It is not a suitability assessment,
-          financial advice or a recommendation. Investing involves risk, including the possible loss
-          of capital.
-        </p>
-      </footer>
     </div>
   );
 }

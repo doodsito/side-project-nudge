@@ -5,8 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* New-experience tokens, scoped to the homepage and /nudge-next. */
-.nx-page {
+/* New-experience tokens, scoped to the homepage, /nudge-next and the folded-N mark (shown on every page). */
+.nx-page,
+.nx-mark {
   --nx-purple: #6236e8;
   --nx-deep-purple: #4521b2;
   --nx-ink: #231b32;
@@ -24,6 +25,27 @@
   --nx-radius: 14px;
   --nx-fast: 180ms;
   --nx-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Colours of the folded N (NudgeNextMark and NudgeFold). */
+.nx-mark-tile {
+  fill: var(--nx-purple);
+}
+.nx-mark-ribs {
+  stroke: var(--nx-purple);
+  opacity: 0.55;
+}
+.nx-fill-lilac {
+  fill: var(--nx-lilac);
+}
+.nx-fill-white {
+  fill: var(--nx-paper);
+}
+.nx-fill-lime {
+  fill: var(--nx-lime);
+}
+.nx-fill-shadow {
+  fill: var(--nx-fold-shadow);
 }
 
 @theme inline {

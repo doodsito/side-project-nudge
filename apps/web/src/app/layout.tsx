@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { ConsentManager } from "@/components/organisms/consent-manager";
+import { Footer } from "@/components/organisms/footer";
+import { llmsTxtAlternate } from "@/lib/metadata";
 import "@/styles.css";
 
 const manrope = Manrope({
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website" },
   twitter: { card: "summary_large_image" },
   icons: { icon: { url: "/favicon.png", type: "image/png" } },
+  alternates: llmsTxtAlternate,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,7 +35,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${manrope.variable} ${inter.variable}`}
     >
       <body>
-        <ConsentManager>{children}</ConsentManager>
+        <ConsentManager>
+          {children}
+          <Footer />
+        </ConsentManager>
       </body>
     </html>
   );

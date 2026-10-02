@@ -53,14 +53,6 @@ export function NudgeNextTemplate({
         </div>
       </header>
       <main>{children}</main>
-      <footer className="nx-footer">
-        <span className="nx-brand">
-          <NudgeNextMark />
-          {c.brand.toLowerCase()}
-        </span>
-        <p>{c.footer}</p>
-        <span>{c.prototype}</span>
-      </footer>
     </div>
   );
 }
