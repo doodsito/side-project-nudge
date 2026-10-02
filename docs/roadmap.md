@@ -20,7 +20,9 @@ changes through a pull request.
 - [ ] Remove AI-writing tics from the landing copy (em dashes, inconsistencies)
 - [ ] Custom 404 page
 - [x] Cookie policy (`/cookies`) with a consent banner
-- [ ] Legal pages: legal notice, privacy policy
+- [x] Legal pages: legal notice, privacy policy, terms of service, with a footer
+      on every page
+- [x] `llms.txt`, sitemap and robots.txt for search engines and AI crawlers
 - [x] Google Analytics with a new GA4 property, behind the consent banner
 - [ ] Logo options for the team to choose from
 
