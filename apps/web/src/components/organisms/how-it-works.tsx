@@ -21,10 +21,16 @@ const STEPS = [
     "See the cash consequence, check your understanding and optionally explore how your context changes the explanation.",
   ],
 ];
-export function HowItWorks() {
+export function HowItWorks({
+  label = "How Nudge works",
+  title = "Choose. Understand. Try again.",
+}: {
+  label?: string;
+  title?: string;
+}) {
   return (
     <Section id="how-it-works" className="bg-ink text-ink-foreground">
-      <SectionIntro inverse label="How Nudge works" title="Choose. Understand. Try again." />
+      <SectionIntro inverse label={label} title={title} />
       <div className="mt-14 grid gap-4 md:grid-cols-3">
         {STEPS.map(([n, title, copy], i) => (
           <Reveal

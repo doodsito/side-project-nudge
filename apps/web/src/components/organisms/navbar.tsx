@@ -7,7 +7,18 @@ import { Button } from "@/components/ui/button";
 import { NudgeLogo } from "@/components/atoms/nudge-logo";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+const DEFAULT_ITEMS: Array<[string, string]> = [
+  ["Try a challenge", "/#challenge"],
+  ["How it works", "/#how-it-works"],
+];
+
+export function Navbar({
+  items = DEFAULT_ITEMS,
+  ctaHref = "/#early-access",
+}: {
+  items?: Array<[string, string]> | undefined;
+  ctaHref?: string | undefined;
+}) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -17,10 +28,6 @@ export function Navbar() {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
-  const items = [
-    ["Try a challenge", "/#challenge"],
-    ["How it works", "/#how-it-works"],
-  ] as const;
   return (
     <header
       onKeyDown={(event) => {
@@ -58,7 +65,7 @@ export function Navbar() {
             asChild
             className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
           >
-            <Link href="/#early-access">
+            <Link href={ctaHref}>
               Join early access{" "}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -95,7 +102,7 @@ export function Navbar() {
               </Link>
             ))}
             <Button asChild size="lg" className="mt-2">
-              <Link href="/#early-access" onClick={() => setOpen(false)}>
+              <Link href={ctaHref} onClick={() => setOpen(false)}>
                 Join early access <ArrowRight />
               </Link>
             </Button>
