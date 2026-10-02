@@ -74,10 +74,15 @@ level.
 `components/ui/` only holds what the site uses today (accordion, button,
 input); add the others from shadcn when you need them.
 
-The landing page (`/`) and the practice flow (`/practice`) are built from the
-atomic folders: look there before creating a component. `/` uses
-`templates/marketing-template.tsx` (navbar and footer) and `/practice` uses
-`templates/practice-template.tsx`. The practice questions, answers and feedback
+The pages are built from the atomic folders: look there before creating a
+component. `/` uses `templates/marketing-template.tsx` (navbar), the
+`/nudge-next` preview uses `templates/nudge-next-template.tsx`, `/practice` uses
+`templates/practice-template.tsx`, and the legal pages (`/privacy-policy`,
+`/terms-of-service`, `/legal-notice`, `/cookies`) use
+`templates/legal-template.tsx`, which styles their headings, paragraphs, lists
+and links. The footer (`organisms/footer.tsx`) is in
+no template: `app/layout.tsx` adds it to every page, so the legal links and the
+cookie settings are always one click away. The practice questions, answers and feedback
 rules are data in `lib/practice-scenario.ts`, and the state of the flow (step,
 profile, decision) lives in `app/practice/practice-flow.tsx`, next to its page,
 because no other page uses it.

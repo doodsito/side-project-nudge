@@ -5,8 +5,13 @@ import { ArrowDown, ArrowUpRight, Check, RotateCcw } from "lucide-react";
 import { NudgeNextChart } from "@/components/molecules/nudge-next-chart";
 import { NudgeNextMark } from "@/components/atoms/nudge-next-mark";
 import { Button } from "@/components/ui/button";
-import { nudgeCopy, formatters, type NudgeLocale } from "@/lib/nudge-next-copy";
-import { DECISIONS, type Decision } from "@/lib/practice-case";
+import {
+  DECISIONS,
+  nudgeCopy,
+  formatters,
+  type Decision,
+  type NudgeLocale,
+} from "@/lib/nudge-next-copy";
 
 export function NudgeNextDemo({
   locale,
@@ -70,7 +75,7 @@ export function NudgeNextDemo({
               <fieldset ref={choiceRef}>
                 <legend>{c.question}</legend>
                 <p className="nx-choice-intro">{c.choose}</p>
-                {DECISIONS.map(({ value }, i) => (
+                {DECISIONS.map((value, i) => (
                   <label className="nx-choice" key={value} data-selected={selection === value}>
                     <input
                       type="radio"
