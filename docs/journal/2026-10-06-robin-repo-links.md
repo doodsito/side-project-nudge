@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-06
 - **Author:** Robin, with Claude Code
-- **Pull request:** link once opened
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/15
 
 **Why:** the repository moved from `doodsito/side-project-nudge` to `nudge-code/side-project-nudge`. GitHub redirects the old address for now, but the redirect stops if a repository is ever created there again.
 
