@@ -7,7 +7,7 @@ you read what it did, open the preview and decide to merge.
 
 ## One-time setup
 
-1. Install [Node.js](https://nodejs.org) 22 or later and [Git](https://git-scm.com).
+1. Install [Node.js](https://nodejs.org) 22 and [Git](https://git-scm.com).
 2. Ask Robin to add your GitHub account to the repository.
 3. Install your agent: Claude Code or Codex.
 4. If you use Claude Code, also install the [GitHub CLI](https://cli.github.com)
