@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   const contact = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   return (
-    <LegalTemplate title="Privacy policy" updated="2 October 2026">
+    <LegalTemplate title="Privacy policy" updated="6 October 2026">
       <p>
         This policy explains what personal data {BRAND} collects on {new URL(SITE_URL).host}, why,
         how long we keep it and how to use your rights. We never sell your data and never use it for
@@ -80,6 +80,10 @@ export default function PrivacyPolicyPage() {
         <li>
           Google Ireland Limited: Google Analytics, only if you accept it, and Google sign-in, only
           if you choose it.
+        </li>
+        <li>
+          Resend, Inc., United States: sending of the account emails (confirming your address,
+          resetting your password), from servers in the European Union (Ireland).
         </li>
       </ul>
 
