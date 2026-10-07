@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-29
 - **Author:** Emma, with Codex
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/8
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/8
 
 **Why:** Four profile questions and a large portfolio delayed the first useful decision for new savers.
 **What changed:**

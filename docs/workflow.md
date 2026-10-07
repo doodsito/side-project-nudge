@@ -16,7 +16,7 @@ you read what it did, open the preview and decide to merge.
 5. Get the code and install it:
 
    ```sh
-   git clone https://github.com/doodsito/side-project-nudge.git
+   git clone https://github.com/nudge-code/side-project-nudge.git
    cd side-project-nudge
    npm install
    ```

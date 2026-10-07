@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-28
 - **Author:** Robin, with Claude Code
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/2
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/2
 
 **Why:** Next.js is what the team and its agents know best, Vercel runs it
 natively, and it builds from any folder (TanStack broke on `Rob'1`).

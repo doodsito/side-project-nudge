@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-02
 - **Author:** Robin, with Claude Code
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/13
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/13
 
 **Why:** `main` is now protected on GitHub, and the legal pages went live with #11 while their docs were still on another branch.
 
