@@ -18,7 +18,7 @@ export function FAQSection({ faqs }: { faqs: Array<[string, string]> }) {
         <SectionIntro
           label="Before you begin"
           title="Good questions deserve clear answers."
-          text="Nudge is designed to help beginners build judgement — not to make investment choices for them."
+          text="Nudge is designed to help beginners build judgement, not to make investment choices for them."
         />
         <Reveal delay={100}>
           <Accordion type="single" collapsible>
