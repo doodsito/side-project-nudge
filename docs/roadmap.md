@@ -20,7 +20,7 @@ changes through a pull request.
       design levels, and restyle `components/ui/` with our tokens, without
       changing how the pages look
 - [ ] Remove AI-writing tics from the landing copy (em dashes, inconsistencies)
-- [ ] Custom 404 page
+- [x] Custom 404 page
 - [x] Cookie policy (`/cookies`) with a consent banner
 - [x] Legal pages: legal notice, privacy policy, terms of service, with a footer
       on every page
