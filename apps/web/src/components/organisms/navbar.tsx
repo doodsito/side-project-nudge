@@ -5,12 +5,14 @@ import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NudgeLogo } from "@/components/atoms/nudge-logo";
+import { useHasSession } from "@/hooks/use-has-session";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const signedIn = useHasSession();
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 18);
     update();
@@ -54,15 +56,26 @@ export function Navbar() {
               {label}
             </Link>
           ))}
-          <Button
-            asChild
-            className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
-          >
-            <Link href="/#early-access">
-              Join early access{" "}
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
+          <div className="flex items-center gap-3">
+            {!signedIn && (
+              <Button
+                asChild
+                variant="outline"
+                className="h-10 rounded-xl border-border-strong bg-surface font-bold transition-all hover:-translate-y-px hover:bg-muted"
+              >
+                <Link href="/#early-access">Join the waitlist</Link>
+              </Button>
+            )}
+            <Button
+              asChild
+              className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
+            >
+              <Link href={signedIn ? "/dashboard" : "/beta"}>
+                {signedIn ? "Dashboard" : "I have a code"}{" "}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
         </nav>
         <Button
           ref={toggleRef}
@@ -94,9 +107,21 @@ export function Navbar() {
                 {label}
               </Link>
             ))}
+            {!signedIn && (
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="mt-2 border-border-strong bg-surface hover:bg-muted"
+              >
+                <Link href="/#early-access" onClick={() => setOpen(false)}>
+                  Join the waitlist
+                </Link>
+              </Button>
+            )}
             <Button asChild size="lg" className="mt-2">
-              <Link href="/#early-access" onClick={() => setOpen(false)}>
-                Join early access <ArrowRight />
+              <Link href={signedIn ? "/dashboard" : "/beta"} onClick={() => setOpen(false)}>
+                {signedIn ? "Dashboard" : "I have a code"} <ArrowRight />
               </Link>
             </Button>
           </div>

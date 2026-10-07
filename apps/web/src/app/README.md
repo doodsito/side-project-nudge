@@ -28,6 +28,9 @@ default metadata.
   in `src/components/` (see `docs/ui.md`). The one exception is state that a
   single page needs, such as `practice/practice-flow.tsx`: it sits next to that
   page.
+- Server Actions sit in an `actions.ts` next to the page that uses them, such
+  as `beta/actions.ts`. Pages under `dashboard/` and their actions call
+  `requireMember()` from `lib/auth.ts` before anything else.
 - Next.js 16 changed some APIs: check the matching guide in
   `node_modules/next/dist/docs/` (at the repository root) before writing
   Next.js code.
