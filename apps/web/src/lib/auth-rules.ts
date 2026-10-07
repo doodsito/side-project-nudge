@@ -76,4 +76,4 @@ export function readCredentials(
 
 // Shows "Continue with Google" on /beta. Turn on once Google sign-in is
 // set up in Supabase (Authentication > Providers > Google), never before.
-export const GOOGLE_SIGN_IN_ENABLED = false;
+export const GOOGLE_SIGN_IN_ENABLED = true;

@@ -140,7 +140,11 @@ export default async function BetaPage({ searchParams }: PageProps<"/beta">) {
     <AuthTemplate
       eyebrow="Code accepted"
       title="Create your account"
-      intro="Your email address and a password are all you need."
+      intro={
+        GOOGLE_SIGN_IN_ENABLED
+          ? "Use your Google account, or an email address and a password."
+          : "Your email address and a password are all you need."
+      }
     >
       {errorBox}
       {google}
