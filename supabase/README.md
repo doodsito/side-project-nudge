@@ -26,7 +26,7 @@ dashboard in step with them.
   Redirect URLs `https://nudge.doodsito.com/**`, `http://localhost:3000/**` and
   `https://*-doodsito.vercel.app/**`.
 - Emails (confirmation, password reset) are sent by Resend, from
-  `no-reply@notify.nudge.doodsito.com` (domain verified in Resend, EU region;
+  `no-reply@mail.nudge.doodsito.com` (domain verified in Resend, EU region;
   DNS records in Cloudflare). Authentication > Emails > SMTP Settings: host
   `smtp.resend.com`, port 465, user `resend`, password = a Resend API key with
   sending access to that domain only. The key lives only there, never in this
