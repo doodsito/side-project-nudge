@@ -1,0 +1,15 @@
+# Weekly pull requests that update our dependencies. They go through the same
+# checks as every other pull request; read the release notes before merging.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
