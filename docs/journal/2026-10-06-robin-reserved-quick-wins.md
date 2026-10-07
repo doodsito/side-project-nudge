@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-06
 - **Author:** Robin, with Claude Code
-- **Pull request:** link once opened
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/16
 
 **Why:** three small safeguards found while reviewing the repository.
 
