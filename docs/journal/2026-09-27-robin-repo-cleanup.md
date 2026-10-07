@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-27
 - **Author:** Robin, with Claude Code
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/1
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/1
 
 **Why:** keep only what the site uses, so the repository is easier to read for
 people and agents, installs faster and has fewer packages to keep safe.

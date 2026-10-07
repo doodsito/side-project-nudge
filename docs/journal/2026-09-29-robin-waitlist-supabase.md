@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-29
 - **Author:** Robin, with Claude Code
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/4
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/4
 
 **Why:** the early access form pointed at the old Lovable database and could
 not save anything.

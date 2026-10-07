@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-29
 - **Author:** Emma, with Codex
-- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/7
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/7
 
 **Why:** Some explanations contradicted profile answers, and the mobile journey delayed practice.
 **What changed:**
