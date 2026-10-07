@@ -24,6 +24,6 @@ export async function updatePassword(_: AuthFormState, formData: FormData): Prom
     if (error.code === "weak_password") return { error: error.message };
     return { error: "Something went wrong on our side. Please try again." };
   }
-  if (!(await finishSignIn(supabase))) redirect("/get-started?error=access");
-  redirect("/dashboard");
+  if (!(await finishSignIn(supabase))) redirect("/beta?error=access");
+  redirect("/dashboard/account?password=updated");
 }

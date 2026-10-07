@@ -32,7 +32,7 @@ export async function updateSession(request: NextRequest) {
   // A quick check only: every dashboard page checks the session and the beta
   // access again (lib/auth.ts), since this proxy can be skipped.
   if (!data?.claims && request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/get-started", request.url));
+    return NextResponse.redirect(new URL("/beta", request.url));
   }
   return response;
 }

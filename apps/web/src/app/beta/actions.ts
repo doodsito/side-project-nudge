@@ -54,12 +54,12 @@ export async function submitAccessCode(
     path: "/",
     maxAge: 60 * 30,
   });
-  redirect("/get-started");
+  redirect("/beta");
 }
 
 export async function changeAccessCode() {
   (await cookies()).delete(ACCESS_CODE_COOKIE);
-  redirect("/get-started");
+  redirect("/beta");
 }
 
 export async function signInWithGoogle() {
@@ -68,7 +68,7 @@ export async function signInWithGoogle() {
     provider: "google",
     options: { redirectTo: await callbackUrl() },
   });
-  if (error || !data.url) redirect("/get-started?error=auth");
+  if (error || !data.url) redirect("/beta?error=auth");
   redirect(data.url);
 }
 
@@ -76,7 +76,7 @@ export async function signUpWithPassword(
   _: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
-  const credentials = readCredentials(formData);
+  const credentials = readCredentials(formData, { newPassword: true });
   if ("error" in credentials) return credentials;
   const { email, password } = credentials;
   const code = (await cookies()).get(ACCESS_CODE_COOKIE)?.value;
@@ -109,7 +109,7 @@ export async function signInWithPassword(
   _: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
-  const credentials = readCredentials(formData);
+  const credentials = readCredentials(formData, { newPassword: false });
   if ("error" in credentials) return credentials;
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword(credentials);

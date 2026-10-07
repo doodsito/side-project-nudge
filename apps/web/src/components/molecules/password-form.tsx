@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, MailCheck } from "lucide-react";
 import { SubmitButton } from "@/components/atoms/submit-button";
+import { PasswordStrength } from "@/components/molecules/password-strength";
 import { Input } from "@/components/ui/input";
 import { PASSWORD_MIN_LENGTH, type AuthFormAction } from "@/lib/auth-rules";
 
@@ -29,8 +30,9 @@ export function PasswordForm({
 }) {
   const [state, formAction] = useActionState(action, {});
   const [visible, setVisible] = useState(false);
-  // Kept in state: React empties a form's fields after its action runs (the password is retyped).
+  // Kept in state: React empties a form's fields after its action runs.
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (state.error)
@@ -81,6 +83,8 @@ export function PasswordForm({
           id="auth-password"
           name="password"
           type={visible ? "text" : "password"}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
           required
           autoComplete={autoComplete}
           minLength={choosing ? PASSWORD_MIN_LENGTH : undefined}
@@ -103,11 +107,7 @@ export function PasswordForm({
           )}
         </button>
       </div>
-      {choosing && (
-        <p id="auth-password-hint" className="mt-2 text-xs text-muted-foreground">
-          At least {PASSWORD_MIN_LENGTH} characters.
-        </p>
-      )}
+      {choosing && <PasswordStrength id="auth-password-hint" password={password} />}
       <p id="auth-status" aria-live="polite" className="mt-2 min-h-5 text-sm text-destructive">
         {state.error}
       </p>

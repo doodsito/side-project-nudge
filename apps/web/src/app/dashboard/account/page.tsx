@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CircleCheck } from "lucide-react";
 import { SignOutButton } from "@/components/molecules/sign-out-button";
 import { requireMember } from "@/lib/auth";
 import { BRAND, CONTACT_EMAIL } from "@/lib/brand";
@@ -9,8 +10,8 @@ export const metadata: Metadata = { title: "Account" };
 
 const linkClass = "font-semibold text-primary underline-offset-4 hover:underline";
 
-export default async function AccountPage() {
-  const member = await requireMember();
+export default async function AccountPage({ searchParams }: PageProps<"/dashboard/account">) {
+  const [member, params] = await Promise.all([requireMember(), searchParams]);
   const memberSince = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "long",
     timeZone: "Europe/Paris",
@@ -25,6 +26,15 @@ export default async function AccountPage() {
   return (
     <>
       <h1 className="font-display text-3xl font-extrabold text-balance">Account</h1>
+      {params["password"] === "updated" && (
+        <p
+          role="status"
+          className="mt-6 flex gap-2 rounded-xl bg-mint-soft p-4 text-sm text-foreground"
+        >
+          <CircleCheck className="mt-0.5 size-4 shrink-0 text-market-up" aria-hidden />
+          Password updated. Use it next time you sign in.
+        </p>
+      )}
       <section
         aria-labelledby="account-details"
         className="mt-8 rounded-3xl border border-border bg-surface p-6 shadow-soft"

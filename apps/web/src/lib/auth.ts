@@ -10,7 +10,7 @@ export const ACCESS_CODE_COOKIE = "nudge_access_code";
 
 /**
  * Runs after every sign-in. Gives beta access with the code typed on
- * /get-started (from the cookie, or saved with the account at sign-up); an
+ * /beta (from the cookie, or saved with the account at sign-up); an
  * account that still has no access is signed out again. True for a member.
  */
 export async function finishSignIn(
@@ -63,6 +63,6 @@ export const getMember = cache(async (): Promise<Member | null> => {
 
 export async function requireMember(): Promise<Member> {
   const member = await getMember();
-  if (!member) redirect("/get-started");
+  if (!member) redirect("/beta");
   return member;
 }

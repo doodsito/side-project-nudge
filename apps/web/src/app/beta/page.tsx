@@ -21,7 +21,7 @@ import {
 } from "./actions";
 
 export const metadata: Metadata = {
-  title: `Get started | ${BRAND}`,
+  title: `Private beta | ${BRAND}`,
   description: `Join the ${BRAND} beta with your access code.`,
   robots: { index: false, follow: false },
 };
@@ -30,13 +30,15 @@ const ERRORS: Record<string, string> = {
   access: "This account doesn’t have beta access yet. Enter your access code, then sign in again.",
   auth: "The sign-in didn’t finish. Please try again.",
   link: "This link has expired or was opened in another browser. If you just confirmed your email, sign in with your password.",
+  reset:
+    "This reset link has expired, was already used or was opened in another browser. Ask for a new one below, then open it in this browser.",
 };
 
 const linkClass = "font-semibold text-primary underline-offset-4 hover:underline";
 
 // The steps are in the URL: the code, then create an account (once the code is
 // accepted), or sign in, or ask for a password reset link.
-export default async function GetStartedPage({ searchParams }: PageProps<"/get-started">) {
+export default async function BetaPage({ searchParams }: PageProps<"/beta">) {
   const [member, params, cookieStore] = await Promise.all([getMember(), searchParams, cookies()]);
   if (member) redirect("/dashboard");
 
@@ -79,7 +81,7 @@ export default async function GetStartedPage({ searchParams }: PageProps<"/get-s
         {footer(
           <p>
             Already have an account?{" "}
-            <Link href="/get-started?step=sign-in" className={linkClass}>
+            <Link href="/beta?step=sign-in" className={linkClass}>
               Sign in
             </Link>
           </p>,
@@ -100,7 +102,7 @@ export default async function GetStartedPage({ searchParams }: PageProps<"/get-s
         {footer(
           <p>
             Remembered it?{" "}
-            <Link href="/get-started?step=sign-in" className={linkClass}>
+            <Link href="/beta?step=sign-in" className={linkClass}>
               Sign in
             </Link>
           </p>,
@@ -118,13 +120,13 @@ export default async function GetStartedPage({ searchParams }: PageProps<"/get-s
         {footer(
           <>
             <p>
-              <Link href="/get-started?step=reset" className={linkClass}>
+              <Link href="/beta?step=reset" className={linkClass}>
                 Forgot your password?
               </Link>
             </p>
             <p>
               New here?{" "}
-              <Link href="/get-started" className={linkClass}>
+              <Link href="/beta" className={linkClass}>
                 {hasCode ? "Create your account" : "Enter an access code"}
               </Link>
             </p>
@@ -158,7 +160,7 @@ export default async function GetStartedPage({ searchParams }: PageProps<"/get-s
         <>
           <p>
             Already have an account?{" "}
-            <Link href="/get-started?step=sign-in" className={linkClass}>
+            <Link href="/beta?step=sign-in" className={linkClass}>
               Sign in
             </Link>
           </p>
