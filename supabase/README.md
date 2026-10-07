@@ -22,6 +22,12 @@ dashboard in step with them.
 
 - Authentication > Providers > Email: on, "Confirm email" on, minimum password
   length 8, password requirements "Letters and digits".
+- Authentication > Sign In / Providers > Google: on, with the Client ID and
+  Client Secret of the OAuth client "Nudge" (Google Cloud project "Nudge",
+  account `github@doodsito.com`; Google Auth Platform, published "In
+  production", basic scopes only, no logo so no Google review). Its only
+  redirect URI is `https://zqphlvtnxrokjlcqbput.supabase.co/auth/v1/callback`.
+  The secret lives only in Supabase.
 - Authentication > URL Configuration: Site URL `https://nudge.doodsito.com`;
   Redirect URLs `https://nudge.doodsito.com/**`, `http://localhost:3000/**` and
   `https://*-doodsito.vercel.app/**`.
