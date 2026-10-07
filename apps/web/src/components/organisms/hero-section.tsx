@@ -18,7 +18,7 @@ export function HeroSection() {
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               New to saving or investing? Start with Alex’s first paycheque. Choose what to do with
-              €100, explore the trade-offs and check what you learned — without using real money.
+              €100, explore the trade-offs and check what you learned, without using real money.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button

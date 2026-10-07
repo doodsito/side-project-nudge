@@ -12,7 +12,7 @@ const display = Space_Grotesk({
 const body = DM_Sans({ subsets: ["latin"], variable: "--font-nudge-next-body", display: "swap" });
 
 export const metadata: Metadata = {
-  title: `${BRAND} — Get a feel for investing`,
+  title: `Get a feel for investing | ${BRAND}`,
   description:
     "An interactive investing-learning direction study. Fictional situations, virtual money, real understanding.",
   robots: { index: false, follow: false },
