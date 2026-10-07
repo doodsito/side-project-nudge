@@ -23,7 +23,7 @@ https://nudge.doodsito.com.
 
 ## Run it on your computer
 
-You need Node.js 22 or later and npm. Run every command from the repository
+You need Node.js 22 and npm. Run every command from the repository
 root.
 
 ```sh

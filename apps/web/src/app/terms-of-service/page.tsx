@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <LegalTemplate title="Terms of service" updated="1 October 2026">
+    <LegalTemplate title="Terms of service" updated="2 October 2026">
       <p>
         These terms apply when you use {new URL(SITE_URL).host}. By using the site, you accept them.
         If you don’t agree, please don’t use the site.
@@ -22,8 +22,8 @@ export default function TermsOfServicePage() {
       <p>
         {BRAND} is an educational project. It lets you practise investing decisions with fictional
         situations and virtual money, then explains the reasoning behind your choices. The site is
-        free and needs no account. {BRAND} has not launched yet: this early version may change or
-        stop at any time.
+        free. The beta needs an account and an access code; the rest of the site needs no account.{" "}
+        {BRAND} has not launched yet: this early version may change or stop at any time.
       </p>
 
       <h2>Education, not advice</h2>
@@ -51,6 +51,20 @@ export default function TermsOfServicePage() {
         yours. We use it as described in the <Link href="/privacy-policy">privacy policy</Link>, and
         you can leave the list at any time by writing to{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </p>
+
+      <h2>Your beta account</h2>
+      <p>
+        The beta is by invitation: you need an access code from the {BRAND} team, and you must be at
+        least 15. Use an email address or a Google account that is yours, keep your password to
+        yourself, and keep that email secure: anyone who can read it can reset your password. Please
+        don’t share your access code without our permission.
+      </p>
+      <p>
+        You can delete your account at any time by writing to{" "}
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> from its email address. We may close
+        an account that breaks these terms, or close the beta, and we will tell you by email first
+        when we can.
       </p>
 
       <h2>Using the site</h2>

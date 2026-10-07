@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   const contact = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   return (
-    <LegalTemplate title="Privacy policy" updated="1 October 2026">
+    <LegalTemplate title="Privacy policy" updated="6 October 2026">
       <p>
         This policy explains what personal data {BRAND} collects on {new URL(SITE_URL).host}, why,
         how long we keep it and how to use your rights. We never sell your data and never use it for
@@ -35,6 +35,14 @@ export default function PrivacyPolicyPage() {
           when. We use them only to tell you when early access opens and when {BRAND} launches; the
           profile helps us understand who is interested. Legal basis: your consent, given by
           submitting the form.
+        </li>
+        <li>
+          <strong>Your beta account.</strong> When you create an account with an access code, we
+          keep your email address, how you sign in (password or Google), the access code you used,
+          when you joined and when you last signed in. Your password is stored only in a scrambled
+          form (hashed) that nobody, us included, can read. If you sign in with Google, Google also
+          shares your name and profile picture with us. We use this only to let you sign in and use
+          the beta. Legal basis: the terms you accept when you create the account.
         </li>
         <li>
           <strong>Audience measurement.</strong> Only if you accept analytics cookies, Google
@@ -60,15 +68,23 @@ export default function PrivacyPolicyPage() {
 
       <h2>Who receives it</h2>
       <p>
-        Only the {BRAND} team can see the early access list. These providers process data on our
-        behalf, under a data processing agreement:
+        Only the {BRAND} team can see the early access list and the accounts. These providers
+        process data on our behalf, under a data processing agreement:
       </p>
       <ul>
         <li>Vercel Inc., United States: hosting of the site.</li>
         <li>
-          Supabase: the database of the early access list, stored in the European Union (Paris).
+          Supabase: sign-in and the database of the early access list and the accounts, stored in
+          the European Union (Paris).
         </li>
-        <li>Google Ireland Limited: Google Analytics, only if you accept it.</li>
+        <li>
+          Google Ireland Limited: Google Analytics, only if you accept it, and Google sign-in, only
+          if you choose it.
+        </li>
+        <li>
+          Resend, Inc., United States: sending of the account emails (confirming your address,
+          resetting your password), from servers in the European Union (Ireland).
+        </li>
       </ul>
 
       <h2>Transfers outside the European Union</h2>
@@ -83,6 +99,7 @@ export default function PrivacyPolicyPage() {
         <li>
           Early access list: until you ask us to remove you, and at most 3 years after you sign up.
         </li>
+        <li>Beta account: until you ask us to delete it.</li>
         <li>
           Google Analytics: its cookies last 13 months at most, and the data it collects is kept 14
           months at most.
@@ -96,8 +113,8 @@ export default function PrivacyPolicyPage() {
         You can ask to access, correct or delete your data, to restrict or object to its use, and to
         receive it in a portable format. You can also give instructions on what happens to your data
         after your death. Where we rely on your consent, you can withdraw it at any time: to leave
-        the early access list, email us; to turn off analytics, click “Cookies” at the bottom of any
-        page.
+        the early access list or delete your account, email us from the address concerned; to turn
+        off analytics, click “Cookies” at the bottom of any page.
       </p>
       <p>
         To use your rights, write to {contact}. We answer within one month. If you think your rights
@@ -107,8 +124,9 @@ export default function PrivacyPolicyPage() {
 
       <h2>Children</h2>
       <p>
-        You must be at least 15 to join the early access list: below that age, French law requires a
-        parent’s consent. The rest of the site works without giving any personal data.
+        You must be at least 15 to join the early access list or create an account: below that age,
+        French law requires a parent’s consent. The rest of the site works without giving any
+        personal data.
       </p>
 
       <h2>Changes to this policy</h2>

@@ -2,7 +2,6 @@ import { ArrowDown, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/atoms/eyebrow";
 import { HeroProductWindow } from "@/components/molecules/hero-product-window";
-import { PracticeButton } from "@/components/molecules/practice-button";
 
 export function HeroSection() {
   return (
@@ -22,14 +21,15 @@ export function HeroSection() {
               €100, explore the trade-offs and check what you learned — without using real money.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <PracticeButton location="hero">Try the practice case</PracticeButton>
               <Button
                 asChild
-                variant="outline"
                 size="lg"
-                className="h-auto min-h-12 whitespace-normal py-3 border-border-strong bg-surface transition-all hover:-translate-y-px hover:bg-muted"
+                className="group transition-all hover:-translate-y-px hover:shadow-lift"
               >
-                <a href="#early-access">Join the early access list</a>
+                <a href="#early-access">
+                  Join the waitlist
+                  <ArrowDown className="transition-transform group-hover:translate-y-0.5" />
+                </a>
               </Button>
             </div>
             <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-muted-foreground">

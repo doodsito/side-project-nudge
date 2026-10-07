@@ -22,6 +22,25 @@ const COOKIES = [
     category: "Strictly necessary",
   },
   {
+    name: "nudge_access_code",
+    purpose: "Remembers the beta access code you entered until you finish signing in.",
+    duration: "30 minutes",
+    category: "Strictly necessary",
+  },
+  {
+    name: "sb-…-auth-token",
+    purpose: "Keeps you signed in to your beta account. Set only when you sign in.",
+    duration: "Until you sign out, 400 days at most",
+    category: "Strictly necessary",
+  },
+  {
+    name: "sb-…-auth-token-code-verifier",
+    purpose:
+      "Secures your sign-in while you go through Google or an email link (confirming your email, resetting your password).",
+    duration: "Deleted once you are signed in",
+    category: "Strictly necessary",
+  },
+  {
     name: "_ga",
     purpose: "Google Analytics: tells visits from the same browser apart, to count visitors.",
     duration: "13 months",
@@ -37,7 +56,7 @@ const COOKIES = [
 
 export default function CookiesPage() {
   return (
-    <LegalTemplate title="Cookie policy" updated="1 October 2026">
+    <LegalTemplate title="Cookie policy" updated="2 October 2026">
       <p>
         This page explains which cookies {new URL(SITE_URL).host} uses, why, and how to change your
         choice at any time. Everything else about your personal data is in our{" "}
@@ -46,7 +65,10 @@ export default function CookiesPage() {
 
       <h2>In short</h2>
       <ul>
-        <li>Without your permission, we only store your cookie choice.</li>
+        <li>
+          Without your permission, we only store your cookie choice and, when you sign in to the
+          beta, what keeps you signed in.
+        </li>
         <li>
           Google Analytics cookies are set only if you click “Accept all” or turn on Analytics in
           the cookie settings.

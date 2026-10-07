@@ -80,7 +80,10 @@ component. `/` uses `templates/marketing-template.tsx` (navbar), the
 `templates/practice-template.tsx`, and the legal pages (`/privacy-policy`,
 `/terms-of-service`, `/legal-notice`, `/cookies`) use
 `templates/legal-template.tsx`, which styles their headings, paragraphs, lists
-and links. The footer (`organisms/footer.tsx`) is in
+and links. `/beta` (access code, then sign-in) uses
+`templates/auth-template.tsx`, and the members' pages under `/dashboard` use
+`templates/dashboard-template.tsx`, whose tabs (Courses, Portfolio, Account)
+are links to their own URLs. The footer (`organisms/footer.tsx`) is in
 no template: `app/layout.tsx` adds it to every page, so the legal links and the
 cookie settings are always one click away. The practice questions, answers and feedback
 rules are data in `lib/practice-scenario.ts`, and the state of the flow (step,
