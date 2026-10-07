@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-07
 - **Author:** Robin, with Claude Code
-- **Pull request:** link once opened
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/24
 
 **Why:** `npm audit` flagged a high-severity flaw in `source-map-js`, a package Tailwind uses while building the site.
 
