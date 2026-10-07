@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-06
 - **Author:** Robin, with Claude Code
-- **Pull request:** link once opened
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/14
 
 **Why:** the team needs a first user journey to try with testers, while everyone else can still join the waitlist.
 
