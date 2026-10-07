@@ -23,8 +23,9 @@ dashboard in step with them.
 - Authentication > Providers > Email: on, "Confirm email" on, minimum password
   length 8, password requirements "Letters and digits".
 - Authentication > URL Configuration: Site URL `https://nudge.doodsito.com`;
-  Redirect URLs `https://nudge.doodsito.com/**`, `http://localhost:3000/**` and
-  `https://*-nudge-0423.vercel.app/**`.
+  Redirect URLs `https://nudge.doodsito.com/**`, `http://localhost:3000/**`,
+  and the previews of both Vercel projects, `https://*-doodsito.vercel.app/**`
+  and `https://*-nudge-0423.vercel.app/**`.
 - Emails (confirmation, password reset) are sent by Resend, from
   `no-reply@notify.nudge.doodsito.com` (domain verified in Resend, EU region;
   DNS records in Cloudflare). Authentication > Emails > SMTP Settings: host
