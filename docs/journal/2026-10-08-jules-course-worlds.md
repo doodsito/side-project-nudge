@@ -1,7 +1,7 @@
 # Turn the course list into a journey of worlds
 - **Date:** 2026-10-08
 - **Author:** Jules, with Codex
-- **Pull request:** To add once opened
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/25
 **Why:** beta members need to understand the complete learning journey before starting Alex's first practice case.
 **What changed:**
 - Courses now shows nine worlds, with the first open and the later worlds visibly locked.
