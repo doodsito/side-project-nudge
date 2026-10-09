@@ -92,6 +92,7 @@ export const FOUNDATION_LESSONS = [
     title: "How much should you save?",
     description: "Use common percentages as flexible reference points, not fixed rules.",
     duration: "4 min",
+    href: "/dashboard/courses/financial-foundation/how-much-should-you-save",
   },
   {
     number: 4,

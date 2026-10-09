@@ -45,3 +45,19 @@ test("completing lesson one is persistent, ordered and idempotent", () => {
   assert.equal(hasCompletedLesson(completed, FOUNDATION_WORLD, 1), true);
   assert.equal(completedLessonCount(completed, FOUNDATION_WORLD), 2);
 });
+
+test("lesson two adds to lesson one and unlocks the third step", () => {
+  const afterOne = completeLesson(readCourseProgress(null), FOUNDATION_WORLD, 1);
+  const afterTwo = completeLesson(afterOne, FOUNDATION_WORLD, 2);
+  const repeated = completeLesson(afterTwo, FOUNDATION_WORLD, 2);
+
+  assert.equal(completedLessonCount(afterOne, FOUNDATION_WORLD), 1);
+  assert.equal(hasCompletedLesson(afterOne, FOUNDATION_WORLD, 1), true);
+  assert.equal(hasCompletedLesson(afterOne, FOUNDATION_WORLD, 2), false);
+  assert.deepEqual(Array.from(afterTwo.completedLessons[FOUNDATION_WORLD]), [1, 2]);
+  assert.equal(completedLessonCount(afterTwo, FOUNDATION_WORLD), 2);
+  assert.equal(hasCompletedLesson(afterTwo, FOUNDATION_WORLD, 1), true);
+  assert.equal(hasCompletedLesson(afterTwo, FOUNDATION_WORLD, 2), true);
+  assert.equal(hasCompletedLesson(afterTwo, FOUNDATION_WORLD, 3), false);
+  assert.equal(repeated, afterTwo);
+});
