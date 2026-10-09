@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-08
 - **Author:** Jules, with Codex
-- **Pull request:** to add
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/28
 
 **Why:** beta members need to see their progress after finishing a lesson and continue from where they stopped.
 
