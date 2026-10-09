@@ -47,6 +47,10 @@ export const getMember = cache(async (): Promise<Member | null> => {
   const { data } = await supabase.auth.getClaims();
   const claims = data?.claims;
   if (!claims) return null;
+  // Course progress can change before the access token is refreshed. Read the
+  // current account record instead of the older metadata embedded in its JWT.
+  const { data: account, error: accountError } = await supabase.auth.getUser();
+  if (accountError || !account.user || account.user.id !== claims.sub) return null;
   const { data: profile } = await supabase
     .from("profiles")
     .select("access_code, created_at")
@@ -60,7 +64,7 @@ export const getMember = cache(async (): Promise<Member | null> => {
     provider: typeof provider === "string" ? provider : "email",
     accessCode: profile.access_code,
     memberSince: profile.created_at,
-    courseProgress: readCourseProgress(claims.user_metadata?.["course_progress"]),
+    courseProgress: readCourseProgress(account.user.user_metadata?.["course_progress"]),
   };
 });
 
