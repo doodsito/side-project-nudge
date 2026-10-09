@@ -283,6 +283,12 @@
   }
 }
 
+/* A lesson is a focused, full-screen activity. The exit in its header keeps the
+   rest of the site one click away, so the global footer stays out of the flow. */
+body:has(.lesson-shell) .site-footer {
+  display: none;
+}
+
 .hero-stagger > * {
   animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

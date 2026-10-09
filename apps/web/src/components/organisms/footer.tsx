@@ -8,7 +8,7 @@ const linkClass = "text-muted-foreground hover:text-foreground";
 /** Shown on every page from the root layout, so the legal pages and cookie settings are always one click away. */
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background px-5 py-12 sm:px-8">
+    <footer className="site-footer border-t border-border bg-background px-5 py-12 sm:px-8">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_auto]">
         <div>
           <NudgeNextLogo />

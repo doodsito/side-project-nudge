@@ -1,54 +1,31 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { NudgeLogo } from "@/components/atoms/nudge-logo";
-import type { Step } from "@/lib/practice-scenario";
+import { X } from "lucide-react";
+import { NudgeNextMark } from "@/components/atoms/nudge-next-mark";
 
-export function PracticeHeader({ step }: { step: Step }) {
-  const steps = [
-    { key: "scenario", label: "Decide" },
-    { key: "feedback", label: "Learn" },
-    { key: "summary", label: "Recap" },
-  ];
-  const visibleSteps =
-    step === "profile" ? [{ key: "profile", label: "Reflect" }, ...steps] : steps;
-  const index = visibleSteps.findIndex((item) => item.key === step);
+export function PracticeHeader({ current, total }: { current: number; total: number }) {
+  const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 sm:px-8">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5">
-          <NudgeLogo small />
-          <span className="hidden rounded-full bg-mint-soft px-2 py-1 text-[9px] font-bold uppercase text-market-up sm:inline">
-            Educational simulation
-          </span>
-        </Link>
+    <header className="relative z-40 border-b border-border bg-background/95 backdrop-blur-xl">
+      <div className="mx-auto flex h-18 w-full max-w-4xl items-center gap-4 px-5 sm:px-8">
+        <NudgeNextMark className="size-8 shrink-0" />
+        <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+          <div
+            className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <span className="sr-only">
+          Lesson progress: step {current} of {total}
+        </span>
         <Link
-          href="/"
-          className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
+          href="/dashboard/courses/financial-foundation"
+          aria-label="Leave lesson"
+          className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <ArrowLeft className="size-4" aria-hidden="true" /> Return{" "}
-          <span className="hidden sm:inline">to Nudge home</span>
+          <X className="size-5" aria-hidden="true" />
         </Link>
       </div>
-      <ol
-        aria-label="Practice steps"
-        className={`mx-auto grid max-w-5xl gap-2 px-5 pb-3 text-xs sm:px-8 ${step === "profile" ? "grid-cols-4" : "grid-cols-3"}`}
-      >
-        {visibleSteps.map((item, i) => (
-          <li
-            key={item.key}
-            aria-current={step === item.key ? "step" : undefined}
-            className={i <= index ? "font-bold text-primary" : "text-muted-foreground"}
-          >
-            <span className="block">
-              {i + 1}. {item.label}
-            </span>
-            <span
-              aria-hidden="true"
-              className={`mt-2 block h-1 rounded-full ${i <= index ? "bg-primary" : "bg-muted"}`}
-            />
-          </li>
-        ))}
-      </ol>
     </header>
   );
 }
