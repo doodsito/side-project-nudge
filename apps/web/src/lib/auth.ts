@@ -4,6 +4,7 @@ import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
+import { readCourseProgress, type CourseProgress } from "@/lib/course-progress";
 
 // Holds the access code between the code step and the sign-in (httpOnly).
 export const ACCESS_CODE_COOKIE = "nudge_access_code";
@@ -36,6 +37,7 @@ export type Member = {
   provider: string;
   accessCode: string;
   memberSince: string;
+  courseProgress: CourseProgress;
 };
 
 // getClaims() verifies the session token's signature; never trust getSession() on the server.
@@ -58,6 +60,7 @@ export const getMember = cache(async (): Promise<Member | null> => {
     provider: typeof provider === "string" ? provider : "email",
     accessCode: profile.access_code,
     memberSince: profile.created_at,
+    courseProgress: readCourseProgress(claims.user_metadata?.["course_progress"]),
   };
 });
 

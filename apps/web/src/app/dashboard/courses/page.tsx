@@ -5,6 +5,6 @@ import { requireMember } from "@/lib/auth";
 export const metadata: Metadata = { title: "Courses" };
 
 export default async function CoursesPage() {
-  await requireMember();
-  return <CourseWorlds />;
+  const member = await requireMember();
+  return <CourseWorlds progress={member.courseProgress} />;
 }
