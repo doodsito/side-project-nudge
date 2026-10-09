@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-08
 - **Author:** Jules, with Codex
-- **Pull request:** to add
+- **Pull request:** https://github.com/nudge-code/side-project-nudge/pull/26
   **Why:** the first case showed too much at once and asked for a decision before teaching a reusable idea.
   **What changed:**
 - The lesson now follows Alex's first paycheque through eight short, illustrated screens.
