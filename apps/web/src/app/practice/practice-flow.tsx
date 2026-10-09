@@ -1,115 +1,70 @@
 "use client";
 
-// The state of the /practice page. It lives next to its page because no other
-// page uses it; the screens it imports run on the client through this file.
 import { useEffect, useRef, useState } from "react";
-import { LearningProfile } from "@/components/organisms/learning-profile";
-import { LearningSummary } from "@/components/organisms/learning-summary";
-import { PersonalizedFeedback } from "@/components/organisms/personalized-feedback";
-import { PracticeScenario } from "@/components/organisms/practice-scenario";
+import { FirstPaychequeLesson } from "@/components/organisms/first-paycheque-lesson";
 import { PracticeTemplate } from "@/components/templates/practice-template";
+import { BUDGET_ITEMS, LESSON_STEPS, type LessonStep } from "@/lib/first-paycheque-lesson";
 import { track } from "@/lib/analytics";
-import {
-  isCompleteProfile,
-  resolveStep,
-  updateProfile,
-  type Decision,
-  type Profile,
-  type Step,
-} from "@/lib/practice-scenario";
 
 export function PracticeFlow() {
-  const [step, setStep] = useState<Step>("scenario");
-  const [profile, setProfile] = useState<Profile>({});
-  const [decision, setDecision] = useState<Decision | null>(null);
+  const [step, setStep] = useState<LessonStep>("welcome");
+  const [expenseIndex, setExpenseIndex] = useState(0);
+  const [expenseAnswer, setExpenseAnswer] = useState<"essential" | "flexible" | null>(null);
+  const [conceptAnswer, setConceptAnswer] = useState<string | null>(null);
+  const [transferAnswer, setTransferAnswer] = useState<string | null>(null);
   const content = useRef<HTMLDivElement>(null);
-  const complete = isCompleteProfile(profile);
+  const stepIndex = LESSON_STEPS.indexOf(step);
+
   useEffect(() => {
-    // A direct link or refresh starts a new session; no personal answers go in the URL.
-    window.history.replaceState(window.history.state, "", "#scenario");
+    window.history.replaceState(window.history.state, "", "#welcome");
   }, []);
-  useEffect(() => {
-    function restoreStep() {
-      const target = resolveStep(window.location.hash.slice(1), profile, decision);
-      setStep(target);
-      if (window.location.hash !== `#${target}`) {
-        window.history.replaceState(window.history.state, "", `#${target}`);
-      }
-    }
-    window.addEventListener("popstate", restoreStep);
-    return () => window.removeEventListener("popstate", restoreStep);
-  }, [profile, decision]);
-  function navigate(target: Step) {
-    const next = resolveStep(target, profile, decision);
-    if (next !== step) window.history.pushState(window.history.state, "", `#${next}`);
-    setStep(next);
-  }
+
   useEffect(() => {
     const heading = content.current?.querySelector("h1");
     heading?.setAttribute("tabindex", "-1");
     heading?.focus({ preventScroll: true });
-    window.scrollTo({
-      top: 0,
-      behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    });
-  }, [step]);
-  function reset() {
-    setDecision(null);
-    navigate("scenario");
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [step, expenseIndex]);
+
+  function goTo(target: LessonStep) {
+    window.history.replaceState(window.history.state, "", `#${target}`);
+    setStep(target);
+    track("demo_lesson_opened", { lesson: "first-paycheque", step: target });
   }
-  function startOver() {
-    setProfile({});
-    setDecision(null);
-    navigate("scenario");
+
+  function continueExpense() {
+    if (expenseIndex < BUDGET_ITEMS.length - 1) {
+      setExpenseIndex((current) => current + 1);
+      setExpenseAnswer(null);
+      return;
+    }
+    goTo("result");
   }
+
+  function restart() {
+    setExpenseIndex(0);
+    setExpenseAnswer(null);
+    setConceptAnswer(null);
+    setTransferAnswer(null);
+    goTo("welcome");
+  }
+
   return (
-    <PracticeTemplate step={step}>
-      <div ref={content} className="[&_h1]:scroll-mt-32 [&_h1]:focus:outline-none">
-        {step === "profile" && (
-          <LearningProfile
-            profile={profile}
-            onSelect={(k, v) => setProfile((p) => updateProfile(p, k, v))}
-            onBack={() => navigate("summary")}
-            onContinue={() => {
-              if (complete) {
-                track("practice_profile_completed");
-                navigate("scenario");
-              }
-            }}
-          />
-        )}{" "}
-        {step === "scenario" && (
-          <PracticeScenario
-            decision={decision}
-            onSelect={setDecision}
-            onEditProfile={complete ? () => navigate("profile") : undefined}
-            onContinue={() => {
-              if (decision) {
-                track("demo_decision_confirmed", { decision });
-                navigate("feedback");
-              }
-            }}
-          />
-        )}{" "}
-        {step === "feedback" && decision && (
-          <PersonalizedFeedback
-            profile={complete ? profile : null}
-            decision={decision}
-            onBack={() => navigate("scenario")}
-            onContinue={() => {
-              track("practice_explanation_read");
-              navigate("summary");
-            }}
-          />
-        )}{" "}
-        {step === "summary" && decision && (
-          <LearningSummary
-            hasProfile={complete}
-            onReset={reset}
-            onEdit={() => navigate("profile")}
-            onStartOver={startOver}
-          />
-        )}
+    <PracticeTemplate current={stepIndex + 1} total={LESSON_STEPS.length}>
+      <div ref={content} className="flex flex-1 flex-col [&_h1]:focus:outline-none">
+        <FirstPaychequeLesson
+          step={step}
+          expenseIndex={expenseIndex}
+          expenseAnswer={expenseAnswer}
+          conceptAnswer={conceptAnswer}
+          transferAnswer={transferAnswer}
+          onExpenseAnswer={setExpenseAnswer}
+          onConceptAnswer={setConceptAnswer}
+          onTransferAnswer={setTransferAnswer}
+          onContinueExpense={continueExpense}
+          onGoTo={goTo}
+          onRestart={restart}
+        />
       </div>
     </PracticeTemplate>
   );
