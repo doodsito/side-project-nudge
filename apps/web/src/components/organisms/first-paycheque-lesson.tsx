@@ -205,7 +205,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
             Your first paycheque just landed.
           </h1>
           <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Meet Alex. Help them work out what their money can really do.
+            Meet Alex. Help map out what this paycheque can really do.
           </p>
         </div>
       </LessonScreen>
