@@ -7,5 +7,5 @@
 - Courses now shows nine worlds, with the first open and the later worlds visibly locked.
 - World 1 has an eight-lesson path, a final unlock and a working link to the existing Alex case.
 **Files:** `apps/web/src/app/dashboard/courses/`, `apps/web/src/components/organisms/`, `apps/web/src/lib/course-worlds.ts`
-**Checked:** lint and typecheck pass; desktop and mobile previews checked. Production build is checked before the pull request.
+**Checked:** lint, typecheck and build pass in CI; desktop and mobile previews checked.
 **Next:** build the first lesson and save real learner progress.
