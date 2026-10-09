@@ -173,7 +173,7 @@ export function PayYourselfFirstLesson(props: Props) {
         <div className="text-center">
           <Eyebrow>World 1 · Lesson 2</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            Alex knows what’s left. When should they save?
+            Alex knows what’s left. When should Alex save?
           </h1>
           <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
             Help Alex give a saving goal a place in the month.
@@ -236,7 +236,7 @@ export function PayYourselfFirstLesson(props: Props) {
             id="order-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            Alex would like to set aside €{EXAMPLE_TRANSFER}. What could they do?
+            Alex would like to set aside €{EXAMPLE_TRANSFER}. How could Alex make that goal visible?
           </h1>
         </div>
         <ChoiceList
