@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-11
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/34
 
 **Why:** beta testers need a clear, always-visible way to tell us about a bug, an idea, or anything else, without leaving the app.
 
