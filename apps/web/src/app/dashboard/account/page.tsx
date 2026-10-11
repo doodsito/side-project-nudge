@@ -19,7 +19,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
   const rows: Array<[string, string]> = [
     ["Email", member.email],
     ["Signed in with", member.provider === "google" ? "Google" : "Email and password"],
-    ["Access code", member.accessCode],
+    ["Invitation code", member.accessCode],
     ["Member since", memberSince],
   ];
   const deleteRequest = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Delete my ${BRAND} account`)}`;

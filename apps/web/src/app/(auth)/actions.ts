@@ -21,7 +21,7 @@ async function callbackUrl() {
 
 const TOO_MANY = "Too many attempts. Wait a few minutes, then try again.";
 const TRY_AGAIN = "Something went wrong on our side. Please try again.";
-const NO_ACCESS = "This account doesn’t have beta access yet. Enter your access code first.";
+const NO_ACCESS = "This account doesn’t have access yet. Enter your invitation code first.";
 
 export async function submitAccessCode(
   _: AuthFormState,
@@ -31,7 +31,7 @@ export async function submitAccessCode(
     .trim()
     .toUpperCase();
   if (!ACCESS_CODE_PATTERN.test(code)) {
-    return { error: "Enter the access code you were given: letters, numbers and dashes." };
+    return { error: "Enter the invitation code you were given: letters, numbers and dashes." };
   }
   const supabase = await createSupabaseServerClient();
 
@@ -54,12 +54,12 @@ export async function submitAccessCode(
     path: "/",
     maxAge: 60 * 30,
   });
-  redirect("/beta");
+  redirect("/signup");
 }
 
 export async function changeAccessCode() {
   (await cookies()).delete(ACCESS_CODE_COOKIE);
-  redirect("/beta");
+  redirect("/signup");
 }
 
 export async function signInWithGoogle() {
@@ -68,7 +68,7 @@ export async function signInWithGoogle() {
     provider: "google",
     options: { redirectTo: await callbackUrl() },
   });
-  if (error || !data.url) redirect("/beta?error=auth");
+  if (error || !data.url) redirect("/login?error=auth");
   redirect(data.url);
 }
 
@@ -80,7 +80,7 @@ export async function signUpWithPassword(
   if ("error" in credentials) return credentials;
   const { email, password } = credentials;
   const code = (await cookies()).get(ACCESS_CODE_COOKIE)?.value;
-  if (!code) return { error: "Your access code has expired. Enter it again to continue." };
+  if (!code) return { error: "Your invitation code has expired. Enter it again to continue." };
 
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
@@ -94,7 +94,7 @@ export async function signUpWithPassword(
     if (error.status === 429) return { error: TOO_MANY };
     if (error.code === "weak_password") return { error: error.message };
     if (error.code === "user_already_exists") {
-      return { error: "An account already uses this email. Sign in instead." };
+      return { error: "An account already uses this email. Log in instead." };
     }
     return { error: TRY_AGAIN };
   }
@@ -116,7 +116,7 @@ export async function signInWithPassword(
   if (error) {
     if (error.status === 429) return { error: TOO_MANY };
     if (error.code === "email_not_confirmed") {
-      return { error: "Confirm your email first: open the link we sent you, then sign in." };
+      return { error: "Confirm your email first: open the link we sent you, then log in." };
     }
     if (error.code === "invalid_credentials") return { error: "Wrong email or password." };
     return { error: TRY_AGAIN };

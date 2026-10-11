@@ -12,7 +12,7 @@ is a reserved area: changes wait for Robin's approval.
 | `join_waitlist(email, profile, source)` | The only thing the website can call: it checks the input and adds the email, ignoring one that is already on the list. |
 | `access_codes` table | The private beta codes: code, note, how many uses are allowed and used, expiry, on/off. Closed to the website. |
 | `profiles` table | One row per beta member, linked to their Supabase account. A member can read only their own row; deleting the account deletes it. |
-| `check_access_code(code)` | Says whether a code can be used now, so `/beta` can refuse a wrong code before sign-in. |
+| `check_access_code(code)` | Says whether a code can be used now, so `/signup` can refuse a wrong code before sign-in. |
 | `redeem_access_code(code)` | Gives the signed-in user beta access with a code (creates their `profiles` row). Only ever acts on the caller's own account. |
 
 ## Sign-in settings (Robin, Supabase dashboard)

@@ -16,12 +16,12 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
   }, [state]);
   return (
     <form action={formAction} noValidate>
-      <label htmlFor="access-code" className="mb-2 block text-sm font-bold">
-        Access code
+      <label htmlFor="invitation-code" className="mb-2 block text-sm font-bold">
+        Invitation code
       </label>
       <Input
         ref={inputRef}
-        id="access-code"
+        id="invitation-code"
         name="code"
         value={code}
         onChange={(event) => setCode(event.target.value)}
@@ -31,11 +31,11 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
         spellCheck={false}
         placeholder="Your code…"
         aria-invalid={state.error ? true : undefined}
-        aria-describedby={state.error ? "access-code-error" : undefined}
+        aria-describedby={state.error ? "invitation-code-error" : undefined}
         className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base uppercase placeholder:normal-case placeholder:text-muted-foreground"
       />
       <p
-        id="access-code-error"
+        id="invitation-code-error"
         className="mt-2 min-h-5 text-sm text-destructive"
         aria-live="polite"
       >

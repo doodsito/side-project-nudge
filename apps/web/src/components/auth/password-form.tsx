@@ -9,7 +9,7 @@ import { PASSWORD_MIN_LENGTH, type AuthFormAction } from "@/lib/auth-rules";
 
 const MODES = {
   "sign-up": { submit: "Create my account", pending: "Creating…", autoComplete: "new-password" },
-  "sign-in": { submit: "Sign in", pending: "Signing in…", autoComplete: "current-password" },
+  "sign-in": { submit: "Log in", pending: "Logging in…", autoComplete: "current-password" },
   "new-password": {
     submit: "Save my new password",
     pending: "Saving…",
