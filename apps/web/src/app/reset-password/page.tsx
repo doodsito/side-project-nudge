@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { PasswordForm } from "@/components/molecules/password-form";
-import { AuthTemplate } from "@/components/templates/auth-template";
+import { PasswordForm } from "@/components/auth/password-form";
+import { AuthTemplate } from "@/components/auth/auth-template";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
 import { BRAND } from "@/lib/brand";
 import { updatePassword } from "./actions";

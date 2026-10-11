@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FirstPaychequeLesson } from "@/components/organisms/first-paycheque-lesson";
-import { PracticeTemplate } from "@/components/templates/practice-template";
+import { FirstPaychequeLesson } from "@/components/lessons/first-paycheque-lesson";
+import { PracticeTemplate } from "@/components/practice/practice-template";
 import { type ProgressStatus } from "@/lib/course-progress";
 import { BUDGET_ITEMS, LESSON_STEPS, type LessonStep } from "@/lib/first-paycheque-lesson";
 import { track } from "@/lib/analytics";

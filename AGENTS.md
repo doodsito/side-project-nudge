@@ -24,12 +24,12 @@ schema (`supabase/`) and the team docs (`docs/`); a mobile app will follow.
 | You are adding | Put it in |
 |---|---|
 | A page (a URL) | `apps/web/src/app/<url>/page.tsx` (Next.js App Router): read `apps/web/src/app/README.md` |
-| A component downloaded from the web (shadcn, motion...) | `apps/web/src/components/ui/` |
-| One of our own components | `apps/web/src/components/{atoms,molecules,organisms,templates}/`: read `docs/ui.md` |
+| A shadcn component | `apps/web/src/components/ui/`, added with `npx shadcn@latest add <name>` |
+| One of our own components | The folder of its feature in `apps/web/src/components/` (`marketing/`, `auth/`, `dashboard/`...), or `shared/` if several features use it: read `docs/ui.md` |
 | A colour, font, radius, shadow or animation | A token in `apps/web/src/styles.css` |
 | A React hook | `apps/web/src/hooks/` |
 | A helper that is not a component | `apps/web/src/lib/` |
-| An analytics or tracking script (Google Analytics, a pixel...) | The `scripts` list in `apps/web/src/components/organisms/consent-manager.tsx`, so it only loads after consent; never a `<script>` tag or `next/script` |
+| An analytics or tracking script (Google Analytics, a pixel...) | The `scripts` list in `apps/web/src/components/layout/consent-manager.tsx`, so it only loads after consent; never a `<script>` tag or `next/script` |
 | Supabase access | `apps/web/src/integrations/supabase/` |
 | A page or Server Action for signed-in members | Call `requireMember()` from `apps/web/src/lib/auth.ts` inside it, every time |
 | An image or other static file | `apps/web/public/` |
@@ -103,8 +103,8 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
   hand.
 - Minimal change: do only what the task asks. No refactors, renames or
   reformatting of unrelated files.
-- Reuse before adding: look in `components/ui/` and the atomic folders before
-  creating a component, and in `apps/web/package.json` before adding a
+- Reuse before adding: look in `components/ui/`, the shadcn catalogue and the
+  feature folders before creating a component, and in `apps/web/package.json` before adding a
   dependency. Justify any new dependency in the pull request.
 - `components/ui/` only holds the primitives the site uses. If you need a
   standard one (dialog, tabs, select...), add it with

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DashboardTemplate } from "@/components/templates/dashboard-template";
+import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
 import { BRAND } from "@/lib/brand";
 import { signOut } from "./actions";
 

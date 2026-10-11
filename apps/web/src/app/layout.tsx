@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
-import { ConsentManager } from "@/components/organisms/consent-manager";
-import { Footer } from "@/components/organisms/footer";
+import { ConsentManager } from "@/components/layout/consent-manager";
+import { Footer } from "@/components/layout/footer";
 import { llmsTxtAlternate } from "@/lib/metadata";
 import "@/styles.css";
 

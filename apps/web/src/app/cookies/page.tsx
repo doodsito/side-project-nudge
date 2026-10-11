@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ConsentDialogLink } from "@c15t/nextjs/components/consent-dialog-link";
 import { Button } from "@/components/ui/button";
-import { LegalTemplate } from "@/components/templates/legal-template";
+import { LegalTemplate } from "@/components/layout/legal-template";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { BRAND, CONTACT_EMAIL, SITE_URL } from "@/lib/brand";
 import { llmsTxtAlternate } from "@/lib/metadata";

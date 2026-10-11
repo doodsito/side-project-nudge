@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PracticeButton } from "@/components/molecules/practice-button";
+import { PracticeButton } from "@/components/marketing/practice-button";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/brand";
 

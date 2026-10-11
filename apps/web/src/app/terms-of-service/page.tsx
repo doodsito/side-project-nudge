@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LegalTemplate } from "@/components/templates/legal-template";
+import { LegalTemplate } from "@/components/layout/legal-template";
 import { BRAND, CONTACT_EMAIL, SITE_URL } from "@/lib/brand";
 import { llmsTxtAlternate } from "@/lib/metadata";
 

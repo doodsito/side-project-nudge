@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { NudgeNextTemplate } from "@/components/templates/nudge-next-template";
-import { NudgeNextHero } from "@/components/organisms/nudge-next-hero";
-import { NudgeNextDemo } from "@/components/organisms/nudge-next-demo";
-import { NudgeNextExplorer } from "@/components/organisms/nudge-next-explorer";
-import { NudgeNextProgress } from "@/components/organisms/nudge-next-progress";
+import { NudgeNextTemplate } from "@/components/nudge-next/nudge-next-template";
+import { NudgeNextHero } from "@/components/nudge-next/nudge-next-hero";
+import { NudgeNextDemo } from "@/components/nudge-next/nudge-next-demo";
+import { NudgeNextExplorer } from "@/components/nudge-next/nudge-next-explorer";
+import { NudgeNextProgress } from "@/components/nudge-next/nudge-next-progress";
 import type { NudgeLocale } from "@/lib/nudge-next-copy";
 
 export function NudgeNextFlow() {

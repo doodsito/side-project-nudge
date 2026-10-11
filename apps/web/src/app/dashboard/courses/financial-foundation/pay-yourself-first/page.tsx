@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { PayYourselfFirstIntro } from "@/components/organisms/pay-yourself-first-intro";
+import { PayYourselfFirstIntro } from "@/components/lessons/pay-yourself-first-intro";
 import { requireMember } from "@/lib/auth";
 import { FOUNDATION_WORLD, hasCompletedLesson } from "@/lib/course-progress";
 
