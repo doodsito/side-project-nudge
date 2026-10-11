@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-10
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/32
 
 **Why:** being logged in sent people to the dashboard without saying so, and the header mixed "Join the waitlist", "I have a code" and "Dashboard". We follow the usual pattern instead, and stop saying "beta".
 
