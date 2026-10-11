@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
-import { getMember } from "@/lib/auth";
+import { getMemberTrack } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
-import { DEFAULT_TRACK, TRACK_INFO } from "@/lib/tracks";
+import { TRACK_INFO } from "@/lib/tracks";
 import { signOut } from "./actions";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // page calls requireMember() itself (lib/auth.ts). The member is only read for
 // the language of their track.
 export default async function DashboardLayout({ children }: LayoutProps<"/dashboard">) {
-  const track = (await getMember())?.track ?? DEFAULT_TRACK;
+  const track = await getMemberTrack();
   const t = getDictionary(track);
   return (
     <div lang={TRACK_INFO[track].lang}>

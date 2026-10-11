@@ -5,6 +5,7 @@ import { ArrowRight, Check, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { textLinkClass } from "@/components/shared/text-link";
 import { getSupabase } from "@/integrations/supabase/client";
 import { track } from "@/lib/analytics";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -131,10 +132,7 @@ export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
       )}
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
         {t.consent}{" "}
-        <Link
-          href="/privacy-policy"
-          className="font-semibold text-primary underline-offset-4 hover:underline"
-        >
+        <Link href="/privacy-policy" className={textLinkClass}>
           {t.privacy}
         </Link>
       </p>

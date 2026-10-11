@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PasswordForm } from "@/components/auth/password-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
+import { textLinkClass } from "@/components/shared/text-link";
 import { getMember } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
 import { signInWithPassword } from "../actions";
-import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn, linkClass } from "../shared";
+import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn } from "../shared";
 
 export const metadata: Metadata = {
   title: `Log in | ${BRAND}`,
@@ -23,13 +24,13 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
       <PasswordForm mode="sign-in" action={signInWithPassword} />
       <AuthLinks>
         <p>
-          <Link href="/forgot-password" className={linkClass}>
+          <Link href="/forgot-password" className={textLinkClass}>
             Forgot your password?
           </Link>
         </p>
         <p>
           New here?{" "}
-          <Link href="/signup" className={linkClass}>
+          <Link href="/signup" className={textLinkClass}>
             Sign up
           </Link>
         </p>

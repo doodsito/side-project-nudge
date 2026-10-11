@@ -110,3 +110,8 @@ export async function requireMember(): Promise<Member> {
   if (!member) redirect("/login");
   return member;
 }
+
+/** The signed-in member's track, or the default one: the language of a members' page. */
+export async function getMemberTrack(): Promise<Track> {
+  return (await getMember())?.track ?? DEFAULT_TRACK;
+}

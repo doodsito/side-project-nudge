@@ -4,10 +4,11 @@ import { cookies } from "next/headers";
 import { AccessCodeForm } from "@/components/auth/access-code-form";
 import { PasswordForm } from "@/components/auth/password-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
+import { textLinkClass } from "@/components/shared/text-link";
 import { ACCESS_CODE_COOKIE, getMember } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
 import { changeAccessCode, signUpWithPassword, submitAccessCode } from "../actions";
-import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn, linkClass } from "../shared";
+import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn } from "../shared";
 
 export const metadata: Metadata = {
   title: `Sign up | ${BRAND}`,
@@ -33,13 +34,13 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
         <AuthLinks>
           <p>
             No code yet?{" "}
-            <Link href="/#early-access" className={linkClass}>
+            <Link href="/#early-access" className={textLinkClass}>
               Join the waitlist
             </Link>
           </p>
           <p>
             Already have an account?{" "}
-            <Link href="/login" className={linkClass}>
+            <Link href="/login" className={textLinkClass}>
               Log in
             </Link>
           </p>
@@ -59,11 +60,11 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
       <PasswordForm mode="sign-up" action={signUpWithPassword} />
       <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
         By creating an account, you agree to the{" "}
-        <Link href="/terms-of-service" className={linkClass}>
+        <Link href="/terms-of-service" className={textLinkClass}>
           Terms of service
         </Link>{" "}
         and confirm you have read the{" "}
-        <Link href="/privacy-policy" className={linkClass}>
+        <Link href="/privacy-policy" className={textLinkClass}>
           Privacy policy
         </Link>
         . You must be 15 or older.
@@ -71,12 +72,12 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
       <AuthLinks>
         <p>
           Already have an account?{" "}
-          <Link href="/login" className={linkClass}>
+          <Link href="/login" className={textLinkClass}>
             Log in
           </Link>
         </p>
         <form action={changeAccessCode}>
-          <button type="submit" className={`cursor-pointer ${linkClass}`}>
+          <button type="submit" className={`cursor-pointer ${textLinkClass}`}>
             Use a different invitation code
           </button>
         </form>

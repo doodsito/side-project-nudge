@@ -23,8 +23,6 @@ const ERRORS: Record<string, string> = {
     "This reset link has expired, was already used or was opened in another browser. Ask for a new one below, then open it in this browser.",
 };
 
-export const linkClass = "font-semibold text-primary underline-offset-4 hover:underline";
-
 export function ErrorBox({ code }: { code: unknown }) {
   const error = typeof code === "string" ? ERRORS[code] : undefined;
   if (!error) return null;

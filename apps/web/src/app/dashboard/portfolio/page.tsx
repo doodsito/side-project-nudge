@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getMember, requireMember } from "@/lib/auth";
+import { getMemberTrack, requireMember } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionaries";
-import { DEFAULT_TRACK } from "@/lib/tracks";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const track = (await getMember())?.track ?? DEFAULT_TRACK;
+  const track = await getMemberTrack();
   return { title: getDictionary(track).dashboard.portfolio.title };
 }
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +11,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { TrackOption } from "@/components/shared/track-option";
 import { saveTrack, useTrackCookie } from "@/hooks/use-track-cookie";
-import { isTrack, TRACK_INFO, TRACKS, type Track } from "@/lib/tracks";
+import { isTrack, TRACKS, type Track } from "@/lib/tracks";
 
 // Shown in both languages: the visitor has not chosen one yet.
 const MARKET: Record<Track, string> = {
@@ -56,25 +56,12 @@ export function TrackDialog({ track }: { track: Track }) {
           className="mt-2 gap-3"
         >
           {TRACKS.map((option) => (
-            <label
+            <TrackOption
               key={option}
-              htmlFor={`track-${option}`}
-              className="flex cursor-pointer items-center gap-4 rounded-2xl border border-border p-4 transition-colors has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary-soft"
-            >
-              <RadioGroupItem id={`track-${option}`} value={option} />
-              <Image
-                src={TRACK_INFO[option].flag}
-                alt=""
-                width={36}
-                height={24}
-                unoptimized
-                className="h-6 w-9 rounded-sm border border-border"
-              />
-              <span lang={TRACK_INFO[option].lang} className="min-w-0">
-                <span className="block font-bold">{TRACK_INFO[option].country}</span>
-                <span className="block text-sm text-muted-foreground">{MARKET[option]}</span>
-              </span>
-            </label>
+              track={option}
+              id={`track-${option}`}
+              detail={MARKET[option]}
+            />
           ))}
         </RadioGroup>
         <DialogFooter className="mt-2">

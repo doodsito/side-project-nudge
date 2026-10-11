@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ResetRequestForm } from "@/components/auth/reset-request-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
+import { textLinkClass } from "@/components/shared/text-link";
 import { getMember } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
 import { requestPasswordReset } from "../actions";
-import { AlreadySignedIn, AuthLinks, ErrorBox, linkClass } from "../shared";
+import { AlreadySignedIn, AuthLinks, ErrorBox } from "../shared";
 
 export const metadata: Metadata = {
   title: `Forgot your password? | ${BRAND}`,
@@ -26,7 +27,7 @@ export default async function ForgotPasswordPage({ searchParams }: PageProps<"/f
       <AuthLinks>
         <p>
           Remembered it?{" "}
-          <Link href="/login" className={linkClass}>
+          <Link href="/login" className={textLinkClass}>
             Log in
           </Link>
         </p>

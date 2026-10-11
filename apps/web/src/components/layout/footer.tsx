@@ -1,10 +1,10 @@
 "use client";
 
 import { ConsentDialogLink } from "@c15t/nextjs/components/consent-dialog-link";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
+import { TrackFlag } from "@/components/shared/track-option";
 import { saveTrack, useTrackCookie } from "@/hooks/use-track-cookie";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
@@ -70,14 +70,7 @@ export function Footer() {
                     : "border-border text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Image
-                  src={TRACK_INFO[track].flag}
-                  alt=""
-                  width={18}
-                  height={12}
-                  unoptimized
-                  className="h-3 w-[18px] rounded-[2px]"
-                />
+                <TrackFlag track={track} small />
                 {TRACK_INFO[track].country}
               </Link>
             ))}
