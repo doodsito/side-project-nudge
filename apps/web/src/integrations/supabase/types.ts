@@ -38,6 +38,38 @@ export type Database = {
         };
         Relationships: [];
       };
+      feedback_submissions: {
+        Row: {
+          category: string;
+          created_at: string;
+          id: number;
+          member_id: string;
+          message: string;
+        };
+        Insert: {
+          category: string;
+          created_at?: string;
+          id?: never;
+          member_id: string;
+          message: string;
+        };
+        Update: {
+          category?: string;
+          created_at?: string;
+          id?: never;
+          member_id?: string;
+          message?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "feedback_submissions_member_id_fkey";
+            columns: ["member_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           access_code: string;
