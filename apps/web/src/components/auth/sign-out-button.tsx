@@ -4,13 +4,13 @@ import { SubmitButton } from "@/components/auth/submit-button";
 export function SignOutButton({
   action,
   className,
-  label = "Log out",
-  pendingLabel = "Logging out…",
+  label,
+  pendingLabel,
 }: {
   action: () => Promise<void>;
   className?: string;
-  label?: string;
-  pendingLabel?: string;
+  label: string;
+  pendingLabel: string;
 }) {
   return (
     <form action={action}>

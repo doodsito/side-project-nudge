@@ -24,6 +24,11 @@ export async function readTrackCookie(): Promise<Track | null> {
   return isTrack(value) ? value : null;
 }
 
+/** The language of the sign-in pages: the browser's track, else the default one. */
+export async function getVisitorTrack(): Promise<Track> {
+  return (await readTrackCookie()) ?? DEFAULT_TRACK;
+}
+
 /**
  * Saves the track on the account (user_metadata.track, which the emails read
  * too) and in this browser. The session is refreshed so the next page reads it.

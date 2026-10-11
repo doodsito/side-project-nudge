@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { TrackDialog } from "@/components/layout/track-dialog";
+import { getDictionary } from "@/lib/dictionaries";
 import { isTrack, TRACK_INFO, TRACKS } from "@/lib/tracks";
 
 // /fr and /us are built ahead of time; any other first segment is a 404.
@@ -17,7 +18,7 @@ export default async function TrackLayout({ children, params }: LayoutProps<"/[t
   return (
     <div lang={TRACK_INFO[track].lang}>
       {children}
-      <TrackDialog track={track} />
+      <TrackDialog track={track} t={getDictionary(track).tracks} />
     </div>
   );
 }

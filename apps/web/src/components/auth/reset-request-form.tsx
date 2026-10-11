@@ -5,9 +5,16 @@ import { MailCheck } from "lucide-react";
 import { SubmitButton } from "@/components/auth/submit-button";
 import { Input } from "@/components/ui/input";
 import type { AuthFormAction } from "@/lib/auth-rules";
+import type { Dictionary } from "@/lib/dictionaries";
 
 /** "Forgot your password?": asks for the email that should receive a reset link. */
-export function ResetRequestForm({ action }: { action: AuthFormAction }) {
+export function ResetRequestForm({
+  action,
+  t,
+}: {
+  action: AuthFormAction;
+  t: Dictionary["auth"]["form"];
+}) {
   const [state, formAction] = useActionState(action, {});
   // Kept in state: React empties a form's fields after its action runs.
   const [email, setEmail] = useState("");
@@ -18,7 +25,7 @@ export function ResetRequestForm({ action }: { action: AuthFormAction }) {
   return (
     <form action={formAction} noValidate>
       <label htmlFor="reset-email" className="mb-2 block text-sm font-bold">
-        Email address
+        {t.email}
       </label>
       <Input
         ref={inputRef}
@@ -30,7 +37,7 @@ export function ResetRequestForm({ action }: { action: AuthFormAction }) {
         spellCheck={false}
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        placeholder="you@example.com"
+        placeholder={t.emailPlaceholder}
         aria-invalid={state.error ? true : undefined}
         aria-describedby="reset-email-status"
         className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base placeholder:text-muted-foreground"
@@ -41,14 +48,14 @@ export function ResetRequestForm({ action }: { action: AuthFormAction }) {
           <p className="flex gap-2 rounded-xl bg-mint-soft p-3 text-foreground">
             <MailCheck className="mt-0.5 size-4 shrink-0 text-market-up" aria-hidden />
             <span className="min-w-0 break-words">
-              If an account uses <strong>{state.sentTo}</strong>, we sent it a link to choose a new
-              password. Open it in this browser.
+              {t.resetSentBefore} <strong>{state.sentTo}</strong>
+              {t.resetSentAfter}
             </span>
           </p>
         )}
       </div>
-      <SubmitButton pendingLabel="Sending…" className="mt-2 w-full">
-        {state.sentTo ? "Send the link again" : "Send me a reset link"}
+      <SubmitButton pendingLabel={t.resetPending} className="mt-2 w-full">
+        {state.sentTo ? t.resetAgain : t.resetSubmit}
       </SubmitButton>
     </form>
   );

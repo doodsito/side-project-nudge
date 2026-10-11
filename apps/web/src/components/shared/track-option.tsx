@@ -20,8 +20,18 @@ export function TrackFlag({ track, small = false }: { track: Track; small?: bool
   );
 }
 
-/** One choice of track inside a RadioGroup: flag, country, then `detail`. */
-export function TrackOption({ track, id, detail }: { track: Track; id: string; detail: string }) {
+/** One choice of track inside a RadioGroup: flag, `label`, then `detail`. */
+export function TrackOption({
+  track,
+  id,
+  label,
+  detail,
+}: {
+  track: Track;
+  id: string;
+  label: string;
+  detail: string;
+}) {
   return (
     <label
       htmlFor={id}
@@ -29,8 +39,8 @@ export function TrackOption({ track, id, detail }: { track: Track; id: string; d
     >
       <RadioGroupItem id={id} value={track} />
       <TrackFlag track={track} />
-      <span lang={TRACK_INFO[track].lang} className="min-w-0">
-        <span className="block font-bold">{TRACK_INFO[track].country}</span>
+      <span className="min-w-0">
+        <span className="block font-bold">{label}</span>
         <span className="block text-sm text-muted-foreground">{detail}</span>
       </span>
     </label>

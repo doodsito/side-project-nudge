@@ -12,19 +12,12 @@ import { signOut } from "@/app/dashboard/actions";
 import { GOOGLE_SIGN_IN_ENABLED } from "@/lib/auth-rules";
 import { type Member } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
+import { getDictionary, type Dictionary } from "@/lib/dictionaries";
 import { signInWithGoogle } from "./actions";
 
-// The `error` the auth callback and the actions add to the URL.
-const ERRORS: Record<string, string> = {
-  access: "This account doesn’t have access yet. Enter your invitation code, then log in again.",
-  auth: "The log-in didn’t finish. Please try again.",
-  link: "This link has expired or was opened in another browser. If you just confirmed your email, log in with your password.",
-  reset:
-    "This reset link has expired, was already used or was opened in another browser. Ask for a new one below, then open it in this browser.",
-};
-
-export function ErrorBox({ code }: { code: unknown }) {
-  const error = typeof code === "string" ? ERRORS[code] : undefined;
+/** The `error` the auth callback and the actions add to the URL, explained. */
+export function ErrorBox({ code, t }: { code: unknown; t: Dictionary["auth"]["urlErrors"] }) {
+  const error = typeof code === "string" ? t[code] : undefined;
   if (!error) return null;
   return (
     <Alert variant="destructive" className="mb-6">
@@ -34,14 +27,14 @@ export function ErrorBox({ code }: { code: unknown }) {
   );
 }
 
-export function GoogleSignIn() {
+export function GoogleSignIn({ t }: { t: Dictionary["auth"]["form"] }) {
   if (!GOOGLE_SIGN_IN_ENABLED) return null;
   return (
     <>
-      <GoogleSignInButton action={signInWithGoogle} />
+      <GoogleSignInButton action={signInWithGoogle} t={t} />
       <div className="my-6 flex items-center gap-3 text-xs font-bold text-muted-foreground uppercase">
         <Separator className="flex-1" />
-        or
+        {t.or}
         <Separator className="flex-1" />
       </div>
     </>
@@ -52,26 +45,34 @@ export function AuthLinks({ children }: { children: ReactNode }) {
   return <div className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">{children}</div>;
 }
 
-/** Shown instead of a form when the visitor is already logged in. */
+/** Shown instead of a form when the visitor is already logged in, in their track's language. */
 export function AlreadySignedIn({ member }: { member: Member }) {
+  const dictionary = getDictionary(member.track);
+  const t = dictionary.auth.pages.signedIn;
   return (
     <AuthTemplate
-      eyebrow="Logged in"
-      title="You’re already logged in"
+      track={member.track}
+      eyebrow={t.eyebrow}
+      title={t.title}
       intro={
         <>
-          You’re logged in as <strong className="text-foreground">{member.email}</strong>.
+          {t.intro} <strong className="text-foreground">{member.email}</strong>.
         </>
       }
     >
       <div className="flex flex-col gap-3">
         <Button asChild size="lg" className="group w-full">
           <Link href="/dashboard">
-            Open {BRAND}{" "}
+            {t.open} {BRAND}{" "}
             <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
           </Link>
         </Button>
-        <SignOutButton action={signOut} className="h-12 w-full" />
+        <SignOutButton
+          action={signOut}
+          label={dictionary.dashboard.logOut}
+          pendingLabel={dictionary.dashboard.logOutPending}
+          className="h-12 w-full"
+        />
       </div>
     </AuthTemplate>
   );

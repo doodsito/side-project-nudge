@@ -9,14 +9,12 @@ export const ACCESS_CODE_PATTERN = /^[A-Z0-9-]{4,32}$/;
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 72;
 
-// The rules a new password must meet, in the order the form lists them.
+// The rules a new password must meet, in the order the form lists them. Their
+// labels are in the dictionaries (auth.form.rules).
 export const PASSWORD_RULES = [
-  {
-    label: `At least ${PASSWORD_MIN_LENGTH} characters`,
-    test: (p: string) => p.length >= PASSWORD_MIN_LENGTH,
-  },
-  { label: "A letter", test: (p: string) => /[a-zA-Z]/.test(p) },
-  { label: "A number", test: (p: string) => /[0-9]/.test(p) },
+  { id: "length", test: (p: string) => p.length >= PASSWORD_MIN_LENGTH },
+  { id: "letter", test: (p: string) => /[a-zA-Z]/.test(p) },
+  { id: "number", test: (p: string) => /[0-9]/.test(p) },
 ] as const;
 
 /**
@@ -46,16 +44,13 @@ export function readEmail(formData: FormData): string | null {
   return email.length <= 254 && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null;
 }
 
-export function passwordError(password: string): string | null {
-  if (password.length < PASSWORD_MIN_LENGTH) {
-    return `Use at least ${PASSWORD_MIN_LENGTH} characters for your password.`;
-  }
-  if (password.length > PASSWORD_MAX_LENGTH) {
-    return `Use at most ${PASSWORD_MAX_LENGTH} characters for your password.`;
-  }
-  if (!PASSWORD_RULES.every((rule) => rule.test(password))) {
-    return "Use at least one letter and one number in your password.";
-  }
+// What can be wrong with the credentials: keys of auth.errors in the dictionaries.
+export type CredentialsError = "email" | "passwordMissing" | "tooShort" | "tooLong" | "rules";
+
+export function passwordError(password: string): CredentialsError | null {
+  if (password.length < PASSWORD_MIN_LENGTH) return "tooShort";
+  if (password.length > PASSWORD_MAX_LENGTH) return "tooLong";
+  if (!PASSWORD_RULES.every((rule) => rule.test(password))) return "rules";
   return null;
 }
 
@@ -66,11 +61,11 @@ export function passwordError(password: string): string | null {
 export function readCredentials(
   formData: FormData,
   { newPassword }: { newPassword: boolean },
-): { email: string; password: string } | { error: string } {
+): { email: string; password: string } | { error: CredentialsError } {
   const email = readEmail(formData);
-  if (!email) return { error: "Enter a valid email address, like you@example.com." };
+  if (!email) return { error: "email" };
   const password = String(formData.get("password") ?? "");
-  const error = newPassword ? passwordError(password) : password ? null : "Enter your password.";
+  const error = newPassword ? passwordError(password) : password ? null : "passwordMissing";
   return error ? { error } : { email, password };
 }
 

@@ -104,7 +104,7 @@ export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
           autoComplete="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="you@example.com"
+          placeholder={t.emailPlaceholder}
           className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base placeholder:text-muted-foreground"
         />
         <Button

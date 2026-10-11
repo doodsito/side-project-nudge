@@ -98,7 +98,8 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
                 key={track}
                 track={track}
                 id={`account-track-${track}`}
-                detail={`${TRACK_INFO[track].language} · ${TRACK_INFO[track].currency}`}
+                label={dictionary.tracks.options[track].country}
+                detail={dictionary.tracks.options[track].detail}
               />
             ))}
           </RadioGroup>

@@ -5,43 +5,54 @@ import { AccessCodeForm } from "@/components/auth/access-code-form";
 import { PasswordForm } from "@/components/auth/password-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
 import { textLinkClass } from "@/components/shared/text-link";
-import { ACCESS_CODE_COOKIE, getMember } from "@/lib/auth";
+import { ACCESS_CODE_COOKIE, getMember, getVisitorTrack } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
+import { getDictionary } from "@/lib/dictionaries";
 import { changeAccessCode, signUpWithPassword, submitAccessCode } from "../actions";
 import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn } from "../shared";
 
-export const metadata: Metadata = {
-  title: `Sign up | ${BRAND}`,
-  description: `Create your ${BRAND} account with your invitation code.`,
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = getDictionary(await getVisitorTrack()).auth.pages.signupCode;
+  return {
+    title: `${t.metaTitle} | ${BRAND}`,
+    description: t.metaDescription,
+    robots: { index: false, follow: false },
+  };
+}
 
 // Two steps: the invitation code, then the account (once the code is accepted,
 // it waits in an httpOnly cookie).
 export default async function SignupPage({ searchParams }: PageProps<"/signup">) {
-  const [member, params, cookieStore] = await Promise.all([getMember(), searchParams, cookies()]);
+  const [member, params, cookieStore, track] = await Promise.all([
+    getMember(),
+    searchParams,
+    cookies(),
+    getVisitorTrack(),
+  ]);
   if (member) return <AlreadySignedIn member={member} />;
+  const t = getDictionary(track).auth;
 
   if (!cookieStore.has(ACCESS_CODE_COOKIE)) {
     return (
       <AuthTemplate
-        eyebrow="Invitation only"
-        title="Enter your invitation code"
-        intro={`${BRAND} opens to a few people at a time. Enter the code you were given to create your account.`}
+        track={track}
+        eyebrow={t.pages.signupCode.eyebrow}
+        title={t.pages.signupCode.title}
+        intro={t.pages.signupCode.intro}
       >
-        <ErrorBox code={params["error"]} />
-        <AccessCodeForm action={submitAccessCode} />
+        <ErrorBox code={params["error"]} t={t.urlErrors} />
+        <AccessCodeForm action={submitAccessCode} t={t.form} />
         <AuthLinks>
           <p>
-            No code yet?{" "}
-            <Link href="/#early-access" className={textLinkClass}>
-              Join the waitlist
+            {t.links.noCode}{" "}
+            <Link href={`/${track}#early-access`} className={textLinkClass}>
+              {t.links.joinWaitlist}
             </Link>
           </p>
           <p>
-            Already have an account?{" "}
+            {t.links.haveAccount}{" "}
             <Link href="/login" className={textLinkClass}>
-              Log in
+              {t.links.logIn}
             </Link>
           </p>
         </AuthLinks>
@@ -51,34 +62,35 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
 
   return (
     <AuthTemplate
-      eyebrow="Code accepted"
-      title="Create your account"
-      intro="Your email address and a password are all you need."
+      track={track}
+      eyebrow={t.pages.signupAccount.eyebrow}
+      title={t.pages.signupAccount.title}
+      intro={t.pages.signupAccount.intro}
     >
-      <ErrorBox code={params["error"]} />
-      <GoogleSignIn />
-      <PasswordForm mode="sign-up" action={signUpWithPassword} />
+      <ErrorBox code={params["error"]} t={t.urlErrors} />
+      <GoogleSignIn t={t.form} />
+      <PasswordForm mode="sign-up" action={signUpWithPassword} t={t.form} />
       <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-        By creating an account, you agree to the{" "}
+        {t.links.consentBefore}{" "}
         <Link href="/terms-of-service" className={textLinkClass}>
-          Terms of service
+          {t.links.terms}
         </Link>{" "}
-        and confirm you have read the{" "}
+        {t.links.consentMiddle}{" "}
         <Link href="/privacy-policy" className={textLinkClass}>
-          Privacy policy
+          {t.links.privacy}
         </Link>
-        . You must be 15 or older.
+        {t.links.consentAfter}
       </p>
       <AuthLinks>
         <p>
-          Already have an account?{" "}
+          {t.links.haveAccount}{" "}
           <Link href="/login" className={textLinkClass}>
-            Log in
+            {t.links.logIn}
           </Link>
         </p>
         <form action={changeAccessCode}>
           <button type="submit" className={`cursor-pointer ${textLinkClass}`}>
-            Use a different invitation code
+            {t.links.differentCode}
           </button>
         </form>
       </AuthLinks>

@@ -12,22 +12,16 @@ export const DEFAULT_TRACK: Track = "fr";
 export const TRACK_COOKIE = "nudge_track";
 export const TRACK_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-export const TRACK_INFO: Record<
-  Track,
-  { lang: string; country: string; language: string; currency: string; flag: string }
-> = {
+// `country` is in the track's own language, for the footer's switch.
+export const TRACK_INFO: Record<Track, { lang: string; country: string; flag: string }> = {
   fr: {
     lang: "fr-FR",
     country: "France",
-    language: "Français",
-    currency: "€",
     flag: "/flags/fr.svg",
   },
   us: {
     lang: "en-US",
     country: "United States",
-    language: "English",
-    currency: "$",
     flag: "/flags/us.svg",
   },
 };
