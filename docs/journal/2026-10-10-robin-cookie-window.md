@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-10
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/30
 
 **Why:** the cookie banner was easy to miss, and its invisible full-width wrapper caught clicks: on a laptop screen (1366x680, 1280x720), "Sign in" on `/beta` could not be pressed before choosing.
 
