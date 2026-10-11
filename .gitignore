@@ -31,5 +31,6 @@ npm-debug.log*
 *.sln
 *.sw?
 
-# Personal task notes (never committed)
+# Personal task notes and plans (never committed)
 tasks/
+perso/
