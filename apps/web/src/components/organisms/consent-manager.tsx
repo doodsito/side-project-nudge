@@ -1,8 +1,12 @@
 "use client";
 
 import { type ComponentProps, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { ConsentBanner, ConsentDialog, ConsentManagerProvider } from "@c15t/nextjs";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
+
+// The pages the banner links to: they stay readable and scrollable while it is open.
+const POLICY_PAGES = ["/privacy-policy", "/cookies"];
 
 // CNIL: analytics cookies live 13 months at most, without being renewed on each visit.
 const THIRTEEN_MONTHS_IN_SECONDS = 60 * 60 * 24 * 395;
@@ -52,7 +56,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
           save: "Save settings",
         },
         cookieBanner: {
-          title: "Can we measure your visit?",
+          title: "🍪 Can we measure your visit?",
           description:
             "With your permission, Google Analytics sets cookies to count visits and show which pages help people learn. Nothing is set unless you accept, and you can change your choice at any time from the footer.",
         },
@@ -98,13 +102,37 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
       lg: "var(--radius)",
       full: "9999px",
     },
+    slots: {
+      // c15t's wrapper grows to the full width of the screen and used to catch clicks
+      // next to the card (a "Sign in" button could not be pressed): only the card does now.
+      consentBanner: "pointer-events-none",
+      consentBannerCard: "pointer-events-auto",
+    },
+  },
+};
+
+// On the policy pages, the banner stays in its corner so the text can be read.
+const centredOptions: typeof options = {
+  ...options,
+  theme: {
+    ...options.theme,
+    slots: {
+      ...options.theme?.slots,
+      consentBanner: "pointer-events-none inset-0 grid place-items-center",
+    },
   },
 };
 
 export function ConsentManager({ children }: { children: ReactNode }) {
+  const onPolicyPage = POLICY_PAGES.includes(usePathname());
   return (
-    <ConsentManagerProvider options={options}>
-      <ConsentBanner hideBranding legalLinks={["privacyPolicy", "cookiePolicy"]} />
+    <ConsentManagerProvider options={onPolicyPage ? options : centredOptions}>
+      <ConsentBanner
+        hideBranding
+        legalLinks={["privacyPolicy", "cookiePolicy"]}
+        // Dims and locks the page until a choice is made, except on the policy pages.
+        scrollLock={!onPolicyPage}
+      />
       <ConsentDialog hideBranding legalLinks={["privacyPolicy", "cookiePolicy"]} />
       {children}
     </ConsentManagerProvider>
