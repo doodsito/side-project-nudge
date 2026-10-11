@@ -1,9 +1,11 @@
 "use client";
 
-import { type ComponentProps, type ReactNode } from "react";
+import { useMemo, type ComponentProps, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { ConsentBanner, ConsentDialog, ConsentManagerProvider } from "@c15t/nextjs";
+import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
+import { trackFromPath } from "@/lib/tracks";
 
 // The pages the banner links to: they stay readable and scrollable while it is open.
 const POLICY_PAGES = ["/privacy-policy", "/cookies"];
@@ -46,7 +48,6 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
     cookiePolicy: { href: "/cookies", target: "_self", label: "Cookie policy" },
   },
   i18n: {
-    locale: "en",
     messages: {
       en: {
         common: {
@@ -68,12 +69,41 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         consentTypes: {
           necessary: {
             title: "Strictly necessary",
-            description: "Remembers your cookie choice. Always on.",
+            description: "Remembers your cookie choice and your version of the site. Always on.",
           },
           measurement: {
             title: "Analytics",
             description:
               "Google Analytics counts visits and shows which pages and features are used, so we can improve Nudge.",
+          },
+        },
+      },
+      fr: {
+        common: {
+          acceptAll: "Tout accepter",
+          rejectAll: "Tout refuser",
+          customize: "Personnaliser",
+          save: "Enregistrer",
+        },
+        cookieBanner: {
+          title: "🍪 Pouvons-nous mesurer ta visite\u00a0?",
+          description:
+            "Avec ton accord, Google Analytics dépose des cookies pour compter les visites et voir quelles pages aident à apprendre. Rien n’est déposé sans ton accord, et tu peux changer d’avis à tout moment depuis le bas de page.",
+        },
+        consentManagerDialog: {
+          title: "Réglages des cookies",
+          description:
+            "Choisis les cookies que Nudge peut utiliser. Tu peux revenir ici à tout moment depuis le bas de page.",
+        },
+        consentTypes: {
+          necessary: {
+            title: "Strictement nécessaires",
+            description: "Mémorisent ton choix de cookies et ta version du site. Toujours actifs.",
+          },
+          measurement: {
+            title: "Mesure d’audience",
+            description:
+              "Google Analytics compte les visites et montre quelles pages et fonctions sont utilisées, pour améliorer Nudge.",
           },
         },
       },
@@ -111,28 +141,47 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
   },
 };
 
-// On the policy pages, the banner stays in its corner so the text can be read.
-const centredOptions: typeof options = {
-  ...options,
-  theme: {
-    ...options.theme,
-    slots: {
-      ...options.theme?.slots,
-      consentBanner: "pointer-events-none inset-0 grid place-items-center",
+// The texts follow the language of the track: offline, c15t shows the `locale`
+// language rather than the browser's. On the policy pages, the banner stays in
+// its corner so the text can be read; elsewhere it is centred.
+function optionsFor(language: "en" | "fr", centred: boolean): typeof options {
+  return {
+    ...options,
+    i18n: { ...options.i18n, locale: language },
+    theme: {
+      ...options.theme,
+      slots: {
+        ...options.theme?.slots,
+        ...(centred && { consentBanner: "pointer-events-none inset-0 grid place-items-center" }),
+      },
     },
-  },
-};
+  };
+}
 
 export function ConsentManager({ children }: { children: ReactNode }) {
-  const onPolicyPage = POLICY_PAGES.includes(usePathname());
+  const pathname = usePathname();
+  const onPolicyPage = POLICY_PAGES.includes(pathname);
+  const pageTrack = trackFromPath(pathname);
+  const savedTrack = useTrackCookie();
+  // On a track's pages, the visitor picks their version first (TrackDialog),
+  // then sees the cookie choice in that language.
+  const showBanner = !pageTrack || Boolean(savedTrack);
+  const language = (pageTrack ?? savedTrack) === "fr" ? "fr" : "en";
+  const providerOptions = useMemo(
+    () => optionsFor(language, !onPolicyPage),
+    [language, onPolicyPage],
+  );
   return (
-    <ConsentManagerProvider options={onPolicyPage ? options : centredOptions}>
-      <ConsentBanner
-        hideBranding
-        legalLinks={["privacyPolicy", "cookiePolicy"]}
-        // Dims and locks the page until a choice is made, except on the policy pages.
-        scrollLock={!onPolicyPage}
-      />
+    // c15t keeps the language it started with: a new language needs a new provider.
+    <ConsentManagerProvider key={language} options={providerOptions}>
+      {showBanner && (
+        <ConsentBanner
+          hideBranding
+          legalLinks={["privacyPolicy", "cookiePolicy"]}
+          // Dims and locks the page until a choice is made, except on the policy pages.
+          scrollLock={!onPolicyPage}
+        />
+      )}
       <ConsentDialog hideBranding legalLinks={["privacyPolicy", "cookiePolicy"]} />
       {children}
     </ConsentManagerProvider>

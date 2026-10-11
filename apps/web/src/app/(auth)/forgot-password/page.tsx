@@ -2,32 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ResetRequestForm } from "@/components/auth/reset-request-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
-import { getMember } from "@/lib/auth";
+import { textLinkClass } from "@/components/shared/text-link";
+import { getMember, getVisitorTrack } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
+import { getDictionary } from "@/lib/dictionaries";
 import { requestPasswordReset } from "../actions";
-import { AlreadySignedIn, AuthLinks, ErrorBox, linkClass } from "../shared";
+import { AlreadySignedIn, AuthLinks, ErrorBox } from "../shared";
 
-export const metadata: Metadata = {
-  title: `Forgot your password? | ${BRAND}`,
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = getDictionary(await getVisitorTrack()).auth.pages.forgot;
+  return { title: `${t.metaTitle} | ${BRAND}`, robots: { index: false, follow: false } };
+}
 
 export default async function ForgotPasswordPage({ searchParams }: PageProps<"/forgot-password">) {
-  const [member, params] = await Promise.all([getMember(), searchParams]);
+  const [member, params, track] = await Promise.all([getMember(), searchParams, getVisitorTrack()]);
   if (member) return <AlreadySignedIn member={member} />;
+  const t = getDictionary(track).auth;
   return (
     <AuthTemplate
-      eyebrow="Password reset"
-      title="Forgot your password?"
-      intro="Enter your email address and we’ll send you a link to choose a new one."
+      track={track}
+      eyebrow={t.pages.forgot.eyebrow}
+      title={t.pages.forgot.title}
+      intro={t.pages.forgot.intro}
     >
-      <ErrorBox code={params["error"]} />
-      <ResetRequestForm action={requestPasswordReset} />
+      <ErrorBox code={params["error"]} t={t.urlErrors} />
+      <ResetRequestForm action={requestPasswordReset} t={t.form} />
       <AuthLinks>
         <p>
-          Remembered it?{" "}
-          <Link href="/login" className={linkClass}>
-            Log in
+          {t.links.remembered}{" "}
+          <Link href="/login" className={textLinkClass}>
+            {t.links.logIn}
           </Link>
         </p>
       </AuthLinks>

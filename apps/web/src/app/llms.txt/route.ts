@@ -14,7 +14,7 @@ ${BRAND} is education, never financial advice: it does not recommend any financi
 
 ## Pages
 
-- [Home](${SITE_URL}/): the interactive experience. A fictional case where the market dips and Alex chooses whether to keep, delay or increase a planned contribution, with the trade-off of each choice; short ideas to explore (market movements, time horizons, diversification); progress through the session.
+- [Home, France](${SITE_URL}/fr) and [Home, United States](${SITE_URL}/us): the same home page in French (euros) and in American English (dollars); "/" opens the one chosen or matching the visitor's country. The interactive experience. A fictional case where the market dips and Alex chooses whether to keep, delay or increase a planned contribution, with the trade-off of each choice; short ideas to explore (market movements, time horizons, diversification); progress through the session.
 - [Practice](${SITE_URL}/practice): one first money decision in a fictional case, choosing between accessible savings and a first investment, then checking what was learned. No account needed.
 
 ## Optional

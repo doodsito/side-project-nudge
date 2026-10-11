@@ -4,22 +4,26 @@ import { Eyebrow } from "@/components/shared/eyebrow";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
 import { SkipLink } from "@/components/layout/skip-link";
 import { BRAND } from "@/lib/brand";
+import { getDictionary } from "@/lib/dictionaries";
+import { TRACK_INFO, type Track } from "@/lib/tracks";
 
-/** Sign-in pages: the logo, then one narrow card with a title. */
+/** Sign-in pages: the logo, then one narrow card with a title, in the track's language. */
 export function AuthTemplate({
+  track,
   eyebrow,
   title,
   intro,
   children,
 }: {
+  track: Track;
   eyebrow: string;
   title: string;
   intro: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <>
-      <SkipLink />
+    <div lang={TRACK_INFO[track].lang}>
+      <SkipLink label={getDictionary(track).skipLink} />
       <header className="px-5 pt-6 sm:px-8">
         <div className="mx-auto max-w-md">
           <Link href="/" aria-label={`${BRAND} home`} className="inline-flex">
@@ -35,6 +39,6 @@ export function AuthTemplate({
           <div className="mt-8">{children}</div>
         </div>
       </main>
-    </>
+    </div>
   );
 }

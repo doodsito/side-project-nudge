@@ -5,19 +5,16 @@ import { ArrowRight, Check, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { textLinkClass } from "@/components/shared/text-link";
 import { getSupabase } from "@/integrations/supabase/client";
 import { track } from "@/lib/analytics";
-import { BRAND } from "@/lib/brand";
+import type { Dictionary } from "@/lib/dictionaries";
 import { cn } from "@/lib/utils";
 
-const PROFILES = [
-  ["student", "Student"],
-  ["young_professional", "Young professional"],
-  ["other", "Other"],
-] as const;
-type Profile = (typeof PROFILES)[number][0];
+const PROFILES = ["student", "young_professional", "other"] as const;
+type Profile = (typeof PROFILES)[number];
 
-export function EarlyAccessForm() {
+export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileMissing, setProfileMissing] = useState(false);
@@ -56,15 +53,15 @@ export function EarlyAccessForm() {
         <span className="grid size-7 place-items-center rounded-full bg-surface">
           <Check className="size-4" aria-hidden />
         </span>
-        You’re on the list.
+        {t.done}
       </div>
     );
   return (
     <form onSubmit={submit} className="w-full max-w-xl">
       <fieldset className="mb-3" aria-describedby={profileMissing ? "profile-error" : undefined}>
-        <legend className="mb-2 text-sm font-bold">Which describes you best?</legend>
+        <legend className="mb-2 text-sm font-bold">{t.profileLegend}</legend>
         <div className="flex flex-wrap gap-2">
-          {PROFILES.map(([value, label]) => (
+          {PROFILES.map((value) => (
             <label key={value} className="cursor-pointer">
               <input
                 type="radio"
@@ -85,19 +82,19 @@ export function EarlyAccessForm() {
                   "peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2",
                 )}
               >
-                {label}
+                {t.profiles[value]}
               </span>
             </label>
           ))}
         </div>
         {profileMissing && (
           <p id="profile-error" className="mt-2 text-sm text-destructive" role="alert">
-            Choose the option that describes you best.
+            {t.profileError}
           </p>
         )}
       </fieldset>
       <label htmlFor="early-access-email" className="mb-2 block text-sm font-bold">
-        Email address
+        {t.emailLabel}
       </label>
       <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
         <Input
@@ -107,7 +104,7 @@ export function EarlyAccessForm() {
           autoComplete="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="you@example.com"
+          placeholder={t.emailPlaceholder}
           className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base placeholder:text-muted-foreground"
         />
         <Button
@@ -118,11 +115,11 @@ export function EarlyAccessForm() {
         >
           {status === "saving" ? (
             <>
-              <LoaderCircle className="size-4 animate-spin" /> Joining…
+              <LoaderCircle className="size-4 animate-spin" /> {t.saving}
             </>
           ) : (
             <>
-              Join early access{" "}
+              {t.submit}{" "}
               <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
             </>
           )}
@@ -130,17 +127,13 @@ export function EarlyAccessForm() {
       </div>
       {status === "error" && (
         <p className="mt-2 text-sm text-destructive" role="alert">
-          We couldn’t save your place just now. Please try again.
+          {t.error}
         </p>
       )}
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        We’ll only email you about early access and the launch of {BRAND}. You can leave the list at
-        any time. You must be 15 or older.{" "}
-        <Link
-          href="/privacy-policy"
-          className="font-semibold text-primary underline-offset-4 hover:underline"
-        >
-          Privacy policy
+        {t.consent}{" "}
+        <Link href="/privacy-policy" className={textLinkClass}>
+          {t.privacy}
         </Link>
       </p>
     </form>

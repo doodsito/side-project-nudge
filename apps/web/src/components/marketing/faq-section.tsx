@@ -10,19 +10,16 @@ import { Reveal } from "@/components/marketing/reveal";
 import { Section } from "@/components/marketing/section";
 import { SectionIntro } from "@/components/marketing/section-intro";
 import { track } from "@/lib/analytics";
+import type { Dictionary } from "@/lib/dictionaries";
 
-export function FAQSection({ faqs }: { faqs: Array<[string, string]> }) {
+export function FAQSection({ t }: { t: Dictionary["faq"] }) {
   return (
     <Section id="faq" className="bg-surface-2">
       <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
-        <SectionIntro
-          label="Before you begin"
-          title="Good questions deserve clear answers."
-          text="Nudge is designed to help beginners build judgement, not to make investment choices for them."
-        />
+        <SectionIntro label={t.label} title={t.title} text={t.text} />
         <Reveal delay={100}>
           <Accordion type="single" collapsible>
-            {faqs.map(([q, a]) => (
+            {t.items.map(([q, a]) => (
               <AccordionItem key={q} value={q}>
                 <AccordionTrigger
                   onClick={() => track("faq_opened", { question: q })}

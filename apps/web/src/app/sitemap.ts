@@ -4,7 +4,8 @@ import { SITE_URL } from "@/lib/brand";
 // Indexable pages only: /nudge-next is a noindex preview and /demo redirects to /practice.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    "/",
+    "/fr",
+    "/us",
     "/practice",
     "/privacy-policy",
     "/terms-of-service",

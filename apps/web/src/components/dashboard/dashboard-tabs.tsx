@@ -3,21 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BookOpen, CircleUser, Wallet } from "lucide-react";
+import type { Dictionary } from "@/lib/dictionaries";
 import { cn } from "@/lib/utils";
 
 // Each tab is its own URL, so a tab can be bookmarked and the back button works.
 const TABS = [
-  { href: "/dashboard/courses", label: "Courses", icon: BookOpen },
-  { href: "/dashboard/portfolio", label: "Portfolio", icon: Wallet },
-  { href: "/dashboard/account", label: "Account", icon: CircleUser },
+  { href: "/dashboard/courses", tab: "courses", icon: BookOpen },
+  { href: "/dashboard/portfolio", tab: "portfolio", icon: Wallet },
+  { href: "/dashboard/account", tab: "account", icon: CircleUser },
 ] as const;
 
-export function DashboardTabs() {
+export function DashboardTabs({ t }: { t: Dictionary["dashboard"] }) {
   const pathname = usePathname();
   return (
-    <nav aria-label="Dashboard" className="border-b border-border">
+    <nav aria-label={t.tabsLabel} className="border-b border-border">
       <ul className="-mb-px flex gap-1 overflow-x-auto">
-        {TABS.map(({ href, label, icon: Icon }) => {
+        {TABS.map(({ href, tab, icon: Icon }) => {
           const current = pathname === href || pathname.startsWith(`${href}/`);
           return (
             <li key={href}>
@@ -33,7 +34,7 @@ export function DashboardTabs() {
                 )}
               >
                 <Icon className="size-4" aria-hidden />
-                {label}
+                {t.tabs[tab]}
               </Link>
             </li>
           );

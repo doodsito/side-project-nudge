@@ -6,13 +6,15 @@ import { SubmitButton } from "@/components/auth/submit-button";
 import { PasswordStrength } from "@/components/auth/password-strength";
 import { Input } from "@/components/ui/input";
 import { PASSWORD_MIN_LENGTH, type AuthFormAction } from "@/lib/auth-rules";
+import type { Dictionary } from "@/lib/dictionaries";
 
+// Each mode's submit button (keys of auth.form in the dictionaries) and autocomplete hint.
 const MODES = {
-  "sign-up": { submit: "Create my account", pending: "Creating…", autoComplete: "new-password" },
-  "sign-in": { submit: "Log in", pending: "Logging in…", autoComplete: "current-password" },
+  "sign-up": { submit: "signUp", pending: "signUpPending", autoComplete: "new-password" },
+  "sign-in": { submit: "logIn", pending: "logInPending", autoComplete: "current-password" },
   "new-password": {
-    submit: "Save my new password",
-    pending: "Saving…",
+    submit: "savePassword",
+    pending: "savePasswordPending",
     autoComplete: "new-password",
   },
 } as const;
@@ -24,9 +26,11 @@ const inputClass =
 export function PasswordForm({
   mode,
   action,
+  t,
 }: {
   mode: keyof typeof MODES;
   action: AuthFormAction;
+  t: Dictionary["auth"]["form"];
 }) {
   const [state, formAction] = useActionState(action, {});
   const [visible, setVisible] = useState(false);
@@ -46,8 +50,7 @@ export function PasswordForm({
       <p role="status" className="flex gap-2 rounded-xl bg-mint-soft p-4 text-sm text-foreground">
         <MailCheck className="mt-0.5 size-4 shrink-0 text-market-up" aria-hidden />
         <span className="min-w-0 break-words">
-          Check your inbox: we sent a link to <strong>{state.sentTo}</strong> to confirm your email.
-          Open it in this browser to finish creating your account.
+          {t.checkInboxBefore} <strong>{state.sentTo}</strong> {t.checkInboxAfter}
         </span>
       </p>
     );
@@ -57,7 +60,7 @@ export function PasswordForm({
       {mode !== "new-password" && (
         <>
           <label htmlFor="auth-email" className="mb-2 block text-sm font-bold">
-            Email address
+            {t.email}
           </label>
           <Input
             id="auth-email"
@@ -68,7 +71,7 @@ export function PasswordForm({
             required
             autoComplete="email"
             spellCheck={false}
-            placeholder="you@example.com"
+            placeholder={t.emailPlaceholder}
             aria-invalid={state.error ? true : undefined}
             aria-describedby="auth-status"
             className={`${inputClass} mb-4`}
@@ -76,7 +79,7 @@ export function PasswordForm({
         </>
       )}
       <label htmlFor="auth-password" className="mb-2 block text-sm font-bold">
-        {mode === "new-password" ? "New password" : "Password"}
+        {mode === "new-password" ? t.newPassword : t.password}
       </label>
       <div className="relative">
         <Input
@@ -95,7 +98,7 @@ export function PasswordForm({
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
-          aria-label={visible ? "Hide password" : "Show password"}
+          aria-label={visible ? t.hidePassword : t.showPassword}
           aria-pressed={visible}
           aria-controls="auth-password"
           className="absolute inset-y-0 right-1 my-auto grid size-11 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
@@ -107,12 +110,12 @@ export function PasswordForm({
           )}
         </button>
       </div>
-      {choosing && <PasswordStrength id="auth-password-hint" password={password} />}
+      {choosing && <PasswordStrength id="auth-password-hint" password={password} t={t} />}
       <p id="auth-status" aria-live="polite" className="mt-2 min-h-5 text-sm text-destructive">
         {state.error}
       </p>
-      <SubmitButton pendingLabel={pending} className="mt-2 w-full">
-        {submit}
+      <SubmitButton pendingLabel={t[pending]} className="mt-2 w-full">
+        {t[submit]}
       </SubmitButton>
     </form>
   );

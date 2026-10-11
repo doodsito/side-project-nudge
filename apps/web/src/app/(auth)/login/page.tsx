@@ -2,35 +2,46 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PasswordForm } from "@/components/auth/password-form";
 import { AuthTemplate } from "@/components/auth/auth-template";
-import { getMember } from "@/lib/auth";
+import { textLinkClass } from "@/components/shared/text-link";
+import { getMember, getVisitorTrack } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
+import { getDictionary } from "@/lib/dictionaries";
 import { signInWithPassword } from "../actions";
-import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn, linkClass } from "../shared";
+import { AlreadySignedIn, AuthLinks, ErrorBox, GoogleSignIn } from "../shared";
 
-export const metadata: Metadata = {
-  title: `Log in | ${BRAND}`,
-  description: `Log in to your ${BRAND} account.`,
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = getDictionary(await getVisitorTrack()).auth.pages.login;
+  return {
+    title: `${t.metaTitle} | ${BRAND}`,
+    description: t.metaDescription,
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
-  const [member, params] = await Promise.all([getMember(), searchParams]);
+  const [member, params, track] = await Promise.all([getMember(), searchParams, getVisitorTrack()]);
   if (member) return <AlreadySignedIn member={member} />;
+  const t = getDictionary(track).auth;
   return (
-    <AuthTemplate eyebrow="Welcome back" title="Log in" intro="Use the account you created.">
-      <ErrorBox code={params["error"]} />
-      <GoogleSignIn />
-      <PasswordForm mode="sign-in" action={signInWithPassword} />
+    <AuthTemplate
+      track={track}
+      eyebrow={t.pages.login.eyebrow}
+      title={t.pages.login.title}
+      intro={t.pages.login.intro}
+    >
+      <ErrorBox code={params["error"]} t={t.urlErrors} />
+      <GoogleSignIn t={t.form} />
+      <PasswordForm mode="sign-in" action={signInWithPassword} t={t.form} />
       <AuthLinks>
         <p>
-          <Link href="/forgot-password" className={linkClass}>
-            Forgot your password?
+          <Link href="/forgot-password" className={textLinkClass}>
+            {t.links.forgot}
           </Link>
         </p>
         <p>
-          New here?{" "}
-          <Link href="/signup" className={linkClass}>
-            Sign up
+          {t.links.newHere}{" "}
+          <Link href="/signup" className={textLinkClass}>
+            {t.links.signUp}
           </Link>
         </p>
       </AuthLinks>

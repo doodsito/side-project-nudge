@@ -8,26 +8,11 @@ import { Section } from "@/components/marketing/section";
 import { PracticeButton } from "@/components/marketing/practice-button";
 import { SectionIntro } from "@/components/marketing/section-intro";
 import { track } from "@/lib/analytics";
+import type { Dictionary } from "@/lib/dictionaries";
 
-type MiniAnswer = "A" | "B" | "C";
-const MINI = {
-  A: {
-    answer: "Which stocks fell the most",
-    title: "Price movement is only one piece of the decision.",
-    copy: "Knowing what fell tells you what the market did, not whether your goal, timeline or ability to take risk changed. A lower price alone is not a complete reason to act.",
-  },
-  B: {
-    answer: "Whether your goal, timeline or risk capacity changed",
-    title: "Start with what changed for you.",
-    copy: "Your investment decision should begin with your situation, not with this week’s market movement.",
-  },
-  C: {
-    answer: "What financial influencers are buying",
-    title: "Someone else’s decision may not fit your life.",
-    copy: "Their goal, time horizon, finances and tolerance for loss may be completely different. Borrowed conviction is fragile when markets move.",
-  },
-};
-export function MiniChallenge() {
+type MiniAnswer = keyof Dictionary["challenge"]["answers"];
+
+export function MiniChallenge({ t }: { t: Dictionary["challenge"] }) {
   const [answer, setAnswer] = useState<MiniAnswer | null>(null);
   const [shown, setShown] = useState(false);
   function choose(value: MiniAnswer) {
@@ -43,17 +28,9 @@ export function MiniChallenge() {
     <Section id="challenge" className="bg-surface-2">
       <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr]">
         <div>
-          <SectionIntro
-            label="Learn by deciding"
-            title="Start with a small decision."
-            text="Try this question before the full case. Choose an answer to explore the reasoning."
-          />{" "}
+          <SectionIntro label={t.label} title={t.title} text={t.text} />{" "}
           <Reveal className="mt-8 space-y-3">
-            {[
-              "No “perfect answer” detached from your situation",
-              "No stock tips or pressure to trade",
-              "No real capital at risk",
-            ].map((item) => (
+            {t.promises.map((item) => (
               <p key={item} className="flex gap-3 font-semibold">
                 <Check className="size-5 shrink-0 text-market-up" />
                 {item}
@@ -66,57 +43,47 @@ export function MiniChallenge() {
           className="overflow-hidden rounded-3xl border border-border-strong bg-surface shadow-lift"
         >
           <div className="flex items-center justify-between border-b border-border bg-background px-5 py-4">
-            <span className="text-xs font-extrabold uppercase text-primary">
-              20-second challenge
-            </span>
-            <span className="text-xs font-semibold text-muted-foreground">1 of 1</span>
+            <span className="text-xs font-extrabold uppercase text-primary">{t.badge}</span>
+            <span className="text-xs font-semibold text-muted-foreground">{t.count}</span>
           </div>
           <div className="p-5 sm:p-8">
-            <p className="text-sm text-muted-foreground">
-              You planned to invest for 10 years. Markets fall 10% this week.
-            </p>
-            <h3 className="mt-2 font-display text-2xl font-extrabold sm:text-3xl">
-              What should you review first?
-            </h3>
-            <div className="mt-6 grid gap-3" role="radiogroup" aria-label="Challenge answers">
-              {(Object.entries(MINI) as Array<[MiniAnswer, typeof MINI.A]>).map(([key, item]) => (
-                <ChoiceButton
-                  key={key}
-                  selected={answer === key}
-                  tabIndex={answer === key || (!answer && key === "A") ? 0 : -1}
-                  onClick={() => choose(key)}
-                  className="group min-h-16 px-4 py-3"
-                >
-                  <ChoiceMarker
+            <p className="text-sm text-muted-foreground">{t.context}</p>
+            <h3 className="mt-2 font-display text-2xl font-extrabold sm:text-3xl">{t.question}</h3>
+            <div className="mt-6 grid gap-3" role="radiogroup" aria-label={t.answersLabel}>
+              {(Object.entries(t.answers) as Array<[MiniAnswer, (typeof t.answers)["A"]]>).map(
+                ([key, item]) => (
+                  <ChoiceButton
+                    key={key}
                     selected={answer === key}
-                    className="size-8 font-bold transition-transform group-hover:translate-x-0.5"
+                    tabIndex={answer === key || (!answer && key === "A") ? 0 : -1}
+                    onClick={() => choose(key)}
+                    className="group min-h-16 px-4 py-3"
                   >
-                    {key}
-                  </ChoiceMarker>
-                  <span className="text-sm sm:text-base">{item.answer}</span>
-                  <ChevronRight className="ml-auto size-4 shrink-0 transition-transform group-hover:translate-x-1" />
-                </ChoiceButton>
-              ))}
+                    <ChoiceMarker
+                      selected={answer === key}
+                      className="size-8 font-bold transition-transform group-hover:translate-x-0.5"
+                    >
+                      {key}
+                    </ChoiceMarker>
+                    <span className="text-sm sm:text-base">{item.answer}</span>
+                    <ChevronRight className="ml-auto size-4 shrink-0 transition-transform group-hover:translate-x-1" />
+                  </ChoiceButton>
+                ),
+              )}
             </div>
-            {!shown && (
-              <p className="mt-5 text-sm text-muted-foreground">
-                Choose an answer to see how Nudge turns a reaction into a reasoned decision.
-              </p>
-            )}
+            {!shown && <p className="mt-5 text-sm text-muted-foreground">{t.prompt}</p>}
             {shown && answer && (
               <div
                 className="animate-slide-up mt-6 rounded-2xl border border-primary/25 bg-primary-soft p-5"
                 aria-live="polite"
               >
-                <h4 className="font-display text-xl font-extrabold">{MINI[answer].title}</h4>
-                <p className="mt-2 leading-relaxed text-muted-foreground">{MINI[answer].copy}</p>
+                <h4 className="font-display text-xl font-extrabold">{t.answers[answer].title}</h4>
+                <p className="mt-2 leading-relaxed text-muted-foreground">
+                  {t.answers[answer].copy}
+                </p>
                 {answer === "B" && (
                   <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                    {[
-                      ["Goal", "Has the reason you are investing changed?"],
-                      ["Timeline", "Do you still have roughly the same amount of time?"],
-                      ["Risk capacity", "Has your financial ability to tolerate losses changed?"],
-                    ].map(([title, copy]) => (
+                    {t.checks.map(([title, copy]) => (
                       <div key={title} className="rounded-xl bg-surface p-3">
                         <p className="text-xs font-bold uppercase text-primary">{title}</p>
                         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{copy}</p>
@@ -124,12 +91,10 @@ export function MiniChallenge() {
                     ))}
                   </div>
                 )}
-                <p className="mt-4 font-bold">Market prices changed. Your plan may not have.</p>
-                <p className="mt-5 text-sm font-semibold">
-                  Want to see how this changes based on your situation?
-                </p>
+                <p className="mt-4 font-bold">{t.takeaway}</p>
+                <p className="mt-5 text-sm font-semibold">{t.nudge}</p>
                 <PracticeButton location="mini_challenge" className="mt-3 w-full sm:w-auto">
-                  Try the full practice case
+                  {t.cta}
                 </PracticeButton>
               </div>
             )}

@@ -5,8 +5,15 @@ import { ArrowRight } from "lucide-react";
 import { SubmitButton } from "@/components/auth/submit-button";
 import { Input } from "@/components/ui/input";
 import type { AuthFormAction } from "@/lib/auth-rules";
+import type { Dictionary } from "@/lib/dictionaries";
 
-export function AccessCodeForm({ action }: { action: AuthFormAction }) {
+export function AccessCodeForm({
+  action,
+  t,
+}: {
+  action: AuthFormAction;
+  t: Dictionary["auth"]["form"];
+}) {
   const [state, formAction] = useActionState(action, {});
   // Kept in state: React empties a form's fields after its action runs.
   const [code, setCode] = useState("");
@@ -17,7 +24,7 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
   return (
     <form action={formAction} noValidate>
       <label htmlFor="invitation-code" className="mb-2 block text-sm font-bold">
-        Invitation code
+        {t.code}
       </label>
       <Input
         ref={inputRef}
@@ -29,7 +36,7 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
         autoComplete="off"
         autoCapitalize="characters"
         spellCheck={false}
-        placeholder="Your code…"
+        placeholder={t.codePlaceholder}
         aria-invalid={state.error ? true : undefined}
         aria-describedby={state.error ? "invitation-code-error" : undefined}
         className="h-14 rounded-xl border-muted-foreground bg-surface px-4 text-base uppercase placeholder:normal-case placeholder:text-muted-foreground"
@@ -41,8 +48,8 @@ export function AccessCodeForm({ action }: { action: AuthFormAction }) {
       >
         {state.error}
       </p>
-      <SubmitButton pendingLabel="Checking…" className="group mt-2 w-full">
-        Continue{" "}
+      <SubmitButton pendingLabel={t.codePending} className="group mt-2 w-full">
+        {t.codeSubmit}{" "}
         <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
       </SubmitButton>
     </form>
