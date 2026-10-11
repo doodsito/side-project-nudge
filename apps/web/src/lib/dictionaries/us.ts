@@ -347,6 +347,21 @@ export const us = {
       deleteRights: "for your other rights.",
       deleteSubject: `Delete my ${BRAND} account`,
     },
+    feedback: {
+      trigger: "Give feedback",
+      title: "Tell us what you think",
+      intro: "A bug, an idea, anything else? We read it all.",
+      categoryLegend: "What is this about?",
+      categories: { bug: "A bug", idea: "An idea", other: "Something else" },
+      messageLabel: "Your message",
+      messagePlaceholder: "Describe what you saw or what you’d like…",
+      submit: "Send",
+      submitPending: "Sending…",
+      success: "Thanks, it’s sent!",
+      error: "We couldn’t send your message right now. Try again.",
+      messageMissing: "Write a message before sending.",
+      messageTooLong: "Message too long (2000 characters max).",
+    },
   },
 };
 
