@@ -16,6 +16,12 @@ import {
 import { Eyebrow } from "@/components/atoms/eyebrow";
 import { Button } from "@/components/ui/button";
 import { COURSE_WORLDS } from "@/lib/course-worlds";
+import {
+  completedLessonCount,
+  FOUNDATION_LESSON_COUNT,
+  FOUNDATION_WORLD,
+  type CourseProgress,
+} from "@/lib/course-progress";
 
 const WORLD_ICONS = [
   Wallet,
@@ -30,9 +36,10 @@ const WORLD_ICONS = [
 ] as const;
 
 /** The signed-in learning journey: one open world, with the later worlds visible. */
-export function CourseWorlds() {
+export function CourseWorlds({ progress }: { progress: CourseProgress }) {
   const firstWorld = COURSE_WORLDS[0]!;
   const lockedWorlds = COURSE_WORLDS.slice(1);
+  const completed = completedLessonCount(progress, FOUNDATION_WORLD);
 
   return (
     <>
@@ -108,7 +115,18 @@ export function CourseWorlds() {
               <p className="mt-2 max-w-xl leading-relaxed text-muted-foreground">
                 {firstWorld.description}
               </p>
-              <p className="mt-4 text-sm font-bold">8 short lessons · About 35 minutes</p>
+              <p className="mt-4 text-sm font-bold">
+                {completed} of {FOUNDATION_LESSON_COUNT} lessons complete · About 35 minutes
+              </p>
+              <div
+                className="mt-3 h-2 overflow-hidden rounded-full bg-primary/10"
+                aria-label={`World 1 progress: ${completed} of ${FOUNDATION_LESSON_COUNT} lessons`}
+              >
+                <span
+                  className="block h-full rounded-full bg-primary transition-[width] duration-500"
+                  style={{ width: `${(completed / FOUNDATION_LESSON_COUNT) * 100}%` }}
+                />
+              </div>
             </div>
             <Button asChild size="lg" className="group w-full md:w-auto">
               <Link href={`/dashboard/courses/${firstWorld.slug}`}>

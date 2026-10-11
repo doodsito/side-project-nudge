@@ -14,6 +14,7 @@ import {
   ShoppingBasket,
   Sparkles,
   WalletCards,
+  LoaderCircle,
   type LucideIcon,
 } from "lucide-react";
 import { ChoiceButton, ChoiceMarker } from "@/components/atoms/choice-button";
@@ -32,6 +33,7 @@ import {
   type LessonStep,
 } from "@/lib/first-paycheque-lesson";
 import { cn } from "@/lib/utils";
+import type { ProgressStatus } from "@/lib/course-progress";
 
 type FirstPaychequeLessonProps = {
   step: LessonStep;
@@ -39,12 +41,14 @@ type FirstPaychequeLessonProps = {
   expenseAnswer: ExpenseType | null;
   conceptAnswer: string | null;
   transferAnswer: string | null;
+  progressStatus: ProgressStatus;
   onExpenseAnswer: (answer: ExpenseType) => void;
   onConceptAnswer: (answer: string) => void;
   onTransferAnswer: (answer: string) => void;
   onContinueExpense: () => void;
   onGoTo: (step: LessonStep) => void;
   onRestart: () => void;
+  onRetryProgress: () => void;
 };
 
 const expenseIcons: LucideIcon[] = [Home, ShoppingBasket, Bus, WalletCards, Sparkles];
@@ -452,11 +456,22 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
           <Button variant="ghost" size="xl" onClick={props.onRestart}>
             <RefreshCcw aria-hidden="true" /> Replay lesson
           </Button>
-          <Button asChild size="xl">
-            <Link href="/dashboard/courses/financial-foundation">
-              Back to World 1 <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
+          {props.progressStatus === "saving" ? (
+            <Button size="xl" disabled>
+              <LoaderCircle className="animate-spin" aria-hidden="true" /> Saving progress…
+            </Button>
+          ) : props.progressStatus === "error" ? (
+            <Button size="xl" onClick={props.onRetryProgress}>
+              Save progress again <ArrowRight aria-hidden="true" />
+            </Button>
+          ) : (
+            <Button asChild size="xl">
+              <Link href="/dashboard/courses/financial-foundation#lesson-2">
+                {props.progressStatus === "saved" ? "Continue to lesson 2" : "Back to World 1"}
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+          )}
         </div>
       }
     >

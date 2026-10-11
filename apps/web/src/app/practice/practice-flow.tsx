@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { FirstPaychequeLesson } from "@/components/organisms/first-paycheque-lesson";
 import { PracticeTemplate } from "@/components/templates/practice-template";
+import { type ProgressStatus } from "@/lib/course-progress";
 import { BUDGET_ITEMS, LESSON_STEPS, type LessonStep } from "@/lib/first-paycheque-lesson";
 import { track } from "@/lib/analytics";
+import { completeFirstLesson } from "./actions";
 
 export function PracticeFlow() {
   const [step, setStep] = useState<LessonStep>("welcome");
@@ -12,6 +14,7 @@ export function PracticeFlow() {
   const [expenseAnswer, setExpenseAnswer] = useState<"essential" | "flexible" | null>(null);
   const [conceptAnswer, setConceptAnswer] = useState<string | null>(null);
   const [transferAnswer, setTransferAnswer] = useState<string | null>(null);
+  const [progressStatus, setProgressStatus] = useState<ProgressStatus>("idle");
   const content = useRef<HTMLDivElement>(null);
   const stepIndex = LESSON_STEPS.indexOf(step);
 
@@ -30,6 +33,19 @@ export function PracticeFlow() {
     window.history.replaceState(window.history.state, "", `#${target}`);
     setStep(target);
     track("demo_lesson_opened", { lesson: "first-paycheque", step: target });
+    if (target === "complete") void saveProgress();
+  }
+
+  async function saveProgress() {
+    setProgressStatus("saving");
+    try {
+      const result = await completeFirstLesson();
+      setProgressStatus(
+        result.status === "signed-out" ? "idle" : result.status === "saved" ? "saved" : "error",
+      );
+    } catch {
+      setProgressStatus("error");
+    }
   }
 
   function continueExpense() {
@@ -46,6 +62,7 @@ export function PracticeFlow() {
     setExpenseAnswer(null);
     setConceptAnswer(null);
     setTransferAnswer(null);
+    setProgressStatus("idle");
     goTo("welcome");
   }
 
@@ -58,12 +75,14 @@ export function PracticeFlow() {
           expenseAnswer={expenseAnswer}
           conceptAnswer={conceptAnswer}
           transferAnswer={transferAnswer}
+          progressStatus={progressStatus}
           onExpenseAnswer={setExpenseAnswer}
           onConceptAnswer={setConceptAnswer}
           onTransferAnswer={setTransferAnswer}
           onContinueExpense={continueExpense}
           onGoTo={goTo}
           onRestart={restart}
+          onRetryProgress={() => void saveProgress()}
         />
       </div>
     </PracticeTemplate>
