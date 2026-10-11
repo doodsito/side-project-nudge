@@ -2,10 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, UserRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { NudgeLogo } from "@/components/brand/nudge-logo";
+import { signOut } from "@/app/dashboard/actions";
 import { useHasSession } from "@/hooks/use-has-session";
+import { BRAND } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -58,23 +68,47 @@ export function Navbar() {
           ))}
           <div className="flex items-center gap-3">
             {!signedIn && (
-              <Button
-                asChild
-                variant="outline"
-                className="h-10 rounded-xl border-border-strong bg-surface font-bold transition-all hover:-translate-y-px hover:bg-muted"
+              <Link
+                href="/login"
+                className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Link href="/#early-access">Join the waitlist</Link>
-              </Button>
+                Log in
+              </Link>
             )}
             <Button
               asChild
               className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
             >
-              <Link href={signedIn ? "/dashboard" : "/beta"}>
-                {signedIn ? "Dashboard" : "I have a code"}{" "}
+              <Link href={signedIn ? "/dashboard" : "/signup"}>
+                {signedIn ? `Open ${BRAND}` : "Sign up"}{" "}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
+            {signedIn && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Account menu"
+                    className="size-10 rounded-xl border-border-strong bg-surface hover:bg-muted"
+                  >
+                    <UserRound />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="min-w-44">
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard/account">Account</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onSelect={() => signOut()}>Log out</DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </nav>
         <Button
@@ -107,21 +141,38 @@ export function Navbar() {
                 {label}
               </Link>
             ))}
-            {!signedIn && (
+            {signedIn ? (
+              <>
+                <Link
+                  href="/dashboard/account"
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-semibold hover:bg-muted"
+                >
+                  Account
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => signOut()}
+                  className="cursor-pointer rounded-lg px-3 py-3 text-left text-base font-semibold hover:bg-muted"
+                >
+                  Log out
+                </button>
+              </>
+            ) : (
               <Button
                 asChild
                 size="lg"
                 variant="outline"
                 className="mt-2 border-border-strong bg-surface hover:bg-muted"
               >
-                <Link href="/#early-access" onClick={() => setOpen(false)}>
-                  Join the waitlist
+                <Link href="/login" onClick={() => setOpen(false)}>
+                  Log in
                 </Link>
               </Button>
             )}
             <Button asChild size="lg" className="mt-2">
-              <Link href={signedIn ? "/dashboard" : "/beta"} onClick={() => setOpen(false)}>
-                {signedIn ? "Dashboard" : "I have a code"} <ArrowRight />
+              <Link href={signedIn ? "/dashboard" : "/signup"} onClick={() => setOpen(false)}>
+                {signedIn ? `Open ${BRAND}` : "Sign up"} <ArrowRight />
               </Link>
             </Button>
           </div>

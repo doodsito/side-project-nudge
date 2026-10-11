@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function ResetPasswordPage() {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase.auth.getClaims();
-  if (!data?.claims) redirect("/beta?step=reset&error=reset");
+  if (!data?.claims) redirect("/forgot-password?error=reset");
   return (
     <AuthTemplate
       eyebrow="Password reset"

@@ -80,7 +80,8 @@ uses `nudge-next/nudge-next-template.tsx`, `/practice` uses
 `practice/practice-template.tsx`, and the legal pages (`/privacy-policy`,
 `/terms-of-service`, `/legal-notice`, `/cookies`) use
 `layout/legal-template.tsx`, which styles their headings, paragraphs, lists and
-links. `/beta` (access code, then sign-in) uses `auth/auth-template.tsx`, and
+links. `/signup` (invitation code, then account), `/login` and `/forgot-password`
+use `auth/auth-template.tsx`, and
 the members' pages under `/dashboard` use `dashboard/dashboard-template.tsx`,
 whose tabs (Courses, Portfolio, Account) are links to their own URLs. The
 footer (`layout/footer.tsx`) is in no page layout: `app/layout.tsx` adds it to

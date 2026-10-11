@@ -10,8 +10,8 @@ export function SignOutButton({
 }) {
   return (
     <form action={action}>
-      <SubmitButton pendingLabel="Signing out…" variant="outline" className={className}>
-        <LogOut aria-hidden /> Sign out
+      <SubmitButton pendingLabel="Logging out…" variant="outline" className={className}>
+        <LogOut aria-hidden /> Log out
       </SubmitButton>
     </form>
   );

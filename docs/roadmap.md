@@ -29,6 +29,8 @@ changes through a pull request.
 - [ ] Logo options for the team to choose from
 - [x] Private beta: "I have a code" (/beta) asks for an access code, then an account with
       an email and a password, then a dashboard (Courses, Portfolio, Account)
+- [x] Clear header: "Log in" and "Sign up" (invitation code) signed out, "Open Nudge" and an
+      account menu signed in; `/login`, `/signup` and `/forgot-password` replace `/beta`
 - [ ] Sign in with Google (ready in the code, set up in Google Cloud and Supabase)
 
 ## Later
