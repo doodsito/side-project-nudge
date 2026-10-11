@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-10
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/31
 
 **Why:** we drop atomic design and follow shadcn/ui and its recommendations, without changing the look.
 
