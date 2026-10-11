@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-10
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/33
 
 **Why:** a French visitor should learn with French money (euros, PEA, assurance vie) and an American one with US money. France comes first.
 
