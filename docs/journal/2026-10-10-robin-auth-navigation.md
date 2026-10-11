@@ -8,11 +8,11 @@
 
 **What changed:**
 - Header: "Log in" and "Sign up" when logged out; "Open Nudge" and an account menu (Account, Log out) when logged in.
-- `/beta` becomes `/signup` (invitation code, then account, with "No code yet? Join the waitlist"), `/login` and `/forgot-password`. Old `/beta` links redirect.
+- `/beta` becomes `/signup` (invitation code, then account, with "No code yet? Join the waitlist"), `/login` and `/forgot-password`. Old `/beta` links now lead to the 404 page (no email points there).
 - Opening `/login` or `/signup` while logged in now says so, with "Open Nudge" and "Log out", instead of a silent redirect.
-- "Access code" is now "invitation code"; "Sign in/out" is now "Log in/out". New shadcn component: dropdown menu.
+- "Access code" is now "invitation code"; "Sign in/out" is now "Log in/out". New shadcn components: dropdown menu, alert, separator.
 
-**Files:** `apps/web/src/app/(auth)/`, `apps/web/src/components/layout/navbar.tsx`, `apps/web/next.config.ts`, auth redirects in `lib/`, `proxy.ts`, `auth/callback`
+**Files:** `apps/web/src/app/(auth)/`, `apps/web/src/components/layout/navbar.tsx`, auth redirects in `lib/`, `proxy.ts`, `auth/callback`
 
 **Checked:** lint, typecheck and build pass; 22 browser checks against a fake Supabase (redirects, wrong and good codes, log in, menu, log out, mobile).
 

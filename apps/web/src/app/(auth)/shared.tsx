@@ -1,11 +1,13 @@
 // Pieces shared by /login, /signup and /forgot-password.
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CircleAlert } from "lucide-react";
 import { AuthTemplate } from "@/components/auth/auth-template";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { SignOutButton } from "@/components/auth/sign-out-button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { signOut } from "@/app/dashboard/actions";
 import { GOOGLE_SIGN_IN_ENABLED } from "@/lib/auth-rules";
 import { type Member } from "@/lib/auth";
@@ -27,9 +29,10 @@ export function ErrorBox({ code }: { code: unknown }) {
   const error = typeof code === "string" ? ERRORS[code] : undefined;
   if (!error) return null;
   return (
-    <p role="alert" className="mb-6 rounded-xl bg-muted p-3 text-sm text-foreground">
-      {error}
-    </p>
+    <Alert variant="destructive" className="mb-6">
+      <CircleAlert aria-hidden />
+      <AlertDescription>{error}</AlertDescription>
+    </Alert>
   );
 }
 
@@ -39,9 +42,9 @@ export function GoogleSignIn() {
     <>
       <GoogleSignInButton action={signInWithGoogle} />
       <div className="my-6 flex items-center gap-3 text-xs font-bold text-muted-foreground uppercase">
-        <span className="h-px flex-1 bg-border" />
+        <Separator className="flex-1" />
         or
-        <span className="h-px flex-1 bg-border" />
+        <Separator className="flex-1" />
       </div>
     </>
   );
