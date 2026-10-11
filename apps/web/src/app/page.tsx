@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { EarlyAccessSection } from "@/components/organisms/early-access-section";
-import { FAQSection } from "@/components/organisms/faq-section";
-import { HeroSection } from "@/components/organisms/hero-section";
-import { HowItWorks } from "@/components/organisms/how-it-works";
-import { MiniChallenge } from "@/components/organisms/mini-challenge";
-import { MarketingTemplate } from "@/components/templates/marketing-template";
+import { EarlyAccessSection } from "@/components/marketing/early-access-section";
+import { FAQSection } from "@/components/marketing/faq-section";
+import { HeroSection } from "@/components/marketing/hero-section";
+import { HowItWorks } from "@/components/marketing/how-it-works";
+import { MiniChallenge } from "@/components/marketing/mini-challenge";
+import { MarketingTemplate } from "@/components/layout/marketing-template";
 import { BRAND, SITE_URL } from "@/lib/brand";
 import { llmsTxtAlternate } from "@/lib/metadata";
 

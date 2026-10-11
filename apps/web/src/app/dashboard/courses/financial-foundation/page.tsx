@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FoundationWorld } from "@/components/organisms/foundation-world";
+import { FoundationWorld } from "@/components/dashboard/foundation-world";
 import { requireMember } from "@/lib/auth";
 
 export const metadata: Metadata = { title: "Build your financial foundation" };

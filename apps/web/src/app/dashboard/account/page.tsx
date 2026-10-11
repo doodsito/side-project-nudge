@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CircleCheck } from "lucide-react";
-import { SignOutButton } from "@/components/molecules/sign-out-button";
+import { SignOutButton } from "@/components/auth/sign-out-button";
 import { requireMember } from "@/lib/auth";
 import { BRAND, CONTACT_EMAIL } from "@/lib/brand";
 import { signOut } from "../actions";

@@ -3,7 +3,7 @@
  *
  * Events are pushed to a queue on `window` and forwarded to PostHog or GA4 if
  * either is present. GA4 is only present once the visitor has accepted
- * analytics cookies: components/organisms/consent-manager.tsx loads it.
+ * analytics cookies: components/layout/consent-manager.tsx loads it.
  */
 
 /** Google Analytics 4 property "Nudge". A public ID, not a secret. */
