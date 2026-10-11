@@ -75,7 +75,9 @@ The brand lives in `src/styles.css`: changing a token changes every screen.
 `components/ui/` only holds what the site uses today (accordion, button,
 input); add the others from shadcn when you need them.
 
-`/` uses `layout/marketing-template.tsx` (navbar), the `/nudge-next` preview
+`/fr` and `/us` (the two tracks; `/` redirects to one) use
+`layout/marketing-template.tsx` (navbar), with their copy from
+`lib/dictionaries/`; the `/nudge-next` preview
 uses `nudge-next/nudge-next-template.tsx`, `/practice` uses
 `practice/practice-template.tsx`, and the legal pages (`/privacy-policy`,
 `/terms-of-service`, `/legal-notice`, `/cookies`) use

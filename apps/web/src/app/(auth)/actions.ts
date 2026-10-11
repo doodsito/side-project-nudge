@@ -3,7 +3,7 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
-import { ACCESS_CODE_COOKIE, finishSignIn } from "@/lib/auth";
+import { ACCESS_CODE_COOKIE, finishSignIn, readTrackCookie } from "@/lib/auth";
 import {
   ACCESS_CODE_PATTERN,
   readCredentials,
@@ -11,6 +11,7 @@ import {
   type AuthFormState,
 } from "@/lib/auth-rules";
 import { SITE_URL } from "@/lib/brand";
+import { DEFAULT_TRACK } from "@/lib/tracks";
 
 // Where Supabase sends people back after Google or an email link. The
 // address must be allowed in Supabase (Authentication > URL Configuration).
@@ -88,7 +89,11 @@ export async function signUpWithPassword(
     password,
     // The code is kept with the account so the confirmation link works later
     // or in another browser. It is only an input: redeem_access_code() checks it.
-    options: { emailRedirectTo: await callbackUrl(), data: { access_code: code } },
+    // The track picks the language of the confirmation email.
+    options: {
+      emailRedirectTo: await callbackUrl(),
+      data: { access_code: code, track: (await readTrackCookie()) ?? DEFAULT_TRACK },
+    },
   });
   if (error) {
     if (error.status === 429) return { error: TOO_MANY };

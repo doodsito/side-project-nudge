@@ -1,12 +1,22 @@
 import { type ReactNode } from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { SkipLink } from "@/components/layout/skip-link";
+import type { Dictionary } from "@/lib/dictionaries";
+import type { Track } from "@/lib/tracks";
 
-export function MarketingTemplate({ children }: { children: ReactNode }) {
+export function MarketingTemplate({
+  track,
+  t,
+  children,
+}: {
+  track: Track;
+  t: Dictionary;
+  children: ReactNode;
+}) {
   return (
     <>
-      <SkipLink />
-      <Navbar />
+      <SkipLink label={t.skipLink} />
+      <Navbar track={track} t={t.nav} />
       <main id="main-content" tabIndex={-1}>
         {children}
       </main>

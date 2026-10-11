@@ -16,9 +16,11 @@ import { NudgeLogo } from "@/components/brand/nudge-logo";
 import { signOut } from "@/app/dashboard/actions";
 import { useHasSession } from "@/hooks/use-has-session";
 import { BRAND } from "@/lib/brand";
+import type { Dictionary } from "@/lib/dictionaries";
+import type { Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -30,8 +32,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   const items = [
-    ["Try a challenge", "/#challenge"],
-    ["How it works", "/#how-it-works"],
+    [t.challenge, `/${track}#challenge`],
+    [t.howItWorks, `/${track}#how-it-works`],
   ] as const;
   return (
     <header
@@ -53,10 +55,10 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8">
-        <Link href="/#top" aria-label="Nudge home">
+        <Link href={`/${track}#top`} aria-label={`${BRAND} ${t.home}`}>
           <NudgeLogo small />
         </Link>
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-7 md:flex" aria-label={t.main}>
           {items.map(([label, href]) => (
             <Link
               key={href}
@@ -72,7 +74,7 @@ export function Navbar() {
                 href="/login"
                 className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
               >
-                Log in
+                {t.logIn}
               </Link>
             )}
             <Button
@@ -80,7 +82,7 @@ export function Navbar() {
               className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
             >
               <Link href={signedIn ? "/dashboard" : "/signup"}>
-                {signedIn ? `Open ${BRAND}` : "Sign up"}{" "}
+                {signedIn ? `${t.open} ${BRAND}` : t.signUp}{" "}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -90,7 +92,7 @@ export function Navbar() {
                   <Button
                     size="icon"
                     variant="outline"
-                    aria-label="Account menu"
+                    aria-label={t.accountMenu}
                     className="size-10 rounded-xl border-border-strong bg-surface hover:bg-muted"
                   >
                     <UserRound />
@@ -99,12 +101,12 @@ export function Navbar() {
                 <DropdownMenuContent align="end" className="min-w-44">
                   <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard/account">Account</Link>
+                      <Link href="/dashboard/account">{t.account}</Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <DropdownMenuItem onSelect={() => signOut()}>Log out</DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => signOut()}>{t.logOut}</DropdownMenuItem>
                   </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -115,7 +117,7 @@ export function Navbar() {
           ref={toggleRef}
           size="icon"
           variant="outline"
-          aria-label="Toggle navigation"
+          aria-label={t.toggle}
           aria-expanded={open}
           aria-controls="mobile-navigation"
           onClick={() => setOpen(!open)}
@@ -128,7 +130,7 @@ export function Navbar() {
         <nav
           id="mobile-navigation"
           className="animate-slide-up border-t border-border bg-background px-5 py-4 shadow-lift md:hidden"
-          aria-label="Mobile navigation"
+          aria-label={t.mobile}
         >
           <div className="mx-auto flex max-w-6xl flex-col">
             {items.map(([label, href]) => (
@@ -148,14 +150,14 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-3 text-base font-semibold hover:bg-muted"
                 >
-                  Account
+                  {t.account}
                 </Link>
                 <button
                   type="button"
                   onClick={() => signOut()}
                   className="cursor-pointer rounded-lg px-3 py-3 text-left text-base font-semibold hover:bg-muted"
                 >
-                  Log out
+                  {t.logOut}
                 </button>
               </>
             ) : (
@@ -166,13 +168,13 @@ export function Navbar() {
                 className="mt-2 border-border-strong bg-surface hover:bg-muted"
               >
                 <Link href="/login" onClick={() => setOpen(false)}>
-                  Log in
+                  {t.logIn}
                 </Link>
               </Button>
             )}
             <Button asChild size="lg" className="mt-2">
               <Link href={signedIn ? "/dashboard" : "/signup"} onClick={() => setOpen(false)}>
-                {signedIn ? `Open ${BRAND}` : "Sign up"} <ArrowRight />
+                {signedIn ? `${t.open} ${BRAND}` : t.signUp} <ArrowRight />
               </Link>
             </Button>
           </div>

@@ -22,6 +22,13 @@ const COOKIES = [
     category: "Strictly necessary",
   },
   {
+    name: "nudge_track",
+    purpose:
+      "Remembers the version of the site you chose (France or United States), so the right home page and language open next time.",
+    duration: "12 months",
+    category: "Strictly necessary",
+  },
+  {
     name: "nudge_access_code",
     purpose: "Remembers the beta access code you entered until you finish signing in.",
     duration: "30 minutes",
@@ -56,7 +63,7 @@ const COOKIES = [
 
 export default function CookiesPage() {
   return (
-    <LegalTemplate title="Cookie policy" updated="2 October 2026">
+    <LegalTemplate title="Cookie policy" updated="10 October 2026">
       <p>
         This page explains which cookies {new URL(SITE_URL).host} uses, why, and how to change your
         choice at any time. Everything else about your personal data is in our{" "}

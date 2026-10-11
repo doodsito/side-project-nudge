@@ -31,7 +31,8 @@ dashboard in step with them.
   `smtp.resend.com`, port 465, user `resend`, password = a Resend API key with
   sending access to that domain only. The key lives only there, never in this
   repository or in Vercel. The email texts are in Authentication > Emails >
-  Templates.
+  Templates: copy them from `email-templates.md`, which picks French or
+  English from the account's track (`user_metadata.track`).
 
 ## Beta access codes (Robin)
 
