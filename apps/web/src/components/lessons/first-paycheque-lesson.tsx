@@ -84,8 +84,8 @@ function LessonScreen({
 }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <section className="flex min-h-0 flex-1 items-center overflow-y-auto px-5 py-8 sm:px-8 sm:py-10">
-        <div className={cn("mx-auto w-full animate-rise", wide ? "max-w-3xl" : "max-w-xl")}>
+      <section className="flex min-h-0 flex-1 overflow-y-auto px-5 py-8 sm:px-8 sm:py-10">
+        <div className={cn("m-auto w-full animate-rise", wide ? "max-w-3xl" : "max-w-xl")}>
           {children}
         </div>
       </section>

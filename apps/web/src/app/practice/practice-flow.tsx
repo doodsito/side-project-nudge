@@ -95,7 +95,7 @@ export function PracticeFlow() {
 
   return (
     <PracticeTemplate current={stepIndex + 1} total={LESSON_STEPS.length}>
-      <div ref={content} className="flex flex-1 flex-col [&_h1]:focus:outline-none">
+      <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <FirstPaychequeLesson
           step={step}
           track={lessonTrack}
