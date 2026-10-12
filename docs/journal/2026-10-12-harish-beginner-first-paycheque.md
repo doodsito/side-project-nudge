@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-12
 - **Author:** Harish, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/35
 
 **Why:** testers found the lessons too advanced. Task 06 (Notion) asks for one idea, a new-situation question, retries and an optional deeper read.
 
