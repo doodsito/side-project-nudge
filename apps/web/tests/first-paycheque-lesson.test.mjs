@@ -20,12 +20,18 @@ const {
   LESSON_STEPS,
   REMAINING,
   SALARY,
+  SAM,
+  SKIP_QUIZ,
   TOTAL_SPENT,
   TRANSFER_OPTIONS,
+  formatMoney,
   isExpenseAnswerCorrect,
+  scoreSkipQuiz,
 } = compiledModule.exports;
 
-test("Alex's budget adds up to the €100 used throughout the lesson", () => {
+const dollars = (amount) => formatMoney(amount, "us");
+
+test("Alex's budget adds up to the 100 used throughout the lesson", () => {
   assert.equal(SALARY, 1850);
   assert.equal(TOTAL_SPENT, 1750);
   assert.equal(REMAINING, 100);
@@ -35,20 +41,64 @@ test("Alex's budget adds up to the €100 used throughout the lesson", () => {
   );
 });
 
-test("every practice question has one clear explained answer", () => {
-  assert.equal(CONCEPT_OPTIONS.filter((option) => option.correct).length, 1);
-  assert.equal(TRANSFER_OPTIONS.filter((option) => option.correct).length, 1);
+test("US learners see dollars and French learners see euros", () => {
+  assert.equal(formatMoney(1850, "us"), "$1,850");
+  assert.equal(formatMoney(1850, "fr"), "€1,850");
+  assert.equal(formatMoney(0, "us"), "$0");
+});
+
+test("every expense is a need or a want, with a plain hint", () => {
   BUDGET_ITEMS.forEach((item, index) => {
+    assert.ok(["need", "want"].includes(item.type));
     assert.ok(item.note);
     assert.equal(isExpenseAnswerCorrect(index, item.type), true);
-    assert.equal(
-      isExpenseAnswerCorrect(index, item.type === "essential" ? "flexible" : "essential"),
-      false,
-    );
+    assert.equal(isExpenseAnswerCorrect(index, item.type === "need" ? "want" : "need"), false);
   });
 });
 
-test("the lesson keeps one focused concept across eight short screens", () => {
+test("every lesson question has one right answer and a hint for each wrong one", () => {
+  for (const options of [CONCEPT_OPTIONS, TRANSFER_OPTIONS]) {
+    assert.equal(options.filter((option) => option.correct).length, 1);
+    options.forEach((option) => assert.ok(option.feedback(dollars)));
+  }
+});
+
+test("Sam's case is a new situation whose free money is what is left minus the bill", () => {
+  assert.equal(SAM.earned - SAM.spent, 125);
+  const right = TRANSFER_OPTIONS.find((option) => option.correct);
+  assert.equal(right.amount, SAM.earned - SAM.spent - SAM.bill);
+  assert.equal(right.amount, 100);
+  assert.notEqual(SAM.earned, SALARY);
+});
+
+test("the skip quiz has 3 questions, each with exactly one right option", () => {
+  assert.equal(SKIP_QUIZ.length, 3);
+  SKIP_QUIZ.forEach((question) => {
+    assert.ok(question.prompt(dollars));
+    assert.ok(question.reason(dollars));
+    assert.equal(question.options.filter((option) => option.value === question.answer).length, 1);
+  });
+});
+
+test("the skip quiz's sums are right", () => {
+  assert.equal(SKIP_QUIZ[0].answer, String(1200 - 1000));
+  assert.equal(SKIP_QUIZ[2].answer, String(200 - 50));
+});
+
+test("only 3 out of 3 skips the lesson", () => {
+  const allRight = Object.fromEntries(SKIP_QUIZ.map((question) => [question.id, question.answer]));
+  const passed = scoreSkipQuiz(allRight);
+  assert.equal(passed.passed, true);
+  assert.deepEqual(Array.from(passed.missed), []);
+
+  const oneWrong = scoreSkipQuiz({ ...allRight, [SKIP_QUIZ[1].id]: "streaming" });
+  assert.equal(oneWrong.passed, false);
+  assert.deepEqual(Array.from(oneWrong.missed), [SKIP_QUIZ[1].id]);
+
+  assert.equal(scoreSkipQuiz({}).passed, false);
+});
+
+test("the lesson keeps one focused idea across eight short screens", () => {
   assert.deepEqual(Array.from(LESSON_STEPS), [
     "welcome",
     "story",
