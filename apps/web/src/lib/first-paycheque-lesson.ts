@@ -17,9 +17,13 @@ export type LessonStep = (typeof LESSON_STEPS)[number];
 export type LessonView = LessonStep | "skip-quiz";
 export type ExpenseType = "need" | "want";
 
+export function currencySymbol(track: Track) {
+  return track === "us" ? "$" : "€";
+}
+
 /** Writes an amount in the track's currency: $1,850 (US) or €1,850 (France). */
 export function formatMoney(amount: number, track: Track) {
-  return `${track === "us" ? "$" : "€"}${amount.toLocaleString("en-US")}`;
+  return `${currencySymbol(track)}${amount.toLocaleString("en-US")}`;
 }
 
 export type Money = (amount: number) => string;
@@ -73,7 +77,7 @@ type LessonOption = {
   feedback: (money: Money) => string;
 };
 
-export const CONCEPT_OPTIONS = [
+export const CONCEPT_OPTIONS: ReadonlyArray<LessonOption> = [
   {
     value: "spending",
     label: () => "Money to spend on anything",
@@ -84,15 +88,17 @@ export const CONCEPT_OPTIONS = [
     value: "investing",
     label: () => "Money to invest right now",
     correct: false,
-    feedback: () => "Not yet. First, Alex should check if any of it is already promised. Try again.",
+    feedback: () =>
+      "Not yet. First, Alex should check if any of it is already promised. Try again.",
   },
   {
     value: "might-save",
     label: () => "Money Alex might be able to save",
     correct: true,
-    feedback: () => "Yes. It's money left over that Alex might save, once nothing is already promised.",
+    feedback: () =>
+      "Yes. It's money left over that Alex might save, once nothing is already promised.",
   },
-] as const satisfies ReadonlyArray<LessonOption>;
+];
 
 // The transfer question: the same idea, a different person and different numbers.
 export const SAM = { earned: 600, spent: 475, bill: 25 } as const;
@@ -138,7 +144,8 @@ export const SKIP_QUIZ = [
       { value: "1000", label: (money: Money) => money(1000) },
     ],
     answer: "200",
-    reason: (money: Money) => `Money in − money out: ${money(1200)} − ${money(1000)} = ${money(200)}.`,
+    reason: (money: Money) =>
+      `Money in − money out: ${money(1200)} − ${money(1000)} = ${money(200)}.`,
   },
   {
     id: "need",
