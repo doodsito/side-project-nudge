@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-13
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/42
 
 **Why:** the rest of the bug hunt from #39: findings that needed a database change or a closer look.
 
