@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Learn investing by making real decisions with a virtual portfolio and real market data.",
   openGraph: { type: "website" },
   twitter: { card: "summary_large_image" },
-  icons: { icon: { url: "/favicon.png", type: "image/png" } },
+  icons: { icon: { url: "/brand/nudge-bascule.svg", type: "image/svg+xml" } },
   alternates: llmsTxtAlternate,
 };
 
