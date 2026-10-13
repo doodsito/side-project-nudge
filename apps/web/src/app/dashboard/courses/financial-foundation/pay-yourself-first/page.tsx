@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { requireMember } from "@/lib/auth";
+import { getMemberTrack, requireMember } from "@/lib/auth";
 import { FOUNDATION_WORLD, hasCompletedLesson } from "@/lib/course-progress";
+import { getDictionary } from "@/lib/dictionaries";
 
-export const metadata: Metadata = { title: "Pay yourself first" };
+export async function generateMetadata(): Promise<Metadata> {
+  const track = await getMemberTrack();
+  return { title: getDictionary(track).learning.courses.lessonTwo.metaTitle };
+}
 
 export default async function PayYourselfFirstPage() {
   const member = await requireMember();

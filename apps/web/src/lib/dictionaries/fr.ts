@@ -310,6 +310,441 @@ export const fr: Dictionary = {
       samePassword: "Choisis un mot de passe différent de l’actuel.",
     },
   },
+  learning: {
+    shared: {
+      lessonProgress: (current, total) => `Progression\u00a0: étape ${current} sur ${total}`,
+      leaveLesson: "Quitter la leçon",
+      educationalNote: "Simulation pédagogique uniquement. Ceci n’est pas un conseil financier.",
+    },
+    courses: {
+      journeyLabel: "Ton parcours d’apprentissage",
+      journeyTitle: "Neuf mondes. Une décision à la fois.",
+      journeyIntro:
+        "Construis les bases, entraîne-toi avec de l’argent virtuel et débloque les connaissances utiles à tes premières décisions d’investissement.",
+      worldsCompleted: "0 monde sur 9",
+      firstWorldReady: "Le monde 1 est prêt",
+      mapLabel: "Carte du parcours",
+      mapTitle: "Choisis ton monde",
+      mapIntro:
+        "Termine un monde pour ouvrir le suivant. Les mondes verrouillés restent visibles pour que tu saches toujours où mène le parcours.",
+      world: "Monde",
+      ready: "Prêt à explorer",
+      locked: "Verrouillé",
+      lessonsComplete: (completed, total) =>
+        `${completed} leçon${completed > 1 ? "s" : ""} sur ${total} terminée${completed > 1 ? "s" : ""} · Environ 35 minutes`,
+      worldProgress: (completed, total) =>
+        `Progression du monde 1\u00a0: ${completed} leçon${completed > 1 ? "s" : ""} sur ${total}`,
+      enterWorld: "Entrer dans le monde",
+      worlds: [
+        {
+          title: "Construis tes bases financières",
+          description: "Donne un rôle à chaque euro avant de chercher à le faire fructifier.",
+        },
+        {
+          title: "Pourquoi investir ?",
+          description:
+            "Découvre comment le temps, l’inflation et les intérêts composés changent la donne.",
+        },
+        {
+          title: "Découvre le monde de l’investissement",
+          description:
+            "Découvre les actions, obligations, ETF, cryptos, liquidités et les enveloppes qui les accueillent.",
+        },
+        {
+          title: "Risque, diversification et psychologie",
+          description:
+            "Comprends l’incertitude, répartis les risques et repère les pièges émotionnels.",
+        },
+        {
+          title: "Comprends les ETF",
+          description:
+            "Apprends ce que contient un ETF et quels éléments méritent d’être comparés.",
+        },
+        {
+          title: "Construis ton premier portefeuille",
+          description:
+            "Transforme un objectif, un horizon et une limite de risque en portefeuille virtuel.",
+        },
+        {
+          title: "Investir en France",
+          description:
+            "Associe les enveloppes et produits d’épargne français à leur véritable rôle.",
+        },
+        {
+          title: "Comment fonctionne vraiment un achat",
+          description:
+            "Comprends les courtiers, les ordres, les frais et ce qui se passe après avoir cliqué sur Acheter.",
+        },
+        {
+          title: "Ton premier investissement réel",
+          description: "Rassemble tes connaissances, ta pratique et ton plan personnel.",
+        },
+      ],
+      foundation: {
+        metaTitle: "Construis tes bases financières",
+        back: "Tous les mondes",
+        label: "Monde 1 · Les bases de l’argent",
+        title: "Construis tes bases financières",
+        intro:
+          "Avant d’investir, comprends ce que ton argent doit financer aujourd’hui, bientôt et beaucoup plus tard.",
+        progress: "Progression",
+        totalTime: "Durée totale",
+        duration: "~35 min",
+        progressLabel: (completed, total) =>
+          `Progression du monde\u00a0: ${completed} leçon${completed > 1 ? "s" : ""} sur ${total}`,
+        pathLabel: "Ton parcours",
+        pathTitle: "Huit décisions avant les marchés",
+        pathIntro:
+          "Commence avec un premier salaire. Chaque courte leçon ouvre la prochaine étape du parcours.",
+        lesson: "Leçon",
+        completed: "Terminée",
+        unlocked: "Débloquée",
+        practicalDecision: "Une décision concrète",
+        virtualMoney: "Argent virtuel",
+        review: "Revoir la leçon",
+        start: "Commencer la leçon",
+        rewardLabel: "Récompense du monde",
+        rewardTitle: "L’investissement débloqué",
+        rewardIntro: "Termine les huit leçons pour ouvrir l’univers de l’investissement.",
+        lessons: [
+          {
+            title: "Où va ton argent ?",
+            description:
+              "Aide Alex à calculer ce qu’il lui reste vraiment après ses dépenses essentielles.",
+          },
+          {
+            title: "Paie-toi en premier",
+            description:
+              "Découvre pourquoi épargner d’abord change la donne par rapport à épargner ce qui reste.",
+          },
+          {
+            title: "Combien devrais-tu épargner ?",
+            description:
+              "Utilise les pourcentages courants comme repères souples, pas comme règles fixes.",
+          },
+          {
+            title: "Construis ton filet de sécurité",
+            description:
+              "Comprends pourquoi chaque situation demande une réserve de précaution différente.",
+          },
+          {
+            title: "L’argent dont tu auras bientôt besoin",
+            description:
+              "Sépare tes besoins proches de l’argent qui peut rester investi plus longtemps.",
+          },
+          {
+            title: "Rembourser une dette ou investir ?",
+            description:
+              "Compare le coût certain d’un emprunt au rendement incertain d’un investissement.",
+          },
+          {
+            title: "Les liquidités ne sont pas sans risque",
+            description:
+              "Observe comment l’inflation réduit ce que la même somme permet d’acheter.",
+          },
+          {
+            title: "Épargner ou investir ?",
+            description:
+              "Choisis entre disponibilité, stabilité et potentiel de croissance à long terme.",
+          },
+        ],
+      },
+      lessonTwo: {
+        metaTitle: "Paie-toi en premier",
+        back: "Monde 1",
+        label: "Monde 1 · Leçon 2",
+        title: "Paie-toi en premier",
+        intro:
+          "Tu as terminé ta première leçon. Découvre maintenant pourquoi mettre de l’argent de côté avant de dépenser peut rendre l’épargne plus simple et plus régulière.",
+        unlocked: "Leçon 2 débloquée",
+        comingNext: "Prochaine étape",
+        placeholder:
+          "La leçon interactive complète sera construite ensuite. Ta progression est déjà enregistrée sur ton compte : tu peux partir et revenir sans rien perdre.",
+        viewProgress: "Voir ta progression",
+      },
+      lessonThree: {
+        metaTitle: "Combien devrais-tu épargner ?",
+        back: "Monde 1",
+        label: "Monde 1 · Leçon 3",
+        title: "Combien devrais-tu épargner ?",
+        intro:
+          "Tu as vu quand Alex peut mettre de l’argent de côté. Découvre maintenant comment choisir une somme adaptée à un budget réel.",
+        unlocked: "Leçon 3 débloquée",
+        comingNext: "Prochaine étape",
+        placeholder:
+          "La leçon interactive complète est en cours de conception. Ta progression est enregistrée sur ton compte : tu peux partir et revenir sans rien perdre.",
+        viewProgress: "Voir ta progression",
+      },
+    },
+    payYourselfFirst: {
+      metaTitle: `Paie-toi en premier | ${BRAND}`,
+      feedbackCorrect: "Exactement",
+      feedbackThinking: "Bien vu",
+      art: {
+        nextStep: "La prochaine étape d’Alex",
+        saveFirst: "Épargner d’abord ?",
+      },
+      welcome: {
+        action: "Commencer la leçon",
+        label: "Monde 1 · Leçon 2",
+        title: "Alex sait ce qu’il lui reste. Quand devrait-il épargner ?",
+        intro: "Aide Alex à donner une place à son objectif d’épargne dans le mois.",
+      },
+      recap: {
+        action: "Faire un plan",
+        label: "Reprends là où Alex s’est arrêté",
+        title: "L’abonnement de transport passe en premier.",
+        description: (remainder, pass) =>
+          `Il restait ${remainder} à Alex, mais son abonnement de ${pass} doit bientôt être payé.`,
+        available: "Potentiellement disponible",
+        note: "D’autres dépenses à venir peuvent encore modifier cette somme.",
+      },
+      decision: {
+        action: "Voir ce qui change",
+        hint: "Choisis l’organisation qui rend l’objectif visible le plus tôt.",
+        label: "Un objectif, deux approches",
+        question: (amount) =>
+          `Alex aimerait mettre ${amount} de côté. Comment peut-il rendre cet objectif visible\u00a0?`,
+        options: [
+          () => "Attendre et épargner ce qu’il reste",
+          (amount) => `Mettre ${amount} de côté après avoir vérifié les dépenses à venir`,
+        ],
+        correct: "L’objectif a sa propre place avant les dépenses ajustables.",
+        retry:
+          "Attendre peut fonctionner, mais l’objectif reste mélangé à l’argent qu’Alex pourrait dépenser.",
+      },
+      consequence: {
+        action: "Découvrir le concept",
+        label: "Qu’est-ce qui change ?",
+        title: "L’argent est le même. L’ordre change.",
+        intro: (amount) => `Imagine qu’Alex envisage un achat facultatif de ${amount}.`,
+        waitTitle: "Attendre la fin du mois",
+        waitDetail: (available, purchase) => `${available} − ${purchase} d’achat facultatif`,
+        waitResult: (amount) => `${amount} à épargner`,
+        firstTitle: (amount) => `Mettre d’abord ${amount} de côté`,
+        firstDetail: (available, goal) => `${available} − ${goal} pour l’objectif`,
+        firstResult: (amount) => `${amount} disponibles`,
+        takeaway: (amount) =>
+          `Alex voit maintenant que l’achat de ${amount} modifierait son plan d’épargne.`,
+      },
+      concept: {
+        action: "En faire une habitude",
+        label: "Concept débloqué",
+        title: "Paie-toi en premier",
+        intro:
+          "Après avoir vérifié les dépenses connues, réserve une somme raisonnable pour ton épargne",
+        emphasis: "avant les dépenses ajustables.",
+        flexibleTitle: "Un plan flexible",
+        flexibleBody:
+          "Les factures doivent toujours être payées. La somme peut évoluer quand la vie change.",
+      },
+      habit: {
+        action: "Tester l’habitude",
+        hint: "Les deux approches peuvent aider. Choisis-en une pour l’explorer.",
+        label: "Au prochain salaire",
+        question: "Comment Alex pourrait-il se souvenir de son plan ?",
+        options: [
+          "Programmer un rappel après le salaire",
+          "Programmer un virement après le salaire",
+        ],
+        reminder:
+          "Un rappel permet à Alex de vérifier son budget avant d’effectuer le virement lui-même.",
+        transfer:
+          "Un virement programmé peut faciliter la répétition, à condition qu’Alex vérifie son budget et la date du prélèvement.",
+      },
+      change: {
+        action: "Terminer la leçon",
+        hint: "Applique l’idée à une nouvelle dépense.",
+        expenseLabel: "Nouvelle dépense à payer",
+        expense: (amount) => `Régularisation d’électricité · ${amount}`,
+        label: "La vie change le plan",
+        question: (amount) => `Alex doit-il maintenir le virement de ${amount}\u00a0?`,
+        remaining: (amount) => `Il reste au maximum ${amount} après cette nouvelle dépense.`,
+        options: [
+          (amount) => `Maintenir le virement de ${amount}`,
+          () => "Le revoir et le réduire ou le suspendre",
+          () => "Utiliser un découvert pour maintenir le plan",
+        ],
+        correct:
+          "Une habitude d’épargne peut s’adapter. Alex peut réduire ou suspendre le virement, puis y revenir plus tard.",
+        retry:
+          "Les dépenses connues passent en premier. Alex peut modifier le virement au lieu d’emprunter ou de déséquilibrer son budget.",
+      },
+      complete: {
+        replay: "Rejouer la leçon",
+        saving: "Enregistrement de la progression…",
+        saveAgain: "Réenregistrer la progression",
+        continue: "Continuer vers la leçon 3",
+        back: "Retourner au monde 1",
+        label: "Leçon terminée",
+        title: "Tu as donné une place à l’épargne avant les dépenses ajustables.",
+        steps: [
+          "Vérifie d’abord les dépenses à venir.",
+          "Mets une somme raisonnable de côté avant les dépenses ajustables.",
+          "Adapte le plan lorsque ta situation change.",
+        ],
+        takeaway: "Se payer en premier est une habitude flexible, pas une somme fixe.",
+      },
+    },
+    firstPaycheck: {
+      metaTitle: `Ton premier salaire | ${BRAND}`,
+      metaDescription:
+        "Aide Alex à comprendre où va son premier salaire et ce qu’il peut mettre de côté. Aucun compte requis.",
+      ogDescription:
+        "Une courte leçon pour débuter et calculer ce qu’il reste après un mois de dépenses.",
+      artLabel: "Premier salaire",
+      feedbackCorrect: "Exactement",
+      feedbackRetry: "Bien essayé",
+      welcome: {
+        skip: "Je connais déjà : faire le test rapide",
+        start: "Commencer la leçon",
+        label: "Monde 1 · Leçon 1",
+        title: "Ton premier salaire vient d’arriver. Où va-t-il ?",
+        intro: "Fais connaissance avec Alex. Environ 4 minutes.",
+      },
+      skip: {
+        startRefresher: "Commencer le rappel",
+        check: "Vérifier mes réponses",
+        hint: "Réponds aux 3 questions. Obtiens 3 sur 3 pour passer la leçon.",
+        label: "Test rapide · 3 questions",
+        passedTitle: "Un petit rappel, puis tu peux continuer.",
+        title: "Tu connais déjà\u00a0?",
+        questions: [
+          {
+            prompt: (money) =>
+              `Tu gagnes ${money(1200)} ce mois-ci et dépenses ${money(1000)}. Combien te reste-t-il\u00a0?`,
+            options: ["", "", ""],
+            reason: (money) =>
+              `Argent reçu − argent dépensé\u00a0: ${money(1200)} − ${money(1000)} = ${money(200)}.`,
+          },
+          {
+            prompt: () => "Laquelle de ces dépenses est essentielle\u00a0?",
+            options: ["Le loyer", "Un abonnement de streaming", "Une place de concert"],
+            reason: () =>
+              "Le loyer est essentiel pour garder son logement. Les deux autres dépenses peuvent être réduites ou supprimées.",
+          },
+          {
+            prompt: (money) =>
+              `Il te reste ${money(200)}. Une facture de ${money(50)} est due la semaine prochaine. Combien peux-tu mettre de côté\u00a0?`,
+            options: ["", "", ""],
+            reason: (money) =>
+              `Les ${money(50)} sont déjà réservés\u00a0: ${money(200)} − ${money(50)} = ${money(150)}.`,
+          },
+        ],
+      },
+      story: {
+        action: "Voir les dépenses",
+        label: "Le mois d’Alex",
+        title: (money) => `Alex a reçu ${money(1850)}.`,
+        introBefore: "Alex vient de commencer son premier emploi. C’est son",
+        income: "revenu",
+        introAfter: " : l’argent qui entre.",
+      },
+      budget: {
+        lastAction: "Voir ce qu’il reste",
+        nextAction: "Dépense suivante",
+        hint: "Dépense essentielle ou ajustable ?",
+        heading: "Où est parti l’argent d’Alex",
+        count: (current, total) => `${current} sur ${total}`,
+        question: "Pour Alex, cette dépense est-elle essentielle ou ajustable ?",
+        need: "Essentielle : Alex doit la payer",
+        want: "Ajustable : Alex peut la réduire ou la supprimer",
+        tryAgain: " Réessaie.",
+        items: [
+          {
+            label: "Loyer et factures",
+            note: "Alex doit les payer pour garder son logement et ses services essentiels.",
+          },
+          { label: "Courses alimentaires", note: "Alex a besoin de manger chaque semaine." },
+          { label: "Transports", note: "Alex en a besoin pour aller travailler." },
+          {
+            label: "Abonnements",
+            note: "Alex pourrait les résilier ou choisir des offres moins chères.",
+          },
+          {
+            label: "Sorties",
+            note: "S’amuser compte, mais Alex pourrait réduire cette dépense si nécessaire.",
+          },
+        ],
+      },
+      result: {
+        action: "Qu’est-ce que cela signifie ?",
+        label: "Ce qu’il reste",
+        title: (money) => `Il reste ${money(100)}.`,
+        formula: "Argent reçu − argent dépensé = argent restant.",
+        moneyIn: "Argent reçu",
+        moneyOut: "Argent dépensé",
+        moneyLeft: "Argent restant",
+      },
+      conceptCheck: {
+        action: "Voir l’idée essentielle",
+        hint: "Choisis la meilleure réponse.",
+        label: "Test rapide",
+        question: (money) => `Que représentent les ${money(100)} d’Alex\u00a0?`,
+        options: [
+          {
+            label: "De l’argent à dépenser librement",
+            feedback:
+              "Pas tout à fait. Une partie est peut-être déjà réservée à une facture. Réessaie.",
+          },
+          {
+            label: "De l’argent à investir tout de suite",
+            feedback:
+              "Pas encore. Alex doit d’abord vérifier si une partie est déjà réservée. Réessaie.",
+          },
+          {
+            label: "De l’argent qu’Alex pourrait épargner",
+            feedback:
+              "Oui. C’est l’argent restant qu’Alex pourrait épargner, si rien n’est déjà prévu.",
+          },
+        ],
+      },
+      concept: {
+        action: "Essayer une nouvelle situation",
+        label: "L’idée essentielle",
+        title: "L’argent que tu pourrais épargner",
+        before: "L’argent restant est de l’argent que tu",
+        might: "pourrais",
+        middle: "épargner. Vérifie d’abord si une partie est",
+        promised: "déjà réservée",
+        after: ", par exemple pour une facture à payer la semaine prochaine.",
+      },
+      transfer: {
+        action: "Terminer la leçon",
+        hint: "Applique l’idée essentielle : quelle somme est déjà réservée ?",
+        due: "À payer la semaine prochaine",
+        bill: "Forfait téléphone",
+        label: "Une nouvelle situation",
+        intro: (money) =>
+          `Sam est étudiant·e. Son travail d’été lui a rapporté ${money(600)}. Sam a dépensé ${money(475)}.`,
+        question: "Combien Sam pourrait mettre de côté ?",
+        feedback: [
+          (money) =>
+            `Il reste ${money(125)}, mais ${money(25)} sont déjà réservés au forfait téléphone. Réessaie.`,
+          (money) =>
+            `Oui. Il reste ${money(125)}, mais ${money(25)} sont déjà réservés. Sam peut donc mettre ${money(100)} de côté.`,
+          () => "Sam ne peut pas tout mettre de côté, mais une partie est disponible. Réessaie.",
+        ],
+      },
+      complete: {
+        replay: "Rejouer la leçon",
+        saving: "Enregistrement de la progression…",
+        retry: "Réenregistrer la progression",
+        continue: "Continuer vers la leçon 2",
+        back: "Retour à l’accueil",
+        label: "Leçon terminée",
+        skippedTitle: "3 sur 3. Tu maîtrises déjà cette leçon.",
+        title: "Tu as trouvé ce qu’il restait, puis vérifié ce qui était déjà réservé.",
+        takeaways: [
+          "Argent reçu − argent dépensé = argent restant.",
+          "Vérifie ce qui est déjà réservé.",
+          "Ce qui est vraiment disponible est ce que tu pourrais épargner.",
+        ],
+        moreTitle: "Pour aller plus loin : pourquoi dit-on « pourrait » ?",
+        more: "Une somme peut sembler disponible sans vraiment l’être. Une facture annuelle, comme une assurance téléphone, peut tomber n’importe quel mois. Un imprévu aussi, comme un écran cassé. Voilà pourquoi nous disons « pourrait ». La leçon 4 parlera de ton filet de sécurité.",
+      },
+    },
+  },
   dashboard: {
     home: "tableau de bord",
     tabsLabel: "Tableau de bord",
