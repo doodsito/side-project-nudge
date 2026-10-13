@@ -8,7 +8,7 @@ import { TrackFlag } from "@/components/shared/track-option";
 import { saveTrack, useTrackCookie } from "@/hooks/use-track-cookie";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
-import { TRACK_INFO, trackFromPath, TRACKS } from "@/lib/tracks";
+import { trackFromPath, TRACKS } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
 const linkClass = "text-muted-foreground hover:text-foreground";
@@ -22,7 +22,8 @@ export function Footer() {
   const pageTrack = trackFromPath(usePathname());
   const savedTrack = useTrackCookie();
   const current = pageTrack ?? savedTrack ?? null;
-  const t = getDictionary(current ?? "us").footer;
+  const dictionary = getDictionary(current ?? "us");
+  const t = dictionary.footer;
   return (
     <footer className="site-footer border-t border-border bg-background px-5 py-12 sm:px-8">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_auto]">
@@ -60,7 +61,6 @@ export function Footer() {
               <Link
                 key={track}
                 href={`/${track}`}
-                lang={TRACK_INFO[track].lang}
                 onClick={() => saveTrack(track)}
                 aria-current={track === current ? "true" : undefined}
                 className={cn(
@@ -71,7 +71,7 @@ export function Footer() {
                 )}
               >
                 <TrackFlag track={track} small />
-                {TRACK_INFO[track].country}
+                {dictionary.tracks.options[track].country}
               </Link>
             ))}
           </nav>

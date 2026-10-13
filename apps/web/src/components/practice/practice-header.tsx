@@ -1,8 +1,17 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 import { NudgeNextMark } from "@/components/brand/nudge-next-mark";
+import type { Dictionary } from "@/lib/dictionaries";
 
-export function PracticeHeader({ current, total }: { current: number; total: number }) {
+export function PracticeHeader({
+  current,
+  total,
+  copy,
+}: {
+  current: number;
+  total: number;
+  copy: Dictionary["learning"]["shared"];
+}) {
   const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
 
   return (
@@ -15,12 +24,10 @@ export function PracticeHeader({ current, total }: { current: number; total: num
             style={{ width: `${progress}%` }}
           />
         </div>
-        <span className="sr-only">
-          Lesson progress: step {current} of {total}
-        </span>
+        <span className="sr-only">{copy.lessonProgress(current, total)}</span>
         <Link
           href="/dashboard/courses/financial-foundation"
-          aria-label="Leave lesson"
+          aria-label={copy.leaveLesson}
           className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <X className="size-5" aria-hidden="true" />
