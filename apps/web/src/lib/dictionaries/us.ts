@@ -308,6 +308,297 @@ export const us = {
       samePassword: "Choose a password different from your current one.",
     },
   },
+  learning: {
+    shared: {
+      lessonProgress: (current: number, total: number) =>
+        `Lesson progress: step ${current} of ${total}`,
+      leaveLesson: "Leave lesson",
+      educationalNote: "Educational simulation only. Not investment advice.",
+    },
+    courses: {
+      journeyLabel: "Your learning journey",
+      journeyTitle: "Nine worlds. One decision at a time.",
+      journeyIntro:
+        "Build the foundations, practise with virtual money and unlock the knowledge behind your first investment decisions.",
+      worldsCompleted: "0 of 9 worlds",
+      firstWorldReady: "World 1 is ready",
+      mapLabel: "Journey map",
+      mapTitle: "Choose your world",
+      mapIntro:
+        "Complete a world to open the next one. Locked worlds stay visible so you always know where the journey is heading.",
+      world: "World",
+      ready: "Ready to explore",
+      locked: "Locked",
+      lessonsComplete: (completed: number, total: number) =>
+        `${completed} of ${total} lessons complete · About 35 minutes`,
+      worldProgress: (completed: number, total: number) =>
+        `World 1 progress: ${completed} of ${total} lessons`,
+      enterWorld: "Enter world",
+      worlds: [
+        {
+          title: "Build your financial foundation",
+          description: "Give every dollar a job before you ask it to grow.",
+        },
+        {
+          title: "Why invest?",
+          description: "See how time, inflation and compounding change the picture.",
+        },
+        {
+          title: "Meet the investment world",
+          description: "Discover stocks, bonds, ETFs, crypto, cash and the accounts around them.",
+        },
+        {
+          title: "Risk, diversification & psychology",
+          description: "Understand uncertainty, spread risk and spot emotional traps.",
+        },
+        {
+          title: "Understand ETFs",
+          description: "Learn what an ETF contains and which details are worth comparing.",
+        },
+        {
+          title: "Build your first portfolio",
+          description: "Turn a goal, a horizon and a risk limit into a virtual portfolio.",
+        },
+        {
+          title: "Investing in the United States",
+          description: "Match US accounts and savings vehicles to their real purpose.",
+        },
+        {
+          title: "How buying actually works",
+          description: "Understand brokers, orders, fees and what happens after you press Buy.",
+        },
+        {
+          title: "Your first real investment",
+          description: "Bring your knowledge, practice and personal plan together.",
+        },
+      ],
+      foundation: {
+        metaTitle: "Build your financial foundation",
+        back: "All worlds",
+        label: "World 1 · Money foundations",
+        title: "Build your financial foundation",
+        intro: "Before investing, learn what your money needs to do today, soon and much later.",
+        progress: "Progress",
+        totalTime: "Total time",
+        duration: "~35 min",
+        progressLabel: (completed: number, total: number) =>
+          `World progress: ${completed} of ${total} lessons`,
+        pathLabel: "Your path",
+        pathTitle: "Eight decisions before the market",
+        pathIntro:
+          "Start with a first paycheck. Each short lesson opens the next part of the path.",
+        lesson: "Lesson",
+        completed: "Completed",
+        unlocked: "Unlocked",
+        practicalDecision: "One practical decision",
+        virtualMoney: "Virtual money",
+        review: "Review lesson",
+        start: "Start lesson",
+        rewardLabel: "World reward",
+        rewardTitle: "Investing unlocked",
+        rewardIntro: "Complete all eight lessons to open the investment universe.",
+        lessons: [
+          {
+            title: "Where does your money go?",
+            description: "Help Alex work out what is really left after the essentials.",
+          },
+          {
+            title: "Pay yourself first",
+            description: "Explore why saving first feels different from saving what is left.",
+          },
+          {
+            title: "How much should you save?",
+            description: "Use common percentages as flexible reference points, not fixed rules.",
+          },
+          {
+            title: "Build your safety net",
+            description: "See why different lives can call for different cash buffers.",
+          },
+          {
+            title: "Money you’ll need soon",
+            description: "Separate near-term needs from money that can stay invested longer.",
+          },
+          {
+            title: "Debt vs investing",
+            description: "Compare a certain borrowing cost with an uncertain investment return.",
+          },
+          {
+            title: "Cash isn’t risk-free",
+            description: "Watch inflation change what the same amount of cash can buy.",
+          },
+          {
+            title: "Savings vs investing",
+            description: "Choose between accessibility, stability and long-term growth potential.",
+          },
+        ],
+      },
+      lessonTwo: {
+        metaTitle: "Pay yourself first",
+        back: "World 1",
+        label: "World 1 · Lesson 2",
+        title: "Pay yourself first",
+        intro:
+          "You completed your first lesson. Now explore why putting money aside before spending can make saving easier and more consistent.",
+        unlocked: "Lesson 2 unlocked",
+        comingNext: "Coming next",
+        placeholder:
+          "The complete interactive lesson will be built next. Your progress is already saved to your account, so you can safely leave and come back.",
+        viewProgress: "View your progress",
+      },
+    },
+    firstPaycheck: {
+      metaTitle: `Your First Paycheck | ${BRAND}`,
+      metaDescription:
+        "Help Alex see where a first paycheck goes and what money is left to save. No account required.",
+      ogDescription: "A short beginner lesson about what is left after a month of spending.",
+      artLabel: "First paycheck",
+      feedbackCorrect: "Exactly",
+      feedbackRetry: "Good try",
+      welcome: {
+        skip: "I know this: take the quick check",
+        start: "Start lesson",
+        label: "World 1 · Lesson 1",
+        title: "Your first paycheck. Where does it go?",
+        intro: "Meet Alex. About 4 minutes.",
+      },
+      skip: {
+        startRefresher: "Start the refresher",
+        check: "Check my answers",
+        hint: "Answer all 3 questions. Get 3 out of 3 to skip the lesson.",
+        label: "Quick check · 3 questions",
+        passedTitle: "A quick refresher, then you’re through.",
+        title: "Already know this?",
+        questions: [
+          {
+            prompt: (money: (amount: number) => string) =>
+              `You earn ${money(1200)} this month and spend ${money(1000)}. How much is left?`,
+            options: ["", "", ""],
+            reason: (money: (amount: number) => string) =>
+              `Money in − money out: ${money(1200)} − ${money(1000)} = ${money(200)}.`,
+          },
+          {
+            prompt: () => "Which of these is a need?",
+            options: ["Rent", "A streaming subscription", "Concert tickets"],
+            reason: () => "Rent must be paid to keep a home. The other two are wants.",
+          },
+          {
+            prompt: (money: (amount: number) => string) =>
+              `You have ${money(200)} left. A ${money(50)} bill is due next week. How much could you set aside?`,
+            options: ["", "", ""],
+            reason: (money: (amount: number) => string) =>
+              `The ${money(50)} is already promised, so ${money(200)} − ${money(50)} = ${money(150)}.`,
+          },
+        ],
+      },
+      story: {
+        action: "See the spending",
+        label: "Alex’s month",
+        title: (money: (amount: number) => string) => `Alex got paid ${money(1850)}.`,
+        introBefore: "Alex just started their first job. This is Alex’s",
+        income: "income",
+        introAfter: ": money coming in.",
+      },
+      budget: {
+        lastAction: "See what is left",
+        nextAction: "Next expense",
+        hint: "Is it a need or a want?",
+        heading: "Where Alex’s money went",
+        count: (current: number, total: number) => `${current} of ${total}`,
+        question: "Is this a need or a want for Alex?",
+        need: "A need: Alex must pay it",
+        want: "A want: nice, but could change",
+        tryAgain: " Try again.",
+        items: [
+          { label: "Rent & bills", note: "Alex must pay this to keep a home." },
+          { label: "Groceries", note: "Alex needs food every week." },
+          { label: "Transport", note: "Alex needs it to get to work." },
+          {
+            label: "Subscriptions",
+            note: "Nice to have, but Alex could cancel or change them.",
+          },
+          {
+            label: "Going out",
+            note: "Fun matters, but Alex could spend less here if needed.",
+          },
+        ],
+      },
+      result: {
+        action: "What does it mean?",
+        label: "What’s left",
+        title: (money: (amount: number) => string) => `${money(100)} is left.`,
+        formula: "Money in − money out = money left.",
+        moneyIn: "Money in",
+        moneyOut: "Money out",
+        moneyLeft: "Money left",
+      },
+      conceptCheck: {
+        action: "See the big idea",
+        hint: "Choose the best answer.",
+        label: "Quick check",
+        question: (money: (amount: number) => string) => `What is Alex’s ${money(100)}?`,
+        options: [
+          {
+            label: "Money to spend on anything",
+            feedback: "Not quite. Some of it might already be promised to a bill. Try again.",
+          },
+          {
+            label: "Money to invest right now",
+            feedback:
+              "Not yet. First, Alex should check if any of it is already promised. Try again.",
+          },
+          {
+            label: "Money Alex might be able to save",
+            feedback:
+              "Yes. It’s money left over that Alex might save, once nothing is already promised.",
+          },
+        ],
+      },
+      concept: {
+        action: "Try a new situation",
+        label: "The big idea",
+        title: "Money you might save",
+        before: "Money left is money you",
+        might: "might",
+        middle: "save. First, check if any of it is",
+        promised: "already promised",
+        after: ", like a bill due next week.",
+      },
+      transfer: {
+        action: "Finish lesson",
+        hint: "Use the big idea: what is already promised?",
+        due: "Due next week",
+        bill: "Phone bill",
+        label: "A new situation",
+        intro: (money: (amount: number) => string) =>
+          `Sam is a student. A summer job paid ${money(600)}. Sam spent ${money(475)}.`,
+        question: "How much could Sam set aside?",
+        feedback: [
+          (money: (amount: number) => string) =>
+            `${money(125)} is left, but ${money(25)} is already promised to the phone bill. Try again.`,
+          (money: (amount: number) => string) =>
+            `Yes. ${money(125)} is left, but ${money(25)} is already promised. So ${money(100)} is free.`,
+          () => "Sam can’t set it all aside, but some of it is free. Try again.",
+        ],
+      },
+      complete: {
+        replay: "Replay lesson",
+        saving: "Saving progress…",
+        retry: "Save progress again",
+        continue: "Continue to lesson 2",
+        back: "Back to World 1",
+        label: "Lesson complete",
+        skippedTitle: "3 out of 3. You already know this one.",
+        title: "You found what’s left, then checked what’s promised.",
+        takeaways: [
+          "Money in − money out = money left.",
+          "Check what is already promised.",
+          "What is truly free is what you might save.",
+        ],
+        moreTitle: "Want to go further? Why we say “might”",
+        more: "Some money looks free but isn’t. A yearly bill, like phone insurance, can arrive in any month. So can a surprise, like a broken phone screen. That is why we say “might”. Lesson 4 covers your safety net.",
+      },
+    },
+  },
   dashboard: {
     home: "dashboard",
     tabsLabel: "Dashboard",

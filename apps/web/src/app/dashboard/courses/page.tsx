@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function CoursesPage() {
   const member = await requireMember();
+  const dictionary = getDictionary(member.track);
   return (
     <>
       {member.track === "us" && (
@@ -20,7 +21,7 @@ export default async function CoursesPage() {
           <AlertDescription>{getDictionary("us").dashboard.usComingSoon}</AlertDescription>
         </Alert>
       )}
-      <CourseWorlds progress={member.courseProgress} />
+      <CourseWorlds progress={member.courseProgress} copy={dictionary.learning.courses} />
     </>
   );
 }

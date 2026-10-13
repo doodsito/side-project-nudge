@@ -42,16 +42,21 @@ import {
   isExpenseAnswerCorrect,
   type ExpenseType,
   type LessonView,
-  type Money,
   type SkipQuizAnswers,
 } from "@/lib/first-paycheque-lesson";
 import { cn } from "@/lib/utils";
 import type { ProgressStatus } from "@/lib/course-progress";
+import type { Dictionary } from "@/lib/dictionaries";
 import type { Track } from "@/lib/tracks";
+
+type Money = (amount: number) => string;
+type LessonCopy = Dictionary["learning"]["firstPaycheck"];
 
 type FirstPaychequeLessonProps = {
   step: LessonView;
   track: Track;
+  copy: LessonCopy;
+  educationalNote: string;
   expenseIndex: number;
   expenseAnswer: ExpenseType | null;
   conceptAnswer: string | null;
@@ -112,7 +117,7 @@ function ActionHint({ children }: { children: React.ReactNode }) {
   );
 }
 
-function AlexPaychequeArt({ track }: { track: Track }) {
+function AlexPaychequeArt({ track, label }: { track: Track; label: string }) {
   return (
     <div className="relative mx-auto mb-8 h-56 w-full max-w-sm" aria-hidden="true">
       <div className="absolute left-1/2 top-3 h-48 w-72 -translate-x-1/2 rotate-[-3deg] rounded-4xl bg-primary-soft" />
@@ -124,7 +129,7 @@ function AlexPaychequeArt({ track }: { track: Track }) {
           <PartyPopper className="size-7 text-primary" />
         </div>
         <div>
-          <p className="text-xs font-bold uppercase text-muted-foreground">First paycheck</p>
+          <p className="text-xs font-bold uppercase text-muted-foreground">{label}</p>
           <p className="mt-1 font-display text-4xl font-extrabold">{formatMoney(SALARY, track)}</p>
         </div>
       </div>
@@ -159,7 +164,15 @@ function MoneyJourneyArt() {
   );
 }
 
-function Feedback({ correct, children }: { correct: boolean; children: React.ReactNode }) {
+function Feedback({
+  correct,
+  copy,
+  children,
+}: {
+  correct: boolean;
+  copy: LessonCopy;
+  children: React.ReactNode;
+}) {
   return (
     <div
       role="status"
@@ -178,7 +191,9 @@ function Feedback({ correct, children }: { correct: boolean; children: React.Rea
         {correct ? <Check className="size-4" /> : <Lightbulb className="size-4" />}
       </span>
       <div>
-        <p className="font-display font-extrabold">{correct ? "Exactly" : "Good try"}</p>
+        <p className="font-display font-extrabold">
+          {correct ? copy.feedbackCorrect : copy.feedbackRetry}
+        </p>
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</p>
       </div>
     </div>
@@ -220,15 +235,9 @@ function ChoiceList({
   );
 }
 
-function withLabels(
-  options: ReadonlyArray<{ value: string; label: (money: Money) => string }>,
-  money: Money,
-) {
-  return options.map((option) => ({ value: option.value, label: option.label(money) }));
-}
-
 export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
   const money: Money = (amount) => formatMoney(amount, props.track);
+  const copy = props.copy;
 
   if (props.step === "welcome") {
     return (
@@ -236,20 +245,22 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
         action={
           <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
             <Button variant="ghost" size="xl" onClick={() => props.onGoTo("skip-quiz")}>
-              I know this: take the quick check
+              {copy.welcome.skip}
             </Button>
-            <PrimaryAction onClick={() => props.onGoTo("story")}>Start lesson</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("story")}>
+              {copy.welcome.start}
+            </PrimaryAction>
           </div>
         }
       >
-        <AlexPaychequeArt track={props.track} />
+        <AlexPaychequeArt track={props.track} label={copy.artLabel} />
         <div className="text-center">
-          <Eyebrow>World 1 · Lesson 1</Eyebrow>
+          <Eyebrow>{copy.welcome.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            Your first paycheck. Where does it go?
+            {copy.welcome.title}
           </h1>
           <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Meet Alex. About 4 minutes.
+            {copy.welcome.intro}
           </p>
         </div>
       </LessonScreen>
@@ -262,35 +273,44 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           props.skipChecked ? (
-            <PrimaryAction onClick={() => props.onGoTo("story")}>Start the refresher</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("story")}>
+              {copy.skip.startRefresher}
+            </PrimaryAction>
           ) : allAnswered ? (
-            <PrimaryAction onClick={props.onCheckSkipQuiz}>Check my answers</PrimaryAction>
+            <PrimaryAction onClick={props.onCheckSkipQuiz}>{copy.skip.check}</PrimaryAction>
           ) : (
-            <ActionHint>Answer all 3 questions. Get 3 out of 3 to skip the lesson.</ActionHint>
+            <ActionHint>{copy.skip.hint}</ActionHint>
           )
         }
       >
         <div className="text-center">
-          <Eyebrow>Quick check · 3 questions</Eyebrow>
+          <Eyebrow>{copy.skip.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            {props.skipChecked ? "A quick refresher, then you’re through." : "Already know this?"}
+            {props.skipChecked ? copy.skip.passedTitle : copy.skip.title}
           </h1>
         </div>
         {SKIP_QUIZ.map((question, index) => {
+          const questionCopy = copy.skip.questions[index]!;
           const answer = props.skipAnswers[question.id] ?? null;
           return (
             <div key={question.id} className="mt-9">
               <p id={`skip-${question.id}`} className="font-bold">
-                {index + 1}. {question.prompt(money)}
+                {index + 1}. {questionCopy.prompt(money)}
               </p>
               <ChoiceList
                 labelledBy={`skip-${question.id}`}
-                options={withLabels(question.options, money)}
+                options={question.options.map((option, optionIndex) => ({
+                  value: option.value,
+                  label:
+                    "amount" in option ? money(option.amount) : questionCopy.options[optionIndex]!,
+                }))}
                 value={answer}
                 onSelect={(value) => props.onSkipAnswer(question.id, value)}
               />
               {props.skipChecked && (
-                <Feedback correct={answer === question.answer}>{question.reason(money)}</Feedback>
+                <Feedback correct={answer === question.answer} copy={copy}>
+                  {questionCopy.reason(money)}
+                </Feedback>
               )}
             </div>
           );
@@ -303,18 +323,18 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
     return (
       <LessonScreen
         action={
-          <PrimaryAction onClick={() => props.onGoTo("budget")}>See the spending</PrimaryAction>
+          <PrimaryAction onClick={() => props.onGoTo("budget")}>{copy.story.action}</PrimaryAction>
         }
       >
         <MoneyJourneyArt />
         <div className="text-center">
-          <Eyebrow>Alex’s month</Eyebrow>
+          <Eyebrow>{copy.story.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            Alex got paid {money(SALARY)}.
+            {copy.story.title(money)}
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Alex just started their first job. This is Alex’s <strong>income</strong>: money coming
-            in.
+            {copy.story.introBefore} <strong>{copy.story.income}</strong>
+            {copy.story.introAfter}
           </p>
         </div>
       </LessonScreen>
@@ -323,6 +343,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
 
   if (props.step === "budget") {
     const item = BUDGET_ITEMS[props.expenseIndex] ?? BUDGET_ITEMS[0];
+    const itemCopy = (copy.budget.items[props.expenseIndex] ?? copy.budget.items[0])!;
     const Icon = expenseIcons[props.expenseIndex] ?? ReceiptText;
     const correct = isExpenseAnswerCorrect(props.expenseIndex, props.expenseAnswer);
     return (
@@ -330,46 +351,46 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
         action={
           correct ? (
             <PrimaryAction onClick={props.onContinueExpense}>
-              {props.expenseIndex === BUDGET_ITEMS.length - 1 ? "See what is left" : "Next expense"}
+              {props.expenseIndex === BUDGET_ITEMS.length - 1
+                ? copy.budget.lastAction
+                : copy.budget.nextAction}
             </PrimaryAction>
           ) : (
-            <ActionHint>Is it a need or a want?</ActionHint>
+            <ActionHint>{copy.budget.hint}</ActionHint>
           )
         }
       >
         <div className="flex items-center justify-between text-sm font-bold text-muted-foreground">
-          <span>Where Alex’s money went</span>
-          <span>
-            {props.expenseIndex + 1} of {BUDGET_ITEMS.length}
-          </span>
+          <span>{copy.budget.heading}</span>
+          <span>{copy.budget.count(props.expenseIndex + 1, BUDGET_ITEMS.length)}</span>
         </div>
         <div
-          key={item.label}
+          key={itemCopy.label}
           className="mt-6 animate-rise rounded-4xl border border-border bg-surface p-6 text-center shadow-soft sm:p-9"
         >
           <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-primary-soft text-primary">
             <Icon className="size-7" aria-hidden="true" />
           </span>
-          <h1 className="mt-5 font-display text-3xl font-extrabold">{item.label}</h1>
+          <h1 className="mt-5 font-display text-3xl font-extrabold">{itemCopy.label}</h1>
           <p className="mt-2 font-display text-2xl font-extrabold text-primary">
             {money(item.amount)}
           </p>
           <p id="expense-question" className="mt-6 font-bold">
-            Is this a need or a want for Alex?
+            {copy.budget.question}
           </p>
           <ChoiceList
             labelledBy="expense-question"
             value={props.expenseAnswer}
             onSelect={(value) => props.onExpenseAnswer(value as ExpenseType)}
             options={[
-              { value: "need", label: "A need: Alex must pay it" },
-              { value: "want", label: "A want: nice, but could change" },
+              { value: "need", label: copy.budget.need },
+              { value: "want", label: copy.budget.want },
             ]}
           />
           {props.expenseAnswer && (
-            <Feedback correct={correct}>
-              {item.note}
-              {!correct && " Try again."}
+            <Feedback correct={correct} copy={copy}>
+              {itemCopy.note}
+              {!correct && copy.budget.tryAgain}
             </Feedback>
           )}
         </div>
@@ -383,31 +404,31 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
         wide
         action={
           <PrimaryAction onClick={() => props.onGoTo("concept-check")}>
-            What does it mean?
+            {copy.result.action}
           </PrimaryAction>
         }
       >
         <div className="grid items-center gap-8 md:grid-cols-[1fr_.9fr]">
           <div>
-            <Eyebrow>What’s left</Eyebrow>
+            <Eyebrow>{copy.result.label}</Eyebrow>
             <h1 className="mt-3 font-display text-4xl font-extrabold text-balance-tight sm:text-6xl">
-              {money(REMAINING)} is left.
+              {copy.result.title(money)}
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Money in − money out = money left.
+              {copy.result.formula}
             </p>
           </div>
           <div className="rounded-4xl border border-border bg-surface p-5 shadow-lift sm:p-7">
             <div className="flex items-center justify-between border-b border-border py-3">
-              <span className="font-semibold text-muted-foreground">Money in</span>
+              <span className="font-semibold text-muted-foreground">{copy.result.moneyIn}</span>
               <strong className="font-display text-xl">{money(SALARY)}</strong>
             </div>
             <div className="flex items-center justify-between border-b border-border py-3">
-              <span className="font-semibold text-muted-foreground">Money out</span>
+              <span className="font-semibold text-muted-foreground">{copy.result.moneyOut}</span>
               <strong className="font-display text-xl">− {money(TOTAL_SPENT)}</strong>
             </div>
             <div className="mt-4 flex items-center justify-between rounded-2xl bg-brand-lime p-4">
-              <span className="font-extrabold">Money left</span>
+              <span className="font-extrabold">{copy.result.moneyLeft}</span>
               <strong className="font-display text-3xl">{money(REMAINING)}</strong>
             </div>
           </div>
@@ -422,9 +443,11 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           selected?.correct ? (
-            <PrimaryAction onClick={() => props.onGoTo("concept")}>See the big idea</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("concept")}>
+              {copy.conceptCheck.action}
+            </PrimaryAction>
           ) : (
-            <ActionHint>Choose the best answer.</ActionHint>
+            <ActionHint>{copy.conceptCheck.hint}</ActionHint>
           )
         }
       >
@@ -432,21 +455,28 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
           <CircleDollarSign className="size-8" aria-hidden="true" />
         </span>
         <div className="text-center">
-          <Eyebrow>Quick check</Eyebrow>
+          <Eyebrow>{copy.conceptCheck.label}</Eyebrow>
           <h1
             id="concept-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            What is Alex’s {money(REMAINING)}?
+            {copy.conceptCheck.question(money)}
           </h1>
         </div>
         <ChoiceList
           labelledBy="concept-question"
-          options={withLabels(CONCEPT_OPTIONS, money)}
+          options={CONCEPT_OPTIONS.map((option, index) => ({
+            value: option.value,
+            label: copy.conceptCheck.options[index]!.label,
+          }))}
           value={props.conceptAnswer}
           onSelect={props.onConceptAnswer}
         />
-        {selected && <Feedback correct={selected.correct}>{selected.feedback(money)}</Feedback>}
+        {selected && (
+          <Feedback correct={selected.correct} copy={copy}>
+            {copy.conceptCheck.options[CONCEPT_OPTIONS.indexOf(selected)]!.feedback}
+          </Feedback>
+        )}
       </LessonScreen>
     );
   }
@@ -456,7 +486,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           <PrimaryAction onClick={() => props.onGoTo("transfer")}>
-            Try a new situation
+            {copy.concept.action}
           </PrimaryAction>
         }
       >
@@ -464,13 +494,14 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
           <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-primary text-brand-lime">
             <Lightbulb className="size-8" aria-hidden="true" />
           </span>
-          <Eyebrow>The big idea</Eyebrow>
+          <Eyebrow>{copy.concept.label}</Eyebrow>
           <h1 className="mt-3 font-display text-4xl font-extrabold text-balance-tight sm:text-5xl">
-            Money you might save
+            {copy.concept.title}
           </h1>
           <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed">
-            Money left is money you <strong>might</strong> save. First, check if any of it is{" "}
-            <strong>already promised</strong>, like a bill due next week.
+            {copy.concept.before} <strong>{copy.concept.might}</strong> {copy.concept.middle}{" "}
+            <strong>{copy.concept.promised}</strong>
+            {copy.concept.after}
           </p>
         </div>
       </LessonScreen>
@@ -483,38 +514,49 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           selected?.correct ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>Finish lesson</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+              {copy.transfer.action}
+            </PrimaryAction>
           ) : (
-            <ActionHint>Use the big idea: what is already promised?</ActionHint>
+            <ActionHint>{copy.transfer.hint}</ActionHint>
           )
         }
       >
         <div className="mx-auto mb-6 flex w-fit items-center gap-3 rounded-2xl border border-border bg-surface px-5 py-4 shadow-soft">
           <Smartphone className="size-7 text-primary" aria-hidden="true" />
           <div>
-            <p className="text-xs font-bold uppercase text-muted-foreground">Due next week</p>
-            <p className="font-display text-lg font-extrabold">Phone bill · {money(SAM.bill)}</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">{copy.transfer.due}</p>
+            <p className="font-display text-lg font-extrabold">
+              {copy.transfer.bill} · {money(SAM.bill)}
+            </p>
           </div>
         </div>
         <div className="text-center">
-          <Eyebrow>A new situation</Eyebrow>
+          <Eyebrow>{copy.transfer.label}</Eyebrow>
           <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Sam is a student. A summer job paid {money(SAM.earned)}. Sam spent {money(SAM.spent)}.
+            {copy.transfer.intro(money)}
           </p>
           <h1
             id="transfer-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            How much could Sam set aside?
+            {copy.transfer.question}
           </h1>
         </div>
         <ChoiceList
           labelledBy="transfer-question"
-          options={withLabels(TRANSFER_OPTIONS, money)}
+          options={TRANSFER_OPTIONS.map((option) => ({
+            value: option.value,
+            label: money(option.amount),
+          }))}
           value={props.transferAnswer}
           onSelect={props.onTransferAnswer}
         />
-        {selected && <Feedback correct={selected.correct}>{selected.feedback(money)}</Feedback>}
+        {selected && (
+          <Feedback correct={selected.correct} copy={copy}>
+            {copy.transfer.feedback[TRANSFER_OPTIONS.indexOf(selected)]!(money)}
+          </Feedback>
+        )}
       </LessonScreen>
     );
   }
@@ -525,20 +567,20 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       action={
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
           <Button variant="ghost" size="xl" onClick={props.onRestart}>
-            <RefreshCcw aria-hidden="true" /> Replay lesson
+            <RefreshCcw aria-hidden="true" /> {copy.complete.replay}
           </Button>
           {props.progressStatus === "saving" ? (
             <Button size="xl" disabled>
-              <LoaderCircle className="animate-spin" aria-hidden="true" /> Saving progress…
+              <LoaderCircle className="animate-spin" aria-hidden="true" /> {copy.complete.saving}
             </Button>
           ) : props.progressStatus === "error" ? (
             <Button size="xl" onClick={props.onRetryProgress}>
-              Save progress again <ArrowRight aria-hidden="true" />
+              {copy.complete.retry} <ArrowRight aria-hidden="true" />
             </Button>
           ) : (
             <Button asChild size="xl">
               <Link href="/dashboard/courses/financial-foundation#lesson-2">
-                {props.progressStatus === "saved" ? "Continue to lesson 2" : "Back to World 1"}
+                {props.progressStatus === "saved" ? copy.complete.continue : copy.complete.back}
                 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
@@ -550,42 +592,32 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
         <span className="mx-auto grid size-20 place-items-center rounded-full bg-brand-lime text-foreground shadow-lift">
           <Check className="size-9" aria-hidden="true" />
         </span>
-        <Eyebrow>Lesson complete</Eyebrow>
+        <Eyebrow>{copy.complete.label}</Eyebrow>
         <h1 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-          {props.skipped
-            ? "3 out of 3. You already know this one."
-            : "You found what’s left, then checked what’s promised."}
+          {props.skipped ? copy.complete.skippedTitle : copy.complete.title}
         </h1>
         <div className="mx-auto mt-7 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
-          {[
-            ["1", "Money in − money out = money left."],
-            ["2", "Check what is already promised."],
-            ["3", "What is truly free is what you might save."],
-          ].map(([number, copy]) => (
+          {copy.complete.takeaways.map((takeaway, index) => (
             <div
-              key={number}
+              key={takeaway}
               className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
             >
               <span className="grid size-7 place-items-center rounded-full bg-primary text-xs font-extrabold text-primary-foreground">
-                {number}
+                {index + 1}
               </span>
-              <p className="mt-3 text-sm font-semibold leading-relaxed">{copy}</p>
+              <p className="mt-3 text-sm font-semibold leading-relaxed">{takeaway}</p>
             </div>
           ))}
         </div>
         <Accordion type="single" collapsible className="mx-auto mt-7 max-w-2xl text-left">
           <AccordionItem value="might">
-            <AccordionTrigger>Want to go further? Why we say “might”</AccordionTrigger>
+            <AccordionTrigger>{copy.complete.moreTitle}</AccordionTrigger>
             <AccordionContent>
-              <p className="leading-relaxed text-muted-foreground">
-                Some money looks free but isn’t. A yearly bill, like phone insurance, can arrive in
-                any month. So can a surprise, like a broken phone screen. That is why we say{" "}
-                <em>might</em>. Lesson 4 covers your safety net.
-              </p>
+              <p className="leading-relaxed text-muted-foreground">{copy.complete.more}</p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        <EducationalNote />
+        <EducationalNote copy={props.educationalNote} />
       </div>
     </LessonScreen>
   );
