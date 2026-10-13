@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { PayYourselfFirstIntro } from "@/components/lessons/pay-yourself-first-intro";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { FOUNDATION_WORLD, hasCompletedLesson } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
@@ -17,5 +16,5 @@ export default async function PayYourselfFirstPage() {
     redirect("/dashboard/courses/financial-foundation#lesson-1");
   }
 
-  return <PayYourselfFirstIntro copy={getDictionary(member.track).learning.courses.lessonTwo} />;
+  redirect("/lessons/pay-yourself-first");
 }

@@ -27,6 +27,8 @@ export function formatMoney(amount: number, track: Track) {
   return `${amount.toLocaleString("fr-FR")}\u00a0€`;
 }
 
+export type Money = (amount: number) => string;
+
 export const BUDGET_ITEMS = [
   {
     amount: 850,

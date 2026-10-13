@@ -445,6 +445,123 @@ export const us = {
           "The complete interactive lesson will be built next. Your progress is already saved to your account, so you can safely leave and come back.",
         viewProgress: "View your progress",
       },
+      lessonThree: {
+        metaTitle: "How much should you save?",
+        back: "World 1",
+        label: "World 1 · Lesson 3",
+        title: "How much should you save?",
+        intro:
+          "You have seen when Alex can put money aside. Next, explore how to choose an amount that works with a real budget.",
+        unlocked: "Lesson 3 unlocked",
+        comingNext: "Coming next",
+        placeholder:
+          "The complete interactive lesson is being designed. Your progress is saved to your account, so you can safely leave and come back.",
+        viewProgress: "View your progress",
+      },
+    },
+    payYourselfFirst: {
+      metaTitle: `Pay yourself first | ${BRAND}`,
+      feedbackCorrect: "Exactly",
+      feedbackThinking: "Good thinking",
+      art: {
+        nextStep: "Alex’s next step",
+        saveFirst: "Save first?",
+      },
+      welcome: {
+        action: "Start lesson",
+        label: "World 1 · Lesson 2",
+        title: "Alex knows what’s left. When should Alex save?",
+        intro: "Help Alex give a saving goal a place in the month.",
+      },
+      recap: {
+        action: "Make a plan",
+        label: "Pick up where Alex left off",
+        title: "The transport pass comes first.",
+        description: (remainder: string, pass: string) =>
+          `Alex had ${remainder} left, but the ${pass} pass is due soon.`,
+        available: "Potentially available",
+        note: "Other upcoming needs could still change this amount.",
+      },
+      decision: {
+        action: "See what changes",
+        hint: "Choose the setup that makes the goal visible sooner.",
+        label: "One goal, two approaches",
+        question: (amount: string) =>
+          `Alex would like to set aside ${amount}. How could Alex make that goal visible?`,
+        options: [
+          () => "Wait and save whatever is left",
+          (amount: string) => `Move ${amount} after checking upcoming needs`,
+        ],
+        correct: "The goal gets its own place before flexible spending begins.",
+        retry: "Waiting can work, but the goal stays mixed with the money Alex might spend.",
+      },
+      consequence: {
+        action: "Unlock the concept",
+        label: "What changes?",
+        title: "The money is the same. The order is different.",
+        intro: (amount: string) => `Imagine Alex considers a ${amount} optional purchase.`,
+        waitTitle: "Wait until later",
+        waitDetail: (available: string, purchase: string) =>
+          `${available} − ${purchase} optional purchase`,
+        waitResult: (amount: string) => `${amount} to save`,
+        firstTitle: (amount: string) => `Set ${amount} aside first`,
+        firstDetail: (available: string, goal: string) => `${available} − ${goal} towards the goal`,
+        firstResult: (amount: string) => `${amount} flexible`,
+        takeaway: (amount: string) =>
+          `Alex can now see that the ${amount} purchase would change the saving plan.`,
+      },
+      concept: {
+        action: "Make it a habit",
+        label: "Concept unlocked",
+        title: "Pay yourself first",
+        intro: "After checking known needs, give a manageable amount a place in your savings",
+        emphasis: "before flexible spending.",
+        flexibleTitle: "A flexible plan",
+        flexibleBody: "Bills still need covering. The amount can change when life does.",
+      },
+      habit: {
+        action: "Test the habit",
+        hint: "Both approaches can help. Choose one to explore.",
+        label: "Next payday",
+        question: "How could Alex remember the plan?",
+        options: ["Set a reminder after payday", "Schedule a transfer after payday"],
+        reminder: "A reminder lets Alex check the budget and make the transfer manually.",
+        transfer:
+          "A scheduled transfer can make the habit easier to repeat, as long as Alex checks the budget and timing.",
+      },
+      change: {
+        action: "Finish lesson",
+        hint: "Apply the idea to a new expense.",
+        expenseLabel: "New expense due",
+        expense: (amount: string) => `Electricity adjustment · ${amount}`,
+        label: "Life changes the plan",
+        question: (amount: string) => `Should Alex keep the ${amount} transfer unchanged?`,
+        remaining: (amount: string) => `Up to ${amount} remains after this new expense.`,
+        options: [
+          (amount: string) => `Keep the ${amount} transfer unchanged`,
+          () => "Review it and reduce or pause it",
+          () => "Use an overdraft to keep the plan",
+        ],
+        correct:
+          "A saving habit can bend. Alex can reduce or pause the transfer and revisit it later.",
+        retry:
+          "Known needs come first. Alex can change the transfer instead of borrowing or stretching the budget.",
+      },
+      complete: {
+        replay: "Replay lesson",
+        saving: "Saving progress…",
+        saveAgain: "Save progress again",
+        continue: "Continue to lesson 3",
+        back: "Back to World 1",
+        label: "Lesson complete",
+        title: "You gave saving a place before flexible spending.",
+        steps: [
+          "Check upcoming needs first.",
+          "Set a manageable amount aside before flexible spending.",
+          "Adjust the plan when life changes.",
+        ],
+        takeaway: "Pay yourself first is a flexible habit, not a fixed amount.",
+      },
     },
     firstPaycheck: {
       metaTitle: `Your First Paycheck | ${BRAND}`,

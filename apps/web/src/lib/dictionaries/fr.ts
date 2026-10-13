@@ -463,6 +463,129 @@ export const fr: Dictionary = {
           "La leçon interactive complète sera construite ensuite. Ta progression est déjà enregistrée sur ton compte : tu peux partir et revenir sans rien perdre.",
         viewProgress: "Voir ta progression",
       },
+      lessonThree: {
+        metaTitle: "Combien devrais-tu épargner ?",
+        back: "Monde 1",
+        label: "Monde 1 · Leçon 3",
+        title: "Combien devrais-tu épargner ?",
+        intro:
+          "Tu as vu quand Alex peut mettre de l’argent de côté. Découvre maintenant comment choisir une somme adaptée à un budget réel.",
+        unlocked: "Leçon 3 débloquée",
+        comingNext: "Prochaine étape",
+        placeholder:
+          "La leçon interactive complète est en cours de conception. Ta progression est enregistrée sur ton compte : tu peux partir et revenir sans rien perdre.",
+        viewProgress: "Voir ta progression",
+      },
+    },
+    payYourselfFirst: {
+      metaTitle: `Paie-toi en premier | ${BRAND}`,
+      feedbackCorrect: "Exactement",
+      feedbackThinking: "Bien vu",
+      art: {
+        nextStep: "La prochaine étape d’Alex",
+        saveFirst: "Épargner d’abord ?",
+      },
+      welcome: {
+        action: "Commencer la leçon",
+        label: "Monde 1 · Leçon 2",
+        title: "Alex sait ce qu’il lui reste. Quand devrait-il épargner ?",
+        intro: "Aide Alex à donner une place à son objectif d’épargne dans le mois.",
+      },
+      recap: {
+        action: "Faire un plan",
+        label: "Reprends là où Alex s’est arrêté",
+        title: "L’abonnement de transport passe en premier.",
+        description: (remainder, pass) =>
+          `Il restait ${remainder} à Alex, mais son abonnement de ${pass} doit bientôt être payé.`,
+        available: "Potentiellement disponible",
+        note: "D’autres dépenses à venir peuvent encore modifier cette somme.",
+      },
+      decision: {
+        action: "Voir ce qui change",
+        hint: "Choisis l’organisation qui rend l’objectif visible le plus tôt.",
+        label: "Un objectif, deux approches",
+        question: (amount) =>
+          `Alex aimerait mettre ${amount} de côté. Comment peut-il rendre cet objectif visible\u00a0?`,
+        options: [
+          () => "Attendre et épargner ce qu’il reste",
+          (amount) => `Mettre ${amount} de côté après avoir vérifié les dépenses à venir`,
+        ],
+        correct: "L’objectif a sa propre place avant les dépenses ajustables.",
+        retry:
+          "Attendre peut fonctionner, mais l’objectif reste mélangé à l’argent qu’Alex pourrait dépenser.",
+      },
+      consequence: {
+        action: "Découvrir le concept",
+        label: "Qu’est-ce qui change ?",
+        title: "L’argent est le même. L’ordre change.",
+        intro: (amount) => `Imagine qu’Alex envisage un achat facultatif de ${amount}.`,
+        waitTitle: "Attendre la fin du mois",
+        waitDetail: (available, purchase) => `${available} − ${purchase} d’achat facultatif`,
+        waitResult: (amount) => `${amount} à épargner`,
+        firstTitle: (amount) => `Mettre d’abord ${amount} de côté`,
+        firstDetail: (available, goal) => `${available} − ${goal} pour l’objectif`,
+        firstResult: (amount) => `${amount} disponibles`,
+        takeaway: (amount) =>
+          `Alex voit maintenant que l’achat de ${amount} modifierait son plan d’épargne.`,
+      },
+      concept: {
+        action: "En faire une habitude",
+        label: "Concept débloqué",
+        title: "Paie-toi en premier",
+        intro:
+          "Après avoir vérifié les dépenses connues, réserve une somme raisonnable pour ton épargne",
+        emphasis: "avant les dépenses ajustables.",
+        flexibleTitle: "Un plan flexible",
+        flexibleBody:
+          "Les factures doivent toujours être payées. La somme peut évoluer quand la vie change.",
+      },
+      habit: {
+        action: "Tester l’habitude",
+        hint: "Les deux approches peuvent aider. Choisis-en une pour l’explorer.",
+        label: "Au prochain salaire",
+        question: "Comment Alex pourrait-il se souvenir de son plan ?",
+        options: [
+          "Programmer un rappel après le salaire",
+          "Programmer un virement après le salaire",
+        ],
+        reminder:
+          "Un rappel permet à Alex de vérifier son budget avant d’effectuer le virement lui-même.",
+        transfer:
+          "Un virement programmé peut faciliter la répétition, à condition qu’Alex vérifie son budget et la date du prélèvement.",
+      },
+      change: {
+        action: "Terminer la leçon",
+        hint: "Applique l’idée à une nouvelle dépense.",
+        expenseLabel: "Nouvelle dépense à payer",
+        expense: (amount) => `Régularisation d’électricité · ${amount}`,
+        label: "La vie change le plan",
+        question: (amount) => `Alex doit-il maintenir le virement de ${amount}\u00a0?`,
+        remaining: (amount) => `Il reste au maximum ${amount} après cette nouvelle dépense.`,
+        options: [
+          (amount) => `Maintenir le virement de ${amount}`,
+          () => "Le revoir et le réduire ou le suspendre",
+          () => "Utiliser un découvert pour maintenir le plan",
+        ],
+        correct:
+          "Une habitude d’épargne peut s’adapter. Alex peut réduire ou suspendre le virement, puis y revenir plus tard.",
+        retry:
+          "Les dépenses connues passent en premier. Alex peut modifier le virement au lieu d’emprunter ou de déséquilibrer son budget.",
+      },
+      complete: {
+        replay: "Rejouer la leçon",
+        saving: "Enregistrement de la progression…",
+        saveAgain: "Réenregistrer la progression",
+        continue: "Continuer vers la leçon 3",
+        back: "Retourner au monde 1",
+        label: "Leçon terminée",
+        title: "Tu as donné une place à l’épargne avant les dépenses ajustables.",
+        steps: [
+          "Vérifie d’abord les dépenses à venir.",
+          "Mets une somme raisonnable de côté avant les dépenses ajustables.",
+          "Adapte le plan lorsque ta situation change.",
+        ],
+        takeaway: "Se payer en premier est une habitude flexible, pas une somme fixe.",
+      },
     },
     firstPaycheck: {
       metaTitle: `Ton premier salaire | ${BRAND}`,

@@ -579,7 +579,13 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation#lesson-2">
+              <Link
+                href={
+                  props.progressStatus === "saved"
+                    ? "/dashboard/courses/financial-foundation/pay-yourself-first"
+                    : "/dashboard/courses/financial-foundation#lesson-2"
+                }
+              >
                 {props.progressStatus === "saved" ? copy.complete.continue : copy.complete.back}
                 <ArrowRight aria-hidden="true" />
               </Link>

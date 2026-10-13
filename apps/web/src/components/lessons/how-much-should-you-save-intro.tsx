@@ -4,16 +4,16 @@ import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/dictionaries";
 
-/** A clear hand-off into the next lesson while its interactive content is being designed. */
-export function PayYourselfFirstIntro({
+/** A clear hand-off into lesson 3 while its interactive content is being designed. */
+export function HowMuchShouldYouSaveIntro({
   copy,
 }: {
-  copy: Dictionary["learning"]["courses"]["lessonTwo"];
+  copy: Dictionary["learning"]["courses"]["lessonThree"];
 }) {
   return (
     <>
       <Button asChild variant="ghost" className="-ml-3 min-h-11">
-        <Link href="/dashboard/courses/financial-foundation#lesson-2">
+        <Link href="/dashboard/courses/financial-foundation#lesson-3">
           <ArrowLeft aria-hidden /> {copy.back}
         </Link>
       </Button>
