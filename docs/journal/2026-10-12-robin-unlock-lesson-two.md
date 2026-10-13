@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-12
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/36
 
 **Why:** after finishing lesson 1, World 1 still showed lesson 2 as locked, so Jules's work from #28 looked missing.
 
