@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { X } from "lucide-react";
 import { NudgeNextMark } from "@/components/brand/nudge-next-mark";
+import { useHasSession } from "@/hooks/use-has-session";
 import type { Dictionary } from "@/lib/dictionaries";
 
 export function PracticeHeader({
@@ -13,6 +16,8 @@ export function PracticeHeader({
   copy: Dictionary["learning"]["shared"];
 }) {
   const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
+  // /practice needs no account: a visitor without one goes home, not to the log-in page.
+  const signedIn = useHasSession();
 
   return (
     <header className="relative z-40 border-b border-border bg-background/95 backdrop-blur-xl">
@@ -26,7 +31,7 @@ export function PracticeHeader({
         </div>
         <span className="sr-only">{copy.lessonProgress(current, total)}</span>
         <Link
-          href="/dashboard/courses/financial-foundation"
+          href={signedIn ? "/dashboard/courses/financial-foundation" : "/"}
           aria-label={copy.leaveLesson}
           className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >

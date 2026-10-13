@@ -75,6 +75,10 @@ export function FoundationWorld({
         </div>
         <div
           className="relative mt-8 h-2 overflow-hidden rounded-full bg-ink-foreground/10"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={FOUNDATION_LESSON_COUNT}
+          aria-valuenow={completedCount}
           aria-label={copy.progressLabel(completedCount, FOUNDATION_LESSON_COUNT)}
         >
           <span

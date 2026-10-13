@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Menu, UserRound, X } from "lucide-react";
+import { ArrowRight, CircleUser, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -91,11 +91,11 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="icon"
-                    variant="outline"
+                    variant="ghost"
                     aria-label={t.accountMenu}
-                    className="size-10 rounded-xl border-border-strong bg-surface hover:bg-muted"
+                    className="size-10 rounded-full text-muted-foreground hover:text-foreground [&_svg]:size-8"
                   >
-                    <UserRound />
+                    <CircleUser strokeWidth={1.5} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="min-w-44">
