@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-13
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/39
 
 **Why:** small bugs and confusing details found while testing the site.
 
