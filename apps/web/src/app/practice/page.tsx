@@ -4,12 +4,12 @@ import { llmsTxtAlternate } from "@/lib/metadata";
 import { PracticeFlow } from "./practice-flow";
 
 export const metadata: Metadata = {
-  title: `Your First Paycheque | ${BRAND}`,
+  title: `Your First Paycheck | ${BRAND}`,
   description:
-    "Help Alex understand a first paycheque and learn how to identify potential saving capacity. No account required.",
+    "Help Alex see where a first paycheck goes and what money is left to save. No account required.",
   openGraph: {
-    title: `Your First Paycheque | ${BRAND}`,
-    description: "A short interactive lesson about what remains after a month of spending.",
+    title: `Your First Paycheck | ${BRAND}`,
+    description: "A short beginner lesson about what is left after a month of spending.",
     type: "website",
   },
   twitter: { card: "summary_large_image" },
