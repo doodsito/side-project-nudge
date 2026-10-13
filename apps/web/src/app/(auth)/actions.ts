@@ -20,6 +20,10 @@ async function callbackUrl() {
   return `${origin}/auth/callback`;
 }
 
+// The database refuses every code for a minute after too many wrong ones
+// (supabase/migrations/20261013224134_limit_access_code_attempts.sql).
+const CODES_LOCKED = "PT429";
+
 // The error messages, in the visitor's language.
 async function errors() {
   return getDictionary(await getVisitorTrack()).auth.errors;
@@ -40,13 +44,13 @@ export async function submitAccessCode(
   const { data } = await supabase.auth.getClaims();
   if (data?.claims) {
     const { data: isMember, error } = await supabase.rpc("redeem_access_code", { code });
-    if (error) return { error: t.codeCheck };
+    if (error) return { error: error.code === CODES_LOCKED ? t.tooMany : t.codeCheck };
     if (!isMember) return { error: t.codeInvalid };
     redirect("/dashboard");
   }
 
   const { data: isValid, error } = await supabase.rpc("check_access_code", { code });
-  if (error) return { error: t.codeCheck };
+  if (error) return { error: error.code === CODES_LOCKED ? t.tooMany : t.codeCheck };
   if (!isValid) return { error: t.codeInvalid };
   (await cookies()).set(ACCESS_CODE_COOKIE, code, {
     httpOnly: true,
