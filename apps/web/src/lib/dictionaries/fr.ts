@@ -496,10 +496,10 @@ export const fr: Dictionary = {
               `Argent reçu − argent dépensé\u00a0: ${money(1200)} − ${money(1000)} = ${money(200)}.`,
           },
           {
-            prompt: () => "Laquelle de ces dépenses est un besoin\u00a0?",
+            prompt: () => "Laquelle de ces dépenses est essentielle\u00a0?",
             options: ["Le loyer", "Un abonnement de streaming", "Une place de concert"],
             reason: () =>
-              "Le loyer doit être payé pour garder son logement. Les deux autres dépenses sont des envies.",
+              "Le loyer est essentiel pour garder son logement. Les deux autres dépenses peuvent être réduites ou supprimées.",
           },
           {
             prompt: (money) =>
@@ -521,20 +521,23 @@ export const fr: Dictionary = {
       budget: {
         lastAction: "Voir ce qu’il reste",
         nextAction: "Dépense suivante",
-        hint: "Est-ce un besoin ou une envie ?",
+        hint: "Dépense essentielle ou ajustable ?",
         heading: "Où est parti l’argent d’Alex",
         count: (current, total) => `${current} sur ${total}`,
-        question: "Pour Alex, est-ce un besoin ou une envie ?",
-        need: "Un besoin : Alex doit le payer",
-        want: "Une envie : agréable, mais ajustable",
+        question: "Pour Alex, cette dépense est-elle essentielle ou ajustable ?",
+        need: "Essentielle : Alex doit la payer",
+        want: "Ajustable : Alex peut la réduire ou la supprimer",
         tryAgain: " Réessaie.",
         items: [
-          { label: "Loyer et factures", note: "Alex doit les payer pour garder son logement." },
+          {
+            label: "Loyer et factures",
+            note: "Alex doit les payer pour garder son logement et ses services essentiels.",
+          },
           { label: "Courses alimentaires", note: "Alex a besoin de manger chaque semaine." },
           { label: "Transports", note: "Alex en a besoin pour aller travailler." },
           {
             label: "Abonnements",
-            note: "C’est agréable, mais Alex pourrait les résilier ou les modifier.",
+            note: "Alex pourrait les résilier ou choisir des offres moins chères.",
           },
           {
             label: "Sorties",
