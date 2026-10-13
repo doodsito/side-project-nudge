@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { BRAND } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 type NudgeLogoProps = {
@@ -8,11 +10,12 @@ type NudgeLogoProps = {
 
 export function NudgeLogo({ iconOnly = false, small = false, className }: NudgeLogoProps) {
   return (
-    <img
-      src={iconOnly ? "/brand/nudge-icon.png" : "/brand/nudge-logo.png"}
-      alt={iconOnly ? "Nudge" : "Nudge logo"}
-      width={iconOnly ? 447 : 885}
-      height={iconOnly ? 434 : 266}
+    <Image
+      src="/brand/nudge-bascule.svg"
+      alt={iconOnly ? BRAND : `${BRAND} logo`}
+      width={256}
+      height={256}
+      unoptimized
       className={cn("block w-auto shrink-0 object-contain", small ? "h-8" : "h-9", className)}
     />
   );
