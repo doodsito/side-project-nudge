@@ -15,10 +15,11 @@ export function generateStaticParams() {
 export default async function TrackLayout({ children, params }: LayoutProps<"/[track]">) {
   const { track } = await params;
   if (!isTrack(track)) notFound();
+  const dictionary = getDictionary(track);
   return (
     <div lang={TRACK_INFO[track].lang}>
       {children}
-      <TrackDialog track={track} t={getDictionary(track).tracks} />
+      <TrackDialog track={track} t={dictionary.tracks} links={dictionary.footer} />
     </div>
   );
 }

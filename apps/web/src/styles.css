@@ -241,6 +241,29 @@
   text-wrap: balance;
 }
 
+/* A flag drawn like an Apple emoji: rounded, with a soft shine, a thin edge and a shadow. */
+@utility flag-emoji {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 2px oklch(0.2 0.04 265 / 0.2);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      160deg,
+      oklch(1 0 0 / 0.45),
+      oklch(1 0 0 / 0) 45%,
+      oklch(0 0 0 / 0) 60%,
+      oklch(0 0 0 / 0.15)
+    );
+    box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.1);
+  }
+}
+
 @utility grain-divider {
   height: 1px;
   background: linear-gradient(

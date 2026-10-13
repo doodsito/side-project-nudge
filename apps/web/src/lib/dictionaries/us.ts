@@ -163,16 +163,12 @@ export const us = {
     privacy: "Privacy policy",
   },
   tracks: {
-    title: "Choose your version",
-    description:
-      "Your language, market and currency. You can change it later at the bottom of the page.",
+    title: `Welcome to ${BRAND}`,
+    description: "Where are you based? You can switch at the bottom of the page.",
     continue: "Continue",
     options: {
-      fr: { country: "France", detail: "French · euros · PEA, assurance vie, livrets" },
-      us: {
-        country: "United States",
-        detail: "English · dollars · 401(k), IRA, brokerage accounts",
-      },
+      fr: { country: "France", detail: "In French, in euros" },
+      us: { country: "United States", detail: "In English, in dollars" },
     },
   },
   footer: {
