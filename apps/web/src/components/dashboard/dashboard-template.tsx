@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "@/components/layout/beta-colors.css";
 import { type ReactNode } from "react";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
 import { SkipLink } from "@/components/layout/skip-link";
@@ -42,7 +43,7 @@ export function DashboardTemplate({
           <DashboardTabs t={t} />
         </div>
       </header>
-      <main id="main-content" tabIndex={-1} className="px-5 pt-10 pb-20 sm:px-8">
+      <main id="main-content" data-nudge-beta tabIndex={-1} className="px-5 pt-10 pb-20 sm:px-8">
         <div className="mx-auto max-w-5xl">{children}</div>
       </main>
     </FeedbackProvider>
