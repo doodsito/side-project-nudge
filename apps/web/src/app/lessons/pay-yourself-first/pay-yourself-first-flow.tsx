@@ -9,9 +9,10 @@ import {
   PAY_YOURSELF_FIRST_STEPS,
   type PayYourselfFirstStep,
 } from "@/lib/pay-yourself-first-lesson";
+import type { Track } from "@/lib/tracks";
 import { completeSecondLesson } from "./actions";
 
-export function PayYourselfFirstFlow() {
+export function PayYourselfFirstFlow({ track: lessonTrack }: { track: Track }) {
   const [step, setStep] = useState<PayYourselfFirstStep>("welcome");
   const [orderAnswer, setOrderAnswer] = useState<string | null>(null);
   const [habitAnswer, setHabitAnswer] = useState<string | null>(null);
@@ -61,6 +62,7 @@ export function PayYourselfFirstFlow() {
       <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <PayYourselfFirstLesson
           step={step}
+          track={lessonTrack}
           orderAnswer={orderAnswer}
           habitAnswer={habitAnswer}
           changeAnswer={changeAnswer}

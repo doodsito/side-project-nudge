@@ -1,3 +1,5 @@
+import type { Money } from "@/lib/first-paycheque-lesson";
+
 export const PAY_YOURSELF_FIRST_STEPS = [
   "welcome",
   "recap",
@@ -20,8 +22,12 @@ export const EXTRA_ELECTRICITY = 25;
 export const REVISED_CAPACITY = POTENTIAL_CAPACITY - EXTRA_ELECTRICITY;
 
 export const ORDER_OPTIONS = [
-  { value: "wait", label: "Wait and save whatever is left", correct: false },
-  { value: "move", label: "Move €20 after checking upcoming needs", correct: true },
+  { value: "wait", label: () => "Wait and save whatever is left", correct: false },
+  {
+    value: "move",
+    label: (money: Money) => `Move ${money(EXAMPLE_TRANSFER)} after checking upcoming needs`,
+    correct: true,
+  },
 ] as const;
 
 export const HABIT_OPTIONS = [
@@ -30,7 +36,11 @@ export const HABIT_OPTIONS = [
 ] as const;
 
 export const CHANGE_OPTIONS = [
-  { value: "keep", label: "Keep the €20 transfer unchanged", correct: false },
-  { value: "review", label: "Review it and reduce or pause it", correct: true },
-  { value: "overdraft", label: "Use an overdraft to keep the plan", correct: false },
+  {
+    value: "keep",
+    label: (money: Money) => `Keep the ${money(EXAMPLE_TRANSFER)} transfer unchanged`,
+    correct: false,
+  },
+  { value: "review", label: () => "Review it and reduce or pause it", correct: true },
+  { value: "overdraft", label: () => "Use an overdraft to keep the plan", correct: false },
 ] as const;

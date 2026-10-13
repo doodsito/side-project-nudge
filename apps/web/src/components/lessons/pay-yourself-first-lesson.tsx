@@ -18,6 +18,7 @@ import { EducationalNote } from "@/components/shared/educational-note";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import type { ProgressStatus } from "@/lib/course-progress";
+import { currencySymbol, formatMoney, type Money } from "@/lib/first-paycheque-lesson";
 import {
   CHANGE_OPTIONS,
   EXAMPLE_TRANSFER,
@@ -31,10 +32,12 @@ import {
   TRANSPORT_PASS,
   type PayYourselfFirstStep,
 } from "@/lib/pay-yourself-first-lesson";
+import type { Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
 type Props = {
   step: PayYourselfFirstStep;
+  track: Track;
   orderAnswer: string | null;
   habitAnswer: string | null;
   changeAnswer: string | null;
@@ -139,7 +142,7 @@ function ChoiceList({
   );
 }
 
-function SavingArt() {
+function SavingArt({ track }: { track: Track }) {
   return (
     <div className="relative mx-auto mb-8 h-52 w-full max-w-sm" aria-hidden="true">
       <div className="absolute left-1/2 top-4 h-40 w-64 -translate-x-1/2 -rotate-3 rounded-4xl bg-primary-soft" />
@@ -154,7 +157,7 @@ function SavingArt() {
         <PiggyBank className="size-12 text-primary" />
       </div>
       <span className="absolute bottom-0 left-6 grid size-12 animate-float place-items-center rounded-full bg-brand-lime font-display text-xl font-extrabold shadow-soft">
-        €
+        {currencySymbol(track)}
       </span>
       <span className="absolute right-4 top-3 grid size-9 place-items-center rounded-full bg-mint-soft text-market-up shadow-soft">
         <Sparkles className="size-4" />
@@ -164,12 +167,14 @@ function SavingArt() {
 }
 
 export function PayYourselfFirstLesson(props: Props) {
+  const money: Money = (amount) => formatMoney(amount, props.track);
+
   if (props.step === "welcome") {
     return (
       <LessonScreen
         action={<PrimaryAction onClick={() => props.onGoTo("recap")}>Start lesson</PrimaryAction>}
       >
-        <SavingArt />
+        <SavingArt track={props.track} />
         <div className="text-center">
           <Eyebrow>World 1 · Lesson 2</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
@@ -197,12 +202,15 @@ export function PayYourselfFirstLesson(props: Props) {
             The transport pass comes first.
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Alex had €{PREVIOUS_REMAINDER} left, but the €{TRANSPORT_PASS} pass is due soon.
+            Alex had {money(PREVIOUS_REMAINDER)} left, but the {money(TRANSPORT_PASS)} pass is due
+            soon.
           </p>
         </div>
         <div className="mt-7 flex items-center justify-between rounded-3xl border border-border bg-surface p-5 shadow-soft">
           <span className="font-semibold">Potentially available</span>
-          <strong className="font-display text-3xl text-primary">€{POTENTIAL_CAPACITY}</strong>
+          <strong className="font-display text-3xl text-primary">
+            {money(POTENTIAL_CAPACITY)}
+          </strong>
         </div>
         <p className="mt-3 text-center text-sm text-muted-foreground">
           Other upcoming needs could still change this amount.
@@ -236,12 +244,13 @@ export function PayYourselfFirstLesson(props: Props) {
             id="order-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            Alex would like to set aside €{EXAMPLE_TRANSFER}. How could Alex make that goal visible?
+            Alex would like to set aside {money(EXAMPLE_TRANSFER)}. How could Alex make that goal
+            visible?
           </h1>
         </div>
         <ChoiceList
           labelledBy="order-question"
-          options={ORDER_OPTIONS}
+          options={ORDER_OPTIONS.map((option) => ({ ...option, label: option.label(money) }))}
           value={props.orderAnswer}
           onSelect={props.onOrderAnswer}
         />
@@ -270,27 +279,33 @@ export function PayYourselfFirstLesson(props: Props) {
             The money is the same. The order is different.
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">
-            Imagine Alex considers a €20 optional purchase.
+            Imagine Alex considers a {money(20)} optional purchase.
           </p>
         </div>
         <div className="mt-7 grid gap-4 sm:grid-cols-2">
           <div className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-6">
             <ReceiptText className="size-7 text-primary" aria-hidden="true" />
             <h2 className="mt-4 font-display text-xl font-extrabold">Wait until later</h2>
-            <p className="mt-3 text-sm text-muted-foreground">€35 − €20 optional purchase</p>
-            <p className="mt-3 font-display text-3xl font-extrabold">€15 to save</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {money(35)} − {money(20)} optional purchase
+            </p>
+            <p className="mt-3 font-display text-3xl font-extrabold">{money(15)} to save</p>
           </div>
           <div className="rounded-3xl border border-mint bg-mint-soft p-5 shadow-soft sm:p-6">
             <PiggyBank className="size-7 text-primary" aria-hidden="true" />
-            <h2 className="mt-4 font-display text-xl font-extrabold">Set €20 aside first</h2>
-            <p className="mt-3 text-sm text-muted-foreground">€35 − €20 towards the goal</p>
+            <h2 className="mt-4 font-display text-xl font-extrabold">
+              Set {money(20)} aside first
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {money(35)} − {money(20)} towards the goal
+            </p>
             <p className="mt-3 font-display text-3xl font-extrabold">
-              €{FLEXIBLE_BALANCE} flexible
+              {money(FLEXIBLE_BALANCE)} flexible
             </p>
           </div>
         </div>
         <p className="mt-5 text-center font-semibold text-primary">
-          Alex can now see that the €20 purchase would change the saving plan.
+          Alex can now see that the {money(20)} purchase would change the saving plan.
         </p>
       </LessonScreen>
     );
@@ -400,7 +415,7 @@ export function PayYourselfFirstLesson(props: Props) {
           <div>
             <p className="text-xs font-bold uppercase text-muted-foreground">New expense due</p>
             <p className="font-display text-lg font-extrabold">
-              Electricity adjustment · €{EXTRA_ELECTRICITY}
+              Electricity adjustment · {money(EXTRA_ELECTRICITY)}
             </p>
           </div>
         </div>
@@ -410,15 +425,15 @@ export function PayYourselfFirstLesson(props: Props) {
             id="change-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            Should Alex keep the €{EXAMPLE_TRANSFER} transfer unchanged?
+            Should Alex keep the {money(EXAMPLE_TRANSFER)} transfer unchanged?
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Up to €{REVISED_CAPACITY} remains after this new expense.
+            Up to {money(REVISED_CAPACITY)} remains after this new expense.
           </p>
         </div>
         <ChoiceList
           labelledBy="change-question"
-          options={CHANGE_OPTIONS}
+          options={CHANGE_OPTIONS.map((option) => ({ ...option, label: option.label(money) }))}
           value={props.changeAnswer}
           onSelect={props.onChangeAnswer}
         />

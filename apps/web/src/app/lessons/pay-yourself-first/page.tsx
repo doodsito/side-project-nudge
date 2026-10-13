@@ -12,5 +12,5 @@ export default async function PayYourselfFirstPage() {
     redirect("/dashboard/courses/financial-foundation#lesson-1");
   }
 
-  return <PayYourselfFirstFlow />;
+  return <PayYourselfFirstFlow track={member.track} />;
 }
