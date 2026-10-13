@@ -168,13 +168,12 @@ export const fr: Dictionary = {
     privacy: "Politique de confidentialité (en anglais)",
   },
   tracks: {
-    title: "Choisis ta version",
-    description:
-      "Ta langue, ton marché et ta devise. Tu pourras en changer plus tard en bas de page.",
+    title: `Bienvenue sur ${BRAND}`,
+    description: "Tu es où ? Tu pourras changer en bas de page.",
     continue: "Continuer",
     options: {
-      fr: { country: "France", detail: "Français · euros · PEA, assurance vie, livrets" },
-      us: { country: "États-Unis", detail: "Anglais · dollars · 401(k), IRA, comptes-titres" },
+      fr: { country: "France", detail: "En français, en euros" },
+      us: { country: "États-Unis", detail: "En anglais, en dollars" },
     },
   },
   footer: {

@@ -163,8 +163,8 @@ export function ConsentManager({ children }: { children: ReactNode }) {
   const onPolicyPage = POLICY_PAGES.includes(pathname);
   const pageTrack = trackFromPath(pathname);
   const savedTrack = useTrackCookie();
-  // On a track's pages, the visitor picks their version first (TrackDialog),
-  // then sees the cookie choice in that language.
+  // On a track's pages, a first-time visitor makes both choices in TrackDialog;
+  // the banner only asks if they close it without choosing for cookies.
   const showBanner = !pageTrack || Boolean(savedTrack);
   const language = (pageTrack ?? savedTrack) === "fr" ? "fr" : "en";
   const providerOptions = useMemo(
