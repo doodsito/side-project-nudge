@@ -14,7 +14,7 @@ is a reserved area: changes wait for Robin's approval.
 | `profiles` table | One row per beta member, linked to their Supabase account. A member can read only their own row; deleting the account deletes it. |
 | `check_access_code(code)` | Says whether a code can be used now, so `/signup` can refuse a wrong code before sign-in. |
 | `redeem_access_code(code)` | Gives the signed-in user beta access with a code (creates their `profiles` row). Only ever acts on the caller's own account. |
-| `private.access_code_failures` table | Wrong codes of the last hour. After 20 wrong codes within a minute, both functions above refuse every code (error `PT429`) until the minute has passed, so codes cannot be guessed by trying them one after another. Existing members are never blocked. |
+| `private.access_code_failures` table | Wrong codes of the last hour. After 20 wrong codes within a minute, both functions above refuse every code (error `PT429`) until the minute has passed, so codes cannot be guessed by trying them one after another. Existing members are never blocked. Closed to the website (private schema, row level security on, no policy). |
 
 ## Sign-in settings (Robin, Supabase dashboard)
 
