@@ -311,6 +311,137 @@ export const fr: Dictionary = {
       samePassword: "Choisis un mot de passe différent de l’actuel.",
     },
   },
+  lesson3: {
+    enabled: true,
+    metaTitle: "Combien épargner ?",
+    chrome: {
+      skip: "Aller au contenu",
+      progress: "Progression de la leçon : étape {current} sur {total}",
+      leave: "Quitter la leçon",
+    },
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
+      eyebrow: "Monde 1 · Leçon 3",
+      title: "Un pourcentage est un repère, pas une règle.",
+      intro:
+        "Aide Alex à choisir un montant adapté à ce mois-ci, puis à le réévaluer quand la situation change.",
+      action: "Commencer la leçon",
+      cardLabel: "La prochaine question d’Alex",
+      cardTitle: "Combien épargner ?",
+    },
+    snapshot: {
+      eyebrow: "Un nouveau mois pour Alex",
+      title: "Commence par le budget réel.",
+      income: "Revenu net",
+      spending: "Dépenses connues et prévues",
+      capacity: "Montant potentiellement disponible",
+      note: "Ce montant n’est pas une promesse : une dépense oubliée ou un imprévu peut encore le modifier.",
+      action: "Comparer les chiffres",
+    },
+    reference: {
+      eyebrow: "Le budget avant le pourcentage",
+      title: "Qu’est-ce qui doit fixer la limite d’Alex ce mois-ci ?",
+      prompt: "Choisis le chiffre qui doit venir en premier.",
+      options: [
+        "Ce qui reste après les dépenses connues et prévues",
+        "Un pourcentage trouvé dans une règle générale",
+      ],
+      correct:
+        "Le budget réel fixe la limite. Un pourcentage peut ensuite aider à comparer plusieurs montants.",
+      incorrect:
+        "Un pourcentage général ne connaît ni le loyer, ni les factures, ni les projets d’Alex. Le budget vient d’abord.",
+      action: "Voir les pourcentages",
+    },
+    comparison: {
+      eyebrow: "Même revenu, montants très différents",
+      title: "Les pourcentages deviennent des euros.",
+      intro: "Voici ce que donnent trois repères souvent cités avec un revenu de {income}.",
+      within: "Dans la limite de {capacity}",
+      above: "Au-dessus de la limite de {capacity}",
+      takeaway:
+        "Aucun de ces pourcentages ne connaît le mois d’Alex. Ce sont des outils de comparaison, pas des consignes.",
+      action: "Retenir l’idée",
+    },
+    concept: {
+      eyebrow: "Idée débloquée",
+      title: "D’abord le budget. Ensuite la régularité.",
+      body: "Pars d’un montant inférieur à ce que le budget pourrait supporter, garde une marge, puis réévalue ce choix dans le temps.",
+      cardTitle: "Il n’existe pas de pourcentage parfait pour tout le monde.",
+      cardBody:
+        "Les revenus, les dépenses et les priorités diffèrent. Le bon réflexe consiste à revoir le montant sans ignorer les besoins connus.",
+      action: "Choisir un montant",
+    },
+    amount: {
+      eyebrow: "Alex pourrait mettre jusqu’à {capacity} de côté",
+      title: "Quel choix laisse le plus de place pour s’adapter ?",
+      prompt: "Choisis le point de départ le plus souple pour ce cas fictif.",
+      options: [
+        "{saving}, avec {margin} de marge",
+        "{capacity}, en utilisant tout le montant disponible",
+        "{twenty}, pour atteindre le repère de 20 %",
+      ],
+      correct:
+        "{saving} donne une place à l’épargne tout en laissant {margin} de marge dans cet exemple.",
+      incorrect:
+        "Utiliser toute la somme disponible — ou la dépasser pour atteindre un pourcentage — laisse moins de place aux changements du mois.",
+      action: "Tester un autre mois",
+    },
+    stress: {
+      eyebrow: "Le montant rentre encore, mais de justesse",
+      title: "Que devrait faire Alex avant de répéter le virement de {saving} ?",
+      cardLabel: "Le mois suivant",
+      cardText: "Disponible : {capacity} · Marge après épargne : {margin}",
+      prompt: "Teste le même montant pendant un mois plus serré.",
+      options: [
+        "Garder automatiquement {saving}, puisque cela fonctionnait avant",
+        "Vérifier si une marge de {margin} suffit pour ce mois",
+        "Passer à {ten} pour atteindre le repère de 10 %",
+      ],
+      correct:
+        "Un montant peut rentrer dans le calcul et mériter quand même d’être revu. La marge et les dépenses à venir comptent aussi.",
+      incorrect:
+        "Répéter ou augmenter le montant sans regarder la marge plus faible transforme un repère en règle.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as choisi un montant à partir du budget, pas d’une règle.",
+      points: [
+        "Trouver le montant réellement disponible.",
+        "Utiliser les pourcentages comme repères seulement.",
+        "Garder une marge et réévaluer le montant.",
+      ],
+      takeaway:
+        "Un montant utile correspond à la personne, au mois et aux informations disponibles aujourd’hui.",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 4",
+      back: "Retour au Monde 1",
+    },
+    worldCard: {
+      title: "Combien épargner ?",
+      description: "Utilise les pourcentages comme des repères souples, jamais comme des règles.",
+      duration: "4 min",
+    },
+    lesson4: {
+      worldCardTitle: "Construire ton filet de sécurité",
+      worldCardDescription:
+        "Découvre pourquoi chaque situation demande une réserve d’argent différente.",
+      worldCardDuration: "5 min",
+      eyebrow: "Monde 1 · Leçon 4",
+      title: "Construire ton filet de sécurité",
+      intro:
+        "Alex a choisi un montant à épargner. Découvre ensuite pourquoi une réserve dépend des besoins, de la stabilité et du temps — pas d’un objectif universel.",
+      badge: "Leçon 4 débloquée",
+      comingLabel: "Prochaine étape",
+      comingText:
+        "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",
+      back: "Monde 1",
+      viewProgress: "Voir ma progression",
+    },
+  },
   dashboard: {
     home: "tableau de bord",
     tabsLabel: "Tableau de bord",

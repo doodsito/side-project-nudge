@@ -464,10 +464,10 @@ export function PayYourselfFirstLesson(props: Props) {
             <Button size="xl" onClick={props.onRetryProgress}>
               Save progress again <ArrowRight aria-hidden="true" />
             </Button>
-          ) : props.progressStatus === "saved" ? (
+          ) : props.progressStatus === "saved" && props.track === "fr" ? (
             <Button asChild size="xl">
               <Link href="/dashboard/courses/financial-foundation/how-much-should-you-save">
-                Continue to lesson 3 <ArrowRight aria-hidden="true" />
+                Continuer vers la leçon 3 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           ) : (

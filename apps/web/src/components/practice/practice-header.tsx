@@ -2,7 +2,15 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { NudgeNextMark } from "@/components/brand/nudge-next-mark";
 
-export function PracticeHeader({ current, total }: { current: number; total: number }) {
+export function PracticeHeader({
+  current,
+  total,
+  labels,
+}: {
+  current: number;
+  total: number;
+  labels?: { progress: string; leave: string };
+}) {
   const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
 
   return (
@@ -16,11 +24,11 @@ export function PracticeHeader({ current, total }: { current: number; total: num
           />
         </div>
         <span className="sr-only">
-          Lesson progress: step {current} of {total}
+          {labels?.progress ?? `Lesson progress: step ${current} of ${total}`}
         </span>
         <Link
           href="/dashboard/courses/financial-foundation"
-          aria-label="Leave lesson"
+          aria-label={labels?.leave ?? "Leave lesson"}
           className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <X className="size-5" aria-hidden="true" />
