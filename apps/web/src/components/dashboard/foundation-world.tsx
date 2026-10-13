@@ -70,6 +70,10 @@ export function FoundationWorld({ progress }: { progress: CourseProgress }) {
         </div>
         <div
           className="relative mt-8 h-2 overflow-hidden rounded-full bg-ink-foreground/10"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={FOUNDATION_LESSON_COUNT}
+          aria-valuenow={completedCount}
           aria-label={`World progress: ${completedCount} of ${FOUNDATION_LESSON_COUNT} lessons`}
         >
           <span

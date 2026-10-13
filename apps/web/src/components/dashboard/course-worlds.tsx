@@ -120,6 +120,10 @@ export function CourseWorlds({ progress }: { progress: CourseProgress }) {
               </p>
               <div
                 className="mt-3 h-2 overflow-hidden rounded-full bg-primary/10"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={FOUNDATION_LESSON_COUNT}
+                aria-valuenow={completed}
                 aria-label={`World 1 progress: ${completed} of ${FOUNDATION_LESSON_COUNT} lessons`}
               >
                 <span
