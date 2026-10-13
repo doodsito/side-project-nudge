@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-09 (brought up to date with `main` on 2026-10-12)
 - **Author:** Jules, with Codex; ported to the current `main` by Robin, with Claude Code
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/37
 
 **Why:** members need to practise putting a realistic saving goal before flexible spending.
 
