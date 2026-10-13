@@ -272,9 +272,8 @@ export const fr: Dictionary = {
       google: "Continuer avec Google",
       googlePending: "Ouverture de Google…",
       or: "ou",
-      strength: "Solidité",
-      strengthIs: "Solidité\u00a0:",
-      levels: ["Faible", "Correct", "Solide"],
+      strength: "Force du mot de passe",
+      levels: ["Mot de passe faible", "Mot de passe moyen", "Mot de passe fort"],
       ruleDone: "(fait)",
       ruleMissing: "(manquant)",
       rules: {

@@ -269,9 +269,8 @@ export const us = {
       google: "Continue with Google",
       googlePending: "Opening Google…",
       or: "or",
-      strength: "Strength",
-      strengthIs: "Strength:",
-      levels: ["Weak", "Good", "Strong"] as [string, string, string],
+      strength: "Password strength",
+      levels: ["Weak password", "Fair password", "Strong password"] as [string, string, string],
       ruleDone: "(done)",
       ruleMissing: "(missing)",
       rules: {
