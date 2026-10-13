@@ -18,6 +18,7 @@ import { EducationalNote } from "@/components/shared/educational-note";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import type { ProgressStatus } from "@/lib/course-progress";
+import type { Dictionary } from "@/lib/dictionaries";
 import { currencySymbol, formatMoney, type Money } from "@/lib/first-paycheque-lesson";
 import {
   CHANGE_OPTIONS,
@@ -38,6 +39,8 @@ import { cn } from "@/lib/utils";
 type Props = {
   step: PayYourselfFirstStep;
   track: Track;
+  copy: Dictionary["learning"]["payYourselfFirst"];
+  educationalNote: string;
   orderAnswer: string | null;
   habitAnswer: string | null;
   changeAnswer: string | null;
@@ -81,7 +84,15 @@ function PrimaryAction({ children, onClick }: { children: React.ReactNode; onCli
   );
 }
 
-function Feedback({ correct, children }: { correct: boolean; children: React.ReactNode }) {
+function Feedback({
+  correct,
+  copy,
+  children,
+}: {
+  correct: boolean;
+  copy: Dictionary["learning"]["payYourselfFirst"];
+  children: React.ReactNode;
+}) {
   return (
     <div
       role="status"
@@ -100,7 +111,9 @@ function Feedback({ correct, children }: { correct: boolean; children: React.Rea
         {correct ? <Check className="size-4" /> : <Lightbulb className="size-4" />}
       </span>
       <div>
-        <p className="font-display font-extrabold">{correct ? "Exactly" : "Good thinking"}</p>
+        <p className="font-display font-extrabold">
+          {correct ? copy.feedbackCorrect : copy.feedbackThinking}
+        </p>
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</p>
       </div>
     </div>
@@ -142,7 +155,13 @@ function ChoiceList({
   );
 }
 
-function SavingArt({ track }: { track: Track }) {
+function SavingArt({
+  track,
+  copy,
+}: {
+  track: Track;
+  copy: Dictionary["learning"]["payYourselfFirst"]["art"];
+}) {
   return (
     <div className="relative mx-auto mb-8 h-52 w-full max-w-sm" aria-hidden="true">
       <div className="absolute left-1/2 top-4 h-40 w-64 -translate-x-1/2 -rotate-3 rounded-4xl bg-primary-soft" />
@@ -151,8 +170,8 @@ function SavingArt({ track }: { track: Track }) {
           <span className="grid size-12 place-items-center rounded-2xl bg-primary font-display text-xl font-extrabold text-primary-foreground">
             A
           </span>
-          <p className="mt-5 text-xs font-bold uppercase text-muted-foreground">Alex’s next step</p>
-          <p className="mt-1 font-display text-2xl font-extrabold">Save first?</p>
+          <p className="mt-5 text-xs font-bold uppercase text-muted-foreground">{copy.nextStep}</p>
+          <p className="mt-1 font-display text-2xl font-extrabold">{copy.saveFirst}</p>
         </div>
         <PiggyBank className="size-12 text-primary" />
       </div>
@@ -172,16 +191,20 @@ export function PayYourselfFirstLesson(props: Props) {
   if (props.step === "welcome") {
     return (
       <LessonScreen
-        action={<PrimaryAction onClick={() => props.onGoTo("recap")}>Start lesson</PrimaryAction>}
+        action={
+          <PrimaryAction onClick={() => props.onGoTo("recap")}>
+            {props.copy.welcome.action}
+          </PrimaryAction>
+        }
       >
-        <SavingArt track={props.track} />
+        <SavingArt track={props.track} copy={props.copy.art} />
         <div className="text-center">
-          <Eyebrow>World 1 · Lesson 2</Eyebrow>
+          <Eyebrow>{props.copy.welcome.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            Alex knows what’s left. When should Alex save?
+            {props.copy.welcome.title}
           </h1>
           <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Help Alex give a saving goal a place in the month.
+            {props.copy.welcome.intro}
           </p>
         </div>
       </LessonScreen>
@@ -191,30 +214,31 @@ export function PayYourselfFirstLesson(props: Props) {
   if (props.step === "recap") {
     return (
       <LessonScreen
-        action={<PrimaryAction onClick={() => props.onGoTo("decision")}>Make a plan</PrimaryAction>}
+        action={
+          <PrimaryAction onClick={() => props.onGoTo("decision")}>
+            {props.copy.recap.action}
+          </PrimaryAction>
+        }
       >
         <div className="mx-auto mb-6 grid size-16 place-items-center rounded-2xl bg-primary-soft text-primary">
           <Bus className="size-8" aria-hidden="true" />
         </div>
         <div className="text-center">
-          <Eyebrow>Pick up where Alex left off</Eyebrow>
+          <Eyebrow>{props.copy.recap.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            The transport pass comes first.
+            {props.copy.recap.title}
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Alex had {money(PREVIOUS_REMAINDER)} left, but the {money(TRANSPORT_PASS)} pass is due
-            soon.
+            {props.copy.recap.description(money(PREVIOUS_REMAINDER), money(TRANSPORT_PASS))}
           </p>
         </div>
         <div className="mt-7 flex items-center justify-between rounded-3xl border border-border bg-surface p-5 shadow-soft">
-          <span className="font-semibold">Potentially available</span>
+          <span className="font-semibold">{props.copy.recap.available}</span>
           <strong className="font-display text-3xl text-primary">
             {money(POTENTIAL_CAPACITY)}
           </strong>
         </div>
-        <p className="mt-3 text-center text-sm text-muted-foreground">
-          Other upcoming needs could still change this amount.
-        </p>
+        <p className="mt-3 text-center text-sm text-muted-foreground">{props.copy.recap.note}</p>
       </LessonScreen>
     );
   }
@@ -226,11 +250,11 @@ export function PayYourselfFirstLesson(props: Props) {
         action={
           props.orderAnswer ? (
             <PrimaryAction onClick={() => props.onGoTo("consequence")}>
-              See what changes
+              {props.copy.decision.action}
             </PrimaryAction>
           ) : (
             <p className="py-3 text-center text-sm font-semibold text-muted-foreground sm:text-left">
-              Choose the setup that makes the goal visible sooner.
+              {props.copy.decision.hint}
             </p>
           )
         }
@@ -239,26 +263,26 @@ export function PayYourselfFirstLesson(props: Props) {
           <WalletCards className="size-8" aria-hidden="true" />
         </span>
         <div className="text-center">
-          <Eyebrow>One goal, two approaches</Eyebrow>
+          <Eyebrow>{props.copy.decision.label}</Eyebrow>
           <h1
             id="order-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            Alex would like to set aside {money(EXAMPLE_TRANSFER)}. How could Alex make that goal
-            visible?
+            {props.copy.decision.question(money(EXAMPLE_TRANSFER))}
           </h1>
         </div>
         <ChoiceList
           labelledBy="order-question"
-          options={ORDER_OPTIONS.map((option) => ({ ...option, label: option.label(money) }))}
+          options={ORDER_OPTIONS.map((option, index) => ({
+            value: option.value,
+            label: props.copy.decision.options[index]!(money(EXAMPLE_TRANSFER)),
+          }))}
           value={props.orderAnswer}
           onSelect={props.onOrderAnswer}
         />
         {selected && (
-          <Feedback correct={selected.correct}>
-            {selected.correct
-              ? "The goal gets its own place before flexible spending begins."
-              : "Waiting can work, but the goal stays mixed with the money Alex might spend."}
+          <Feedback correct={selected.correct} copy={props.copy}>
+            {selected.correct ? props.copy.decision.correct : props.copy.decision.retry}
           </Feedback>
         )}
       </LessonScreen>
@@ -270,42 +294,48 @@ export function PayYourselfFirstLesson(props: Props) {
       <LessonScreen
         wide
         action={
-          <PrimaryAction onClick={() => props.onGoTo("concept")}>Unlock the concept</PrimaryAction>
+          <PrimaryAction onClick={() => props.onGoTo("concept")}>
+            {props.copy.consequence.action}
+          </PrimaryAction>
         }
       >
         <div className="text-center">
-          <Eyebrow>What changes?</Eyebrow>
+          <Eyebrow>{props.copy.consequence.label}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            The money is the same. The order is different.
+            {props.copy.consequence.title}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">
-            Imagine Alex considers a {money(20)} optional purchase.
+            {props.copy.consequence.intro(money(20))}
           </p>
         </div>
         <div className="mt-7 grid gap-4 sm:grid-cols-2">
           <div className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-6">
             <ReceiptText className="size-7 text-primary" aria-hidden="true" />
-            <h2 className="mt-4 font-display text-xl font-extrabold">Wait until later</h2>
+            <h2 className="mt-4 font-display text-xl font-extrabold">
+              {props.copy.consequence.waitTitle}
+            </h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              {money(35)} − {money(20)} optional purchase
+              {props.copy.consequence.waitDetail(money(35), money(20))}
             </p>
-            <p className="mt-3 font-display text-3xl font-extrabold">{money(15)} to save</p>
+            <p className="mt-3 font-display text-3xl font-extrabold">
+              {props.copy.consequence.waitResult(money(15))}
+            </p>
           </div>
           <div className="rounded-3xl border border-mint bg-mint-soft p-5 shadow-soft sm:p-6">
             <PiggyBank className="size-7 text-primary" aria-hidden="true" />
             <h2 className="mt-4 font-display text-xl font-extrabold">
-              Set {money(20)} aside first
+              {props.copy.consequence.firstTitle(money(20))}
             </h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              {money(35)} − {money(20)} towards the goal
+              {props.copy.consequence.firstDetail(money(35), money(20))}
             </p>
             <p className="mt-3 font-display text-3xl font-extrabold">
-              {money(FLEXIBLE_BALANCE)} flexible
+              {props.copy.consequence.firstResult(money(FLEXIBLE_BALANCE))}
             </p>
           </div>
         </div>
         <p className="mt-5 text-center font-semibold text-primary">
-          Alex can now see that the {money(20)} purchase would change the saving plan.
+          {props.copy.consequence.takeaway(money(20))}
         </p>
       </LessonScreen>
     );
@@ -315,25 +345,26 @@ export function PayYourselfFirstLesson(props: Props) {
     return (
       <LessonScreen
         action={
-          <PrimaryAction onClick={() => props.onGoTo("habit")}>Make it a habit</PrimaryAction>
+          <PrimaryAction onClick={() => props.onGoTo("habit")}>
+            {props.copy.concept.action}
+          </PrimaryAction>
         }
       >
         <div className="rounded-4xl border border-primary/20 bg-primary-soft p-7 text-center shadow-soft sm:p-10">
           <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-primary text-brand-lime">
             <Lightbulb className="size-8" aria-hidden="true" />
           </span>
-          <Eyebrow>Concept unlocked</Eyebrow>
+          <Eyebrow>{props.copy.concept.label}</Eyebrow>
           <h1 className="mt-3 font-display text-4xl font-extrabold text-balance-tight sm:text-5xl">
-            Pay yourself first
+            {props.copy.concept.title}
           </h1>
           <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed">
-            After checking known needs, give a manageable amount a place in your savings{" "}
-            <strong>before flexible spending.</strong>
+            {props.copy.concept.intro} <strong>{props.copy.concept.emphasis}</strong>
           </p>
           <div className="mx-auto mt-6 max-w-md rounded-2xl bg-surface p-4 text-left shadow-soft">
-            <p className="font-bold">A flexible plan</p>
+            <p className="font-bold">{props.copy.concept.flexibleTitle}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Bills still need covering. The amount can change when life does.
+              {props.copy.concept.flexibleBody}
             </p>
           </div>
         </div>
@@ -346,10 +377,12 @@ export function PayYourselfFirstLesson(props: Props) {
       <LessonScreen
         action={
           props.habitAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("change")}>Test the habit</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("change")}>
+              {props.copy.habit.action}
+            </PrimaryAction>
           ) : (
             <p className="py-3 text-center text-sm font-semibold text-muted-foreground sm:text-left">
-              Both approaches can help. Choose one to explore.
+              {props.copy.habit.hint}
             </p>
           )
         }
@@ -358,17 +391,20 @@ export function PayYourselfFirstLesson(props: Props) {
           <CalendarClock className="size-8" aria-hidden="true" />
         </span>
         <div className="text-center">
-          <Eyebrow>Next payday</Eyebrow>
+          <Eyebrow>{props.copy.habit.label}</Eyebrow>
           <h1
             id="habit-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            How could Alex remember the plan?
+            {props.copy.habit.question}
           </h1>
         </div>
         <ChoiceList
           labelledBy="habit-question"
-          options={HABIT_OPTIONS}
+          options={HABIT_OPTIONS.map((option, index) => ({
+            value: option.value,
+            label: props.copy.habit.options[index]!,
+          }))}
           value={props.habitAnswer}
           onSelect={props.onHabitAnswer}
         />
@@ -386,8 +422,8 @@ export function PayYourselfFirstLesson(props: Props) {
               )}
               <p className="text-sm leading-relaxed">
                 {props.habitAnswer === "reminder"
-                  ? "A reminder lets Alex check the budget and make the transfer manually."
-                  : "A scheduled transfer can make the habit easier to repeat, as long as Alex checks the budget and timing."}
+                  ? props.copy.habit.reminder
+                  : props.copy.habit.transfer}
               </p>
             </div>
           </div>
@@ -402,10 +438,12 @@ export function PayYourselfFirstLesson(props: Props) {
       <LessonScreen
         action={
           props.changeAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>Finish lesson</PrimaryAction>
+            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+              {props.copy.change.action}
+            </PrimaryAction>
           ) : (
             <p className="py-3 text-center text-sm font-semibold text-muted-foreground sm:text-left">
-              Apply the idea to a new expense.
+              {props.copy.change.hint}
             </p>
           )
         }
@@ -413,35 +451,38 @@ export function PayYourselfFirstLesson(props: Props) {
         <div className="mx-auto mb-6 flex w-fit items-center gap-3 rounded-2xl border border-border bg-surface px-5 py-4 shadow-soft">
           <ReceiptText className="size-7 text-primary" aria-hidden="true" />
           <div>
-            <p className="text-xs font-bold uppercase text-muted-foreground">New expense due</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">
+              {props.copy.change.expenseLabel}
+            </p>
             <p className="font-display text-lg font-extrabold">
-              Electricity adjustment · {money(EXTRA_ELECTRICITY)}
+              {props.copy.change.expense(money(EXTRA_ELECTRICITY))}
             </p>
           </div>
         </div>
         <div className="text-center">
-          <Eyebrow>Life changes the plan</Eyebrow>
+          <Eyebrow>{props.copy.change.label}</Eyebrow>
           <h1
             id="change-question"
             className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl"
           >
-            Should Alex keep the {money(EXAMPLE_TRANSFER)} transfer unchanged?
+            {props.copy.change.question(money(EXAMPLE_TRANSFER))}
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Up to {money(REVISED_CAPACITY)} remains after this new expense.
+            {props.copy.change.remaining(money(REVISED_CAPACITY))}
           </p>
         </div>
         <ChoiceList
           labelledBy="change-question"
-          options={CHANGE_OPTIONS.map((option) => ({ ...option, label: option.label(money) }))}
+          options={CHANGE_OPTIONS.map((option, index) => ({
+            value: option.value,
+            label: props.copy.change.options[index]!(money(EXAMPLE_TRANSFER)),
+          }))}
           value={props.changeAnswer}
           onSelect={props.onChangeAnswer}
         />
         {selected && (
-          <Feedback correct={selected.correct}>
-            {selected.correct
-              ? "A saving habit can bend. Alex can reduce or pause the transfer and revisit it later."
-              : "Known needs come first. Alex can change the transfer instead of borrowing or stretching the budget."}
+          <Feedback correct={selected.correct} copy={props.copy}>
+            {selected.correct ? props.copy.change.correct : props.copy.change.retry}
           </Feedback>
         )}
       </LessonScreen>
@@ -454,26 +495,27 @@ export function PayYourselfFirstLesson(props: Props) {
       action={
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
           <Button variant="ghost" size="xl" onClick={props.onRestart}>
-            <RefreshCcw aria-hidden="true" /> Replay lesson
+            <RefreshCcw aria-hidden="true" /> {props.copy.complete.replay}
           </Button>
           {props.progressStatus === "saving" ? (
             <Button size="xl" disabled>
-              <LoaderCircle className="animate-spin" aria-hidden="true" /> Saving progress…
+              <LoaderCircle className="animate-spin" aria-hidden="true" />
+              {props.copy.complete.saving}
             </Button>
           ) : props.progressStatus === "error" ? (
             <Button size="xl" onClick={props.onRetryProgress}>
-              Save progress again <ArrowRight aria-hidden="true" />
+              {props.copy.complete.saveAgain} <ArrowRight aria-hidden="true" />
             </Button>
           ) : props.progressStatus === "saved" ? (
             <Button asChild size="xl">
               <Link href="/dashboard/courses/financial-foundation/how-much-should-you-save">
-                Continue to lesson 3 <ArrowRight aria-hidden="true" />
+                {props.copy.complete.continue} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           ) : (
             <Button asChild size="xl">
               <Link href="/dashboard/courses/financial-foundation#lesson-2">
-                Back to World 1 <ArrowRight aria-hidden="true" />
+                {props.copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           )}
@@ -484,31 +526,27 @@ export function PayYourselfFirstLesson(props: Props) {
         <span className="mx-auto grid size-20 place-items-center rounded-full bg-brand-lime text-foreground shadow-lift">
           <Check className="size-9" aria-hidden="true" />
         </span>
-        <Eyebrow>Lesson complete</Eyebrow>
+        <Eyebrow>{props.copy.complete.label}</Eyebrow>
         <h1 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-          You gave saving a place before flexible spending.
+          {props.copy.complete.title}
         </h1>
         <div className="mx-auto mt-7 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
-          {[
-            ["1", "Check upcoming needs first."],
-            ["2", "Set a manageable amount aside before flexible spending."],
-            ["3", "Adjust the plan when life changes."],
-          ].map(([number, copy]) => (
+          {props.copy.complete.steps.map((stepCopy, index) => (
             <div
-              key={number}
+              key={stepCopy}
               className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
             >
               <span className="grid size-7 place-items-center rounded-full bg-primary text-xs font-extrabold text-primary-foreground">
-                {number}
+                {index + 1}
               </span>
-              <p className="mt-3 text-sm font-semibold leading-relaxed">{copy}</p>
+              <p className="mt-3 text-sm font-semibold leading-relaxed">{stepCopy}</p>
             </div>
           ))}
         </div>
         <p className="mx-auto mt-7 max-w-xl font-display text-xl font-extrabold text-primary sm:text-2xl">
-          Pay yourself first is a flexible habit, not a fixed amount.
+          {props.copy.complete.takeaway}
         </p>
-        <EducationalNote />
+        <EducationalNote copy={props.educationalNote} />
       </div>
     </LessonScreen>
   );

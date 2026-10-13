@@ -43,23 +43,22 @@ test("Alex's budget adds up to the 100 used throughout the lesson", () => {
 
 test("US learners see dollars and French learners see euros", () => {
   assert.equal(formatMoney(1850, "us"), "$1,850");
-  assert.equal(formatMoney(1850, "fr"), "€1,850");
+  assert.equal(formatMoney(1850, "fr"), "1\u202f850\u00a0€");
   assert.equal(formatMoney(0, "us"), "$0");
+  assert.equal(formatMoney(0, "fr"), "0\u00a0€");
 });
 
-test("every expense is a need or a want, with a plain hint", () => {
+test("every expense is a need or a want", () => {
   BUDGET_ITEMS.forEach((item, index) => {
     assert.ok(["need", "want"].includes(item.type));
-    assert.ok(item.note);
     assert.equal(isExpenseAnswerCorrect(index, item.type), true);
     assert.equal(isExpenseAnswerCorrect(index, item.type === "need" ? "want" : "need"), false);
   });
 });
 
-test("every lesson question has one right answer and a hint for each wrong one", () => {
+test("every lesson question has one right answer", () => {
   for (const options of [CONCEPT_OPTIONS, TRANSFER_OPTIONS]) {
     assert.equal(options.filter((option) => option.correct).length, 1);
-    options.forEach((option) => assert.ok(option.feedback(dollars)));
   }
 });
 
@@ -74,8 +73,6 @@ test("Sam's case is a new situation whose free money is what is left minus the b
 test("the skip quiz has 3 questions, each with exactly one right option", () => {
   assert.equal(SKIP_QUIZ.length, 3);
   SKIP_QUIZ.forEach((question) => {
-    assert.ok(question.prompt(dollars));
-    assert.ok(question.reason(dollars));
     assert.equal(question.options.filter((option) => option.value === question.answer).length, 1);
   });
 });

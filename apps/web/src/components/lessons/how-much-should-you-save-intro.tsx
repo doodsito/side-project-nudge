@@ -2,14 +2,19 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, PiggyBank, Sparkles } from "lucide-react";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
+import type { Dictionary } from "@/lib/dictionaries";
 
 /** A clear hand-off into lesson 3 while its interactive content is being designed. */
-export function HowMuchShouldYouSaveIntro() {
+export function HowMuchShouldYouSaveIntro({
+  copy,
+}: {
+  copy: Dictionary["learning"]["courses"]["lessonThree"];
+}) {
   return (
     <>
       <Button asChild variant="ghost" className="-ml-3 min-h-11">
         <Link href="/dashboard/courses/financial-foundation#lesson-3">
-          <ArrowLeft aria-hidden /> World 1
+          <ArrowLeft aria-hidden /> {copy.back}
         </Link>
       </Button>
 
@@ -23,33 +28,29 @@ export function HowMuchShouldYouSaveIntro() {
             <PiggyBank className="size-9" aria-hidden />
           </span>
           <div className="mt-8">
-            <Eyebrow>World 1 · Lesson 3</Eyebrow>
+            <Eyebrow>{copy.label}</Eyebrow>
           </div>
           <h1 className="mt-3 font-display text-4xl font-extrabold text-balance sm:text-5xl">
-            How much should you save?
+            {copy.title}
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            You have seen when Alex can put money aside. Next, explore how to choose an amount that
-            works with a real budget.
+            {copy.intro}
           </p>
 
           <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-mint px-4 py-2 text-sm font-extrabold text-foreground">
-            <Check className="size-4" aria-hidden /> Lesson 3 unlocked
+            <Check className="size-4" aria-hidden /> {copy.unlocked}
           </div>
 
           <div className="mt-8 rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-6">
             <p className="inline-flex items-center gap-2 text-sm font-extrabold text-primary">
-              <Sparkles className="size-4" aria-hidden /> Coming next
+              <Sparkles className="size-4" aria-hidden /> {copy.comingNext}
             </p>
-            <p className="mt-2 leading-relaxed text-muted-foreground">
-              The complete interactive lesson is being designed. Your progress is saved to your
-              account, so you can safely leave and come back.
-            </p>
+            <p className="mt-2 leading-relaxed text-muted-foreground">{copy.placeholder}</p>
           </div>
 
           <Button asChild size="lg" className="group mt-8">
             <Link href="/dashboard/courses/financial-foundation">
-              View your progress
+              {copy.viewProgress}
               <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
             </Link>
           </Button>

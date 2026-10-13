@@ -14,6 +14,7 @@ import {
   type SkipQuizAnswers,
 } from "@/lib/first-paycheque-lesson";
 import { track } from "@/lib/analytics";
+import { getDictionary } from "@/lib/dictionaries";
 import { DEFAULT_TRACK } from "@/lib/tracks";
 import { completeFirstLesson } from "./actions";
 
@@ -28,6 +29,8 @@ export function PracticeFlow() {
   const [skipped, setSkipped] = useState(false);
   // Dollars on the US track, euros otherwise (France is the default track).
   const lessonTrack = useTrackCookie() ?? DEFAULT_TRACK;
+  const dictionary = getDictionary(lessonTrack);
+  const learningCopy = dictionary.learning;
   const [progressStatus, setProgressStatus] = useState<ProgressStatus>("idle");
   const content = useRef<HTMLDivElement>(null);
   // The skip quiz counts as the first screen in the progress bar.
@@ -94,11 +97,18 @@ export function PracticeFlow() {
   }
 
   return (
-    <PracticeTemplate current={stepIndex + 1} total={LESSON_STEPS.length}>
+    <PracticeTemplate
+      current={stepIndex + 1}
+      total={LESSON_STEPS.length}
+      copy={learningCopy.shared}
+      skipLink={dictionary.skipLink}
+    >
       <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <FirstPaychequeLesson
           step={step}
           track={lessonTrack}
+          copy={learningCopy.firstPaycheck}
+          educationalNote={learningCopy.shared.educationalNote}
           expenseIndex={expenseIndex}
           expenseAnswer={expenseAnswer}
           conceptAnswer={conceptAnswer}

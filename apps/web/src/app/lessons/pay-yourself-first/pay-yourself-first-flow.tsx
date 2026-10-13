@@ -5,6 +5,7 @@ import { PayYourselfFirstLesson } from "@/components/lessons/pay-yourself-first-
 import { PracticeTemplate } from "@/components/practice/practice-template";
 import { track } from "@/lib/analytics";
 import type { ProgressStatus } from "@/lib/course-progress";
+import { getDictionary } from "@/lib/dictionaries";
 import {
   PAY_YOURSELF_FIRST_STEPS,
   type PayYourselfFirstStep,
@@ -13,6 +14,8 @@ import type { Track } from "@/lib/tracks";
 import { completeSecondLesson } from "./actions";
 
 export function PayYourselfFirstFlow({ track: lessonTrack }: { track: Track }) {
+  const dictionary = getDictionary(lessonTrack);
+  const learningCopy = dictionary.learning;
   const [step, setStep] = useState<PayYourselfFirstStep>("welcome");
   const [orderAnswer, setOrderAnswer] = useState<string | null>(null);
   const [habitAnswer, setHabitAnswer] = useState<string | null>(null);
@@ -58,11 +61,18 @@ export function PayYourselfFirstFlow({ track: lessonTrack }: { track: Track }) {
   }
 
   return (
-    <PracticeTemplate current={stepIndex + 1} total={PAY_YOURSELF_FIRST_STEPS.length}>
+    <PracticeTemplate
+      current={stepIndex + 1}
+      total={PAY_YOURSELF_FIRST_STEPS.length}
+      copy={learningCopy.shared}
+      skipLink={dictionary.skipLink}
+    >
       <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <PayYourselfFirstLesson
           step={step}
           track={lessonTrack}
+          copy={learningCopy.payYourselfFirst}
+          educationalNote={learningCopy.shared.educationalNote}
           orderAnswer={orderAnswer}
           habitAnswer={habitAnswer}
           changeAnswer={changeAnswer}
