@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-13
 - **Author:** Robin, with Claude Code
-- **Pull request:** <link, once opened>
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/46
 
 **Why:** Supabase recommends row level security on every table, even in a private schema, as a second lock.
 
