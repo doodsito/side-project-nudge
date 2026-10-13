@@ -1,8 +1,14 @@
 "use client";
 
-import { useMemo, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ComponentProps, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { ConsentBanner, ConsentDialog, ConsentManagerProvider } from "@c15t/nextjs";
+import {
+  ConsentBanner,
+  ConsentDialog,
+  ConsentManagerProvider,
+  prepareTranslationConfig,
+  useConsentManager,
+} from "@c15t/nextjs";
 import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { trackFromPath } from "@/lib/tracks";
@@ -141,10 +147,12 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
   },
 };
 
-// The texts follow the language of the track: offline, c15t shows the `locale`
-// language rather than the browser's. On the policy pages, the banner stays in
-// its corner so the text can be read; elsewhere it is centred.
-function optionsFor(language: "en" | "fr", centred: boolean): typeof options {
+type Language = "en" | "fr";
+
+// Offline, c15t starts with the `locale` language rather than the browser's. On
+// the policy pages, the banner stays in its corner so the text can be read;
+// elsewhere it is centred.
+function optionsFor(language: Language, centred: boolean): typeof options {
   return {
     ...options,
     i18n: { ...options.i18n, locale: language },
@@ -158,6 +166,27 @@ function optionsFor(language: "en" | "fr", centred: boolean): typeof options {
   };
 }
 
+/**
+ * Switches the banner and dialog to the track's language. c15t keeps the
+ * language it started with, and a new provider would remount the whole page
+ * (it wraps it): the track cookie is only read after hydration, so that
+ * happened on every load of a non-track page for French visitors.
+ */
+function ConsentLanguage({ language }: { language: Language }) {
+  const { translationConfig, setTranslationConfig } = useConsentManager();
+  useEffect(() => {
+    if (translationConfig.defaultLanguage === language) return;
+    setTranslationConfig(
+      prepareTranslationConfig({
+        translations: options.i18n?.messages ?? {},
+        defaultLanguage: language,
+        disableAutoLanguageSwitch: true,
+      }),
+    );
+  }, [language, translationConfig, setTranslationConfig]);
+  return null;
+}
+
 export function ConsentManager({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const onPolicyPage = POLICY_PAGES.includes(pathname);
@@ -167,13 +196,15 @@ export function ConsentManager({ children }: { children: ReactNode }) {
   // then sees the cookie choice in that language.
   const showBanner = !pageTrack || Boolean(savedTrack);
   const language = (pageTrack ?? savedTrack) === "fr" ? "fr" : "en";
+  // Only the first language starts c15t; ConsentLanguage follows later changes.
+  const [startLanguage] = useState<Language>(language);
   const providerOptions = useMemo(
-    () => optionsFor(language, !onPolicyPage),
-    [language, onPolicyPage],
+    () => optionsFor(startLanguage, !onPolicyPage),
+    [startLanguage, onPolicyPage],
   );
   return (
-    // c15t keeps the language it started with: a new language needs a new provider.
-    <ConsentManagerProvider key={language} options={providerOptions}>
+    <ConsentManagerProvider options={providerOptions}>
+      <ConsentLanguage language={language} />
       {showBanner && (
         <ConsentBanner
           hideBranding
