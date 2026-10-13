@@ -1,0 +1,96 @@
+/* Palette C is active only while the landing template is mounted.
+ * Gating on the body also includes its navigation, footer and menu portals,
+ * without changing shared tokens on other routes after client navigation.
+ * This file deliberately contains color declarations only.
+ */
+body:has(main[data-nudge-landing]) {
+  background-color: #f3f0ff;
+  color: #222039;
+  --background: #f3f0ff;
+  --foreground: #222039;
+  --surface: #ffffff;
+  --surface-2: #f3f0ff;
+  --card: #ffffff;
+  --card-foreground: #222039;
+  --popover: #ffffff;
+  --popover-foreground: #222039;
+  --primary: #6236e8;
+  --primary-foreground: #ffffff;
+  --primary-soft: #f3f0ff;
+  --secondary: #e6b44a;
+  --secondary-foreground: #222039;
+  --muted: #f3f0ff;
+  --muted-foreground: #625a76;
+  --accent: #f3f0ff;
+  --accent-foreground: #6236e8;
+  --mint: #2dc9be;
+  --mint-soft: #ffffff;
+  --border: #dad4e8;
+  --border-strong: #b7accf;
+  --input: #8777a6;
+  --ring: #6236e8;
+  --ink: #222039;
+  --ink-foreground: #ffffff;
+}
+
+/* Educational framing: gold carries ink, never white small text. */
+[data-nudge-landing] #top .shadow-device > .bg-surface-2 {
+  background-color: #e6b44a;
+  border-color: #e6b44a;
+}
+
+[data-nudge-landing] #top .shadow-device li .bg-primary-soft {
+  background-color: #e6b44a;
+  color: #222039;
+}
+
+/* Reading surfaces stay neutral; the interactive state uses violet. */
+[data-nudge-landing] :is(#challenge, #faq) {
+  background-color: #ffffff;
+}
+
+[data-nudge-landing] #challenge [role="radio"] {
+  border-color: #8777a6;
+  background-color: #ffffff;
+}
+
+[data-nudge-landing] #challenge [role="radio"]:is(:hover, :active, [aria-checked="true"]) {
+  border-color: #6236e8;
+  background-color: #f3f0ff;
+}
+
+/* Encouragement is distinct from market performance semantics. */
+[data-nudge-landing] :is(#top, #challenge, #early-access) .text-market-up {
+  color: #11786f;
+}
+
+[data-nudge-landing] #how-it-works span.text-mint {
+  color: #e6b44a;
+}
+
+/* Retain the teal arrows and labels on ink; use white focus on dark. */
+[data-nudge-landing] #how-it-works {
+  --ring: #ffffff;
+}
+
+body:has(main[data-nudge-landing]) :is(a, button).bg-primary:hover {
+  background-color: #4e25c5;
+}
+
+body:has(main[data-nudge-landing]) header :is(a, button).border-border-strong {
+  border-color: #8777a6;
+}
+
+/* Gold separates this supporting learning action from the dark ink surface. */
+body:has(main[data-nudge-landing]) #how-it-works a.bg-primary {
+  background-color: #e6b44a;
+  color: #222039;
+}
+
+body:has(main[data-nudge-landing]) #how-it-works a.bg-primary:hover {
+  background-color: #cca03f;
+}
+
+[data-nudge-landing] #faq button:is(:hover, [data-state="open"]) {
+  color: #6236e8;
+}
