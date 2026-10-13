@@ -15,6 +15,8 @@ export async function completeFirstLesson(): Promise<SaveLessonResult> {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.updateUser({ data: { course_progress: progress } });
   if (error) return { status: "error" };
+  // Pages read progress from the session token: refresh it so lesson 2 unlocks now.
+  await supabase.auth.refreshSession();
 
   revalidatePath("/dashboard/courses");
   revalidatePath("/dashboard/courses/financial-foundation");
