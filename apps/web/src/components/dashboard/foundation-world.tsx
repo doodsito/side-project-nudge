@@ -19,19 +19,39 @@ import {
   hasCompletedLesson,
   type CourseProgress,
 } from "@/lib/course-progress";
-import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/lib/dictionaries";
+import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
+import type { Track } from "@/lib/tracks";
+import { cn } from "@/lib/utils";
 
 /** The path inside World 1. Completing a lesson opens the next step. */
 export function FoundationWorld({
   progress,
   copy,
+  track,
 }: {
   progress: CourseProgress;
   copy: Dictionary["learning"]["courses"]["foundation"];
+  track: Track;
 }) {
   const completedCount = completedLessonCount(progress, FOUNDATION_WORLD);
   const progressPercent = (completedCount / FOUNDATION_LESSON_COUNT) * 100;
+  const lessons = FOUNDATION_LESSONS.map((lesson) => {
+    if (!isLessonThreeAvailable(track)) return lesson;
+    if (lesson.number === 3) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/how-much-should-you-save",
+      };
+    }
+    if (lesson.number === 4) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/build-your-safety-net",
+      };
+    }
+    return lesson;
+  });
 
   return (
     <>
@@ -97,7 +117,7 @@ export function FoundationWorld({
         </div>
 
         <ol className="relative mt-8 grid gap-4 before:absolute before:top-10 before:bottom-20 before:left-7 before:w-px before:bg-border sm:before:left-8 lg:mx-auto lg:max-w-4xl lg:before:left-1/2 lg:before:-translate-x-1/2">
-          {FOUNDATION_LESSONS.map((lesson, index) => {
+          {lessons.map((lesson, index) => {
             const lessonCopy = copy.lessons[index]!;
             const completed = hasCompletedLesson(progress, FOUNDATION_WORLD, lesson.number);
             const unlocked =

@@ -14,6 +14,7 @@ export default async function FinancialFoundationPage() {
     <FoundationWorld
       progress={member.courseProgress}
       copy={getDictionary(member.track).learning.courses.foundation}
+      track={member.track}
     />
   );
 }
