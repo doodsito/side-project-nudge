@@ -1,9 +1,9 @@
-/* Palette C is active only while the landing template is mounted.
+/* Palette C is shared by the landing and beta templates.
  * Gating on the body also includes its navigation, footer and menu portals,
  * without changing shared tokens on other routes after client navigation.
  * This file deliberately contains color declarations only.
  */
-body:has(main[data-nudge-landing]) {
+body:has(main[data-nudge-landing], [data-nudge-beta]) {
   background-color: #f3f0ff;
   color: #222039;
   --background: #f3f0ff;
@@ -73,7 +73,7 @@ body:has(main[data-nudge-landing]) {
   --ring: #ffffff;
 }
 
-body:has(main[data-nudge-landing]) :is(a, button).bg-primary:hover {
+body:has(main[data-nudge-landing], [data-nudge-beta]) :is(a, button).bg-primary:hover {
   background-color: #4e25c5;
 }
 
