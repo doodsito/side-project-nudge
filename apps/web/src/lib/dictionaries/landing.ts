@@ -25,6 +25,7 @@ export const landingCopy = {
       navigation: "Questions du cours",
       ambition: "Investir avec assurance",
       illustration: "Illustration d’un cours Nudge avec une réponse et son explication.",
+      sceneLabels: ["Tu fais ton choix", "Tu comprends ce qu’il change"],
       reward: {
         preview: "Bientôt",
         complete: "Leçon terminée",
@@ -213,6 +214,7 @@ export const landingCopy = {
       navigation: "Course questions",
       ambition: "Invest with confidence",
       illustration: "Illustration of a Nudge lesson with an answer and its explanation.",
+      sceneLabels: ["You make a choice", "You see why it matters"],
       reward: {
         preview: "Coming soon",
         complete: "Lesson complete",

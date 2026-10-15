@@ -108,7 +108,7 @@ export function LandingContent({
           </div>
         </div>
       </section>
-      <Section className="bg-surface">
+      <Section id="problem" className="landing-problem">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <h2 className="mt-4 font-display text-3xl font-extrabold sm:text-4xl">
@@ -121,7 +121,7 @@ export function LandingContent({
           </div>
         </div>
       </Section>
-      <Section id="solution">
+      <Section id="solution" className="landing-solution">
         <div className="grid items-center gap-10 lg:grid-cols-[.85fr_1.15fr]">
           <div>
             <h2 className="mt-4 max-w-2xl font-display text-3xl font-extrabold sm:text-4xl">
@@ -136,13 +136,13 @@ export function LandingContent({
           </div>
         </div>
       </Section>
-      <Section className="bg-surface">
+      <Section id="benefits" className="landing-benefits">
         <h2 className="max-w-2xl font-display text-3xl font-extrabold sm:text-4xl">
           {t.benefitsTitle}
         </h2>
-        <div className="mt-12 grid gap-x-12 gap-y-8 md:grid-cols-2">
+        <div className="benefit-list">
           {t.benefits.map(([title, text]) => (
-            <div key={title} className="border-t border-border pt-6">
+            <div key={title} className="benefit-row">
               <h3 className="font-display text-xl font-bold">{title}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{text}</p>
             </div>
@@ -151,9 +151,9 @@ export function LandingContent({
       </Section>
       <Section id="how-it-works" className="bg-ink text-ink-foreground">
         <h2 className="max-w-2xl font-display text-3xl font-extrabold sm:text-4xl">{t.howTitle}</h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="learning-steps">
           {t.steps.map(([title, text], i) => (
-            <div key={title} className="border-t border-ink-foreground/30 pt-6">
+            <div key={title} className="learning-step">
               <span className="font-bold text-secondary">0{i + 1}</span>
               <h3 className="mt-5 font-display text-xl font-bold">{title}</h3>
               <p className="mt-3 leading-relaxed">{text}</p>
@@ -161,13 +161,13 @@ export function LandingContent({
           ))}
         </div>
       </Section>
-      <Section>
+      <Section id="beta-access" className="landing-access">
         <div className="max-w-3xl">
           <h2 className="font-display text-3xl font-extrabold">{t.accessTitle}</h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{t.access}</p>
         </div>
       </Section>
-      <Section className="bg-surface">
+      <Section id="questions" className="landing-faq">
         <div className="grid gap-8 md:grid-cols-[.6fr_1fr]">
           <h2 className="font-display text-3xl font-extrabold">{t.faqTitle}</h2>
           <Accordion type="single" collapsible>
@@ -182,7 +182,7 @@ export function LandingContent({
           </Accordion>
         </div>
       </Section>
-      <Section>
+      <Section className="landing-end">
         <div className="max-w-3xl">
           <h2 className="font-display text-3xl font-extrabold sm:text-4xl">{t.end[0]}</h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{t.end[1]}</p>
