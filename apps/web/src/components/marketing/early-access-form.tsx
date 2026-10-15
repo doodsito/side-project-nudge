@@ -9,30 +9,18 @@ import { textLinkClass } from "@/components/shared/text-link";
 import { getSupabase } from "@/integrations/supabase/client";
 import { track } from "@/lib/analytics";
 import type { Dictionary } from "@/lib/dictionaries";
-import { cn } from "@/lib/utils";
-
-const PROFILES = ["student", "young_professional", "other"] as const;
-type Profile = (typeof PROFILES)[number];
 
 export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
   const [email, setEmail] = useState("");
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [profileMissing, setProfileMissing] = useState(false);
   const [status, setStatus] = useState<"idle" | "saving" | "complete" | "error">("idle");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.trim() || status === "saving") return;
-    if (!profile) {
-      setProfileMissing(true);
-      event.currentTarget.querySelector<HTMLInputElement>('input[name="profile"]')?.focus();
-      return;
-    }
     setStatus("saving");
     track("beta_signup_submitted", { source: "early_access" });
     try {
       const { error } = await getSupabase().rpc("join_waitlist", {
         email: email.trim().toLowerCase(),
-        profile,
         source: "early_access",
       });
       if (error) throw error;
@@ -41,7 +29,7 @@ export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
       setStatus("error");
       return;
     }
-    track("beta_signup_completed", { source: "early_access", profile });
+    track("beta_signup_completed", { source: "early_access" });
     setStatus("complete");
   }
   if (status === "complete")
@@ -58,41 +46,6 @@ export function EarlyAccessForm({ t }: { t: Dictionary["earlyAccess"] }) {
     );
   return (
     <form onSubmit={submit} className="w-full max-w-xl">
-      <fieldset className="mb-3" aria-describedby={profileMissing ? "profile-error" : undefined}>
-        <legend className="mb-2 text-sm font-bold">{t.profileLegend}</legend>
-        <div className="flex flex-wrap gap-2">
-          {PROFILES.map((value) => (
-            <label key={value} className="cursor-pointer">
-              <input
-                type="radio"
-                name="profile"
-                value={value}
-                checked={profile === value}
-                aria-describedby={profileMissing ? "profile-error" : undefined}
-                onChange={() => {
-                  setProfile(value);
-                  setProfileMissing(false);
-                }}
-                className="peer sr-only"
-              />
-              <span
-                className={cn(
-                  "inline-flex min-h-11 items-center rounded-full border border-muted-foreground bg-surface px-4 py-2 text-sm font-bold transition-colors",
-                  "peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground",
-                  "peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2",
-                )}
-              >
-                {t.profiles[value]}
-              </span>
-            </label>
-          ))}
-        </div>
-        {profileMissing && (
-          <p id="profile-error" className="mt-2 text-sm text-destructive" role="alert">
-            {t.profileError}
-          </p>
-        )}
-      </fieldset>
       <label htmlFor="early-access-email" className="mb-2 block text-sm font-bold">
         {t.emailLabel}
       </label>

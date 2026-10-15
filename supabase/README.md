@@ -8,8 +8,8 @@ is a reserved area: changes wait for Robin's approval.
 
 | Object | What it does |
 |---|---|
-| `waitlist_signups` table | The early access list: email, profile, source, date. Closed to the website (row level security on, no access for the public key). Read it in the Supabase dashboard, Table Editor. |
-| `join_waitlist(email, profile, source)` | The only thing the website can call: it checks the input and adds the email, ignoring one that is already on the list. |
+| `waitlist_signups` table | The early access list: email, source, date (after the pending local migration). Closed to the website (row level security on, no access for the public key). Read it in the Supabase dashboard, Table Editor. |
+| `join_waitlist(email, source)` | The only thing the website can call: it checks the input and adds the email, ignoring one that is already on the list. |
 | `access_codes` table | The private beta codes: code, note, how many uses are allowed and used, expiry, on/off. Closed to the website. |
 | `profiles` table | One row per beta member, linked to their Supabase account. A member can read only their own row; deleting the account deletes it. |
 | `check_access_code(code)` | Says whether a code can be used now, so `/signup` can refuse a wrong code before sign-in. |
@@ -69,3 +69,11 @@ npx supabase login                                    # once per computer
 npx supabase link --project-ref zqphlvtnxrokjlcqbput  # once per clone; asks for the database password
 npx supabase db push                                  # applies the migrations not applied yet
 ```
+
+## Pending local waitlist simplification
+
+`20261015072702_remove_waitlist_profile.sql` removes only the waitlist profile field.
+It preserves email addresses, row security and duplicate handling. The old three-argument
+function remains as a compatibility wrapper that ignores its profile argument.
+Apply this migration before deploying the email-only landing form. It has not been
+applied remotely during this local preview. Member profiles and invitation codes are unchanged.

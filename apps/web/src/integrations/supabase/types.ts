@@ -101,21 +101,18 @@ export type Database = {
           created_at: string;
           email: string;
           id: number;
-          profile: string;
           source: string;
         };
         Insert: {
           created_at?: string;
           email: string;
           id?: never;
-          profile: string;
           source: string;
         };
         Update: {
           created_at?: string;
           email?: string;
           id?: never;
-          profile?: string;
           source?: string;
         };
         Relationships: [];
@@ -127,7 +124,7 @@ export type Database = {
     Functions: {
       check_access_code: { Args: { code: string }; Returns: boolean };
       join_waitlist: {
-        Args: { email: string; profile: string; source: string };
+        Args: { email: string; source: string };
         Returns: undefined;
       };
       redeem_access_code: { Args: { code: string }; Returns: boolean };
