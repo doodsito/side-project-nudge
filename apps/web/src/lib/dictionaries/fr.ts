@@ -21,7 +21,7 @@ export const fr: Dictionary = {
     challenge: "Faire un défi",
     howItWorks: "Comment ça marche",
     logIn: "Se connecter",
-    signUp: "S’inscrire",
+    signUp: "Rejoindre la bêta",
     open: "Ouvrir",
     accountMenu: "Menu du compte",
     account: "Compte",

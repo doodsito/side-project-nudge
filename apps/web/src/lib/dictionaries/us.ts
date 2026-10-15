@@ -21,7 +21,7 @@ export const us = {
     challenge: "Try a challenge",
     howItWorks: "How it works",
     logIn: "Log in",
-    signUp: "Sign up",
+    signUp: "Join the beta",
     open: "Open",
     accountMenu: "Account menu",
     account: "Account",
