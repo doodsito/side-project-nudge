@@ -10,12 +10,9 @@ Le pack fourni est conservé sans retouche. Rose réservé à la mascotte ; pale
 
 # Preview et données
 
-Le formulaire ne collecte que l’e-mail. La migration locale retire uniquement
-`waitlist_signups.profile`, pas la table des profils des membres ni les accès bêta.
-Elle conserve les e-mails existants et une signature compatible avec les anciennes pages ouvertes.
-Appliquer la migration avant une éventuelle publication de l’interface.
-Rien n’a été appliqué à la base distante ; la preview locale ne doit pas être utilisée
-pour un test d’inscription réel tant que la migration n’est pas déployée sur une base de test.
+Le formulaire conserve exactement les champs, validations et appel existants de main.
+La suppression du profil et la migration sont reportées ; aucune modification de base de données.
+Le travail différé reste récupérable dans le commit 7df7ac8.
 
 ## Raffinement de la landing
 

@@ -1,11 +1,11 @@
-# Landing, liste d’attente et mascotte
+# Landing et mascotte
 
 - **Date:** 2026-10-15
 - **Author:** Emma, with Codex
-- **Why:** clarifier la promesse et distinguer liste d’attente et accès bêta.
-- **Changes:** landing FR/US, hero animé, illustration statique du cours, mascottes, boutons pleins, popup e-mail seul sans animation.
-- **Scope:** accès membres, authentification et routes conservés.
-- **Data:** migration du profil waitlist uniquement, non appliquée à distance ; validation Robin requise.
-- **Checks:** lint, types, build ; navigation initiale FR vers US et ouverture waitlist vérifiées en navigateur.
-- **Limit:** inscription réelle non testée avant migration ; validation Vercel restante.
-- **Release:** ne pas fusionner avant validation Robin et déploiement contrôlé de la migration.
+- **PR:** https://github.com/doodsito/side-project-nudge/pull/51
+- **Why:** clarifier la promesse et améliorer la présentation du produit.
+- **Changes:** landing FR/US, hero animé, illustration statique, mascottes, boutons pleins, responsive.
+- **Scope:** routes et accès membres conservés.
+- **Waitlist:** formulaire, champs, traductions et appel existants conservés ; migration exclue.
+- **Deferred:** retrait du profil récupérable dans le commit 7df7ac8.
+- **Checks:** lint, types et build passent ; formulaire restauré vérifié en local, preview desktop/mobile inspectée.
