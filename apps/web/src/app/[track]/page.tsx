@@ -1,10 +1,7 @@
+import { LandingContent } from "@/components/marketing/landing-content";
+import { landingCopy } from "@/lib/dictionaries/landing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { EarlyAccessSection } from "@/components/marketing/early-access-section";
-import { FAQSection } from "@/components/marketing/faq-section";
-import { HeroSection } from "@/components/marketing/hero-section";
-import { HowItWorks } from "@/components/marketing/how-it-works";
-import { MiniChallenge } from "@/components/marketing/mini-challenge";
 import { MarketingTemplate } from "@/components/layout/marketing-template";
 import { BRAND, SITE_URL } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
@@ -46,7 +43,7 @@ export default async function HomePage({ params }: PageProps<"/[track]">) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     inLanguage: TRACK_INFO[track].lang,
-    mainEntity: t.faq.items.map(([name, text]) => ({
+    mainEntity: landingCopy[track].faq.map(([name, text]) => ({
       "@type": "Question",
       name,
       acceptedAnswer: { "@type": "Answer", text },
@@ -55,11 +52,7 @@ export default async function HomePage({ params }: PageProps<"/[track]">) {
   return (
     <>
       <MarketingTemplate track={track} t={t}>
-        <HeroSection t={t.hero} window={t.heroWindow} />
-        <MiniChallenge t={t.challenge} />
-        <HowItWorks t={t.how} />
-        <FAQSection t={t.faq} />
-        <EarlyAccessSection t={t.earlyAccess} />
+        <LandingContent track={track} earlyAccess={t.earlyAccess} />
       </MarketingTemplate>
       <script
         type="application/ld+json"

@@ -17,7 +17,8 @@ import { signInWithGoogle } from "./actions";
 
 /** The `error` the auth callback and the actions add to the URL, explained. */
 export function ErrorBox({ code, t }: { code: unknown; t: Dictionary["auth"]["urlErrors"] }) {
-  const error = typeof code === "string" ? t[code] : undefined;
+  // Own keys only: "?error=constructor" or "__proto__" must not reach Object.prototype.
+  const error = typeof code === "string" && Object.hasOwn(t, code) ? t[code] : undefined;
   if (!error) return null;
   return (
     <Alert variant="destructive" className="mb-6">

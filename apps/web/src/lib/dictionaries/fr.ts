@@ -21,7 +21,7 @@ export const fr: Dictionary = {
     challenge: "Faire un défi",
     howItWorks: "Comment ça marche",
     logIn: "Se connecter",
-    signUp: "S’inscrire",
+    signUp: "Rejoindre la bêta",
     open: "Ouvrir",
     accountMenu: "Menu du compte",
     account: "Compte",
@@ -168,13 +168,12 @@ export const fr: Dictionary = {
     privacy: "Politique de confidentialité (en anglais)",
   },
   tracks: {
-    title: "Choisis ta version",
-    description:
-      "Ta langue, ton marché et ta devise. Tu pourras en changer plus tard en bas de page.",
+    title: `Bienvenue sur ${BRAND}`,
+    description: "Tu es où ? Tu pourras changer en bas de page.",
     continue: "Continuer",
     options: {
-      fr: { country: "France", detail: "Français · euros · PEA, assurance vie, livrets" },
-      us: { country: "États-Unis", detail: "Anglais · dollars · 401(k), IRA, comptes-titres" },
+      fr: { country: "France", detail: "En français, en euros" },
+      us: { country: "États-Unis", detail: "En anglais, en dollars" },
     },
   },
   footer: {
@@ -272,9 +271,8 @@ export const fr: Dictionary = {
       google: "Continuer avec Google",
       googlePending: "Ouverture de Google…",
       or: "ou",
-      strength: "Solidité",
-      strengthIs: "Solidité\u00a0:",
-      levels: ["Faible", "Correct", "Solide"],
+      strength: "Force du mot de passe",
+      levels: ["Mot de passe faible", "Mot de passe moyen", "Mot de passe fort"],
       ruleDone: "(fait)",
       ruleMissing: "(manquant)",
       rules: {
@@ -732,7 +730,7 @@ export const fr: Dictionary = {
         saving: "Enregistrement de la progression…",
         retry: "Réenregistrer la progression",
         continue: "Continuer vers la leçon 2",
-        back: "Retour au monde 1",
+        back: "Retour à l’accueil",
         label: "Leçon terminée",
         skippedTitle: "3 sur 3. Tu maîtrises déjà cette leçon.",
         title: "Tu as trouvé ce qu’il restait, puis vérifié ce qui était déjà réservé.",

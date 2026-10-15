@@ -21,7 +21,7 @@ export const us = {
     challenge: "Try a challenge",
     howItWorks: "How it works",
     logIn: "Log in",
-    signUp: "Sign up",
+    signUp: "Join the beta",
     open: "Open",
     accountMenu: "Account menu",
     account: "Account",
@@ -163,16 +163,12 @@ export const us = {
     privacy: "Privacy policy",
   },
   tracks: {
-    title: "Choose your version",
-    description:
-      "Your language, market and currency. You can change it later at the bottom of the page.",
+    title: `Welcome to ${BRAND}`,
+    description: "Where are you based? You can switch at the bottom of the page.",
     continue: "Continue",
     options: {
-      fr: { country: "France", detail: "French · euros · PEA, assurance vie, livrets" },
-      us: {
-        country: "United States",
-        detail: "English · dollars · 401(k), IRA, brokerage accounts",
-      },
+      fr: { country: "France", detail: "In French, in euros" },
+      us: { country: "United States", detail: "In English, in dollars" },
     },
   },
   footer: {
@@ -269,9 +265,8 @@ export const us = {
       google: "Continue with Google",
       googlePending: "Opening Google…",
       or: "or",
-      strength: "Strength",
-      strengthIs: "Strength:",
-      levels: ["Weak", "Good", "Strong"] as [string, string, string],
+      strength: "Password strength",
+      levels: ["Weak password", "Fair password", "Strong password"] as [string, string, string],
       ruleDone: "(done)",
       ruleMissing: "(missing)",
       rules: {
@@ -702,7 +697,7 @@ export const us = {
         saving: "Saving progress…",
         retry: "Save progress again",
         continue: "Continue to lesson 2",
-        back: "Back to World 1",
+        back: "Back to home",
         label: "Lesson complete",
         skippedTitle: "3 out of 3. You already know this one.",
         title: "You found what’s left, then checked what’s promised.",

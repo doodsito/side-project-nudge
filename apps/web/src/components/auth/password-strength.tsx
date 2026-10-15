@@ -31,8 +31,8 @@ export function PasswordStrength({
             />
           ))}
         </div>
-        <p className="w-28 text-right text-xs font-bold text-muted-foreground">
-          {level ? `${t.strengthIs} ${level}` : t.strength}
+        <p className="w-36 text-right text-xs font-bold text-muted-foreground">
+          {level ?? t.strength}
         </p>
       </div>
       <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs">

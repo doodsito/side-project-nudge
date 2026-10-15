@@ -3,20 +3,24 @@ import { RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { TRACK_INFO, type Track } from "@/lib/tracks";
 
-/** A track's flag (SVG: emoji flags show as letters on Windows). Decorative. */
+/**
+ * A track's flag, styled like an Apple emoji (SVG: emoji flags show as letters
+ * on Windows). Decorative.
+ */
 export function TrackFlag({ track, small = false }: { track: Track; small?: boolean }) {
   return (
-    <Image
-      src={TRACK_INFO[track].flag}
-      alt=""
-      width={small ? 18 : 36}
-      height={small ? 12 : 24}
-      unoptimized
-      className={cn(
-        "border border-border",
-        small ? "h-3 w-[18px] rounded-[2px]" : "h-6 w-9 rounded-sm",
-      )}
-    />
+    <span
+      className={cn("flag-emoji", small ? "h-3 w-[18px] rounded-[3px]" : "h-7 w-10 rounded-md")}
+    >
+      <Image
+        src={TRACK_INFO[track].flag}
+        alt=""
+        width={small ? 18 : 40}
+        height={small ? 12 : 28}
+        unoptimized
+        className="size-full object-cover"
+      />
+    </span>
   );
 }
 

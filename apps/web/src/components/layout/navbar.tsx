@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Menu, UserRound, X } from "lucide-react";
+import { ArrowRight, CircleUser, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -31,10 +31,6 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
-  const items = [
-    [t.challenge, `/${track}#challenge`],
-    [t.howItWorks, `/${track}#how-it-works`],
-  ] as const;
   return (
     <header
       onKeyDown={(event) => {
@@ -48,26 +44,24 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-40 px-5 transition-all duration-300 sm:px-8",
         scrolled
           ? "border-b border-border/70 bg-background/85 shadow-soft backdrop-blur-xl"
           : "bg-transparent",
       )}
     >
-      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8">
-        <Link href={`/${track}#top`} aria-label={`${BRAND} ${t.home}`}>
+      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center">
+        <Link
+          href={`/${track}#top`}
+          aria-label={`${BRAND} ${t.home}`}
+          className="inline-flex min-h-11 w-fit items-center gap-2"
+        >
           <NudgeLogo small />
+          <span className="font-display text-2xl font-bold tracking-[-0.04em] text-foreground">
+            {BRAND}
+          </span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label={t.main}>
-          {items.map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {label}
-            </Link>
-          ))}
           <div className="flex items-center gap-3">
             {!signedIn && (
               <Link
@@ -79,6 +73,7 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
             )}
             <Button
               asChild
+              variant="default"
               className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
             >
               <Link href={signedIn ? "/dashboard" : "/signup"}>
@@ -91,11 +86,11 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="icon"
-                    variant="outline"
+                    variant="ghost"
                     aria-label={t.accountMenu}
-                    className="size-10 rounded-xl border-border-strong bg-surface hover:bg-muted"
+                    className="size-10 rounded-full text-muted-foreground hover:text-foreground [&_svg]:size-8"
                   >
-                    <UserRound />
+                    <CircleUser strokeWidth={1.5} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="min-w-44">
@@ -129,20 +124,10 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
       {open && (
         <nav
           id="mobile-navigation"
-          className="animate-slide-up border-t border-border bg-background px-5 py-4 shadow-lift md:hidden"
+          className="-mx-5 animate-slide-up border-t border-border bg-background px-5 py-4 shadow-lift sm:-mx-8 sm:px-8 md:hidden"
           aria-label={t.mobile}
         >
           <div className="mx-auto flex max-w-6xl flex-col">
-            {items.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base font-semibold hover:bg-muted"
-              >
-                {label}
-              </Link>
-            ))}
             {signedIn ? (
               <>
                 <Link
@@ -172,7 +157,7 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
                 </Link>
               </Button>
             )}
-            <Button asChild size="lg" className="mt-2">
+            <Button asChild size="lg" variant="default" className="mt-2">
               <Link href={signedIn ? "/dashboard" : "/signup"} onClick={() => setOpen(false)}>
                 {signedIn ? `${t.open} ${BRAND}` : t.signUp} <ArrowRight />
               </Link>

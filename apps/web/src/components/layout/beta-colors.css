@@ -1,0 +1,32 @@
+@import "./landing-colors.css";
+
+/* Reuse Palette C exactly; these additions apply only to the learning app.
+ * Body scope includes feedback dialogs and other portalled controls.
+ * Financial gains/losses and destructive states retain their semantic tokens.
+ */
+body:has([data-nudge-beta]) {
+  --brand-lime: var(--secondary);
+  --chart-1: var(--primary);
+  --chart-2: var(--mint);
+  --chart-3: var(--secondary);
+}
+
+/* Gold identifies educational labels; teal remains a progress signal. */
+[data-nudge-beta] .bg-ink .text-mint {
+  color: var(--secondary);
+}
+
+[data-nudge-beta] [role="progressbar"] > span {
+  background-color: var(--mint);
+}
+
+/* A darker teal gives thin progress bars sufficient contrast on lavender. */
+[data-nudge-beta] [role="progressbar"]:not(.bg-ink-foreground\/10) > span,
+[data-nudge-beta].lesson-shell header .bg-primary {
+  background-color: #11786f;
+}
+
+/* Selected answers retain violet; keyboard focus stays visible on ink. */
+[data-nudge-beta] .bg-ink {
+  --ring: #ffffff;
+}
