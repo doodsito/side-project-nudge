@@ -1217,9 +1217,28 @@ body:has(.landing-refined) header a[href="/login"]:hover {
 @media (max-width: 639px) {
   .investing-worlds {
     --hop-x: calc(50cqw - 52.5px);
-    --hop-rise: 90px;
+    --hop-rise: 45px;
+    /* Reserve the entire jump arc below the CTA, including its highest point. */
+    isolation: isolate;
+    pointer-events: none;
+  }
+  .world-0 {
+    top: 220px;
+  }
+  .world-1 {
+    top: 175px;
+    left: calc(50% - 52.5px);
+  }
+  .world-2 {
+    top: 130px;
+  }
+  .world-route path {
+    d: path("M68 285 C125 285 145 233 220 233 S310 180 372 180");
   }
   .world-companion {
+    width: 100px;
+    left: calc(50% - 50px);
+    top: 90px;
     animation: world-journey 3.2s 0.3s both;
   }
 }
@@ -1284,4 +1303,404 @@ body:has(.landing-refined) header a[href="/login"]:hover {
 .landing-refined .solution-illustration [role="status"] > span {
   background: var(--mint);
   color: var(--foreground);
+}
+
+/* Distinct reading rhythms: pause, product, outcomes, then a guided sequence. */
+.landing-refined > .landing-problem {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.landing-problem h2 {
+  max-width: 14ch;
+}
+.landing-problem > div > div {
+  align-items: center;
+}
+.landing-refined > .landing-solution {
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-radius: 2rem;
+  margin-inline: clamp(0.5rem, 2vw, 2rem);
+}
+.landing-solution .solution-scene {
+  padding-block: 1.5rem;
+}
+.landing-refined > .landing-benefits {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.landing-benefits > div {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+.landing-benefits h2 {
+  max-width: 15ch;
+}
+.benefit-list {
+  border-top: 2px solid var(--secondary);
+}
+.benefit-row {
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.benefit-row h3 {
+  color: var(--primary);
+}
+.benefit-row p {
+  max-width: 48ch;
+}
+.learning-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 3rem;
+  gap: 1.5rem;
+}
+.learning-step {
+  position: relative;
+  border-top: 1px solid color-mix(in srgb, var(--ink-foreground) 35%, transparent);
+  padding-top: 1.5rem;
+}
+.learning-step > span {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--foreground);
+}
+.learning-step:last-child > span {
+  background: var(--mint);
+}
+.landing-refined > .landing-access {
+  background: color-mix(in srgb, var(--secondary) 18%, var(--background));
+}
+.landing-access > div > div {
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.landing-access p {
+  margin: 0;
+}
+.landing-faq h2 {
+  color: var(--primary);
+}
+.landing-refined > .landing-end {
+  text-align: center;
+  border-top: 1px solid var(--border);
+  padding-block: 3rem;
+}
+.landing-end > div > div,
+.landing-end p {
+  margin-inline: auto;
+}
+@media (max-width: 767px) {
+  .landing-benefits > div,
+  .landing-access > div > div {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .landing-problem h2,
+  .landing-benefits h2 {
+    max-width: 22ch;
+  }
+  .landing-refined > .landing-solution {
+    padding-inline: 1rem;
+  }
+  .landing-solution .solution-scene {
+    padding-top: 0;
+  }
+  .benefit-row {
+    padding-block: 1.125rem;
+  }
+  .learning-steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 2rem;
+  }
+  .learning-step {
+    border-top: 0;
+    border-left: 1px solid color-mix(in srgb, var(--ink-foreground) 35%, transparent);
+    margin-left: 1.25rem;
+    padding: 0 0 1.75rem 2.25rem;
+  }
+  .learning-step:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+  .learning-step > span {
+    position: absolute;
+    left: -1.25rem;
+    top: 0;
+  }
+  .learning-step h3 {
+    margin-top: 0;
+    padding-top: 0.5rem;
+  }
+  .learning-step p {
+    margin-top: 0.5rem;
+  }
+  .landing-refined > .landing-faq {
+    padding-block: 3rem;
+  }
+}
+
+/* Reserve room for the companion below the illustration captions. */
+.landing-solution .solution-scene {
+  padding-bottom: 5.5rem;
+}
+.landing-solution .solution-side-companion {
+  bottom: 0;
+}
+
+/* Local landing illustration: one staged timeline, no member-page overrides. */
+.landing-refined #early-access > button {
+  border-radius: 999px;
+  padding-inline: 1.75rem;
+  border: 0;
+  box-shadow: none;
+}
+.landing-refined #early-access > button:hover,
+.landing-refined #early-access > button:active {
+  transform: none;
+  box-shadow: none;
+}
+.landing-refined #early-access > p {
+  margin-top: 1rem;
+}
+.solution-story {
+  position: relative;
+  padding-inline: 1.25rem;
+}
+.solution-story .course-device {
+  max-width: calc(100% - 140px);
+  filter: drop-shadow(0 14px 12px color-mix(in srgb, var(--primary) 14%, transparent));
+}
+.solution-story .course-window {
+  box-shadow: 3px 4px 0 color-mix(in srgb, var(--foreground) 80%, var(--primary));
+}
+.landing-refined .solution-story .course-window .preview-real-header {
+  background: var(--background);
+  color: var(--foreground);
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.preview-brand,
+.preview-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.preview-brand img {
+  width: 22px;
+  height: 22px;
+}
+.solution-story .course-workspace {
+  min-height: 440px;
+}
+.solution-story .beta-course-preview .animate-rise {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+.solution-story .beta-course-preview {
+  opacity: 1;
+  transition: opacity 180ms ease-out;
+}
+.solution-story[data-entered="true"] .beta-course-preview {
+  opacity: 1;
+}
+.solution-story .beta-course-preview [role="status"] {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease-out;
+}
+.solution-story[data-revealed="true"] .beta-course-preview [role="status"] {
+  opacity: 1;
+  visibility: visible;
+}
+.solution-story .beta-course-preview > div > .border-t {
+  border: 0;
+  background: transparent;
+  visibility: hidden;
+}
+.solution-story .beta-course-preview > div > .border-t p {
+  display: none;
+}
+.solution-story[data-action="true"] .beta-course-preview > div > .border-t {
+  visibility: visible;
+}
+.solution-story-notes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.story-connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--primary);
+}
+.story-connectors path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+.solution-story[data-entered="true"] .connector-0 {
+  stroke-dashoffset: 0;
+  transition-delay: 900ms;
+}
+.solution-story[data-caption="true"] .connector-1 {
+  stroke-dashoffset: 0;
+  transition-delay: 0ms;
+}
+.story-note {
+  position: absolute;
+  width: 88px;
+  color: var(--primary);
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+.story-note-0 {
+  left: -16px;
+  text-align: center;
+}
+.story-note-1 {
+  right: -8px;
+}
+.story-note span {
+  display: block;
+  background: none;
+  box-shadow: none;
+  padding: 0.15rem 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+.solution-story[data-entered="true"] .story-note-0 {
+  opacity: 1;
+  transition-delay: 450ms;
+}
+.solution-story[data-caption="true"] .story-note-1 {
+  opacity: 1;
+}
+.scene-tap {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--secondary);
+  background: var(--secondary);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.solution-story[data-clicked="true"] .scene-tap {
+  animation: scene-click 450ms ease-out both;
+}
+@keyframes scene-click {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  35% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+}
+/* Compact prose blocks without changing the approved wording. */
+.landing-refined .landing-solution > div > div > div:first-child > p {
+  line-height: 1.5;
+  max-width: 43ch;
+  margin-top: 1rem;
+}
+.landing-refined .landing-solution > div > div > div:first-child > p + p {
+  margin-top: 0.65rem;
+}
+.landing-refined .landing-end p {
+  line-height: 1.5;
+  max-width: 54ch;
+  margin-top: 1rem;
+  text-wrap: pretty;
+}
+.landing-refined .landing-problem p,
+.landing-refined .benefit-row p,
+.landing-refined .learning-step p {
+  line-height: 1.55;
+}
+@media (max-width: 639px) {
+  .solution-story {
+    padding-inline: 0;
+  }
+  .solution-story .course-device {
+    max-width: calc(100% - 100px);
+  }
+  .solution-story .story-note {
+    width: 48px;
+  }
+  .story-note span {
+    font-size: 0.6rem;
+  }
+  .solution-story .beta-course-preview {
+    zoom: 0.58;
+  }
+  .solution-story .course-workspace {
+    min-height: 340px;
+  }
+  .preview-brand img {
+    height: 16px;
+    width: 16px;
+  }
+  .solution-story .preview-brand strong {
+    font-size: 0.7rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .solution-story *,
+  .landing-refined #early-access > button {
+    animation: none !important;
+    transition: none !important;
+  }
+  .scene-tap {
+    display: none;
+  }
+}
+/* Teal confirms the explanation; the selected answer stays violet. */
+.landing-refined .solution-story[data-revealed="true"] [role="status"] {
+  background: color-mix(in srgb, var(--mint) 32%, var(--background));
+  border-color: var(--mint);
+  color: var(--foreground);
+  animation: solution-success 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.landing-refined .solution-story[data-revealed="true"] [role="status"] > span {
+  background: var(--mint);
+  color: var(--foreground);
+}
+@keyframes solution-success {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.015);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-refined .solution-story[data-revealed="true"] [role="status"] {
+    animation: none;
+  }
 }
