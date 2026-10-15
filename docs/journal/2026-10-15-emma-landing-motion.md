@@ -7,7 +7,7 @@
 
 **What changed:**
 - Separate sections visually, compact paragraphs and improve mobile mascot spacing.
-- Stage the lesson, side labels and arrows on scroll; confirm the right answer in teal before revealing the next button.
+- Stage the lesson, aligned side labels and arrows on scroll; keep the answer violet and reveal teal feedback before the next button.
 
 **Files:** marketing landing components and styles; landing copy dictionary.
 **Checked:** lint, typecheck and build pass; local illustration reviewed at desktop and mobile sizes. Database, access and waitlist logic untouched.

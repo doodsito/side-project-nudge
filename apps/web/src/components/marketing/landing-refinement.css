@@ -1567,7 +1567,8 @@ body:has(.landing-refined) header a[href="/login"]:hover {
   transition: opacity 150ms ease-out;
 }
 .story-note-0 {
-  left: -8px;
+  left: -16px;
+  text-align: center;
 }
 .story-note-1 {
   right: -8px;
@@ -1673,26 +1674,7 @@ body:has(.landing-refined) header a[href="/login"]:hover {
     display: none;
   }
 }
-/* The choice becomes teal only once the explanation confirms it. */
-.landing-refined
-  .solution-story[data-revealed="true"]
-  .beta-course-preview
-  [role="radio"][aria-checked="true"] {
-  background: var(--mint);
-  color: var(--foreground);
-  border-color: var(--mint);
-  transition:
-    background-color 220ms ease-out,
-    color 220ms ease-out;
-}
-.landing-refined
-  .solution-story[data-revealed="true"]
-  .beta-course-preview
-  [role="radio"][aria-checked="true"]
-  span[aria-hidden="true"] {
-  background: var(--foreground);
-  color: var(--mint);
-}
+/* Teal confirms the explanation; the selected answer stays violet. */
 .landing-refined .solution-story[data-revealed="true"] [role="status"] {
   background: color-mix(in srgb, var(--mint) 32%, var(--background));
   border-color: var(--mint);

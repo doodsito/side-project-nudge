@@ -50,14 +50,14 @@ export function LandingLessonPreview({
         const left = index === 0;
 
         const targetX = left
-          ? device.left - origin.left - 6
+          ? device.left - origin.left - 14
           : (feedback?.right ?? choices.right) - origin.left + 5;
         const targetY = left
           ? (choiceGroup
               ? choiceGroup.top + choiceGroup.height / 2
               : choices.top + choices.height / 2) - origin.top
           : (feedback ? feedback.top + feedback.height / 2 : choices.bottom + 35) - origin.top;
-        const y = left ? targetY : targetY - 32;
+        const y = targetY - (left ? 18 : 32);
         tops.push(y - box.height - 5);
         const tip = left ? -7 : 7;
         return `M${x} ${y} Q${x} ${targetY} ${targetX} ${targetY} M${targetX + tip} ${targetY - 5} L${targetX} ${targetY} L${targetX + tip} ${targetY + 5}`;
