@@ -20,15 +20,9 @@ export default async function HowMuchShouldYouSavePage() {
     redirect("/dashboard/courses/financial-foundation#lesson-3");
   }
 
-  const dictionary = getDictionary(member.track);
-
   return (
     <div lang={member.track === "fr" ? "fr-FR" : "en-US"}>
-      <HowMuchShouldYouSaveFlow
-        copy={dictionary.lesson3}
-        sharedCopy={dictionary.learning.shared}
-        track={member.track}
-      />
+      <HowMuchShouldYouSaveFlow track={member.track} />
     </div>
   );
 }

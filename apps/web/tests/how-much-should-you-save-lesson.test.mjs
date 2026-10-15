@@ -8,6 +8,17 @@ const source = readFileSync(
   new URL("../src/lib/how-much-should-you-save-lesson.ts", import.meta.url),
   "utf8",
 );
+const pageSource = readFileSync(
+  new URL("../src/app/lessons/how-much-should-you-save/page.tsx", import.meta.url),
+  "utf8",
+);
+const flowSource = readFileSync(
+  new URL(
+    "../src/app/lessons/how-much-should-you-save/how-much-should-you-save-flow.tsx",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const compiled = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
@@ -33,6 +44,12 @@ const {
 test("lesson three is available in both learning tracks", () => {
   assert.equal(isLessonThreeAvailable("fr"), true);
   assert.equal(isLessonThreeAvailable("us"), true);
+});
+
+test("the server page passes only the track across the lesson client boundary", () => {
+  assert.match(pageSource, /<HowMuchShouldYouSaveFlow track=\{member\.track\} \/>/);
+  assert.doesNotMatch(pageSource, /sharedCopy=/);
+  assert.match(flowSource, /getDictionary\(memberTrack\)/);
 });
 
 test("lesson three turns Alex's budget and percentages into track-localized amounts", () => {

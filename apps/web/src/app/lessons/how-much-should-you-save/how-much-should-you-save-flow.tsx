@@ -5,7 +5,7 @@ import { HowMuchShouldYouSaveLesson } from "@/components/lessons/how-much-should
 import { PracticeTemplate } from "@/components/practice/practice-template";
 import { track } from "@/lib/analytics";
 import type { ProgressStatus } from "@/lib/course-progress";
-import type { Dictionary } from "@/lib/dictionaries";
+import { getDictionary } from "@/lib/dictionaries";
 import {
   HOW_MUCH_SHOULD_YOU_SAVE_STEPS,
   type HowMuchShouldYouSaveStep,
@@ -13,15 +13,9 @@ import {
 import type { Track } from "@/lib/tracks";
 import { completeThirdLesson } from "./actions";
 
-export function HowMuchShouldYouSaveFlow({
-  copy,
-  sharedCopy,
-  track: memberTrack,
-}: {
-  copy: Dictionary["lesson3"];
-  sharedCopy: Dictionary["learning"]["shared"];
-  track: Track;
-}) {
+export function HowMuchShouldYouSaveFlow({ track: memberTrack }: { track: Track }) {
+  const dictionary = getDictionary(memberTrack);
+  const copy = dictionary.lesson3;
   const [step, setStep] = useState<HowMuchShouldYouSaveStep>("welcome");
   const [referenceAnswer, setReferenceAnswer] = useState<string | null>(null);
   const [amountAnswer, setAmountAnswer] = useState<string | null>(null);
@@ -70,7 +64,12 @@ export function HowMuchShouldYouSaveFlow({
   const total = HOW_MUCH_SHOULD_YOU_SAVE_STEPS.length;
 
   return (
-    <PracticeTemplate current={current} total={total} copy={sharedCopy} skipLink={copy.chrome.skip}>
+    <PracticeTemplate
+      current={current}
+      total={total}
+      copy={dictionary.learning.shared}
+      skipLink={dictionary.skipLink}
+    >
       <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <HowMuchShouldYouSaveLesson
           step={step}
