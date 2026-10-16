@@ -824,15 +824,134 @@ export const us = {
       description: "Use percentages as flexible guideposts, never fixed rules.",
       duration: "4 min",
     },
-    lesson4: {
-      worldCardTitle: "Build your safety net",
-      worldCardDescription: "See why different situations call for different cash buffers.",
-      worldCardDuration: "5 min",
+  },
+  lesson4: {
+    enabled: true,
+    metaTitle: "Build your safety net",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
       eyebrow: "World 1 · Lesson 4",
-      title: "Build your safety net",
+      title: "A safety net should fit the life it protects.",
       intro:
-        "Alex chose an amount to save. Next, see why a cash buffer depends on needs, stability and time—not one universal target.",
-      badge: "Lesson 4 unlocked",
+        "Alex has started saving. Help him give some of that money a clear job and adjust it as his situation changes.",
+      action: "Start the lesson",
+      cardLabel: "Alex’s next question",
+      cardTitle: "What should this money protect?",
+    },
+    purpose: {
+      eyebrow: "A different job for some savings",
+      title: "A buffer buys room to respond.",
+      body: "A safety net is money kept within reach so essential costs can continue when income or expenses change.",
+      cardTitle: "It is not a universal target.",
+      cardBody:
+        "Its useful size depends on essential costs, income stability, responsibilities and the other options available to the person.",
+      action: "See Alex’s starting point",
+    },
+    snapshot: {
+      eyebrow: "Alex’s starting point",
+      title: "Start with what must keep running.",
+      income: "Monthly take-home pay",
+      essentials: "Essential monthly costs",
+      buffer: "Accessible safety net",
+      monthlySaving: "Current monthly saving",
+      note: "The $360 is a starting point, not proof that Alex has reached the right amount for every situation.",
+      action: "Look beyond the amount",
+    },
+    factors: {
+      eyebrow: "The amount alone is not enough",
+      title: "Which information is most useful when Alex reviews his safety net?",
+      prompt: "Choose the information that reflects Alex’s real situation.",
+      options: [
+        "A universal number of months that everyone must save",
+        "His essential costs, income stability, responsibilities and other fallbacks",
+        "The largest target he can find, regardless of his current budget",
+      ],
+      correct:
+        "Those factors show what Alex may need the money to protect and how much flexibility he already has.",
+      incorrect:
+        "A fixed or oversized target ignores the person behind the number. Alex needs to start with his own costs and constraints.",
+      action: "Compare two situations",
+    },
+    comparison: {
+      eyebrow: "Same bills, different need for flexibility",
+      title: "The situation can change before the expenses do.",
+      intro: "In both situations, Alex has {essentials} of essential monthly costs.",
+      steadyLabel: "Alex today",
+      steadyTitle: "A steadier month",
+      steadyPoints: [
+        "His work hours are regular",
+        "Some spending can be adjusted",
+        "No one else relies on his income",
+      ],
+      changedLabel: "Alex after a change",
+      changedTitle: "Less room to absorb a gap",
+      changedPoints: [
+        "His work hours can vary",
+        "He helps cover another person’s needs",
+        "Fewer expenses can be delayed",
+      ],
+      takeaway:
+        "The same essential costs can call for a different cushion. That is a reason to review the plan—not a formula that chooses the amount for Alex.",
+      action: "Choose a next step",
+    },
+    decision: {
+      eyebrow: "Build from today’s information",
+      title: "What is the most useful next step for Alex?",
+      cardLabel: "Current plan",
+      cardText: "Accessible: {buffer} · Adding: {saving} per month",
+      prompt: "Choose the step that stays useful if Alex’s situation changes.",
+      options: [
+        "Treat {buffer} as a finished target and never review it",
+        "Keep {buffer} accessible and continue building at a pace his budget can support",
+        "Move the full {buffer} to a long-term goal because he has not needed it yet",
+      ],
+      correct:
+        "Alex keeps the money available for its purpose and can review both the {buffer} and the {saving} as his situation changes.",
+      incorrect:
+        "Declaring the target finished—or giving the money a long-term job—ignores why Alex set this buffer aside.",
+      action: "Put the plan to work",
+    },
+    rebuild: {
+      eyebrow: "Using it is part of the plan",
+      title: "How can Alex rebuild without squeezing the next month?",
+      cardLabel: "After a disruption",
+      cardText: "Used: {disruption} · Safety net left: {remaining}",
+      prompt: "Alex has {capacity} available next month. Choose an adaptable response.",
+      options: [
+        "Replace the full {disruption} immediately, even though only {capacity} is available",
+        "Set aside {rebuild}, keep {margin} of breathing room and review again next month",
+        "Stop rebuilding because the safety net already did its job once",
+      ],
+      correct:
+        "Rebuilding can be gradual. In this example, {rebuild} restores part of the buffer while leaving {margin} for the month.",
+      incorrect:
+        "A safety net can be used and rebuilt. The new contribution still needs to fit the budget instead of creating another squeeze.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You built a safety net around Alex’s situation—not a universal rule.",
+      points: [
+        "Start with essential costs and real responsibilities.",
+        "Keep the buffer accessible and review it when life changes.",
+        "After using it, rebuild at a pace the budget can support.",
+      ],
+      takeaway:
+        "A useful safety net is personal, accessible and adjustable as needs and stability change.",
+      note: "Educational simulation using virtual money. This is not financial advice.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 5",
+      back: "Back to World 1",
+    },
+    lesson5: {
+      metaTitle: "Money you’ll need soon",
+      eyebrow: "World 1 · Lesson 5",
+      title: "Money you’ll need soon",
+      intro:
+        "Alex has given his safety net a clear job. Next, he will separate planned near-term needs from money that can stay set aside for much longer.",
+      badge: "Lesson 5 unlocked",
       comingLabel: "Coming next",
       comingText:
         "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
