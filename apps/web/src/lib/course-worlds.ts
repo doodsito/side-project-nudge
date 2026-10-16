@@ -66,7 +66,6 @@ export const FOUNDATION_LESSONS = [
   {
     number: 3,
     duration: "4 min",
-    href: "/dashboard/courses/financial-foundation/how-much-should-you-save",
   },
   {
     number: 4,

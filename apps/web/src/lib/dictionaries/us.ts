@@ -711,6 +711,135 @@ export const us = {
       },
     },
   },
+  lesson3: {
+    enabled: true,
+    metaTitle: "How much should you save?",
+    chrome: {
+      skip: "Skip to content",
+      progress: "Lesson progress: step {current} of {total}",
+      leave: "Leave lesson",
+    },
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
+      eyebrow: "World 1 · Lesson 3",
+      title: "A percentage is a guide, not a rule.",
+      intro:
+        "Help Alex choose an amount that fits this month, then review it when his situation changes.",
+      action: "Start lesson",
+      cardLabel: "Alex’s next question",
+      cardTitle: "How much should he save?",
+    },
+    snapshot: {
+      eyebrow: "A new month for Alex",
+      title: "Start with the real budget.",
+      income: "Take-home pay",
+      spending: "Known and planned spending",
+      capacity: "Potentially available",
+      note: "This amount is not a promise: a forgotten expense or surprise could still change it.",
+      action: "Compare the numbers",
+    },
+    reference: {
+      eyebrow: "Budget before percentage",
+      title: "What should set Alex’s limit this month?",
+      prompt: "Choose the number that should come first.",
+      options: [
+        "What remains after known and planned spending",
+        "A percentage from a general rule",
+      ],
+      correct:
+        "The real budget sets the limit. A percentage can then help compare different amounts.",
+      incorrect:
+        "A general percentage does not know Alex’s rent, bills or plans. The budget comes first.",
+      action: "See the percentages",
+    },
+    comparison: {
+      eyebrow: "Same income, very different amounts",
+      title: "Percentages become dollars.",
+      intro: "Here is what three commonly cited guideposts look like on {income} of take-home pay.",
+      within: "Within the {capacity} limit",
+      above: "Above the {capacity} limit",
+      takeaway:
+        "None of these percentages knows Alex’s month. They are comparison tools, not instructions.",
+      action: "Keep the key idea",
+    },
+    concept: {
+      eyebrow: "Concept unlocked",
+      title: "Budget first. Consistency second.",
+      body: "Start below what the budget might support, keep some breathing room, then review the amount over time.",
+      cardTitle: "There is no perfect savings percentage for everyone.",
+      cardBody:
+        "Income, spending and priorities differ. The useful habit is to review the amount without ignoring known needs.",
+      action: "Choose an amount",
+    },
+    amount: {
+      eyebrow: "Alex could set aside up to {capacity}",
+      title: "Which choice leaves the most room to adapt?",
+      prompt: "Choose the most flexible starting point for this fictional example.",
+      options: [
+        "{saving}, with {margin} of breathing room",
+        "{capacity}, using the full available amount",
+        "{twenty}, to reach the 20% guidepost",
+      ],
+      correct:
+        "{saving} gives saving a place while leaving {margin} of breathing room in this example.",
+      incorrect:
+        "Using the whole available amount—or exceeding it to hit a percentage—leaves less room for changes during the month.",
+      action: "Test a tighter month",
+    },
+    stress: {
+      eyebrow: "The amount still fits, but only just",
+      title: "What should Alex do before repeating the {saving} transfer?",
+      cardLabel: "The following month",
+      cardText: "Available: {capacity} · Remaining after saving: {margin}",
+      prompt: "Test the same amount during a tighter month.",
+      options: [
+        "Automatically keep {saving} because it worked before",
+        "Check whether {margin} is enough breathing room this month",
+        "Increase to {ten} to reach the 10% guidepost",
+      ],
+      correct:
+        "An amount can fit the math and still deserve a review. Breathing room and upcoming expenses matter too.",
+      incorrect:
+        "Repeating or increasing the amount without checking the smaller margin turns a guidepost into a rule.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You chose an amount from the budget, not from a rule.",
+      points: [
+        "Find what is truly available.",
+        "Use percentages only as guideposts.",
+        "Keep breathing room and review the amount.",
+      ],
+      takeaway: "A useful amount fits the person, the month and the information available today.",
+      note: "Educational simulation using virtual money. This is not financial advice.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 4",
+      back: "Back to World 1",
+    },
+    worldCard: {
+      title: "How much should you save?",
+      description: "Use percentages as flexible guideposts, never fixed rules.",
+      duration: "4 min",
+    },
+    lesson4: {
+      worldCardTitle: "Build your safety net",
+      worldCardDescription: "See why different situations call for different cash buffers.",
+      worldCardDuration: "5 min",
+      eyebrow: "World 1 · Lesson 4",
+      title: "Build your safety net",
+      intro:
+        "Alex chose an amount to save. Next, see why a cash buffer depends on needs, stability and time—not one universal target.",
+      badge: "Lesson 4 unlocked",
+      comingLabel: "Coming next",
+      comingText:
+        "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
+      back: "World 1",
+      viewProgress: "View my progress",
+    },
+  },
   dashboard: {
     home: "dashboard",
     tabsLabel: "Dashboard",

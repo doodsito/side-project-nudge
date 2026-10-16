@@ -506,7 +506,7 @@ export function PayYourselfFirstLesson(props: Props) {
             <Button size="xl" onClick={props.onRetryProgress}>
               {props.copy.complete.saveAgain} <ArrowRight aria-hidden="true" />
             </Button>
-          ) : props.progressStatus === "saved" ? (
+          ) : props.progressStatus === "saved" && props.track === "fr" ? (
             <Button asChild size="xl">
               <Link href="/dashboard/courses/financial-foundation/how-much-should-you-save">
                 {props.copy.complete.continue} <ArrowRight aria-hidden="true" />
