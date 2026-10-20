@@ -858,16 +858,134 @@ export const fr: Dictionary = {
       description: "Utilise les pourcentages comme des repères souples, jamais comme des règles.",
       duration: "4 min",
     },
-    lesson4: {
-      worldCardTitle: "Construire ton filet de sécurité",
-      worldCardDescription:
-        "Découvre pourquoi chaque situation demande une réserve d’argent différente.",
-      worldCardDuration: "5 min",
+  },
+  lesson4: {
+    enabled: true,
+    metaTitle: "Construire ton filet de sécurité",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 4",
-      title: "Construire ton filet de sécurité",
+      title: "Un filet de sécurité doit correspondre à la vie qu’il protège.",
       intro:
-        "Alex a choisi un montant à épargner. Découvre ensuite pourquoi une réserve dépend des besoins, de la stabilité et du temps — pas d’un objectif universel.",
-      badge: "Leçon 4 débloquée",
+        "Alex a commencé à épargner. Aide-le à donner un rôle clair à une partie de cet argent et à l’adapter quand sa situation change.",
+      action: "Commencer la leçon",
+      cardLabel: "La prochaine question d’Alex",
+      cardTitle: "Que doit protéger cet argent ?",
+    },
+    purpose: {
+      eyebrow: "Un rôle différent pour une partie de l’épargne",
+      title: "Une réserve donne le temps de réagir.",
+      body: "Un filet de sécurité est une somme qui reste accessible pour continuer à payer les dépenses essentielles lorsque les revenus ou les dépenses changent.",
+      cardTitle: "Ce n’est pas un objectif universel.",
+      cardBody:
+        "Son montant utile dépend des dépenses essentielles, de la stabilité des revenus, des responsabilités et des autres solutions dont dispose la personne.",
+      action: "Voir le point de départ d’Alex",
+    },
+    snapshot: {
+      eyebrow: "Le point de départ d’Alex",
+      title: "Commence par ce qui doit continuer à fonctionner.",
+      income: "Revenu net mensuel",
+      essentials: "Dépenses essentielles mensuelles",
+      buffer: "Filet de sécurité accessible",
+      monthlySaving: "Épargne mensuelle actuelle",
+      note: "Les 360 € sont un point de départ, pas la preuve qu’Alex a atteint le bon montant pour toutes les situations.",
+      action: "Regarder au-delà du montant",
+    },
+    factors: {
+      eyebrow: "Le montant seul ne suffit pas",
+      title: "Quelles informations sont les plus utiles quand Alex revoit son filet ?",
+      prompt: "Choisis les informations qui reflètent la situation réelle d’Alex.",
+      options: [
+        "Un nombre universel de mois que tout le monde doit épargner",
+        "Ses dépenses essentielles, la stabilité de ses revenus, ses responsabilités et ses autres solutions",
+        "L’objectif le plus élevé qu’il trouve, sans tenir compte de son budget actuel",
+      ],
+      correct:
+        "Ces facteurs montrent ce que l’argent doit protéger et la marge de manœuvre dont Alex dispose déjà.",
+      incorrect:
+        "Un objectif fixe ou démesuré oublie la personne derrière le chiffre. Alex doit partir de ses propres coûts et contraintes.",
+      action: "Comparer deux situations",
+    },
+    comparison: {
+      eyebrow: "Mêmes factures, besoin de souplesse différent",
+      title: "La situation peut changer avant les dépenses.",
+      intro: "Dans les deux situations, Alex a {essentials} de dépenses essentielles mensuelles.",
+      steadyLabel: "Alex aujourd’hui",
+      steadyTitle: "Un mois plus stable",
+      steadyPoints: [
+        "Ses heures de travail sont régulières",
+        "Certaines dépenses peuvent être ajustées",
+        "Personne d’autre ne dépend de son revenu",
+      ],
+      changedLabel: "Alex après un changement",
+      changedTitle: "Moins de marge pour absorber un écart",
+      changedPoints: [
+        "Ses heures de travail peuvent varier",
+        "Il aide à couvrir les besoins d’une autre personne",
+        "Moins de dépenses peuvent être reportées",
+      ],
+      takeaway:
+        "Les mêmes dépenses essentielles peuvent demander une réserve différente. C’est une raison de revoir le plan, pas une formule qui choisit le montant à la place d’Alex.",
+      action: "Choisir la prochaine étape",
+    },
+    decision: {
+      eyebrow: "Construire avec les informations d’aujourd’hui",
+      title: "Quelle prochaine étape est la plus utile pour Alex ?",
+      cardLabel: "Plan actuel",
+      cardText: "Accessible : {buffer} · Ajout : {saving} par mois",
+      prompt: "Choisis l’étape qui reste utile si la situation d’Alex évolue.",
+      options: [
+        "Considérer les {buffer} comme un objectif terminé et ne plus jamais le revoir",
+        "Garder les {buffer} accessibles et continuer à construire au rythme permis par son budget",
+        "Affecter les {buffer} à un objectif de long terme puisqu’il n’en a pas encore eu besoin",
+      ],
+      correct:
+        "Alex garde l’argent disponible pour son rôle et peut revoir les {buffer} comme les {saving} lorsque sa situation évolue.",
+      incorrect:
+        "Déclarer l’objectif terminé — ou donner à l’argent un rôle de long terme — oublie pourquoi Alex a constitué cette réserve.",
+      action: "Mettre le plan à l’épreuve",
+    },
+    rebuild: {
+      eyebrow: "L’utiliser fait partie du plan",
+      title: "Comment Alex peut-il reconstruire sans comprimer le mois suivant ?",
+      cardLabel: "Après une difficulté",
+      cardText: "Utilisé : {disruption} · Filet restant : {remaining}",
+      prompt: "Alex dispose de {capacity} le mois suivant. Choisis une réponse adaptable.",
+      options: [
+        "Remettre immédiatement les {disruption}, même si seulement {capacity} sont disponibles",
+        "Mettre {rebuild} de côté, garder {margin} de marge et revoir la situation le mois suivant",
+        "Arrêter de reconstruire puisque le filet a déjà servi une fois",
+      ],
+      correct:
+        "La reconstruction peut être progressive. Ici, {rebuild} restaure une partie de la réserve tout en laissant {margin} pour le mois.",
+      incorrect:
+        "Un filet peut être utilisé puis reconstruit. La nouvelle contribution doit toujours respecter le budget au lieu de créer une autre tension.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as construit le filet d’Alex autour de sa situation, pas d’une règle universelle.",
+      points: [
+        "Partir des dépenses essentielles et des responsabilités réelles.",
+        "Garder la réserve accessible et la revoir lorsque la vie change.",
+        "Après l’avoir utilisée, la reconstruire au rythme permis par le budget.",
+      ],
+      takeaway:
+        "Un filet utile est personnel, accessible et adaptable lorsque les besoins et la stabilité évoluent.",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 5",
+      back: "Retour au Monde 1",
+    },
+    lesson5: {
+      metaTitle: "L’argent dont tu auras bientôt besoin",
+      eyebrow: "Monde 1 · Leçon 5",
+      title: "L’argent dont tu auras bientôt besoin",
+      intro:
+        "Alex a donné un rôle clair à son filet de sécurité. Il va maintenant séparer ses besoins proches et planifiés de l’argent qui peut rester de côté beaucoup plus longtemps.",
+      badge: "Leçon 5 débloquée",
       comingLabel: "Prochaine étape",
       comingText:
         "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",

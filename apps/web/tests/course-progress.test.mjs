@@ -71,3 +71,15 @@ test("lesson three saves 3/8 progress and unlocks lesson four", () => {
   assert.equal(hasCompletedLesson(afterThree, FOUNDATION_WORLD, 3), true);
   assert.equal(hasCompletedLesson(afterThree, FOUNDATION_WORLD, 4), false);
 });
+
+test("lesson four saves 4/8 progress and unlocks lesson five", () => {
+  const afterOne = completeLesson(readCourseProgress(null), FOUNDATION_WORLD, 1);
+  const afterTwo = completeLesson(afterOne, FOUNDATION_WORLD, 2);
+  const afterThree = completeLesson(afterTwo, FOUNDATION_WORLD, 3);
+  const afterFour = completeLesson(afterThree, FOUNDATION_WORLD, 4);
+
+  assert.equal(completedLessonCount(afterFour, FOUNDATION_WORLD), 4);
+  assert.equal(hasCompletedLesson(afterFour, FOUNDATION_WORLD, 4), true);
+  assert.equal(hasCompletedLesson(afterFour, FOUNDATION_WORLD, 5), false);
+  assert.deepEqual(Array.from(afterFour.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4]);
+});

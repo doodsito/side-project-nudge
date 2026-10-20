@@ -12,6 +12,7 @@ import {
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import { FOUNDATION_LESSONS } from "@/lib/course-worlds";
+import { isLessonFourAvailable } from "@/lib/build-your-safety-net-lesson";
 import {
   completedLessonCount,
   FOUNDATION_LESSON_COUNT,
@@ -37,17 +38,22 @@ export function FoundationWorld({
   const completedCount = completedLessonCount(progress, FOUNDATION_WORLD);
   const progressPercent = (completedCount / FOUNDATION_LESSON_COUNT) * 100;
   const lessons = FOUNDATION_LESSONS.map((lesson) => {
-    if (!isLessonThreeAvailable(track)) return lesson;
-    if (lesson.number === 3) {
+    if (lesson.number === 3 && isLessonThreeAvailable(track)) {
       return {
         ...lesson,
         href: "/dashboard/courses/financial-foundation/how-much-should-you-save",
       };
     }
-    if (lesson.number === 4) {
+    if (lesson.number === 4 && isLessonFourAvailable(track)) {
       return {
         ...lesson,
         href: "/dashboard/courses/financial-foundation/build-your-safety-net",
+      };
+    }
+    if (lesson.number === 5 && isLessonFourAvailable(track)) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/money-youll-need-soon",
       };
     }
     return lesson;
