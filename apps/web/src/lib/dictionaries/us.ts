@@ -945,13 +945,145 @@ export const us = {
       next: "Continue to lesson 5",
       back: "Back to World 1",
     },
-    lesson5: {
-      metaTitle: "Money you’ll need soon",
+  },
+  lesson5: {
+    enabled: true,
+    metaTitle: "Money you’ll need soon",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
       eyebrow: "World 1 · Lesson 5",
-      title: "Money you’ll need soon",
+      title: "A date changes the job of your money.",
       intro:
-        "Alex has given his safety net a clear job. Next, he will separate planned near-term needs from money that can stay set aside for much longer.",
-      badge: "Lesson 5 unlocked",
+        "Alex has separated his safety net. Now help him prepare for a known expense without treating it like an emergency or a distant goal.",
+      action: "Start the lesson",
+      cardLabel: "Alex’s next question",
+      cardTitle: "When will he need it?",
+    },
+    roles: {
+      eyebrow: "Three jobs, three questions",
+      title: "Start with the money’s next job.",
+      intro:
+        "The label “savings” does not say when the money will be used or what happens if it is not available.",
+      cards: [
+        {
+          title: "Safety net",
+          body: "For an unexpected event whose timing and cost are not yet known.",
+        },
+        {
+          title: "Planned expense",
+          body: "For an expected need with an amount and date to prepare for.",
+        },
+        {
+          title: "Long term",
+          body: "For money that can stay untouched much longer despite fluctuations.",
+        },
+      ],
+      takeaway:
+        "The job comes before the account: possible emergency, planned date or a much longer horizon.",
+      action: "See Alex’s plan",
+    },
+    snapshot: {
+      eyebrow: "An expense known in advance",
+      title: "Alex can turn a date into a plan.",
+      intro:
+        "He plans to move. The boxes, transportation and setup costs he expects stay separate from his safety net.",
+      cost: "Moving costs",
+      saved: "Already set aside",
+      deadline: "Due",
+      deadlineValue: "In {months} months",
+      capacity: "Monthly saving capacity",
+      note: "The amounts are here to explore a decision. They are not a personal recommendation.",
+      action: "Give this money a job",
+    },
+    classify: {
+      eyebrow: "The situation defines the job",
+      title: "How should Alex classify the money for his move?",
+      prompt: "Choose the job that matches a known cost with a known date.",
+      options: [
+        "His safety net, because every future expense is an emergency",
+        "A planned expense kept separate from his safety net",
+        "A very long-term goal with no expected use date",
+      ],
+      correct:
+        "The move is planned and estimated. Preparing for it separately avoids treating a predictable expense as an emergency.",
+      incorrect:
+        "The date and cost are already known. A safety net covers surprises, while a distant goal does not have this near-term deadline.",
+      action: "Build the timeline",
+    },
+    timeline: {
+      eyebrow: "From a goal to a monthly amount",
+      title: "The timeline reveals one possible pace.",
+      intro: "Alex can compare the amount still needed with the number of months available.",
+      gapLabel: "Still needed",
+      gapText: "{cost} minus {saved}",
+      monthlyLabel: "For the move",
+      monthlyText: "{gap} spread across {months} months",
+      otherLabel: "For other priorities",
+      otherText: "Left from his current monthly capacity",
+      takeaway:
+        "This calculation describes one option using today’s information. It is not a rule that fits everyone.",
+      action: "Choose what matters as the date approaches",
+    },
+    stability: {
+      eyebrow: "A near and fairly fixed date",
+      title: "Which feature matters most for this money?",
+      cardLabel: "Planned need",
+      cardText: "{cost} in {months} months",
+      prompt: "Choose the answer that fits the money’s job and deadline.",
+      options: [
+        "Prioritize a large gain, even if the amount could fall at the wrong time",
+        "Keep the money stable enough and accessible for the planned date",
+        "Mix it into the safety net because both amounts need to stay available",
+      ],
+      correct:
+        "A near and fairly fixed date makes stability and access important. Alex needs the money to be there when payment is due.",
+      incorrect:
+        "An uncertain gain cannot promise the right amount on the right date, and two accessible amounts can still have different jobs.",
+      action: "See what happens when the date changes",
+    },
+    change: {
+      eyebrow: "When the timeline no longer fits the budget",
+      title: "Which response stays realistic for Alex?",
+      cardLabel: "New deadline",
+      cardText:
+        "{gap} in {earlierMonths} months = {earlierContribution} per month · capacity: {capacity}",
+      prompt:
+        "He is short {shortfall} per month. Choose a response that does not turn the gap into a bet.",
+      options: [
+        "Look for a quick gain to cover the missing {shortfall} each month",
+        "Review the cost, date or budget, then recalculate a workable plan",
+        "Automatically take the difference from his safety net",
+      ],
+      correct:
+        "The new pace exceeds his capacity by {shortfall}. Reviewing the inputs makes the plan explicit without relying on an uncertain outcome.",
+      incorrect:
+        "A timeline that is too tight calls for a revised plan. A quick gain is uncertain, and the safety net already has another job.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You gave Alex’s money a clear date and job.",
+      points: [
+        "A predictable expense is not an emergency.",
+        "The nearer and firmer the date, the more stability and access matter.",
+        "If the timeline exceeds the available capacity, review the plan.",
+      ],
+      takeaway:
+        "Before deciding what to do with your money, ask when you will need it and how much that date can move.",
+      note: "Educational simulation using virtual money. This is not financial advice.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 6",
+      back: "Back to World 1",
+    },
+    lesson6: {
+      metaTitle: "Debt vs investing",
+      eyebrow: "World 1 · Lesson 6",
+      title: "Debt vs investing",
+      intro:
+        "Alex can now separate money needed soon from money that can wait. His next decision will compare a certain borrowing cost with an uncertain investment return.",
+      badge: "Lesson 6 unlocked",
       comingLabel: "Coming next",
       comingText:
         "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",

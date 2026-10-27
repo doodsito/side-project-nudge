@@ -979,13 +979,145 @@ export const fr: Dictionary = {
       next: "Continuer vers la leçon 5",
       back: "Retour au Monde 1",
     },
-    lesson5: {
-      metaTitle: "L’argent dont tu auras bientôt besoin",
+  },
+  lesson5: {
+    enabled: true,
+    metaTitle: "L’argent dont tu auras bientôt besoin",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 5",
-      title: "L’argent dont tu auras bientôt besoin",
+      title: "Une date change le rôle de ton argent.",
       intro:
-        "Alex a donné un rôle clair à son filet de sécurité. Il va maintenant séparer ses besoins proches et planifiés de l’argent qui peut rester de côté beaucoup plus longtemps.",
-      badge: "Leçon 5 débloquée",
+        "Alex a séparé son filet de sécurité. Aide-le maintenant à préparer une dépense connue sans la confondre avec un imprévu ou un objectif lointain.",
+      action: "Commencer la leçon",
+      cardLabel: "La prochaine question d’Alex",
+      cardTitle: "Quand en aura-t-il besoin ?",
+    },
+    roles: {
+      eyebrow: "Trois rôles, trois questions",
+      title: "Commence par la prochaine mission de l’argent.",
+      intro:
+        "L’étiquette « épargne » ne dit pas quand l’argent servira ni ce qui arriverait s’il n’était pas disponible.",
+      cards: [
+        {
+          title: "Filet de sécurité",
+          body: "Pour un imprévu dont la date et le montant ne sont pas connus.",
+        },
+        {
+          title: "Dépense planifiée",
+          body: "Pour un besoin attendu, avec un montant et une échéance à préparer.",
+        },
+        {
+          title: "Long terme",
+          body: "Pour de l’argent qui peut rester inutilisé bien plus longtemps malgré des variations.",
+        },
+      ],
+      takeaway:
+        "Le rôle vient avant le support : urgence possible, date prévue ou horizon beaucoup plus lointain.",
+      action: "Voir le projet d’Alex",
+    },
+    snapshot: {
+      eyebrow: "Une dépense connue à l’avance",
+      title: "Alex peut transformer une date en plan.",
+      intro:
+        "Il prévoit de déménager. Les cartons, le transport et les frais d’installation qu’il anticipe restent distincts de son filet de sécurité.",
+      cost: "Frais de déménagement",
+      saved: "Déjà mis de côté",
+      deadline: "Échéance",
+      deadlineValue: "Dans {months} mois",
+      capacity: "Capacité d’épargne mensuelle",
+      note: "Les montants servent à explorer une décision. Ils ne constituent pas une recommandation personnelle.",
+      action: "Donner un rôle à cette somme",
+    },
+    classify: {
+      eyebrow: "Le rôle vient de la situation",
+      title: "Comment classer l’argent du déménagement d’Alex ?",
+      prompt: "Choisis le rôle qui correspond à un coût connu et daté.",
+      options: [
+        "Son filet de sécurité, car toute dépense future est un imprévu",
+        "Une dépense planifiée, séparée de son filet de sécurité",
+        "Un objectif de très long terme sans date d’utilisation",
+      ],
+      correct:
+        "Le déménagement est prévu et chiffré. Le préparer séparément évite de présenter une dépense prévisible comme une urgence.",
+      incorrect:
+        "La date et le coût sont déjà connus. Le filet sert aux imprévus, tandis qu’un objectif lointain n’a pas cette échéance proche.",
+      action: "Construire le calendrier",
+    },
+    timeline: {
+      eyebrow: "Du projet au montant mensuel",
+      title: "Le calendrier révèle un rythme possible.",
+      intro: "Alex peut comparer ce qu’il lui reste à réunir au nombre de mois disponibles.",
+      gapLabel: "Reste à réunir",
+      gapText: "{cost} moins {saved}",
+      monthlyLabel: "Pour le déménagement",
+      monthlyText: "{gap} répartis sur {months} mois",
+      otherLabel: "Pour d’autres priorités",
+      otherText: "Reste sur sa capacité mensuelle actuelle",
+      takeaway:
+        "Ce calcul décrit une option avec les informations d’aujourd’hui. Il ne fixe pas une règle valable pour tout le monde.",
+      action: "Choisir ce qui compte à l’approche de la date",
+    },
+    stability: {
+      eyebrow: "Une date proche et peu flexible",
+      title: "Quelle caractéristique compte le plus pour cette somme ?",
+      cardLabel: "Besoin planifié",
+      cardText: "{cost} dans {months} mois",
+      prompt: "Choisis la réponse qui respecte le rôle et l’échéance de l’argent.",
+      options: [
+        "Chercher avant tout une forte hausse, même si la somme peut baisser au mauvais moment",
+        "Garder la somme suffisamment stable et accessible pour la date prévue",
+        "Mélanger la somme avec le filet de sécurité puisqu’elles doivent toutes deux rester disponibles",
+      ],
+      correct:
+        "Une date proche et peu flexible rend la stabilité et l’accessibilité importantes. Alex doit pouvoir payer au moment prévu.",
+      incorrect:
+        "Une hausse incertaine ne garantit pas le montant à la bonne date, et deux sommes accessibles peuvent tout de même avoir des rôles distincts.",
+      action: "Voir ce qui se passe si la date change",
+    },
+    change: {
+      eyebrow: "Quand le calendrier ne rentre plus dans le budget",
+      title: "Quelle réponse reste réaliste pour Alex ?",
+      cardLabel: "Nouvelle échéance",
+      cardText:
+        "{gap} en {earlierMonths} mois = {earlierContribution} par mois · capacité : {capacity}",
+      prompt:
+        "Il manque {shortfall} par mois. Choisis une réponse qui ne transforme pas le manque en pari.",
+      options: [
+        "Chercher un gain rapide pour combler les {shortfall} manquants chaque mois",
+        "Revoir le coût, la date ou son budget, puis recalculer un plan réalisable",
+        "Prendre automatiquement la différence dans son filet de sécurité",
+      ],
+      correct:
+        "Le nouveau rythme dépasse sa capacité de {shortfall}. Revoir les paramètres rend le plan explicite sans compter sur un résultat incertain.",
+      incorrect:
+        "Une échéance trop serrée demande de revoir le plan. Un gain rapide est incertain et le filet de sécurité a déjà une autre mission.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as donné une échéance et un rôle clair à l’argent d’Alex.",
+      points: [
+        "Une dépense prévisible n’est pas une urgence.",
+        "Plus la date est proche et fixe, plus stabilité et accessibilité comptent.",
+        "Si le calendrier dépasse la capacité disponible, il faut revoir le plan.",
+      ],
+      takeaway:
+        "Avant de décider quoi faire de ton argent, demande-toi quand tu en auras besoin et à quel point cette date peut bouger.",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 6",
+      back: "Retour au Monde 1",
+    },
+    lesson6: {
+      metaTitle: "Rembourser une dette ou investir ?",
+      eyebrow: "Monde 1 · Leçon 6",
+      title: "Rembourser une dette ou investir ?",
+      intro:
+        "Alex sait maintenant séparer l’argent nécessaire bientôt de celui qui peut attendre. Sa prochaine décision comparera le coût certain d’une dette au rendement incertain d’un investissement.",
+      badge: "Leçon 6 débloquée",
       comingLabel: "Prochaine étape",
       comingText:
         "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",

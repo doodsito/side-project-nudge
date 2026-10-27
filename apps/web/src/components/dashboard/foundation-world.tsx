@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
-import { FOUNDATION_LESSONS } from "@/lib/course-worlds";
 import { isLessonFourAvailable } from "@/lib/build-your-safety-net-lesson";
+import { FOUNDATION_LESSONS } from "@/lib/course-worlds";
 import {
   completedLessonCount,
   FOUNDATION_LESSON_COUNT,
@@ -22,6 +22,7 @@ import {
 } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
 import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
+import { isLessonFiveAvailable } from "@/lib/money-youll-need-soon-lesson";
 import type { Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
@@ -50,10 +51,16 @@ export function FoundationWorld({
         href: "/dashboard/courses/financial-foundation/build-your-safety-net",
       };
     }
-    if (lesson.number === 5 && isLessonFourAvailable(track)) {
+    if (lesson.number === 5 && isLessonFiveAvailable(track)) {
       return {
         ...lesson,
         href: "/dashboard/courses/financial-foundation/money-youll-need-soon",
+      };
+    }
+    if (lesson.number === 6 && isLessonFiveAvailable(track)) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/debt-vs-investing",
       };
     }
     return lesson;
