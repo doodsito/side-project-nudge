@@ -1,7 +1,7 @@
 # Money you’ll need soon
 - **Date:** 2026-10-20
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/56
 **Why:** replace the lesson 5 placeholder with a complete bilingual lesson about planned near-term expenses.
 **What changed:**
 - Alex prepares for a move, compares its six-month timeline with his monthly capacity and revises the plan when the date changes.
