@@ -1,7 +1,7 @@
 # Next.js security upgrade
 - **Date:** 2026-10-26
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/58
 **Why:** The production build reported that Next.js 16.4.0 was affected by a published security advisory.
 **What changed:**
 - Upgraded Next.js and its ESLint config from 16.4.0 to 16.4.3 in an isolated worktree.
