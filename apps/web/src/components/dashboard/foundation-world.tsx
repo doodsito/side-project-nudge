@@ -12,6 +12,7 @@ import {
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import { isLessonFourAvailable } from "@/lib/build-your-safety-net-lesson";
+import { isLessonSevenAvailable } from "@/lib/cash-isnt-risk-free-lesson";
 import { FOUNDATION_LESSONS } from "@/lib/course-worlds";
 import {
   completedLessonCount,
@@ -64,10 +65,16 @@ export function FoundationWorld({
         href: "/dashboard/courses/financial-foundation/debt-vs-investing",
       };
     }
-    if (lesson.number === 7 && isLessonSixAvailable(track)) {
+    if (lesson.number === 7 && isLessonSevenAvailable(track)) {
       return {
         ...lesson,
         href: "/dashboard/courses/financial-foundation/cash-isnt-risk-free",
+      };
+    }
+    if (lesson.number === 8 && isLessonSevenAvailable(track)) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/savings-vs-investing",
       };
     }
     return lesson;
