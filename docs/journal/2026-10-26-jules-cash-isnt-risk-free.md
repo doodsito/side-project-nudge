@@ -1,7 +1,7 @@
 # Cash is not risk-free lesson
 - **Date:** 2026-10-26
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/59
 **Why:** Learners need to see that a stable account balance can lose purchasing power without treating inflation as an automatic reason to invest.
 **What changed:**
 - Added a bilingual lesson with fictional 3% inflation and 2% interest examples.
