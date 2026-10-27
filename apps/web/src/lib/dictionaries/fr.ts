@@ -1111,13 +1111,174 @@ export const fr: Dictionary = {
       next: "Continuer vers la leçon 6",
       back: "Retour au Monde 1",
     },
-    lesson6: {
-      metaTitle: "Rembourser une dette ou investir ?",
+  },
+  lesson6: {
+    enabled: true,
+    metaTitle: "Rembourser une dette ou investir ?",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 6",
-      title: "Rembourser une dette ou investir ?",
+      title: "Un pourcentage ne suffit pas pour décider.",
       intro:
-        "Alex sait maintenant séparer l’argent nécessaire bientôt de celui qui peut attendre. Sa prochaine décision comparera le coût certain d’une dette au rendement incertain d’un investissement.",
-      badge: "Leçon 6 débloquée",
+        "Alex a protégé son filet de sécurité et son déménagement. Aide-le maintenant à comparer le coût connu d’une dette au résultat incertain d’un investissement.",
+      action: "Commencer la leçon",
+      cardLabel: "La prochaine décision d’Alex",
+      cardTitle: "Dette ou investissement ?",
+    },
+    snapshot: {
+      eyebrow: "Deux usages pour la même somme",
+      title: "Alex a 100 € réellement disponibles.",
+      intro:
+        "Ses dépenses, ses mensualités obligatoires, son filet de sécurité et son déménagement sont déjà prévus. Il peut décider du rôle des 100 € restants.",
+      extra: "Disponible chaque mois",
+      debt: "Dette restante",
+      rate: "Taux affiché",
+      rateValue: "TAEG fixe : {rate} %",
+      horizon: "Objectif d’investissement",
+      horizonValue: "{years} ans",
+      note: "Le contrat ne prévoit pas de frais de remboursement anticipé. Les montants servent uniquement à explorer une décision.",
+      action: "Lire le taux",
+    },
+    rate: {
+      eyebrow: "Trois lettres à décoder",
+      title: "Le mot important est caché dans le A.",
+      intro:
+        "TAEG signifie taux annuel effectif global. Le contrat peut simplement afficher « 12 % » : ce nombre est tout de même exprimé sur une base annuelle.",
+      contractLabel: "Extrait du contrat",
+      contractValue: "TAEG fixe : {rate} %",
+      contractHint:
+        "Le TAEG rassemble les intérêts et certains frais obligatoires pour aider à comparer le coût des crédits.",
+      action: "Interpréter le pourcentage",
+    },
+    interpret: {
+      eyebrow: "Le taux annuel n’est pas le coût total",
+      title: "Que signifie le « {rate} % » affiché ?",
+      prompt: "Choisis l’interprétation qui tient compte du temps.",
+      options: [
+        "Alex paiera exactement 12 % en plus sur toute la durée du crédit",
+        "La banque ajoute 12 % au montant restant chaque mois",
+        "Le taux est exprimé sur une base annuelle ; le coût total dépend aussi de la durée, des remboursements et des frais",
+      ],
+      correct:
+        "Le pourcentage est annualisé. Le montant total dû et l’échéancier montrent ce qu’Alex paiera si le contrat est suivi jusqu’au bout.",
+      incorrect:
+        "Le A de TAEG signifie annuel. Ce n’est ni un supplément unique pour toute la durée, ni un taux appliqué chaque mois.",
+      action: "Voir un exemple en euros",
+    },
+    example: {
+      eyebrow: "Du pourcentage aux euros",
+      title: "Une année complète donne un point de repère.",
+      intro:
+        "Imaginons seulement pour comprendre le taux que les {debt} restent dus pendant une année entière et qu’aucun autre frais ne s’ajoute.",
+      formulaLabel: "Exemple volontairement simplifié",
+      formulaText:
+        "Les {annualCost} représentent 12 % de {debt} sur une année complète. Ce n’est pas automatiquement le coût total du crédit.",
+      balanceLabel: "Quand Alex rembourse",
+      balanceText:
+        "Le capital restant dû diminue. Les intérêts suivants ne reposent donc plus sur les 600 € du départ pendant toute la durée.",
+      note: "Dans un vrai crédit, le calcul dépend du contrat, des dates, des mensualités et des frais. Il faut consulter le montant total dû et l’échéancier.",
+      action: "Comparer les deux choix",
+    },
+    compare: {
+      eyebrow: "Deux pourcentages, deux niveaux de certitude",
+      title: "Le taux de la dette et un rendement espéré ne promettent pas la même chose.",
+      intro:
+        "Alex peut décrire l’effet du remboursement. Il ne peut pas connaître à l’avance le résultat de l’investissement.",
+      debtLabel: "Rembourser",
+      debtTitle: "Réduit un coût contractuel",
+      debtPoints: [
+        "Le capital restant dû baisse immédiatement",
+        "La base des intérêts futurs devient plus petite",
+        "L’effet dépend du taux et des règles du contrat",
+      ],
+      investLabel: "Investir",
+      investTitle: "Accepte un résultat incertain",
+      investPoints: [
+        "La valeur peut monter ou baisser",
+        "Un rendement moyen passé n’est pas une promesse",
+        "L’horizon de dix ans laisse du temps, sans garantir le résultat",
+      ],
+      takeaway:
+        "Comparer 12 % de dette à un rendement d’investissement supposé ne transforme pas ce rendement en certitude.",
+      action: "Prendre une décision pour Alex",
+    },
+    decision: {
+      eyebrow: "Les autres priorités sont déjà protégées",
+      title: "Quelle réponse utilise le mieux les informations disponibles ?",
+      cardLabel: "Situation actuelle",
+      cardText: "{extra} disponibles · dette : {debt} à {rate} %",
+      prompt: "Choisis la réponse qui sépare le coût connu du résultat incertain.",
+      options: [
+        "Investir les {extra}, car un portefeuille diversifié rapportera forcément plus de 12 %",
+        "Utiliser les {extra} pour réduire la dette et son coût connu, sans toucher aux autres priorités",
+        "Vider le filet de sécurité pour rembourser immédiatement toute la dette",
+      ],
+      correct:
+        "Dans cette situation fictive, Alex réduit un coût élevé et connu avec de l’argent réellement disponible. Cette conclusion dépend des informations du scénario.",
+      incorrect:
+        "Un rendement n’est pas garanti et le filet de sécurité a déjà un autre rôle. La comparaison porte seulement sur les {extra} disponibles.",
+      action: "Changer une information",
+    },
+    change: {
+      eyebrow: "Le taux change la comparaison",
+      title: "La même réponse est-elle toujours évidente ?",
+      intro:
+        "La mensualité obligatoire tient dans le budget, les autres priorités restent protégées et aucun frais supplémentaire n’est prévu.",
+      cardLabel: "Nouvelles conditions",
+      cardText: "Taux : {lowerRate} % pendant {lowerMonths} mois",
+      prompt: "Choisis le raisonnement qui reste valable lorsque le coût de la dette change.",
+      options: [
+        "Toujours rembourser toute dette avant d’envisager un autre objectif",
+        "Toujours investir dès que le taux de la dette est faible",
+        "Revoir les échéances, le budget et les objectifs : rembourser, investir ou partager la somme peuvent maintenant se défendre",
+      ],
+      correct:
+        "À 0 %, le coût connu ne domine plus la comparaison de la même façon. La décision dépend davantage des échéances, de la marge budgétaire et des objectifs.",
+      incorrect:
+        "Un seul taux ne crée pas une règle universelle. Les paiements obligatoires, les échéances et la capacité à supporter le risque comptent aussi.",
+      action: "Construire la checklist",
+    },
+    checklist: {
+      eyebrow: "Avant de choisir",
+      title: "Alex peut poser les questions dans le bon ordre.",
+      intro:
+        "Cette checklist ne choisit pas à sa place. Elle évite de comparer deux pourcentages comme s’ils avaient la même certitude.",
+      points: [
+        "Les paiements obligatoires sont-ils couverts ?",
+        "Les besoins proches et le filet de sécurité restent-ils protégés ?",
+        "Que signifient le taux, la durée, les frais et le montant total dû ?",
+        "Quel coût diminue avec certitude si la dette est remboursée ?",
+        "L’argent investi peut-il rester placé malgré une baisse ?",
+        "Qu’est-ce qui changerait la décision ?",
+      ],
+      takeaway:
+        "La bonne comparaison commence par le contrat et le calendrier, pas par une promesse de rendement.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as comparé un coût connu à un résultat incertain.",
+      points: [
+        "Le A de TAEG signifie annuel, pas « sur toute la durée ».",
+        "Le coût total dépend aussi du temps, des remboursements et des frais.",
+        "Le taux, le budget et les échéances peuvent changer la décision.",
+      ],
+      takeaway:
+        "Quel coût disparaît avec certitude si je rembourse, et quel risque est-ce que j’accepte si j’investis à la place ?",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier. Les calculs simplifiés ne remplacent pas le contrat et son échéancier.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 7",
+      back: "Retour au Monde 1",
+    },
+    lesson7: {
+      metaTitle: "Les liquidités ne sont pas sans risque",
+      eyebrow: "Monde 1 · Leçon 7",
+      title: "Les liquidités ne sont pas sans risque",
+      intro:
+        "Alex sait maintenant repérer le coût visible d’une dette. La prochaine leçon montrera comment l’inflation peut réduire plus discrètement ce que la même somme permet d’acheter.",
+      badge: "Leçon 7 débloquée",
       comingLabel: "Prochaine étape",
       comingText:
         "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",

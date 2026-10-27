@@ -77,7 +77,7 @@ export const FOUNDATION_LESSONS = [
   },
   {
     number: 6,
-    duration: "5 min",
+    duration: "6 min",
   },
   {
     number: 7,

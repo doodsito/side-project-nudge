@@ -131,21 +131,19 @@ test("the World 1 entry redirects to lesson five and unlocks lesson six", () => 
   );
 });
 
-test("lesson five and the lesson-six introduction are localized without mixed currencies", () => {
+test("lesson five is localized without mixed currencies", () => {
   const frStart = frSource.indexOf("  lesson5:");
   const usStart = usSource.indexOf("  lesson5:");
-  const frLessonFive = frSource.slice(frStart, frSource.indexOf("  dashboard:", frStart));
-  const usLessonFive = usSource.slice(usStart, usSource.indexOf("  dashboard:", usStart));
+  const frLessonFive = frSource.slice(frStart, frSource.indexOf("  lesson6:", frStart));
+  const usLessonFive = usSource.slice(usStart, usSource.indexOf("  lesson6:", usStart));
 
   assert.match(frLessonFive, /prévoit de déménager/);
-  assert.match(frLessonFive, /Rembourser une dette ou investir/);
   assert.doesNotMatch(frLessonFive, /\$/);
   assert.doesNotMatch(
     frLessonFive,
     /A date changes the job|Planned expense|Moving costs|Debt vs investing|Lesson complete/,
   );
   assert.match(usLessonFive, /plans to move/);
-  assert.match(usLessonFive, /Debt vs investing/);
   assert.doesNotMatch(usLessonFive, /€/);
   assert.doesNotMatch(
     usLessonFive,
