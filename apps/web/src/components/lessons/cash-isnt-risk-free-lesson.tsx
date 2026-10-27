@@ -453,7 +453,7 @@ export function CashIsntRiskFreeLesson(props: Props) {
         <div className="text-center">
           <Eyebrow>{copy.interestExample.eyebrow}</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-balance-tight sm:text-5xl">
-            {copy.interestExample.title}
+            {fill(copy.interestExample.title, values)}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             {fill(copy.interestExample.intro, values)}

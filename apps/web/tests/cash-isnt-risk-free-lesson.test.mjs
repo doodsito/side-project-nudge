@@ -145,4 +145,5 @@ test("lesson seven is localized without mixed currencies", () => {
   assert.match(usLessonSeven, /Inflation is a risk to understand/);
   assert.doesNotMatch(usLessonSeven, /€/);
   assert.match(componentSource, /formatMoney\(amount, props\.track\)/);
+  assert.match(componentSource, /fill\(copy\.interestExample\.title, values\)/);
 });
