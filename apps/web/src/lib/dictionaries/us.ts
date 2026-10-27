@@ -1238,14 +1238,180 @@ export const us = {
       next: "Continue to lesson 7",
       back: "Back to World 1",
     },
-    lesson7: {
-      metaTitle: "Cash is not risk-free",
+  },
+  lesson7: {
+    enabled: true,
+    metaTitle: "Cash is not risk-free",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
       eyebrow: "World 1 · Lesson 7",
-      title: "Cash is not risk-free",
+      title: "Your balance can stay the same while buying less.",
       intro:
-        "Alex can now spot the visible cost of debt. The next lesson will show how inflation can more quietly reduce what the same amount of money can buy.",
-      badge: "Lesson 7 unlocked",
-      comingLabel: "Coming next",
+        "Alex sees a stable amount in his account and thinks it carries no risk. Help him separate a stable balance from stable purchasing power.",
+      action: "Look at Alex’s money",
+      cardLabel: "Alex’s next question",
+      cardTitle: "Stable for how long?",
+    },
+    snapshot: {
+      eyebrow: "A deliberately simplified example",
+      title: "Alex keeps money available in his account.",
+      intro: "His balance does not fluctuate. His goal costs exactly the same amount today.",
+      cash: "Cash available",
+      rate: "Account interest rate",
+      goal: "Goal’s current price",
+      inflation: "One-year inflation assumption",
+      note: "Here, “cash” means money that is quickly available and whose displayed amount stays stable. The rates are fictional and used only for learning.",
+      action: "Understand inflation",
+    },
+    inflation: {
+      eyebrow: "An average percentage",
+      title: "What does {inflationRate}% inflation mean?",
+      prompt: "Choose the interpretation that describes an average change in prices.",
+      options: [
+        "Every product becomes exactly {inflationRate}% more expensive",
+        "Prices rise by about {inflationRate}% on average over the period",
+        "The bank removes {inflationRate}% of the money held in accounts",
+      ],
+      correct:
+        "Inflation describes an average change. Each person’s basket and each individual price can move differently.",
+      incorrect:
+        "Inflation is neither the same rise in every price nor a withdrawal from an account. It measures an average change in prices.",
+      action: "See the effect in dollars",
+    },
+    priceExample: {
+      eyebrow: "The same goal, one year later",
+      title: "The price moves even when the balance does not.",
+      intro:
+        "In our example, the goal that costs {startingCash} today follows the {inflationRate}% inflation assumption exactly.",
+      today: "Today",
+      later: "In one year",
+      fullGoal: "The balance fully covers the goal",
+      shortfall: "With {cashAfterYear} in the account, Alex is short {cashGap}",
+      takeaway:
+        "Alex did not lose dollars on his statement. He lost some of what those dollars can buy.",
+      action: "Interpret the change",
+    },
+    balance: {
+      eyebrow: "Risk does not always appear on the statement",
+      title: "What actually happened?",
+      cardLabel: "After one year",
+      cardText: "Account: {cashAfterYear} · goal: {futurePrice}",
+      prompt: "Choose the answer that separates balance from purchasing power.",
+      options: [
+        "Alex’s account was charged {cashGap}",
+        "His balance stayed stable, but it can buy less",
+        "Alex avoided every risk because his balance did not fall",
+      ],
+      correct:
+        "The number of dollars did not change. The gap between that number and the goal’s new price reveals the loss of purchasing power.",
+      incorrect:
+        "Nothing was removed from the account. A stable balance protects the displayed amount, but not automatically what it can buy.",
+      action: "Add interest",
+    },
+    interestExample: {
+      eyebrow: "A balance can rise and still fall behind",
+      title: "What if the money earns {savingsRate}%?",
+      intro:
+        "Put the {startingCash} in a fictional account with no fees or taxes that earns {savingsRate}% for one year.",
+      accountLabel: "Balance after interest",
+      accountText: "Alex earned {interestEarned} on his statement",
+      goalLabel: "Price of the same goal",
+      goalText: "He is still {savingsGap} short of paying for it",
+      note: "A positive return in dollars does not guarantee more purchasing power. The change in the goal’s price matters too.",
+      action: "Compare the two changes",
+    },
+    interest: {
+      eyebrow: "Two different increases",
+      title: "Which conclusion describes the year correctly?",
+      prompt: "Compare the {savingsAfterYear} balance with the {futurePrice} goal.",
+      options: [
+        "Alex earned {interestEarned}, so his purchasing power must have increased",
+        "His balance grew, but more slowly than the price of his goal",
+        "Whenever an account earns less than inflation, every dollar should be invested",
+      ],
+      correct:
+        "The statement shows a gain, but the goal rose by more. In this specific example, the amount’s purchasing power fell.",
+      incorrect:
+        "A displayed gain and a gain in purchasing power are not the same. This gap alone is also not enough to choose an account or investment.",
+      action: "Give the money a job again",
+    },
+    nearTerm: {
+      eyebrow: "Inflation is not the only risk",
+      title: "What does Alex need to protect most?",
+      cardLabel: "New information",
+      cardText: "A deposit due in {nearMonths} months",
+      prompt: "Choose the most important feature for this money.",
+      options: [
+        "Access to the money and a stable amount",
+        "The highest possible potential return",
+        "A promise to earn more than inflation",
+      ],
+      correct:
+        "With a near and fixed date, a drop at the wrong time can matter more than gradual price erosion.",
+      incorrect:
+        "This money has a near deadline. Seeking more return can add a risk of loss or make the money unavailable at the wrong time.",
+      action: "Change the horizon",
+    },
+    longTerm: {
+      eyebrow: "Time changes the trade-off",
+      title: "What changes now?",
+      intro:
+        "Loss of purchasing power matters more over a long period, but investing adds fluctuation and loss risk.",
+      cardLabel: "New information",
+      cardText: "Money unused for at least {longYears} years",
+      prompt: "Choose the answer that recognizes several risks.",
+      options: [
+        "Alex must invest every dollar",
+        "Alex must keep every dollar in cash",
+        "He can compare access, stability, inflation and the risk of a loss",
+      ],
+      correct:
+        "A long horizon gives inflation more weight without removing other risks. The next lesson will compare those trade-offs.",
+      incorrect:
+        "No time horizon creates an automatic rule. The money’s job and the ability to accept a loss still matter.",
+      action: "Build the checklist",
+    },
+    checklist: {
+      eyebrow: "Before deciding",
+      title: "Alex can start with the job and the date.",
+      intro:
+        "This checklist avoids treating inflation as an order to invest or stability as a complete absence of risk.",
+      points: [
+        "When will this money be used?",
+        "Is the date fixed or flexible?",
+        "Does the amount need to stay stable?",
+        "Does the money need to be immediately available?",
+        "Does the account pay interest?",
+        "Can Alex accept a temporary drop?",
+      ],
+      takeaway: "Inflation is a risk to understand, not an order to invest.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You separated displayed dollars from purchasing power.",
+      points: [
+        "Inflation measures an average change in prices.",
+        "A balance can rise while buying less than before.",
+        "Cash protects access and stability, but not always purchasing power.",
+        "The money’s job and use date guide the comparison.",
+      ],
+      takeaway: "What must this money protect: a near expense, a stable amount or a distant goal?",
+      note: "Educational simulation using virtual money. This is not financial advice. The rates are fictional and the calculations are deliberately simplified.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 8",
+      back: "Back to World 1",
+    },
+    lesson8: {
+      metaTitle: "Savings vs investing",
+      eyebrow: "World 1 · Lesson 8",
+      title: "Savings vs investing",
+      intro:
+        "Alex now knows that each option protects against some risks and accepts others. The world’s final lesson will compare access, stability and long-term growth potential.",
+      badge: "Lesson 8 unlocked",
+      comingLabel: "The world’s final step",
       comingText:
         "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
       back: "World 1",

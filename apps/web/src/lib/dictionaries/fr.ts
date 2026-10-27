@@ -1272,14 +1272,181 @@ export const fr: Dictionary = {
       next: "Continuer vers la leçon 7",
       back: "Retour au Monde 1",
     },
-    lesson7: {
-      metaTitle: "Les liquidités ne sont pas sans risque",
+  },
+  lesson7: {
+    enabled: true,
+    metaTitle: "Les liquidités ne sont pas sans risque",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 7",
-      title: "Les liquidités ne sont pas sans risque",
+      title: "Ton solde peut rester le même pendant que ce qu’il achète diminue.",
       intro:
-        "Alex sait maintenant repérer le coût visible d’une dette. La prochaine leçon montrera comment l’inflation peut réduire plus discrètement ce que la même somme permet d’acheter.",
-      badge: "Leçon 7 débloquée",
-      comingLabel: "Prochaine étape",
+        "Alex voit une somme stable sur son compte et pense qu’elle ne court aucun risque. Aide-le à distinguer la stabilité du solde de celle du pouvoir d’achat.",
+      action: "Observer l’argent d’Alex",
+      cardLabel: "La prochaine question d’Alex",
+      cardTitle: "Stable pour combien de temps ?",
+    },
+    snapshot: {
+      eyebrow: "Un exemple volontairement simplifié",
+      title: "Alex garde une somme disponible sur son compte.",
+      intro: "Son solde ne fluctue pas. Son projet coûte aujourd’hui exactement la même somme.",
+      cash: "Argent disponible",
+      rate: "Rémunération du compte",
+      goal: "Prix actuel du projet",
+      inflation: "Hypothèse d’inflation sur un an",
+      note: "Ici, « liquidités » désigne de l’argent disponible rapidement dont le montant affiché reste stable. Les taux sont fictifs et servent uniquement à apprendre.",
+      action: "Comprendre l’inflation",
+    },
+    inflation: {
+      eyebrow: "Un pourcentage moyen",
+      title: "Que signifie une inflation de {inflationRate} % ?",
+      prompt: "Choisis l’interprétation qui décrit une moyenne de prix.",
+      options: [
+        "Tous les produits deviennent exactement {inflationRate} % plus chers",
+        "Les prix augmentent en moyenne d’environ {inflationRate} % sur la période",
+        "La banque retire {inflationRate} % de l’argent présent sur les comptes",
+      ],
+      correct:
+        "L’inflation décrit une évolution moyenne. Le panier de chaque personne et le prix de chaque produit peuvent évoluer différemment.",
+      incorrect:
+        "L’inflation n’est ni une hausse identique de tous les prix, ni un prélèvement sur le compte. Elle mesure une évolution moyenne des prix.",
+      action: "Voir l’effet en euros",
+    },
+    priceExample: {
+      eyebrow: "Le même projet, un an plus tard",
+      title: "Le prix bouge même si le solde ne bouge pas.",
+      intro:
+        "Dans notre exemple, le projet qui coûte {startingCash} aujourd’hui suit exactement l’hypothèse d’inflation de {inflationRate} %.",
+      today: "Aujourd’hui",
+      later: "Dans un an",
+      fullGoal: "Le solde couvre entièrement le projet",
+      shortfall: "Avec {cashAfterYear} sur son compte, il manque {cashGap}",
+      takeaway:
+        "Alex n’a pas perdu d’euros sur son relevé. Il a perdu une partie de ce que ces euros permettent d’acheter.",
+      action: "Interpréter ce changement",
+    },
+    balance: {
+      eyebrow: "Le risque ne se voit pas toujours sur le relevé",
+      title: "Que s’est-il réellement passé ?",
+      cardLabel: "Après un an",
+      cardText: "Compte : {cashAfterYear} · projet : {futurePrice}",
+      prompt: "Choisis la réponse qui distingue solde et pouvoir d’achat.",
+      options: [
+        "Le compte d’Alex a été débité de {cashGap}",
+        "Son solde est resté stable, mais il permet d’acheter moins",
+        "Alex a évité tous les risques parce que son solde n’a pas baissé",
+      ],
+      correct:
+        "Le nombre d’euros n’a pas changé. C’est l’écart entre ce nombre et le nouveau prix du projet qui révèle la baisse de pouvoir d’achat.",
+      incorrect:
+        "Aucune somme n’a été retirée du compte. Un solde stable protège le montant affiché, mais pas automatiquement ce qu’il permet d’acheter.",
+      action: "Ajouter des intérêts",
+    },
+    interestExample: {
+      eyebrow: "Un solde peut monter et rester en retard",
+      title: "Et si l’argent rapporte {savingsRate} % ?",
+      intro:
+        "Plaçons les {startingCash} sur un support fictif, sans frais ni fiscalité, rémunéré {savingsRate} % pendant un an.",
+      accountLabel: "Solde après les intérêts",
+      accountText: "Alex a gagné {interestEarned} sur son relevé",
+      goalLabel: "Prix du même projet",
+      goalText: "Il manque encore {savingsGap} pour le financer",
+      note: "Un rendement positif en euros ne garantit pas un gain de pouvoir d’achat. Il faut aussi regarder l’évolution du prix de l’objectif.",
+      action: "Comparer les deux évolutions",
+    },
+    interest: {
+      eyebrow: "Deux hausses différentes",
+      title: "Quelle conclusion décrit correctement l’année ?",
+      prompt: "Compare le solde de {savingsAfterYear} au projet de {futurePrice}.",
+      options: [
+        "Alex a gagné {interestEarned}, donc son pouvoir d’achat a forcément augmenté",
+        "Son solde a progressé, mais moins vite que le prix de son projet",
+        "Dès qu’un compte rapporte moins que l’inflation, il faut tout investir",
+      ],
+      correct:
+        "Le relevé montre un gain, mais le projet a augmenté davantage. Dans cet exemple précis, le pouvoir d’achat de la somme a diminué.",
+      incorrect:
+        "Un gain affiché et un gain de pouvoir d’achat ne sont pas la même chose. Et cet écart ne suffit pas, à lui seul, pour choisir un placement.",
+      action: "Redonner un rôle à l’argent",
+    },
+    nearTerm: {
+      eyebrow: "L’inflation n’est pas le seul risque",
+      title: "Que doit surtout protéger Alex ?",
+      cardLabel: "Nouvelle information",
+      cardText: "Une caution à payer dans {nearMonths} mois",
+      prompt: "Choisis la caractéristique la plus importante pour cette somme.",
+      options: [
+        "Sa disponibilité et la stabilité de son montant",
+        "Le rendement potentiel le plus élevé possible",
+        "Une promesse de rendement supérieur à l’inflation",
+      ],
+      correct:
+        "Avec une date proche et fixe, une baisse au mauvais moment peut être plus gênante que l’érosion progressive des prix.",
+      incorrect:
+        "Cette somme a une date proche. Chercher davantage de rendement peut introduire un risque de baisse ou d’indisponibilité au mauvais moment.",
+      action: "Changer l’horizon",
+    },
+    longTerm: {
+      eyebrow: "La durée change le compromis",
+      title: "Qu’est-ce qui change maintenant ?",
+      intro:
+        "L’érosion du pouvoir d’achat compte davantage sur une longue durée, mais investir ajoute un risque de fluctuation et de perte.",
+      cardLabel: "Nouvelle information",
+      cardText: "Somme inutilisée pendant au moins {longYears} ans",
+      prompt: "Choisis la réponse qui reconnaît plusieurs risques.",
+      options: [
+        "Alex doit obligatoirement tout investir",
+        "Alex doit obligatoirement tout conserver en liquidités",
+        "Il peut comparer disponibilité, stabilité, inflation et risque de baisse",
+      ],
+      correct:
+        "Un horizon long rend l’inflation plus importante dans la comparaison sans supprimer les autres risques. La prochaine leçon comparera ces compromis.",
+      incorrect:
+        "Aucun horizon ne crée une règle automatique. Le rôle de la somme et la capacité à accepter une baisse restent essentiels.",
+      action: "Construire la checklist",
+    },
+    checklist: {
+      eyebrow: "Avant de décider",
+      title: "Alex peut commencer par le rôle et la date.",
+      intro:
+        "Cette checklist évite de traiter l’inflation comme un ordre d’investir ou la stabilité comme une absence totale de risque.",
+      points: [
+        "Quand cette somme sera-t-elle utilisée ?",
+        "La date est-elle fixe ou flexible ?",
+        "Le montant doit-il rester stable ?",
+        "L’argent doit-il être disponible immédiatement ?",
+        "La somme produit-elle des intérêts ?",
+        "Alex peut-il accepter une baisse temporaire ?",
+      ],
+      takeaway: "L’inflation est un risque à comprendre, pas un ordre d’investir.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as distingué euros affichés et pouvoir d’achat.",
+      points: [
+        "L’inflation mesure une évolution moyenne des prix.",
+        "Un solde peut augmenter tout en achetant moins qu’avant.",
+        "Les liquidités protègent l’accès et la stabilité, pas toujours le pouvoir d’achat.",
+        "Le rôle de l’argent et sa date d’utilisation guident la comparaison.",
+      ],
+      takeaway:
+        "Qu’est-ce que cette somme doit protéger : une dépense proche, un montant stable ou un objectif lointain ?",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier. Les taux sont fictifs et les calculs volontairement simplifiés.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 8",
+      back: "Retour au Monde 1",
+    },
+    lesson8: {
+      metaTitle: "Épargner ou investir ?",
+      eyebrow: "Monde 1 · Leçon 8",
+      title: "Épargner ou investir ?",
+      intro:
+        "Alex sait maintenant que chaque option protège contre certains risques et en accepte d’autres. La dernière leçon du monde comparera disponibilité, stabilité et potentiel de croissance à long terme.",
+      badge: "Leçon 8 débloquée",
+      comingLabel: "Dernière étape du monde",
       comingText:
         "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",
       back: "Monde 1",
