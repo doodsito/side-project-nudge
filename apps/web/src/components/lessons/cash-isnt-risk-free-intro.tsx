@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Scale, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, WalletCards } from "lucide-react";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/dictionaries";
 
-export function DebtVsInvestingIntro({ copy }: { copy: Dictionary["lesson5"]["lesson6"] }) {
+export function CashIsntRiskFreeIntro({ copy }: { copy: Dictionary["lesson6"]["lesson7"] }) {
   return (
     <>
       <Button asChild variant="ghost" className="-ml-3 min-h-11">
-        <Link href="/dashboard/courses/financial-foundation#lesson-6">
+        <Link href="/dashboard/courses/financial-foundation#lesson-7">
           <ArrowLeft aria-hidden /> {copy.back}
         </Link>
       </Button>
@@ -20,7 +20,7 @@ export function DebtVsInvestingIntro({ copy }: { copy: Dictionary["lesson5"]["le
         />
         <div className="relative max-w-3xl">
           <span className="grid size-20 place-items-center rounded-3xl bg-primary text-primary-foreground shadow-soft">
-            <Scale className="size-9" aria-hidden />
+            <WalletCards className="size-9" aria-hidden />
           </span>
           <div className="mt-8">
             <Eyebrow>{copy.eyebrow}</Eyebrow>

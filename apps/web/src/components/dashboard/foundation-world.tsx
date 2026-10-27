@@ -20,6 +20,7 @@ import {
   hasCompletedLesson,
   type CourseProgress,
 } from "@/lib/course-progress";
+import { isLessonSixAvailable } from "@/lib/debt-vs-investing-lesson";
 import type { Dictionary } from "@/lib/dictionaries";
 import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
 import { isLessonFiveAvailable } from "@/lib/money-youll-need-soon-lesson";
@@ -57,10 +58,16 @@ export function FoundationWorld({
         href: "/dashboard/courses/financial-foundation/money-youll-need-soon",
       };
     }
-    if (lesson.number === 6 && isLessonFiveAvailable(track)) {
+    if (lesson.number === 6 && isLessonSixAvailable(track)) {
       return {
         ...lesson,
         href: "/dashboard/courses/financial-foundation/debt-vs-investing",
+      };
+    }
+    if (lesson.number === 7 && isLessonSixAvailable(track)) {
+      return {
+        ...lesson,
+        href: "/dashboard/courses/financial-foundation/cash-isnt-risk-free",
       };
     }
     return lesson;

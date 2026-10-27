@@ -1077,13 +1077,174 @@ export const us = {
       next: "Continue to lesson 6",
       back: "Back to World 1",
     },
-    lesson6: {
-      metaTitle: "Debt vs investing",
+  },
+  lesson6: {
+    enabled: true,
+    metaTitle: "Debt vs investing",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
       eyebrow: "World 1 · Lesson 6",
-      title: "Debt vs investing",
+      title: "One percentage is not enough to decide.",
       intro:
-        "Alex can now separate money needed soon from money that can wait. His next decision will compare a certain borrowing cost with an uncertain investment return.",
-      badge: "Lesson 6 unlocked",
+        "Alex has protected his safety net and moving plan. Now help him compare a known borrowing cost with an uncertain investment outcome.",
+      action: "Start the lesson",
+      cardLabel: "Alex’s next decision",
+      cardTitle: "Debt or investing?",
+    },
+    snapshot: {
+      eyebrow: "Two jobs for the same amount",
+      title: "Alex has $100 truly available.",
+      intro:
+        "His spending, required payments, safety net and moving plan are already covered. He can decide what job to give the remaining $100.",
+      extra: "Available each month",
+      debt: "Debt balance",
+      rate: "Displayed rate",
+      rateValue: "APR: {rate}%",
+      horizon: "Investing goal",
+      horizonValue: "{years} years",
+      note: "There is no early payment fee. The amounts are here only to explore a decision.",
+      action: "Read the rate",
+    },
+    rate: {
+      eyebrow: "Three letters to decode",
+      title: "The important word is hidden in the A.",
+      intro:
+        "APR means annual percentage rate. A statement may simply show “12%”: the number is still expressed on an annual basis.",
+      contractLabel: "Statement excerpt",
+      contractValue: "APR: {rate}%",
+      contractHint:
+        "APR is an annualized measure used to describe the cost of borrowing and compare credit offers.",
+      action: "Interpret the percentage",
+    },
+    interpret: {
+      eyebrow: "An annual rate is not the total cost",
+      title: "What does the displayed “{rate}%” mean?",
+      prompt: "Choose the interpretation that accounts for time.",
+      options: [
+        "Alex will pay exactly 12% extra over the entire life of the debt",
+        "The lender adds 12% to the remaining balance every month",
+        "The rate is expressed on an annual basis; the total cost also depends on time, payments and fees",
+      ],
+      correct:
+        "The percentage is annualized. The payoff information and statements show what Alex will pay as the balance changes.",
+      incorrect:
+        "The A in APR means annual. It is neither a one-time charge for the full term nor a rate added every month.",
+      action: "See an example in dollars",
+    },
+    example: {
+      eyebrow: "From a percentage to dollars",
+      title: "A full year gives a useful reference point.",
+      intro:
+        "Only to understand the rate, imagine the {debt} stays unpaid for one full year and no other cost is added.",
+      formulaLabel: "Deliberately simplified example",
+      formulaText:
+        "The {annualCost} represents 12% of {debt} over one full year. It is not automatically the debt’s total cost.",
+      balanceLabel: "When Alex makes payments",
+      balanceText:
+        "The balance falls. Later interest is therefore no longer based on the original $600 for the entire term.",
+      note: "A real balance can accrue interest using the contract’s calculation method and timing. Alex should use the statements and payoff information for the actual cost.",
+      action: "Compare the two choices",
+    },
+    compare: {
+      eyebrow: "Two percentages, two levels of certainty",
+      title: "A debt rate and an expected return do not promise the same thing.",
+      intro:
+        "Alex can describe the effect of paying debt. He cannot know the investment result in advance.",
+      debtLabel: "Pay debt",
+      debtTitle: "Reduces a contractual cost",
+      debtPoints: [
+        "The outstanding balance falls immediately",
+        "The base for future interest becomes smaller",
+        "The effect depends on the rate and account terms",
+      ],
+      investLabel: "Invest",
+      investTitle: "Accepts an uncertain result",
+      investPoints: [
+        "The value can rise or fall",
+        "A past average return is not a promise",
+        "A ten-year horizon provides time, not a guaranteed result",
+      ],
+      takeaway:
+        "Comparing 12% debt with an assumed investment return does not make that return certain.",
+      action: "Make a decision for Alex",
+    },
+    decision: {
+      eyebrow: "The other priorities are already protected",
+      title: "Which response best uses the available information?",
+      cardLabel: "Current situation",
+      cardText: "{extra} available · debt: {debt} at {rate}%",
+      prompt: "Choose the response that separates a known cost from an uncertain outcome.",
+      options: [
+        "Invest the {extra}, because a diversified portfolio is guaranteed to return more than 12%",
+        "Use the {extra} to reduce the debt and its known cost without touching the other priorities",
+        "Empty the safety net to pay the entire debt immediately",
+      ],
+      correct:
+        "In this fictional situation, Alex reduces a high known cost with money that is truly available. The conclusion depends on the scenario’s facts.",
+      incorrect:
+        "An investment return is not guaranteed, and the safety net already has another job. The comparison only involves the available {extra}.",
+      action: "Change one fact",
+    },
+    change: {
+      eyebrow: "The rate changes the comparison",
+      title: "Is the same answer always obvious?",
+      intro:
+        "The required payment fits the budget, the other priorities remain protected and there is no additional fee.",
+      cardLabel: "New terms",
+      cardText: "Rate: {lowerRate}% for {lowerMonths} months",
+      prompt: "Choose the reasoning that still works when the cost of debt changes.",
+      options: [
+        "Always repay every debt before considering another goal",
+        "Always invest as soon as the debt rate is low",
+        "Review the deadlines, budget and goals: paying debt, investing or splitting the amount may now be reasonable",
+      ],
+      correct:
+        "At 0%, the known cost no longer dominates the comparison in the same way. Deadlines, budget room and goals matter more.",
+      incorrect:
+        "One rate does not create a universal rule. Required payments, deadlines and the ability to accept risk also matter.",
+      action: "Build the checklist",
+    },
+    checklist: {
+      eyebrow: "Before choosing",
+      title: "Alex can ask the questions in the right order.",
+      intro:
+        "The checklist does not choose for him. It prevents two percentages from being treated as if they had the same certainty.",
+      points: [
+        "Are all required payments covered?",
+        "Do near-term needs and the safety net remain protected?",
+        "What do the rate, term, fees and payoff information mean?",
+        "Which cost falls with certainty if the debt is paid?",
+        "Can the invested money stay invested through a decline?",
+        "What new fact would change the decision?",
+      ],
+      takeaway:
+        "A useful comparison starts with the account terms and timeline, not a promised return.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You compared a known cost with an uncertain outcome.",
+      points: [
+        "The A in APR means annual—not “over the entire term.”",
+        "The total cost also depends on time, payments and fees.",
+        "The rate, budget and deadlines can change the decision.",
+      ],
+      takeaway:
+        "Which cost disappears with certainty if I pay the debt, and which risk do I accept if I invest instead?",
+      note: "Educational simulation using virtual money. This is not financial advice. Simplified calculations do not replace the account terms and statements.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 7",
+      back: "Back to World 1",
+    },
+    lesson7: {
+      metaTitle: "Cash is not risk-free",
+      eyebrow: "World 1 · Lesson 7",
+      title: "Cash is not risk-free",
+      intro:
+        "Alex can now spot the visible cost of debt. The next lesson will show how inflation can more quietly reduce what the same amount of money can buy.",
+      badge: "Lesson 7 unlocked",
       comingLabel: "Coming next",
       comingText:
         "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
