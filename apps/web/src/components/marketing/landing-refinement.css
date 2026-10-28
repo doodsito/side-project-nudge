@@ -235,6 +235,9 @@ body:has(.waitlist-dialog) [data-state].fixed.inset-0 {
   outline: 3px solid var(--secondary);
   outline-offset: 4px;
 }
+.landing-refined #top #early-access > div > button {
+  color: var(--foreground);
+}
 .landing-refined #top .landing-reperes {
   padding: 0 0 2rem;
 }
