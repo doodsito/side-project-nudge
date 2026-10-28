@@ -120,7 +120,8 @@ export const landingCopy = {
       "Apprends à mieux investir et prends en main ton avenir financier. Des leçons courtes et des situations concrètes pour progresser, de tes premiers pas à tes prochains objectifs.",
     ],
     reassurance: "Aucune connaissance requise. Tu t’exerces sans argent réel.",
-    cta: "Rejoindre la liste d’attente",
+    cta: "Accéder à la bêta",
+    waitlistCta: "Rejoindre la liste d’attente",
     note: "On te fait signe dès que l’app est lancée !",
     preview: "Ce que tu apprendras à regarder",
     questions: ["Ton objectif", "Le temps devant toi", "Le risque que tu peux prendre"],
@@ -165,7 +166,7 @@ export const landingCopy = {
     ],
     accessTitle: "La bêta est déjà accessible sur invitation.",
     access:
-      "Tu as reçu un code ? « Rejoindre la bêta » te permet de créer ton compte dès maintenant. La liste d’attente te permet, elle, d’être prévenu du lancement public de l’app.",
+      "Tu as reçu un code ? « Accéder à la bêta » te permet de créer ton compte dès maintenant. La liste d’attente te permet, elle, d’être prévenu du lancement public de l’app.",
     faqTitle: "Avant de commencer",
     faq: [
       [
@@ -306,7 +307,8 @@ export const landingCopy = {
       "Learn to invest better and take charge of your financial future. Short lessons and real-life situations to help you grow, from your first steps to your next goals.",
     ],
     reassurance: "No prior knowledge needed. Practice without using real money.",
-    cta: "Join the waitlist",
+    cta: "Access the beta",
+    waitlistCta: "Join the waitlist",
     note: "We’ll let you know as soon as the app launches!",
     preview: "What you’ll learn to consider",
     questions: ["Your goal", "Your time horizon", "The risk you can take"],
@@ -351,7 +353,7 @@ export const landingCopy = {
     ],
     accessTitle: "The beta is already available by invitation.",
     access:
-      "Have a code? Choose “Join the beta” to create your account now. The waitlist is for hearing when the app launches publicly.",
+      "Have a code? Choose “Access the beta” to create your account now. The waitlist is for hearing when the app launches publicly.",
     faqTitle: "Before you begin",
     faq: [
       [
