@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-27
 - **Author:** Emma, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/61
 
 **Why:** Visitors with an invitation code should reach the beta directly.
 **What changed:**
