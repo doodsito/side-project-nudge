@@ -124,27 +124,6 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 - Use `BRAND` and `SITE_URL` from `apps/web/src/lib/brand.ts` instead of
   writing the name or the address by hand.
 
-  ## Product, UX & Design System
-
-Before making product, UX/UI or visual changes, read the relevant documentation:
-
-- `docs/product/product-vision.md` — product positioning, audience and learning experience.
-- `docs/design/brand-identity.md` — approved brand identity and Colour System C.
-- `docs/design/design-system.md` — design tokens, typography, spacing and interaction states.
-- `docs/design/ux-principles.md` — mobile-first UX and learning-by-doing principles.
-
-The official colour palette is **Colour System C: Violet #6236E8, Gold #E6B44A, Teal #2DC9BE**, defined in `docs/design/references/Nudge_Colour_System_C_Only.pdf`.
-
-### Rules
-- Treat Colour System C as approved. Do not introduce alternative palettes.
-- Reuse existing Tailwind tokens and shadcn components.
-- Define colour tokens in `apps/web/src/styles.css`, never hard-code colours in components.
-- Prioritize mobile-first, accessible and interactive learning experiences.
-- Preserve consistency across the website and future mobile app.
-- Do not change established brand or UX guidelines without approval.
-- Distinguish approved design decisions from proposed improvements.
-- Document new approved design decisions in the relevant files.
-
 ## Journal
 
 Every pull request adds one file to `docs/journal/`, named

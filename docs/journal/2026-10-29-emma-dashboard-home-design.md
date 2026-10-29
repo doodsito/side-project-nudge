@@ -12,4 +12,4 @@
 
 **Files:** `apps/web/src/app/dashboard/`, `apps/web/src/components/dashboard/`, `docs/design/`, `docs/product/`
 **Checked:** Lint and typecheck pass; Vercel build passes; local Windows build fails in Turbopack.
-**Next:** Finish CI and preview review, get Robin's review of reserved files, then merge.
+**Next:** Finish CI and preview review, then merge. Review agent instructions separately.

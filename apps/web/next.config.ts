@@ -4,8 +4,6 @@ const nextConfig: NextConfig = {
   // AGENTS.md at the repository root is the single instruction file for agents,
   // so `next dev` must not generate a second AGENTS.md and CLAUDE.md in apps/web.
   agentRules: false,
-  // Keep development tools away from the mobile navigation.
-  devIndicators: { position: "top-right" },
   // Basic security headers on every page. No Content-Security-Policy yet: the
   // consent banner and Google Analytics need one tuned for them.
   headers() {
