@@ -1,3 +1,10 @@
+import { isLessonFourAvailable } from "@/lib/build-your-safety-net-lesson";
+import { isLessonSevenAvailable } from "@/lib/cash-isnt-risk-free-lesson";
+import { isLessonSixAvailable } from "@/lib/debt-vs-investing-lesson";
+import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
+import { isLessonFiveAvailable } from "@/lib/money-youll-need-soon-lesson";
+import type { Track } from "@/lib/tracks";
+
 export type CourseWorld = {
   number: number;
   slug: string;
@@ -88,3 +95,39 @@ export const FOUNDATION_LESSONS = [
     duration: "5 min",
   },
 ] as const;
+
+/** Use the same available lesson destination on Home and in the course path. */
+export function foundationLessonHref(lessonNumber: number, track: Track): string | undefined {
+  switch (lessonNumber) {
+    case 1:
+      return FOUNDATION_LESSONS[0].href;
+    case 2:
+      return FOUNDATION_LESSONS[1].href;
+    case 3:
+      return isLessonThreeAvailable(track)
+        ? "/dashboard/courses/financial-foundation/how-much-should-you-save"
+        : undefined;
+    case 4:
+      return isLessonFourAvailable(track)
+        ? "/dashboard/courses/financial-foundation/build-your-safety-net"
+        : undefined;
+    case 5:
+      return isLessonFiveAvailable(track)
+        ? "/dashboard/courses/financial-foundation/money-youll-need-soon"
+        : undefined;
+    case 6:
+      return isLessonSixAvailable(track)
+        ? "/dashboard/courses/financial-foundation/debt-vs-investing"
+        : undefined;
+    case 7:
+      return isLessonSevenAvailable(track)
+        ? "/dashboard/courses/financial-foundation/cash-isnt-risk-free"
+        : undefined;
+    case 8:
+      return isLessonSevenAvailable(track)
+        ? "/dashboard/courses/financial-foundation/savings-vs-investing"
+        : undefined;
+    default:
+      return undefined;
+  }
+}

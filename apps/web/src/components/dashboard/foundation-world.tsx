@@ -11,9 +11,7 @@ import {
 } from "lucide-react";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
-import { isLessonFourAvailable } from "@/lib/build-your-safety-net-lesson";
-import { isLessonSevenAvailable } from "@/lib/cash-isnt-risk-free-lesson";
-import { FOUNDATION_LESSONS } from "@/lib/course-worlds";
+import { FOUNDATION_LESSONS, foundationLessonHref } from "@/lib/course-worlds";
 import {
   completedLessonCount,
   FOUNDATION_LESSON_COUNT,
@@ -21,10 +19,7 @@ import {
   hasCompletedLesson,
   type CourseProgress,
 } from "@/lib/course-progress";
-import { isLessonSixAvailable } from "@/lib/debt-vs-investing-lesson";
 import type { Dictionary } from "@/lib/dictionaries";
-import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
-import { isLessonFiveAvailable } from "@/lib/money-youll-need-soon-lesson";
 import type { Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
@@ -40,45 +35,10 @@ export function FoundationWorld({
 }) {
   const completedCount = completedLessonCount(progress, FOUNDATION_WORLD);
   const progressPercent = (completedCount / FOUNDATION_LESSON_COUNT) * 100;
-  const lessons = FOUNDATION_LESSONS.map((lesson) => {
-    if (lesson.number === 3 && isLessonThreeAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/how-much-should-you-save",
-      };
-    }
-    if (lesson.number === 4 && isLessonFourAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/build-your-safety-net",
-      };
-    }
-    if (lesson.number === 5 && isLessonFiveAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/money-youll-need-soon",
-      };
-    }
-    if (lesson.number === 6 && isLessonSixAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/debt-vs-investing",
-      };
-    }
-    if (lesson.number === 7 && isLessonSevenAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/cash-isnt-risk-free",
-      };
-    }
-    if (lesson.number === 8 && isLessonSevenAvailable(track)) {
-      return {
-        ...lesson,
-        href: "/dashboard/courses/financial-foundation/savings-vs-investing",
-      };
-    }
-    return lesson;
-  });
+  const lessons = FOUNDATION_LESSONS.map((lesson) => ({
+    ...lesson,
+    href: foundationLessonHref(lesson.number, track),
+  }));
 
   return (
     <>

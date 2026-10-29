@@ -15,37 +15,52 @@ export function DashboardTemplate({
   t,
   skipLink,
   children,
+  preview = false,
+  homeHref = "/dashboard",
 }: {
-  signOut: () => Promise<void>;
   t: Dictionary["dashboard"];
   skipLink: string;
   children: ReactNode;
-}) {
-  return (
-    <FeedbackProvider t={t.feedback}>
+} & (
+  | { preview: true; signOut?: never; homeHref: string }
+  | { preview?: false; signOut: () => Promise<void>; homeHref?: never }
+)) {
+  const content = (
+    <>
       <SkipLink label={skipLink} />
-      <header className="px-5 pt-6 sm:px-8">
+      <header className="px-5 pt-[calc(1.25rem+env(safe-area-inset-top))] sm:px-8 sm:pt-6">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-          <Link href="/dashboard" aria-label={`${BRAND} ${t.home}`} className="inline-flex">
+          <Link href={homeHref} aria-label={`${BRAND} ${t.home}`} className="inline-flex">
             <NudgeNextLogo />
           </Link>
-          <div className="flex items-center gap-2">
-            <FeedbackHeaderButton label={t.feedback.trigger} />
-            <SignOutButton
-              action={signOut}
-              label={t.logOut}
-              pendingLabel={t.logOutPending}
-              className="h-10 px-4 text-sm"
-            />
-          </div>
+          {!preview && signOut && (
+            <div className="hidden items-center gap-2 sm:flex">
+              <FeedbackHeaderButton label={t.feedback.trigger} />
+              <SignOutButton
+                action={signOut}
+                label={t.logOut}
+                pendingLabel={t.logOutPending}
+                className="h-10 px-4 text-sm"
+              />
+            </div>
+          )}
         </div>
-        <div className="mx-auto mt-6 max-w-5xl">
-          <DashboardTabs t={t} />
+        <div className="mx-auto mt-6 hidden max-w-5xl sm:block">
+          <DashboardTabs tabs={t.tabs} tabsLabel={t.tabsLabel} homeHref={homeHref} />
         </div>
       </header>
-      <main id="main-content" data-nudge-beta tabIndex={-1} className="px-5 pt-10 pb-20 sm:px-8">
+      <main
+        id="main-content"
+        data-nudge-beta
+        tabIndex={-1}
+        className="px-5 pt-6 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-8 sm:pt-10 sm:pb-20"
+      >
         <div className="mx-auto max-w-5xl">{children}</div>
       </main>
-    </FeedbackProvider>
+      <div className="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)] shadow-lift sm:hidden">
+        <DashboardTabs tabs={t.tabs} tabsLabel={t.tabsLabel} homeHref={homeHref} mobile />
+      </div>
+    </>
   );
+  return preview ? content : <FeedbackProvider t={t.feedback}>{content}</FeedbackProvider>;
 }

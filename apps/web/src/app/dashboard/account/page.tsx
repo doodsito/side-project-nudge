@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CircleAlert, CircleCheck } from "lucide-react";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { SubmitButton } from "@/components/auth/submit-button";
+import { FeedbackHeaderButton } from "@/components/dashboard/feedback-widget";
 import { textLinkClass } from "@/components/shared/text-link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { RadioGroup } from "@/components/ui/radio-group";
@@ -69,11 +70,17 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
             </div>
           ))}
         </dl>
+        <div className="mt-5 border-t border-border pt-5 sm:hidden">
+          <FeedbackHeaderButton
+            label={dictionary.dashboard.feedback.trigger}
+            className="h-11 w-full justify-start"
+          />
+        </div>
         <SignOutButton
           action={signOut}
           label={dictionary.dashboard.logOut}
           pendingLabel={dictionary.dashboard.logOutPending}
-          className="mt-6"
+          className="mt-3 min-h-11 w-full justify-start sm:mt-6 sm:w-auto sm:justify-center"
         />
       </section>
       <section

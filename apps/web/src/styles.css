@@ -312,6 +312,13 @@ body:has(.lesson-shell) .site-footer {
   display: none;
 }
 
+/* The signed-in app uses bottom navigation on phones, so its site footer stays out of the way. */
+@media (max-width: 639px) {
+  body:has(main[data-nudge-beta]) .site-footer {
+    display: none;
+  }
+}
+
 .hero-stagger > * {
   animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

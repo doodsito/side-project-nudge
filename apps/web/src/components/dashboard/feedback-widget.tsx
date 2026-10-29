@@ -25,6 +25,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import type { Dictionary } from "@/lib/dictionaries";
+import { cn } from "@/lib/utils";
 
 const FEEDBACK_CATEGORIES = ["bug", "idea", "other"] as const;
 type FeedbackCategory = (typeof FEEDBACK_CATEGORIES)[number];
@@ -56,7 +57,7 @@ export function FeedbackProvider({
         size="icon"
         aria-label={t.trigger}
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full shadow-lift"
+        className="fixed right-6 bottom-6 z-40 hidden h-14 w-14 rounded-full shadow-lift sm:inline-flex"
       >
         <MessageSquarePlus className="size-6" aria-hidden />
       </Button>
@@ -144,15 +145,15 @@ function FeedbackForm({ t }: { t: Dictionary["dashboard"]["feedback"] }) {
   );
 }
 
-/** A second entry point to the same feedback Dialog, meant for the dashboard header. */
-export function FeedbackHeaderButton({ label }: { label: string }) {
+/** Opens the dashboard's feedback dialog from the desktop header or mobile Account page. */
+export function FeedbackHeaderButton({ label, className }: { label: string; className?: string }) {
   const openFeedback = useContext(openFeedbackContext);
   return (
     <Button
       type="button"
       variant="outline"
       onClick={() => openFeedback?.()}
-      className="h-10 px-4 text-sm"
+      className={cn("h-10 px-4 text-sm", className)}
     >
       <MessageSquarePlus aria-hidden /> {label}
     </Button>
