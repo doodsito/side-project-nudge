@@ -316,6 +316,10 @@ export const fr: Dictionary = {
       educationalNote: "Simulation pédagogique uniquement. Ceci n’est pas un conseil financier.",
     },
     courses: {
+      yourCourses: "Tes cours",
+      nextLesson: "Prochaine leçon",
+      viewAllLessons: "Voir toutes les leçons",
+      roadmap: "Les autres mondes",
       journeyLabel: "Ton parcours d’apprentissage",
       journeyTitle: "Neuf mondes. Une décision à la fois.",
       journeyIntro:
@@ -1454,9 +1458,24 @@ export const fr: Dictionary = {
     },
   },
   dashboard: {
-    home: "tableau de bord",
+    home: "accueil",
     tabsLabel: "Tableau de bord",
-    tabs: { courses: "Cours", portfolio: "Portefeuille", account: "Compte" },
+    tabs: { home: "Accueil", courses: "Cours", portfolio: "Portefeuille", account: "Compte" },
+    preview: {
+      title: "Aperçu local de l’accueil",
+      label: "Aperçu local · données fictives",
+      description:
+        "La progression affichée est un exemple (2 leçons sur 8). Les autres pages du tableau de bord demandent une connexion.",
+    },
+    homeScreen: {
+      eyebrow: "Ta prochaine étape",
+      startHeading: "Ton parcours commence ici.",
+      continueHeading: "Reprends là où tu en es.",
+      completeHeading: "Voici ton parcours accompli.",
+      review: "Revoir ton parcours",
+      worldComplete: "Monde 1 terminé",
+      explore: "Explorer tous les cours",
+    },
     logOut: "Se déconnecter",
     logOutPending: "Déconnexion…",
     usComingSoon: "D’autres leçons pour les États-Unis arrivent bientôt.",

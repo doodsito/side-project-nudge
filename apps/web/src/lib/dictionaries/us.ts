@@ -311,6 +311,10 @@ export const us = {
       educationalNote: "Educational simulation only. Not investment advice.",
     },
     courses: {
+      yourCourses: "Your courses",
+      nextLesson: "Next lesson",
+      viewAllLessons: "View all lessons",
+      roadmap: "Other worlds",
       journeyLabel: "Your learning journey",
       journeyTitle: "Nine worlds. One decision at a time.",
       journeyIntro:
@@ -1419,9 +1423,24 @@ export const us = {
     },
   },
   dashboard: {
-    home: "dashboard",
+    home: "home",
     tabsLabel: "Dashboard",
-    tabs: { courses: "Courses", portfolio: "Portfolio", account: "Account" },
+    tabs: { home: "Home", courses: "Courses", portfolio: "Portfolio", account: "Account" },
+    preview: {
+      title: "Local Home preview",
+      label: "Local preview · sample data",
+      description:
+        "The progress shown is an example (2 of 8 lessons). Other dashboard pages require sign-in.",
+    },
+    homeScreen: {
+      eyebrow: "Your next step",
+      startHeading: "Your learning path starts here.",
+      continueHeading: "Pick up where you left off.",
+      completeHeading: "See how far you’ve come.",
+      review: "Review your journey",
+      worldComplete: "World 1 complete",
+      explore: "Explore all courses",
+    },
     logOut: "Log out",
     logOutPending: "Logging out…",
     usComingSoon: "More lessons for the US are coming soon.",
