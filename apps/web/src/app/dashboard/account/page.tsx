@@ -70,17 +70,17 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
             </div>
           ))}
         </dl>
-        <div className="mt-5 border-t border-border pt-5 sm:hidden">
+        <div className="mt-5 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center">
           <FeedbackHeaderButton
             label={dictionary.dashboard.feedback.trigger}
-            className="h-11 w-full justify-start"
+            className="h-11 w-full justify-start sm:w-auto"
           />
         </div>
         <SignOutButton
           action={signOut}
           label={dictionary.dashboard.logOut}
           pendingLabel={dictionary.dashboard.logOutPending}
-          className="mt-3 min-h-11 w-full justify-start sm:mt-6 sm:w-auto sm:justify-center"
+          className="min-h-11 w-full justify-start sm:w-auto sm:justify-center"
         />
       </section>
       <section
