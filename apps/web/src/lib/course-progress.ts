@@ -1,3 +1,4 @@
+export const INTRO_WORLD = "why-invest";
 export const FOUNDATION_WORLD = "financial-foundation";
 export const FOUNDATION_LESSON_COUNT = 8;
 

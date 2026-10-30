@@ -7,6 +7,7 @@ import {
   FOUNDATION_LESSON_COUNT,
   FOUNDATION_WORLD,
   hasCompletedLesson,
+  INTRO_WORLD,
   type CourseProgress,
 } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -22,7 +23,8 @@ export function CourseWorlds({
   copy: Dictionary["learning"]["courses"];
   track: Track;
 }) {
-  const activeWorld = COURSE_WORLDS[0]!;
+  const activeWorld = COURSE_WORLDS[1]!;
+  const introComplete = hasCompletedLesson(progress, INTRO_WORLD, 1);
   const completed = Math.min(
     completedLessonCount(progress, FOUNDATION_WORLD),
     FOUNDATION_LESSON_COUNT,
@@ -38,8 +40,45 @@ export function CourseWorlds({
       <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{copy.yourCourses}</h1>
 
       <section
+        aria-labelledby="intro-world-heading"
+        className="mt-5 rounded-3xl border border-primary/25 bg-primary-soft p-5 shadow-soft sm:p-8"
+      >
+        <div className="flex items-center justify-between gap-3 text-sm font-semibold text-primary">
+          <span>{copy.intro.label}</span>
+          <span>{introComplete ? copy.intro.completed : copy.intro.duration}</span>
+        </div>
+        <h2
+          id="intro-world-heading"
+          className="mt-3 font-display text-xl font-extrabold text-balance sm:text-2xl"
+        >
+          {copy.intro.title}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {copy.intro.description}
+        </p>
+        <div
+          className="mt-5 h-2 overflow-hidden rounded-full bg-surface"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={1}
+          aria-valuenow={introComplete ? 1 : 0}
+          aria-label={copy.intro.progressLabel(introComplete ? 1 : 0)}
+        >
+          <span
+            className="block h-full rounded-full bg-mint"
+            style={{ width: introComplete ? "100%" : "0%" }}
+          />
+        </div>
+        <Button asChild size="lg" className="mt-5 w-full sm:w-auto">
+          <Link href="/lessons/why-invest">
+            {introComplete ? copy.intro.review : copy.intro.start} <ArrowRight aria-hidden="true" />
+          </Link>
+        </Button>
+      </section>
+
+      <section
         aria-labelledby="active-world-heading"
-        className="mt-5 rounded-3xl border border-primary/25 bg-surface p-5 shadow-soft sm:p-8"
+        className="mt-4 rounded-3xl border border-primary/25 bg-surface p-5 shadow-soft sm:p-8"
       >
         <div className="flex items-center justify-between gap-3 text-sm font-semibold text-primary">
           <span>{`${copy.world} ${activeWorld.number}`}</span>
@@ -102,7 +141,7 @@ export function CourseWorlds({
           {copy.roadmap}
         </h2>
         <ol className="mt-4 border-l-2 border-border pl-5">
-          {COURSE_WORLDS.slice(1).map((world) => {
+          {COURSE_WORLDS.slice(2).map((world) => {
             const worldCopy = copy.worlds[world.number - 1]!;
             return (
               <li key={world.slug} className="relative pb-3 last:pb-0">

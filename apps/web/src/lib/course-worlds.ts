@@ -14,47 +14,47 @@ export type CourseWorld = {
 
 export const COURSE_WORLDS: CourseWorld[] = [
   {
+    number: 0,
+    slug: "why-invest",
+    available: true,
+  },
+  {
     number: 1,
     slug: "financial-foundation",
     available: true,
   },
   {
     number: 2,
-    slug: "why-invest",
-    available: false,
-  },
-  {
-    number: 3,
     slug: "investment-world",
     available: false,
   },
   {
-    number: 4,
+    number: 3,
     slug: "risk-and-behaviour",
     available: false,
   },
   {
-    number: 5,
+    number: 4,
     slug: "etfs",
     available: false,
   },
   {
-    number: 6,
+    number: 5,
     slug: "first-portfolio",
     available: false,
   },
   {
-    number: 7,
+    number: 6,
     slug: "investing-in-france",
     available: false,
   },
   {
-    number: 8,
+    number: 7,
     slug: "how-buying-works",
     available: false,
   },
   {
-    number: 9,
+    number: 8,
     slug: "ready-to-invest",
     available: false,
   },

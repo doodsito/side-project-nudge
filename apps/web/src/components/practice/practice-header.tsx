@@ -10,10 +10,12 @@ export function PracticeHeader({
   current,
   total,
   copy,
+  exitHref = "/dashboard/courses/financial-foundation",
 }: {
   current: number;
   total: number;
   copy: Dictionary["learning"]["shared"];
+  exitHref?: string;
 }) {
   const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
   // /practice needs no account: a visitor without one goes home, not to the log-in page.
@@ -31,7 +33,7 @@ export function PracticeHeader({
         </div>
         <span className="sr-only">{copy.lessonProgress(current, total)}</span>
         <Link
-          href={signedIn ? "/dashboard/courses/financial-foundation" : "/"}
+          href={signedIn ? exitHref : "/"}
           aria-label={copy.leaveLesson}
           className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >

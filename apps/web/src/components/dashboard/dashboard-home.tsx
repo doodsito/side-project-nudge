@@ -7,6 +7,7 @@ import {
   FOUNDATION_LESSON_COUNT,
   FOUNDATION_WORLD,
   hasCompletedLesson,
+  INTRO_WORLD,
   type CourseProgress,
 } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -29,6 +30,7 @@ export function DashboardHome({
     completedLessonCount(progress, FOUNDATION_WORLD),
     FOUNDATION_LESSON_COUNT,
   );
+  const introPending = completed === 0 && !hasCompletedLesson(progress, INTRO_WORLD, 1);
   const nextLesson = Array.from({ length: FOUNDATION_LESSON_COUNT }, (_, index) => index + 1).find(
     (lesson) => !hasCompletedLesson(progress, FOUNDATION_WORLD, lesson),
   );
@@ -36,6 +38,8 @@ export function DashboardHome({
   const lessonCopy = nextLesson ? foundationCopy.lessons[nextLesson - 1] : undefined;
   const lessonHref = nextLesson ? foundationLessonHref(nextLesson, track) : undefined;
   const courseHref = "/dashboard/courses/financial-foundation";
+  const displayedCompleted = introPending ? 0 : completed;
+  const displayedTotal = introPending ? 1 : FOUNDATION_LESSON_COUNT;
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -58,24 +62,34 @@ export function DashboardHome({
         className="mt-5 rounded-3xl border border-primary/25 bg-surface p-6 shadow-soft sm:p-8"
       >
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm font-semibold text-primary">{courseCopy.worlds[0]!.title}</p>
+          <p className="text-sm font-semibold text-primary">
+            {introPending ? courseCopy.intro.label : courseCopy.worlds[0]!.title}
+          </p>
           <span className="shrink-0 rounded-full bg-primary-soft px-3 py-1 text-sm font-bold text-primary">
-            {completed}/{FOUNDATION_LESSON_COUNT}
+            {displayedCompleted}/{displayedTotal}
           </span>
         </div>
 
         <p className="mt-5 text-sm font-bold text-primary">
-          {complete ? copy.worldComplete : `${foundationCopy.lesson} ${nextLesson}`}
+          {introPending
+            ? courseCopy.intro.duration
+            : complete
+              ? copy.worldComplete
+              : `${foundationCopy.lesson} ${nextLesson}`}
         </p>
         <h2
           id="next-lesson-heading"
           className="mt-1 font-display text-2xl font-extrabold leading-snug text-balance sm:text-3xl"
         >
-          {complete ? foundationCopy.title : lessonCopy!.title}
+          {introPending
+            ? courseCopy.intro.title
+            : complete
+              ? foundationCopy.title
+              : lessonCopy!.title}
         </h2>
         {!complete && (
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {lessonCopy!.description}
+            {introPending ? courseCopy.intro.description : lessonCopy!.description}
           </p>
         )}
 
@@ -85,20 +99,38 @@ export function DashboardHome({
             className="mt-2 h-2 overflow-hidden rounded-full bg-primary-soft"
             role="progressbar"
             aria-valuemin={0}
-            aria-valuemax={FOUNDATION_LESSON_COUNT}
-            aria-valuenow={completed}
-            aria-label={courseCopy.worldProgress(completed, FOUNDATION_LESSON_COUNT)}
+            aria-valuemax={displayedTotal}
+            aria-valuenow={displayedCompleted}
+            aria-label={
+              introPending
+                ? courseCopy.intro.progressLabel(0)
+                : courseCopy.worldProgress(completed, FOUNDATION_LESSON_COUNT)
+            }
           >
             <span
               className="block h-full rounded-full bg-mint transition-[width] duration-500"
-              style={{ width: `${(completed / FOUNDATION_LESSON_COUNT) * 100}%` }}
+              style={{ width: `${(displayedCompleted / displayedTotal) * 100}%` }}
             />
           </div>
         </div>
 
         <Button asChild size="lg" className="mt-6 w-full sm:w-auto">
-          <Link href={complete ? courseHref : (lessonHref ?? `${courseHref}#lesson-${nextLesson}`)}>
-            {complete ? copy.review : lessonHref ? foundationCopy.start : copy.explore}
+          <Link
+            href={
+              introPending
+                ? "/lessons/why-invest"
+                : complete
+                  ? courseHref
+                  : (lessonHref ?? `${courseHref}#lesson-${nextLesson}`)
+            }
+          >
+            {introPending
+              ? courseCopy.intro.start
+              : complete
+                ? copy.review
+                : lessonHref
+                  ? foundationCopy.start
+                  : copy.explore}
             <ArrowRight aria-hidden />
           </Link>
         </Button>

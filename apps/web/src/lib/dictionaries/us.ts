@@ -320,11 +320,11 @@ export const us = {
       journeyIntro:
         "Build the foundations, practise with virtual money and unlock the knowledge behind your first investment decisions.",
       worldsCompleted: "0 of 9 worlds",
-      firstWorldReady: "World 1 is ready",
+      firstWorldReady: "World 0 is ready",
       mapLabel: "Journey map",
       mapTitle: "Choose your world",
       mapIntro:
-        "Complete a world to open the next one. Locked worlds stay visible so you always know where the journey is heading.",
+        "Start with World 0 if investing is new to you. World 1 stays open at your own pace; later worlds are still in the works.",
       world: "World",
       ready: "Ready to explore",
       locked: "Locked",
@@ -337,10 +337,6 @@ export const us = {
         {
           title: "Build your financial foundation",
           description: "Give every dollar a job before you ask it to grow.",
-        },
-        {
-          title: "Why invest?",
-          description: "See how time, inflation and compounding change the picture.",
         },
         {
           title: "Meet the investment world",
@@ -371,6 +367,17 @@ export const us = {
           description: "Bring your knowledge, practice and personal plan together.",
         },
       ],
+      intro: {
+        label: "World 0 · Start here",
+        title: "Why learn about investing?",
+        description:
+          "A short lesson on the idea, compounding, and risk. You do not need to invest today.",
+        duration: "~3 min",
+        start: "Explore World 0",
+        review: "Review World 0",
+        completed: "Lesson complete",
+        progressLabel: (completed: number) => `World 0 progress: ${completed} of 1 lessons`,
+      },
       foundation: {
         metaTitle: "Build your financial foundation",
         back: "All worlds",
@@ -715,6 +722,90 @@ export const us = {
         moreTitle: "Want to go further? Why we say “might”",
         more: "Some money looks free but isn’t. A yearly bill, like phone insurance, can arrive in any month. So can a surprise, like a broken phone screen. That is why we say “might”. Lesson 4 covers your safety net.",
       },
+    },
+  },
+  lesson0: {
+    metaTitle: "Why learn about investing?",
+    welcome: {
+      eyebrow: "World 0 · A short introduction",
+      title: "Why learn about investing?",
+      body: "You do not need to know the stock market or have money to invest today. Even if you are a student or waiting for your first paycheck, you can already understand what investing could offer and what could go wrong.",
+      reassurance: "You can learn today and decide later whether investing is right for you.",
+      action: "Explore the idea",
+    },
+    meaning: {
+      eyebrow: "The basic idea",
+      title: "Give some money a chance to grow",
+      definition:
+        "Investing means putting money into an asset whose value can rise or fall, hoping it may grow for a goal further away.",
+      example:
+        "Imagine Leah, a student today. Once she has an income, she could consider putting aside a small amount each month for a goal ten years away. She does not need to start now to understand the idea.",
+      boundary:
+        "Money you may need soon has a different job. World 1 will help you tell these amounts apart.",
+      action: "See how growth can build",
+    },
+    compound: {
+      eyebrow: "A made-up calculation",
+      title: "Gains can earn gains too",
+      intro:
+        "Imagine $100 growing by 10% in each of two years, with every gain left invested. This steady rate is fictional.",
+      start: "Start",
+      first: "After year 1",
+      second: "After year 2",
+      firstGain: "+$10",
+      secondGain: "+$11",
+      explanation:
+        "In year 2, 10% applies to $110, including the first gain. That is compound growth.",
+      caveat:
+        "Real investments do not grow at a steady rate. They can lose value; this example leaves out fees and taxes.",
+      action: "What about losses?",
+    },
+    risk: {
+      eyebrow: "The other side",
+      title: "The value can fall",
+      example: "A fictional 20% drop turns $100 into $80.",
+      soon: "If you need that money soon, you may have to sell while it is down.",
+      later:
+        "A distant goal gives you more time to ride out a fall. Historically, losses have been less frequent over longer periods for diversified stock investments.",
+      warning: "Even after ten years, a loss is possible. Time never guarantees a gain.",
+      action: "Check what you understood",
+    },
+    question: {
+      eyebrow: "One question",
+      title: "What does more time change?",
+      prompt: "Choose the statement that holds up even when markets fall.",
+      options: [
+        "After ten years, a gain is guaranteed.",
+        "Time can help you wait through a fall, but a loss is still possible.",
+        "Any money left over should be invested, even if you need it next month.",
+      ],
+      feedback: [
+        "Ten years do not guarantee a gain. An investment can still be worth less when you need it.",
+        "Exactly. More time can help you wait, but it cannot remove the risk of loss.",
+        "Money needed soon must stay available. Investing it could force you to sell after a drop.",
+      ],
+      correct: "That reasoning holds up",
+      rethink: "A useful distinction",
+      answer: "A sounder answer",
+      check: "See the explanation",
+      hint: "Choose an answer to continue.",
+      action: "Finish World 0",
+    },
+    complete: {
+      eyebrow: "World 0 complete",
+      title: "You can learn before you invest",
+      summary:
+        "Investing offers a chance to grow money for a distant goal. Gains left invested can build on earlier gains, but the value can also fall.",
+      next: "In World 1, you will decide which money should stay available before considering a long-term goal.",
+      saving: "Saving your progress…",
+      saved: "Your progress is saved.",
+      error: "We could not save your progress. Try again.",
+      retry: "Try saving again",
+      action: "Explore World 1",
+      replay: "Replay World 0",
+      source: "Read the SEC’s introduction to investing",
+      sourceHref: "https://www.investor.gov/introduction-investing",
+      note: "Fictional examples for learning. No investment advice or promised returns.",
     },
   },
   lesson3: {
