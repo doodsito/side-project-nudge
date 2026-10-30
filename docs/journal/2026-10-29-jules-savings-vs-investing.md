@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-29
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/63
 
 **Why:** The beta needs a final lesson that helps learners match saving or investing to the job of each amount, then thanks them for completing World 1.
 **What changed:**
