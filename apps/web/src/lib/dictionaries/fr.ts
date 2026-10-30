@@ -1552,17 +1552,25 @@ export const fr: Dictionary = {
       action: "Faire le lien avec ta situation",
     },
     reflection: {
-      eyebrow: "Réutilise la méthode",
-      title: "Si tu mettais une somme de côté aujourd’hui, quand pourrais-tu en avoir besoin ?",
-      prompt: "Choisis la situation que tu voudrais d’abord comprendre.",
-      options: ["Bientôt", "Bien plus tard", "Je ne sais pas encore"],
-      feedback: [
-        "Demande-toi à quelle date la somme doit être accessible et ce qu’une baisse à ce moment changerait pour ton projet.",
-        "Demande-toi si la somme peut rester inutilisée malgré des variations, et ce que signifierait une perte pour ton objectif.",
-        "Commence par nommer l’objectif et une date approximative. Tu pourras comparer les choix une fois le rôle de la somme plus clair.",
+      eyebrow: "Et toi ?",
+      title: "Pourrais-tu mettre une petite somme de côté pendant plusieurs années ?",
+      context:
+        "Pense à aujourd’hui ou aux prochains mois. Tu pourrais chercher à faire fructifier cette somme en l’investissant, mais sa valeur pourrait aussi baisser.",
+      prompt:
+        "Choisis ce qui se rapproche le plus de ta situation. Il n’y a pas de mauvaise réponse.",
+      check: "Voir ce que cela implique",
+      options: [
+        "Oui, je pourrais ne pas y toucher pendant 10 ans ou plus.",
+        "Peut-être, mais je pourrais en avoir besoin après 12 mois et avant 10 ans.",
+        "Non, j’en aurais besoin dans les 12 prochains mois.",
+        "Je ne sais pas encore quand j’en aurais besoin.",
       ],
-      reminder:
-        "Vérifie aussi tes obligations et le coût connu d’une éventuelle dette. Un rendement espéré n’a pas la même certitude qu’un coût contractuel.",
+      feedback: [
+        "Avec cet horizon, tu peux comparer épargne et investissement. Vérifie que cette somme ne sert pas à un besoin prévu ou à ton filet de sécurité, et garde en tête le risque de perte.",
+        "Précise d’abord la date de ton besoin. Tu pourras ensuite comparer la disponibilité de l’épargne et la croissance possible, mais incertaine, d’un investissement.",
+        "Si tu peux en avoir besoin dans les 12 mois, sa disponibilité et sa stabilité comptent. Tu pourras réexaminer la question pour un autre projet, plus lointain.",
+        "Tu n’as pas besoin de décider maintenant. Commence par définir à quoi cette somme pourrait servir et quand tu en aurais besoin.",
+      ],
       action: "Terminer le Monde 1",
     },
     complete: {

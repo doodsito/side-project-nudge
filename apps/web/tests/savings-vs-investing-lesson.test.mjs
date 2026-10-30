@@ -55,7 +55,7 @@ test("practice questions each have one sound answer; personal reflection has non
     );
     assert.equal(SAVINGS_VS_INVESTING_OPTIONS[question].length, 3);
   }
-  assert.equal(SAVINGS_VS_INVESTING_OPTIONS.reflection.length, 3);
+  assert.equal(SAVINGS_VS_INVESTING_OPTIONS.reflection.length, 4);
   assert.equal(
     SAVINGS_VS_INVESTING_OPTIONS.reflection.every((option) => option.correct === null),
     true,

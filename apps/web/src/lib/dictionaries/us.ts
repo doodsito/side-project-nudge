@@ -1512,17 +1512,24 @@ export const us = {
       action: "Connect it to your own questions",
     },
     reflection: {
-      eyebrow: "Use the method",
-      title: "If you set an amount aside today, when might you need it?",
-      prompt: "Choose the situation you would want to understand first.",
-      options: ["Soon", "Much later", "I'm not sure yet"],
-      feedback: [
-        "Ask how soon you need access and how much a drop at that moment would affect your plan.",
-        "Ask whether you could leave the money untouched through ups and downs, and what a loss would mean for your goal.",
-        "Start by naming the goal and an approximate date. You can compare the choices once you know the money's job.",
+      eyebrow: "What about you?",
+      title: "Could you set aside a small amount for several years?",
+      context:
+        "Think about now or the next few months. You could invest that amount in the hope of growing it, but its value could also fall.",
+      prompt: "Choose what comes closest to your situation. There is no wrong answer.",
+      check: "Explore what this means",
+      options: [
+        "Yes, I could leave it untouched for 10 years or more.",
+        "Maybe, but I might need it after 12 months and before 10 years.",
+        "No, I would need it within the next 12 months.",
+        "I'm not sure yet when I would need it.",
       ],
-      reminder:
-        "Also check obligations and any known debt cost. A hoped-for investment return is not as certain as a contractual cost.",
+      feedback: [
+        "With that horizon, you can compare saving and investing. Check that this amount is not needed for a planned expense or your safety net, and keep the risk of loss in mind.",
+        "First, get clearer on when you would need it. You can then compare the access savings offer with an investment's possible, but uncertain, growth.",
+        "If you might need it within 12 months, access and stability matter. You can revisit the question for a different, more distant goal.",
+        "You do not need to decide now. Start by identifying what you might use that amount for and when you would need it.",
+      ],
       action: "Finish World 1",
     },
     complete: {

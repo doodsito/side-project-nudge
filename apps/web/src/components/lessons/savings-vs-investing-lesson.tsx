@@ -37,6 +37,7 @@ type QuestionCopy = {
   eyebrow: string;
   title: string;
   prompt: string;
+  check?: string;
   options: readonly string[];
   feedback: readonly string[];
   action: string;
@@ -120,7 +121,7 @@ function QuestionScreen({
         checked ? (
           <PrimaryAction onClick={onNext}>{copy.action}</PrimaryAction>
         ) : answer ? (
-          <PrimaryAction onClick={onCheck}>{shared.check}</PrimaryAction>
+          <PrimaryAction onClick={onCheck}>{copy.check ?? shared.check}</PrimaryAction>
         ) : (
           <p className="py-3 text-center text-sm font-semibold text-muted-foreground">
             {copy.prompt}
@@ -373,9 +374,7 @@ export function SavingsVsInvestingLesson(props: Props) {
         onCheck={props.onCheck}
         onNext={() => props.onGoTo("complete")}
       >
-        <p className="mb-5 rounded-2xl bg-surface-2 p-4 text-sm leading-relaxed">
-          {copy.reflection.reminder}
-        </p>
+        <p className="mt-4 text-muted-foreground">{copy.reflection.context}</p>
       </QuestionScreen>
     );
   }
