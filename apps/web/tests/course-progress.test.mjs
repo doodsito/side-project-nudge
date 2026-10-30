@@ -122,3 +122,18 @@ test("lesson seven saves 7/8 progress and unlocks lesson eight", () => {
   assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 8), false);
   assert.deepEqual(Array.from(progress.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4, 5, 6, 7]);
 });
+
+test("lesson eight saves 8/8 progress and is idempotent", () => {
+  let progress = readCourseProgress(null);
+  for (let lesson = 1; lesson <= 8; lesson += 1) {
+    progress = completeLesson(progress, FOUNDATION_WORLD, lesson);
+  }
+
+  assert.equal(completedLessonCount(progress, FOUNDATION_WORLD), 8);
+  assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 8), true);
+  assert.equal(completeLesson(progress, FOUNDATION_WORLD, 8), progress);
+  assert.deepEqual(
+    Array.from(progress.completedLessons[FOUNDATION_WORLD]),
+    [1, 2, 3, 4, 5, 6, 7, 8],
+  );
+});
