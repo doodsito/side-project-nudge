@@ -325,11 +325,11 @@ export const fr: Dictionary = {
       journeyIntro:
         "Construis les bases, entraîne-toi avec de l’argent virtuel et débloque les connaissances utiles à tes premières décisions d’investissement.",
       worldsCompleted: "0 monde sur 9",
-      firstWorldReady: "Le monde 1 est prêt",
+      firstWorldReady: "Le monde 0 est prêt",
       mapLabel: "Carte du parcours",
       mapTitle: "Choisis ton monde",
       mapIntro:
-        "Termine un monde pour ouvrir le suivant. Les mondes verrouillés restent visibles pour que tu saches toujours où mène le parcours.",
+        "Commence par le Monde 0 si tu découvres l’investissement. Le Monde 1 reste accessible à ton rythme ; les prochains mondes sont encore en préparation.",
       world: "Monde",
       ready: "Prêt à explorer",
       locked: "Verrouillé",
@@ -342,11 +342,6 @@ export const fr: Dictionary = {
         {
           title: "Construis tes bases financières",
           description: "Donne un rôle à chaque euro avant de chercher à le faire fructifier.",
-        },
-        {
-          title: "Pourquoi investir ?",
-          description:
-            "Découvre comment le temps, l’inflation et les intérêts composés changent la donne.",
         },
         {
           title: "Découvre le monde de l’investissement",
@@ -383,6 +378,17 @@ export const fr: Dictionary = {
           description: "Rassemble tes connaissances, ta pratique et ton plan personnel.",
         },
       ],
+      intro: {
+        label: "Monde 0 · Pour commencer",
+        title: "Pourquoi s’intéresser à l’investissement ?",
+        description:
+          "Une leçon courte pour comprendre l’idée, les intérêts composés et le risque, sans avoir besoin d’investir aujourd’hui.",
+        duration: "~3 min",
+        start: "Découvrir le Monde 0",
+        review: "Revoir le Monde 0",
+        completed: "Leçon terminée",
+        progressLabel: (completed: number) => `Progression du Monde 0 : ${completed} leçon sur 1`,
+      },
       foundation: {
         metaTitle: "Construis tes bases financières",
         back: "Tous les mondes",
@@ -749,6 +755,102 @@ export const fr: Dictionary = {
         moreTitle: "Pour aller plus loin : pourquoi dit-on « pourrait » ?",
         more: "Une somme peut sembler disponible sans vraiment l’être. Une facture annuelle, comme une assurance téléphone, peut tomber n’importe quel mois. Un imprévu aussi, comme un écran cassé. Voilà pourquoi nous disons « pourrait ». La leçon 4 parlera de ton filet de sécurité.",
       },
+    },
+  },
+  lesson0: {
+    metaTitle: "Pourquoi s’intéresser à l’investissement ?",
+    welcome: {
+      eyebrow: "Monde 0 · Une courte introduction",
+      title: "Pourquoi s’intéresser à l’investissement ?",
+      body: "Tu n’as pas besoin de connaître la Bourse ni d’avoir de l’argent à investir aujourd’hui. Même si tu es étudiant ou attends ton premier salaire, tu peux déjà comprendre ce que l’investissement pourrait apporter et ce qui peut mal tourner.",
+      reassurance: "Tu peux apprendre aujourd’hui et décider plus tard si investir te convient.",
+      action: "Découvrir l’idée",
+    },
+    meaning: {
+      eyebrow: "L’idée de base",
+      title: "Donner une chance à une somme de grandir",
+      definition:
+        "Investir, c’est placer de l’argent dans un actif dont la valeur peut monter ou baisser, avec l’espoir de le faire grandir pour un objectif lointain.",
+      example:
+        "Imagine Léa, étudiante aujourd’hui. Quand elle aura un salaire, elle pourra réfléchir à mettre une petite somme de côté chaque mois pour un projet dans dix ans. Elle peut dès aujourd’hui apprendre comment fonctionne l’investissement et préparer ses futurs choix.",
+      boundary:
+        "L’argent dont tu pourrais avoir besoin bientôt a un autre rôle. Le Monde 1 t’aidera à distinguer ces sommes.",
+      action: "Voir comment les gains s’accumulent",
+    },
+    compound: {
+      eyebrow: "Un calcul imaginaire",
+      title: "Les gains peuvent aussi produire des gains",
+      intro:
+        "Imagine 1 000 € qui gagnent 5 % chaque année pendant 20 ans, en laissant tous les gains placés.",
+      start: "Départ",
+      first: "Après 10 ans",
+      second: "Après 20 ans",
+      explanation:
+        "Au début, 5 % de 1 000 € rapportent 50 €. Ensuite, les gains laissés placés produisent eux aussi des gains : c’est l’effet des intérêts composés.",
+      comparison:
+        "Sans réinvestir les gains, le total serait de 2 000 € après 20 ans. Ici, les gains réinvestis ajoutent 653 € de plus.",
+      caveat:
+        "Dans la réalité, le rendement varie d’une année à l’autre. Les frais et les impôts ne sont pas inclus dans ce calcul.",
+      action: "Et quand la valeur baisse ?",
+    },
+    risk: {
+      eyebrow: "Et les baisses ?",
+      title: "Une baisse peut être suivie d’une reprise",
+      intro:
+        "Imagine un placement réparti entre plusieurs entreprises. Voici une trajectoire possible sur plusieurs années :",
+      start: "Valeur au départ",
+      dip: "Valeur après une baisse",
+      dipChange: "−20 % · 200 € de moins",
+      recovery: "Valeur plus tard, dans cet exemple",
+      recoveryChange: "300 € de plus qu’au départ",
+      example:
+        "La baisse de 20 % n’a pas forcément été la fin de l’histoire. Si tu as besoin de cet argent bientôt, tu pourrais toutefois devoir vendre avant une éventuelle reprise.",
+      historical:
+        "Dans le passé, selon l’AMF, les placements diversifiés en actions sur 15 à 20 ans ont rapporté en moyenne 5 à 7 % par an. Répartir son investissement évite aussi de dépendre d’une seule entreprise.",
+      source: "Voir les repères de l’AMF",
+      sourceHref:
+        "https://www.amf-france.org/fr/espace-epargnants/actualites-mises-en-garde/reperes-utiles-sur-les-rendements-de-lepargne",
+      warning:
+        "Ce scénario et ces résultats passés ne promettent rien : même avec du temps et de la diversification, une perte reste possible.",
+      action: "Vérifier ce que tu as compris",
+    },
+    question: {
+      eyebrow: "Une question",
+      title: "Qu’est-ce que le temps change ?",
+      prompt: "Choisis l’affirmation qui reste vraie même si les marchés baissent.",
+      options: [
+        "Après dix ans, un gain est garanti.",
+        "Le temps peut aider à traverser une baisse, mais une perte reste possible.",
+        "Tout l’argent restant devrait être investi, même s’il sert le mois prochain.",
+      ],
+      feedback: [
+        "Dix ans ne garantissent aucun gain. Un investissement peut valoir moins quand tu en auras besoin.",
+        "Exactement. Avoir du temps peut aider à attendre, mais ne supprime pas le risque de perte.",
+        "L’argent nécessaire bientôt doit rester disponible. L’investir pourrait t’obliger à vendre après une baisse.",
+      ],
+      correct: "Bonne réponse !",
+      rethink: "Une distinction utile",
+      answer: "Réponse plus juste",
+      check: "Voir l’explication",
+      hint: "Choisis une réponse pour continuer.",
+      action: "Terminer le Monde 0",
+    },
+    complete: {
+      eyebrow: "Monde 0 terminé",
+      title: "Tu peux apprendre avant d’investir",
+      summary:
+        "Investir donne une chance de faire grandir une somme pour un objectif lointain. Les gains laissés placés peuvent s’ajouter aux précédents, mais la valeur peut aussi baisser.",
+      next: "Dans le Monde 1, tu décideras quelles sommes doivent rester disponibles avant de penser à un objectif lointain.",
+      saving: "Enregistrement de ta progression…",
+      saved: "Ta progression est enregistrée.",
+      error: "Nous n’avons pas pu enregistrer ta progression. Réessaie.",
+      retry: "Réessayer l’enregistrement",
+      action: "Explorer le Monde 1",
+      replay: "Revoir le Monde 0",
+      source: "Lire les repères de l’AMF sur le risque et le rendement",
+      sourceHref:
+        "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/rendement-et-risque-des-placements-en-actions-0",
+      note: "Exemples fictifs pour apprendre. Aucun conseil financier ni rendement promis.",
     },
   },
   lesson3: {
