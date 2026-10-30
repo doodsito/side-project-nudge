@@ -13,7 +13,7 @@ import { CircleAlert, CircleCheck, MessageSquarePlus } from "lucide-react";
 import { submitFeedback, type FeedbackFormState } from "@/app/dashboard/actions";
 import { SubmitButton } from "@/components/auth/submit-button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -43,29 +43,35 @@ const initialState: FeedbackFormState = {};
 export function FeedbackProvider({
   t,
   children,
+  intro,
+  showFloatingTrigger = true,
 }: {
   t: Dictionary["dashboard"]["feedback"];
   children: ReactNode;
+  intro?: string;
+  showFloatingTrigger?: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
   return (
     <openFeedbackContext.Provider value={() => setOpen(true)}>
       {children}
-      <Button
-        type="button"
-        size="icon"
-        aria-label={t.trigger}
-        onClick={() => setOpen(true)}
-        className="fixed right-6 bottom-6 z-40 hidden h-14 w-14 rounded-full shadow-lift sm:inline-flex"
-      >
-        <MessageSquarePlus className="size-6" aria-hidden />
-      </Button>
+      {showFloatingTrigger && (
+        <Button
+          type="button"
+          size="icon"
+          aria-label={t.trigger}
+          onClick={() => setOpen(true)}
+          className="fixed right-6 bottom-6 z-40 hidden h-14 w-14 rounded-full shadow-lift sm:inline-flex"
+        >
+          <MessageSquarePlus className="size-6" aria-hidden />
+        </Button>
+      )}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t.title}</DialogTitle>
-            <DialogDescription>{t.intro}</DialogDescription>
+            <DialogDescription>{intro ?? t.intro}</DialogDescription>
           </DialogHeader>
           <FeedbackForm t={t} />
         </DialogContent>
@@ -146,14 +152,25 @@ function FeedbackForm({ t }: { t: Dictionary["dashboard"]["feedback"] }) {
 }
 
 /** Opens the dashboard's feedback dialog from the desktop header or mobile Account page. */
-export function FeedbackHeaderButton({ label, className }: { label: string; className?: string }) {
+export function FeedbackHeaderButton({
+  label,
+  className,
+  variant = "outline",
+  size = "default",
+}: {
+  label: string;
+  className?: string;
+  variant?: "default" | "outline";
+  size?: ButtonProps["size"];
+}) {
   const openFeedback = useContext(openFeedbackContext);
   return (
     <Button
       type="button"
-      variant="outline"
+      variant={variant}
+      size={size}
       onClick={() => openFeedback?.()}
-      className={cn("h-10 px-4 text-sm", className)}
+      className={cn(size === "default" && "h-10 px-4 text-sm", className)}
     >
       <MessageSquarePlus aria-hidden /> {label}
     </Button>

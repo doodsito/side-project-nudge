@@ -4,7 +4,7 @@ import { type ReactNode } from "react";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
 import { SkipLink } from "@/components/layout/skip-link";
 import { DashboardTabs } from "@/components/dashboard/dashboard-tabs";
-import { FeedbackHeaderButton, FeedbackProvider } from "@/components/dashboard/feedback-widget";
+import { FeedbackHeaderButton, FeedbackProvider } from "@/components/shared/feedback-widget";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { BRAND } from "@/lib/brand";
 import type { Dictionary } from "@/lib/dictionaries";

@@ -45,6 +45,10 @@ const foundationSource = readFileSync(
   new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
   "utf8",
 );
+const courseWorldsSource = readFileSync(
+  new URL("../src/lib/course-worlds.ts", import.meta.url),
+  "utf8",
+);
 const frSource = readFileSync(new URL("../src/lib/dictionaries/fr.ts", import.meta.url), "utf8");
 const usSource = readFileSync(new URL("../src/lib/dictionaries/us.ts", import.meta.url), "utf8");
 
@@ -123,8 +127,9 @@ test("lesson five moves focus between screens and supports replay and save retry
 
 test("the World 1 entry redirects to lesson five and unlocks lesson six", () => {
   assert.match(entrySource, /redirect\("\/lessons\/money-youll-need-soon"\)/);
-  assert.match(foundationSource, /financial-foundation\/money-youll-need-soon/);
-  assert.match(foundationSource, /financial-foundation\/debt-vs-investing/);
+  assert.match(foundationSource, /foundationLessonHref/);
+  assert.match(courseWorldsSource, /financial-foundation\/money-youll-need-soon/);
+  assert.match(courseWorldsSource, /financial-foundation\/debt-vs-investing/);
   assert.match(
     lessonSixSource,
     /hasCompletedLesson\(member\.courseProgress, FOUNDATION_WORLD, 5\)/,

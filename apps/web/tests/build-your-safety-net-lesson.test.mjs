@@ -27,6 +27,10 @@ const foundationSource = readFileSync(
   new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
   "utf8",
 );
+const courseWorldsSource = readFileSync(
+  new URL("../src/lib/course-worlds.ts", import.meta.url),
+  "utf8",
+);
 const lessonFiveSource = readFileSync(
   new URL(
     "../src/app/dashboard/courses/financial-foundation/money-youll-need-soon/page.tsx",
@@ -99,8 +103,9 @@ test("lesson four requires lesson three and saves 4 of 8 progress", () => {
 });
 
 test("the world map links lesson four and the unlocked lesson-five introduction", () => {
-  assert.match(foundationSource, /financial-foundation\/build-your-safety-net/);
-  assert.match(foundationSource, /financial-foundation\/money-youll-need-soon/);
+  assert.match(foundationSource, /foundationLessonHref/);
+  assert.match(courseWorldsSource, /financial-foundation\/build-your-safety-net/);
+  assert.match(courseWorldsSource, /financial-foundation\/money-youll-need-soon/);
   assert.match(
     lessonFiveSource,
     /hasCompletedLesson\(member\.courseProgress, FOUNDATION_WORLD, 4\)/,

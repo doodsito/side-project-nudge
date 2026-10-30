@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CircleAlert, CircleCheck } from "lucide-react";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { SubmitButton } from "@/components/auth/submit-button";
-import { FeedbackHeaderButton } from "@/components/dashboard/feedback-widget";
+import { FeedbackHeaderButton } from "@/components/shared/feedback-widget";
 import { textLinkClass } from "@/components/shared/text-link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { RadioGroup } from "@/components/ui/radio-group";

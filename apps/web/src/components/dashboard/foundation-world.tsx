@@ -225,8 +225,16 @@ export function FoundationWorld({
           <p className="mt-4 text-[11px] font-extrabold uppercase text-primary">
             {copy.rewardLabel}
           </p>
-          <h2 className="mt-2 font-display text-2xl font-extrabold">{copy.rewardTitle}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{copy.rewardIntro}</p>
+          <h2 className="mt-2 font-display text-2xl font-extrabold">
+            {completedCount === FOUNDATION_LESSON_COUNT
+              ? copy.rewardCompleteTitle
+              : copy.rewardTitle}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {completedCount === FOUNDATION_LESSON_COUNT
+              ? copy.rewardCompleteIntro
+              : copy.rewardIntro}
+          </p>
         </div>
       </section>
     </>
