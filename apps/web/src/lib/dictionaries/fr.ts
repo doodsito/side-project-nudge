@@ -798,9 +798,11 @@ export const fr: Dictionary = {
       title: "Une baisse peut être suivie d’une reprise",
       intro:
         "Imagine un placement réparti entre plusieurs entreprises. Voici une trajectoire possible sur plusieurs années :",
-      start: "Départ",
-      dip: "Pendant une baisse",
-      recovery: "Plus tard, dans cet exemple",
+      start: "Valeur au départ",
+      dip: "Valeur après une baisse",
+      dipChange: "−20 % · 200 € de moins",
+      recovery: "Valeur plus tard, dans cet exemple",
+      recoveryChange: "300 € de plus qu’au départ",
       example:
         "La baisse de 20 % n’a pas forcément été la fin de l’histoire. Si tu as besoin de cet argent bientôt, tu pourrais toutefois devoir vendre avant une éventuelle reprise.",
       historical:

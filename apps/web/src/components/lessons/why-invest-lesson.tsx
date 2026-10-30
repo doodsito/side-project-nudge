@@ -160,9 +160,19 @@ export function WhyInvestLesson(props: Props) {
 
   if (step === "risk") {
     const amounts = [
-      { label: copy.risk.start, value: RISK_EXAMPLE.start, trend: null },
-      { label: copy.risk.dip, value: RISK_EXAMPLE.duringDrop, trend: "down" },
-      { label: copy.risk.recovery, value: RISK_EXAMPLE.afterRecovery, trend: "up" },
+      { label: copy.risk.start, value: RISK_EXAMPLE.start, change: null, trend: null },
+      {
+        label: copy.risk.dip,
+        value: RISK_EXAMPLE.duringDrop,
+        change: copy.risk.dipChange,
+        trend: "down",
+      },
+      {
+        label: copy.risk.recovery,
+        value: RISK_EXAMPLE.afterRecovery,
+        change: copy.risk.recoveryChange,
+        trend: "up",
+      },
     ];
     return (
       <LessonScreen
@@ -179,15 +189,19 @@ export function WhyInvestLesson(props: Props) {
               className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
             >
               <dt className="text-xs font-bold text-muted-foreground">{amount.label}</dt>
-              <dd className="mt-2 flex items-center gap-2 font-display text-2xl font-extrabold">
-                {amount.trend === "down" && (
-                  <TrendingDown className="size-5 shrink-0 text-market-down" aria-hidden="true" />
-                )}
-                {amount.trend === "up" && (
-                  <TrendingUp className="size-5 shrink-0 text-market-up" aria-hidden="true" />
-                )}
-                {money(amount.value)}
-              </dd>
+              <dd className="mt-2 font-display text-2xl font-extrabold">{money(amount.value)}</dd>
+              {amount.change && (
+                <p
+                  className={`mt-2 flex items-start gap-1 text-xs font-semibold ${amount.trend === "down" ? "text-market-down" : "text-market-up"}`}
+                >
+                  {amount.trend === "down" ? (
+                    <TrendingDown className="size-4 shrink-0" aria-hidden="true" />
+                  ) : (
+                    <TrendingUp className="size-4 shrink-0" aria-hidden="true" />
+                  )}
+                  {amount.change}
+                </p>
+              )}
             </div>
           ))}
         </dl>

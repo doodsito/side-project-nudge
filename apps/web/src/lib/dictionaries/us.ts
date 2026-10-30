@@ -763,9 +763,11 @@ export const us = {
       title: "A drop can be followed by a recovery",
       intro:
         "Imagine an investment spread across several companies. Here is one possible path over several years:",
-      start: "Start",
-      dip: "During a drop",
-      recovery: "Later, in this example",
+      start: "Value at the start",
+      dip: "Value after a drop",
+      dipChange: "−20% · $200 less",
+      recovery: "Value later, in this example",
+      recoveryChange: "$300 more than at the start",
       example:
         "The 20% drop was not necessarily the end of the story. If you need the money soon, though, you might have to sell before any recovery.",
       historical:
