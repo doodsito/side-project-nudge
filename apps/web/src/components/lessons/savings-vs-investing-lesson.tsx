@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import {
   ArrowRight,
   Check,
@@ -115,6 +115,11 @@ function QuestionScreen({
   const selectedIndex = options.findIndex((option) => option.value === answer);
   const correctIndex = options.findIndex((option) => option.correct === true);
   const correct = selectedIndex === correctIndex;
+  const feedbackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (checked) feedbackRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [checked]);
 
   return (
     <LessonScreen
@@ -161,10 +166,11 @@ function QuestionScreen({
       </div>
       {checked && selectedIndex >= 0 && (
         <div
+          ref={feedbackRef}
           role="status"
           aria-live="polite"
           className={cn(
-            "mt-5 rounded-2xl border p-4",
+            "mt-5 scroll-mt-5 rounded-2xl border p-4",
             correctIndex < 0
               ? "border-primary/30 bg-primary-soft"
               : correct
