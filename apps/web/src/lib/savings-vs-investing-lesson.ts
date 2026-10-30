@@ -36,9 +36,9 @@ export const SAVINGS_VS_INVESTING_OPTIONS = {
     { value: "no-risk", correct: false },
   ],
   reflection: [
-    { value: "ten-years-or-more", correct: null },
-    { value: "one-to-ten-years", correct: null },
-    { value: "within-a-year", correct: null },
+    { value: "now-and-long-term", correct: null },
+    { value: "soon-and-long-term", correct: null },
+    { value: "needed-within-ten-years", correct: null },
     { value: "unsure", correct: null },
   ],
 } as const;
