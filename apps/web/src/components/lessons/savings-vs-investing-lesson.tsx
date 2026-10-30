@@ -373,7 +373,6 @@ export function SavingsVsInvestingLesson(props: Props) {
         onCheck={props.onCheck}
         onNext={() => props.onGoTo("complete")}
       >
-        <p className="mb-5 text-sm text-muted-foreground">{copy.reflection.intro}</p>
         <p className="mb-5 rounded-2xl bg-surface-2 p-4 text-sm leading-relaxed">
           {copy.reflection.reminder}
         </p>

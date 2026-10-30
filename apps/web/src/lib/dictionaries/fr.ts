@@ -1554,8 +1554,6 @@ export const fr: Dictionary = {
     reflection: {
       eyebrow: "Réutilise la méthode",
       title: "Si tu mettais une somme de côté aujourd’hui, quand pourrais-tu en avoir besoin ?",
-      intro:
-        "Cette réflexion reste sur cet écran. Elle ne demande aucun montant et n’enregistre pas de réponse financière personnelle.",
       prompt: "Choisis la situation que tu voudrais d’abord comprendre.",
       options: ["Bientôt", "Bien plus tard", "Je ne sais pas encore"],
       feedback: [

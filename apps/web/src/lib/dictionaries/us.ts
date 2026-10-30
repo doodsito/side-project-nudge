@@ -1514,8 +1514,6 @@ export const us = {
     reflection: {
       eyebrow: "Use the method",
       title: "If you set an amount aside today, when might you need it?",
-      intro:
-        "This reflection stays on this screen. It does not ask for an amount or save a personal financial answer.",
       prompt: "Choose the situation you would want to understand first.",
       options: ["Soon", "Much later", "I'm not sure yet"],
       feedback: [
