@@ -739,7 +739,7 @@ export const us = {
       definition:
         "Investing means putting money into an asset whose value can rise or fall, hoping it may grow for a goal further away.",
       example:
-        "Imagine Leah, a student today. Once she has an income, she could consider putting aside a small amount each month for a goal ten years away. She does not need to start now to understand the idea.",
+        "Imagine Leah, a student today. Once she has an income, she could consider putting aside a small amount each month for a goal ten years away. She can start learning how investing works today and prepare to make her own choices.",
       boundary:
         "Money you may need soon has a different job. World 1 will help you tell these amounts apart.",
       action: "See how growth can build",

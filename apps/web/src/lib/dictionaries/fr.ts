@@ -772,7 +772,7 @@ export const fr: Dictionary = {
       definition:
         "Investir, c’est placer de l’argent dans un actif dont la valeur peut monter ou baisser, avec l’espoir de le faire grandir pour un objectif lointain.",
       example:
-        "Imagine Léa, étudiante aujourd’hui. Quand elle aura un salaire, elle pourra réfléchir à mettre une petite somme de côté chaque mois pour un projet dans dix ans. Elle n’a pas besoin de commencer maintenant pour comprendre l’idée.",
+        "Imagine Léa, étudiante aujourd’hui. Quand elle aura un salaire, elle pourra réfléchir à mettre une petite somme de côté chaque mois pour un projet dans dix ans. Elle peut dès aujourd’hui apprendre comment fonctionne l’investissement et préparer ses futurs choix.",
       boundary:
         "L’argent dont tu pourrais avoir besoin bientôt a un autre rôle. Le Monde 1 t’aidera à distinguer ces sommes.",
       action: "Voir comment les gains s’accumulent",
