@@ -781,26 +781,35 @@ export const fr: Dictionary = {
       eyebrow: "Un calcul imaginaire",
       title: "Les gains peuvent aussi produire des gains",
       intro:
-        "Imagine 100 € qui gagnent 10 % la première année, puis encore 10 % la deuxième, en laissant chaque gain placé. Ce taux régulier est fictif.",
+        "Imagine 1 000 € qui gagnent 5 % chaque année pendant 20 ans, en laissant tous les gains placés.",
       start: "Départ",
-      first: "Après 1 an",
-      second: "Après 2 ans",
-      firstGain: "+10 €",
-      secondGain: "+11 €",
+      first: "Après 10 ans",
+      second: "Après 20 ans",
       explanation:
-        "La deuxième année, les 10 % portent sur 110 €, premier gain compris. C’est l’effet des intérêts composés.",
+        "Au début, 5 % de 1 000 € rapportent 50 €. Ensuite, les gains laissés placés produisent eux aussi des gains : c’est l’effet des intérêts composés.",
+      comparison:
+        "Sans réinvestir les gains, le total serait de 2 000 € après 20 ans. Ici, les gains réinvestis ajoutent 653 € de plus.",
       caveat:
-        "Un investissement réel ne progresse pas à taux fixe. Sa valeur peut baisser ; cet exemple laisse de côté frais et impôts.",
-      action: "Et si la valeur baisse ?",
+        "Dans la réalité, le rendement varie d’une année à l’autre. Les frais et les impôts ne sont pas inclus dans ce calcul.",
+      action: "Et quand la valeur baisse ?",
     },
     risk: {
-      eyebrow: "L’autre côté",
-      title: "La valeur peut baisser",
-      example: "Une baisse fictive de 20 % fait passer 100 € à 80 €.",
-      soon: "Si tu as besoin de cette somme bientôt, tu pourrais devoir vendre pendant la baisse.",
-      later:
-        "Un projet lointain te laisse plus de temps pour traverser une baisse. Historiquement, les pertes ont été moins fréquentes sur des durées longues pour des placements en actions diversifiés.",
-      warning: "Même après dix ans, une perte reste possible. Le temps ne garantit aucun gain.",
+      eyebrow: "Et les baisses ?",
+      title: "Une baisse peut être suivie d’une reprise",
+      intro:
+        "Imagine un placement réparti entre plusieurs entreprises. Voici une trajectoire possible sur plusieurs années :",
+      start: "Départ",
+      dip: "Pendant une baisse",
+      recovery: "Plus tard, dans cet exemple",
+      example:
+        "La baisse de 20 % n’a pas forcément été la fin de l’histoire. Si tu as besoin de cet argent bientôt, tu pourrais toutefois devoir vendre avant une éventuelle reprise.",
+      historical:
+        "Dans le passé, selon l’AMF, les placements diversifiés en actions sur 15 à 20 ans ont rapporté en moyenne 5 à 7 % par an. Répartir son investissement évite aussi de dépendre d’une seule entreprise.",
+      source: "Voir les repères de l’AMF",
+      sourceHref:
+        "https://www.amf-france.org/fr/espace-epargnants/actualites-mises-en-garde/reperes-utiles-sur-les-rendements-de-lepargne",
+      warning:
+        "Ce scénario et ces résultats passés ne promettent rien : même avec du temps et de la diversification, une perte reste possible.",
       action: "Vérifier ce que tu as compris",
     },
     question: {
@@ -817,7 +826,7 @@ export const fr: Dictionary = {
         "Exactement. Avoir du temps peut aider à attendre, mais ne supprime pas le risque de perte.",
         "L’argent nécessaire bientôt doit rester disponible. L’investir pourrait t’obliger à vendre après une baisse.",
       ],
-      correct: "Ce raisonnement tient la route",
+      correct: "Bonne réponse !",
       rethink: "Une distinction utile",
       answer: "Réponse plus juste",
       check: "Voir l’explication",

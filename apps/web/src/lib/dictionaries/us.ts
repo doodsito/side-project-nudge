@@ -747,27 +747,33 @@ export const us = {
     compound: {
       eyebrow: "A made-up calculation",
       title: "Gains can earn gains too",
-      intro:
-        "Imagine $100 growing by 10% in each of two years, with every gain left invested. This steady rate is fictional.",
+      intro: "Imagine $1,000 growing by 5% each year for 20 years, with every gain left invested.",
       start: "Start",
-      first: "After year 1",
-      second: "After year 2",
-      firstGain: "+$10",
-      secondGain: "+$11",
+      first: "After 10 years",
+      second: "After 20 years",
       explanation:
-        "In year 2, 10% applies to $110, including the first gain. That is compound growth.",
-      caveat:
-        "Real investments do not grow at a steady rate. They can lose value; this example leaves out fees and taxes.",
-      action: "What about losses?",
+        "At first, 5% of $1,000 earns $50. Then the gains left invested can earn gains of their own. That is compound growth.",
+      comparison:
+        "Without reinvesting the gains, the total would be $2,000 after 20 years. Here, reinvesting adds another $653.",
+      caveat: "Real returns vary from year to year. This calculation leaves out fees and taxes.",
+      action: "What happens when value falls?",
     },
     risk: {
-      eyebrow: "The other side",
-      title: "The value can fall",
-      example: "A fictional 20% drop turns $100 into $80.",
-      soon: "If you need that money soon, you may have to sell while it is down.",
-      later:
-        "A distant goal gives you more time to ride out a fall. Historically, losses have been less frequent over longer periods for diversified stock investments.",
-      warning: "Even after ten years, a loss is possible. Time never guarantees a gain.",
+      eyebrow: "What about downturns?",
+      title: "A drop can be followed by a recovery",
+      intro:
+        "Imagine an investment spread across several companies. Here is one possible path over several years:",
+      start: "Start",
+      dip: "During a drop",
+      recovery: "Later, in this example",
+      example:
+        "The 20% drop was not necessarily the end of the story. If you need the money soon, though, you might have to sell before any recovery.",
+      historical:
+        "Investor.gov notes that diversified US stock investments have had positive long-term average returns historically. Spreading investments also means relying less on any single company.",
+      source: "Read Investor.gov’s introduction",
+      sourceHref: "https://www.investor.gov/introduction-investing",
+      warning:
+        "This path and past results are not promises: even with time and diversification, a loss remains possible.",
       action: "Check what you understood",
     },
     question: {
@@ -784,7 +790,7 @@ export const us = {
         "Exactly. More time can help you wait, but it cannot remove the risk of loss.",
         "Money needed soon must stay available. Investing it could force you to sell after a drop.",
       ],
-      correct: "That reasoning holds up",
+      correct: "Correct!",
       rethink: "A useful distinction",
       answer: "A sounder answer",
       check: "See the explanation",

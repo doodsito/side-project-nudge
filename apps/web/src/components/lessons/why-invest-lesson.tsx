@@ -20,6 +20,7 @@ import { formatMoney } from "@/lib/first-paycheque-lesson";
 import type { Track } from "@/lib/tracks";
 import {
   COMPOUND_EXAMPLE,
+  RISK_EXAMPLE,
   WHY_INVEST_CORRECT_ANSWER,
   type WhyInvestStep,
 } from "@/lib/why-invest-lesson";
@@ -124,17 +125,9 @@ export function WhyInvestLesson(props: Props) {
 
   if (step === "compound") {
     const amounts = [
-      { label: copy.compound.start, value: COMPOUND_EXAMPLE.start, gain: null },
-      {
-        label: copy.compound.first,
-        value: COMPOUND_EXAMPLE.afterOneYear,
-        gain: copy.compound.firstGain,
-      },
-      {
-        label: copy.compound.second,
-        value: COMPOUND_EXAMPLE.afterTwoYears,
-        gain: copy.compound.secondGain,
-      },
+      { label: copy.compound.start, value: COMPOUND_EXAMPLE.start },
+      { label: copy.compound.first, value: COMPOUND_EXAMPLE.afterTenYears },
+      { label: copy.compound.second, value: COMPOUND_EXAMPLE.afterTwentyYears },
     ];
     return (
       <LessonScreen
@@ -145,29 +138,32 @@ export function WhyInvestLesson(props: Props) {
         <Heading eyebrow={copy.compound.eyebrow} title={copy.compound.title} />
         <p className="mt-4 text-muted-foreground">{copy.compound.intro}</p>
         <dl className="mt-6 grid gap-3 sm:grid-cols-3">
-          {amounts.map((amount, index) => (
+          {amounts.map((amount) => (
             <div
               key={amount.label}
               className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
             >
               <dt className="text-xs font-bold text-muted-foreground">{amount.label}</dt>
               <dd className="mt-2 font-display text-2xl font-extrabold">{money(amount.value)}</dd>
-              {amount.gain && (
-                <p className="mt-1 flex items-center gap-1 text-sm font-semibold text-market-up">
-                  <TrendingUp className="size-4" aria-hidden="true" /> {amount.gain}
-                </p>
-              )}
-              {index < amounts.length - 1 && <span className="sr-only">→</span>}
             </div>
           ))}
         </dl>
         <p className="mt-6 font-semibold leading-relaxed">{copy.compound.explanation}</p>
+        <p className="mt-4 flex items-start gap-3 rounded-2xl border border-market-up/25 bg-surface p-4 font-semibold leading-relaxed shadow-soft">
+          <TrendingUp className="mt-1 size-5 shrink-0 text-market-up" aria-hidden="true" />
+          {copy.compound.comparison}
+        </p>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{copy.compound.caveat}</p>
       </LessonScreen>
     );
   }
 
   if (step === "risk") {
+    const amounts = [
+      { label: copy.risk.start, value: RISK_EXAMPLE.start, trend: null },
+      { label: copy.risk.dip, value: RISK_EXAMPLE.duringDrop, trend: "down" },
+      { label: copy.risk.recovery, value: RISK_EXAMPLE.afterRecovery, trend: "up" },
+    ];
     return (
       <LessonScreen
         action={
@@ -175,27 +171,39 @@ export function WhyInvestLesson(props: Props) {
         }
       >
         <Heading eyebrow={copy.risk.eyebrow} title={copy.risk.title} />
-        <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-surface p-5 shadow-soft">
-          <span className="font-display text-2xl font-extrabold">
-            {money(COMPOUND_EXAMPLE.start)}
-          </span>
-          <TrendingDown className="size-6 shrink-0 text-market-down" aria-hidden="true" />
-          <span className="font-display text-2xl font-extrabold text-market-down">
-            {money(COMPOUND_EXAMPLE.afterDrop)}
-          </span>
-        </div>
+        <p className="mt-4 text-muted-foreground">{copy.risk.intro}</p>
+        <dl className="mt-6 grid gap-3 sm:grid-cols-3">
+          {amounts.map((amount) => (
+            <div
+              key={amount.label}
+              className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
+            >
+              <dt className="text-xs font-bold text-muted-foreground">{amount.label}</dt>
+              <dd className="mt-2 flex items-center gap-2 font-display text-2xl font-extrabold">
+                {amount.trend === "down" && (
+                  <TrendingDown className="size-5 shrink-0 text-market-down" aria-hidden="true" />
+                )}
+                {amount.trend === "up" && (
+                  <TrendingUp className="size-5 shrink-0 text-market-up" aria-hidden="true" />
+                )}
+                {money(amount.value)}
+              </dd>
+            </div>
+          ))}
+        </dl>
         <p className="mt-4 text-sm text-muted-foreground">{copy.risk.example}</p>
-        <div className="mt-6 grid gap-3">
-          <p className="rounded-2xl border border-border bg-surface-2 p-4 leading-relaxed">
-            {copy.risk.soon}
-          </p>
-          <p className="rounded-2xl border border-border bg-surface-2 p-4 leading-relaxed">
-            {copy.risk.later}
-          </p>
+        <div className="mt-6 rounded-2xl border border-primary/25 bg-primary-soft p-4">
+          <p className="leading-relaxed">{copy.risk.historical}</p>
+          <a
+            href={copy.risk.sourceHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-2"
+          >
+            {copy.risk.source}
+          </a>
         </div>
-        <p className="mt-5 rounded-2xl border border-primary/25 bg-primary-soft p-4 font-semibold leading-relaxed">
-          {copy.risk.warning}
-        </p>
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{copy.risk.warning}</p>
       </LessonScreen>
     );
   }

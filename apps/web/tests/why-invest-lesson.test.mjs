@@ -36,14 +36,23 @@ test("the short introduction explains growth, risk and a decision before complet
     "complete",
   ]);
   assert.equal(
-    Math.round(lesson.COMPOUND_EXAMPLE.start * 1.1),
-    lesson.COMPOUND_EXAMPLE.afterOneYear,
+    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 10),
+    lesson.COMPOUND_EXAMPLE.afterTenYears,
   );
   assert.equal(
-    Math.round(lesson.COMPOUND_EXAMPLE.afterOneYear * 1.1),
-    lesson.COMPOUND_EXAMPLE.afterTwoYears,
+    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 20),
+    lesson.COMPOUND_EXAMPLE.afterTwentyYears,
   );
-  assert.equal(lesson.COMPOUND_EXAMPLE.start * 0.8, lesson.COMPOUND_EXAMPLE.afterDrop);
+  assert.equal(
+    lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate * 20),
+    lesson.COMPOUND_EXAMPLE.withoutCompounding,
+  );
+  assert.equal(
+    lesson.COMPOUND_EXAMPLE.afterTwentyYears - lesson.COMPOUND_EXAMPLE.withoutCompounding,
+    653,
+  );
+  assert.equal(lesson.RISK_EXAMPLE.start * 0.8, lesson.RISK_EXAMPLE.duringDrop);
+  assert.ok(lesson.RISK_EXAMPLE.afterRecovery > lesson.RISK_EXAMPLE.start);
   assert.equal(lesson.WHY_INVEST_CORRECT_ANSWER, 1);
 });
 
@@ -74,14 +83,19 @@ test("the lesson is member-only and saves a single World 0 completion", () => {
   assert.match(component, /feedbackRef\.current\?\.scrollIntoView/);
 });
 
-test("both tracks warn that returns and long horizons are uncertain", () => {
+test("both tracks show long-term illustrations and explain their uncertainty", () => {
   const frLesson = fr.slice(fr.indexOf("  lesson0:"), fr.indexOf("  lesson3:"));
   const usLesson = us.slice(us.indexOf("  lesson0:"), us.indexOf("  lesson3:"));
 
   assert.match(frLesson, /étudiant/);
-  assert.match(frLesson, /fictif/);
-  assert.match(frLesson, /Même après dix ans, une perte reste possible/);
+  assert.match(frLesson, /Après 20 ans/);
+  assert.match(frLesson, /5 à 7 % par an/);
+  assert.match(frLesson, /une perte reste possible/);
+  assert.doesNotMatch(frLesson, /Ce taux régulier est fictif/);
+  assert.match(frLesson, /Bonne réponse !/);
   assert.match(usLesson, /student/);
-  assert.match(usLesson, /fictional/);
-  assert.match(usLesson, /Even after ten years, a loss is possible/);
+  assert.match(usLesson, /After 20 years/);
+  assert.match(usLesson, /positive long-term average returns/);
+  assert.match(usLesson, /loss is still possible/);
+  assert.match(usLesson, /Correct!/);
 });
