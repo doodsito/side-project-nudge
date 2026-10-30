@@ -38,6 +38,7 @@ type QuestionCopy = {
   title: string;
   prompt: string;
   check?: string;
+  hint?: string;
   options: readonly string[];
   feedback: readonly string[];
   action: string;
@@ -124,7 +125,7 @@ function QuestionScreen({
           <PrimaryAction onClick={onCheck}>{copy.check ?? shared.check}</PrimaryAction>
         ) : (
           <p className="py-3 text-center text-sm font-semibold text-muted-foreground">
-            {copy.prompt}
+            {copy.hint ?? copy.prompt}
           </p>
         )
       }

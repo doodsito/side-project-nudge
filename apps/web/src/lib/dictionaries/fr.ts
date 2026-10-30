@@ -1553,12 +1553,13 @@ export const fr: Dictionary = {
     },
     reflection: {
       eyebrow: "Et toi ?",
-      title: "Pourrais-tu mettre une petite somme de côté pendant plusieurs années ?",
+      title: "Pourrais-tu laisser une petite somme de côté pendant 10 ans ?",
       context:
         "Pense à aujourd’hui ou aux prochains mois. Tu pourrais chercher à faire fructifier cette somme en l’investissant, mais sa valeur pourrait aussi baisser.",
       prompt:
         "Choisis ce qui se rapproche le plus de ta situation. Il n’y a pas de mauvaise réponse.",
       check: "Voir ce que cela implique",
+      hint: "Choisis une réponse pour continuer.",
       options: [
         "Oui, je pourrais ne pas y toucher pendant 10 ans ou plus.",
         "Peut-être, mais je pourrais en avoir besoin après 12 mois et avant 10 ans.",

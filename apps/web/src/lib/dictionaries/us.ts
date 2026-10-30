@@ -1513,11 +1513,12 @@ export const us = {
     },
     reflection: {
       eyebrow: "What about you?",
-      title: "Could you set aside a small amount for several years?",
+      title: "Could you leave a small amount untouched for 10 years?",
       context:
         "Think about now or the next few months. You could invest that amount in the hope of growing it, but its value could also fall.",
       prompt: "Choose what comes closest to your situation. There is no wrong answer.",
       check: "Explore what this means",
+      hint: "Choose an answer to continue.",
       options: [
         "Yes, I could leave it untouched for 10 years or more.",
         "Maybe, but I might need it after 12 months and before 10 years.",
