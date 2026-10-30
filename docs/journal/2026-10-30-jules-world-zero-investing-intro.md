@@ -12,4 +12,4 @@
 
 **Fichiers :** `apps/web/src/app/lessons/why-invest/`, `apps/web/src/components/lessons/`, `apps/web/src/lib/dictionaries/`
 
-**Vérifié :** 73 tests, lint, typecheck et build ; preview à confirmer.
+**Vérifié :** 73 tests, lint, typecheck et build ; preview vérifiée sur ordinateur.
