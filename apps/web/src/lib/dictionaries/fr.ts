@@ -1553,23 +1553,17 @@ export const fr: Dictionary = {
     },
     reflection: {
       eyebrow: "Et toi ?",
-      title: "Pourrais-tu mettre une petite somme de côté, maintenant ou bientôt ?",
+      title:
+        "Aujourd’hui ou dans un futur proche, pourrais-tu mettre de côté même une petite somme chaque mois ?",
       context:
-        "Si tu es étudiant·e, pense aussi à tes premiers revenus après ton diplôme. Imagine une somme que tu pourrais laisser de côté des années pour chercher à la faire fructifier, en acceptant qu’elle puisse perdre de la valeur.",
-      prompt: "Quelle situation te ressemble le plus ? Aucune réponse n’est mauvaise.",
+        "Si tu es étudiant·e, pense aussi à ce qui pourrait être possible après tes études, avec tes premiers revenus.",
+      prompt: "Choisis la réponse qui te correspond. Il n’y a pas de mauvaise réponse.",
       check: "Voir ce que cela implique",
       hint: "Choisis une réponse pour continuer.",
-      options: [
-        "Oui, dès maintenant : je pourrais ne pas y toucher pendant 10 ans ou plus.",
-        "Pas encore, mais peut-être d’ici 3 ans : je pourrais ensuite la laisser de côté 10 ans ou plus.",
-        "Je pourrais mettre de côté maintenant ou bientôt, mais j’aurais besoin de cette somme avant 10 ans.",
-        "Je ne sais pas encore quand je pourrais mettre de côté ni quand j’en aurais besoin.",
-      ],
+      options: ["Oui", "Non"],
       feedback: [
-        "Pour cette somme, tu peux comparer épargne et investissement. Vérifie ce qui doit rester disponible pour tes besoins et ton filet de sécurité. Aucun gain n’est garanti.",
-        "Tu n’as pas besoin de disposer de cette somme aujourd’hui pour apprendre. Quand tes revenus changeront, tu pourras distinguer l’argent à garder disponible de celui destiné à un projet lointain.",
-        "La date de ton besoin compte pour cette somme. Elle ne dit rien de ce que tu pourrais faire plus tard avec une autre somme destinée à un projet plus lointain.",
-        "Tu peux apprendre maintenant et revenir à cette question quand tes revenus, tes besoins et tes projets seront plus clairs.",
+        "C’est un premier repère. Avant d’envisager d’investir, demande-toi quand tu pourrais avoir besoin de cette somme, ce qui doit rester disponible et si tu accepterais une perte.",
+        "Tu peux quand même apprendre dès maintenant. Si ta situation change, par exemple après tes études, tu pourras revenir à cette question et réfléchir à l’usage de chaque somme selon tes besoins.",
       ],
       action: "Terminer le Monde 1",
     },
