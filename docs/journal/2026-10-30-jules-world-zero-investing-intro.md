@@ -2,7 +2,7 @@
 
 - **Date :** 2026-10-30
 - **Auteur :** Jules, avec Codex
-- **Pull request :** à compléter après ouverture
+- **Pull request :** https://github.com/doodsito/side-project-nudge/pull/64
 
 **Pourquoi :** Donner une première réponse aux questions et aux craintes des personnes qui découvrent l’investissement.
 
