@@ -407,8 +407,11 @@ export const fr: Dictionary = {
         review: "Revoir la leçon",
         start: "Commencer la leçon",
         rewardLabel: "Récompense du monde",
-        rewardTitle: "L’investissement débloqué",
-        rewardIntro: "Termine les huit leçons pour ouvrir l’univers de l’investissement.",
+        rewardTitle: "Huit leçons pour construire tes bases",
+        rewardIntro:
+          "Termine le Monde 1 pour faire le point sur ce que tu as appris dans cette bêta.",
+        rewardCompleteTitle: "Tes bases sont acquises",
+        rewardCompleteIntro: "Tu as terminé les huit leçons. Merci d’avoir exploré cette bêta.",
         lessons: [
           {
             title: "Où va ton argent ?",
@@ -1443,18 +1446,149 @@ export const fr: Dictionary = {
       next: "Continuer vers la leçon 8",
       back: "Retour au Monde 1",
     },
-    lesson8: {
-      metaTitle: "Épargner ou investir ?",
+  },
+  lesson8: {
+    metaTitle: "Épargner ou investir ?",
+    feedback: {
+      correct: "Ce raisonnement convient",
+      rethink: "Regarde le compromis",
+      reflect: "Une question utile pour la suite",
+      answer: "Le raisonnement à retenir",
+      check: "Vérifier ma réponse",
+    },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 8",
-      title: "Épargner ou investir ?",
+      title: "Épargner ou investir : quel rôle pour cet argent ?",
       intro:
-        "Alex sait maintenant que chaque option protège contre certains risques et en accepte d’autres. La dernière leçon du monde comparera disponibilité, stabilité et potentiel de croissance à long terme.",
-      badge: "Leçon 8 débloquée",
-      comingLabel: "Dernière étape du monde",
-      comingText:
-        "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",
-      back: "Monde 1",
-      viewProgress: "Voir ma progression",
+        "Alex a de l’argent pour différents objectifs. Aide-le à voir ce que chaque somme doit protéger avant de chercher ce qu’elle pourrait rapporter.",
+      action: "Commencer la leçon",
+      note: "Exemples fictifs avec de l’argent virtuel. Ceci est une leçon, pas un conseil financier.",
+    },
+    difference: {
+      eyebrow: "Deux façons de mettre de côté",
+      title: "La différence commence par ce que tu attends de la somme.",
+      intro:
+        "Dans cette leçon, épargner signifie garder une somme accessible avec un solde nominal stable. Investir signifie accepter que sa valeur varie, avec une perte possible, pour un potentiel de croissance à long terme.",
+      savingTitle: "Épargner",
+      savingText:
+        "Privilégier la disponibilité et un montant stable en euros. La hausse des prix peut quand même réduire ce qu’il permet d’acheter.",
+      investingTitle: "Investir",
+      investingText:
+        "Accepter des hausses, des baisses et une perte possible pour un potentiel de croissance. Cette croissance n’est jamais garantie.",
+      nuance:
+        "Investir est aussi une façon de mettre de l’argent de côté. Ici, nous comparons deux usages différents.",
+      action: "Essayer un exemple",
+    },
+    sameAmount: {
+      eyebrow: "Mêmes euros, objectifs différents",
+      title: "Qu’est-ce qui change quand la date change ?",
+      intro:
+        "Ces {amount} sont fictifs. Imagine en avoir besoin dans deux mois, puis imagine ne pas en avoir besoin avant dix ans.",
+      soon: "Nécessaires dans deux mois",
+      later: "Pour un objectif dans dix ans",
+      prompt: "Quel élément compte le plus pour comparer épargne et investissement ?",
+      options: [
+        "Le montant est le même, donc le choix doit être le même.",
+        "La date, le besoin de disponibilité et la possibilité d’attendre après une baisse.",
+        "Investir est toujours préférable quand l’objectif est lointain.",
+      ],
+      feedback: [
+        "Une même somme peut avoir plusieurs rôles. Une baisse juste avant une dépense nécessaire a plus de conséquences que pour un objectif lointain et flexible.",
+        "Exactement. Le montant seul ne décide pas : la date et les conséquences d’une baisse changent le compromis.",
+        "Un horizon lointain peut rendre l’investissement envisageable, mais il ne garantit pas un gain et ne supprime pas le risque de perte.",
+      ],
+      action: "Découvrir les objectifs d’Alex",
+    },
+    alex: {
+      eyebrow: "Alex a plusieurs objectifs",
+      title: "Tout son argent n’a pas le même rôle.",
+      intro:
+        "Alex est un jeune actif. Ses dépenses courantes sont couvertes, mais il a plusieurs raisons de mettre de l’argent de côté.",
+      cards: [
+        {
+          title: "Filet de sécurité",
+          body: "Une somme dont il pourrait avoir besoin sans prévenir.",
+        },
+        { title: "Déménagement dans six mois", body: "Une dépense prévue à une date proche." },
+        {
+          title: "Objectif lointain",
+          body: "Une somme distincte dont il ne prévoit pas d’avoir besoin avant dix ans.",
+        },
+      ],
+      note: "Son cas est un exemple, pas une règle pour toutes les personnes au même âge.",
+      action: "Décider pour le déménagement",
+    },
+    nearTerm: {
+      eyebrow: "Une date proche",
+      title: "Que doit privilégier Alex pour son déménagement dans six mois ?",
+      prompt: "Choisis ce qui protège le rôle de cette somme.",
+      options: [
+        "Garder cette somme stable et disponible pour le déménagement.",
+        "L’investir pour espérer un meilleur rendement d’ici le déménagement.",
+        "Utiliser plutôt le filet de sécurité, puisque les deux sommes sont disponibles.",
+      ],
+      feedback: [
+        "Oui. Une baisse au mauvais moment pourrait l’empêcher de payer une dépense prévue. La stabilité du solde ne garantit toutefois pas le pouvoir d’achat.",
+        "Un gain possible n’est pas assuré en six mois. Si la valeur baisse près de la date prévue, Alex peut manquer de la somme nécessaire.",
+        "Le filet sert aux imprévus ; le déménagement est déjà planifié. Deux sommes disponibles peuvent avoir des rôles différents.",
+      ],
+      action: "Examiner l’objectif lointain",
+    },
+    longTerm: {
+      eyebrow: "Un objectif lointain",
+      title:
+        "Que peut envisager Alex pour une somme distincte dont il n’aura pas besoin avant dix ans ?",
+      prompt: "Choisis un raisonnement qui tient compte du potentiel de croissance et de perte.",
+      options: [
+        "Comparer épargne et investissement, notamment sa capacité à accepter une perte.",
+        "Investir automatiquement : dix ans garantissent une hausse.",
+        "Tout garder en épargne : un solde stable signifie qu’il n’y a aucun risque.",
+      ],
+      feedback: [
+        "Oui. Le temps peut rendre l’investissement envisageable, pas obligatoire. Alex doit aussi considérer les pertes possibles, ses besoins et le coût connu de ses dettes éventuelles.",
+        "Dix ans ne promettent aucun gain. Un investissement peut encore valoir moins lorsque Alex en aura besoin.",
+        "Un solde stable en euros peut être utile, mais l’inflation peut réduire ce qu’il permet d’acheter au fil du temps.",
+      ],
+      action: "Faire le lien avec ta situation",
+    },
+    reflection: {
+      eyebrow: "Réutilise la méthode",
+      title: "Si tu mettais une somme de côté aujourd’hui, quand pourrais-tu en avoir besoin ?",
+      intro:
+        "Cette réflexion reste sur cet écran. Elle ne demande aucun montant et n’enregistre pas de réponse financière personnelle.",
+      prompt: "Choisis la situation que tu voudrais d’abord comprendre.",
+      options: ["Bientôt", "Bien plus tard", "Je ne sais pas encore"],
+      feedback: [
+        "Demande-toi à quelle date la somme doit être accessible et ce qu’une baisse à ce moment changerait pour ton projet.",
+        "Demande-toi si la somme peut rester inutilisée malgré des variations, et ce que signifierait une perte pour ton objectif.",
+        "Commence par nommer l’objectif et une date approximative. Tu pourras comparer les choix une fois le rôle de la somme plus clair.",
+      ],
+      reminder:
+        "Vérifie aussi tes obligations et le coût connu d’une éventuelle dette. Un rendement espéré n’a pas la même certitude qu’un coût contractuel.",
+      action: "Terminer le Monde 1",
+    },
+    complete: {
+      eyebrow: "Monde 1 · Bêta terminée",
+      pendingTitle: "Ta dernière leçon est prête à être enregistrée.",
+      title: "Tu as terminé le Monde 1 !",
+      count: "8 leçons sur 8 terminées",
+      thanks:
+        "Merci d’avoir découvert cette première version. Tu sais maintenant relier chaque somme à son objectif, sa date et ses risques.",
+      saved: "Ta progression est enregistrée.",
+      saving: "Enregistrement de ta progression…",
+      error: "Nous n’avons pas pu confirmer ta progression. Réessaie de l’enregistrer.",
+      retry: "Réessayer d’enregistrer",
+      teaserTitle: "Et après ?",
+      teaser:
+        "Nous préparons de nouveaux mondes et explorons des portefeuilles virtuels utilisant des données de marché réelles. L’entraînement resterait en argent virtuel ; ces fonctions ne sont pas encore disponibles.",
+      feedbackIntro:
+        "Tes retours nous aideront à choisir ce que nous construirons ensuite. Qu’est-ce qui t’a aidé, qu’est-ce qui n’était pas clair, et qu’aimerais-tu essayer ?",
+      feedbackPrompt:
+        "Qu’est-ce qui t’a aidé à apprendre, qu’est-ce qui n’était pas clair, et qu’aimerais-tu essayer ensuite ?",
+      feedbackButton: "Donner mon avis",
+      dashboard: "Retour au tableau de bord",
+      replay: "Rejouer la leçon",
+      note: "Exercice éducatif avec des sommes fictives. Ceci n’est pas un conseil financier.",
     },
   },
   dashboard: {

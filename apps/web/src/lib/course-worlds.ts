@@ -3,6 +3,7 @@ import { isLessonSevenAvailable } from "@/lib/cash-isnt-risk-free-lesson";
 import { isLessonSixAvailable } from "@/lib/debt-vs-investing-lesson";
 import { isLessonThreeAvailable } from "@/lib/how-much-should-you-save-lesson";
 import { isLessonFiveAvailable } from "@/lib/money-youll-need-soon-lesson";
+import { isLessonEightAvailable } from "@/lib/savings-vs-investing-lesson";
 import type { Track } from "@/lib/tracks";
 
 export type CourseWorld = {
@@ -124,7 +125,7 @@ export function foundationLessonHref(lessonNumber: number, track: Track): string
         ? "/dashboard/courses/financial-foundation/cash-isnt-risk-free"
         : undefined;
     case 8:
-      return isLessonSevenAvailable(track)
+      return isLessonEightAvailable(track)
         ? "/dashboard/courses/financial-foundation/savings-vs-investing"
         : undefined;
     default:

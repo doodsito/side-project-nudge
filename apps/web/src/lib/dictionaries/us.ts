@@ -394,8 +394,10 @@ export const us = {
         review: "Review lesson",
         start: "Start lesson",
         rewardLabel: "World reward",
-        rewardTitle: "Investing unlocked",
-        rewardIntro: "Complete all eight lessons to open the investment universe.",
+        rewardTitle: "Eight lessons to build your foundations",
+        rewardIntro: "Finish World 1 to see what you have learned in this beta.",
+        rewardCompleteTitle: "Your foundations are complete",
+        rewardCompleteIntro: "You finished all eight lessons. Thank you for exploring this beta.",
         lessons: [
           {
             title: "Where does your money go?",
@@ -1408,18 +1410,145 @@ export const us = {
       next: "Continue to lesson 8",
       back: "Back to World 1",
     },
-    lesson8: {
-      metaTitle: "Savings vs investing",
+  },
+  lesson8: {
+    metaTitle: "Savings vs investing",
+    feedback: {
+      correct: "That reasoning fits",
+      rethink: "Look at the tradeoff",
+      reflect: "A useful next question",
+      answer: "Reasoning to keep",
+      check: "Check my answer",
+    },
+    welcome: {
       eyebrow: "World 1 · Lesson 8",
-      title: "Savings vs investing",
+      title: "Savings vs investing: what job does this money have?",
       intro:
-        "Alex now knows that each option protects against some risks and accepts others. The world’s final lesson will compare access, stability and long-term growth potential.",
-      badge: "Lesson 8 unlocked",
-      comingLabel: "The world’s final step",
-      comingText:
-        "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
-      back: "World 1",
-      viewProgress: "View my progress",
+        "Alex has money for different goals. Help him decide what each amount needs to protect before thinking about what it might earn.",
+      action: "Start the lesson",
+      note: "Fictional examples with virtual money. This is education, not financial advice.",
+    },
+    difference: {
+      eyebrow: "Two ways to set money aside",
+      title: "The difference starts with what you need from the money.",
+      intro:
+        "In this lesson, saving means keeping money accessible with a stable account balance. Investing means accepting that its value can change, including a possible loss, for long-term growth potential.",
+      savingTitle: "Save it",
+      savingText:
+        "Prioritize access and a stable amount in dollars. Rising prices may still reduce what it can buy.",
+      investingTitle: "Invest it",
+      investingText:
+        "Accept ups and downs and a possible loss for growth potential over time. Growth is never guaranteed.",
+      nuance:
+        "Investing is also a way of setting money aside. Here we compare two different uses for it.",
+      action: "Try one example",
+    },
+    sameAmount: {
+      eyebrow: "Same dollars, different goals",
+      title: "What changes when the date changes?",
+      intro:
+        "These {amount} are fictional. Imagine needing them in two months, then imagine not needing them for ten years.",
+      soon: "Needed in two months",
+      later: "For a goal in ten years",
+      prompt: "Which fact matters most when comparing saving and investing?",
+      options: [
+        "The amount is the same, so the choice must be the same.",
+        "The timeline, need for access, and ability to wait through a drop.",
+        "Investing always wins when the goal is far away.",
+      ],
+      feedback: [
+        "The same amount can have different jobs. A drop just before a needed expense matters more than a change in a flexible long-term goal.",
+        "Exactly. The amount alone does not decide; the date and consequences of a drop change the tradeoff.",
+        "A long horizon can make investing worth considering, but it never guarantees a gain or removes the risk of loss.",
+      ],
+      action: "Meet Alex's goals",
+    },
+    alex: {
+      eyebrow: "Alex has more than one goal",
+      title: "His money does not all have the same job.",
+      intro:
+        "Alex is a young working adult. His everyday bills are covered, but he has different reasons to set money aside.",
+      cards: [
+        { title: "Emergency buffer", body: "Money he may need without warning." },
+        { title: "Move in six months", body: "A planned expense with a close date." },
+        {
+          title: "Distant goal",
+          body: "A separate amount he does not expect to need for ten years.",
+        },
+      ],
+      note: "His case is an example, not a rule for everyone at the same stage of life.",
+      action: "Decide for the move",
+    },
+    nearTerm: {
+      eyebrow: "A close date",
+      title: "What should Alex prioritize for his move in six months?",
+      prompt: "Choose what protects the purpose of this amount.",
+      options: [
+        "Keep this amount stable and accessible for the move.",
+        "Invest it to aim for a higher return before the move.",
+        "Use the emergency buffer instead, since both amounts are available.",
+      ],
+      feedback: [
+        "Yes. A drop at the wrong time could leave him short for a planned bill. Keeping the balance stable does not guarantee its purchasing power.",
+        "A possible gain is not assured in six months. If the value falls near moving day, Alex may lack the money he planned to use.",
+        "The buffer covers surprises; the move is already planned. Accessible amounts can still have different jobs.",
+      ],
+      action: "Consider the distant goal",
+    },
+    longTerm: {
+      eyebrow: "A distant goal",
+      title: "What can Alex consider for the separate amount he will not need for ten years?",
+      prompt: "Choose reasoning that accounts for both growth potential and loss.",
+      options: [
+        "Compare saving and investing, including whether he could accept a loss.",
+        "Invest automatically: ten years guarantee growth.",
+        "Keep it all in savings: a stable balance means no risk.",
+      ],
+      feedback: [
+        "Yes. Time can make investing an option, not an obligation. Alex still needs to consider possible losses, his needs, and any known debt costs.",
+        "Ten years do not promise a gain. An investment can still be worth less when Alex needs it.",
+        "A stable dollar balance can be useful, but inflation may reduce what it buys over time.",
+      ],
+      action: "Connect it to your own questions",
+    },
+    reflection: {
+      eyebrow: "Use the method",
+      title: "If you set an amount aside today, when might you need it?",
+      intro:
+        "This reflection stays on this screen. It does not ask for an amount or save a personal financial answer.",
+      prompt: "Choose the situation you would want to understand first.",
+      options: ["Soon", "Much later", "I'm not sure yet"],
+      feedback: [
+        "Ask how soon you need access and how much a drop at that moment would affect your plan.",
+        "Ask whether you could leave the money untouched through ups and downs, and what a loss would mean for your goal.",
+        "Start by naming the goal and an approximate date. You can compare the choices once you know the money's job.",
+      ],
+      reminder:
+        "Also check obligations and any known debt cost. A hoped-for investment return is not as certain as a contractual cost.",
+      action: "Finish World 1",
+    },
+    complete: {
+      eyebrow: "World 1 · Beta complete",
+      pendingTitle: "Your final lesson is ready to save.",
+      title: "You finished World 1!",
+      count: "8 of 8 lessons complete",
+      thanks:
+        "Thank you for exploring this first version. You can now connect each amount to its goal, timeline, and risks.",
+      saved: "Your progress is saved.",
+      saving: "Saving your progress…",
+      error: "We could not confirm your progress. Try saving it again.",
+      retry: "Try saving again",
+      teaserTitle: "What might come next?",
+      teaser:
+        "We are preparing new worlds and exploring virtual portfolios that use real market data. Practice would still use virtual money; these features are not available yet.",
+      feedbackIntro:
+        "Your feedback will help us choose what to build next. What helped, what was unclear, and what would you like to try?",
+      feedbackPrompt:
+        "What helped you learn, what was unclear, and what would you like to try next?",
+      feedbackButton: "Give feedback",
+      dashboard: "Back to dashboard",
+      replay: "Replay the lesson",
+      note: "Educational practice with fictional amounts. This is not financial advice.",
     },
   },
   dashboard: {
