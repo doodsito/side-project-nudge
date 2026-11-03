@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-03
 - **Author:** Robin, with Claude Code
-- **Pull request:** to be added once opened
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/70
 
 **Why:** testers and the team need to replay the courses from the start without creating a new account.
 
@@ -13,6 +13,6 @@
 
 **Files:** `apps/web/src/components/dashboard/reset-progress-section.tsx`, `apps/web/src/app/dashboard/actions.ts`, `apps/web/src/app/dashboard/account/page.tsx`, `apps/web/src/lib/course-progress.ts`, `apps/web/src/lib/learn-map-motion.ts`, `apps/web/src/lib/dictionaries/fr.ts`, `apps/web/src/lib/dictionaries/us.ts`, `apps/web/tests/course-progress.test.mjs`
 
-**Checked:** see the pull request.
+**Checked:** lint, typecheck, build and tests pass. Still to test on the Vercel preview with a real account.
 
 **Next:** voice feedback, in its own pull request.
