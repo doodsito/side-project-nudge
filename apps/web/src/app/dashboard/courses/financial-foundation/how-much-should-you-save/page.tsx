@@ -17,7 +17,7 @@ export default async function HowMuchShouldYouSavePage() {
     !isLessonThreeAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 2)
   ) {
-    redirect("/dashboard/courses/financial-foundation#lesson-3");
+    redirect("/dashboard");
   }
 
   redirect("/lessons/how-much-should-you-save");

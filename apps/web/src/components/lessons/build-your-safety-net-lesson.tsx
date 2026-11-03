@@ -546,7 +546,7 @@ export function BuildYourSafetyNetLesson(props: Props) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation#lesson-4">
+              <Link href="/dashboard">
                 {copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

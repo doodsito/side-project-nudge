@@ -21,7 +21,7 @@ export const us = {
     challenge: "Try a challenge",
     howItWorks: "How it works",
     logIn: "Log in",
-    signUp: "Join the beta",
+    signUp: "Access the beta",
     open: "Open",
     accountMenu: "Account menu",
     account: "Account",
@@ -166,6 +166,7 @@ export const us = {
     title: `Welcome to ${BRAND}`,
     description: "Where are you based? You can switch at the bottom of the page.",
     continue: "Continue",
+    error: "We couldn’t switch versions just now. Please try again.",
     options: {
       fr: { country: "France", detail: "In French, in euros" },
       us: { country: "United States", detail: "In English, in dollars" },
@@ -311,16 +312,20 @@ export const us = {
       educationalNote: "Educational simulation only. Not investment advice.",
     },
     courses: {
+      yourCourses: "Your courses",
+      nextLesson: "Next lesson",
+      viewAllLessons: "View all lessons",
+      roadmap: "Other worlds",
       journeyLabel: "Your learning journey",
       journeyTitle: "Nine worlds. One decision at a time.",
       journeyIntro:
         "Build the foundations, practise with virtual money and unlock the knowledge behind your first investment decisions.",
       worldsCompleted: "0 of 9 worlds",
-      firstWorldReady: "World 1 is ready",
+      firstWorldReady: "World 0 is ready",
       mapLabel: "Journey map",
       mapTitle: "Choose your world",
       mapIntro:
-        "Complete a world to open the next one. Locked worlds stay visible so you always know where the journey is heading.",
+        "Start with World 0 if investing is new to you. World 1 stays open at your own pace; later worlds are still in the works.",
       world: "World",
       ready: "Ready to explore",
       locked: "Locked",
@@ -333,10 +338,6 @@ export const us = {
         {
           title: "Build your financial foundation",
           description: "Give every dollar a job before you ask it to grow.",
-        },
-        {
-          title: "Why invest?",
-          description: "See how time, inflation and compounding change the picture.",
         },
         {
           title: "Meet the investment world",
@@ -367,6 +368,19 @@ export const us = {
           description: "Bring your knowledge, practice and personal plan together.",
         },
       ],
+      intro: {
+        label: "World 0 · Start here",
+        title: "Why learn about investing?",
+        description:
+          "A short lesson on the idea, compounding, and risk. You do not need to invest today.",
+        duration: "~3 min",
+        start: "Explore World 0",
+        review: "Review World 0",
+        completed: "Lesson complete",
+        skip: "Skip World 0",
+        notions: ["What investing means", "Growth and compounding", "Risk and uncertainty"],
+        progressLabel: (completed: number) => `World 0 progress: ${completed} of 1 lessons`,
+      },
       foundation: {
         metaTitle: "Build your financial foundation",
         back: "All worlds",
@@ -389,41 +403,81 @@ export const us = {
         virtualMoney: "Virtual money",
         review: "Review lesson",
         start: "Start lesson",
+        notionsLabel: "In this lesson",
+        lockedExplanation: "Complete the previous lesson to unlock this step.",
+        closePreview: "Close lesson preview",
+        mascotAlt: "Nudge tilts its head thoughtfully.",
         rewardLabel: "World reward",
-        rewardTitle: "Investing unlocked",
-        rewardIntro: "Complete all eight lessons to open the investment universe.",
+        rewardTitle: "Eight lessons to build your foundations",
+        rewardIntro: "Finish World 1 to see what you have learned in this beta.",
+        rewardCompleteTitle: "Your foundations are complete",
+        rewardCompleteIntro: "You finished all eight lessons. Thank you for exploring this beta.",
+        current: "Up next",
+        locked: "Locked",
         lessons: [
           {
             title: "Where does your money go?",
             description: "Help Alex work out what is really left after the essentials.",
+            notions: ["Essential expenses", "What remains", "Cash-flow awareness"],
+            keyNotions: ["Essential expenses", "What remains", "Cash-flow awareness"],
           },
           {
             title: "Pay yourself first",
             description: "Explore why saving first feels different from saving what is left.",
+            notions: ["Save before spending", "Build a routine", "Plan around real expenses"],
+            keyNotions: [
+              "Pay yourself first",
+              "Small regular amounts",
+              "Adjusting when costs change",
+            ],
           },
           {
             title: "How much should you save?",
             description: "Use common percentages as flexible reference points, not fixed rules.",
+            notions: ["Flexible reference points", "Budget room", "A sustainable amount"],
+            keyNotions: [
+              "Savings rate",
+              "Flexible reference percentages",
+              "A budget that can vary",
+            ],
           },
           {
             title: "Build your safety net",
             description: "See why different lives can call for different cash buffers.",
+            notions: ["Unexpected expenses", "Personal circumstances", "Accessible reserves"],
+            keyNotions: ["Emergency buffer", "Personal circumstances", "Accessible cash"],
           },
           {
             title: "Money you’ll need soon",
             description: "Separate near-term needs from money that can stay invested longer.",
+            notions: ["When the money is needed", "Access and stability", "Time horizon"],
+            keyNotions: ["Near-term spending needs", "Time horizon", "Longer-term money"],
           },
           {
             title: "Debt vs investing",
             description: "Compare a certain borrowing cost with an uncertain investment return.",
+            notions: [
+              "Known borrowing costs",
+              "Uncertain returns",
+              "Deadlines and required payments",
+            ],
+            keyNotions: [
+              "Certain borrowing costs",
+              "Uncertain returns",
+              "Debt and investing trade-offs",
+            ],
           },
           {
             title: "Cash isn’t risk-free",
             description: "Watch inflation change what the same amount of cash can buy.",
+            notions: ["Stable balances", "Purchasing power", "Near-term access"],
+            keyNotions: ["Inflation", "Purchasing power", "Cash risk"],
           },
           {
             title: "Savings vs investing",
             description: "Choose between accessibility, stability and long-term growth potential.",
+            notions: ["Accessibility", "Stability and loss risk", "Long-term growth potential"],
+            keyNotions: ["Accessibility", "Stability", "Long-term growth potential"],
           },
         ],
       },
@@ -709,6 +763,134 @@ export const us = {
         moreTitle: "Want to go further? Why we say “might”",
         more: "Some money looks free but isn’t. A yearly bill, like phone insurance, can arrive in any month. So can a surprise, like a broken phone screen. That is why we say “might”. Lesson 4 covers your safety net.",
       },
+    },
+  },
+  lesson0: {
+    metaTitle: "Why learn about investing?",
+    onboarding: {
+      progress: "World 0 · step {current} of {total}",
+      decisionEyebrow: "Your first money decision",
+      decisionTitle: "You've got {amount} left. What would you do?",
+      decisionBody:
+        "Alex has covered this month’s essentials. There is {amount} left, and no decision has been made yet.",
+      decisionChoices: ["Keep it in savings", "Invest some of it", "Split it between both"],
+      decisionHint: "There is no universal right answer.",
+      decisionSpeech: "Your call!",
+      decisionAction: "See what your choice means",
+      feedbackEyebrow: "Think like an investor",
+      feedbackTitle: "Good question. But what’s missing?",
+      feedbackSpeech: "It depends!",
+      feedbackLabels: ["Keep it available", "Give it a chance to grow", "A bit of both"],
+      feedbackChoices: [
+        "Savings keep money accessible, which can help when you may need it soon.",
+        "Investing can offer growth, but the value might fall when you need the money.",
+        "Splitting can balance priorities, but it does not replace an accessible safety buffer.",
+      ],
+      feedbackInsight:
+        "When will Alex need the money? Money for next month has a different job than money for ten years from now.",
+      feedbackAction: "Show me how investing works",
+      growthAction: "But what about risk?",
+      riskAction: "Finish World 0",
+      selected: "Your choice",
+      assumption: "Hypothetical annual return",
+      simulatedValue: "Simulated value",
+      sliderLabel: "Move through time",
+      year: "year",
+      years: "years",
+      chartLabel: "Illustration of hypothetical compound growth over time",
+      completionAlt: "Nudge celebrates",
+      decisionAlt: "Nudge looks curious",
+      guideAlt: "Nudge offers a guide",
+      encourageAlt: "Nudge encourages you",
+    },
+    welcome: {
+      eyebrow: "World 0 · A short introduction",
+      title: "Why learn about investing?",
+      body: "You do not need to know the stock market or have money to invest today. Even if you are a student or waiting for your first paycheck, you can already understand what investing could offer and what could go wrong.",
+      reassurance: "You can learn today and decide later whether investing is right for you.",
+      action: "Explore the idea",
+    },
+    meaning: {
+      eyebrow: "The basic idea",
+      title: "Give some money a chance to grow",
+      definition:
+        "Investing means putting money into an asset whose value can rise or fall, hoping it may grow for a goal further away.",
+      example:
+        "Imagine Leah, a student today. Once she has an income, she could consider putting aside a small amount each month for a goal ten years away. She can start learning how investing works today and prepare to make her own choices.",
+      boundary:
+        "Money you may need soon has a different job. World 1 will help you tell these amounts apart.",
+      action: "See how growth can build",
+    },
+    compound: {
+      eyebrow: "Try it yourself",
+      title: "What if gains could earn gains?",
+      intro: "Imagine $1,000 growing by 5% each year for 20 years, with every gain left invested.",
+      start: "Start",
+      first: "After 10 years",
+      second: "After 20 years",
+      explanation:
+        "At first, 5% of $1,000 earns $50. Then the gains left invested can earn gains of their own. That is compound growth.",
+      comparison:
+        "Without reinvesting the gains, the total would be $2,000 after 20 years. Here, reinvesting adds another $653.",
+      caveat: "Real returns vary from year to year. This calculation leaves out fees and taxes.",
+      action: "What happens when value falls?",
+    },
+    risk: {
+      eyebrow: "What about downturns?",
+      title: "Investments can drop, too.",
+      intro: "Here is one possible path for an investment spread across several companies:",
+      start: "At the start",
+      dip: "After a drop",
+      dipChange: "−20% · $200 less",
+      recovery: "Later",
+      recoveryChange: "$300 more than at the start",
+      example:
+        "The 20% drop was not necessarily the end of the story. If you need the money soon, though, you might have to sell before any recovery.",
+      historical:
+        "Investor.gov notes that diversified US stock investments have had positive long-term average returns historically. Spreading investments also means relying less on any single company.",
+      source: "Read Investor.gov’s introduction",
+      sourceHref: "https://www.investor.gov/introduction-investing",
+      warning:
+        "This path and past results are not promises: even with time and diversification, a loss remains possible.",
+      action: "Check what you understood",
+    },
+    question: {
+      eyebrow: "One question",
+      title: "What does more time change?",
+      prompt: "Choose the statement that holds up even when markets fall.",
+      options: [
+        "After ten years, a gain is guaranteed.",
+        "Time can help you wait through a fall, but a loss is still possible.",
+        "Any money left over should be invested, even if you need it next month.",
+      ],
+      feedback: [
+        "Ten years do not guarantee a gain. An investment can still be worth less when you need it.",
+        "Exactly. More time can help you wait, but it cannot remove the risk of loss.",
+        "Money needed soon must stay available. Investing it could force you to sell after a drop.",
+      ],
+      correct: "Correct!",
+      rethink: "A useful distinction",
+      answer: "A sounder answer",
+      check: "See the explanation",
+      hint: "Choose an answer to continue.",
+      action: "Finish World 0",
+    },
+    complete: {
+      eyebrow: "World 0 complete",
+      title: "You made your first money decision.",
+      summary:
+        "You’ve discovered the trade-off between access, growth and risk. Now put it into practice.",
+      next: "In World 1, you will decide which money should stay available before considering a long-term goal.",
+      saving: "Saving your progress…",
+      saved: "Your progress is saved.",
+      error: "We could not save your progress. Try again.",
+      preview: "Preview only · Progress is not saved.",
+      retry: "Try saving again",
+      action: "Continue to World 1",
+      replay: "Replay World 0",
+      source: "Read the SEC’s introduction to investing",
+      sourceHref: "https://www.investor.gov/introduction-investing",
+      note: "Fictional examples for learning. No investment advice or promised returns.",
     },
   },
   lesson3: {
@@ -1077,34 +1259,527 @@ export const us = {
       next: "Continue to lesson 6",
       back: "Back to World 1",
     },
-    lesson6: {
-      metaTitle: "Debt vs investing",
+  },
+  lesson6: {
+    enabled: true,
+    metaTitle: "Debt vs investing",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
       eyebrow: "World 1 · Lesson 6",
-      title: "Debt vs investing",
+      title: "One percentage is not enough to decide.",
       intro:
-        "Alex can now separate money needed soon from money that can wait. His next decision will compare a certain borrowing cost with an uncertain investment return.",
-      badge: "Lesson 6 unlocked",
-      comingLabel: "Coming next",
-      comingText:
-        "The complete interactive lesson is being prepared. Your progress is saved to your account, so you can leave and come back later.",
-      back: "World 1",
-      viewProgress: "View my progress",
+        "Alex has protected his safety net and moving plan. Now help him compare a known borrowing cost with an uncertain investment outcome.",
+      action: "Start the lesson",
+      cardLabel: "Alex’s next decision",
+      cardTitle: "Debt or investing?",
+    },
+    snapshot: {
+      eyebrow: "Two jobs for the same amount",
+      title: "Alex has $100 truly available.",
+      intro:
+        "His spending, required payments, safety net and moving plan are already covered. He can decide what job to give the remaining $100.",
+      extra: "Available each month",
+      debt: "Debt balance",
+      rate: "Displayed rate",
+      rateValue: "APR: {rate}%",
+      horizon: "Investing goal",
+      horizonValue: "{years} years",
+      note: "There is no early payment fee. The amounts are here only to explore a decision.",
+      action: "Read the rate",
+    },
+    rate: {
+      eyebrow: "Three letters to decode",
+      title: "The important word is hidden in the A.",
+      intro:
+        "APR means annual percentage rate. A statement may simply show “12%”: the number is still expressed on an annual basis.",
+      contractLabel: "Statement excerpt",
+      contractValue: "APR: {rate}%",
+      contractHint:
+        "APR is an annualized measure used to describe the cost of borrowing and compare credit offers.",
+      action: "Interpret the percentage",
+    },
+    interpret: {
+      eyebrow: "An annual rate is not the total cost",
+      title: "What does the displayed “{rate}%” mean?",
+      prompt: "Choose the interpretation that accounts for time.",
+      options: [
+        "Alex will pay exactly 12% extra over the entire life of the debt",
+        "The lender adds 12% to the remaining balance every month",
+        "The rate is expressed on an annual basis; the total cost also depends on time, payments and fees",
+      ],
+      correct:
+        "The percentage is annualized. The payoff information and statements show what Alex will pay as the balance changes.",
+      incorrect:
+        "The A in APR means annual. It is neither a one-time charge for the full term nor a rate added every month.",
+      action: "See an example in dollars",
+    },
+    example: {
+      eyebrow: "From a percentage to dollars",
+      title: "A full year gives a useful reference point.",
+      intro:
+        "Only to understand the rate, imagine the {debt} stays unpaid for one full year and no other cost is added.",
+      formulaLabel: "Deliberately simplified example",
+      formulaText:
+        "The {annualCost} represents 12% of {debt} over one full year. It is not automatically the debt’s total cost.",
+      balanceLabel: "When Alex makes payments",
+      balanceText:
+        "The balance falls. Later interest is therefore no longer based on the original $600 for the entire term.",
+      note: "A real balance can accrue interest using the contract’s calculation method and timing. Alex should use the statements and payoff information for the actual cost.",
+      action: "Compare the two choices",
+    },
+    compare: {
+      eyebrow: "Two percentages, two levels of certainty",
+      title: "A debt rate and an expected return do not promise the same thing.",
+      intro:
+        "Alex can describe the effect of paying debt. He cannot know the investment result in advance.",
+      debtLabel: "Pay debt",
+      debtTitle: "Reduces a contractual cost",
+      debtPoints: [
+        "The outstanding balance falls immediately",
+        "The base for future interest becomes smaller",
+        "The effect depends on the rate and account terms",
+      ],
+      investLabel: "Invest",
+      investTitle: "Accepts an uncertain result",
+      investPoints: [
+        "The value can rise or fall",
+        "A past average return is not a promise",
+        "A ten-year horizon provides time, not a guaranteed result",
+      ],
+      takeaway:
+        "Comparing 12% debt with an assumed investment return does not make that return certain.",
+      action: "Make a decision for Alex",
+    },
+    decision: {
+      eyebrow: "The other priorities are already protected",
+      title: "Which response best uses the available information?",
+      cardLabel: "Current situation",
+      cardText: "{extra} available · debt: {debt} at {rate}%",
+      prompt: "Choose the response that separates a known cost from an uncertain outcome.",
+      options: [
+        "Invest the {extra}, because a diversified portfolio is guaranteed to return more than 12%",
+        "Use the {extra} to reduce the debt and its known cost without touching the other priorities",
+        "Empty the safety net to pay the entire debt immediately",
+      ],
+      correct:
+        "In this fictional situation, Alex reduces a high known cost with money that is truly available. The conclusion depends on the scenario’s facts.",
+      incorrect:
+        "An investment return is not guaranteed, and the safety net already has another job. The comparison only involves the available {extra}.",
+      action: "Change one fact",
+    },
+    change: {
+      eyebrow: "The rate changes the comparison",
+      title: "Is the same answer always obvious?",
+      intro:
+        "The required payment fits the budget, the other priorities remain protected and there is no additional fee.",
+      cardLabel: "New terms",
+      cardText: "Rate: {lowerRate}% for {lowerMonths} months",
+      prompt: "Choose the reasoning that still works when the cost of debt changes.",
+      options: [
+        "Always repay every debt before considering another goal",
+        "Always invest as soon as the debt rate is low",
+        "Review the deadlines, budget and goals: paying debt, investing or splitting the amount may now be reasonable",
+      ],
+      correct:
+        "At 0%, the known cost no longer dominates the comparison in the same way. Deadlines, budget room and goals matter more.",
+      incorrect:
+        "One rate does not create a universal rule. Required payments, deadlines and the ability to accept risk also matter.",
+      action: "Build the checklist",
+    },
+    checklist: {
+      eyebrow: "Before choosing",
+      title: "Alex can ask the questions in the right order.",
+      intro:
+        "The checklist does not choose for him. It prevents two percentages from being treated as if they had the same certainty.",
+      points: [
+        "Are all required payments covered?",
+        "Do near-term needs and the safety net remain protected?",
+        "What do the rate, term, fees and payoff information mean?",
+        "Which cost falls with certainty if the debt is paid?",
+        "Can the invested money stay invested through a decline?",
+        "What new fact would change the decision?",
+      ],
+      takeaway:
+        "A useful comparison starts with the account terms and timeline, not a promised return.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You compared a known cost with an uncertain outcome.",
+      points: [
+        "The A in APR means annual—not “over the entire term.”",
+        "The total cost also depends on time, payments and fees.",
+        "The rate, budget and deadlines can change the decision.",
+      ],
+      takeaway:
+        "Which cost disappears with certainty if I pay the debt, and which risk do I accept if I invest instead?",
+      note: "Educational simulation using virtual money. This is not financial advice. Simplified calculations do not replace the account terms and statements.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 7",
+      back: "Back to World 1",
+    },
+  },
+  lesson7: {
+    enabled: true,
+    metaTitle: "Cash is not risk-free",
+    feedback: { correct: "Exactly", retry: "Take another look" },
+    welcome: {
+      eyebrow: "World 1 · Lesson 7",
+      title: "Your balance can stay the same while buying less.",
+      intro:
+        "Alex sees a stable amount in his account and thinks it carries no risk. Help him separate a stable balance from stable purchasing power.",
+      action: "Look at Alex’s money",
+      cardLabel: "Alex’s next question",
+      cardTitle: "Stable for how long?",
+    },
+    snapshot: {
+      eyebrow: "A deliberately simplified example",
+      title: "Alex keeps money available in his account.",
+      intro: "His balance does not fluctuate. His goal costs exactly the same amount today.",
+      cash: "Cash available",
+      rate: "Account interest rate",
+      goal: "Goal’s current price",
+      inflation: "One-year inflation assumption",
+      note: "Here, “cash” means money that is quickly available and whose displayed amount stays stable. The rates are fictional and used only for learning.",
+      action: "Understand inflation",
+    },
+    inflation: {
+      eyebrow: "An average percentage",
+      title: "What does {inflationRate}% inflation mean?",
+      prompt: "Choose the interpretation that describes an average change in prices.",
+      options: [
+        "Every product becomes exactly {inflationRate}% more expensive",
+        "Prices rise by about {inflationRate}% on average over the period",
+        "The bank removes {inflationRate}% of the money held in accounts",
+      ],
+      correct:
+        "Inflation describes an average change. Each person’s basket and each individual price can move differently.",
+      incorrect:
+        "Inflation is neither the same rise in every price nor a withdrawal from an account. It measures an average change in prices.",
+      action: "See the effect in dollars",
+    },
+    priceExample: {
+      eyebrow: "The same goal, one year later",
+      title: "The price moves even when the balance does not.",
+      intro:
+        "In our example, the goal that costs {startingCash} today follows the {inflationRate}% inflation assumption exactly.",
+      today: "Today",
+      later: "In one year",
+      fullGoal: "The balance fully covers the goal",
+      shortfall: "With {cashAfterYear} in the account, Alex is short {cashGap}",
+      takeaway:
+        "Alex did not lose dollars on his statement. He lost some of what those dollars can buy.",
+      action: "Interpret the change",
+    },
+    balance: {
+      eyebrow: "Risk does not always appear on the statement",
+      title: "What actually happened?",
+      cardLabel: "After one year",
+      cardText: "Account: {cashAfterYear} · goal: {futurePrice}",
+      prompt: "Choose the answer that separates balance from purchasing power.",
+      options: [
+        "Alex’s account was charged {cashGap}",
+        "His balance stayed stable, but it can buy less",
+        "Alex avoided every risk because his balance did not fall",
+      ],
+      correct:
+        "The number of dollars did not change. The gap between that number and the goal’s new price reveals the loss of purchasing power.",
+      incorrect:
+        "Nothing was removed from the account. A stable balance protects the displayed amount, but not automatically what it can buy.",
+      action: "Add interest",
+    },
+    interestExample: {
+      eyebrow: "A balance can rise and still fall behind",
+      title: "What if the money earns {savingsRate}%?",
+      intro:
+        "Put the {startingCash} in a fictional account with no fees or taxes that earns {savingsRate}% for one year.",
+      accountLabel: "Balance after interest",
+      accountText: "Alex earned {interestEarned} on his statement",
+      goalLabel: "Price of the same goal",
+      goalText: "He is still {savingsGap} short of paying for it",
+      note: "A positive return in dollars does not guarantee more purchasing power. The change in the goal’s price matters too.",
+      action: "Compare the two changes",
+    },
+    interest: {
+      eyebrow: "Two different increases",
+      title: "Which conclusion describes the year correctly?",
+      prompt: "Compare the {savingsAfterYear} balance with the {futurePrice} goal.",
+      options: [
+        "Alex earned {interestEarned}, so his purchasing power must have increased",
+        "His balance grew, but more slowly than the price of his goal",
+        "Whenever an account earns less than inflation, every dollar should be invested",
+      ],
+      correct:
+        "The statement shows a gain, but the goal rose by more. In this specific example, the amount’s purchasing power fell.",
+      incorrect:
+        "A displayed gain and a gain in purchasing power are not the same. This gap alone is also not enough to choose an account or investment.",
+      action: "Give the money a job again",
+    },
+    nearTerm: {
+      eyebrow: "Inflation is not the only risk",
+      title: "What does Alex need to protect most?",
+      cardLabel: "New information",
+      cardText: "A deposit due in {nearMonths} months",
+      prompt: "Choose the most important feature for this money.",
+      options: [
+        "Access to the money and a stable amount",
+        "The highest possible potential return",
+        "A promise to earn more than inflation",
+      ],
+      correct:
+        "With a near and fixed date, a drop at the wrong time can matter more than gradual price erosion.",
+      incorrect:
+        "This money has a near deadline. Seeking more return can add a risk of loss or make the money unavailable at the wrong time.",
+      action: "Change the horizon",
+    },
+    longTerm: {
+      eyebrow: "Time changes the trade-off",
+      title: "What changes now?",
+      intro:
+        "Loss of purchasing power matters more over a long period, but investing adds fluctuation and loss risk.",
+      cardLabel: "New information",
+      cardText: "Money unused for at least {longYears} years",
+      prompt: "Choose the answer that recognizes several risks.",
+      options: [
+        "Alex must invest every dollar",
+        "Alex must keep every dollar in cash",
+        "He can compare access, stability, inflation and the risk of a loss",
+      ],
+      correct:
+        "A long horizon gives inflation more weight without removing other risks. The next lesson will compare those trade-offs.",
+      incorrect:
+        "No time horizon creates an automatic rule. The money’s job and the ability to accept a loss still matter.",
+      action: "Build the checklist",
+    },
+    checklist: {
+      eyebrow: "Before deciding",
+      title: "Alex can start with the job and the date.",
+      intro:
+        "This checklist avoids treating inflation as an order to invest or stability as a complete absence of risk.",
+      points: [
+        "When will this money be used?",
+        "Is the date fixed or flexible?",
+        "Does the amount need to stay stable?",
+        "Does the money need to be immediately available?",
+        "Does the account pay interest?",
+        "Can Alex accept a temporary drop?",
+      ],
+      takeaway: "Inflation is a risk to understand, not an order to invest.",
+      action: "Finish the lesson",
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You separated displayed dollars from purchasing power.",
+      points: [
+        "Inflation measures an average change in prices.",
+        "A balance can rise while buying less than before.",
+        "Cash protects access and stability, but not always purchasing power.",
+        "The money’s job and use date guide the comparison.",
+      ],
+      takeaway: "What must this money protect: a near expense, a stable amount or a distant goal?",
+      note: "Educational simulation using virtual money. This is not financial advice. The rates are fictional and the calculations are deliberately simplified.",
+      replay: "Replay lesson",
+      saving: "Saving progress…",
+      retry: "Try saving again",
+      next: "Continue to lesson 8",
+      back: "Back to World 1",
+    },
+  },
+  lesson8: {
+    metaTitle: "Savings vs investing",
+    feedback: {
+      correct: "That reasoning fits",
+      rethink: "Look at the tradeoff",
+      reflect: "A useful next question",
+      answer: "Reasoning to keep",
+      check: "Check my answer",
+    },
+    welcome: {
+      eyebrow: "World 1 · Lesson 8",
+      title: "Savings vs investing: what job does this money have?",
+      intro:
+        "Alex has money for different goals. Help him decide what each amount needs to protect before thinking about what it might earn.",
+      action: "Start the lesson",
+      note: "Fictional examples with virtual money. This is education, not financial advice.",
+    },
+    difference: {
+      eyebrow: "Two ways to set money aside",
+      title: "The difference starts with what you need from the money.",
+      intro:
+        "In this lesson, saving means keeping money accessible with a stable account balance. Investing means accepting that its value can change, including a possible loss, for long-term growth potential.",
+      savingTitle: "Save it",
+      savingText:
+        "Prioritize access and a stable amount in dollars. Rising prices may still reduce what it can buy.",
+      investingTitle: "Invest it",
+      investingText:
+        "Accept ups and downs and a possible loss for growth potential over time. Growth is never guaranteed.",
+      nuance:
+        "Investing is also a way of setting money aside. Here we compare two different uses for it.",
+      action: "Try one example",
+    },
+    sameAmount: {
+      eyebrow: "Same dollars, different goals",
+      title: "What changes when the date changes?",
+      intro:
+        "These {amount} are fictional. Imagine needing them in two months, then imagine not needing them for ten years.",
+      soon: "Needed in two months",
+      later: "For a goal in ten years",
+      prompt: "Which fact matters most when comparing saving and investing?",
+      options: [
+        "The amount is the same, so the choice must be the same.",
+        "The timeline, need for access, and ability to wait through a drop.",
+        "Investing always wins when the goal is far away.",
+      ],
+      feedback: [
+        "The same amount can have different jobs. A drop just before a needed expense matters more than a change in a flexible long-term goal.",
+        "Exactly. The amount alone does not decide; the date and consequences of a drop change the tradeoff.",
+        "A long horizon can make investing worth considering, but it never guarantees a gain or removes the risk of loss.",
+      ],
+      action: "Meet Alex's goals",
+    },
+    alex: {
+      eyebrow: "Alex has more than one goal",
+      title: "His money does not all have the same job.",
+      intro:
+        "Alex is a young working adult. His everyday bills are covered, but he has different reasons to set money aside.",
+      cards: [
+        { title: "Emergency buffer", body: "Money he may need without warning." },
+        { title: "Move in six months", body: "A planned expense with a close date." },
+        {
+          title: "Distant goal",
+          body: "A separate amount he does not expect to need for ten years.",
+        },
+      ],
+      note: "His case is an example, not a rule for everyone at the same stage of life.",
+      action: "Decide for the move",
+    },
+    nearTerm: {
+      eyebrow: "A close date",
+      title: "What should Alex prioritize for his move in six months?",
+      prompt: "Choose what protects the purpose of this amount.",
+      options: [
+        "Keep this amount stable and accessible for the move.",
+        "Invest it to aim for a higher return before the move.",
+        "Use the emergency buffer instead, since both amounts are available.",
+      ],
+      feedback: [
+        "Yes. A drop at the wrong time could leave him short for a planned bill. Keeping the balance stable does not guarantee its purchasing power.",
+        "A possible gain is not assured in six months. If the value falls near moving day, Alex may lack the money he planned to use.",
+        "The buffer covers surprises; the move is already planned. Accessible amounts can still have different jobs.",
+      ],
+      action: "Consider the distant goal",
+    },
+    longTerm: {
+      eyebrow: "A distant goal",
+      title: "What can Alex consider for the separate amount he will not need for ten years?",
+      prompt: "Choose reasoning that accounts for both growth potential and loss.",
+      options: [
+        "Compare saving and investing, including whether he could accept a loss.",
+        "Invest automatically: ten years guarantee growth.",
+        "Keep it all in savings: a stable balance means no risk.",
+      ],
+      feedback: [
+        "Yes. Time can make investing an option, not an obligation. Alex still needs to consider possible losses, his needs, and any known debt costs.",
+        "Ten years do not promise a gain. An investment can still be worth less when Alex needs it.",
+        "A stable dollar balance can be useful, but inflation may reduce what it buys over time.",
+      ],
+      action: "Connect it to your own questions",
+    },
+    reflection: {
+      eyebrow: "What about you?",
+      title: "Could you set aside even a small amount each month, now or in the near future?",
+      context:
+        "If you are a student, think about what might be possible after graduation, when you have your first income.",
+      prompt: "Choose the answer that fits you. There is no wrong answer.",
+      check: "Explore what this means",
+      hint: "Choose an answer to continue.",
+      options: ["Yes", "No"],
+      feedback: [
+        "That is a starting point. Before considering investing, ask when you might need that amount, what must stay available, and whether you could accept a loss.",
+        "You can still learn now. If your situation changes, for example after graduation, you can return to this question and think about how each amount fits your needs.",
+      ],
+      action: "Finish World 1",
+    },
+    complete: {
+      eyebrow: "World 1 · Beta complete",
+      pendingTitle: "Your final lesson is ready to save.",
+      title: "You finished World 1!",
+      count: "8 of 8 lessons complete",
+      thanks:
+        "Thank you for exploring this first version. You can now connect each amount to its goal, timeline, and risks.",
+      saved: "Your progress is saved.",
+      saving: "Saving your progress…",
+      error: "We could not confirm your progress. Try saving it again.",
+      retry: "Try saving again",
+      teaserTitle: "What might come next?",
+      teaser:
+        "We are preparing new worlds and exploring virtual portfolios that use real market data. Practice would still use virtual money; these features are not available yet.",
+      feedbackIntro:
+        "Your feedback will help us choose what to build next. What helped, what was unclear, and what would you like to try?",
+      feedbackPrompt:
+        "What helped you learn, what was unclear, and what would you like to try next?",
+      feedbackButton: "Give feedback",
+      dashboard: "Back to dashboard",
+      replay: "Replay the lesson",
+      note: "Educational practice with fictional amounts. This is not financial advice.",
     },
   },
   dashboard: {
-    home: "dashboard",
+    home: "Learn",
     tabsLabel: "Dashboard",
-    tabs: { courses: "Courses", portfolio: "Portfolio", account: "Account" },
+    tabs: { home: "Learn", courses: "Courses", portfolio: "Portfolio", account: "Profile" },
+    preview: {
+      title: "Local Home preview",
+      label: "Local preview · sample data",
+      description: "Sample progress is shown for review. Other dashboard pages require sign-in.",
+    },
+    homeScreen: {
+      learnTitle: "Learn",
+      worldIdentifier: "World 1",
+      eyebrow: "Your next step",
+      startHeading: "Your learning path starts here.",
+      continueHeading: "Pick up where you left off.",
+      currentLesson: "Current",
+      availableLesson: "Available",
+      startLearning: "Start learning",
+      alreadyKnowBasics: "I already know the basics",
+      discoveryTitle: "Build your financial foundations",
+      discoveryDescription:
+        "Explore eight interactive lessons to understand the financial basics and move forward at your own pace.",
+      discoveryAction: "Explore World 1",
+      discoveryClose: "Close",
+      preferenceFallback: "We’ll remember this choice on this device.",
+      preferenceSaveError: "We couldn’t remember this choice. Please try again.",
+      pathProgressLabel: (completed: number, total: number) =>
+        `${completed} of ${total} path steps complete`,
+      upcomingWorldsTitle: "Coming next",
+      comingSoon: "Coming soon",
+      moreWorlds: "More worlds",
+      moreWorldsCount: (count: number) => `${count} upcoming worlds`,
+      worldLabel: (number: number) => `World ${number}`,
+      upcomingWorlds: [
+        "Meet the investment world",
+        "Risk, diversification & psychology",
+        "Understand ETFs",
+        "Build your first portfolio",
+        "Investing in the United States",
+        "How buying actually works",
+        "Your first real investment",
+      ],
+      resumeLesson: (number: number) => `Continue at lesson ${number}`,
+      completeHeading: "See how far you’ve come.",
+      review: "Review your journey",
+      worldComplete: "World 1 complete",
+      explore: "Explore all courses",
+    },
     logOut: "Log out",
     logOutPending: "Logging out…",
     usComingSoon: "More lessons for the US are coming soon.",
     portfolio: {
       title: "Portfolio",
-      intro: "Virtual money only. Nothing here is real.",
-      emptyTitle: "Your virtual portfolio starts soon",
-      emptyText:
-        "The decisions you practice will build a portfolio in virtual dollars, so you can see how your choices play out over time. It is a simulation for learning, not financial advice.",
-      cta: "Practice a decision",
+      inDevelopment: "In development",
     },
     account: {
       title: "Account",

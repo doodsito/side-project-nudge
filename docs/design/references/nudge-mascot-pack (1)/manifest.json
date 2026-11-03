@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "assetType": "static-mascot-poses",
+  "animated": false,
+  "reference": "Original Nudge pink/lilac piggy-bank mascot",
+  "states": [
+    {
+      "state": "welcome",
+      "labelFr": "Bienvenue",
+      "png": "png/nudge-welcome.png",
+      "webp": "webp/nudge-welcome.webp",
+      "width": 1305,
+      "height": 1205,
+      "placementFr": "Accueil et onboarding",
+      "altEn": "Nudge the pink pig waves hello.",
+      "altFr": "Nudge, le cochon rose, fait un signe de bienvenue.",
+      "suggestedMotion": "One gentle entrance, 220 ms.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    },
+    {
+      "state": "curious",
+      "labelFr": "Curieux",
+      "png": "png/nudge-curious.png",
+      "webp": "webp/nudge-curious.webp",
+      "width": 1305,
+      "height": 1205,
+      "placementFr": "Choix, apprentissage et aide",
+      "altEn": "Nudge tilts its head thoughtfully.",
+      "altFr": "Nudge penche la tête avec curiosité.",
+      "suggestedMotion": "Optional one-time 2-degree tilt, 250 ms.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    },
+    {
+      "state": "encourage",
+      "labelFr": "Encourageant",
+      "png": "png/nudge-encourage.png",
+      "webp": "webp/nudge-encourage.webp",
+      "width": 1305,
+      "height": 1205,
+      "placementFr": "Erreur et nouvel essai",
+      "altEn": "Nudge offers a reassuring smile.",
+      "altFr": "Nudge sourit pour vous encourager.",
+      "suggestedMotion": "Static by default; no shaking or negative motion.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    },
+    {
+      "state": "celebrate",
+      "labelFr": "Bravo !",
+      "png": "png/nudge-celebrate.png",
+      "webp": "webp/nudge-celebrate.webp",
+      "width": 1305,
+      "height": 1205,
+      "placementFr": "Objectif ou étape réussie",
+      "altEn": "Nudge celebrates with raised hooves.",
+      "altFr": "Nudge célèbre la réussite, les sabots levés.",
+      "suggestedMotion": "Optional one-time 8 px hop, 350 ms.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    },
+    {
+      "state": "guide",
+      "labelFr": "Par ici",
+      "png": "png/nudge-guide.png",
+      "webp": "webp/nudge-guide.webp",
+      "width": 1306,
+      "height": 1205,
+      "placementFr": "Prochaine étape et tutoriel",
+      "altEn": "Nudge points toward the next step.",
+      "altFr": "Nudge indique la prochaine étape.",
+      "suggestedMotion": "Optional one-time 4 px nudge toward the action, 250 ms.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    },
+    {
+      "state": "walk",
+      "labelFr": "En route",
+      "png": "png/nudge-walk.png",
+      "webp": "webp/nudge-walk.webp",
+      "width": 1305,
+      "height": 1205,
+      "placementFr": "Progression et accompagnement",
+      "altEn": "Nudge takes a cheerful step forward.",
+      "altFr": "Nudge avance avec un pas joyeux.",
+      "suggestedMotion": "Still walking pose; optional whole-image 4 px slide, 250 ms. Not a walk-cycle animation.",
+      "reducedMotion": "Use static pose, disable transforms and animation."
+    }
+  ]
+}

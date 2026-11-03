@@ -16,7 +16,7 @@ export default async function MoneyYoullNeedSoonPage() {
     !isLessonFiveAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 4)
   ) {
-    redirect("/dashboard/courses/financial-foundation#lesson-5");
+    redirect("/dashboard");
   }
 
   redirect("/lessons/money-youll-need-soon");

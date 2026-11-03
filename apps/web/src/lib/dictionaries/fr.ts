@@ -21,7 +21,7 @@ export const fr: Dictionary = {
     challenge: "Faire un défi",
     howItWorks: "Comment ça marche",
     logIn: "Se connecter",
-    signUp: "Rejoindre la bêta",
+    signUp: "Accéder à la bêta",
     open: "Ouvrir",
     accountMenu: "Menu du compte",
     account: "Compte",
@@ -165,12 +165,13 @@ export const fr: Dictionary = {
     done: "Tu es sur la liste.",
     error: "Impossible d’enregistrer ta place pour le moment. Réessaie.",
     consent: `On t’écrira seulement au sujet de l’accès anticipé et du lancement de ${BRAND}. Tu peux quitter la liste à tout moment. Tu dois avoir 15 ans ou plus.`,
-    privacy: "Politique de confidentialité (en anglais)",
+    privacy: "Politique de confidentialité",
   },
   tracks: {
     title: `Bienvenue sur ${BRAND}`,
     description: "Tu es où ? Tu pourras changer en bas de page.",
     continue: "Continuer",
+    error: "Impossible de changer de version pour le moment. Réessaie.",
     options: {
       fr: { country: "France", detail: "En français, en euros" },
       us: { country: "États-Unis", detail: "En anglais, en dollars" },
@@ -237,9 +238,9 @@ export const fr: Dictionary = {
       remembered: "Ça te revient\u00a0?",
       differentCode: "Utiliser un autre code d’invitation",
       consentBefore: "En créant un compte, tu acceptes les",
-      terms: "Conditions d’utilisation (en anglais)",
+      terms: "Conditions d’utilisation",
       consentMiddle: "et confirmes avoir lu la",
-      privacy: "Politique de confidentialité (en anglais)",
+      privacy: "Politique de confidentialité",
       consentAfter: ". Tu dois avoir 15 ans ou plus.",
     },
     form: {
@@ -316,16 +317,20 @@ export const fr: Dictionary = {
       educationalNote: "Simulation pédagogique uniquement. Ceci n’est pas un conseil financier.",
     },
     courses: {
+      yourCourses: "Tes cours",
+      nextLesson: "Prochaine leçon",
+      viewAllLessons: "Voir toutes les leçons",
+      roadmap: "Les autres mondes",
       journeyLabel: "Ton parcours d’apprentissage",
       journeyTitle: "Neuf mondes. Une décision à la fois.",
       journeyIntro:
         "Construis les bases, entraîne-toi avec de l’argent virtuel et débloque les connaissances utiles à tes premières décisions d’investissement.",
       worldsCompleted: "0 monde sur 9",
-      firstWorldReady: "Le monde 1 est prêt",
+      firstWorldReady: "Le monde 0 est prêt",
       mapLabel: "Carte du parcours",
       mapTitle: "Choisis ton monde",
       mapIntro:
-        "Termine un monde pour ouvrir le suivant. Les mondes verrouillés restent visibles pour que tu saches toujours où mène le parcours.",
+        "Commence par le Monde 0 si tu découvres l’investissement. Le Monde 1 reste accessible à ton rythme ; les prochains mondes sont encore en préparation.",
       world: "Monde",
       ready: "Prêt à explorer",
       locked: "Verrouillé",
@@ -338,11 +343,6 @@ export const fr: Dictionary = {
         {
           title: "Construis tes bases financières",
           description: "Donne un rôle à chaque euro avant de chercher à le faire fructifier.",
-        },
-        {
-          title: "Pourquoi investir ?",
-          description:
-            "Découvre comment le temps, l’inflation et les intérêts composés changent la donne.",
         },
         {
           title: "Découvre le monde de l’investissement",
@@ -379,6 +379,23 @@ export const fr: Dictionary = {
           description: "Rassemble tes connaissances, ta pratique et ton plan personnel.",
         },
       ],
+      intro: {
+        label: "Monde 0 · Pour commencer",
+        title: "Pourquoi s’intéresser à l’investissement ?",
+        description:
+          "Une leçon courte pour comprendre l’idée, les intérêts composés et le risque, sans avoir besoin d’investir aujourd’hui.",
+        duration: "~3 min",
+        start: "Découvrir le Monde 0",
+        review: "Revoir le Monde 0",
+        completed: "Leçon terminée",
+        skip: "Passer le Monde 0",
+        notions: [
+          "Comprendre l’investissement",
+          "Croissance et intérêts composés",
+          "Risque et incertitude",
+        ],
+        progressLabel: (completed: number) => `Progression du Monde 0 : ${completed} leçon sur 1`,
+      },
       foundation: {
         metaTitle: "Construis tes bases financières",
         back: "Tous les mondes",
@@ -402,49 +419,90 @@ export const fr: Dictionary = {
         virtualMoney: "Argent virtuel",
         review: "Revoir la leçon",
         start: "Commencer la leçon",
+        notionsLabel: "Au programme",
+        lockedExplanation: "Termine la leçon précédente pour débloquer cette étape.",
+        closePreview: "Fermer l’aperçu de la leçon",
+        mascotAlt: "Nudge penche la tête avec curiosité.",
         rewardLabel: "Récompense du monde",
-        rewardTitle: "L’investissement débloqué",
-        rewardIntro: "Termine les huit leçons pour ouvrir l’univers de l’investissement.",
+        rewardTitle: "Huit leçons pour construire tes bases",
+        rewardIntro:
+          "Termine le Monde 1 pour faire le point sur ce que tu as appris dans cette bêta.",
+        rewardCompleteTitle: "Tes bases sont acquises",
+        rewardCompleteIntro: "Tu as terminé les huit leçons. Merci d’avoir exploré cette bêta.",
+        current: "À découvrir",
+        locked: "Verrouillée",
         lessons: [
           {
             title: "Où va ton argent ?",
             description:
               "Aide Alex à calculer ce qu’il lui reste vraiment après ses dépenses essentielles.",
+            notions: ["Dépenses essentielles", "Ce qu’il reste", "Suivi des dépenses"],
+            keyNotions: ["Dépenses essentielles", "Reste à vivre", "Suivi des entrées et sorties"],
           },
           {
             title: "Paie-toi en premier",
             description:
               "Découvre pourquoi épargner d’abord change la donne par rapport à épargner ce qui reste.",
+            notions: [
+              "Épargner avant de dépenser",
+              "Créer une habitude",
+              "Prévoir les dépenses réelles",
+            ],
+            keyNotions: [
+              "Se payer en premier",
+              "Petites sommes régulières",
+              "Adapter son plan aux dépenses",
+            ],
           },
           {
             title: "Combien devrais-tu épargner ?",
             description:
               "Utilise les pourcentages courants comme repères souples, pas comme règles fixes.",
+            notions: ["Des repères souples", "La marge du budget", "Un montant tenable"],
+            keyNotions: ["Part du revenu épargnée", "Pourcentages indicatifs", "Budget flexible"],
           },
           {
             title: "Construis ton filet de sécurité",
             description:
               "Comprends pourquoi chaque situation demande une réserve de précaution différente.",
+            notions: ["Dépenses imprévues", "Situation personnelle", "Réserve accessible"],
+            keyNotions: ["Réserve de précaution", "Situation personnelle", "Épargne disponible"],
           },
           {
             title: "L’argent dont tu auras bientôt besoin",
             description:
               "Sépare tes besoins proches de l’argent qui peut rester investi plus longtemps.",
+            notions: ["La date du besoin", "Accès et stabilité", "Horizon de placement"],
+            keyNotions: ["Dépenses à court terme", "Horizon de temps", "Objectifs plus lointains"],
           },
           {
             title: "Rembourser une dette ou investir ?",
             description:
               "Compare le coût certain d’un emprunt au rendement incertain d’un investissement.",
+            notions: [
+              "Coût connu d’un emprunt",
+              "Rendement incertain",
+              "Échéances et paiements dus",
+            ],
+            keyNotions: [
+              "Coût certain d’un emprunt",
+              "Rendement incertain",
+              "Arbitrage entre dette et investissement",
+            ],
           },
           {
             title: "Les liquidités ne sont pas sans risque",
             description:
               "Observe comment l’inflation réduit ce que la même somme permet d’acheter.",
+            notions: ["Solde stable", "Pouvoir d’achat", "Disponibilité à court terme"],
+            keyNotions: ["Inflation", "Pouvoir d’achat", "Risque lié aux liquidités"],
           },
           {
             title: "Épargner ou investir ?",
             description:
               "Choisis entre disponibilité, stabilité et potentiel de croissance à long terme.",
+            notions: ["Disponibilité", "Stabilité et risque de perte", "Potentiel à long terme"],
+            keyNotions: ["Disponibilité", "Stabilité", "Potentiel de croissance à long terme"],
           },
         ],
       },
@@ -742,6 +800,147 @@ export const fr: Dictionary = {
         moreTitle: "Pour aller plus loin : pourquoi dit-on « pourrait » ?",
         more: "Une somme peut sembler disponible sans vraiment l’être. Une facture annuelle, comme une assurance téléphone, peut tomber n’importe quel mois. Un imprévu aussi, comme un écran cassé. Voilà pourquoi nous disons « pourrait ». La leçon 4 parlera de ton filet de sécurité.",
       },
+    },
+  },
+  lesson0: {
+    metaTitle: "Pourquoi s’intéresser à l’investissement ?",
+    onboarding: {
+      progress: "Monde 0 · étape {current} sur {total}",
+      decisionEyebrow: "Ta première décision avec l’argent",
+      decisionTitle: "Il te reste {amount}. Qu’en ferais-tu ?",
+      decisionBody:
+        "Alex a payé ses dépenses essentielles du mois. Il reste {amount} et aucune décision n’a encore été prise.",
+      decisionChoices: [
+        "Le garder sur un compte d’épargne",
+        "En investir une partie",
+        "Partager entre les deux",
+      ],
+      decisionHint: "Il n’y a pas une seule bonne réponse.",
+      decisionSpeech: "À toi de choisir !",
+      decisionAction: "Comprendre ce que ce choix implique",
+      feedbackEyebrow: "Réfléchir comme un investisseur",
+      feedbackTitle: "Bonne question. Mais que manque-t-il ?",
+      feedbackSpeech: "Ça dépend !",
+      feedbackLabels: [
+        "Garder la somme disponible",
+        "Lui donner une chance de grandir",
+        "Un peu des deux",
+      ],
+      feedbackChoices: [
+        "L’épargne garde l’argent accessible, ce qui peut aider si tu en as bientôt besoin.",
+        "Investir peut permettre une hausse, mais la valeur peut aussi baisser quand tu auras besoin de cette somme.",
+        "Partager la somme peut concilier deux priorités, mais ne remplace pas une réserve disponible.",
+      ],
+      feedbackInsight:
+        "Quand Alex aura-t-il besoin de cet argent ? Une somme utile le mois prochain n’a pas le même rôle qu’une somme prévue pour dans dix ans.",
+      feedbackAction: "Voir l’investissement en action",
+      growthAction: "Mais qu’en est-il du risque ?",
+      riskAction: "Terminer le Monde 0",
+      selected: "Ton choix",
+      assumption: "Rendement annuel hypothétique",
+      simulatedValue: "Valeur simulée",
+      sliderLabel: "Avancer dans le temps",
+      year: "an",
+      years: "ans",
+      chartLabel: "Illustration d’une croissance composée hypothétique au fil du temps",
+      completionAlt: "Nudge célèbre",
+      decisionAlt: "Nudge est curieux",
+      guideAlt: "Nudge t’accompagne",
+      encourageAlt: "Nudge t’encourage",
+    },
+    welcome: {
+      eyebrow: "Monde 0 · Une courte introduction",
+      title: "Pourquoi s’intéresser à l’investissement ?",
+      body: "Tu n’as pas besoin de connaître la Bourse ni d’avoir de l’argent à investir aujourd’hui. Même si tu es étudiant ou attends ton premier salaire, tu peux déjà comprendre ce que l’investissement pourrait apporter et ce qui peut mal tourner.",
+      reassurance: "Tu peux apprendre aujourd’hui et décider plus tard si investir te convient.",
+      action: "Découvrir l’idée",
+    },
+    meaning: {
+      eyebrow: "L’idée de base",
+      title: "Donner une chance à une somme de grandir",
+      definition:
+        "Investir, c’est placer de l’argent dans un actif dont la valeur peut monter ou baisser, avec l’espoir de le faire grandir pour un objectif lointain.",
+      example:
+        "Imagine Léa, étudiante aujourd’hui. Quand elle aura un salaire, elle pourra réfléchir à mettre une petite somme de côté chaque mois pour un projet dans dix ans. Elle peut dès aujourd’hui apprendre comment fonctionne l’investissement et préparer ses futurs choix.",
+      boundary:
+        "L’argent dont tu pourrais avoir besoin bientôt a un autre rôle. Le Monde 1 t’aidera à distinguer ces sommes.",
+      action: "Voir comment les gains s’accumulent",
+    },
+    compound: {
+      eyebrow: "À toi d’essayer",
+      title: "Et si les gains produisaient eux aussi des gains ?",
+      intro:
+        "Imagine 1 000 € qui gagnent 5 % chaque année pendant 20 ans, en laissant tous les gains placés.",
+      start: "Départ",
+      first: "Après 10 ans",
+      second: "Après 20 ans",
+      explanation:
+        "Au début, 5 % de 1 000 € rapportent 50 €. Ensuite, les gains laissés placés produisent eux aussi des gains : c’est l’effet des intérêts composés.",
+      comparison:
+        "Sans réinvestir les gains, le total serait de 2 000 € après 20 ans. Ici, les gains réinvestis ajoutent 653 € de plus.",
+      caveat:
+        "Dans la réalité, le rendement varie d’une année à l’autre. Les frais et les impôts ne sont pas inclus dans ce calcul.",
+      action: "Et quand la valeur baisse ?",
+    },
+    risk: {
+      eyebrow: "Et les baisses ?",
+      title: "Un investissement peut aussi baisser.",
+      intro:
+        "Voici une trajectoire possible pour un placement réparti entre plusieurs entreprises :",
+      start: "Au départ",
+      dip: "Après la baisse",
+      dipChange: "−20 % · 200 € de moins",
+      recovery: "Plus tard",
+      recoveryChange: "300 € de plus qu’au départ",
+      example:
+        "La baisse de 20 % n’a pas forcément été la fin de l’histoire. Si tu as besoin de cet argent bientôt, tu pourrais toutefois devoir vendre avant une éventuelle reprise.",
+      historical:
+        "Dans le passé, selon l’AMF, les placements diversifiés en actions sur 15 à 20 ans ont rapporté en moyenne 5 à 7 % par an. Répartir son investissement évite aussi de dépendre d’une seule entreprise.",
+      source: "Voir les repères de l’AMF",
+      sourceHref:
+        "https://www.amf-france.org/fr/espace-epargnants/actualites-mises-en-garde/reperes-utiles-sur-les-rendements-de-lepargne",
+      warning:
+        "Ce scénario et ces résultats passés ne promettent rien : même avec du temps et de la diversification, une perte reste possible.",
+      action: "Vérifier ce que tu as compris",
+    },
+    question: {
+      eyebrow: "Une question",
+      title: "Qu’est-ce que le temps change ?",
+      prompt: "Choisis l’affirmation qui reste vraie même si les marchés baissent.",
+      options: [
+        "Après dix ans, un gain est garanti.",
+        "Le temps peut aider à traverser une baisse, mais une perte reste possible.",
+        "Tout l’argent restant devrait être investi, même s’il sert le mois prochain.",
+      ],
+      feedback: [
+        "Dix ans ne garantissent aucun gain. Un investissement peut valoir moins quand tu en auras besoin.",
+        "Exactement. Avoir du temps peut aider à attendre, mais ne supprime pas le risque de perte.",
+        "L’argent nécessaire bientôt doit rester disponible. L’investir pourrait t’obliger à vendre après une baisse.",
+      ],
+      correct: "Bonne réponse !",
+      rethink: "Une distinction utile",
+      answer: "Réponse plus juste",
+      check: "Voir l’explication",
+      hint: "Choisis une réponse pour continuer.",
+      action: "Terminer le Monde 0",
+    },
+    complete: {
+      eyebrow: "Monde 0 terminé",
+      title: "Tu viens de prendre ta première décision avec ton argent.",
+      summary:
+        "Tu as découvert le compromis entre disponibilité, croissance et risque. À toi de mettre ces notions en pratique.",
+      next: "Dans le Monde 1, tu décideras quelles sommes doivent rester disponibles avant de penser à un objectif lointain.",
+      saving: "Enregistrement de ta progression…",
+      saved: "Ta progression est enregistrée.",
+      error: "Nous n’avons pas pu enregistrer ta progression. Réessaie.",
+      preview: "Aperçu uniquement · La progression n’est pas enregistrée.",
+      retry: "Réessayer l’enregistrement",
+      action: "Continuer vers le Monde 1",
+      replay: "Revoir le Monde 0",
+      source: "Lire les repères de l’AMF sur le risque et le rendement",
+      sourceHref:
+        "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/rendement-et-risque-des-placements-en-actions-0",
+      note: "Exemples fictifs pour apprendre. Aucun conseil financier ni rendement promis.",
     },
   },
   lesson3: {
@@ -1111,34 +1310,534 @@ export const fr: Dictionary = {
       next: "Continuer vers la leçon 6",
       back: "Retour au Monde 1",
     },
-    lesson6: {
-      metaTitle: "Rembourser une dette ou investir ?",
+  },
+  lesson6: {
+    enabled: true,
+    metaTitle: "Rembourser une dette ou investir ?",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
       eyebrow: "Monde 1 · Leçon 6",
-      title: "Rembourser une dette ou investir ?",
+      title: "Un pourcentage ne suffit pas pour décider.",
       intro:
-        "Alex sait maintenant séparer l’argent nécessaire bientôt de celui qui peut attendre. Sa prochaine décision comparera le coût certain d’une dette au rendement incertain d’un investissement.",
-      badge: "Leçon 6 débloquée",
-      comingLabel: "Prochaine étape",
-      comingText:
-        "La leçon interactive complète est en préparation. Ta progression est enregistrée sur ton compte : tu peux quitter cette page et revenir plus tard.",
-      back: "Monde 1",
-      viewProgress: "Voir ma progression",
+        "Alex a protégé son filet de sécurité et son déménagement. Aide-le maintenant à comparer le coût connu d’une dette au résultat incertain d’un investissement.",
+      action: "Commencer la leçon",
+      cardLabel: "La prochaine décision d’Alex",
+      cardTitle: "Dette ou investissement ?",
+    },
+    snapshot: {
+      eyebrow: "Deux usages pour la même somme",
+      title: "Alex a 100 € réellement disponibles.",
+      intro:
+        "Ses dépenses, ses mensualités obligatoires, son filet de sécurité et son déménagement sont déjà prévus. Il peut décider du rôle des 100 € restants.",
+      extra: "Disponible chaque mois",
+      debt: "Dette restante",
+      rate: "Taux affiché",
+      rateValue: "TAEG fixe : {rate} %",
+      horizon: "Objectif d’investissement",
+      horizonValue: "{years} ans",
+      note: "Le contrat ne prévoit pas de frais de remboursement anticipé. Les montants servent uniquement à explorer une décision.",
+      action: "Lire le taux",
+    },
+    rate: {
+      eyebrow: "Trois lettres à décoder",
+      title: "Le mot important est caché dans le A.",
+      intro:
+        "TAEG signifie taux annuel effectif global. Le contrat peut simplement afficher « 12 % » : ce nombre est tout de même exprimé sur une base annuelle.",
+      contractLabel: "Extrait du contrat",
+      contractValue: "TAEG fixe : {rate} %",
+      contractHint:
+        "Le TAEG rassemble les intérêts et certains frais obligatoires pour aider à comparer le coût des crédits.",
+      action: "Interpréter le pourcentage",
+    },
+    interpret: {
+      eyebrow: "Le taux annuel n’est pas le coût total",
+      title: "Que signifie le « {rate} % » affiché ?",
+      prompt: "Choisis l’interprétation qui tient compte du temps.",
+      options: [
+        "Alex paiera exactement 12 % en plus sur toute la durée du crédit",
+        "La banque ajoute 12 % au montant restant chaque mois",
+        "Le taux est exprimé sur une base annuelle ; le coût total dépend aussi de la durée, des remboursements et des frais",
+      ],
+      correct:
+        "Le pourcentage est annualisé. Le montant total dû et l’échéancier montrent ce qu’Alex paiera si le contrat est suivi jusqu’au bout.",
+      incorrect:
+        "Le A de TAEG signifie annuel. Ce n’est ni un supplément unique pour toute la durée, ni un taux appliqué chaque mois.",
+      action: "Voir un exemple en euros",
+    },
+    example: {
+      eyebrow: "Du pourcentage aux euros",
+      title: "Une année complète donne un point de repère.",
+      intro:
+        "Imaginons seulement pour comprendre le taux que les {debt} restent dus pendant une année entière et qu’aucun autre frais ne s’ajoute.",
+      formulaLabel: "Exemple volontairement simplifié",
+      formulaText:
+        "Les {annualCost} représentent 12 % de {debt} sur une année complète. Ce n’est pas automatiquement le coût total du crédit.",
+      balanceLabel: "Quand Alex rembourse",
+      balanceText:
+        "Le capital restant dû diminue. Les intérêts suivants ne reposent donc plus sur les 600 € du départ pendant toute la durée.",
+      note: "Dans un vrai crédit, le calcul dépend du contrat, des dates, des mensualités et des frais. Il faut consulter le montant total dû et l’échéancier.",
+      action: "Comparer les deux choix",
+    },
+    compare: {
+      eyebrow: "Deux pourcentages, deux niveaux de certitude",
+      title: "Le taux de la dette et un rendement espéré ne promettent pas la même chose.",
+      intro:
+        "Alex peut décrire l’effet du remboursement. Il ne peut pas connaître à l’avance le résultat de l’investissement.",
+      debtLabel: "Rembourser",
+      debtTitle: "Réduit un coût contractuel",
+      debtPoints: [
+        "Le capital restant dû baisse immédiatement",
+        "La base des intérêts futurs devient plus petite",
+        "L’effet dépend du taux et des règles du contrat",
+      ],
+      investLabel: "Investir",
+      investTitle: "Accepte un résultat incertain",
+      investPoints: [
+        "La valeur peut monter ou baisser",
+        "Un rendement moyen passé n’est pas une promesse",
+        "L’horizon de dix ans laisse du temps, sans garantir le résultat",
+      ],
+      takeaway:
+        "Comparer 12 % de dette à un rendement d’investissement supposé ne transforme pas ce rendement en certitude.",
+      action: "Prendre une décision pour Alex",
+    },
+    decision: {
+      eyebrow: "Les autres priorités sont déjà protégées",
+      title: "Quelle réponse utilise le mieux les informations disponibles ?",
+      cardLabel: "Situation actuelle",
+      cardText: "{extra} disponibles · dette : {debt} à {rate} %",
+      prompt: "Choisis la réponse qui sépare le coût connu du résultat incertain.",
+      options: [
+        "Investir les {extra}, car un portefeuille diversifié rapportera forcément plus de 12 %",
+        "Utiliser les {extra} pour réduire la dette et son coût connu, sans toucher aux autres priorités",
+        "Vider le filet de sécurité pour rembourser immédiatement toute la dette",
+      ],
+      correct:
+        "Dans cette situation fictive, Alex réduit un coût élevé et connu avec de l’argent réellement disponible. Cette conclusion dépend des informations du scénario.",
+      incorrect:
+        "Un rendement n’est pas garanti et le filet de sécurité a déjà un autre rôle. La comparaison porte seulement sur les {extra} disponibles.",
+      action: "Changer une information",
+    },
+    change: {
+      eyebrow: "Le taux change la comparaison",
+      title: "La même réponse est-elle toujours évidente ?",
+      intro:
+        "La mensualité obligatoire tient dans le budget, les autres priorités restent protégées et aucun frais supplémentaire n’est prévu.",
+      cardLabel: "Nouvelles conditions",
+      cardText: "Taux : {lowerRate} % pendant {lowerMonths} mois",
+      prompt: "Choisis le raisonnement qui reste valable lorsque le coût de la dette change.",
+      options: [
+        "Toujours rembourser toute dette avant d’envisager un autre objectif",
+        "Toujours investir dès que le taux de la dette est faible",
+        "Revoir les échéances, le budget et les objectifs : rembourser, investir ou partager la somme peuvent maintenant se défendre",
+      ],
+      correct:
+        "À 0 %, le coût connu ne domine plus la comparaison de la même façon. La décision dépend davantage des échéances, de la marge budgétaire et des objectifs.",
+      incorrect:
+        "Un seul taux ne crée pas une règle universelle. Les paiements obligatoires, les échéances et la capacité à supporter le risque comptent aussi.",
+      action: "Construire la checklist",
+    },
+    checklist: {
+      eyebrow: "Avant de choisir",
+      title: "Alex peut poser les questions dans le bon ordre.",
+      intro:
+        "Cette checklist ne choisit pas à sa place. Elle évite de comparer deux pourcentages comme s’ils avaient la même certitude.",
+      points: [
+        "Les paiements obligatoires sont-ils couverts ?",
+        "Les besoins proches et le filet de sécurité restent-ils protégés ?",
+        "Que signifient le taux, la durée, les frais et le montant total dû ?",
+        "Quel coût diminue avec certitude si la dette est remboursée ?",
+        "L’argent investi peut-il rester placé malgré une baisse ?",
+        "Qu’est-ce qui changerait la décision ?",
+      ],
+      takeaway:
+        "La bonne comparaison commence par le contrat et le calendrier, pas par une promesse de rendement.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as comparé un coût connu à un résultat incertain.",
+      points: [
+        "Le A de TAEG signifie annuel, pas « sur toute la durée ».",
+        "Le coût total dépend aussi du temps, des remboursements et des frais.",
+        "Le taux, le budget et les échéances peuvent changer la décision.",
+      ],
+      takeaway:
+        "Quel coût disparaît avec certitude si je rembourse, et quel risque est-ce que j’accepte si j’investis à la place ?",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier. Les calculs simplifiés ne remplacent pas le contrat et son échéancier.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 7",
+      back: "Retour au Monde 1",
+    },
+  },
+  lesson7: {
+    enabled: true,
+    metaTitle: "Les liquidités ne sont pas sans risque",
+    feedback: { correct: "Exactement", retry: "Regarde encore une fois" },
+    welcome: {
+      eyebrow: "Monde 1 · Leçon 7",
+      title: "Ton solde peut rester le même pendant que ce qu’il achète diminue.",
+      intro:
+        "Alex voit une somme stable sur son compte et pense qu’elle ne court aucun risque. Aide-le à distinguer la stabilité du solde de celle du pouvoir d’achat.",
+      action: "Observer l’argent d’Alex",
+      cardLabel: "La prochaine question d’Alex",
+      cardTitle: "Stable pour combien de temps ?",
+    },
+    snapshot: {
+      eyebrow: "Un exemple volontairement simplifié",
+      title: "Alex garde une somme disponible sur son compte.",
+      intro: "Son solde ne fluctue pas. Son projet coûte aujourd’hui exactement la même somme.",
+      cash: "Argent disponible",
+      rate: "Rémunération du compte",
+      goal: "Prix actuel du projet",
+      inflation: "Hypothèse d’inflation sur un an",
+      note: "Ici, « liquidités » désigne de l’argent disponible rapidement dont le montant affiché reste stable. Les taux sont fictifs et servent uniquement à apprendre.",
+      action: "Comprendre l’inflation",
+    },
+    inflation: {
+      eyebrow: "Un pourcentage moyen",
+      title: "Que signifie une inflation de {inflationRate} % ?",
+      prompt: "Choisis l’interprétation qui décrit une moyenne de prix.",
+      options: [
+        "Tous les produits deviennent exactement {inflationRate} % plus chers",
+        "Les prix augmentent en moyenne d’environ {inflationRate} % sur la période",
+        "La banque retire {inflationRate} % de l’argent présent sur les comptes",
+      ],
+      correct:
+        "L’inflation décrit une évolution moyenne. Le panier de chaque personne et le prix de chaque produit peuvent évoluer différemment.",
+      incorrect:
+        "L’inflation n’est ni une hausse identique de tous les prix, ni un prélèvement sur le compte. Elle mesure une évolution moyenne des prix.",
+      action: "Voir l’effet en euros",
+    },
+    priceExample: {
+      eyebrow: "Le même projet, un an plus tard",
+      title: "Le prix bouge même si le solde ne bouge pas.",
+      intro:
+        "Dans notre exemple, le projet qui coûte {startingCash} aujourd’hui suit exactement l’hypothèse d’inflation de {inflationRate} %.",
+      today: "Aujourd’hui",
+      later: "Dans un an",
+      fullGoal: "Le solde couvre entièrement le projet",
+      shortfall: "Avec {cashAfterYear} sur son compte, il manque {cashGap}",
+      takeaway:
+        "Alex n’a pas perdu d’euros sur son relevé. Il a perdu une partie de ce que ces euros permettent d’acheter.",
+      action: "Interpréter ce changement",
+    },
+    balance: {
+      eyebrow: "Le risque ne se voit pas toujours sur le relevé",
+      title: "Que s’est-il réellement passé ?",
+      cardLabel: "Après un an",
+      cardText: "Compte : {cashAfterYear} · projet : {futurePrice}",
+      prompt: "Choisis la réponse qui distingue solde et pouvoir d’achat.",
+      options: [
+        "Le compte d’Alex a été débité de {cashGap}",
+        "Son solde est resté stable, mais il permet d’acheter moins",
+        "Alex a évité tous les risques parce que son solde n’a pas baissé",
+      ],
+      correct:
+        "Le nombre d’euros n’a pas changé. C’est l’écart entre ce nombre et le nouveau prix du projet qui révèle la baisse de pouvoir d’achat.",
+      incorrect:
+        "Aucune somme n’a été retirée du compte. Un solde stable protège le montant affiché, mais pas automatiquement ce qu’il permet d’acheter.",
+      action: "Ajouter des intérêts",
+    },
+    interestExample: {
+      eyebrow: "Un solde peut monter et rester en retard",
+      title: "Et si l’argent rapporte {savingsRate} % ?",
+      intro:
+        "Plaçons les {startingCash} sur un support fictif, sans frais ni fiscalité, rémunéré {savingsRate} % pendant un an.",
+      accountLabel: "Solde après les intérêts",
+      accountText: "Alex a gagné {interestEarned} sur son relevé",
+      goalLabel: "Prix du même projet",
+      goalText: "Il manque encore {savingsGap} pour le financer",
+      note: "Un rendement positif en euros ne garantit pas un gain de pouvoir d’achat. Il faut aussi regarder l’évolution du prix de l’objectif.",
+      action: "Comparer les deux évolutions",
+    },
+    interest: {
+      eyebrow: "Deux hausses différentes",
+      title: "Quelle conclusion décrit correctement l’année ?",
+      prompt: "Compare le solde de {savingsAfterYear} au projet de {futurePrice}.",
+      options: [
+        "Alex a gagné {interestEarned}, donc son pouvoir d’achat a forcément augmenté",
+        "Son solde a progressé, mais moins vite que le prix de son projet",
+        "Dès qu’un compte rapporte moins que l’inflation, il faut tout investir",
+      ],
+      correct:
+        "Le relevé montre un gain, mais le projet a augmenté davantage. Dans cet exemple précis, le pouvoir d’achat de la somme a diminué.",
+      incorrect:
+        "Un gain affiché et un gain de pouvoir d’achat ne sont pas la même chose. Et cet écart ne suffit pas, à lui seul, pour choisir un placement.",
+      action: "Redonner un rôle à l’argent",
+    },
+    nearTerm: {
+      eyebrow: "L’inflation n’est pas le seul risque",
+      title: "Que doit surtout protéger Alex ?",
+      cardLabel: "Nouvelle information",
+      cardText: "Une caution à payer dans {nearMonths} mois",
+      prompt: "Choisis la caractéristique la plus importante pour cette somme.",
+      options: [
+        "Sa disponibilité et la stabilité de son montant",
+        "Le rendement potentiel le plus élevé possible",
+        "Une promesse de rendement supérieur à l’inflation",
+      ],
+      correct:
+        "Avec une date proche et fixe, une baisse au mauvais moment peut être plus gênante que l’érosion progressive des prix.",
+      incorrect:
+        "Cette somme a une date proche. Chercher davantage de rendement peut introduire un risque de baisse ou d’indisponibilité au mauvais moment.",
+      action: "Changer l’horizon",
+    },
+    longTerm: {
+      eyebrow: "La durée change le compromis",
+      title: "Qu’est-ce qui change maintenant ?",
+      intro:
+        "L’érosion du pouvoir d’achat compte davantage sur une longue durée, mais investir ajoute un risque de fluctuation et de perte.",
+      cardLabel: "Nouvelle information",
+      cardText: "Somme inutilisée pendant au moins {longYears} ans",
+      prompt: "Choisis la réponse qui reconnaît plusieurs risques.",
+      options: [
+        "Alex doit obligatoirement tout investir",
+        "Alex doit obligatoirement tout conserver en liquidités",
+        "Il peut comparer disponibilité, stabilité, inflation et risque de baisse",
+      ],
+      correct:
+        "Un horizon long rend l’inflation plus importante dans la comparaison sans supprimer les autres risques. La prochaine leçon comparera ces compromis.",
+      incorrect:
+        "Aucun horizon ne crée une règle automatique. Le rôle de la somme et la capacité à accepter une baisse restent essentiels.",
+      action: "Construire la checklist",
+    },
+    checklist: {
+      eyebrow: "Avant de décider",
+      title: "Alex peut commencer par le rôle et la date.",
+      intro:
+        "Cette checklist évite de traiter l’inflation comme un ordre d’investir ou la stabilité comme une absence totale de risque.",
+      points: [
+        "Quand cette somme sera-t-elle utilisée ?",
+        "La date est-elle fixe ou flexible ?",
+        "Le montant doit-il rester stable ?",
+        "L’argent doit-il être disponible immédiatement ?",
+        "La somme produit-elle des intérêts ?",
+        "Alex peut-il accepter une baisse temporaire ?",
+      ],
+      takeaway: "L’inflation est un risque à comprendre, pas un ordre d’investir.",
+      action: "Terminer la leçon",
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu as distingué euros affichés et pouvoir d’achat.",
+      points: [
+        "L’inflation mesure une évolution moyenne des prix.",
+        "Un solde peut augmenter tout en achetant moins qu’avant.",
+        "Les liquidités protègent l’accès et la stabilité, pas toujours le pouvoir d’achat.",
+        "Le rôle de l’argent et sa date d’utilisation guident la comparaison.",
+      ],
+      takeaway:
+        "Qu’est-ce que cette somme doit protéger : une dépense proche, un montant stable ou un objectif lointain ?",
+      note: "Simulation éducative avec de l’argent virtuel. Ceci n’est pas un conseil financier. Les taux sont fictifs et les calculs volontairement simplifiés.",
+      replay: "Rejouer la leçon",
+      saving: "Enregistrement…",
+      retry: "Réessayer d’enregistrer",
+      next: "Continuer vers la leçon 8",
+      back: "Retour au Monde 1",
+    },
+  },
+  lesson8: {
+    metaTitle: "Épargner ou investir ?",
+    feedback: {
+      correct: "Ce raisonnement convient",
+      rethink: "Regarde le compromis",
+      reflect: "Une question utile pour la suite",
+      answer: "Le raisonnement à retenir",
+      check: "Vérifier ma réponse",
+    },
+    welcome: {
+      eyebrow: "Monde 1 · Leçon 8",
+      title: "Épargner ou investir : quel rôle pour cet argent ?",
+      intro:
+        "Alex a de l’argent pour différents objectifs. Aide-le à voir ce que chaque somme doit protéger avant de chercher ce qu’elle pourrait rapporter.",
+      action: "Commencer la leçon",
+      note: "Exemples fictifs avec de l’argent virtuel. Ceci est une leçon, pas un conseil financier.",
+    },
+    difference: {
+      eyebrow: "Deux façons de mettre de côté",
+      title: "La différence commence par ce que tu attends de la somme.",
+      intro:
+        "Dans cette leçon, épargner signifie garder une somme accessible avec un solde nominal stable. Investir signifie accepter que sa valeur varie, avec une perte possible, pour un potentiel de croissance à long terme.",
+      savingTitle: "Épargner",
+      savingText:
+        "Privilégier la disponibilité et un montant stable en euros. La hausse des prix peut quand même réduire ce qu’il permet d’acheter.",
+      investingTitle: "Investir",
+      investingText:
+        "Accepter des hausses, des baisses et une perte possible pour un potentiel de croissance. Cette croissance n’est jamais garantie.",
+      nuance:
+        "Investir est aussi une façon de mettre de l’argent de côté. Ici, nous comparons deux usages différents.",
+      action: "Essayer un exemple",
+    },
+    sameAmount: {
+      eyebrow: "Mêmes euros, objectifs différents",
+      title: "Qu’est-ce qui change quand la date change ?",
+      intro:
+        "Ces {amount} sont fictifs. Imagine en avoir besoin dans deux mois, puis imagine ne pas en avoir besoin avant dix ans.",
+      soon: "Nécessaires dans deux mois",
+      later: "Pour un objectif dans dix ans",
+      prompt: "Quel élément compte le plus pour comparer épargne et investissement ?",
+      options: [
+        "Le montant est le même, donc le choix doit être le même.",
+        "La date, le besoin de disponibilité et la possibilité d’attendre après une baisse.",
+        "Investir est toujours préférable quand l’objectif est lointain.",
+      ],
+      feedback: [
+        "Une même somme peut avoir plusieurs rôles. Une baisse juste avant une dépense nécessaire a plus de conséquences que pour un objectif lointain et flexible.",
+        "Exactement. Le montant seul ne décide pas : la date et les conséquences d’une baisse changent le compromis.",
+        "Un horizon lointain peut rendre l’investissement envisageable, mais il ne garantit pas un gain et ne supprime pas le risque de perte.",
+      ],
+      action: "Découvrir les objectifs d’Alex",
+    },
+    alex: {
+      eyebrow: "Alex a plusieurs objectifs",
+      title: "Tout son argent n’a pas le même rôle.",
+      intro:
+        "Alex est un jeune actif. Ses dépenses courantes sont couvertes, mais il a plusieurs raisons de mettre de l’argent de côté.",
+      cards: [
+        {
+          title: "Filet de sécurité",
+          body: "Une somme dont il pourrait avoir besoin sans prévenir.",
+        },
+        { title: "Déménagement dans six mois", body: "Une dépense prévue à une date proche." },
+        {
+          title: "Objectif lointain",
+          body: "Une somme distincte dont il ne prévoit pas d’avoir besoin avant dix ans.",
+        },
+      ],
+      note: "Son cas est un exemple, pas une règle pour toutes les personnes au même âge.",
+      action: "Décider pour le déménagement",
+    },
+    nearTerm: {
+      eyebrow: "Une date proche",
+      title: "Que doit privilégier Alex pour son déménagement dans six mois ?",
+      prompt: "Choisis ce qui protège le rôle de cette somme.",
+      options: [
+        "Garder cette somme stable et disponible pour le déménagement.",
+        "L’investir pour espérer un meilleur rendement d’ici le déménagement.",
+        "Utiliser plutôt le filet de sécurité, puisque les deux sommes sont disponibles.",
+      ],
+      feedback: [
+        "Oui. Une baisse au mauvais moment pourrait l’empêcher de payer une dépense prévue. La stabilité du solde ne garantit toutefois pas le pouvoir d’achat.",
+        "Un gain possible n’est pas assuré en six mois. Si la valeur baisse près de la date prévue, Alex peut manquer de la somme nécessaire.",
+        "Le filet sert aux imprévus ; le déménagement est déjà planifié. Deux sommes disponibles peuvent avoir des rôles différents.",
+      ],
+      action: "Examiner l’objectif lointain",
+    },
+    longTerm: {
+      eyebrow: "Un objectif lointain",
+      title:
+        "Que peut envisager Alex pour une somme distincte dont il n’aura pas besoin avant dix ans ?",
+      prompt: "Choisis un raisonnement qui tient compte du potentiel de croissance et de perte.",
+      options: [
+        "Comparer épargne et investissement, notamment sa capacité à accepter une perte.",
+        "Investir automatiquement : dix ans garantissent une hausse.",
+        "Tout garder en épargne : un solde stable signifie qu’il n’y a aucun risque.",
+      ],
+      feedback: [
+        "Oui. Le temps peut rendre l’investissement envisageable, pas obligatoire. Alex doit aussi considérer les pertes possibles, ses besoins et le coût connu de ses dettes éventuelles.",
+        "Dix ans ne promettent aucun gain. Un investissement peut encore valoir moins lorsque Alex en aura besoin.",
+        "Un solde stable en euros peut être utile, mais l’inflation peut réduire ce qu’il permet d’acheter au fil du temps.",
+      ],
+      action: "Faire le lien avec ta situation",
+    },
+    reflection: {
+      eyebrow: "Et toi ?",
+      title:
+        "Aujourd’hui ou dans un futur proche, pourrais-tu mettre de côté même une petite somme chaque mois ?",
+      context:
+        "Si tu es étudiant·e, pense aussi à ce qui pourrait être possible après tes études, avec tes premiers revenus.",
+      prompt: "Choisis la réponse qui te correspond. Il n’y a pas de mauvaise réponse.",
+      check: "Voir ce que cela implique",
+      hint: "Choisis une réponse pour continuer.",
+      options: ["Oui", "Non"],
+      feedback: [
+        "C’est un premier repère. Avant d’envisager d’investir, demande-toi quand tu pourrais avoir besoin de cette somme, ce qui doit rester disponible et si tu accepterais une perte.",
+        "Tu peux quand même apprendre dès maintenant. Si ta situation change, par exemple après tes études, tu pourras revenir à cette question et réfléchir à l’usage de chaque somme selon tes besoins.",
+      ],
+      action: "Terminer le Monde 1",
+    },
+    complete: {
+      eyebrow: "Monde 1 · Bêta terminée",
+      pendingTitle: "Ta dernière leçon est prête à être enregistrée.",
+      title: "Tu as terminé le Monde 1 !",
+      count: "8 leçons sur 8 terminées",
+      thanks:
+        "Merci d’avoir découvert cette première version. Tu sais maintenant relier chaque somme à son objectif, sa date et ses risques.",
+      saved: "Ta progression est enregistrée.",
+      saving: "Enregistrement de ta progression…",
+      error: "Nous n’avons pas pu confirmer ta progression. Réessaie de l’enregistrer.",
+      retry: "Réessayer d’enregistrer",
+      teaserTitle: "Et après ?",
+      teaser:
+        "Nous préparons de nouveaux mondes et explorons des portefeuilles virtuels utilisant des données de marché réelles. L’entraînement resterait en argent virtuel ; ces fonctions ne sont pas encore disponibles.",
+      feedbackIntro:
+        "Tes retours nous aideront à choisir ce que nous construirons ensuite. Qu’est-ce qui t’a aidé, qu’est-ce qui n’était pas clair, et qu’aimerais-tu essayer ?",
+      feedbackPrompt:
+        "Qu’est-ce qui t’a aidé à apprendre, qu’est-ce qui n’était pas clair, et qu’aimerais-tu essayer ensuite ?",
+      feedbackButton: "Donner mon avis",
+      dashboard: "Retour au tableau de bord",
+      replay: "Rejouer la leçon",
+      note: "Exercice éducatif avec des sommes fictives. Ceci n’est pas un conseil financier.",
     },
   },
   dashboard: {
-    home: "tableau de bord",
+    home: "Apprendre",
     tabsLabel: "Tableau de bord",
-    tabs: { courses: "Cours", portfolio: "Portefeuille", account: "Compte" },
+    tabs: { home: "Apprendre", courses: "Cours", portfolio: "Portefeuille", account: "Profil" },
+    preview: {
+      title: "Aperçu local de l’accueil",
+      label: "Aperçu local · données fictives",
+      description:
+        "La progression fictive sert à tester l’interface. Les autres pages du tableau de bord demandent une connexion.",
+    },
+    homeScreen: {
+      learnTitle: "Apprendre",
+      worldIdentifier: "Monde 1",
+      eyebrow: "Ta prochaine étape",
+      startHeading: "Ton parcours commence ici.",
+      continueHeading: "Reprends là où tu en es.",
+      currentLesson: "En cours",
+      availableLesson: "Disponible",
+      startLearning: "Commencer à apprendre",
+      alreadyKnowBasics: "Je connais déjà les bases",
+      discoveryTitle: "Construis tes bases financières",
+      discoveryDescription:
+        "Découvre huit leçons interactives pour comprendre les bases financières et avancer à ton rythme.",
+      discoveryAction: "Explorer le Monde 1",
+      discoveryClose: "Fermer",
+      preferenceFallback: "Ce choix sera mémorisé sur cet appareil.",
+      preferenceSaveError: "Impossible de mémoriser ce choix. Réessaie.",
+      pathProgressLabel: (completed, total) =>
+        `${completed} étape${completed > 1 ? "s" : ""} sur ${total} terminée${completed > 1 ? "s" : ""}`,
+      upcomingWorldsTitle: "À venir",
+      comingSoon: "Bientôt disponible",
+      moreWorlds: "Les prochains mondes",
+      moreWorldsCount: (count: number) => `${count} mondes à venir`,
+      worldLabel: (number: number) => `Monde ${number}`,
+      upcomingWorlds: [
+        "Découvre le monde de l’investissement",
+        "Risque, diversification et psychologie",
+        "Comprends les ETF",
+        "Construis ton premier portefeuille",
+        "Investir aux États-Unis",
+        "Comment fonctionne vraiment un achat",
+        "Ton premier investissement réel",
+      ],
+      resumeLesson: (number) => `Reprendre à la leçon ${number}`,
+      completeHeading: "Voici ton parcours accompli.",
+      review: "Revoir ton parcours",
+      worldComplete: "Monde 1 terminé",
+      explore: "Explorer tous les cours",
+    },
     logOut: "Se déconnecter",
     logOutPending: "Déconnexion…",
     usComingSoon: "D’autres leçons pour les États-Unis arrivent bientôt.",
     portfolio: {
       title: "Portefeuille",
-      intro: "Uniquement de l’argent virtuel. Rien n’est réel ici.",
-      emptyTitle: "Ton portefeuille virtuel arrive bientôt",
-      emptyText:
-        "Les décisions que tu t’entraînes à prendre formeront un portefeuille en euros virtuels, pour voir comment tes choix évoluent dans le temps. C’est une simulation pour apprendre, pas un conseil financier.",
-      cta: "S’entraîner sur une décision",
+      inDevelopment: "En développement",
     },
     account: {
       title: "Compte",

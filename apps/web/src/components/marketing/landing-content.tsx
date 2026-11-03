@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ShieldCheck, Scale, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +23,7 @@ import { Section } from "@/components/marketing/section";
 import { LandingLessonPreview } from "@/components/marketing/landing-lesson-preview";
 import "./landing-refinement.css";
 import { landingCopy } from "@/lib/dictionaries/landing";
+import { useHasSession } from "@/hooks/use-has-session";
 import type { Dictionary } from "@/lib/dictionaries";
 
 function Companion({
@@ -52,6 +54,7 @@ export function LandingContent({
 }) {
   const t = landingCopy[track];
   const [open, setOpen] = useState(false);
+  const signedIn = useHasSession();
 
   return (
     <div className="landing-refined">
@@ -65,22 +68,29 @@ export function LandingContent({
               {t.hero[3]}
             </p>
             <div id="early-access" className="mt-8 scroll-mt-28">
-              <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                  <Button size="lg">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button asChild size="lg">
+                  <Link href={signedIn ? "/dashboard" : "/signup"}>
                     {t.cta}
                     <ArrowRight aria-hidden />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="waitlist-dialog max-h-[90dvh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl">
-                  <Companion pose="welcome" className="mx-auto h-auto w-24" />
-                  <DialogTitle className="pr-6 font-display text-2xl font-extrabold">
-                    {earlyAccess.title}
-                  </DialogTitle>
-                  <DialogDescription>{earlyAccess.text}</DialogDescription>
-                  <EarlyAccessForm t={earlyAccess} />
-                </DialogContent>
-              </Dialog>
+                  </Link>
+                </Button>
+                <Dialog open={open} onOpenChange={setOpen}>
+                  <DialogTrigger asChild>
+                    <Button size="lg" variant="outline">
+                      {t.waitlistCta}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="waitlist-dialog max-h-[90dvh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl">
+                    <Companion pose="welcome" className="mx-auto h-auto w-24" />
+                    <DialogTitle className="pr-6 font-display text-2xl font-extrabold">
+                      {earlyAccess.title}
+                    </DialogTitle>
+                    <DialogDescription>{earlyAccess.text}</DialogDescription>
+                    <EarlyAccessForm t={earlyAccess} />
+                  </DialogContent>
+                </Dialog>
+              </div>
               <p className="mt-3 text-sm text-muted-foreground">{t.note}</p>
             </div>
           </div>

@@ -77,7 +77,7 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
               className="group h-10 rounded-xl font-bold transition-all hover:-translate-y-px"
             >
               <Link href={signedIn ? "/dashboard" : "/signup"}>
-                {signedIn ? `${t.open} ${BRAND}` : t.signUp}{" "}
+                {t.signUp}{" "}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -159,7 +159,7 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
             )}
             <Button asChild size="lg" variant="default" className="mt-2">
               <Link href={signedIn ? "/dashboard" : "/signup"} onClick={() => setOpen(false)}>
-                {signedIn ? `${t.open} ${BRAND}` : t.signUp} <ArrowRight />
+                {t.signUp} <ArrowRight />
               </Link>
             </Button>
           </div>

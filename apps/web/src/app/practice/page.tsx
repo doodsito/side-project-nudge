@@ -20,6 +20,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function PracticePage() {
-  return <PracticeFlow />;
+export default async function PracticePage() {
+  return <PracticeFlow initialTrack={await getVisitorTrack()} />;
 }

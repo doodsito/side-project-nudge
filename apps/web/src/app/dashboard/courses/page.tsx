@@ -21,7 +21,11 @@ export default async function CoursesPage() {
           <AlertDescription>{getDictionary("us").dashboard.usComingSoon}</AlertDescription>
         </Alert>
       )}
-      <CourseWorlds progress={member.courseProgress} copy={dictionary.learning.courses} />
+      <CourseWorlds
+        progress={member.courseProgress}
+        copy={dictionary.learning.courses}
+        track={member.track}
+      />
     </>
   );
 }

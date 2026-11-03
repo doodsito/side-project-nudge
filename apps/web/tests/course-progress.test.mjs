@@ -16,7 +16,9 @@ const {
   completeLesson,
   completedLessonCount,
   hasCompletedLesson,
+  markWorldOneDiscoverySeen,
   readCourseProgress,
+  skipWorldZero,
 } = compiledModule.exports;
 
 test("invalid account metadata starts with empty course progress", () => {
@@ -33,6 +35,21 @@ test("stored progress keeps only unique positive lesson numbers", () => {
   });
 
   assert.deepEqual(Array.from(progress.completedLessons[FOUNDATION_WORLD]), [1, 3]);
+});
+
+test("World 0 skip and World 1 discovery preferences stay separate from completion", () => {
+  const initial = readCourseProgress({ completedLessons: {} });
+  const skipped = skipWorldZero(initial);
+  const discovered = markWorldOneDiscoverySeen(skipped);
+  const withWorldOneProgress = completeLesson(discovered, FOUNDATION_WORLD, 1);
+
+  assert.equal(skipped.worldZeroSkipped, true);
+  assert.equal(skipped.worldOneDiscoverySeen, false);
+  assert.equal(skipped.completedLessons["why-invest"], undefined);
+  assert.equal(discovered.worldOneDiscoverySeen, true);
+  assert.equal(withWorldOneProgress.worldZeroSkipped, true);
+  assert.equal(withWorldOneProgress.worldOneDiscoverySeen, true);
+  assert.equal(hasCompletedLesson(withWorldOneProgress, "why-invest", 1), false);
 });
 
 test("completing lesson one is persistent, ordered and idempotent", () => {
@@ -95,4 +112,45 @@ test("lesson five saves 5/8 progress and unlocks lesson six", () => {
   assert.equal(hasCompletedLesson(afterFive, FOUNDATION_WORLD, 5), true);
   assert.equal(hasCompletedLesson(afterFive, FOUNDATION_WORLD, 6), false);
   assert.deepEqual(Array.from(afterFive.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4, 5]);
+});
+
+test("lesson six saves 6/8 progress and unlocks lesson seven", () => {
+  const afterOne = completeLesson(readCourseProgress(null), FOUNDATION_WORLD, 1);
+  const afterTwo = completeLesson(afterOne, FOUNDATION_WORLD, 2);
+  const afterThree = completeLesson(afterTwo, FOUNDATION_WORLD, 3);
+  const afterFour = completeLesson(afterThree, FOUNDATION_WORLD, 4);
+  const afterFive = completeLesson(afterFour, FOUNDATION_WORLD, 5);
+  const afterSix = completeLesson(afterFive, FOUNDATION_WORLD, 6);
+
+  assert.equal(completedLessonCount(afterSix, FOUNDATION_WORLD), 6);
+  assert.equal(hasCompletedLesson(afterSix, FOUNDATION_WORLD, 6), true);
+  assert.equal(hasCompletedLesson(afterSix, FOUNDATION_WORLD, 7), false);
+  assert.deepEqual(Array.from(afterSix.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4, 5, 6]);
+});
+
+test("lesson seven saves 7/8 progress and unlocks lesson eight", () => {
+  let progress = readCourseProgress(null);
+  for (let lesson = 1; lesson <= 7; lesson += 1) {
+    progress = completeLesson(progress, FOUNDATION_WORLD, lesson);
+  }
+
+  assert.equal(completedLessonCount(progress, FOUNDATION_WORLD), 7);
+  assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 7), true);
+  assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 8), false);
+  assert.deepEqual(Array.from(progress.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4, 5, 6, 7]);
+});
+
+test("lesson eight saves 8/8 progress and is idempotent", () => {
+  let progress = readCourseProgress(null);
+  for (let lesson = 1; lesson <= 8; lesson += 1) {
+    progress = completeLesson(progress, FOUNDATION_WORLD, lesson);
+  }
+
+  assert.equal(completedLessonCount(progress, FOUNDATION_WORLD), 8);
+  assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 8), true);
+  assert.equal(completeLesson(progress, FOUNDATION_WORLD, 8), progress);
+  assert.deepEqual(
+    Array.from(progress.completedLessons[FOUNDATION_WORLD]),
+    [1, 2, 3, 4, 5, 6, 7, 8],
+  );
 });

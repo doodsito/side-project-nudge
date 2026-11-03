@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Wallet } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionaries";
 
@@ -16,23 +13,8 @@ export default async function PortfolioPage() {
   return (
     <>
       <h1 className="font-display text-3xl font-extrabold text-balance">{t.title}</h1>
-      <p className="mt-2 text-muted-foreground">{t.intro}</p>
-      <section
-        aria-labelledby="portfolio-empty"
-        className="mt-8 flex flex-col items-start rounded-3xl border border-dashed border-border-strong p-8"
-      >
-        <span className="grid size-12 place-items-center rounded-2xl bg-muted">
-          <Wallet className="size-6 text-primary" aria-hidden />
-        </span>
-        <h2 id="portfolio-empty" className="mt-4 font-display text-xl font-extrabold">
-          {t.emptyTitle}
-        </h2>
-        <p className="mt-2 max-w-prose text-sm leading-relaxed text-muted-foreground">
-          {t.emptyText}
-        </p>
-        <Button asChild variant="outline" size="lg" className="mt-6">
-          <Link href="/dashboard/courses">{t.cta}</Link>
-        </Button>
+      <section className="mt-8 rounded-3xl border border-border bg-surface p-6 sm:p-8">
+        <p className="font-display text-xl font-extrabold text-primary">{t.inDevelopment}</p>
       </section>
     </>
   );

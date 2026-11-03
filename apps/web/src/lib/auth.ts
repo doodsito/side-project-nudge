@@ -41,7 +41,7 @@ export async function saveAccountTrack(supabase: SupabaseServerClient, track: Tr
   return true;
 }
 
-async function setTrackCookie(track: Track) {
+export async function setTrackCookie(track: Track) {
   (await cookies()).set(TRACK_COOKIE, track, {
     path: "/",
     maxAge: TRACK_COOKIE_MAX_AGE,

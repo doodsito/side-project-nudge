@@ -4,11 +4,12 @@ import { ConsentDialogLink } from "@c15t/nextjs/components/consent-dialog-link";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
+import { chooseTrack } from "@/app/track-actions";
 import { TrackFlag } from "@/components/shared/track-option";
-import { saveTrack, useTrackCookie } from "@/hooks/use-track-cookie";
+import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
-import { trackFromPath, TRACKS } from "@/lib/tracks";
+import { DEFAULT_TRACK, trackFromPath, TRACKS, type Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
 const linkClass = "text-muted-foreground hover:text-foreground";
@@ -18,11 +19,11 @@ const linkClass = "text-muted-foreground hover:text-foreground";
  * settings and the choice of version are always one click away. In the
  * language of the page's track, or of the visitor's choice elsewhere.
  */
-export function Footer() {
+export function Footer({ initialTrack }: { initialTrack: Track | null }) {
   const pageTrack = trackFromPath(usePathname());
   const savedTrack = useTrackCookie();
-  const current = pageTrack ?? savedTrack ?? null;
-  const dictionary = getDictionary(current ?? "us");
+  const current = pageTrack ?? savedTrack ?? initialTrack ?? DEFAULT_TRACK;
+  const dictionary = getDictionary(current);
   const t = dictionary.footer;
   return (
     <footer className="site-footer border-t border-border bg-background px-5 py-12 sm:px-8">
@@ -58,21 +59,22 @@ export function Footer() {
           </nav>
           <nav className="flex flex-wrap items-center gap-2 text-sm" aria-label={t.version}>
             {TRACKS.map((track) => (
-              <Link
-                key={track}
-                href={`/${track}`}
-                onClick={() => saveTrack(track)}
-                aria-current={track === current ? "true" : undefined}
-                className={cn(
-                  "inline-flex min-h-9 items-center gap-2 rounded-full border px-3 font-semibold transition-colors",
-                  track === current
-                    ? "border-primary bg-primary-soft text-foreground"
-                    : "border-border text-muted-foreground hover:text-foreground",
-                )}
-              >
-                <TrackFlag track={track} small />
-                {dictionary.tracks.options[track].country}
-              </Link>
+              <form key={track} action={chooseTrack}>
+                <input type="hidden" name="track" value={track} />
+                <button
+                  type="submit"
+                  aria-current={track === current ? "true" : undefined}
+                  className={cn(
+                    "inline-flex min-h-9 items-center gap-2 rounded-full border px-3 font-semibold transition-colors",
+                    track === current
+                      ? "border-primary bg-primary-soft text-foreground"
+                      : "border-border text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  <TrackFlag track={track} small />
+                  {dictionary.tracks.options[track].country}
+                </button>
+              </form>
             ))}
           </nav>
         </div>

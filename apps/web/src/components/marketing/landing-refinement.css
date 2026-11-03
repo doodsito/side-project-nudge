@@ -224,16 +224,19 @@ body:has(.waitlist-dialog) [data-state].fixed.inset-0 {
 .landing-refined #top .landing-intro-line {
   color: var(--primary-foreground);
 }
-.landing-refined #top #early-access > button {
+.landing-refined #top #early-access > div > a {
   background: var(--secondary);
   color: var(--foreground);
 }
-.landing-refined #top #early-access > button:hover {
+.landing-refined #top #early-access > div > a:hover {
   background: var(--background);
 }
-.landing-refined #top #early-access > button:focus-visible {
+.landing-refined #top #early-access > div > a:focus-visible {
   outline: 3px solid var(--secondary);
   outline-offset: 4px;
+}
+.landing-refined #top #early-access > div > button {
+  color: var(--foreground);
 }
 .landing-refined #top .landing-reperes {
   padding: 0 0 2rem;
@@ -1457,14 +1460,14 @@ body:has(.landing-refined) header a[href="/login"]:hover {
 }
 
 /* Local landing illustration: one staged timeline, no member-page overrides. */
-.landing-refined #early-access > button {
+.landing-refined #early-access > div > a {
   border-radius: 999px;
   padding-inline: 1.75rem;
   border: 0;
   box-shadow: none;
 }
-.landing-refined #early-access > button:hover,
-.landing-refined #early-access > button:active {
+.landing-refined #early-access > div > a:hover,
+.landing-refined #early-access > div > a:active {
   transform: none;
   box-shadow: none;
 }
@@ -1666,7 +1669,7 @@ body:has(.landing-refined) header a[href="/login"]:hover {
 }
 @media (prefers-reduced-motion: reduce) {
   .solution-story *,
-  .landing-refined #early-access > button {
+  .landing-refined #early-access > div > a {
     animation: none !important;
     transition: none !important;
   }

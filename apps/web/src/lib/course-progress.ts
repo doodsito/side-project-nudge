@@ -1,9 +1,12 @@
+export const INTRO_WORLD = "why-invest";
 export const FOUNDATION_WORLD = "financial-foundation";
 export const FOUNDATION_LESSON_COUNT = 8;
 
 export type CourseProgress = {
   version: 1;
   completedLessons: Record<string, number[]>;
+  worldZeroSkipped?: boolean;
+  worldOneDiscoverySeen?: boolean;
 };
 
 export type ProgressStatus = "idle" | "saving" | "saved" | "error";
@@ -11,6 +14,8 @@ export type ProgressStatus = "idle" | "saving" | "saved" | "error";
 export const EMPTY_COURSE_PROGRESS: CourseProgress = {
   version: 1,
   completedLessons: {},
+  worldZeroSkipped: false,
+  worldOneDiscoverySeen: false,
 };
 
 export function readCourseProgress(value: unknown): CourseProgress {
@@ -36,7 +41,12 @@ export function readCourseProgress(value: unknown): CourseProgress {
     );
   }
 
-  return { version: 1, completedLessons: result };
+  return {
+    version: 1,
+    completedLessons: result,
+    worldZeroSkipped: Reflect.get(value, "worldZeroSkipped") === true,
+    worldOneDiscoverySeen: Reflect.get(value, "worldOneDiscoverySeen") === true,
+  };
 }
 
 export function completeLesson(
@@ -47,12 +57,20 @@ export function completeLesson(
   const completed = progress.completedLessons[world] ?? [];
   if (completed.includes(lessonNumber)) return progress;
   return {
-    version: 1,
+    ...progress,
     completedLessons: {
       ...progress.completedLessons,
       [world]: [...completed, lessonNumber].sort((a, b) => a - b),
     },
   };
+}
+
+export function skipWorldZero(progress: CourseProgress): CourseProgress {
+  return { ...progress, worldZeroSkipped: true };
+}
+
+export function markWorldOneDiscoverySeen(progress: CourseProgress): CourseProgress {
+  return { ...progress, worldOneDiscoverySeen: true };
 }
 
 export function hasCompletedLesson(progress: CourseProgress, world: string, lessonNumber: number) {

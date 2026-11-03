@@ -41,8 +41,17 @@ const lessonSixSource = readFileSync(
   ),
   "utf8",
 );
-const foundationSource = readFileSync(
-  new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
+const foundationSource =
+  readFileSync(
+    new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
+    "utf8",
+  ) +
+  readFileSync(
+    new URL("../src/components/dashboard/foundation-world-client.tsx", import.meta.url),
+    "utf8",
+  );
+const courseWorldsSource = readFileSync(
+  new URL("../src/lib/course-worlds.ts", import.meta.url),
   "utf8",
 );
 const frSource = readFileSync(new URL("../src/lib/dictionaries/fr.ts", import.meta.url), "utf8");
@@ -123,29 +132,28 @@ test("lesson five moves focus between screens and supports replay and save retry
 
 test("the World 1 entry redirects to lesson five and unlocks lesson six", () => {
   assert.match(entrySource, /redirect\("\/lessons\/money-youll-need-soon"\)/);
-  assert.match(foundationSource, /financial-foundation\/money-youll-need-soon/);
-  assert.match(foundationSource, /financial-foundation\/debt-vs-investing/);
+  assert.match(foundationSource, /foundationLessonHref/);
+  assert.match(courseWorldsSource, /financial-foundation\/money-youll-need-soon/);
+  assert.match(courseWorldsSource, /financial-foundation\/debt-vs-investing/);
   assert.match(
     lessonSixSource,
     /hasCompletedLesson\(member\.courseProgress, FOUNDATION_WORLD, 5\)/,
   );
 });
 
-test("lesson five and the lesson-six introduction are localized without mixed currencies", () => {
+test("lesson five is localized without mixed currencies", () => {
   const frStart = frSource.indexOf("  lesson5:");
   const usStart = usSource.indexOf("  lesson5:");
-  const frLessonFive = frSource.slice(frStart, frSource.indexOf("  dashboard:", frStart));
-  const usLessonFive = usSource.slice(usStart, usSource.indexOf("  dashboard:", usStart));
+  const frLessonFive = frSource.slice(frStart, frSource.indexOf("  lesson6:", frStart));
+  const usLessonFive = usSource.slice(usStart, usSource.indexOf("  lesson6:", usStart));
 
   assert.match(frLessonFive, /prévoit de déménager/);
-  assert.match(frLessonFive, /Rembourser une dette ou investir/);
   assert.doesNotMatch(frLessonFive, /\$/);
   assert.doesNotMatch(
     frLessonFive,
     /A date changes the job|Planned expense|Moving costs|Debt vs investing|Lesson complete/,
   );
   assert.match(usLessonFive, /plans to move/);
-  assert.match(usLessonFive, /Debt vs investing/);
   assert.doesNotMatch(usLessonFive, /€/);
   assert.doesNotMatch(
     usLessonFive,
