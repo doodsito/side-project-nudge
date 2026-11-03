@@ -198,10 +198,11 @@ export default async function PrivacyPolicyPage() {
           <Link href="/cookies">cookie policy</Link>.
         </li>
         <li>
-          <strong>Your feedback.</strong> When you send feedback from the dashboard, we keep your
-          written message or voice recording, its category, your account and the date. We use them
-          only to improve {BRAND}. The microphone turns on only with your permission, when you start
-          a recording. Legal basis: your consent, given by sending the feedback.
+          <strong>Your feedback.</strong> When you send feedback from the dashboard or answer the
+          end-of-beta survey, we keep your answers, written message or voice recording, any
+          category, your account and the date. We use them only to improve {BRAND}. The microphone
+          turns on only with your permission, when you start a recording. Legal basis: your consent,
+          given by sending the feedback.
         </li>
         <li>
           <strong>Your cookie choice.</strong> We keep it in a cookie and in your browser’s local

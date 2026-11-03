@@ -77,6 +77,10 @@ export function hasCompletedLesson(progress: CourseProgress, world: string, less
   return progress.completedLessons[world]?.includes(lessonNumber) ?? false;
 }
 
+export function hasCompletedFoundationWorld(progress: CourseProgress) {
+  return completedLessonCount(progress, FOUNDATION_WORLD) >= FOUNDATION_LESSON_COUNT;
+}
+
 export function completedLessonCount(progress: CourseProgress, world: string) {
   return progress.completedLessons[world]?.length ?? 0;
 }

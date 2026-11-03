@@ -1,3 +1,4 @@
+import { BetaSurveyCta } from "@/components/dashboard/beta-survey-cta";
 import { ComingNextSection } from "@/components/dashboard/coming-next-section";
 import { LearnStartActions } from "@/components/dashboard/learn-start-actions";
 import { WorldOnePath } from "@/components/dashboard/world-one-path";
@@ -21,6 +22,7 @@ export function DashboardHome({
   userId,
   skipWorldZeroAction,
   markDiscoverySeenAction,
+  betaSurveyCopy,
 }: {
   progress: CourseProgress;
   track: Track;
@@ -30,6 +32,8 @@ export function DashboardHome({
   userId?: string;
   skipWorldZeroAction?: () => Promise<{ status: "saved" | "error" }>;
   markDiscoverySeenAction?: () => Promise<{ status: "saved" | "error" }>;
+  /** Only passed once the member finished World 1 and has not answered the survey yet. */
+  betaSurveyCopy?: Dictionary["betaSurvey"]["cta"];
 }) {
   const lessonCount = FOUNDATION_LESSONS.length;
   const completed = Math.min(completedLessonCount(progress, FOUNDATION_WORLD), lessonCount);
@@ -165,6 +169,8 @@ export function DashboardHome({
           />
         </div>
       </header>
+
+      {betaSurveyCopy && <BetaSurveyCta t={betaSurveyCopy} />}
 
       <section aria-labelledby="learn-path-heading">
         <h2 id="learn-path-heading" className="sr-only">
