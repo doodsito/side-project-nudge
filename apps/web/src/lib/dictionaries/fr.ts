@@ -811,9 +811,9 @@ export const fr: Dictionary = {
       decisionBody:
         "Alex a payé ses dépenses essentielles du mois. Il reste {amount} et aucune décision n’a encore été prise.",
       decisionChoices: [
-        "Le garder sur un compte d’épargne",
-        "En investir une partie",
-        "Partager entre les deux",
+        "Garder les {amount} sur un compte d’épargne",
+        "Investir les {amount}",
+        "Répartir les {amount} entre épargne et investissement",
       ],
       decisionHint: "Il n’y a pas une seule bonne réponse.",
       decisionSpeech: "À toi de choisir !",
@@ -838,11 +838,10 @@ export const fr: Dictionary = {
       riskAction: "Terminer le Monde 0",
       selected: "Ton choix",
       assumption: "Rendement annuel hypothétique",
-      simulatedValue: "Valeur simulée",
       sliderLabel: "Avancer dans le temps",
       year: "an",
       years: "ans",
-      chartLabel: "Illustration d’une croissance composée hypothétique au fil du temps",
+      chartLabel: "Comparaison entre des gains réinvestis et des gains mis de côté au fil du temps",
       completionAlt: "Nudge célèbre",
       decisionAlt: "Nudge est curieux",
       guideAlt: "Nudge t’accompagne",
@@ -868,18 +867,21 @@ export const fr: Dictionary = {
     },
     compound: {
       eyebrow: "À toi d’essayer",
-      title: "Et si les gains produisaient eux aussi des gains ?",
+      title: "Regarde l’effet boule de neige",
       intro:
-        "Imagine 1 000 € qui gagnent 5 % chaque année pendant 20 ans, en laissant tous les gains placés.",
+        "Tu verses {amount} chaque mois pendant 25 ans. Compare ce qui se passe quand les gains restent investis ou sont mis de côté.",
       start: "Départ",
-      first: "Après 10 ans",
-      second: "Après 20 ans",
-      explanation:
-        "Au début, 5 % de 1 000 € rapportent 50 €. Ensuite, les gains laissés placés produisent eux aussi des gains : c’est l’effet des intérêts composés.",
-      comparison:
-        "Sans réinvestir les gains, le total serait de 2 000 € après 20 ans. Ici, les gains réinvestis ajoutent 653 € de plus.",
+      contributions: "Tes versements",
+      withReinvestment: "Avec les gains réinvestis",
+      withoutReinvestment: "Sans réinvestir les gains",
+      difference: "En plus grâce au réinvestissement",
+      snowballTitle: "L’effet boule de neige",
+      snowball:
+        "Chaque versement ajoute de la neige. Quand les gains restent investis, ils grossissent aussi la boule et peuvent produire de nouveaux gains. S’ils sont mis de côté, ils sont bien comptés, mais ne font plus grossir la boule.",
+      comparisonNote:
+        "Les gains mis de côté sont inclus dans le total, mais ils ne produisent pas de nouveaux gains.",
       caveat:
-        "Dans la réalité, le rendement varie d’une année à l’autre. Les frais et les impôts ne sont pas inclus dans ce calcul.",
+        "Cette courbe régulière sert seulement à comprendre le mécanisme. Dans la réalité, le rendement varie, peut être négatif, et les frais et impôts réduisent le résultat.",
       action: "Et quand la valeur baisse ?",
     },
     risk: {

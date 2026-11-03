@@ -44,10 +44,19 @@ test("World 0 presents five interactive onboarding stages using the existing exa
     /prefers-reduced-motion: reduce/,
   );
   assert.match(flow, /formatMoney\(amount, track\)/);
-  assert.equal(
-    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 20),
-    lesson.COMPOUND_EXAMPLE.afterTwentyYears,
-  );
+  assert.match(flow, /copyWithAmount\(label, amount\)/);
+  assert.match(fr, /Garder les \{amount\} sur un compte d’épargne/);
+  assert.match(fr, /Investir les \{amount\}/);
+  assert.match(fr, /Répartir les \{amount\} entre épargne et investissement/);
+  assert.match(us, /Keep the \{amount\} in a savings account/);
+  assert.match(us, /Invest the \{amount\}/);
+  assert.match(us, /Split the \{amount\} between savings and investing/);
+  assert.match(flow, /growth\.setAside/);
+  assert.match(flow, /max=\{COMPOUND_EXAMPLE\.years\}/);
+  assert.match(fr, /Regarde l’effet boule de neige/);
+  assert.match(fr, /Avec les gains réinvestis/);
+  assert.match(fr, /Sans réinvestir les gains/);
+  assert.match(us, /Watch the snowball effect/);
 });
 
 test("the shared lesson model keeps the source examples and answer correct", () => {
@@ -59,22 +68,17 @@ test("the shared lesson model keeps the source examples and answer correct", () 
     "question",
     "complete",
   ]);
-  assert.equal(
-    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 10),
-    lesson.COMPOUND_EXAMPLE.afterTenYears,
-  );
-  assert.equal(
-    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 20),
-    lesson.COMPOUND_EXAMPLE.afterTwentyYears,
-  );
-  assert.equal(
-    lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate * 20),
-    lesson.COMPOUND_EXAMPLE.withoutCompounding,
-  );
-  assert.equal(
-    lesson.COMPOUND_EXAMPLE.afterTwentyYears - lesson.COMPOUND_EXAMPLE.withoutCompounding,
-    653,
-  );
+  assert.equal(lesson.COMPOUND_EXAMPLE.monthlyContribution, 50);
+  assert.equal(lesson.COMPOUND_EXAMPLE.annualRate, 0.07);
+  assert.equal(lesson.COMPOUND_EXAMPLE.years, 25);
+  const start = lesson.calculateCompoundComparison(0);
+  const end = lesson.calculateCompoundComparison(25);
+  assert.equal(start.contributions, 0);
+  assert.equal(end.contributions, 15_000);
+  assert.equal(end.valueWithoutReinvestment, end.contributions + end.gainsSetAside);
+  assert.ok(end.valueWithoutReinvestment > end.contributions);
+  assert.ok(end.reinvestedValue > end.valueWithoutReinvestment);
+  assert.equal(end.reinvestmentDifference, end.reinvestedValue - end.valueWithoutReinvestment);
   assert.equal(lesson.RISK_EXAMPLE.start * 0.8, lesson.RISK_EXAMPLE.duringDrop);
   assert.ok(lesson.RISK_EXAMPLE.afterRecovery > lesson.RISK_EXAMPLE.start);
   assert.equal(lesson.WHY_INVEST_CORRECT_ANSWER, 1);
@@ -119,13 +123,13 @@ test("both tracks show long-term illustrations and explain their uncertainty", (
   const usLesson = us.slice(us.indexOf("  lesson0:"), us.indexOf("  lesson3:"));
 
   assert.match(frLesson, /étudiant/);
-  assert.match(frLesson, /Après 20 ans/);
+  assert.match(frLesson, /pendant 25 ans/);
   assert.match(frLesson, /5 à 7 % par an/);
   assert.match(frLesson, /une perte reste possible/);
   assert.doesNotMatch(frLesson, /Ce taux régulier est fictif/);
   assert.match(frLesson, /Bonne réponse !/);
   assert.match(usLesson, /student/);
-  assert.match(usLesson, /After 20 years/);
+  assert.match(usLesson, /for 25 years/);
   assert.match(usLesson, /positive long-term average returns/);
   assert.match(usLesson, /loss is still possible/);
   assert.match(usLesson, /Correct!/);

@@ -4,12 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { ArrowRight, Check, Lightbulb, RefreshCcw } from "lucide-react";
+import { ArrowRight, Check, Lightbulb, RefreshCcw, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PracticeTemplate } from "@/components/practice/practice-template";
 import type { ProgressStatus } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
-import { COMPOUND_EXAMPLE, WHY_INVEST_CORRECT_ANSWER } from "@/lib/why-invest-lesson";
+import {
+  calculateCompoundComparison,
+  COMPOUND_EXAMPLE,
+  WHY_INVEST_CORRECT_ANSWER,
+} from "@/lib/why-invest-lesson";
 import { formatMoney } from "@/lib/first-paycheque-lesson";
 import type { Track } from "@/lib/tracks";
 import { completeWhyInvestLesson } from "./actions";
@@ -23,17 +27,22 @@ function copyWithAmount(template: string, amount: string) {
   return template.replaceAll("{amount}", amount);
 }
 
-function growthLine(year: number) {
-  const points = Array.from({ length: 21 }, (_, index) => {
-    const x = 8 + (284 * index) / 20;
-    const growth =
-      (Math.pow(1 + COMPOUND_EXAMPLE.annualRate, index) - 1) /
-      (Math.pow(1 + COMPOUND_EXAMPLE.annualRate, 20) - 1);
-    const y = 86 - growth * 69;
-    return `${x},${y}`;
+function comparisonLines(year: number) {
+  const maximum = calculateCompoundComparison(COMPOUND_EXAMPLE.years).reinvestedValue;
+  const points = Array.from({ length: COMPOUND_EXAMPLE.years + 1 }, (_, index) => {
+    const comparison = calculateCompoundComparison(index);
+    const x = 10 + (300 * index) / COMPOUND_EXAMPLE.years;
+    const reinvestedY = 128 - (comparison.reinvestedValue / maximum) * 112;
+    const setAsideY = 128 - (comparison.valueWithoutReinvestment / maximum) * 112;
+    return { x, reinvestedY, setAsideY };
   });
-  const marker = points[year] ?? points[10]!;
-  return { line: points.join(" "), area: `8,90 ${points.join(" ")} 292,90`, marker };
+  const marker = points[year] ?? points[15]!;
+
+  return {
+    reinvested: points.map(({ x, reinvestedY }) => `${x},${reinvestedY}`).join(" "),
+    setAside: points.map(({ x, setAsideY }) => `${x},${setAsideY}`).join(" "),
+    marker,
+  };
 }
 
 function moveRadioFocus(event: KeyboardEvent<HTMLButtonElement>) {
@@ -73,7 +82,7 @@ export function WhyInvestFlow({
   const onboarding = copy.onboarding;
   const [stage, setStage] = useState(0);
   const [choice, setChoice] = useState<Choice | null>(null);
-  const [years, setYears] = useState(10);
+  const [years, setYears] = useState(15);
   const [scrubbing, setScrubbing] = useState(false);
   const [answer, setAnswer] = useState<number | null>(null);
   const [progressStatus, setProgressStatus] = useState<ProgressStatus>(
@@ -84,10 +93,8 @@ export function WhyInvestFlow({
   const saving = useRef(false);
   const money = (amount: number) => formatMoney(amount, track);
   const amount = money(100);
-  const simulatedValue = Math.round(
-    COMPOUND_EXAMPLE.start * Math.pow(1 + COMPOUND_EXAMPLE.annualRate, years),
-  );
-  const growth = growthLine(years);
+  const compoundComparison = calculateCompoundComparison(years);
+  const growth = comparisonLines(years);
 
   useEffect(() => {
     window.history.replaceState(window.history.state, "", `#world-0-${stage + 1}`);
@@ -251,7 +258,7 @@ export function WhyInvestFlow({
                       <span className={styles["emblem"]} aria-hidden="true">
                         {index === 0 ? "▤" : index === 1 ? "↗" : "◐"}
                       </span>
-                      <span className={styles["optionText"]}>{label}</span>
+                      <span className={styles["optionText"]}>{copyWithAmount(label, amount)}</span>
                       <span className={styles["radio"]} aria-hidden="true">
                         {selected && <span />}
                       </span>
@@ -292,35 +299,55 @@ export function WhyInvestFlow({
             <section className={styles["screen"]} key="growth">
               <p className={styles["eyebrow"]}>{copy.compound.eyebrow}</p>
               <h1 className={styles["title"]}>{copy.compound.title}</h1>
-              <p className={styles["subtitle"]}>{copy.compound.intro}</p>
+              <p className={styles["subtitle"]}>
+                {copyWithAmount(copy.compound.intro, money(COMPOUND_EXAMPLE.monthlyContribution))}
+              </p>
               <div className={styles["growthCard"]}>
                 <div className={styles["growthValues"]}>
-                  <div>
-                    <span className={styles["eyebrow"]}>{onboarding.simulatedValue}</span>
-                    <p className={`${styles["money"]} ${scrubbing ? styles["scrubbing"] : ""}`}>
-                      {money(simulatedValue)}
-                    </p>
-                  </div>
+                  <span className={styles["sliderLabel"]}>{onboarding.sliderLabel}</span>
                   <span className={styles["tag"]}>
                     {years} {years === 1 ? onboarding.year : onboarding.years}
                   </span>
                 </div>
                 <svg
                   className={styles["chart"]}
-                  viewBox="0 0 300 100"
+                  viewBox="0 0 320 138"
                   role="img"
                   aria-label={onboarding.chartLabel}
                 >
-                  <polygon points={growth.area} className={styles["chartArea"]} />
-                  <polyline points={growth.line} className={styles["chartLine"]} />
+                  <line x1="10" y1="128" x2="310" y2="128" className={styles["chartBaseline"]} />
+                  <polyline points={growth.setAside} className={styles["chartLineSetAside"]} />
+                  <polyline points={growth.reinvested} className={styles["chartLine"]} />
                   <circle
-                    cx={growth.marker.split(",")[0]}
-                    cy={growth.marker.split(",")[1]}
-                    r="6"
+                    cx={growth.marker.x}
+                    cy={growth.marker.setAsideY}
+                    r="5"
+                    className={styles["chartMarkerSetAside"]}
+                  />
+                  <circle
+                    cx={growth.marker.x}
+                    cy={growth.marker.reinvestedY}
+                    r="5"
                     className={styles["chartMarker"]}
                   />
                 </svg>
-                <label className={styles["sliderLabel"]} htmlFor="growth-years">
+                <div className={styles["chartLegend"]} aria-hidden="true">
+                  <div>
+                    <span className={styles["legendReinvested"]} />
+                    <span>{copy.compound.withReinvestment}</span>
+                    <strong className={scrubbing ? styles["scrubbing"] : ""}>
+                      {money(Math.round(compoundComparison.reinvestedValue))}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className={styles["legendSetAside"]} />
+                    <span>{copy.compound.withoutReinvestment}</span>
+                    <strong>
+                      {money(Math.round(compoundComparison.valueWithoutReinvestment))}
+                    </strong>
+                  </div>
+                </div>
+                <label className={styles["visuallyHidden"]} htmlFor="growth-years">
                   {onboarding.sliderLabel}
                 </label>
                 <input
@@ -328,7 +355,7 @@ export function WhyInvestFlow({
                   className={styles["slider"]}
                   type="range"
                   min="0"
-                  max="20"
+                  max={COMPOUND_EXAMPLE.years}
                   step="1"
                   value={years}
                   aria-valuetext={`${years} ${years === 1 ? onboarding.year : onboarding.years}`}
@@ -340,13 +367,29 @@ export function WhyInvestFlow({
                 <div className={styles["yearLabels"]}>
                   <span>{copy.compound.start}</span>
                   <span>10 {onboarding.years}</span>
-                  <span>20 {onboarding.years}</span>
+                  <span>25 {onboarding.years}</span>
+                </div>
+                <div className={styles["growthSummary"]}>
+                  <div>
+                    <span>{copy.compound.contributions}</span>
+                    <strong>{money(Math.round(compoundComparison.contributions))}</strong>
+                  </div>
+                  <div className={styles["difference"]}>
+                    <span>{copy.compound.difference}</span>
+                    <strong>
+                      +{money(Math.max(0, Math.round(compoundComparison.reinvestmentDifference)))}
+                    </strong>
+                  </div>
                 </div>
               </div>
-              <p className={styles["insight"]}>
-                <Lightbulb aria-hidden="true" /> <span>{copy.compound.explanation}</span>
-              </p>
-              <p className={styles["comparison"]}>{copy.compound.comparison}</p>
+              <div className={styles["snowball"]}>
+                <Snowflake aria-hidden="true" />
+                <div>
+                  <strong>{copy.compound.snowballTitle}</strong>
+                  <p>{copy.compound.snowball}</p>
+                </div>
+              </div>
+              <p className={styles["comparison"]}>{copy.compound.comparisonNote}</p>
               <p className={styles["assumption"]}>
                 <strong>
                   {onboarding.assumption}: {Math.round(COMPOUND_EXAMPLE.annualRate * 100)}%
