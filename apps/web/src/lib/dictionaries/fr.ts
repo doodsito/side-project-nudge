@@ -1888,8 +1888,18 @@ export const fr: Dictionary = {
       submitPending: "Envoi…",
       success: "Merci, c’est envoyé !",
       error: "Impossible d’envoyer ton message pour le moment. Réessaie.",
-      messageMissing: "Écris un message avant d’envoyer.",
+      messageMissing: "Écris un message ou enregistre un audio avant d’envoyer.",
       messageTooLong: "Message trop long (2000 caractères maximum).",
+      audioRecord: "Enregistrer un audio",
+      audioStop: "Arrêter",
+      audioDelete: "Supprimer l’audio",
+      audioRecording: "Enregistrement en cours",
+      audioPlayback: "Réécouter ton audio",
+      audioDenied:
+        "Impossible d’accéder au micro. Autorise-le dans ton navigateur, ou écris ton message.",
+      audioUnsupported:
+        "L’enregistrement ne marche pas sur ce navigateur. Écris plutôt ton message.",
+      audioNotice: `Ta voix est conservée 12 mois au plus, uniquement pour améliorer ${BRAND}.`,
     },
   },
 };
