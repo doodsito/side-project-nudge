@@ -292,6 +292,9 @@
 }
 
 @keyframes learn-map-progress {
+  from {
+    stroke-dashoffset: 1;
+  }
   to {
     stroke-dashoffset: 0;
   }
@@ -304,8 +307,10 @@
   animation: learn-map-sparkle 760ms ease-out both;
 }
 .learn-map-progress-route {
-  stroke-dasharray: var(--learn-map-progress-length) 1;
-  stroke-dashoffset: var(--learn-map-progress-length);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.learn-map-progress-route.is-animating {
   animation: learn-map-progress 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .learn-map-celebration {
@@ -322,7 +327,7 @@
   animation-delay: -280ms;
   animation-play-state: paused;
 }
-.learn-motion-preview.learn-map-progress-route {
+.learn-motion-preview.learn-map-progress-route.is-animating {
   animation-delay: -350ms;
   animation-play-state: paused;
 }

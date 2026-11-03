@@ -70,6 +70,20 @@ function curveThrough(points: Point[]) {
   }, "");
 }
 
+function completedProgressPoints(points: Array<Point & { lesson: WorldLesson }>) {
+  const worldZeroPoint = points.find(({ lesson }) => lesson.worldNumber === 0);
+  const consecutiveWorldOnePoints: Array<Point & { lesson: WorldLesson }> = [];
+
+  for (const point of points.filter(({ lesson }) => lesson.worldNumber === 1)) {
+    if (point.lesson.state !== "completed") break;
+    consecutiveWorldOnePoints.push(point);
+  }
+
+  return worldZeroPoint?.lesson.state === "completed"
+    ? [worldZeroPoint, ...consecutiveWorldOnePoints]
+    : consecutiveWorldOnePoints;
+}
+
 function LessonNode({
   lesson,
   position,
@@ -368,8 +382,8 @@ export function WorldOnePath({
   }));
   const route = curveThrough(points);
   const finish = points.at(-1);
-  const routeProgress = pathLessons.filter((lesson) => lesson.state === "completed").length;
-  const routeProgressRatio = routeProgress / pathLessons.length;
+  const progressPoints = completedProgressPoints(points);
+  const progressRoute = progressPoints.length > 1 ? curveThrough(progressPoints) : "";
 
   return (
     <figure className="overflow-hidden rounded-3xl border border-border bg-primary-soft/35 p-2 shadow-soft sm:p-4">
@@ -431,12 +445,11 @@ export function WorldOnePath({
             strokeWidth="2.5"
             vectorEffect="non-scaling-stroke"
           />
-          {animatedCompletions.length > 0 && (
+          {progressRoute && (
             <path
-              d={route}
+              d={progressRoute}
               pathLength="1"
-              className={`learn-map-progress-route stroke-mint${motionPreview ? " learn-motion-preview" : ""}`}
-              style={{ "--learn-map-progress-length": routeProgressRatio } as CSSProperties}
+              className={`learn-map-progress-route stroke-mint${animatedCompletions.length > 0 ? " is-animating" : ""}${motionPreview ? " learn-motion-preview" : ""}`}
               fill="none"
               strokeLinecap="round"
               strokeWidth="5"
