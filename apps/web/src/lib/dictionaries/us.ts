@@ -773,7 +773,11 @@ export const us = {
       decisionTitle: "You've got {amount} left. What would you do?",
       decisionBody:
         "Alex has covered this month’s essentials. There is {amount} left, and no decision has been made yet.",
-      decisionChoices: ["Keep it in savings", "Invest some of it", "Split it between both"],
+      decisionChoices: [
+        "Keep the {amount} in a savings account",
+        "Invest the {amount}",
+        "Split the {amount} between savings and investing",
+      ],
       decisionHint: "There is no universal right answer.",
       decisionSpeech: "Your call!",
       decisionAction: "See what your choice means",
@@ -793,11 +797,10 @@ export const us = {
       riskAction: "Finish World 0",
       selected: "Your choice",
       assumption: "Hypothetical annual return",
-      simulatedValue: "Simulated value",
       sliderLabel: "Move through time",
       year: "year",
       years: "years",
-      chartLabel: "Illustration of hypothetical compound growth over time",
+      chartLabel: "Comparison of reinvested gains and gains set aside over time",
       completionAlt: "Nudge celebrates",
       decisionAlt: "Nudge looks curious",
       guideAlt: "Nudge offers a guide",
@@ -823,16 +826,21 @@ export const us = {
     },
     compound: {
       eyebrow: "Try it yourself",
-      title: "What if gains could earn gains?",
-      intro: "Imagine $1,000 growing by 5% each year for 20 years, with every gain left invested.",
+      title: "Watch the snowball effect",
+      intro:
+        "You contribute {amount} every month for 25 years. Compare what happens when gains stay invested or are set aside.",
       start: "Start",
-      first: "After 10 years",
-      second: "After 20 years",
-      explanation:
-        "At first, 5% of $1,000 earns $50. Then the gains left invested can earn gains of their own. That is compound growth.",
-      comparison:
-        "Without reinvesting the gains, the total would be $2,000 after 20 years. Here, reinvesting adds another $653.",
-      caveat: "Real returns vary from year to year. This calculation leaves out fees and taxes.",
+      contributions: "Your contributions",
+      withReinvestment: "With gains reinvested",
+      withoutReinvestment: "Without reinvesting gains",
+      difference: "Extra from reinvesting",
+      snowballTitle: "The snowball effect",
+      snowball:
+        "Each contribution adds snow. When gains stay invested, they make the snowball bigger and can earn gains of their own. When gains are set aside, they still count toward the total, but they no longer make the snowball grow.",
+      comparisonNote:
+        "Gains set aside are included in the total, but they do not generate any new gains.",
+      caveat:
+        "This smooth curve only explains the mechanism. Real returns vary, can be negative, and fees and taxes reduce the result.",
       action: "What happens when value falls?",
     },
     risk: {
