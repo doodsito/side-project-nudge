@@ -73,6 +73,9 @@ function curveThrough(points: Point[]) {
 function LessonNode({
   lesson,
   position,
+  animateCompletion,
+  highlightCurrent,
+  motionPreview,
   lockedLabel,
   notionsLabel,
   mascotAlt,
@@ -80,6 +83,9 @@ function LessonNode({
 }: {
   lesson: WorldLesson;
   position: CSSProperties;
+  animateCompletion: boolean;
+  highlightCurrent: boolean;
+  motionPreview: boolean;
   lockedLabel: string;
   notionsLabel: string;
   mascotAlt: string;
@@ -112,9 +118,24 @@ function LessonNode({
             {lesson.markerNumber}
           </span>
           {lesson.state === "completed" && (
-            <span className="absolute -right-0.5 -top-0.5 grid size-5 place-items-center rounded-full border border-white bg-mint text-ink shadow-sm">
+            <span
+              className={`absolute -right-0.5 -top-0.5 grid size-5 place-items-center rounded-full border border-white bg-mint text-ink shadow-sm ${animateCompletion ? `learn-check-draw${motionPreview ? " learn-motion-preview" : ""}` : ""}`}
+            >
               <Check className="size-3" aria-hidden />
             </span>
+          )}
+          {highlightCurrent && (
+            <svg
+              className={`learn-map-sparkle pointer-events-none absolute -right-3 -top-3 size-7 text-secondary${motionPreview ? " learn-motion-preview" : ""}`}
+              viewBox="0 0 28 28"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 1.5 16.5 11.5 26.5 14 16.5 16.5 14 26.5 11.5 16.5 1.5 14 11.5 11.5 14 1.5Z"
+                fill="currentColor"
+              />
+              <circle cx="23" cy="4" r="1.5" fill="currentColor" />
+            </svg>
           )}
           {isLocked && (
             <span className="absolute -bottom-0.5 -right-0.5 grid size-5 place-items-center rounded-full border border-white bg-surface text-muted-foreground shadow-sm">
@@ -229,6 +250,10 @@ export function WorldOnePath({
 }) {
   const storageKey = userId ? `nudge:learn-preferences:${userId}` : null;
   const [sessionSkip, setSessionSkip] = useState(worldZeroSkipped);
+  const [animatedCompletions, setAnimatedCompletions] = useState<number[]>([]);
+  const [highlightCurrent, setHighlightCurrent] = useState(false);
+  const [celebrateWorldOne, setCelebrateWorldOne] = useState(false);
+  const [motionPreview, setMotionPreview] = useState(false);
   useEffect(() => {
     const handleSkip = () => setSessionSkip(true);
     window.addEventListener("nudge:world-zero-skipped", handleSkip);
@@ -242,7 +267,82 @@ export function WorldOnePath({
   const hasWorldOneProgress = lessons.some(
     (lesson) => lesson.worldNumber === 1 && lesson.state === "completed",
   );
+  const allWorldOneLessonsComplete = lessons
+    .filter((lesson) => lesson.worldNumber === 1)
+    .every((lesson) => lesson.state === "completed");
   const showWorldOne = sessionSkip || worldZeroSkipped || localSkip;
+  const hasHighlightedLesson =
+    lessons.some((lesson) => lesson.state === "current") ||
+    (showWorldOne &&
+      lessons.some(
+        (lesson) =>
+          lesson.worldNumber === 1 && lesson.lessonNumber === 1 && lesson.state === "available",
+      ));
+  useEffect(() => {
+    const scope = userId ?? "anonymous";
+    let frame: number | undefined;
+    let showSparkle = false;
+    let completed: number[] = [];
+    let showCelebration = false;
+    const previewMotion =
+      process.env.NODE_ENV === "development" &&
+      new URLSearchParams(window.location.search).get("motion-preview") === "1";
+    try {
+      const sparkleKey = `nudge:learn-map-sparkle-seen:${scope}`;
+      if (hasHighlightedLesson && !window.localStorage.getItem(sparkleKey)) {
+        window.localStorage.setItem(sparkleKey, "1");
+        showSparkle = true;
+      }
+      const completedNow = lessons
+        .filter((lesson) => lesson.worldNumber === 1 && lesson.state === "completed")
+        .map((lesson) => lesson.lessonNumber);
+      const baselineKey = `nudge:learn-map-completed:${scope}`;
+      const baselineRaw = window.localStorage.getItem(baselineKey);
+      if (baselineRaw) {
+        const baseline: unknown = JSON.parse(baselineRaw);
+        if (Array.isArray(baseline)) {
+          completed = completedNow.filter((number) => !baseline.includes(number));
+        }
+      }
+      window.localStorage.setItem(baselineKey, JSON.stringify(completedNow));
+      const completionKey = `nudge:learn-map-motion:${scope}`;
+      const pending: unknown = JSON.parse(window.sessionStorage.getItem(completionKey) ?? "null");
+      if (
+        pending &&
+        typeof pending === "object" &&
+        Array.isArray(Reflect.get(pending, "completed"))
+      ) {
+        completed = Reflect.get(pending, "completed") as number[];
+        window.sessionStorage.removeItem(completionKey);
+      }
+      const celebrationKey = `nudge:learn-map-world-complete:${scope}`;
+      if (
+        allWorldOneLessonsComplete &&
+        window.sessionStorage.getItem(celebrationKey) === "pending"
+      ) {
+        window.sessionStorage.removeItem(celebrationKey);
+        showCelebration = true;
+      }
+      if (previewMotion) {
+        showSparkle = true;
+        completed = completedNow;
+        showCelebration = true;
+      }
+    } catch {
+      // Motion is decorative; unavailable storage should not affect map behavior.
+    }
+    if (showSparkle || completed.length > 0 || showCelebration || previewMotion) {
+      frame = window.requestAnimationFrame(() => {
+        setHighlightCurrent(showSparkle);
+        setAnimatedCompletions(completed);
+        setCelebrateWorldOne(showCelebration);
+        setMotionPreview(previewMotion);
+      });
+    }
+    return () => {
+      if (frame !== undefined) window.cancelAnimationFrame(frame);
+    };
+  }, [allWorldOneLessonsComplete, hasHighlightedLesson, lessons, userId]);
   const pathLessons = showWorldOne
     ? lessons.map((lesson) => {
         if (lesson.worldNumber === 0 && lesson.state !== "completed") {
@@ -268,6 +368,8 @@ export function WorldOnePath({
   }));
   const route = curveThrough(points);
   const finish = points.at(-1);
+  const routeProgress = pathLessons.filter((lesson) => lesson.state === "completed").length;
+  const routeProgressRatio = routeProgress / pathLessons.length;
 
   return (
     <figure className="overflow-hidden rounded-3xl border border-border bg-primary-soft/35 p-2 shadow-soft sm:p-4">
@@ -329,6 +431,18 @@ export function WorldOnePath({
             strokeWidth="2.5"
             vectorEffect="non-scaling-stroke"
           />
+          {animatedCompletions.length > 0 && (
+            <path
+              d={route}
+              pathLength="1"
+              className={`learn-map-progress-route stroke-mint${motionPreview ? " learn-motion-preview" : ""}`}
+              style={{ "--learn-map-progress-length": routeProgressRatio } as CSSProperties}
+              fill="none"
+              strokeLinecap="round"
+              strokeWidth="5"
+              vectorEffect="non-scaling-stroke"
+            />
+          )}
           {finish && (
             <g aria-hidden="true" transform={`translate(${finish.x - 27} ${finish.y + 38})`}>
               <path d="M 0 0 v 20" className="stroke-foreground/65" strokeWidth="2" />
@@ -346,12 +460,45 @@ export function WorldOnePath({
             key={`${lesson.worldNumber}-${lesson.lessonNumber}`}
             lesson={lesson}
             position={{ left: `${(x / 360) * 100}%`, top: y }}
+            animateCompletion={
+              lesson.worldNumber === 1 && animatedCompletions.includes(lesson.lessonNumber)
+            }
+            motionPreview={motionPreview}
+            highlightCurrent={
+              highlightCurrent &&
+              (lesson.state === "current" ||
+                (motionPreview && lesson.worldNumber === 1 && lesson.lessonNumber === 8))
+            }
             lockedLabel={lockedLabel}
             notionsLabel={notionsLabel}
             mascotAlt={mascotAlt}
             closeLabel={closeLabel}
           />
         ))}
+        {celebrateWorldOne && finish && (
+          <svg
+            aria-hidden="true"
+            className={`learn-map-celebration pointer-events-none absolute z-20${motionPreview ? " learn-motion-preview" : ""}`}
+            style={{ left: `${(finish.x / 360) * 100}%`, top: Math.max(12, finish.y - 94) }}
+            viewBox="0 0 120 100"
+          >
+            <path
+              d="M18 8v16m-8-8h16M92 10v12m-6-6h12M55 2v14m-7-7h14"
+              className="stroke-secondary"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <path
+              d="M32 34c0 8-7 8-7 16m59-19c0 8 7 8 7 16M43 57c0 8-7 8-7 16m44-17c0 8 7 8 7 16"
+              className="stroke-mint"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+            <circle cx="19" cy="59" r="4" className="fill-primary" />
+            <circle cx="100" cy="62" r="4" className="fill-secondary" />
+            <circle cx="57" cy="79" r="4" className="fill-mint" />
+          </svg>
+        )}
       </div>
     </figure>
   );
