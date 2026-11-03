@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-03
 - **Author:** Robin, with Claude Code
-- **Pull request:** to be added once opened
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/71
 
 **Why:** speaking is faster than writing, so testers can say more about what they see.
 
