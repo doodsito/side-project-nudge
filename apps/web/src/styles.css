@@ -100,6 +100,25 @@
 }
 
 :root {
+  --nudge-learn-violet: #6236e8;
+  --nudge-learn-violet-hover: #522acd;
+  --nudge-learn-violet-soft: #f4f0ff;
+  --nudge-learn-violet-200: #d8c8ff;
+  --nudge-learn-gold: #e6b44a;
+  --nudge-learn-gold-soft: #fff9e8;
+  --nudge-learn-gold-dark: #583b0b;
+  --nudge-learn-teal: #2dc9be;
+  --nudge-learn-teal-soft: #edfcfa;
+  --nudge-learn-teal-dark: #07474b;
+  --nudge-learn-canvas: #f3f0ff;
+  --nudge-learn-white: #ffffff;
+  --nudge-learn-ink: #222039;
+  --nudge-learn-neutral-50: #f8f7fa;
+  --nudge-learn-neutral-100: #f0eef4;
+  --nudge-learn-neutral-200: #e3dfea;
+  --nudge-learn-neutral-300: #c8c2d4;
+  --nudge-learn-neutral-600: #655f78;
+  --nudge-learn-neutral-700: #4b455f;
   --radius: 0.875rem;
   --background: oklch(0.985 0.006 85);
   --foreground: oklch(0.204 0.031 267);

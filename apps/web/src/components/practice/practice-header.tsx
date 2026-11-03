@@ -11,11 +11,13 @@ export function PracticeHeader({
   total,
   copy,
   exitHref = "/dashboard",
+  showProgress = true,
 }: {
   current: number;
   total: number;
   copy: Dictionary["learning"]["shared"];
   exitHref?: string;
+  showProgress?: boolean;
 }) {
   const progress = Math.max(0, Math.min(100, ((current - 1) / (total - 1)) * 100));
   // /practice needs no account: a visitor without one goes home, not to the log-in page.
@@ -25,12 +27,15 @@ export function PracticeHeader({
     <header className="relative z-40 border-b border-border bg-background/95 backdrop-blur-xl">
       <div className="mx-auto flex h-18 w-full max-w-4xl items-center gap-4 px-5 sm:px-8">
         <NudgeNextMark className="size-8 shrink-0" />
-        <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
-          <div
-            className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        {showProgress && (
+          <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+            <div
+              className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        )}
+        {!showProgress && <div className="flex-1" aria-hidden="true" />}
         <span className="sr-only">{copy.lessonProgress(current, total)}</span>
         <Link
           href={signedIn ? exitHref : "/"}

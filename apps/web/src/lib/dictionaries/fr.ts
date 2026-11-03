@@ -429,12 +429,15 @@ export const fr: Dictionary = {
           "Termine le Monde 1 pour faire le point sur ce que tu as appris dans cette bêta.",
         rewardCompleteTitle: "Tes bases sont acquises",
         rewardCompleteIntro: "Tu as terminé les huit leçons. Merci d’avoir exploré cette bêta.",
+        current: "À découvrir",
+        locked: "Verrouillée",
         lessons: [
           {
             title: "Où va ton argent ?",
             description:
               "Aide Alex à calculer ce qu’il lui reste vraiment après ses dépenses essentielles.",
             notions: ["Dépenses essentielles", "Ce qu’il reste", "Suivi des dépenses"],
+            keyNotions: ["Dépenses essentielles", "Reste à vivre", "Suivi des entrées et sorties"],
           },
           {
             title: "Paie-toi en premier",
@@ -445,24 +448,32 @@ export const fr: Dictionary = {
               "Créer une habitude",
               "Prévoir les dépenses réelles",
             ],
+            keyNotions: [
+              "Se payer en premier",
+              "Petites sommes régulières",
+              "Adapter son plan aux dépenses",
+            ],
           },
           {
             title: "Combien devrais-tu épargner ?",
             description:
               "Utilise les pourcentages courants comme repères souples, pas comme règles fixes.",
             notions: ["Des repères souples", "La marge du budget", "Un montant tenable"],
+            keyNotions: ["Part du revenu épargnée", "Pourcentages indicatifs", "Budget flexible"],
           },
           {
             title: "Construis ton filet de sécurité",
             description:
               "Comprends pourquoi chaque situation demande une réserve de précaution différente.",
             notions: ["Dépenses imprévues", "Situation personnelle", "Réserve accessible"],
+            keyNotions: ["Réserve de précaution", "Situation personnelle", "Épargne disponible"],
           },
           {
             title: "L’argent dont tu auras bientôt besoin",
             description:
               "Sépare tes besoins proches de l’argent qui peut rester investi plus longtemps.",
             notions: ["La date du besoin", "Accès et stabilité", "Horizon de placement"],
+            keyNotions: ["Dépenses à court terme", "Horizon de temps", "Objectifs plus lointains"],
           },
           {
             title: "Rembourser une dette ou investir ?",
@@ -473,18 +484,25 @@ export const fr: Dictionary = {
               "Rendement incertain",
               "Échéances et paiements dus",
             ],
+            keyNotions: [
+              "Coût certain d’un emprunt",
+              "Rendement incertain",
+              "Arbitrage entre dette et investissement",
+            ],
           },
           {
             title: "Les liquidités ne sont pas sans risque",
             description:
               "Observe comment l’inflation réduit ce que la même somme permet d’acheter.",
             notions: ["Solde stable", "Pouvoir d’achat", "Disponibilité à court terme"],
+            keyNotions: ["Inflation", "Pouvoir d’achat", "Risque lié aux liquidités"],
           },
           {
             title: "Épargner ou investir ?",
             description:
               "Choisis entre disponibilité, stabilité et potentiel de croissance à long terme.",
             notions: ["Disponibilité", "Stabilité et risque de perte", "Potentiel à long terme"],
+            keyNotions: ["Disponibilité", "Stabilité", "Potentiel de croissance à long terme"],
           },
         ],
       },
@@ -786,6 +804,50 @@ export const fr: Dictionary = {
   },
   lesson0: {
     metaTitle: "Pourquoi s’intéresser à l’investissement ?",
+    onboarding: {
+      progress: "Monde 0 · étape {current} sur {total}",
+      decisionEyebrow: "Ta première décision avec l’argent",
+      decisionTitle: "Il te reste {amount}. Qu’en ferais-tu ?",
+      decisionBody:
+        "Alex a payé ses dépenses essentielles du mois. Il reste {amount} et aucune décision n’a encore été prise.",
+      decisionChoices: [
+        "Le garder sur un compte d’épargne",
+        "En investir une partie",
+        "Partager entre les deux",
+      ],
+      decisionHint: "Il n’y a pas une seule bonne réponse.",
+      decisionSpeech: "À toi de choisir !",
+      decisionAction: "Comprendre ce que ce choix implique",
+      feedbackEyebrow: "Réfléchir comme un investisseur",
+      feedbackTitle: "Bonne question. Mais que manque-t-il ?",
+      feedbackSpeech: "Ça dépend !",
+      feedbackLabels: [
+        "Garder la somme disponible",
+        "Lui donner une chance de grandir",
+        "Un peu des deux",
+      ],
+      feedbackChoices: [
+        "L’épargne garde l’argent accessible, ce qui peut aider si tu en as bientôt besoin.",
+        "Investir peut permettre une hausse, mais la valeur peut aussi baisser quand tu auras besoin de cette somme.",
+        "Partager la somme peut concilier deux priorités, mais ne remplace pas une réserve disponible.",
+      ],
+      feedbackInsight:
+        "Quand Alex aura-t-il besoin de cet argent ? Une somme utile le mois prochain n’a pas le même rôle qu’une somme prévue pour dans dix ans.",
+      feedbackAction: "Voir l’investissement en action",
+      growthAction: "Mais qu’en est-il du risque ?",
+      riskAction: "Terminer le Monde 0",
+      selected: "Ton choix",
+      assumption: "Rendement annuel hypothétique",
+      simulatedValue: "Valeur simulée",
+      sliderLabel: "Avancer dans le temps",
+      year: "an",
+      years: "ans",
+      chartLabel: "Illustration d’une croissance composée hypothétique au fil du temps",
+      completionAlt: "Nudge célèbre",
+      decisionAlt: "Nudge est curieux",
+      guideAlt: "Nudge t’accompagne",
+      encourageAlt: "Nudge t’encourage",
+    },
     welcome: {
       eyebrow: "Monde 0 · Une courte introduction",
       title: "Pourquoi s’intéresser à l’investissement ?",
@@ -805,8 +867,8 @@ export const fr: Dictionary = {
       action: "Voir comment les gains s’accumulent",
     },
     compound: {
-      eyebrow: "Un calcul imaginaire",
-      title: "Les gains peuvent aussi produire des gains",
+      eyebrow: "À toi d’essayer",
+      title: "Et si les gains produisaient eux aussi des gains ?",
       intro:
         "Imagine 1 000 € qui gagnent 5 % chaque année pendant 20 ans, en laissant tous les gains placés.",
       start: "Départ",
@@ -822,13 +884,13 @@ export const fr: Dictionary = {
     },
     risk: {
       eyebrow: "Et les baisses ?",
-      title: "Une baisse peut être suivie d’une reprise",
+      title: "Un investissement peut aussi baisser.",
       intro:
-        "Imagine un placement réparti entre plusieurs entreprises. Voici une trajectoire possible sur plusieurs années :",
-      start: "Valeur au départ",
-      dip: "Valeur après une baisse",
+        "Voici une trajectoire possible pour un placement réparti entre plusieurs entreprises :",
+      start: "Au départ",
+      dip: "Après la baisse",
       dipChange: "−20 % · 200 € de moins",
-      recovery: "Valeur plus tard, dans cet exemple",
+      recovery: "Plus tard",
       recoveryChange: "300 € de plus qu’au départ",
       example:
         "La baisse de 20 % n’a pas forcément été la fin de l’histoire. Si tu as besoin de cet argent bientôt, tu pourrais toutefois devoir vendre avant une éventuelle reprise.",
@@ -864,15 +926,16 @@ export const fr: Dictionary = {
     },
     complete: {
       eyebrow: "Monde 0 terminé",
-      title: "Tu peux apprendre avant d’investir",
+      title: "Tu viens de prendre ta première décision avec ton argent.",
       summary:
-        "Investir donne une chance de faire grandir une somme pour un objectif lointain. Les gains laissés placés peuvent s’ajouter aux précédents, mais la valeur peut aussi baisser.",
+        "Tu as découvert le compromis entre disponibilité, croissance et risque. À toi de mettre ces notions en pratique.",
       next: "Dans le Monde 1, tu décideras quelles sommes doivent rester disponibles avant de penser à un objectif lointain.",
       saving: "Enregistrement de ta progression…",
       saved: "Ta progression est enregistrée.",
       error: "Nous n’avons pas pu enregistrer ta progression. Réessaie.",
+      preview: "Aperçu uniquement · La progression n’est pas enregistrée.",
       retry: "Réessayer l’enregistrement",
-      action: "Explorer le Monde 1",
+      action: "Continuer vers le Monde 1",
       replay: "Revoir le Monde 0",
       source: "Lire les repères de l’AMF sur le risque et le rendement",
       sourceHref:

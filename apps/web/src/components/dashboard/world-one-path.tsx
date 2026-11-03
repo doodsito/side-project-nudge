@@ -200,7 +200,7 @@ export function WorldOnePath({
   worldZeroLabel: string;
   worldOneLabel: string;
 }) {
-  const rowHeight = 108;
+  const rowHeight = 92;
   const height = Math.max(560, lessons.length * rowHeight + 32);
   const points = lessons.map((lesson, index) => ({
     x: index % 2 === 0 ? 108 : 252,
@@ -211,45 +211,69 @@ export function WorldOnePath({
   const finish = points.at(-1);
 
   return (
-    <figure className="overflow-hidden rounded-3xl border border-border bg-primary-soft/45 p-2 shadow-soft sm:p-4">
+    <figure className="overflow-hidden rounded-3xl border border-border bg-primary-soft/35 p-2 shadow-soft sm:p-4">
       <figcaption className="flex flex-wrap items-center gap-x-2 gap-y-1 px-2 pb-2 text-xs font-semibold text-muted-foreground sm:px-3">
         <span>{worldZeroLabel}</span>
         <span aria-hidden>→</span>
         <span>{worldOneLabel}</span>
         <span className="sr-only">{progressLabel}</span>
       </figcaption>
-      <div className="relative mx-auto w-full max-w-xl" style={{ height }}>
+      <div
+        className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl bg-surface"
+        style={{ height }}
+      >
         <svg
-          className="absolute inset-0 size-full"
+          className="pointer-events-none absolute inset-0 size-full"
           aria-hidden="true"
           viewBox={`0 0 360 ${height}`}
           preserveAspectRatio="none"
         >
+          <path d={`M0 0h360v${height}H0z`} className="fill-primary-soft/35" />
           <path
-            d={route}
-            className="stroke-border-strong/70"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="28"
-            vectorEffect="non-scaling-stroke"
+            d={`M0 0h142c-34 54-15 113 19 160s28 92-5 137-48 85-15 133 43 91 4 140-36 93 2 143 42 99 6 148-35 99 1 143 28 75 11 100H0z`}
+            className="fill-mint/10"
           />
+          <path
+            d={`M360 82c-44 14-54 55-21 95s28 77-10 116-41 84-5 124 37 83-2 124-39 83 2 125 37 85-3 126-43 81-10 126 35 78 49 112H360z`}
+            className="fill-primary-soft/70"
+          />
+          <g aria-hidden="true" className="fill-mint/35 stroke-mint/55">
+            <path d="M28 230c12-15 26-17 39-4-4 17-20 22-39 4Zm5 13c-9-11-9-24 3-32 14 9 14 21-3 32Zm-4 10c15-11 29-10 38 3-8 15-22 15-38-3Z" />
+            <path d="M292 425c13-15 26-17 39-4-4 17-20 22-39 4Zm5 13c-9-11-9-24 3-32 14 9 14 21-3 32Zm-4 10c15-11 29-10 38 3-8 15-22 15-38-3Z" />
+            <path d="M28 652c12-15 26-17 39-4-4 17-20 22-39 4Zm5 13c-9-11-9-24 3-32 14 9 14 21-3 32Zm-4 10c15-11 29-10 38 3-8 15-22 15-38-3Z" />
+            <path d="M292 850c13-15 26-17 39-4-4 17-20 22-39 4Zm5 13c-9-11-9-24 3-32 14 9 14 21-3 32Zm-4 10c15-11 29-10 38 3-8 15-22 15-38-3Z" />
+          </g>
+          <g className="fill-secondary/50">
+            <circle cx="47" cy="176" r="4" />
+            <circle cx="311" cy="358" r="3" />
+            <circle cx="46" cy="585" r="3.5" />
+            <circle cx="312" cy="784" r="4" />
+          </g>
           <path
             d={route}
             className="stroke-white"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="23"
+            strokeWidth="46"
             vectorEffect="non-scaling-stroke"
           />
           <path
             d={route}
-            className="stroke-primary/20"
+            className="stroke-primary/10"
             fill="none"
-            strokeDasharray="2 9"
             strokeLinecap="round"
-            strokeWidth="2"
+            strokeLinejoin="round"
+            strokeWidth="38"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            d={route}
+            className="stroke-secondary/55"
+            fill="none"
+            strokeDasharray="1 13"
+            strokeLinecap="round"
+            strokeWidth="2.5"
             vectorEffect="non-scaling-stroke"
           />
           {finish && (

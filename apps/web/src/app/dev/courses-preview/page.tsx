@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { CourseWorlds } from "@/components/dashboard/course-worlds";
+import { FoundationWorld } from "@/components/dashboard/foundation-world";
 import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
 import {
   FOUNDATION_LESSON_COUNT,
@@ -24,7 +25,7 @@ export default async function CoursesPreviewPage({
   const host = (await headers()).get("host") ?? "";
   if (!/^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host)) notFound();
 
-  const { track: requestedTrack, state } = await searchParams;
+  const { track: requestedTrack, state, view } = await searchParams;
   const track = isTrack(requestedTrack) ? requestedTrack : DEFAULT_TRACK;
   const t = getDictionary(track);
   const completedLessons =
@@ -55,7 +56,15 @@ export default async function CoursesPreviewPage({
         t={t.dashboard}
         skipLink={t.skipLink}
       >
-        <CourseWorlds progress={sampleProgress} copy={t.learning.courses} track={track} />
+        {view === "world" ? (
+          <FoundationWorld
+            progress={sampleProgress}
+            copy={t.learning.courses.foundation}
+            track={track}
+          />
+        ) : (
+          <CourseWorlds progress={sampleProgress} copy={t.learning.courses} track={track} />
+        )}
       </DashboardTemplate>
     </div>
   );

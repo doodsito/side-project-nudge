@@ -41,10 +41,15 @@ const lessonSixSource = readFileSync(
   ),
   "utf8",
 );
-const foundationSource = readFileSync(
-  new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
-  "utf8",
-);
+const foundationSource =
+  readFileSync(
+    new URL("../src/components/dashboard/foundation-world.tsx", import.meta.url),
+    "utf8",
+  ) +
+  readFileSync(
+    new URL("../src/components/dashboard/foundation-world-client.tsx", import.meta.url),
+    "utf8",
+  );
 const courseWorldsSource = readFileSync(
   new URL("../src/lib/course-worlds.ts", import.meta.url),
   "utf8",

@@ -26,7 +26,31 @@ const dashboard = read("../src/components/dashboard/dashboard-home.tsx");
 const fr = read("../src/lib/dictionaries/fr.ts");
 const us = read("../src/lib/dictionaries/us.ts");
 
-test("the short introduction explains growth, risk and a decision before completion", () => {
+test("World 0 presents five interactive onboarding stages using the existing examples", () => {
+  assert.match(flow, /const STAGE_COUNT = 5/);
+  assert.match(flow, /decisionChoices\.map/);
+  assert.match(flow, /feedbackChoices/);
+  assert.match(flow, /type="range"/);
+  assert.match(flow, /WHY_INVEST_CORRECT_ANSWER/);
+  assert.match(flow, /nudge-curious\.webp/);
+  assert.match(flow, /nudge-guide\.webp/);
+  assert.match(flow, /nudge-encourage\.webp/);
+  assert.match(flow, /nudge-celebrate\.webp/);
+  assert.match(flow, /copy\.risk\.sourceHref/);
+  assert.match(flow, /copy\.complete\.sourceHref/);
+  assert.doesNotMatch(flow, /\$100/);
+  assert.match(
+    read("../src/app/lessons/why-invest/why-invest-flow.module.css"),
+    /prefers-reduced-motion: reduce/,
+  );
+  assert.match(flow, /formatMoney\(amount, track\)/);
+  assert.equal(
+    Math.round(lesson.COMPOUND_EXAMPLE.start * (1 + lesson.COMPOUND_EXAMPLE.annualRate) ** 20),
+    lesson.COMPOUND_EXAMPLE.afterTwentyYears,
+  );
+});
+
+test("the shared lesson model keeps the source examples and answer correct", () => {
   assert.deepEqual(Array.from(lesson.WHY_INVEST_STEPS), [
     "welcome",
     "meaning",
@@ -69,16 +93,23 @@ test("World 0 progress is independent from World 1 and neither blocks the other"
 
   assert.match(courseWorlds, /href="\/lessons\/why-invest"/);
   assert.match(courseWorlds, /foundationLessonHref\(/);
-  assert.match(dashboard, /completed === 0 && !hasCompletedLesson\(progress, INTRO_WORLD, 1\)/);
+  assert.match(dashboard, /const introCurrent = !introComplete && completed === 0/);
 });
 
-test("the lesson is member-only and saves a single World 0 completion", () => {
+test("the member-only lesson saves after completion and keeps replay", () => {
   assert.match(page, /requireMember\(\)/);
   assert.match(action, /requireMember\(\)/);
   assert.match(action, /completeLesson\(member\.courseProgress, INTRO_WORLD, 1\)/);
   assert.match(action, /refreshSession\(\)/);
   assert.match(action, /revalidatePath\("\/dashboard\/courses"\)/);
-  assert.match(flow, /if \(target === "complete" && !alreadyCompleted\) void saveProgress\(\)/);
+  assert.match(flow, /function finishQuiz\(\) \{\s*setStage\(4\)/);
+  assert.match(flow, /async function continueToWorldOne\(\)/);
+  assert.match(flow, /alreadyCompleted \|\| \(await saveProgress\(\)\)/);
+  assert.match(flow, /router\.push\("\/dashboard\/courses\/financial-foundation"\)/);
+  assert.doesNotMatch(flow.match(/function finishQuiz\(\) \{[^}]*\}/)?.[0] ?? "", /saveProgress/);
+  assert.match(flow, /onClick=\{finishQuiz\}/);
+  assert.match(flow, /function replay\(\)/);
+  assert.match(flow, /progressStatus === "error"/);
   assert.match(component, /progressStatus === "error"/);
   assert.match(component, /feedbackRef\.current\?\.scrollIntoView/);
 });
