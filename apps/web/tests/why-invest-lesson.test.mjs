@@ -105,7 +105,7 @@ test("the member-only lesson saves after completion and keeps replay", () => {
   assert.match(flow, /function finishQuiz\(\) \{\s*setStage\(4\)/);
   assert.match(flow, /async function continueToWorldOne\(\)/);
   assert.match(flow, /alreadyCompleted \|\| \(await saveProgress\(\)\)/);
-  assert.match(flow, /router\.push\("\/dashboard\/courses\/financial-foundation"\)/);
+  assert.match(flow, /router\.push\("\/dashboard"\)/);
   assert.doesNotMatch(flow.match(/function finishQuiz\(\) \{[^}]*\}/)?.[0] ?? "", /saveProgress/);
   assert.match(flow, /onClick=\{finishQuiz\}/);
   assert.match(flow, /function replay\(\)/);

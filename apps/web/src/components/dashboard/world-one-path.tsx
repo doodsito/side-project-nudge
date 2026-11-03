@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check, LockKeyhole } from "lucide-react";
-import type { CSSProperties } from "react";
+import { useEffect, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -33,6 +33,31 @@ type WorldLesson = {
   id?: string;
 };
 type Point = { x: number; y: number };
+
+function subscribeToLocalSkip(key: string | null, callback: () => void) {
+  if (!key) return () => {};
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === key) callback();
+  };
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener("nudge:learn-preferences", callback);
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener("nudge:learn-preferences", callback);
+  };
+}
+
+function readLocalSkip(key: string | null) {
+  if (!key) return false;
+  try {
+    const value: unknown = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    return Boolean(
+      value && typeof value === "object" && Reflect.get(value, "worldZeroSkipped") === true,
+    );
+  } catch {
+    return false;
+  }
+}
 
 function curveThrough(points: Point[]) {
   if (points.length === 0) return "";
@@ -101,7 +126,7 @@ function LessonNode({
       <DialogContent
         overlayClassName="bg-ink/35 backdrop-blur-[2px]"
         closeLabel={closeLabel}
-        className="!left-0 !top-auto !bottom-0 !translate-x-0 !translate-y-0 grid max-h-[min(88dvh,42rem)] w-full max-w-none gap-0 overflow-y-auto rounded-t-[2rem] rounded-b-none border border-border bg-background p-0 shadow-lift duration-200 data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom-6 data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom-6 sm:!left-[50%] sm:!top-[50%] sm:!bottom-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:max-w-xl sm:rounded-3xl"
+        className="!left-0 !top-auto !bottom-0 !translate-x-0 !translate-y-0 grid min-h-[min(64dvh,34rem)] max-h-[min(90dvh,42rem)] w-full max-w-none gap-0 overflow-y-auto rounded-t-[2rem] rounded-b-none border border-border bg-background p-0 shadow-lift duration-200 data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom-6 data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom-6 sm:!left-[50%] sm:!top-[50%] sm:!bottom-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:min-h-0 sm:max-w-xl sm:rounded-3xl"
       >
         <div className="mx-auto w-full max-w-xl px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 sm:px-7 sm:pb-6 sm:pt-6">
           <div
@@ -183,26 +208,60 @@ function LessonNode({
 
 export function WorldOnePath({
   lessons,
-  progressLabel,
   lockedLabel,
   notionsLabel,
   mascotAlt,
   closeLabel,
-  worldZeroLabel,
-  worldOneLabel,
+  currentLessonLabel,
+  availableLessonLabel,
+  worldZeroSkipped,
+  userId,
 }: {
   lessons: WorldLesson[];
-  progressLabel: string;
   lockedLabel: string;
   notionsLabel: string;
   mascotAlt: string;
   closeLabel: string;
-  worldZeroLabel: string;
-  worldOneLabel: string;
+  currentLessonLabel: string;
+  availableLessonLabel: string;
+  worldZeroSkipped: boolean;
+  userId?: string;
 }) {
+  const storageKey = userId ? `nudge:learn-preferences:${userId}` : null;
+  const [sessionSkip, setSessionSkip] = useState(worldZeroSkipped);
+  useEffect(() => {
+    const handleSkip = () => setSessionSkip(true);
+    window.addEventListener("nudge:world-zero-skipped", handleSkip);
+    return () => window.removeEventListener("nudge:world-zero-skipped", handleSkip);
+  }, []);
+  const localSkip = useSyncExternalStore(
+    (callback) => subscribeToLocalSkip(storageKey, callback),
+    () => readLocalSkip(storageKey),
+    () => false,
+  );
+  const hasWorldOneProgress = lessons.some(
+    (lesson) => lesson.worldNumber === 1 && lesson.state === "completed",
+  );
+  const showWorldOne = sessionSkip || worldZeroSkipped || localSkip;
+  const pathLessons = showWorldOne
+    ? lessons.map((lesson) => {
+        if (lesson.worldNumber === 0 && lesson.state !== "completed") {
+          return { ...lesson, state: "available" as const, status: availableLessonLabel };
+        }
+        if (
+          lesson.worldNumber === 1 &&
+          lesson.lessonNumber === 1 &&
+          !hasWorldOneProgress &&
+          lesson.state !== "completed"
+        ) {
+          return { ...lesson, state: "current" as const, status: currentLessonLabel };
+        }
+        return lesson;
+      })
+    : lessons;
   const rowHeight = 92;
-  const height = Math.max(560, lessons.length * rowHeight + 32);
-  const points = lessons.map((lesson, index) => ({
+  const height = Math.max(560, pathLessons.length * rowHeight + 32);
+  const points = pathLessons.map((lesson, index) => ({
     x: index % 2 === 0 ? 108 : 252,
     y: 42 + index * rowHeight,
     lesson,
@@ -212,12 +271,6 @@ export function WorldOnePath({
 
   return (
     <figure className="overflow-hidden rounded-3xl border border-border bg-primary-soft/35 p-2 shadow-soft sm:p-4">
-      <figcaption className="flex flex-wrap items-center gap-x-2 gap-y-1 px-2 pb-2 text-xs font-semibold text-muted-foreground sm:px-3">
-        <span>{worldZeroLabel}</span>
-        <span aria-hidden>→</span>
-        <span>{worldOneLabel}</span>
-        <span className="sr-only">{progressLabel}</span>
-      </figcaption>
       <div
         className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl bg-surface"
         style={{ height }}

@@ -10,7 +10,6 @@ export function PracticeTemplate({
   copy,
   skipLink,
   exitHref,
-  showProgress,
   children,
 }: {
   current: number;
@@ -18,7 +17,6 @@ export function PracticeTemplate({
   copy: Dictionary["learning"]["shared"];
   skipLink: string;
   exitHref?: string;
-  showProgress?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -29,7 +27,6 @@ export function PracticeTemplate({
         total={total}
         copy={copy}
         {...(exitHref ? { exitHref } : {})}
-        {...(showProgress !== undefined ? { showProgress } : {})}
       />
       <main id="main-content" tabIndex={-1} className="flex min-h-0 flex-1 flex-col">
         {children}

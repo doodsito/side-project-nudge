@@ -1,15 +1,12 @@
-import Link from "next/link";
 import "@/components/layout/beta-colors.css";
 import { type ReactNode } from "react";
-import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
 import { SkipLink } from "@/components/layout/skip-link";
 import { DashboardTabs } from "@/components/dashboard/dashboard-tabs";
 import { FeedbackHeaderButton, FeedbackProvider } from "@/components/shared/feedback-widget";
 import { SignOutButton } from "@/components/auth/sign-out-button";
-import { BRAND } from "@/lib/brand";
 import type { Dictionary } from "@/lib/dictionaries";
 
-/** The signed-in app: logo and sign-out, the tabs, then the tab's content. */
+/** The signed-in app: account actions, the tabs, then the tab's content. */
 export function DashboardTemplate({
   signOut,
   t,
@@ -28,11 +25,8 @@ export function DashboardTemplate({
   const content = (
     <>
       <SkipLink label={skipLink} />
-      <header className="px-5 pt-[calc(1.25rem+env(safe-area-inset-top))] sm:px-8 sm:pt-6">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-          <Link href={homeHref} aria-label={`${BRAND} ${t.home}`} className="inline-flex">
-            <NudgeNextLogo />
-          </Link>
+      <header className="px-5 pt-[env(safe-area-inset-top)] sm:px-8 sm:pt-6">
+        <div className="mx-auto flex max-w-5xl items-center justify-end gap-4">
           {!preview && signOut && (
             <div className="hidden items-center gap-2 sm:flex">
               <FeedbackHeaderButton label={t.feedback.trigger} />

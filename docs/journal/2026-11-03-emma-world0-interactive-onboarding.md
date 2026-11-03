@@ -1,16 +1,16 @@
-# Bring World 0 into interactive onboarding
+# Complete World 0 and refine the Learn experience
 
 - **Date:** 2026-11-03
 - **Author:** Emma, with Codex
-- **Pull request:** Not opened
+- **Pull request:** Pending
 
-**Why:** New learners should make a money decision before reading an introduction.
+**Why:** New learners should start with a decision, and returning learners should find their next lesson quickly.
 
 **What changed:**
-- Built the five-stage World 0 flow from the approved prototype, in French and US English.
-- Added choice feedback, a compound-growth slider, a risk quiz, and a World 1 handoff.
-- Save World 0 through its existing progress record only when learners continue to World 1.
+- Added the five-stage World 0 experience, mobile Learn map refinements, and a one-time World 1 discovery for learners who skip.
+- Saved skip and discovery preferences with existing user progress; no database change.
+- Added the illustrated World 2 preview and expandable locked worlds, plus compact lesson headers and the Portfolio placeholder.
 
-**Files:** `apps/web/src/app/lessons/why-invest/`, `apps/web/src/lib/dictionaries/`
-**Checked:** lint, typecheck, tests and 320–430px preview; production build cannot fetch Google Fonts in this environment.
-**Next:** Review the local preview and rerun the build when Google Fonts is reachable.
+**Files:** `apps/web/src/components/dashboard/`, `apps/web/src/app/lessons/why-invest/`, `apps/web/src/lib/course-progress.ts`
+**Checked:** lint, typecheck, tests, production build, and local mobile previews on port 3002.
+**Next:** Merge after the pull request checks pass.

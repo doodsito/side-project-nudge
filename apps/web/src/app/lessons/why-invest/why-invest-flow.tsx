@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { ArrowRight, Check, Lightbulb, RefreshCcw } from "lucide-react";
-import { BRAND } from "@/lib/brand";
 import { Button } from "@/components/ui/button";
 import { PracticeTemplate } from "@/components/practice/practice-template";
 import type { ProgressStatus } from "@/lib/course-progress";
@@ -130,7 +129,7 @@ export function WhyInvestFlow({
 
   async function continueToWorldOne() {
     if (alreadyCompleted || (await saveProgress())) {
-      router.push("/dashboard/courses/financial-foundation");
+      router.push("/dashboard");
     }
   }
 
@@ -175,13 +174,13 @@ export function WhyInvestFlow({
       </Button>
     ) : preview ? (
       <Button asChild size="xl" className={styles["action"]}>
-        <Link href={`/dev/courses-preview?track=${track}`}>
+        <Link href={`/dev/dashboard-preview?track=${track}&state=world-zero-complete`}>
           {copy.complete.action} <ArrowRight aria-hidden="true" />
         </Link>
       </Button>
     ) : progressStatus === "saved" ? (
       <Button asChild size="xl" className={styles["action"]}>
-        <Link href="/dashboard/courses/financial-foundation">
+        <Link href="/dashboard">
           {copy.complete.action} <ArrowRight aria-hidden="true" />
         </Link>
       </Button>
@@ -204,31 +203,11 @@ export function WhyInvestFlow({
     <PracticeTemplate
       current={stage + 1}
       total={STAGE_COUNT}
-      showProgress={false}
       copy={dictionary.learning.shared}
       skipLink={dictionary.skipLink}
       exitHref="/dashboard"
     >
       <div ref={content} className={styles["flow"]}>
-        <div className={styles["topline"]}>
-          <span className={styles["brand"]}>{BRAND}</span>
-          <span className={styles["counter"]}>
-            {String(stage + 1).padStart(2, "0")} / {String(STAGE_COUNT).padStart(2, "0")}
-          </span>
-        </div>
-        <div
-          className={styles["progressTrack"]}
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={STAGE_COUNT}
-          aria-valuenow={stage + 1}
-          aria-label={onboarding.progress
-            .replace("{current}", String(stage + 1))
-            .replace("{total}", String(STAGE_COUNT))}
-        >
-          <span style={{ width: `${((stage + 1) / STAGE_COUNT) * 100}%` }} />
-        </div>
-
         <div className={styles["main"]} id="world-0-main" data-scroll-region tabIndex={-1}>
           {stage === 0 && (
             <section className={styles["screen"]} key="decision">

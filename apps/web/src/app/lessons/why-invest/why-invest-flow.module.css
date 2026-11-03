@@ -21,46 +21,12 @@
   font-family: var(--font-dm-sans), var(--font-inter), sans-serif;
 }
 
-.topline {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 1.25rem 0.25rem;
-}
-
-.brand {
-  color: var(--ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.counter,
 .eyebrow {
   color: var(--violet);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.progressTrack {
-  height: 0.3rem;
-  flex: 0 0 auto;
-  overflow: hidden;
-  margin: 0.45rem 1.25rem 0;
-  border-radius: 99px;
-  background: var(--line);
-}
-
-.progressTrack span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--nudge-learn-teal);
-  transition: width 400ms ease-in-out;
 }
 
 .main {
@@ -838,12 +804,6 @@
 }
 
 @media (max-width: 370px) {
-  .topline {
-    padding-inline: 1rem;
-  }
-  .progressTrack {
-    margin-inline: 1rem;
-  }
   .main {
     padding: 0.85rem 1rem 1rem;
   }
