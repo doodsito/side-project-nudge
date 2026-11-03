@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DashboardHome } from "@/components/dashboard/dashboard-home";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionaries";
+import { markWorldOneDiscoverySeen, skipWorldZero } from "./actions";
 
 export async function generateMetadata(): Promise<Metadata> {
   const track = await getMemberTrack();
@@ -18,6 +19,9 @@ export default async function DashboardPage() {
       copy={dictionary.dashboard.homeScreen}
       courseCopy={dictionary.learning.courses}
       foundationCopy={dictionary.learning.courses.foundation}
+      userId={member.id}
+      skipWorldZeroAction={skipWorldZero}
+      markDiscoverySeenAction={markWorldOneDiscoverySeen}
     />
   );
 }

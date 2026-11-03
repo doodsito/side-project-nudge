@@ -14,7 +14,9 @@ const actionSource = read("../src/app/lessons/savings-vs-investing/actions.ts");
 const flowSource = read("../src/app/lessons/savings-vs-investing/savings-vs-investing-flow.tsx");
 const componentSource = read("../src/components/lessons/savings-vs-investing-lesson.tsx");
 const feedbackSource = read("../src/components/shared/feedback-widget.tsx");
-const worldSource = read("../src/components/dashboard/foundation-world.tsx");
+const worldSource =
+  read("../src/components/dashboard/foundation-world.tsx") +
+  read("../src/components/dashboard/foundation-world-client.tsx");
 const frSource = read("../src/lib/dictionaries/fr.ts");
 const usSource = read("../src/lib/dictionaries/us.ts");
 

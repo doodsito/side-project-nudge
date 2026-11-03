@@ -5,6 +5,10 @@ import { SavingsVsInvestingLesson } from "@/components/lessons/savings-vs-invest
 import { PracticeTemplate } from "@/components/practice/practice-template";
 import { track } from "@/lib/analytics";
 import type { ProgressStatus } from "@/lib/course-progress";
+import {
+  recordLearnMapLessonCompletion,
+  recordLearnMapWorldCompletion,
+} from "@/lib/learn-map-motion";
 import { getDictionary } from "@/lib/dictionaries";
 import {
   SAVINGS_VS_INVESTING_STEPS,
@@ -16,9 +20,11 @@ import { completeEighthLesson } from "./actions";
 export function SavingsVsInvestingFlow({
   track: memberTrack,
   alreadyCompleted,
+  userId,
 }: {
   track: Track;
   alreadyCompleted: boolean;
+  userId: string;
 }) {
   const dictionary = getDictionary(memberTrack);
   const [step, setStep] = useState<SavingsVsInvestingStep>("welcome");
@@ -59,8 +65,10 @@ export function SavingsVsInvestingFlow({
       if (result.status === "saved") {
         setProgressStatus("saved");
         if (!celebrated.current) {
+          recordLearnMapLessonCompletion(userId, 8);
           celebrated.current = true;
           setShowConfetti(true);
+          recordLearnMapWorldCompletion(userId);
         }
       } else {
         setProgressStatus("error");

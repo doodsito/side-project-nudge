@@ -49,5 +49,7 @@ body:has([data-nudge-beta]) {
 }
 
 [data-nudge-beta] .nudge-world-label {
-  text-shadow: 0 0 5px var(--primary-soft), 0 0 8px var(--primary-soft);
+  text-shadow:
+    0 0 5px var(--primary-soft),
+    0 0 8px var(--primary-soft);
 }

@@ -16,7 +16,9 @@ const {
   completeLesson,
   completedLessonCount,
   hasCompletedLesson,
+  markWorldOneDiscoverySeen,
   readCourseProgress,
+  skipWorldZero,
 } = compiledModule.exports;
 
 test("invalid account metadata starts with empty course progress", () => {
@@ -33,6 +35,21 @@ test("stored progress keeps only unique positive lesson numbers", () => {
   });
 
   assert.deepEqual(Array.from(progress.completedLessons[FOUNDATION_WORLD]), [1, 3]);
+});
+
+test("World 0 skip and World 1 discovery preferences stay separate from completion", () => {
+  const initial = readCourseProgress({ completedLessons: {} });
+  const skipped = skipWorldZero(initial);
+  const discovered = markWorldOneDiscoverySeen(skipped);
+  const withWorldOneProgress = completeLesson(discovered, FOUNDATION_WORLD, 1);
+
+  assert.equal(skipped.worldZeroSkipped, true);
+  assert.equal(skipped.worldOneDiscoverySeen, false);
+  assert.equal(skipped.completedLessons["why-invest"], undefined);
+  assert.equal(discovered.worldOneDiscoverySeen, true);
+  assert.equal(withWorldOneProgress.worldZeroSkipped, true);
+  assert.equal(withWorldOneProgress.worldOneDiscoverySeen, true);
+  assert.equal(hasCompletedLesson(withWorldOneProgress, "why-invest", 1), false);
 });
 
 test("completing lesson one is persistent, ordered and idempotent", () => {

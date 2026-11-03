@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { DM_Sans, Inter, Manrope, Space_Grotesk } from "next/font/google";
 import { ConsentManager } from "@/components/layout/consent-manager";
 import { Footer } from "@/components/layout/footer";
 import { readTrackCookie } from "@/lib/auth";
@@ -14,6 +14,18 @@ const manrope = Manrope({
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -34,7 +46,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={initialTrack === "fr" ? "fr" : "en"}
       data-scroll-behavior="smooth"
-      className={`${manrope.variable} ${inter.variable}`}
+      className={`${manrope.variable} ${inter.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}
     >
       <body>
         <ConsentManager initialTrack={initialTrack}>

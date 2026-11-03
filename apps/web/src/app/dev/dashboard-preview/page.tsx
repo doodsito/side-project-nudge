@@ -51,9 +51,17 @@ export default async function DashboardPreviewPage({
           progress={
             state === "first-time"
               ? { version: 1, completedLessons: {} }
-              : state === "world-zero-complete"
-                ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
-                : sampleProgress
+              : state === "skipped"
+                ? {
+                    version: 1,
+                    completedLessons: {},
+                    worldZeroSkipped: true,
+                  }
+                : state === "world-zero-complete"
+                  ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
+                  : state === "returning"
+                    ? { ...sampleProgress, worldZeroSkipped: true }
+                    : sampleProgress
           }
           track={track}
           copy={t.dashboard.homeScreen}

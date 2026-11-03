@@ -31,6 +31,7 @@ export default async function SavingsVsInvestingPage() {
       >
         <SavingsVsInvestingFlow
           track={member.track}
+          userId={member.id}
           alreadyCompleted={hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 8)}
         />
       </FeedbackProvider>

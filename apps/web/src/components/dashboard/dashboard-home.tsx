@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ComingNextSection } from "@/components/dashboard/coming-next-section";
+import { LearnStartActions } from "@/components/dashboard/learn-start-actions";
 import { WorldOnePath } from "@/components/dashboard/world-one-path";
 import { FOUNDATION_LESSONS, foundationLessonHref } from "@/lib/course-worlds";
 import {
@@ -18,17 +18,23 @@ export function DashboardHome({
   copy,
   courseCopy,
   foundationCopy,
+  userId,
+  skipWorldZeroAction,
+  markDiscoverySeenAction,
 }: {
   progress: CourseProgress;
   track: Track;
   copy: Dictionary["dashboard"]["homeScreen"];
   courseCopy: Dictionary["learning"]["courses"];
   foundationCopy: Dictionary["learning"]["courses"]["foundation"];
+  userId?: string;
+  skipWorldZeroAction?: () => Promise<{ status: "saved" | "error" }>;
+  markDiscoverySeenAction?: () => Promise<{ status: "saved" | "error" }>;
 }) {
   const lessonCount = FOUNDATION_LESSONS.length;
   const completed = Math.min(completedLessonCount(progress, FOUNDATION_WORLD), lessonCount);
   const introComplete = hasCompletedLesson(progress, INTRO_WORLD, 1);
-  const introCurrent = !introComplete && completed === 0;
+  const introCurrent = !introComplete && completed === 0 && !progress.worldZeroSkipped;
   const nextLesson = FOUNDATION_LESSONS.find(
     ({ number }) => !hasCompletedLesson(progress, FOUNDATION_WORLD, number),
   )?.number;
@@ -67,7 +73,8 @@ export function DashboardHome({
     const done = hasCompletedLesson(progress, FOUNDATION_WORLD, lesson.number);
     const href = foundationLessonHref(lesson.number, track);
     const isNext = !introCurrent && !done && lesson.number === nextLesson && Boolean(href);
-    const isAvailable = introCurrent && !done && lesson.number === 1 && Boolean(href);
+    const isAvailable =
+      progress.worldZeroSkipped === true && !done && lesson.number === 1 && Boolean(href);
     const lessonCopy = foundationCopy.lessons[index]!;
     const state = done
       ? ("completed" as const)
@@ -99,12 +106,18 @@ export function DashboardHome({
       startLabel: foundationCopy.start,
       reviewLabel: foundationCopy.review,
       lockedExplanation: foundationCopy.lockedExplanation,
-      ...(href && (done || isNext || isAvailable) ? { href } : {}),
+      ...(href && (done || isNext || isAvailable || (introCurrent && lesson.number === 1))
+        ? { href }
+        : {}),
       id: `lesson-${lesson.number}`,
     };
   });
 
   const currentWorldOne = worldOneNodes.find(({ state }) => state === "current");
+  const nextLessonNumber = currentWorldOne?.lessonNumber ?? nextLesson;
+  const nextLessonHref =
+    currentWorldOne?.href ??
+    (nextLessonNumber ? foundationLessonHref(nextLessonNumber, track) : undefined);
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -112,15 +125,9 @@ export function DashboardHome({
         <h1 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           {copy.learnTitle}
         </h1>
-        <div className="mt-2 flex items-center justify-between gap-3">
-          <p className="min-w-0 text-xs font-semibold leading-relaxed text-muted-foreground sm:text-sm">
-            {courseCopy.intro.label} <ArrowRight className="mx-1 inline size-3" aria-hidden />
-            {foundationCopy.label}
-          </p>
-          <p className="shrink-0 text-sm font-semibold tabular-nums text-foreground">
-            {progressSteps}/{progressTotal}
-          </p>
-        </div>
+        <p className="mt-2 text-right text-sm font-semibold tabular-nums text-foreground">
+          {progressSteps}/{progressTotal}
+        </p>
         <div
           className="mt-2 h-1.5 overflow-hidden rounded-full bg-primary-soft"
           role="progressbar"
@@ -134,23 +141,28 @@ export function DashboardHome({
             style={{ width: `${(progressSteps / progressTotal) * 100}%` }}
           />
         </div>
-        <div className="mt-1.5 flex min-h-9 justify-end">
-          {introCurrent ? (
-            <Link
-              href="#lesson-1"
-              className="inline-flex min-h-9 items-center gap-1 font-semibold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              {courseCopy.intro.skip} <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          ) : currentWorldOne ? (
-            <Link
-              href={`#lesson-${currentWorldOne.lessonNumber}`}
-              className="inline-flex min-h-9 items-center gap-1 font-semibold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              {copy.resumeLesson(currentWorldOne.lessonNumber)}
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          ) : null}
+        <div className="mt-4">
+          <LearnStartActions
+            firstTime={introCurrent}
+            completedWorldOneLessons={completed}
+            initialWorldZeroSkipped={progress.worldZeroSkipped === true}
+            initialDiscoverySeen={progress.worldOneDiscoverySeen === true}
+            worldZeroHref="/lessons/why-invest"
+            worldOneLabel={copy.worldLabel(1)}
+            {...(userId ? { userId } : {})}
+            {...(nextLessonHref ? { nextLessonHref } : {})}
+            {...(nextLessonNumber ? { nextLessonLabel: copy.resumeLesson(nextLessonNumber) } : {})}
+            startLearningLabel={copy.startLearning}
+            alreadyKnowBasicsLabel={copy.alreadyKnowBasics}
+            discoveryTitle={copy.discoveryTitle}
+            discoveryDescription={copy.discoveryDescription}
+            discoveryAction={copy.discoveryAction}
+            discoveryClose={copy.discoveryClose}
+            preferenceFallback={copy.preferenceFallback}
+            preferenceSaveError={copy.preferenceSaveError}
+            {...(skipWorldZeroAction ? { skipWorldZeroAction } : {})}
+            {...(markDiscoverySeenAction ? { markDiscoverySeenAction } : {})}
+          />
         </div>
       </header>
 
@@ -160,15 +172,29 @@ export function DashboardHome({
         </h2>
         <WorldOnePath
           lessons={[introNode, ...worldOneNodes]}
-          progressLabel={progressLabel}
           lockedLabel={courseCopy.locked}
           notionsLabel={foundationCopy.notionsLabel}
           mascotAlt={foundationCopy.mascotAlt}
           closeLabel={foundationCopy.closePreview}
-          worldZeroLabel={courseCopy.intro.label}
-          worldOneLabel={foundationCopy.label}
+          currentLessonLabel={copy.currentLesson}
+          availableLessonLabel={copy.availableLesson}
+          worldZeroSkipped={progress.worldZeroSkipped === true}
+          {...(userId ? { userId } : {})}
         />
       </section>
+
+      <ComingNextSection
+        sectionTitle={copy.upcomingWorldsTitle}
+        worldTwoLabel={copy.worldLabel(2)}
+        worldTwoTitle={copy.upcomingWorlds[0]!}
+        comingSoonLabel={copy.comingSoon}
+        moreWorldsLabel={copy.moreWorlds}
+        moreWorldsCountLabel={copy.moreWorldsCount(copy.upcomingWorlds.length - 1)}
+        worlds={copy.upcomingWorlds.slice(1).map((title, index) => ({
+          worldLabel: copy.worldLabel(index + 3),
+          title,
+        }))}
+      />
     </div>
   );
 }
