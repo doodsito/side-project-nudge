@@ -1838,8 +1838,17 @@ export const us = {
       submitPending: "Sending…",
       success: "Thanks, it’s sent!",
       error: "We couldn’t send your message right now. Try again.",
-      messageMissing: "Write a message before sending.",
+      messageMissing: "Write a message or record audio before sending.",
       messageTooLong: "Message too long (2000 characters max).",
+      audioRecord: "Record audio",
+      audioStop: "Stop",
+      audioDelete: "Delete audio",
+      audioRecording: "Recording",
+      audioPlayback: "Listen to your audio",
+      audioDenied:
+        "We can’t access your microphone. Allow it in your browser, or write your message.",
+      audioUnsupported: "Recording doesn’t work on this browser. Write your message instead.",
+      audioNotice: `We keep your voice for 12 months at most, only to improve ${BRAND}.`,
     },
   },
 };
