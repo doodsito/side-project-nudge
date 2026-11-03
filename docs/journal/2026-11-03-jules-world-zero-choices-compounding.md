@@ -2,7 +2,7 @@
 
 - **Date :** 2026-11-03
 - **Auteur :** Jules, avec Codex
-- **Pull request :** À ouvrir
+- **Pull request :** https://github.com/doodsito/side-project-nudge/pull/74
 
 **Pourquoi :** Les premiers choix se chevauchaient et l’exemple des intérêts composés restait trop abstrait pour un débutant.
 
@@ -12,4 +12,4 @@
 
 **Fichiers :** `apps/web/src/app/lessons/why-invest/`, `apps/web/src/lib/`, `apps/web/tests/`
 **Vérifié :** tests ciblés, lint, typecheck et build ; preview française vérifiée sur ordinateur.
-**Suite :** Ouvrir la pull request.
+**Suite :** Fusionner après validation des contrôles.
