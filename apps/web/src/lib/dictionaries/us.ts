@@ -377,6 +377,8 @@ export const us = {
         start: "Explore World 0",
         review: "Review World 0",
         completed: "Lesson complete",
+        skip: "Skip World 0",
+        notions: ["What investing means", "Growth and compounding", "Risk and uncertainty"],
         progressLabel: (completed: number) => `World 0 progress: ${completed} of 1 lessons`,
       },
       foundation: {
@@ -401,6 +403,10 @@ export const us = {
         virtualMoney: "Virtual money",
         review: "Review lesson",
         start: "Start lesson",
+        notionsLabel: "In this lesson",
+        lockedExplanation: "Complete the previous lesson to unlock this step.",
+        closePreview: "Close lesson preview",
+        mascotAlt: "Nudge tilts its head thoughtfully.",
         rewardLabel: "World reward",
         rewardTitle: "Eight lessons to build your foundations",
         rewardIntro: "Finish World 1 to see what you have learned in this beta.",
@@ -410,34 +416,46 @@ export const us = {
           {
             title: "Where does your money go?",
             description: "Help Alex work out what is really left after the essentials.",
+            notions: ["Essential expenses", "What remains", "Cash-flow awareness"],
           },
           {
             title: "Pay yourself first",
             description: "Explore why saving first feels different from saving what is left.",
+            notions: ["Save before spending", "Build a routine", "Plan around real expenses"],
           },
           {
             title: "How much should you save?",
             description: "Use common percentages as flexible reference points, not fixed rules.",
+            notions: ["Flexible reference points", "Budget room", "A sustainable amount"],
           },
           {
             title: "Build your safety net",
             description: "See why different lives can call for different cash buffers.",
+            notions: ["Unexpected expenses", "Personal circumstances", "Accessible reserves"],
           },
           {
             title: "Money you’ll need soon",
             description: "Separate near-term needs from money that can stay invested longer.",
+            notions: ["When the money is needed", "Access and stability", "Time horizon"],
           },
           {
             title: "Debt vs investing",
             description: "Compare a certain borrowing cost with an uncertain investment return.",
+            notions: [
+              "Known borrowing costs",
+              "Uncertain returns",
+              "Deadlines and required payments",
+            ],
           },
           {
             title: "Cash isn’t risk-free",
             description: "Watch inflation change what the same amount of cash can buy.",
+            notions: ["Stable balances", "Purchasing power", "Near-term access"],
           },
           {
             title: "Savings vs investing",
             description: "Choose between accessibility, stability and long-term growth potential.",
+            notions: ["Accessibility", "Stability and loss risk", "Long-term growth potential"],
           },
         ],
       },
@@ -1651,19 +1669,25 @@ export const us = {
     },
   },
   dashboard: {
-    home: "home",
+    home: "Learn",
     tabsLabel: "Dashboard",
-    tabs: { home: "Home", courses: "Courses", portfolio: "Portfolio", account: "Account" },
+    tabs: { home: "Learn", courses: "Courses", portfolio: "Portfolio", account: "Profile" },
     preview: {
       title: "Local Home preview",
       label: "Local preview · sample data",
-      description:
-        "The progress shown is an example (2 of 8 lessons). Other dashboard pages require sign-in.",
+      description: "Sample progress is shown for review. Other dashboard pages require sign-in.",
     },
     homeScreen: {
+      learnTitle: "Learn",
+      worldIdentifier: "World 1",
       eyebrow: "Your next step",
       startHeading: "Your learning path starts here.",
       continueHeading: "Pick up where you left off.",
+      currentLesson: "Current",
+      availableLesson: "Available",
+      pathProgressLabel: (completed: number, total: number) =>
+        `${completed} of ${total} path steps complete`,
+      resumeLesson: (number: number) => `Continue at lesson ${number}`,
       completeHeading: "See how far you’ve come.",
       review: "Review your journey",
       worldComplete: "World 1 complete",

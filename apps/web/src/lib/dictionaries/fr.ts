@@ -388,6 +388,12 @@ export const fr: Dictionary = {
         start: "Découvrir le Monde 0",
         review: "Revoir le Monde 0",
         completed: "Leçon terminée",
+        skip: "Passer le Monde 0",
+        notions: [
+          "Comprendre l’investissement",
+          "Croissance et intérêts composés",
+          "Risque et incertitude",
+        ],
         progressLabel: (completed: number) => `Progression du Monde 0 : ${completed} leçon sur 1`,
       },
       foundation: {
@@ -413,6 +419,10 @@ export const fr: Dictionary = {
         virtualMoney: "Argent virtuel",
         review: "Revoir la leçon",
         start: "Commencer la leçon",
+        notionsLabel: "Au programme",
+        lockedExplanation: "Termine la leçon précédente pour débloquer cette étape.",
+        closePreview: "Fermer l’aperçu de la leçon",
+        mascotAlt: "Nudge penche la tête avec curiosité.",
         rewardLabel: "Récompense du monde",
         rewardTitle: "Huit leçons pour construire tes bases",
         rewardIntro:
@@ -424,41 +434,57 @@ export const fr: Dictionary = {
             title: "Où va ton argent ?",
             description:
               "Aide Alex à calculer ce qu’il lui reste vraiment après ses dépenses essentielles.",
+            notions: ["Dépenses essentielles", "Ce qu’il reste", "Suivi des dépenses"],
           },
           {
             title: "Paie-toi en premier",
             description:
               "Découvre pourquoi épargner d’abord change la donne par rapport à épargner ce qui reste.",
+            notions: [
+              "Épargner avant de dépenser",
+              "Créer une habitude",
+              "Prévoir les dépenses réelles",
+            ],
           },
           {
             title: "Combien devrais-tu épargner ?",
             description:
               "Utilise les pourcentages courants comme repères souples, pas comme règles fixes.",
+            notions: ["Des repères souples", "La marge du budget", "Un montant tenable"],
           },
           {
             title: "Construis ton filet de sécurité",
             description:
               "Comprends pourquoi chaque situation demande une réserve de précaution différente.",
+            notions: ["Dépenses imprévues", "Situation personnelle", "Réserve accessible"],
           },
           {
             title: "L’argent dont tu auras bientôt besoin",
             description:
               "Sépare tes besoins proches de l’argent qui peut rester investi plus longtemps.",
+            notions: ["La date du besoin", "Accès et stabilité", "Horizon de placement"],
           },
           {
             title: "Rembourser une dette ou investir ?",
             description:
               "Compare le coût certain d’un emprunt au rendement incertain d’un investissement.",
+            notions: [
+              "Coût connu d’un emprunt",
+              "Rendement incertain",
+              "Échéances et paiements dus",
+            ],
           },
           {
             title: "Les liquidités ne sont pas sans risque",
             description:
               "Observe comment l’inflation réduit ce que la même somme permet d’acheter.",
+            notions: ["Solde stable", "Pouvoir d’achat", "Disponibilité à court terme"],
           },
           {
             title: "Épargner ou investir ?",
             description:
               "Choisis entre disponibilité, stabilité et potentiel de croissance à long terme.",
+            notions: ["Disponibilité", "Stabilité et risque de perte", "Potentiel à long terme"],
           },
         ],
       },
@@ -1695,19 +1721,26 @@ export const fr: Dictionary = {
     },
   },
   dashboard: {
-    home: "accueil",
+    home: "Apprendre",
     tabsLabel: "Tableau de bord",
-    tabs: { home: "Accueil", courses: "Cours", portfolio: "Portefeuille", account: "Compte" },
+    tabs: { home: "Apprendre", courses: "Cours", portfolio: "Portefeuille", account: "Profil" },
     preview: {
       title: "Aperçu local de l’accueil",
       label: "Aperçu local · données fictives",
       description:
-        "La progression affichée est un exemple (2 leçons sur 8). Les autres pages du tableau de bord demandent une connexion.",
+        "La progression fictive sert à tester l’interface. Les autres pages du tableau de bord demandent une connexion.",
     },
     homeScreen: {
+      learnTitle: "Apprendre",
+      worldIdentifier: "Monde 1",
       eyebrow: "Ta prochaine étape",
       startHeading: "Ton parcours commence ici.",
       continueHeading: "Reprends là où tu en es.",
+      currentLesson: "En cours",
+      availableLesson: "Disponible",
+      pathProgressLabel: (completed, total) =>
+        `${completed} étape${completed > 1 ? "s" : ""} sur ${total} terminée${completed > 1 ? "s" : ""}`,
+      resumeLesson: (number) => `Reprendre à la leçon ${number}`,
       completeHeading: "Voici ton parcours accompli.",
       review: "Revoir ton parcours",
       worldComplete: "Monde 1 terminé",

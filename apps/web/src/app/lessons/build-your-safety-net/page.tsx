@@ -17,7 +17,7 @@ export default async function BuildYourSafetyNetPage() {
     !isLessonFourAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 3)
   ) {
-    redirect("/dashboard/courses/financial-foundation#lesson-4");
+    redirect("/dashboard");
   }
 
   return (

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { DashboardHome } from "@/components/dashboard/dashboard-home";
 import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
-import { FOUNDATION_WORLD, type CourseProgress } from "@/lib/course-progress";
+import { FOUNDATION_WORLD, INTRO_WORLD, type CourseProgress } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { DEFAULT_TRACK, isTrack, TRACK_INFO } from "@/lib/tracks";
 
@@ -32,7 +32,7 @@ export default async function DashboardPreviewPage({
   const host = (await headers()).get("host") ?? "";
   if (!/^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host)) notFound();
 
-  const { track: requestedTrack } = await searchParams;
+  const { track: requestedTrack, state } = await searchParams;
   const track = isTrack(requestedTrack) ? requestedTrack : DEFAULT_TRACK;
   const t = getDictionary(track);
   const homeHref = `/dev/dashboard-preview?track=${track}`;
@@ -48,7 +48,13 @@ export default async function DashboardPreviewPage({
       </aside>
       <DashboardTemplate preview homeHref={homeHref} t={t.dashboard} skipLink={t.skipLink}>
         <DashboardHome
-          progress={sampleProgress}
+          progress={
+            state === "first-time"
+              ? { version: 1, completedLessons: {} }
+              : state === "world-zero-complete"
+                ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
+                : sampleProgress
+          }
           track={track}
           copy={t.dashboard.homeScreen}
           courseCopy={t.learning.courses}

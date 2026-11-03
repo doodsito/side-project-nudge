@@ -10,7 +10,7 @@ export function PracticeHeader({
   current,
   total,
   copy,
-  exitHref = "/dashboard/courses/financial-foundation",
+  exitHref = "/dashboard",
 }: {
   current: number;
   total: number;

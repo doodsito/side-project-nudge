@@ -294,7 +294,7 @@ export function WhyInvestLesson(props: Props) {
       action={
         props.progressStatus === "saved" ? (
           <Button asChild size="xl" className="w-full sm:ml-auto sm:flex sm:w-fit">
-            <Link href="/dashboard/courses/financial-foundation">
+            <Link href="/dashboard">
               {copy.complete.action} <ArrowRight aria-hidden="true" />
             </Link>
           </Button>

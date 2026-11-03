@@ -16,7 +16,7 @@ export default async function SavingsVsInvestingPage() {
     !isLessonEightAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 7)
   ) {
-    redirect("/dashboard/courses/financial-foundation#lesson-8");
+    redirect("/dashboard");
   }
 
   redirect("/lessons/savings-vs-investing");

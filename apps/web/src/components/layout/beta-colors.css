@@ -30,3 +30,24 @@ body:has([data-nudge-beta]) {
 [data-nudge-beta] .bg-ink {
   --ring: #ffffff;
 }
+
+/* Invite one tap on the next lesson, then settle into a stable map. */
+@keyframes nudge-current-step {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--secondary) 45%, transparent);
+  }
+  45% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--secondary) 0%, transparent);
+  }
+}
+
+[data-nudge-beta] .nudge-current-step {
+  animation: nudge-current-step 700ms ease-out 180ms 1 both;
+}
+
+[data-nudge-beta] .nudge-world-label {
+  text-shadow: 0 0 5px var(--primary-soft), 0 0 8px var(--primary-soft);
+}
