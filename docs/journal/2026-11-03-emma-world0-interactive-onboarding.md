@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-03
 - **Author:** Emma, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/68
 
 **Why:** New learners should start with a decision, and returning learners should find their next lesson quickly.
 
