@@ -50,12 +50,13 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
     },
   ],
   legalLinks: {
-    privacyPolicy: { href: "/privacy-policy", target: "_self", label: "Privacy policy" },
-    cookiePolicy: { href: "/cookies", target: "_self", label: "Cookie policy" },
+    privacyPolicy: { href: "/privacy-policy", target: "_self" },
+    cookiePolicy: { href: "/cookies", target: "_self" },
   },
   i18n: {
     messages: {
       en: {
+        legalLinks: { privacyPolicy: "Privacy policy", cookiePolicy: "Cookie policy" },
         common: {
           acceptAll: "Accept all",
           rejectAll: "Reject all",
@@ -85,6 +86,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         },
       },
       fr: {
+        legalLinks: { privacyPolicy: "Confidentialité", cookiePolicy: "Cookies" },
         common: {
           acceptAll: "Tout accepter",
           rejectAll: "Tout refuser",
