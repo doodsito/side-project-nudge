@@ -664,7 +664,7 @@ export function DebtVsInvestingLesson(props: Props) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation#lesson-6">
+              <Link href="/dashboard">
                 {copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

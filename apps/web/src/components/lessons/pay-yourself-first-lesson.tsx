@@ -514,7 +514,7 @@ export function PayYourselfFirstLesson(props: Props) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation#lesson-2">
+              <Link href="/dashboard">
                 {props.copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

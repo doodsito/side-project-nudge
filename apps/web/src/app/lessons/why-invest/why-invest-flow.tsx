@@ -65,7 +65,7 @@ export function WhyInvestFlow({
       total={WHY_INVEST_STEPS.length}
       copy={dictionary.learning.shared}
       skipLink={dictionary.skipLink}
-      exitHref="/dashboard/courses"
+      exitHref="/dashboard"
     >
       <div ref={content} className="flex min-h-0 flex-1 flex-col [&_h1]:focus:outline-none">
         <WhyInvestLesson

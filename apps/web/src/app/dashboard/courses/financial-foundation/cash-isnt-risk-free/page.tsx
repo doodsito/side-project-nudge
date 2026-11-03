@@ -16,7 +16,7 @@ export default async function CashIsntRiskFreePage() {
     !isLessonSevenAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 6)
   ) {
-    redirect("/dashboard/courses/financial-foundation#lesson-7");
+    redirect("/dashboard");
   }
 
   redirect("/lessons/cash-isnt-risk-free");

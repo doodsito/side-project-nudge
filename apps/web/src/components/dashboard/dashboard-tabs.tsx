@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, CircleUser, House, Wallet } from "lucide-react";
+import { CircleUser, House, Wallet } from "lucide-react";
 import type { Dictionary } from "@/lib/dictionaries";
 import { cn } from "@/lib/utils";
 
 // Each tab is its own URL, so a tab can be bookmarked and the back button works.
 const TABS = [
   { href: "/dashboard", tab: "home", icon: House },
-  { href: "/dashboard/courses", tab: "courses", icon: BookOpen },
   { href: "/dashboard/portfolio", tab: "portfolio", icon: Wallet },
   { href: "/dashboard/account", tab: "account", icon: CircleUser },
 ] as const;
@@ -31,7 +30,7 @@ export function DashboardTabs({
       aria-label={tabsLabel}
       className={mobile ? "border-t border-border bg-surface" : "border-b border-border"}
     >
-      <ul className={mobile ? "grid grid-cols-4" : "-mb-px flex gap-1 overflow-x-auto"}>
+      <ul className={mobile ? "grid grid-cols-3" : "-mb-px flex gap-1 overflow-x-auto"}>
         {TABS.map(({ href, tab, icon: Icon }) => {
           const targetHref = tab === "home" ? homeHref : href;
           const current =

@@ -519,7 +519,7 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation#lesson-3">
+              <Link href="/dashboard">
                 {copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
