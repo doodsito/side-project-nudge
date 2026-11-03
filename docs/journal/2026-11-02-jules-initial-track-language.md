@@ -1,7 +1,7 @@
 # Show the selected language on the first render
 - **Date:** 2026-11-02
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/66
 
 **Why:** The public practice lesson briefly rendered in French after selecting the United States because its client component used the French default until hydration.
 
