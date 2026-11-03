@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { FeedbackProvider } from "@/components/shared/feedback-widget";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { FOUNDATION_WORLD, hasCompletedLesson } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
@@ -21,20 +20,13 @@ export default async function SavingsVsInvestingPage() {
     redirect("/dashboard");
   }
 
-  const dictionary = getDictionary(member.track);
   return (
     <div lang={member.track === "fr" ? "fr-FR" : "en-US"}>
-      <FeedbackProvider
-        t={dictionary.dashboard.feedback}
-        intro={dictionary.lesson8.complete.feedbackPrompt}
-        showFloatingTrigger={false}
-      >
-        <SavingsVsInvestingFlow
-          track={member.track}
-          userId={member.id}
-          alreadyCompleted={hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 8)}
-        />
-      </FeedbackProvider>
+      <SavingsVsInvestingFlow
+        track={member.track}
+        userId={member.id}
+        alreadyCompleted={hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 8)}
+      />
     </div>
   );
 }
