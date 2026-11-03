@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CircleAlert, CircleCheck } from "lucide-react";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { SubmitButton } from "@/components/auth/submit-button";
+import { ResetProgressSection } from "@/components/dashboard/reset-progress-section";
 import { FeedbackHeaderButton } from "@/components/shared/feedback-widget";
 import { textLinkClass } from "@/components/shared/text-link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -10,6 +11,7 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { TrackOption } from "@/components/shared/track-option";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { CONTACT_EMAIL } from "@/lib/brand";
+import { totalCompletedLessonCount } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { TRACK_INFO, TRACKS } from "@/lib/tracks";
 import { changeTrack, signOut } from "../actions";
@@ -115,6 +117,18 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
           </SubmitButton>
         </form>
       </section>
+      <ResetProgressSection
+        userId={member.id}
+        title={t.resetTitle}
+        text={t.resetText}
+        action={t.resetAction}
+        dialogTitle={t.resetDialogTitle}
+        dialogText={t.resetDialogText(totalCompletedLessonCount(member.courseProgress))}
+        confirm={t.resetConfirm}
+        pendingLabel={t.resetPending}
+        cancel={t.resetCancel}
+        error={t.resetError}
+      />
       <section
         aria-labelledby="account-delete"
         className="mt-6 rounded-3xl border border-border p-6"
