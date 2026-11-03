@@ -15,10 +15,10 @@ import {
 } from "@/lib/first-paycheque-lesson";
 import { track } from "@/lib/analytics";
 import { getDictionary } from "@/lib/dictionaries";
-import { DEFAULT_TRACK } from "@/lib/tracks";
+import { type Track } from "@/lib/tracks";
 import { completeFirstLesson } from "./actions";
 
-export function PracticeFlow() {
+export function PracticeFlow({ initialTrack }: { initialTrack: Track }) {
   const [step, setStep] = useState<LessonView>("welcome");
   const [expenseIndex, setExpenseIndex] = useState(0);
   const [expenseAnswer, setExpenseAnswer] = useState<ExpenseType | null>(null);
@@ -28,7 +28,7 @@ export function PracticeFlow() {
   const [skipChecked, setSkipChecked] = useState(false);
   const [skipped, setSkipped] = useState(false);
   // Dollars on the US track, euros otherwise (France is the default track).
-  const lessonTrack = useTrackCookie() ?? DEFAULT_TRACK;
+  const lessonTrack = useTrackCookie() ?? initialTrack;
   const dictionary = getDictionary(lessonTrack);
   const learningCopy = dictionary.learning;
   const [progressStatus, setProgressStatus] = useState<ProgressStatus>("idle");

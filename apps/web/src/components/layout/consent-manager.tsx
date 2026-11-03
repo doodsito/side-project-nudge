@@ -11,7 +11,7 @@ import {
 } from "@c15t/nextjs";
 import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
-import { trackFromPath } from "@/lib/tracks";
+import { DEFAULT_TRACK, trackFromPath, type Track } from "@/lib/tracks";
 
 // The pages the banner links to: they stay readable and scrollable while it is open.
 const POLICY_PAGES = ["/privacy-policy", "/cookies"];
@@ -189,15 +189,22 @@ function ConsentLanguage({ language }: { language: Language }) {
   return null;
 }
 
-export function ConsentManager({ children }: { children: ReactNode }) {
+export function ConsentManager({
+  children,
+  initialTrack,
+}: {
+  children: ReactNode;
+  initialTrack: Track | null;
+}) {
   const pathname = usePathname();
   const onPolicyPage = POLICY_PAGES.includes(pathname);
   const pageTrack = trackFromPath(pathname);
   const savedTrack = useTrackCookie();
   // On a track's pages, a first-time visitor makes both choices in TrackDialog;
   // the banner only asks if they close it without choosing for cookies.
-  const showBanner = !pageTrack || Boolean(savedTrack);
-  const language = (pageTrack ?? savedTrack) === "fr" ? "fr" : "en";
+  const showBanner = !pageTrack || Boolean(savedTrack ?? initialTrack);
+  const language =
+    (pageTrack ?? savedTrack ?? initialTrack ?? DEFAULT_TRACK) === "fr" ? "fr" : "en";
   // Only the first language starts c15t; ConsentLanguage follows later changes.
   const [startLanguage] = useState<Language>(language);
   const providerOptions = useMemo(
