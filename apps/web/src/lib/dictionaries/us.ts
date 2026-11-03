@@ -166,6 +166,7 @@ export const us = {
     title: `Welcome to ${BRAND}`,
     description: "Where are you based? You can switch at the bottom of the page.",
     continue: "Continue",
+    error: "We couldn’t switch versions just now. Please try again.",
     options: {
       fr: { country: "France", detail: "In French, in euros" },
       us: { country: "United States", detail: "In English, in dollars" },

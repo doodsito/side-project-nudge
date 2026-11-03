@@ -4,6 +4,7 @@ import { Eyebrow } from "@/components/shared/eyebrow";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
 import { SkipLink } from "@/components/layout/skip-link";
 import { BRAND } from "@/lib/brand";
+import { TRACK_INFO, type Track } from "@/lib/tracks";
 
 // Styles the policy text, so a legal page only holds headings, paragraphs, lists and links.
 const prose = [
@@ -18,29 +19,37 @@ export function LegalTemplate({
   title,
   updated,
   children,
+  track,
 }: {
   title: string;
   updated: string;
   children: ReactNode;
+  track: Track;
 }) {
   return (
-    <>
-      <SkipLink />
+    <div lang={TRACK_INFO[track].lang}>
+      <SkipLink label={track === "fr" ? "Aller au contenu" : "Skip to content"} />
       <header className="px-5 pt-6 sm:px-8">
         <div className="mx-auto max-w-3xl">
-          <Link href="/" aria-label={`${BRAND} home`} className="inline-flex">
+          <Link
+            href="/"
+            aria-label={`${BRAND} ${track === "fr" ? "accueil" : "home"}`}
+            className="inline-flex"
+          >
             <NudgeNextLogo />
           </Link>
         </div>
       </header>
       <main id="main-content" tabIndex={-1} className="px-5 pt-14 pb-20 sm:px-8 sm:pt-20 sm:pb-28">
         <article className="mx-auto max-w-3xl">
-          <Eyebrow>Legal</Eyebrow>
+          <Eyebrow>{track === "fr" ? "Informations légales" : "Legal"}</Eyebrow>
           <h1 className="mt-4 font-display text-4xl font-extrabold sm:text-5xl">{title}</h1>
-          <p className="mt-4 text-sm text-muted-foreground">Last updated: {updated}</p>
+          <p className="mt-4 text-sm text-muted-foreground">
+            {track === "fr" ? "Dernière mise à jour" : "Last updated"} : {updated}
+          </p>
           <div className={prose}>{children}</div>
         </article>
       </main>
-    </>
+    </div>
   );
 }

@@ -2,18 +2,155 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalTemplate } from "@/components/layout/legal-template";
 import { BRAND, CONTACT_EMAIL, PUBLISHER, SITE_URL } from "@/lib/brand";
+import { getVisitorTrack } from "@/lib/auth";
 import { llmsTxtAlternate } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy | ${BRAND}`,
-  description: `What personal data ${BRAND} collects, why, how long we keep it and how to use your rights.`,
-  alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/privacy-policy` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const fr = (await getVisitorTrack()) === "fr";
+  return {
+    title: `${fr ? "Politique de confidentialité" : "Privacy Policy"} | ${BRAND}`,
+    description: fr
+      ? `Quelles données personnelles ${BRAND} recueille, pourquoi, combien de temps elles sont conservées et comment exercer tes droits.`
+      : `What personal data ${BRAND} collects, why, how long we keep it and how to use your rights.`,
+    alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/privacy-policy` },
+  };
+}
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  const track = await getVisitorTrack();
   const contact = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
+  if (track === "fr") {
+    return (
+      <LegalTemplate track={track} title="Politique de confidentialité" updated="6 octobre 2026">
+        <p>
+          Cette politique explique quelles données personnelles {BRAND} recueille sur{" "}
+          {new URL(SITE_URL).host}, pourquoi, combien de temps nous les conservons et comment
+          exercer tes droits. Nous ne vendons jamais tes données et ne les utilisons pas pour la
+          publicité.
+        </p>
+        <h2>Responsable du traitement</h2>
+        <p>
+          Le responsable du traitement est {PUBLISHER}, qui édite {BRAND} à titre individuel (voir
+          les <Link href="/legal-notice">mentions légales</Link>). Pour toute question sur tes
+          données, écris à {contact}.
+        </p>
+        <h2>Données recueillies et finalités</h2>
+        <ul>
+          <li>
+            <strong>Liste d’accès anticipé.</strong> Lorsque tu t’inscris, nous conservons ton
+            adresse e-mail, le profil choisi (étudiant, jeune actif ou autre), l’endroit du site où
+            tu t’es inscrit et la date. Nous les utilisons uniquement pour te prévenir de
+            l’ouverture de l’accès anticipé et du lancement de {BRAND} ; le profil nous aide à
+            comprendre qui s’intéresse au projet. Base légale : ton consentement, donné en envoyant
+            le formulaire.
+          </li>
+          <li>
+            <strong>Ton compte bêta.</strong> Lorsque tu crées un compte avec un code d’accès, nous
+            conservons ton adresse e-mail, ton mode de connexion (mot de passe ou Google), le code
+            utilisé, la date de ton inscription et celle de ta dernière connexion. Ton mot de passe
+            est conservé uniquement sous forme hachée, illisible même pour nous. Si tu utilises
+            Google, celui-ci nous transmet aussi ton nom et ta photo de profil. Ces données servent
+            uniquement à te connecter et à utiliser la bêta. Base légale : les conditions que tu
+            acceptes lors de la création du compte.
+          </li>
+          <li>
+            <strong>Mesure d’audience.</strong> Si tu acceptes les cookies analytiques, Google
+            Analytics enregistre ta visite : pages consultées, fonctionnalités utilisées (comme ton
+            choix dans un exercice ou le profil choisi pour rejoindre la liste, jamais ton e-mail),
+            localisation approximative, appareil et navigateur. Base légale : ton consentement. Les
+            détails figurent dans la <Link href="/cookies">politique relative aux cookies</Link>.
+          </li>
+          <li>
+            <strong>Ton choix de cookies.</strong> Nous le conservons dans un cookie et dans le
+            stockage local de ton navigateur pour ne pas te reposer la question à chaque page. Il
+            reste dans ton navigateur ; nous ne le recevons pas.
+          </li>
+          <li>
+            <strong>Données techniques.</strong> Notre hébergeur, Vercel, traite des données
+            techniques comme ton adresse IP, ton navigateur et les pages demandées pour afficher le
+            site et le protéger contre les abus. Base légale : notre intérêt légitime à exploiter un
+            site fonctionnel et sécurisé.
+          </li>
+        </ul>
+        <p>
+          Ce que tu saisis dans l’exercice reste dans l’onglet de ton navigateur et disparaît quand
+          tu quittes la page : nous ne le conservons pas.
+        </p>
+        <h2>Destinataires</h2>
+        <p>
+          Seule l’équipe {BRAND} peut consulter la liste d’accès anticipé et les comptes. Ces
+          prestataires traitent des données pour notre compte, dans le cadre d’un accord de
+          sous-traitance :
+        </p>
+        <ul>
+          <li>Vercel Inc., États-Unis : hébergement du site.</li>
+          <li>
+            Supabase : connexion et base de données de la liste d’accès anticipé et des comptes,
+            hébergées dans l’Union européenne (Paris).
+          </li>
+          <li>
+            Google Ireland Limited : Google Analytics uniquement si tu l’acceptes, et connexion avec
+            Google uniquement si tu la choisis.
+          </li>
+          <li>
+            Resend, Inc., États-Unis : envoi des e-mails du compte (confirmation de l’adresse,
+            réinitialisation du mot de passe) depuis des serveurs dans l’Union européenne (Irlande).
+          </li>
+        </ul>
+        <h2>Transferts hors de l’Union européenne</h2>
+        <p>
+          Certains de ces prestataires peuvent traiter des données aux États-Unis. Ces transferts
+          reposent sur la décision d’adéquation de la Commission européenne concernant le cadre de
+          protection des données UE–États-Unis, ou sur ses clauses contractuelles types.
+        </p>
+        <h2>Durée de conservation</h2>
+        <ul>
+          <li>
+            Liste d’accès anticipé : jusqu’à ta demande de retrait, et au plus 3 ans après ton
+            inscription.
+          </li>
+          <li>Compte bêta : jusqu’à ta demande de suppression.</li>
+          <li>
+            Google Analytics : ses cookies durent au plus 13 mois et les données recueillies sont
+            conservées au plus 14 mois.
+          </li>
+          <li>Ton choix de cookies : 6 mois, puis nous te redemandons.</li>
+          <li>
+            Données techniques : pendant la courte durée nécessaire à Vercel pour exploiter et
+            sécuriser le site.
+          </li>
+        </ul>
+        <h2>Tes droits</h2>
+        <p>
+          Tu peux demander l’accès à tes données, leur rectification ou leur suppression, limiter
+          leur utilisation ou t’y opposer, et les recevoir dans un format portable. Tu peux aussi
+          donner des instructions sur le sort de tes données après ton décès. Lorsque le traitement
+          repose sur ton consentement, tu peux le retirer à tout moment : pour quitter la liste
+          d’accès anticipé ou supprimer ton compte, écris-nous depuis l’adresse concernée ; pour
+          désactiver la mesure d’audience, clique sur « Cookies » en bas de n’importe quelle page.
+        </p>
+        <p>
+          Pour exercer tes droits, écris à {contact}. Nous répondons sous un mois. Si tu estimes que
+          tes droits ne sont pas respectés, tu peux saisir la CNIL, l’autorité française de
+          protection des données (<a href="https://www.cnil.fr">cnil.fr</a>).
+        </p>
+        <h2>Mineurs</h2>
+        <p>
+          Tu dois avoir au moins 15 ans pour rejoindre la liste d’accès anticipé ou créer un compte
+          : en dessous de cet âge, la loi française exige le consentement d’un parent. Le reste du
+          site fonctionne sans fournir de données personnelles.
+        </p>
+        <h2>Modification de cette politique</h2>
+        <p>
+          Lorsque cette politique change, nous mettons à jour la date en haut de cette page. Si un
+          changement concerne l’utilisation de ton e-mail, nous prévenons les personnes inscrites
+          sur la liste d’accès anticipé avant son entrée en vigueur.
+        </p>
+      </LegalTemplate>
+    );
+  }
   return (
-    <LegalTemplate title="Privacy policy" updated="6 October 2026">
+    <LegalTemplate track={track} title="Privacy policy" updated="6 October 2026">
       <p>
         This policy explains what personal data {BRAND} collects on {new URL(SITE_URL).host}, why,
         how long we keep it and how to use your rights. We never sell your data and never use it for
