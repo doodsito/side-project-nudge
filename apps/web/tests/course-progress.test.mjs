@@ -13,12 +13,14 @@ runInNewContext(compiled, { module: compiledModule, exports: compiledModule.expo
 
 const {
   FOUNDATION_WORLD,
+  INTRO_WORLD,
   completeLesson,
   completedLessonCount,
   hasCompletedLesson,
   markWorldOneDiscoverySeen,
   readCourseProgress,
   skipWorldZero,
+  totalCompletedLessonCount,
 } = compiledModule.exports;
 
 test("invalid account metadata starts with empty course progress", () => {
@@ -138,6 +140,16 @@ test("lesson seven saves 7/8 progress and unlocks lesson eight", () => {
   assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 7), true);
   assert.equal(hasCompletedLesson(progress, FOUNDATION_WORLD, 8), false);
   assert.deepEqual(Array.from(progress.completedLessons[FOUNDATION_WORLD]), [1, 2, 3, 4, 5, 6, 7]);
+});
+
+test("total completed lessons counts every world", () => {
+  assert.equal(totalCompletedLessonCount(readCourseProgress(null)), 0);
+  const progress = completeLesson(
+    completeLesson(readCourseProgress(null), FOUNDATION_WORLD, 1),
+    INTRO_WORLD,
+    1,
+  );
+  assert.equal(totalCompletedLessonCount(progress), 2);
 });
 
 test("lesson eight saves 8/8 progress and is idempotent", () => {

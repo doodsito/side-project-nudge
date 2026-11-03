@@ -1797,6 +1797,19 @@ export const us = {
       versionError: "We couldn’t change your version just now. Please try again.",
       versionSave: "Save",
       versionSaving: "Saving…",
+      resetTitle: "Reset my progress",
+      resetText:
+        "Restart your courses from the beginning, as if you had just created your account. Your account, version and feedback stay the same.",
+      resetAction: "Reset my progress",
+      resetDialogTitle: "Reset your progress?",
+      resetDialogText: (count: number) =>
+        count === 0
+          ? "Your path will go back to its starting point. This can’t be undone."
+          : `You’ll lose ${count} completed ${count > 1 ? "lessons" : "lesson"}. This can’t be undone.`,
+      resetConfirm: "Yes, reset",
+      resetPending: "Resetting…",
+      resetCancel: "Cancel",
+      resetError: "We couldn’t reset your progress just now. Please try again.",
       deleteTitle: "Delete your account",
       deleteEmail: "Email",
       deleteFrom:
