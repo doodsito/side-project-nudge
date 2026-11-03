@@ -375,9 +375,13 @@
 
 .growthValues {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+}
+
+.growthValues .sliderLabel {
+  margin: 0;
 }
 
 .money {
@@ -395,28 +399,78 @@
 .chart {
   display: block;
   width: 100%;
-  height: 6rem;
-  margin-top: 0.2rem;
+  height: 8.25rem;
+  margin-top: 0.45rem;
   overflow: visible;
 }
 
-.chartArea {
-  fill: var(--nudge-learn-violet-soft, var(--nudge-learn-neutral-100));
-  opacity: 0.8;
+.chartBaseline {
+  stroke: var(--line);
+  stroke-width: 1.5;
 }
 
-.chartLine {
+.chartLine,
+.chartLineSetAside {
   fill: none;
-  stroke: var(--violet);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 4;
 }
 
-.chartMarker {
-  fill: var(--gold);
+.chartLine {
+  stroke: var(--violet);
+}
+
+.chartLineSetAside {
+  stroke: var(--gold);
+}
+
+.chartMarker,
+.chartMarkerSetAside {
   stroke: var(--white);
   stroke-width: 3;
+}
+
+.chartMarker {
+  fill: var(--violet);
+}
+
+.chartMarkerSetAside {
+  fill: var(--gold);
+}
+
+.chartLegend {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+}
+
+.chartLegend > div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.7rem;
+}
+
+.chartLegend strong,
+.growthSummary strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.legendReinvested,
+.legendSetAside {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+
+.legendReinvested {
+  background: var(--violet);
+}
+
+.legendSetAside {
+  background: var(--gold);
 }
 
 .sliderLabel {
@@ -444,6 +498,88 @@
   justify-content: space-between;
   color: var(--muted);
   font-size: 0.68rem;
+}
+
+.growthSummary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.growthSummary > div {
+  min-width: 0;
+  padding: 0.65rem;
+  border-radius: 0.75rem;
+  background: var(--nudge-learn-neutral-50);
+}
+
+.growthSummary span,
+.growthSummary strong {
+  display: block;
+}
+
+.growthSummary span {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.growthSummary strong {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.growthSummary .difference {
+  background: var(--nudge-learn-violet-soft);
+}
+
+.growthSummary .difference strong {
+  color: var(--violet);
+}
+
+.snowball {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+  padding: 0.8rem;
+  border: 1px solid var(--nudge-learn-violet-200, var(--line));
+  border-radius: 0.9rem;
+  background: var(--white);
+  animation: content-enter 310ms var(--motion-ease) 100ms both;
+}
+
+.snowball > svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 auto;
+  color: var(--violet);
+}
+
+.snowball strong {
+  display: block;
+  font-size: 0.78rem;
+}
+
+.snowball p {
+  margin: 0.25rem 0 0;
+  color: var(--nudge-learn-neutral-700, var(--muted));
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .assumption,

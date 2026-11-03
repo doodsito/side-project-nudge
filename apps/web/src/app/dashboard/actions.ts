@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
 import { requireMember } from "@/lib/auth";
 import {
+  EMPTY_COURSE_PROGRESS,
   markWorldOneDiscoverySeen as setWorldOneDiscoverySeen,
   skipWorldZero as setWorldZeroSkipped,
   type CourseProgress,
@@ -43,6 +44,11 @@ export async function skipWorldZero() {
 /** Records that the one-time World 1 discovery popup was dismissed or explored. */
 export async function markWorldOneDiscoverySeen() {
   return saveLearnPreference(setWorldOneDiscoverySeen);
+}
+
+/** Erases the member's course progress: lessons, skip and discovery. The account itself is untouched. */
+export async function resetCourseProgress() {
+  return saveLearnPreference(() => EMPTY_COURSE_PROGRESS);
 }
 
 export type FeedbackFormState = { error?: string; success?: boolean };
