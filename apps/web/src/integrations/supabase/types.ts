@@ -40,25 +40,28 @@ export type Database = {
       };
       feedback_submissions: {
         Row: {
+          audio_path: string | null;
           category: string;
           created_at: string;
           id: number;
           member_id: string;
-          message: string;
+          message: string | null;
         };
         Insert: {
+          audio_path?: string | null;
           category: string;
           created_at?: string;
           id?: never;
           member_id: string;
-          message: string;
+          message?: string | null;
         };
         Update: {
+          audio_path?: string | null;
           category?: string;
           created_at?: string;
           id?: never;
           member_id?: string;
-          message?: string;
+          message?: string | null;
         };
         Relationships: [
           {

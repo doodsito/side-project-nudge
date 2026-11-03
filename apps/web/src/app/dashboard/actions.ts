@@ -10,6 +10,11 @@ import {
   type CourseProgress,
 } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
+import {
+  FEEDBACK_AUDIO_BUCKET,
+  feedbackAudioExtension,
+  isFeedbackAudioPath,
+} from "@/lib/feedback-audio";
 import { isTrack } from "@/lib/tracks";
 import { saveSelectedTrack } from "@/app/track-actions";
 
@@ -58,7 +63,24 @@ export async function changeTrack(formData: FormData) {
   redirect(saved ? "/dashboard/account?track=updated" : "/dashboard/account?track=error");
 }
 
-/** Sends a beta tester's feedback from the dashboard's floating form. */
+/**
+ * Lets the browser upload one voice message straight to the private bucket. The
+ * server picks the path, so a member can only ever write to their own folder.
+ */
+export async function prepareFeedbackAudio(type: string) {
+  const member = await requireMember();
+  const extension = feedbackAudioExtension(type);
+  if (!extension) return null;
+  const path = `${member.id}/${crypto.randomUUID()}.${extension}`;
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.storage
+    .from(FEEDBACK_AUDIO_BUCKET)
+    .createSignedUploadUrl(path);
+  if (error) return null;
+  return { path, token: data.token };
+}
+
+/** Sends a beta tester's feedback from the dashboard's floating form: a message or a recording. */
 export async function submitFeedback(
   _: FeedbackFormState,
   formData: FormData,
@@ -70,13 +92,20 @@ export async function submitFeedback(
   if (!FEEDBACK_CATEGORIES.includes(category as (typeof FEEDBACK_CATEGORIES)[number])) {
     return { error: t.error };
   }
-  if (!message) return { error: t.messageMissing };
-  if (message.length > FEEDBACK_MESSAGE_MAX_LENGTH) return { error: t.messageTooLong };
+  const audioPath = formData.get("audio_path");
+  if (typeof audioPath === "string") {
+    if (message || !isFeedbackAudioPath(audioPath, member.id)) return { error: t.error };
+  } else {
+    if (!message) return { error: t.messageMissing };
+    if (message.length > FEEDBACK_MESSAGE_MAX_LENGTH) return { error: t.messageTooLong };
+  }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase
-    .from("feedback_submissions")
-    .insert({ member_id: member.id, category: category as string, message });
+  const { error } = await supabase.from("feedback_submissions").insert({
+    member_id: member.id,
+    category: category as string,
+    ...(typeof audioPath === "string" ? { audio_path: audioPath } : { message }),
+  });
   if (error) return { error: t.error };
   return { success: true };
 }

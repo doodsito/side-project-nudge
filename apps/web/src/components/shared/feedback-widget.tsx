@@ -10,8 +10,13 @@ import {
   type ReactNode,
 } from "react";
 import { CircleAlert, CircleCheck, MessageSquarePlus } from "lucide-react";
-import { submitFeedback, type FeedbackFormState } from "@/app/dashboard/actions";
+import {
+  prepareFeedbackAudio,
+  submitFeedback,
+  type FeedbackFormState,
+} from "@/app/dashboard/actions";
 import { SubmitButton } from "@/components/auth/submit-button";
+import { FeedbackAudioRecorder } from "@/components/shared/feedback-audio-recorder";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import {
@@ -24,7 +29,9 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { getSupabase } from "@/integrations/supabase/client";
 import type { Dictionary } from "@/lib/dictionaries";
+import { FEEDBACK_AUDIO_BUCKET } from "@/lib/feedback-audio";
 import { cn } from "@/lib/utils";
 
 const FEEDBACK_CATEGORIES = ["bug", "idea", "other"] as const;
@@ -84,7 +91,23 @@ export function FeedbackProvider({
 function FeedbackForm({ t }: { t: Dictionary["dashboard"]["feedback"] }) {
   const [category, setCategory] = useState<FeedbackCategory>("idea");
   const [message, setMessage] = useState("");
-  const [state, formAction] = useActionState(submitFeedback, initialState);
+  const [audio, setAudio] = useState<Blob | null>(null);
+  const [recording, setRecording] = useState(false);
+  const [state, formAction, sending] = useActionState(
+    async (previous: FeedbackFormState, formData: FormData): Promise<FeedbackFormState> => {
+      if (audio) {
+        const prepared = await prepareFeedbackAudio(audio.type);
+        if (!prepared) return { error: t.error };
+        const { error } = await getSupabase()
+          .storage.from(FEEDBACK_AUDIO_BUCKET)
+          .uploadToSignedUrl(prepared.path, prepared.token, audio, { contentType: audio.type });
+        if (error) return { error: t.error };
+        formData.set("audio_path", prepared.path);
+      }
+      return submitFeedback(previous, formData);
+    },
+    initialState,
+  );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -120,33 +143,43 @@ function FeedbackForm({ t }: { t: Dictionary["dashboard"]["feedback"] }) {
           </label>
         ))}
       </RadioGroup>
-      <div>
-        <label htmlFor="feedback-message" className="mb-2 block text-sm font-bold">
-          {t.messageLabel}
-        </label>
-        <Textarea
-          ref={textareaRef}
-          id="feedback-message"
-          name="message"
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-          required
-          maxLength={2000}
-          rows={4}
-          placeholder={t.messagePlaceholder}
-          aria-invalid={state.error ? true : undefined}
-          aria-describedby={state.error ? "feedback-message-error" : undefined}
-        />
-      </div>
+      {!audio && (
+        <div>
+          <label htmlFor="feedback-message" className="mb-2 block text-sm font-bold">
+            {t.messageLabel}
+          </label>
+          <Textarea
+            ref={textareaRef}
+            id="feedback-message"
+            name="message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            required
+            maxLength={2000}
+            rows={4}
+            placeholder={t.messagePlaceholder}
+            aria-invalid={state.error ? true : undefined}
+            aria-describedby={state.error ? "feedback-message-error" : undefined}
+          />
+        </div>
+      )}
+      <FeedbackAudioRecorder
+        t={t}
+        disabled={sending}
+        onRecordingChange={setRecording}
+        onAudioChange={setAudio}
+      />
       {state.error && (
         <Alert variant="destructive" id="feedback-message-error" aria-live="polite">
           <CircleAlert aria-hidden />
           <AlertDescription>{state.error}</AlertDescription>
         </Alert>
       )}
-      <DialogFooter>
-        <SubmitButton pendingLabel={t.submitPending}>{t.submit}</SubmitButton>
-      </DialogFooter>
+      {!recording && (
+        <DialogFooter>
+          <SubmitButton pendingLabel={t.submitPending}>{t.submit}</SubmitButton>
+        </DialogFooter>
+      )}
     </form>
   );
 }
