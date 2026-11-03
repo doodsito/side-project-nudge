@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-03
 - **Author:** Emma, with Codex
-- **Pull request:** pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/69
 
 **Why:** The teal progress overlay could appear beside future lessons instead of stopping at the learner’s actual progress.
 
