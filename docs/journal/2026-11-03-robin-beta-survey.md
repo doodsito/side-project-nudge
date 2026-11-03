@@ -14,4 +14,4 @@
 
 **Files:** `supabase/migrations/20261103233000_create_beta_survey_responses.sql`, `apps/web/src/app/beta-survey/`, `apps/web/src/components/dashboard/beta-survey-flow.tsx`, `apps/web/src/lib/beta-survey.ts`
 
-**Checked:** lint, typecheck, build and 80 tests pass. Full flow walked in Chromium on mobile and desktop with a temporary local page and no account. Real sign-in, sending and voice upload still to test on the Vercel preview once both migrations are applied.
+**Checked:** lint, typecheck, build and 81 tests pass. Full flow walked in Chromium on mobile and desktop with a temporary local page and no account. Real sign-in, sending and voice upload still to test on the Vercel preview once the migration is applied.
