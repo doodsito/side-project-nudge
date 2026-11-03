@@ -9,7 +9,7 @@ import { TrackFlag } from "@/components/shared/track-option";
 import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
-import { trackFromPath, TRACKS } from "@/lib/tracks";
+import { DEFAULT_TRACK, trackFromPath, TRACKS, type Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
 const linkClass = "text-muted-foreground hover:text-foreground";
@@ -19,11 +19,11 @@ const linkClass = "text-muted-foreground hover:text-foreground";
  * settings and the choice of version are always one click away. In the
  * language of the page's track, or of the visitor's choice elsewhere.
  */
-export function Footer() {
+export function Footer({ initialTrack }: { initialTrack: Track | null }) {
   const pageTrack = trackFromPath(usePathname());
   const savedTrack = useTrackCookie();
-  const current = pageTrack ?? savedTrack ?? null;
-  const dictionary = getDictionary(current ?? "us");
+  const current = pageTrack ?? savedTrack ?? initialTrack ?? DEFAULT_TRACK;
+  const dictionary = getDictionary(current);
   const t = dictionary.footer;
   return (
     <footer className="site-footer border-t border-border bg-background px-5 py-12 sm:px-8">

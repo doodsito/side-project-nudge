@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { ConsentManager } from "@/components/layout/consent-manager";
 import { Footer } from "@/components/layout/footer";
+import { readTrackCookie } from "@/lib/auth";
 import { llmsTxtAlternate } from "@/lib/metadata";
 import "@/styles.css";
 
@@ -27,17 +28,18 @@ export const metadata: Metadata = {
   alternates: llmsTxtAlternate,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const initialTrack = await readTrackCookie();
   return (
     <html
-      lang="en"
+      lang={initialTrack === "fr" ? "fr" : "en"}
       data-scroll-behavior="smooth"
       className={`${manrope.variable} ${inter.variable}`}
     >
       <body>
-        <ConsentManager>
+        <ConsentManager initialTrack={initialTrack}>
           {children}
-          <Footer />
+          <Footer initialTrack={initialTrack} />
         </ConsentManager>
       </body>
     </html>
