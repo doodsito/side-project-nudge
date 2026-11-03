@@ -49,6 +49,7 @@ export type Database = {
           disappointment: string;
           friction: string | null;
           id: number;
+          lessons_completed: number;
           member_id: string;
           nps: number;
           overall_audio_path: string | null;
@@ -66,6 +67,7 @@ export type Database = {
           disappointment: string;
           friction?: string | null;
           id?: never;
+          lessons_completed: number;
           member_id: string;
           nps: number;
           overall_audio_path?: string | null;
@@ -83,6 +85,7 @@ export type Database = {
           disappointment?: string;
           friction?: string | null;
           id?: never;
+          lessons_completed?: number;
           member_id?: string;
           nps?: number;
           overall_audio_path?: string | null;

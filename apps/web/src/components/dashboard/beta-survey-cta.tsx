@@ -4,12 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/dictionaries";
 
-/** The dashboard's call to answer the end-of-beta survey, shown once World 1 is finished. */
+/** The dashboard's call to answer the beta survey, shown until the member has answered. */
 export function BetaSurveyCta({ t }: { t: Dictionary["betaSurvey"]["cta"] }) {
   return (
     <section
       aria-labelledby="beta-survey-cta-heading"
-      className="mb-6 flex flex-col gap-4 rounded-3xl border-2 border-secondary bg-surface p-5 shadow-[0_5px_0_var(--nudge-learn-gold)] sm:flex-row sm:items-center"
+      className="mb-6 flex flex-col gap-4 rounded-3xl border-2 border-border bg-surface p-5 shadow-[0_4px_0_var(--nudge-learn-neutral-200)] sm:flex-row sm:items-center"
     >
       <div className="flex min-w-0 flex-1 items-center gap-4">
         <Image
@@ -30,7 +30,7 @@ export function BetaSurveyCta({ t }: { t: Dictionary["betaSurvey"]["cta"] }) {
       <Button
         asChild
         size="xl"
-        className="rounded-2xl font-display font-extrabold shadow-[0_4px_0_var(--nudge-learn-violet-800)] active:translate-y-1 active:shadow-none"
+        className="rounded-2xl bg-mint font-display font-extrabold text-ink shadow-[0_4px_0_var(--nudge-learn-teal-500)] hover:bg-mint/90 active:translate-y-1 active:shadow-none"
       >
         <Link href="/beta-survey">
           {t.button} <ArrowRight aria-hidden />

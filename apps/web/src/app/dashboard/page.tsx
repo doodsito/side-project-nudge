@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { DashboardHome } from "@/components/dashboard/dashboard-home";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { hasAnsweredBetaSurvey } from "@/lib/beta-survey-status";
-import { hasCompletedFoundationWorld } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { markWorldOneDiscoverySeen, skipWorldZero } from "./actions";
 
@@ -14,8 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DashboardPage() {
   const member = await requireMember();
   const dictionary = getDictionary(member.track);
-  const showBetaSurvey =
-    hasCompletedFoundationWorld(member.courseProgress) && !(await hasAnsweredBetaSurvey(member.id));
+  const showBetaSurvey = !(await hasAnsweredBetaSurvey(member.id));
   return (
     <DashboardHome
       progress={member.courseProgress}

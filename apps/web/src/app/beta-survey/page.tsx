@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { BetaSurveyFlow } from "@/components/dashboard/beta-survey-flow";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { hasAnsweredBetaSurvey } from "@/lib/beta-survey-status";
-import { hasCompletedFoundationWorld } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { TRACK_INFO } from "@/lib/tracks";
 
@@ -17,12 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BetaSurveyPage() {
   const member = await requireMember();
-  if (
-    !hasCompletedFoundationWorld(member.courseProgress) ||
-    (await hasAnsweredBetaSurvey(member.id))
-  ) {
-    redirect("/dashboard");
-  }
+  if (await hasAnsweredBetaSurvey(member.id)) redirect("/dashboard");
 
   return (
     <div lang={TRACK_INFO[member.track].lang}>

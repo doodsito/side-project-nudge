@@ -1,4 +1,5 @@
--- The end-of-beta survey: one set of answers per member.
+-- The beta survey: one set of answers per member, open from their first visit.
+-- lessons_completed is how many World 1 lessons they had finished when answering.
 --
 -- A signed-in member can add and read back only their own row, which is how the
 -- dashboard knows to stop showing the survey button. Answers cannot be changed
@@ -8,6 +9,7 @@
 create table public.beta_survey_responses (
   id bigint generated always as identity primary key,
   member_id uuid not null unique references public.profiles (id) on delete cascade,
+  lessons_completed smallint not null check (lessons_completed >= 0),
   device text not null check (device in ('mobile', 'tablet', 'computer')),
   disappointment text not null check (disappointment in ('very', 'somewhat', 'not')),
   nps smallint not null check (nps between 0 and 10),

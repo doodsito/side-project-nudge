@@ -1782,14 +1782,14 @@ export const fr: Dictionary = {
     },
   },
   betaSurvey: {
-    metaTitle: "Questionnaire de fin de bêta",
+    metaTitle: "Questionnaire de la bêta",
     cta: {
-      title: "Tu as fini le Monde 1\u00a0!",
-      text: "Dernière mission\u00a0: dis-nous ce que tu en penses vraiment. Ça prend 2 minutes.",
-      button: "Donner mon avis final",
+      title: "Donne ton avis sur la bêta",
+      text: "Dis-nous ce que tu en penses vraiment. Ça prend 2 minutes.",
+      button: "Donner mon avis",
     },
     intro: {
-      title: "Dernière mission\u00a0: sois cash, ça nous aide vraiment.",
+      title: "Une mission pour toi\u00a0: sois cash, ça nous aide vraiment.",
       text: (count) => `${count} questions, environ 2 minutes.`,
       start: "C’est parti",
     },

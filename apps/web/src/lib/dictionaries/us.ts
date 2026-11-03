@@ -1725,14 +1725,14 @@ export const us = {
     },
   },
   betaSurvey: {
-    metaTitle: "End-of-beta survey",
+    metaTitle: "Beta survey",
     cta: {
-      title: "You finished World 1!",
-      text: "One last mission: tell us what you really think. It takes 2 minutes.",
-      button: "Give my final feedback",
+      title: "Tell us what you think of the beta",
+      text: "Be honest, it really helps. It takes 2 minutes.",
+      button: "Give my feedback",
     },
     intro: {
-      title: "Last mission: be brutally honest, it really helps.",
+      title: "A mission for you: be brutally honest, it really helps.",
       text: (count: number) => `${count} questions, about 2 minutes.`,
       start: "Let's go",
     },

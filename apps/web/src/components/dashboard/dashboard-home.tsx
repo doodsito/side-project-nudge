@@ -32,7 +32,7 @@ export function DashboardHome({
   userId?: string;
   skipWorldZeroAction?: () => Promise<{ status: "saved" | "error" }>;
   markDiscoverySeenAction?: () => Promise<{ status: "saved" | "error" }>;
-  /** Only passed once the member finished World 1 and has not answered the survey yet. */
+  /** Only passed while the member has not answered the survey yet. */
   betaSurveyCopy?: Dictionary["betaSurvey"]["cta"];
 }) {
   const lessonCount = FOUNDATION_LESSONS.length;

@@ -4,16 +4,14 @@ import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
 import { requireMember } from "@/lib/auth";
 import { parseBetaSurveyAnswers } from "@/lib/beta-survey";
-import { hasCompletedFoundationWorld } from "@/lib/course-progress";
+import { completedLessonCount, FOUNDATION_WORLD } from "@/lib/course-progress";
 import { isFeedbackAudioPath } from "@/lib/feedback-audio";
 
 const UNIQUE_VIOLATION = "23505";
 
-/** Saves a member's end-of-beta survey, open only once they finished World 1. */
+/** Saves a member's beta survey, with how many World 1 lessons they had finished. */
 export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved" | "error" }> {
   const member = await requireMember();
-  if (!hasCompletedFoundationWorld(member.courseProgress)) return { status: "error" };
-
   const answers = parseBetaSurveyAnswers(value);
   if (!answers) return { status: "error" };
   if (answers.overallAudioPath && !isFeedbackAudioPath(answers.overallAudioPath, member.id)) {
@@ -23,6 +21,7 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("beta_survey_responses").insert({
     member_id: member.id,
+    lessons_completed: completedLessonCount(member.courseProgress, FOUNDATION_WORLD),
     device: answers.device,
     disappointment: answers.disappointment,
     nps: answers.nps,
