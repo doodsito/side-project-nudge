@@ -5,13 +5,19 @@ import { Button } from "@/components/ui/button";
 import { LegalTemplate } from "@/components/layout/legal-template";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { BRAND, CONTACT_EMAIL, SITE_URL } from "@/lib/brand";
+import { getVisitorTrack } from "@/lib/auth";
 import { llmsTxtAlternate } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: `Cookie Policy | ${BRAND}`,
-  description: `Which cookies ${BRAND} uses, why, and how to change your choice at any time.`,
-  alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/cookies` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const fr = (await getVisitorTrack()) === "fr";
+  return {
+    title: `${fr ? "Politique relative aux cookies" : "Cookie Policy"} | ${BRAND}`,
+    description: fr
+      ? `Quels cookies ${BRAND} utilise, pourquoi et comment modifier ton choix à tout moment.`
+      : `Which cookies ${BRAND} uses, why, and how to change your choice at any time.`,
+    alternates: { ...llmsTxtAlternate, canonical: `${SITE_URL}/cookies` },
+  };
+}
 
 const COOKIES = [
   {
@@ -61,9 +67,138 @@ const COOKIES = [
   },
 ];
 
-export default function CookiesPage() {
+const FR_COOKIES = [
+  {
+    name: "c15t",
+    purpose:
+      "Mémorise ton choix de cookies pour éviter de te le redemander à chaque page. Une copie est conservée dans le stockage local de ton navigateur.",
+    duration: "6 mois",
+    category: "Strictement nécessaire",
+  },
+  {
+    name: "nudge_track",
+    purpose:
+      "Mémorise la version choisie (France ou États-Unis) pour ouvrir la bonne page d’accueil et la bonne langue lors de ta prochaine visite.",
+    duration: "12 mois",
+    category: "Strictement nécessaire",
+  },
+  {
+    name: "nudge_access_code",
+    purpose: "Mémorise le code d’accès bêta saisi jusqu’à la fin de ta connexion.",
+    duration: "30 minutes",
+    category: "Strictement nécessaire",
+  },
+  {
+    name: "sb-…-auth-token",
+    purpose: "Te maintient connecté à ton compte bêta. Créé uniquement lorsque tu te connectes.",
+    duration: "Jusqu’à la déconnexion, 400 jours au plus",
+    category: "Strictement nécessaire",
+  },
+  {
+    name: "sb-…-auth-token-code-verifier",
+    purpose:
+      "Sécurise la connexion via Google ou un lien e-mail (confirmation d’adresse ou réinitialisation du mot de passe).",
+    duration: "Supprimé après la connexion",
+    category: "Strictement nécessaire",
+  },
+  {
+    name: "_ga",
+    purpose:
+      "Google Analytics : distingue les visites provenant d’un même navigateur pour compter les visiteurs.",
+    duration: "13 mois",
+    category: "Mesure d’audience, seulement avec ton accord",
+  },
+  {
+    name: `_ga_${GA_MEASUREMENT_ID.replace("G-", "")}`,
+    purpose: "Google Analytics : suit la visite en cours.",
+    duration: "13 mois",
+    category: "Mesure d’audience, seulement avec ton accord",
+  },
+];
+
+export default async function CookiesPage() {
+  const track = await getVisitorTrack();
+  if (track === "fr") {
+    return (
+      <LegalTemplate track={track} title="Politique relative aux cookies" updated="10 octobre 2026">
+        <p>
+          Cette page explique quels cookies {new URL(SITE_URL).host} utilise, pourquoi et comment
+          modifier ton choix à tout moment. Le reste des informations sur tes données personnelles
+          figure dans notre <Link href="/privacy-policy">politique de confidentialité</Link>.
+        </p>
+        <h2>En bref</h2>
+        <ul>
+          <li>
+            Sans ton accord, nous ne conservons que ton choix de cookies et, si tu te connectes à la
+            bêta, ce qui te permet de rester connecté.
+          </li>
+          <li>
+            Les cookies Google Analytics ne sont créés que si tu cliques sur « Tout accepter » ou
+            actives la mesure d’audience dans les réglages.
+          </li>
+          <li>Nous n’utilisons pas de cookies publicitaires.</li>
+        </ul>
+        <h2>Cookies utilisés</h2>
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full min-w-[36rem] text-left text-sm">
+            <thead>
+              <tr className="border-b border-border-strong">
+                <th className="py-3 pr-4 font-bold">Nom</th>
+                <th className="py-3 pr-4 font-bold">Finalité</th>
+                <th className="py-3 pr-4 font-bold">Durée</th>
+                <th className="py-3 font-bold">Catégorie</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FR_COOKIES.map((cookie) => (
+                <tr key={cookie.name} className="border-b border-border align-top">
+                  <td className="py-3 pr-4 font-mono text-foreground">{cookie.name}</td>
+                  <td className="py-3 pr-4 leading-relaxed text-muted-foreground">
+                    {cookie.purpose}
+                  </td>
+                  <td className="py-3 pr-4 whitespace-nowrap text-muted-foreground">
+                    {cookie.duration}
+                  </td>
+                  <td className="py-3 text-muted-foreground">{cookie.category}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h2>Google Analytics</h2>
+        <p>
+          Google Analytics est fourni par Google Ireland Limited. Il nous indique combien de
+          personnes visitent {BRAND}, quelles pages elles consultent et quelles fonctionnalités
+          elles utilisent, comme un choix dans un exercice. Ses cookies durent au plus 13 mois et ne
+          sont pas renouvelés à chaque visite. Google Signals et la personnalisation publicitaire
+          sont désactivés. Google peut traiter ces données hors de l’Union européenne ; consulte la{" "}
+          <a href="https://policies.google.com/privacy">politique de confidentialité de Google</a>.
+        </p>
+        <h2>Modifier ton choix</h2>
+        <p>
+          Clique sur « Cookies » en bas de chaque page ou utilise le bouton ci-dessous. Si tu
+          retires ton consentement, la page se recharge et Google Analytics ne se charge plus. Tu
+          peux aussi supprimer les cookies dans les réglages de ton navigateur.
+        </p>
+        <ConsentDialogLink asChild>
+          <Button
+            variant="outline"
+            size="lg"
+            className="mt-6 border-border-strong bg-surface hover:bg-muted"
+          >
+            Ouvrir les réglages des cookies
+          </Button>
+        </ConsentDialogLink>
+        <h2>Contact</h2>
+        <p>
+          Pour toute question sur cette politique ou tes données :{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+        </p>
+      </LegalTemplate>
+    );
+  }
   return (
-    <LegalTemplate title="Cookie policy" updated="10 October 2026">
+    <LegalTemplate track={track} title="Cookie policy" updated="10 October 2026">
       <p>
         This page explains which cookies {new URL(SITE_URL).host} uses, why, and how to change your
         choice at any time. Everything else about your personal data is in our{" "}

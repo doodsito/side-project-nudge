@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { TrackOption } from "@/components/shared/track-option";
+import { saveSelectedTrack } from "@/app/track-actions";
 import { saveTrack, useTrackCookie } from "@/hooks/use-track-cookie";
 import type { Dictionary } from "@/lib/dictionaries";
 import { isTrack, TRACKS, type Track } from "@/lib/tracks";
@@ -38,28 +39,34 @@ export function TrackDialog({
   const router = useRouter();
   const saved = useTrackCookie();
   const [selected, setSelected] = useState<Track>(track);
+  const [saveError, setSaveError] = useState(false);
   const { activeUI, saveConsents, setActiveUI } = useConsentManager();
   const cookies = useTranslations();
   const askCookies = activeUI === "banner";
 
-  function choose() {
+  async function choose() {
+    setSaveError(false);
+    if (!(await saveSelectedTrack(selected))) {
+      setSaveError(true);
+      return false;
+    }
     saveTrack(selected);
     if (selected !== track) router.push(`/${selected}`);
+    return true;
   }
 
   // The consent is stored before a change of track remounts the consent provider.
   async function chooseWithCookies(consent: "all" | "necessary") {
     await saveConsents(consent);
-    choose();
+    await choose();
   }
 
-  function customize() {
-    choose();
-    setActiveUI("dialog");
+  async function customize() {
+    if (await choose()) setActiveUI("dialog");
   }
 
   return (
-    <Dialog open={saved === null} onOpenChange={(open) => !open && choose()}>
+    <Dialog open={saved === null} onOpenChange={(open) => !open && void choose()}>
       <DialogContent className="max-w-md rounded-3xl p-6 sm:p-8">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-extrabold">{t.title}</DialogTitle>
@@ -81,6 +88,11 @@ export function TrackDialog({
             />
           ))}
         </RadioGroup>
+        {saveError && (
+          <p role="alert" className="text-sm text-destructive">
+            {t.error}
+          </p>
+        )}
         {askCookies ? (
           <>
             <div className="mt-2 border-t border-border pt-4 text-sm">
@@ -104,14 +116,18 @@ export function TrackDialog({
               <Button size="lg" onClick={() => void chooseWithCookies("all")}>
                 {cookies.common.acceptAll}
               </Button>
-              <Button variant="link" className="col-span-2 h-auto p-0" onClick={customize}>
+              <Button
+                variant="link"
+                className="col-span-2 h-auto p-0"
+                onClick={() => void customize()}
+              >
                 {cookies.common.customize}
               </Button>
             </DialogFooter>
           </>
         ) : (
           <DialogFooter className="mt-2">
-            <Button size="lg" className="w-full" onClick={choose}>
+            <Button size="lg" className="w-full" onClick={() => void choose()}>
               {t.continue}
             </Button>
           </DialogFooter>

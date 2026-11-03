@@ -165,12 +165,13 @@ export const fr: Dictionary = {
     done: "Tu es sur la liste.",
     error: "Impossible d’enregistrer ta place pour le moment. Réessaie.",
     consent: `On t’écrira seulement au sujet de l’accès anticipé et du lancement de ${BRAND}. Tu peux quitter la liste à tout moment. Tu dois avoir 15 ans ou plus.`,
-    privacy: "Politique de confidentialité (en anglais)",
+    privacy: "Politique de confidentialité",
   },
   tracks: {
     title: `Bienvenue sur ${BRAND}`,
     description: "Tu es où ? Tu pourras changer en bas de page.",
     continue: "Continuer",
+    error: "Impossible de changer de version pour le moment. Réessaie.",
     options: {
       fr: { country: "France", detail: "En français, en euros" },
       us: { country: "États-Unis", detail: "En anglais, en dollars" },
@@ -237,9 +238,9 @@ export const fr: Dictionary = {
       remembered: "Ça te revient\u00a0?",
       differentCode: "Utiliser un autre code d’invitation",
       consentBefore: "En créant un compte, tu acceptes les",
-      terms: "Conditions d’utilisation (en anglais)",
+      terms: "Conditions d’utilisation",
       consentMiddle: "et confirmes avoir lu la",
-      privacy: "Politique de confidentialité (en anglais)",
+      privacy: "Politique de confidentialité",
       consentAfter: ". Tu dois avoir 15 ans ou plus.",
     },
     form: {

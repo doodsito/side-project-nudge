@@ -1,11 +1,11 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
-import { requireMember, saveAccountTrack } from "@/lib/auth";
+import { requireMember } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionaries";
 import { isTrack } from "@/lib/tracks";
+import { saveSelectedTrack } from "@/app/track-actions";
 
 const FEEDBACK_CATEGORIES = ["bug", "idea", "other"] as const;
 const FEEDBACK_MESSAGE_MAX_LENGTH = 2000;
@@ -24,8 +24,7 @@ export async function changeTrack(formData: FormData) {
   await requireMember();
   const track = formData.get("track");
   if (!isTrack(track)) redirect("/dashboard/account");
-  const saved = await saveAccountTrack(await createSupabaseServerClient(), track);
-  revalidatePath("/dashboard", "layout");
+  const saved = await saveSelectedTrack(track);
   redirect(saved ? "/dashboard/account?track=updated" : "/dashboard/account?track=error");
 }
 
