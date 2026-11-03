@@ -1855,6 +1855,19 @@ export const fr: Dictionary = {
       versionError: "Impossible de changer ta version pour le moment. Réessaie.",
       versionSave: "Enregistrer",
       versionSaving: "Enregistrement…",
+      resetTitle: "Réinitialiser ma progression",
+      resetText:
+        "Recommence tes cours depuis le début, comme à la création de ton compte. Ton compte, ta version et tes retours ne changent pas.",
+      resetAction: "Réinitialiser ma progression",
+      resetDialogTitle: "Réinitialiser ta progression\u00a0?",
+      resetDialogText: (count: number) =>
+        count === 0
+          ? "Ton parcours reviendra à son point de départ. Cette action est définitive."
+          : `Tu vas perdre ${count} ${count > 1 ? "leçons terminées" : "leçon terminée"}. Cette action est définitive.`,
+      resetConfirm: "Oui, réinitialiser",
+      resetPending: "Réinitialisation…",
+      resetCancel: "Annuler",
+      resetError: "Impossible de réinitialiser ta progression pour le moment. Réessaie.",
       deleteTitle: "Supprimer ton compte",
       deleteEmail: "Écris à",
       deleteFrom:
@@ -1875,8 +1888,18 @@ export const fr: Dictionary = {
       submitPending: "Envoi…",
       success: "Merci, c’est envoyé !",
       error: "Impossible d’envoyer ton message pour le moment. Réessaie.",
-      messageMissing: "Écris un message avant d’envoyer.",
+      messageMissing: "Écris un message ou enregistre un audio avant d’envoyer.",
       messageTooLong: "Message trop long (2000 caractères maximum).",
+      audioRecord: "Enregistrer un audio",
+      audioStop: "Arrêter",
+      audioDelete: "Supprimer l’audio",
+      audioRecording: "Enregistrement en cours",
+      audioPlayback: "Réécouter ton audio",
+      audioDenied:
+        "Impossible d’accéder au micro. Autorise-le dans ton navigateur, ou écris ton message.",
+      audioUnsupported:
+        "L’enregistrement ne marche pas sur ce navigateur. Écris plutôt ton message.",
+      audioNotice: `Ta voix est conservée 12 mois au plus, uniquement pour améliorer ${BRAND}.`,
     },
   },
 };

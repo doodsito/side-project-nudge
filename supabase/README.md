@@ -14,6 +14,8 @@ is a reserved area: changes wait for Robin's approval.
 | `profiles` table | One row per beta member, linked to their Supabase account. A member can read only their own row; deleting the account deletes it. |
 | `check_access_code(code)` | Says whether a code can be used now, so `/signup` can refuse a wrong code before sign-in. |
 | `redeem_access_code(code)` | Gives the signed-in user beta access with a code (creates their `profiles` row). Only ever acts on the caller's own account. |
+| `feedback_submissions` table | Beta feedback: a written message or the path of a recording, never both. A member can only add their own; the website never reads it back. Read it in the dashboard, Table Editor. |
+| `feedback-audio` bucket | Voice feedback: private, 5 MB per file, webm or mp4, one folder per member. A member can only add files to their own folder. |
 | `private.access_code_failures` table | Wrong codes of the last hour. After 20 wrong codes within a minute, both functions above refuse every code (error `PT429`) until the minute has passed, so codes cannot be guessed by trying them one after another. Existing members are never blocked. Closed to the website (private schema, row level security on, no policy). |
 
 ## Sign-in settings (Robin, Supabase dashboard)
@@ -34,6 +36,21 @@ dashboard in step with them.
   repository or in Vercel. The email texts are in Authentication > Emails >
   Templates: copy them from `email-templates.md`, which picks French or
   English from the account's track (`user_metadata.track`).
+
+## Voice feedback (Robin)
+
+To listen to a recording, copy `audio_path` from `feedback_submissions`, then open that file in Storage > `feedback-audio`.
+
+We promise to keep recordings for 12 months at most. Once a month, in the SQL Editor, list the expired ones:
+
+```sql
+select audio_path from public.feedback_submissions
+where audio_path is not null and created_at < now() - interval '12 months';
+```
+
+Delete those files in Storage, then their rows. Also delete files in the bucket that no row points to: they come from an upload whose feedback was not saved.
+
+When deleting an account, first delete the member's folder (their user id) in the bucket: deleting the account removes the rows, not the files.
 
 ## Beta access codes (Robin)
 
