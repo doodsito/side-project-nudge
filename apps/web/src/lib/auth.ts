@@ -78,6 +78,7 @@ export async function finishSignIn(supabase: SupabaseServerClient): Promise<bool
 export type Member = {
   id: string;
   email: string;
+  displayName: string | null;
   provider: string;
   accessCode: string;
   memberSince: string;
@@ -99,9 +100,11 @@ export const getMember = cache(async (): Promise<Member | null> => {
     .maybeSingle();
   if (!profile) return null;
   const provider = claims.app_metadata?.["provider"];
+  const metadataName = claims.user_metadata?.["full_name"] ?? claims.user_metadata?.["name"];
   return {
     id: claims.sub,
     email: claims.email ?? "",
+    displayName: typeof metadataName === "string" ? metadataName : null,
     provider: typeof provider === "string" ? provider : "email",
     accessCode: profile.access_code,
     memberSince: profile.created_at,

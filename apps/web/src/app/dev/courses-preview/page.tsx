@@ -63,7 +63,7 @@ export default async function CoursesPreviewPage({
             track={track}
           />
         ) : (
-          <CourseWorlds progress={sampleProgress} copy={t.learning.courses} track={track} />
+          <CourseWorlds copy={t.learning.courses} />
         )}
       </DashboardTemplate>
     </div>

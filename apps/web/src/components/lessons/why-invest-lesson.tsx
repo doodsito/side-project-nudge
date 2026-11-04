@@ -1,5 +1,6 @@
 "use client";
 
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import {
@@ -293,16 +294,13 @@ export function WhyInvestLesson(props: Props) {
     );
   }
 
+  if (props.progressStatus === "saved")
+    return <LessonRating track={props.track} nextHref="/dashboard" />;
+
   return (
     <LessonScreen
       action={
-        props.progressStatus === "saved" ? (
-          <Button asChild size="xl" className="w-full sm:ml-auto sm:flex sm:w-fit">
-            <Link href="/dashboard">
-              {copy.complete.action} <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
-        ) : props.progressStatus === "error" ? (
+        props.progressStatus === "error" ? (
           <PrimaryAction onClick={props.onRetryProgress}>{copy.complete.retry}</PrimaryAction>
         ) : (
           <p className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-muted-foreground">
@@ -318,11 +316,7 @@ export function WhyInvestLesson(props: Props) {
         {copy.complete.next}
       </p>
       <p role="status" className="mt-5 text-sm font-semibold text-primary">
-        {props.progressStatus === "saved"
-          ? copy.complete.saved
-          : props.progressStatus === "error"
-            ? copy.complete.error
-            : copy.complete.saving}
+        {props.progressStatus === "error" ? copy.complete.error : copy.complete.saving}
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
         <a

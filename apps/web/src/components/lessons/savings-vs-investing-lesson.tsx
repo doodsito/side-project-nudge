@@ -1,5 +1,6 @@
 "use client";
 
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import {
@@ -15,7 +16,6 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
-import { FeedbackHeaderButton } from "@/components/shared/feedback-widget";
 import { ChoiceButton, ChoiceMarker } from "@/components/shared/choice-button";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { Button } from "@/components/ui/button";
@@ -416,6 +416,9 @@ export function SavingsVsInvestingLesson(props: Props) {
     );
   }
 
+  if (props.progressStatus === "saved")
+    return <LessonRating track={props.track} nextHref="/dashboard" />;
+
   return (
     <LessonScreen
       wide
@@ -424,12 +427,9 @@ export function SavingsVsInvestingLesson(props: Props) {
           <Button asChild variant="outline" size="xl">
             <Link href="/dashboard">{copy.complete.dashboard}</Link>
           </Button>
-          <FeedbackHeaderButton
-            label={copy.complete.feedbackButton}
-            variant="default"
-            size="xl"
-            className="w-full sm:w-auto"
-          />
+          <Button asChild size="xl" className="w-full sm:w-auto">
+            <Link href="/beta-survey">{copy.complete.feedbackButton}</Link>
+          </Button>
         </div>
       }
     >

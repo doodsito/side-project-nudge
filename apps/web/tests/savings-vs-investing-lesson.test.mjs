@@ -89,8 +89,7 @@ test("saving controls celebration, retry, replay and feedback", () => {
   assert.match(componentSource, /props\.progressStatus === "error"/);
   assert.match(componentSource, /onClick=\{props\.onRestart\}/);
   assert.match(componentSource, /props\.showConfetti && <Confetti \/>/);
-  assert.match(componentSource, /<FeedbackHeaderButton/);
-  assert.match(pageSource, /showFloatingTrigger=\{false\}/);
+  assert.match(componentSource, /href="\/beta-survey"/);
   assert.match(feedbackSource, /submitFeedback/);
   assert.match(worldSource, /rewardCompleteTitle/);
 });
