@@ -35,15 +35,10 @@ export function LessonRating({ track, nextHref }: { track: Track; nextHref: stri
           {copy.lessonComplete}
         </p>
         <div className="relative mt-[43px] grid size-20 shrink-0 place-items-center">
-          <Image
-            src="/brand/learn-map/completion-check-circle.png"
-            alt=""
-            width={80}
-            height={80}
-            priority
-          />
+          <span className="absolute z-0 size-[136px] rounded-full bg-[var(--nudge-learn-violet-100)]" />
+          <span className="relative z-10 size-20 rounded-full bg-[var(--nudge-learn-teal)]" />
           <span
-            className="absolute -top-1 font-[var(--font-space-grotesk)] text-6xl font-bold leading-none text-primary-foreground"
+            className="absolute top-[10px] z-20 font-[var(--font-space-grotesk)] text-[43px] font-bold leading-none text-primary-foreground"
             aria-hidden="true"
           >
             ✓

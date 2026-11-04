@@ -317,7 +317,7 @@ export const fr: Dictionary = {
       educationalNote: "Simulation pédagogique uniquement. Ceci n’est pas un conseil financier.",
       rating: {
         lessonComplete: "LEÇON TERMINÉE !",
-        title: "Cette leçon t’a-t-elle été utile ?",
+        title: "Cette leçon t’a‑t‑elle été utile ?",
         hint: "Touche une étoile pour noter cette leçon.",
         low: "Pas utile",
         high: "Très utile",
