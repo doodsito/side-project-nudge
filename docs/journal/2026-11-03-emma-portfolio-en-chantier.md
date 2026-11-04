@@ -1,7 +1,7 @@
 # Finaliser le parcours bêta et le portefeuille
 - **Date:** 2026-11-03
 - **Author:** Emma, avec Codex
-- **Pull request:** à compléter
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/78
 **Why:** Présenter le portefeuille virtuel comme bientôt disponible, avec le visuel final choisi dans Figma.
 **What changed:**
 - Met à jour l’écran Portefeuille et sa navigation mobile selon le frame Figma final.
