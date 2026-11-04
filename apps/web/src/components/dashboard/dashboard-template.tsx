@@ -17,13 +17,27 @@ export function DashboardTemplate({
   children,
   preview = false,
   homeHref = "/dashboard",
+  portfolioHref = "/dashboard/portfolio",
+  activeTab,
 }: {
   t: Dictionary["dashboard"];
   skipLink: string;
   children: ReactNode;
 } & (
-  | { preview: true; signOut?: never; homeHref: string }
-  | { preview?: false; signOut: () => Promise<void>; homeHref?: never }
+  | {
+      preview: true;
+      signOut?: never;
+      homeHref: string;
+      portfolioHref?: string | undefined;
+      activeTab?: "home" | "portfolio" | "account" | undefined;
+    }
+  | {
+      preview?: false;
+      signOut: () => Promise<void>;
+      homeHref?: never;
+      portfolioHref?: never;
+      activeTab?: never;
+    }
 )) {
   const content = (
     <>
@@ -40,7 +54,13 @@ export function DashboardTemplate({
               {BRAND.toLowerCase()}
             </span>
           </Link>
-          <DashboardTabs tabs={t.tabs} tabsLabel={t.tabsLabel} homeHref={homeHref} />
+          <DashboardTabs
+            tabs={t.tabs}
+            tabsLabel={t.tabsLabel}
+            homeHref={homeHref}
+            portfolioHref={portfolioHref}
+            activeTab={activeTab}
+          />
           {!preview && signOut && (
             <div className="mt-auto pt-6">
               <SignOutButton
@@ -82,7 +102,14 @@ export function DashboardTemplate({
             {children}
           </main>
           <div className="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)] shadow-lift lg:hidden">
-            <DashboardTabs tabs={t.tabs} tabsLabel={t.tabsLabel} homeHref={homeHref} mobile />
+            <DashboardTabs
+              tabs={t.tabs}
+              tabsLabel={t.tabsLabel}
+              homeHref={homeHref}
+              portfolioHref={portfolioHref}
+              activeTab={activeTab}
+              mobile
+            />
           </div>
         </div>
       </div>
