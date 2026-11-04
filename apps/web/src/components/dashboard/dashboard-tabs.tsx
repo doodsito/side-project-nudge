@@ -28,9 +28,19 @@ export function DashboardTabs({
   return (
     <nav
       aria-label={tabsLabel}
-      className={mobile ? "border-t border-border bg-surface" : "border-b border-border"}
+      className={
+        mobile
+          ? "border-t-2 border-[var(--nudge-learn-nav-border)] bg-[var(--nudge-learn-portfolio-canvas)]"
+          : "border-b border-border"
+      }
     >
-      <ul className={mobile ? "grid grid-cols-3" : "-mb-px flex gap-1 overflow-x-auto"}>
+      <ul
+        className={
+          mobile
+            ? "flex min-h-[75px] items-center justify-between px-[18px] py-[9px]"
+            : "-mb-px flex gap-1 overflow-x-auto"
+        }
+      >
         {TABS.map(({ href, tab, icon: Icon }) => {
           const targetHref = tab === "home" ? homeHref : href;
           const current =
@@ -43,15 +53,22 @@ export function DashboardTabs({
                 aria-current={current ? "page" : undefined}
                 className={cn(
                   mobile
-                    ? "flex min-h-14 flex-col items-center justify-center gap-1 border-t-2 px-1 py-1 text-xs font-semibold transition-colors"
+                    ? cn(
+                        "flex h-14 flex-col items-center justify-center gap-1 rounded-[14px] text-xs transition-colors",
+                        current
+                          ? "w-[108px] border-2 border-[var(--nudge-learn-violet-300)] bg-[var(--nudge-learn-violet-100)] font-extrabold text-[var(--nudge-learn-violet-hover)]"
+                          : "w-[96px] border-2 border-transparent font-normal text-[var(--nudge-learn-neutral-600)]",
+                      )
                     : "inline-flex min-h-11 items-center gap-2 border-b-2 px-4 text-sm font-bold transition-colors",
                   "focus-visible:rounded-t-lg focus-visible:outline-2 focus-visible:outline-ring",
-                  current
+                  !mobile && current
                     ? "border-primary text-primary"
-                    : "border-transparent text-muted-foreground hover:text-foreground",
+                    : !mobile
+                      ? "border-transparent text-muted-foreground hover:text-foreground"
+                      : "",
                 )}
               >
-                <Icon className="size-4" aria-hidden />
+                <Icon className={mobile ? "size-[22px]" : "size-4"} aria-hidden />
                 {tabs[tab]}
               </Link>
             </li>

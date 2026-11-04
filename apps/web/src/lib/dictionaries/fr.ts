@@ -1895,7 +1895,11 @@ export const fr: Dictionary = {
     usComingSoon: "D’autres leçons pour les États-Unis arrivent bientôt.",
     portfolio: {
       title: "Portefeuille",
-      inDevelopment: "En développement",
+      inDevelopment: "EN CHANTIER",
+      headline: "Ça prend forme !",
+      description: "On peaufine votre portefeuille.",
+      comeBack: "Revenez faire un tour :)",
+      continueLearning: "CONTINUER À APPRENDRE  →",
     },
     account: {
       title: "Compte",

@@ -1843,7 +1843,11 @@ export const us = {
     usComingSoon: "More lessons for the US are coming soon.",
     portfolio: {
       title: "Portfolio",
-      inDevelopment: "In development",
+      inDevelopment: "UNDER CONSTRUCTION",
+      headline: "Taking shape!",
+      description: "We’re polishing your portfolio.",
+      comeBack: "Come back soon :)",
+      continueLearning: "CONTINUE LEARNING  →",
     },
     account: {
       title: "Account",
