@@ -50,7 +50,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
   const [member, params] = await Promise.all([requireMember(), searchParams]);
   const dictionary = getDictionary(member.track);
   const t = dictionary.dashboard.account;
-  const emailName = member.email.split("@")[0]?.split(/[._+-]/)[0] ?? "";
+  const emailName = member.displayName ?? member.email.split("@")[0]?.split(/[._+-]/)[0] ?? "";
   const displayName = emailName
     ? `${emailName[0]!.toLocaleUpperCase(TRACK_INFO[member.track].lang)}${emailName.slice(1)}`
     : t.title;

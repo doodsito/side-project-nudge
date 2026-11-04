@@ -4,7 +4,7 @@ import "@/components/layout/beta-colors.css";
 import { type ReactNode } from "react";
 import { SkipLink } from "@/components/layout/skip-link";
 import { DashboardTabs } from "@/components/dashboard/dashboard-tabs";
-import { FeedbackHeaderButton, FeedbackProvider } from "@/components/shared/feedback-widget";
+import { FeedbackProvider } from "@/components/shared/feedback-widget";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { BRAND } from "@/lib/brand";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -42,12 +42,7 @@ export function DashboardTemplate({
           </Link>
           <DashboardTabs tabs={t.tabs} tabsLabel={t.tabsLabel} homeHref={homeHref} />
           {!preview && signOut && (
-            <div className="mt-auto space-y-2 pt-6">
-              <FeedbackHeaderButton
-                label={t.feedback.trigger}
-                iconSrc="/brand/learn-map/feedback.svg"
-                className="w-full justify-start border-0 bg-transparent px-3 shadow-none hover:bg-muted"
-              />
+            <div className="mt-auto pt-6">
               <SignOutButton
                 action={signOut}
                 label={t.logOut}
