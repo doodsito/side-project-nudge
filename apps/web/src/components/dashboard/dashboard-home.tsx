@@ -71,7 +71,7 @@ export function DashboardHome({
       nextWorldLabel={`${courseCopy.world} 2`}
       nextWorldTitle={courseCopy.worlds[1]!.title}
       exploreLabel={courseCopy.viewAllCourses}
-      sideCards={courseCopy.homeSideCards}
+      rewardUnlockedLabel={courseCopy.homeSideCards.rewardUnlocked}
     />
   );
 }

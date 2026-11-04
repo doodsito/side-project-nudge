@@ -98,7 +98,7 @@ export function WorldOnePath({
   nextWorldLabel,
   nextWorldTitle,
   exploreLabel,
-  sideCards,
+  rewardUnlockedLabel,
 }: {
   lessons: WorldLesson[];
   completedCount: number;
@@ -113,15 +113,7 @@ export function WorldOnePath({
   nextWorldLabel: string;
   nextWorldTitle: string;
   exploreLabel: string;
-  sideCards: {
-    habitTitle: string;
-    habitText: string;
-    rewardTitle: string;
-    rewardText: string;
-    rewardUnlocked: string;
-    portfolioTitle: string;
-    portfolioText: string;
-  };
+  rewardUnlockedLabel: string;
 }) {
   const firstCurrent = lessons.find(({ state }) => state === "current");
   const firstLocked = lessons.find(({ state }) => state === "locked");
@@ -245,7 +237,7 @@ export function WorldOnePath({
                 >
                   <Image src="/brand/learn-map/trophy.svg" alt="" width={30} height={30} />
                 </span>
-                <p>{sideCards.rewardUnlocked}</p>
+                <p>{rewardUnlockedLabel}</p>
               </li>
             </ol>
           </section>
@@ -264,34 +256,6 @@ export function WorldOnePath({
             </Link>
           </section>
         </section>
-        <aside className={styles["supportCards"]}>
-          <article className={styles["supportCard"]}>
-            <h2>
-              <Image src="/brand/learn-map/flame.svg" alt="" width={24} height={24} />{" "}
-              {sideCards.habitTitle}
-            </h2>
-            <p>{sideCards.habitText}</p>
-          </article>
-          <article className={styles["supportCard"]}>
-            <h2>
-              <Image src="/brand/learn-map/trophy-outline.svg" alt="" width={24} height={24} />{" "}
-              {sideCards.rewardTitle}
-            </h2>
-            <strong>{sideCards.rewardUnlocked}</strong>
-            <p>{sideCards.rewardText}</p>
-          </article>
-          <article className={styles["supportCard"]}>
-            <Image
-              src="/brand/mascot/nudge-curious-card-figma.png"
-              alt=""
-              width={130}
-              height={120}
-              className={styles["supportMascot"]}
-            />
-            <h2>{sideCards.portfolioTitle}</h2>
-            <p>{sideCards.portfolioText}</p>
-          </article>
-        </aside>
       </div>
     </div>
   );
