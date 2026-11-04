@@ -42,36 +42,9 @@ export function DashboardHome({
   const nextLesson = FOUNDATION_LESSONS.find(
     ({ number }) => !hasCompletedLesson(progress, FOUNDATION_WORLD, number),
   )?.number;
-  const progressSteps = completed + (introComplete ? 1 : 0);
-  const progressTotal = lessonCount + 1;
+  const progressSteps = completed;
+  const progressTotal = lessonCount;
   const progressLabel = copy.pathProgressLabel(progressSteps, progressTotal);
-
-  const introNode = {
-    worldNumber: 0,
-    lessonNumber: 1,
-    markerNumber: 0,
-    title: courseCopy.intro.title,
-    description: courseCopy.intro.description,
-    notions: courseCopy.intro.notions,
-    duration: courseCopy.intro.duration,
-    state: introComplete
-      ? ("completed" as const)
-      : introCurrent
-        ? ("current" as const)
-        : ("available" as const),
-    status: introComplete
-      ? courseCopy.intro.completed
-      : introCurrent
-        ? copy.currentLesson
-        : copy.availableLesson,
-    sectionLabel: courseCopy.intro.label,
-    nodeLabel: `${courseCopy.intro.label}: ${courseCopy.intro.title}`,
-    startLabel: courseCopy.intro.start,
-    reviewLabel: courseCopy.intro.review,
-    lockedExplanation: "",
-    href: "/lessons/why-invest",
-    id: "world-0-intro",
-  };
 
   const worldOneNodes = FOUNDATION_LESSONS.map((lesson, index) => {
     const done = hasCompletedLesson(progress, FOUNDATION_WORLD, lesson.number);
@@ -177,7 +150,7 @@ export function DashboardHome({
           {foundationCopy.pathLabel}
         </h2>
         <WorldOnePath
-          lessons={[introNode, ...worldOneNodes]}
+          lessons={worldOneNodes}
           lockedLabel={courseCopy.locked}
           notionsLabel={foundationCopy.notionsLabel}
           mascotAlt={foundationCopy.mascotAlt}

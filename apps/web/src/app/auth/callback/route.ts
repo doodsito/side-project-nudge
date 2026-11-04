@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
   // A password reset link: choose the new password first. Only this exact
   // path is accepted, so the link cannot send anyone to another site.
   const isReset = request.nextUrl.searchParams.get("next") === "/reset-password";
+  const isOnboarding = request.nextUrl.searchParams.get("next") === "/lessons/why-invest";
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
   // Usually a link opened in another browser, or an old one. A reset link is
@@ -23,5 +24,5 @@ export async function GET(request: NextRequest) {
 
   if (isReset) return redirectTo("/reset-password");
   if (!(await finishSignIn(supabase))) return redirectTo("/signup?error=access");
-  return redirectTo("/dashboard");
+  return redirectTo(isOnboarding ? "/lessons/why-invest" : "/dashboard");
 }

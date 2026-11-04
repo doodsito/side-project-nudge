@@ -15,9 +15,11 @@ import { getDictionary } from "@/lib/dictionaries";
 
 // Where Supabase sends people back after Google or an email link. The
 // address must be allowed in Supabase (Authentication > URL Configuration).
-async function callbackUrl() {
+async function callbackUrl(next?: "/lessons/why-invest") {
   const origin = (await headers()).get("origin") ?? SITE_URL;
-  return `${origin}/auth/callback`;
+  const url = new URL("/auth/callback", origin);
+  if (next) url.searchParams.set("next", next);
+  return url.toString();
 }
 
 // The database refuses every code for a minute after too many wrong ones
@@ -67,14 +69,22 @@ export async function changeAccessCode() {
   redirect("/signup");
 }
 
-export async function signInWithGoogle() {
+async function googleSignIn(next?: "/lessons/why-invest") {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: await callbackUrl() },
+    options: { redirectTo: await callbackUrl(next) },
   });
   if (error || !data.url) redirect("/login?error=auth");
   redirect(data.url);
+}
+
+export async function signInWithGoogle() {
+  await googleSignIn();
+}
+
+export async function signUpWithGoogle() {
+  await googleSignIn("/lessons/why-invest");
 }
 
 export async function signUpWithPassword(
@@ -96,7 +106,7 @@ export async function signUpWithPassword(
     // or in another browser. It is only an input: redeem_access_code() checks it.
     // The track picks the language of the confirmation email.
     options: {
-      emailRedirectTo: await callbackUrl(),
+      emailRedirectTo: await callbackUrl("/lessons/why-invest"),
       data: { access_code: code, track: await getVisitorTrack() },
     },
   });
@@ -110,7 +120,7 @@ export async function signUpWithPassword(
   // the account starts once the link in the email is opened.
   if (!data.session) return { sentTo: email };
   if (!(await finishSignIn(supabase))) return { error: t.noAccess };
-  redirect("/dashboard");
+  redirect("/lessons/why-invest");
 }
 
 export async function signInWithPassword(
