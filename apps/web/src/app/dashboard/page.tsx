@@ -18,7 +18,6 @@ export default async function DashboardPage() {
     <DashboardHome
       progress={member.courseProgress}
       track={member.track}
-      copy={dictionary.dashboard.homeScreen}
       courseCopy={dictionary.learning.courses}
       foundationCopy={dictionary.learning.courses.foundation}
       userId={member.id}

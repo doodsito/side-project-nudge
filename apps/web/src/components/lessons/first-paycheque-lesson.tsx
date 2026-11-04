@@ -1,3 +1,4 @@
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -561,6 +562,14 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
     );
   }
 
+  if (props.progressStatus === "saved")
+    return (
+      <LessonRating
+        track={props.track}
+        nextHref="/dashboard/courses/financial-foundation/pay-yourself-first"
+      />
+    );
+
   return (
     <LessonScreen
       wide
@@ -579,16 +588,8 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link
-                // "idle" here means no account saved the lesson: the dashboard would only show the log-in page.
-                href={
-                  props.progressStatus === "saved"
-                    ? "/dashboard/courses/financial-foundation/pay-yourself-first"
-                    : "/"
-                }
-              >
-                {props.progressStatus === "saved" ? copy.complete.continue : copy.complete.back}
-                <ArrowRight aria-hidden="true" />
+              <Link href="/">
+                {copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           )}

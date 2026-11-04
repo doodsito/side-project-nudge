@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { CircleUser, House, Wallet } from "lucide-react";
 import type { Dictionary } from "@/lib/dictionaries";
 import { cn } from "@/lib/utils";
 
 // Each tab is its own URL, so a tab can be bookmarked and the back button works.
 const TABS = [
-  { href: "/dashboard", tab: "home", icon: House },
-  { href: "/dashboard/portfolio", tab: "portfolio", icon: Wallet },
-  { href: "/dashboard/account", tab: "account", icon: CircleUser },
+  { href: "/dashboard", tab: "home", icon: "house" },
+  { href: "/dashboard/portfolio", tab: "portfolio", icon: "wallet" },
+  { href: "/dashboard/account", tab: "account", icon: "account" },
 ] as const;
 
 export function DashboardTabs({
@@ -18,34 +18,27 @@ export function DashboardTabs({
   tabsLabel,
   mobile = false,
   homeHref = "/dashboard",
+  activeTab,
 }: {
   tabs: Dictionary["dashboard"]["tabs"];
   tabsLabel: string;
   mobile?: boolean;
   homeHref?: string;
+  activeTab?: (typeof TABS)[number]["tab"];
 }) {
   const pathname = usePathname();
   return (
     <nav
       aria-label={tabsLabel}
-      className={
-        mobile
-          ? "border-t-2 border-[var(--nudge-learn-nav-border)] bg-[var(--nudge-learn-portfolio-canvas)]"
-          : "border-b border-border"
-      }
+      className={mobile ? "border-t border-border bg-surface px-1.5 py-2" : "w-full"}
     >
-      <ul
-        className={
-          mobile
-            ? "flex min-h-[75px] items-center justify-between px-[18px] py-[9px]"
-            : "-mb-px flex gap-1 overflow-x-auto"
-        }
-      >
-        {TABS.map(({ href, tab, icon: Icon }) => {
+      <ul className={mobile ? "grid grid-cols-3" : "grid gap-2"}>
+        {TABS.map(({ href, tab, icon }) => {
           const targetHref = tab === "home" ? homeHref : href;
-          const current =
-            pathname === targetHref.split("?")[0] ||
-            (tab !== "home" && pathname.startsWith(`${href}/`));
+          const current = activeTab
+            ? tab === activeTab
+            : pathname === targetHref.split("?")[0] ||
+              (tab !== "home" && pathname.startsWith(`${href}/`));
           return (
             <li key={href}>
               <Link
@@ -53,22 +46,25 @@ export function DashboardTabs({
                 aria-current={current ? "page" : undefined}
                 className={cn(
                   mobile
-                    ? cn(
-                        "flex h-14 flex-col items-center justify-center gap-1 rounded-[14px] text-xs transition-colors",
-                        current
-                          ? "w-[108px] border-2 border-[var(--nudge-learn-violet-300)] bg-[var(--nudge-learn-violet-100)] font-extrabold text-[var(--nudge-learn-violet-hover)]"
-                          : "w-[96px] border-2 border-transparent font-normal text-[var(--nudge-learn-neutral-600)]",
-                      )
-                    : "inline-flex min-h-11 items-center gap-2 border-b-2 px-4 text-sm font-bold transition-colors",
-                  "focus-visible:rounded-t-lg focus-visible:outline-2 focus-visible:outline-ring",
-                  !mobile && current
-                    ? "border-primary text-primary"
-                    : !mobile
-                      ? "border-transparent text-muted-foreground hover:text-foreground"
-                      : "",
+                    ? "flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[0.65rem] font-semibold transition-colors"
+                    : "flex min-h-12 items-center gap-3 rounded-[14px] border-2 px-3 text-sm font-bold transition-colors",
+                  "focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-ring",
+                  current
+                    ? mobile
+                      ? "bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
+                      : "border-[var(--nudge-learn-violet-300)] bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
+                    : mobile
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "border-transparent text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
-                <Icon className={mobile ? "size-[22px]" : "size-4"} aria-hidden />
+                <Image
+                  src={`/brand/learn-map/${mobile ? `${icon}-mobile` : tab === "home" ? "house-active" : icon}.svg`}
+                  alt=""
+                  width={24}
+                  height={24}
+                  className={mobile ? "size-5" : "size-6"}
+                />
                 {tabs[tab]}
               </Link>
             </li>

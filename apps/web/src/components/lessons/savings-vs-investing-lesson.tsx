@@ -1,5 +1,6 @@
 "use client";
 
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import {
@@ -414,6 +415,9 @@ export function SavingsVsInvestingLesson(props: Props) {
       </LessonScreen>
     );
   }
+
+  if (props.progressStatus === "saved")
+    return <LessonRating track={props.track} nextHref="/dashboard" />;
 
   return (
     <LessonScreen

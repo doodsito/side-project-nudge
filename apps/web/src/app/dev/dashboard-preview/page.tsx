@@ -64,7 +64,6 @@ export default async function DashboardPreviewPage({
                     : sampleProgress
           }
           track={track}
-          copy={t.dashboard.homeScreen}
           courseCopy={t.learning.courses}
           foundationCopy={t.learning.courses.foundation}
         />

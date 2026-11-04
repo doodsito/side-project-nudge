@@ -1,3 +1,4 @@
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -495,6 +496,14 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
     );
   }
 
+  if (props.progressStatus === "saved")
+    return (
+      <LessonRating
+        track={props.track}
+        nextHref="/dashboard/courses/financial-foundation/build-your-safety-net"
+      />
+    );
+
   return (
     <LessonScreen
       wide
@@ -510,12 +519,6 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
           ) : props.progressStatus === "error" ? (
             <Button size="xl" onClick={props.onRetryProgress}>
               {copy.complete.retry} <ArrowRight aria-hidden="true" />
-            </Button>
-          ) : props.progressStatus === "saved" ? (
-            <Button asChild size="xl">
-              <Link href="/dashboard/courses/financial-foundation/build-your-safety-net">
-                {copy.complete.next} <ArrowRight aria-hidden="true" />
-              </Link>
             </Button>
           ) : (
             <Button asChild size="xl">

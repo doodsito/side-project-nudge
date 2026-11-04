@@ -1,0 +1,526 @@
+.page {
+  --learn-violet: var(--nudge-learn-violet);
+  --learn-violet-soft: var(--nudge-learn-violet-100);
+  --learn-gold: var(--nudge-learn-gold);
+  --learn-teal: var(--nudge-learn-teal);
+  --learn-canvas: var(--nudge-learn-canvas);
+  --learn-white: var(--nudge-learn-white);
+  --learn-ink: var(--nudge-learn-ink);
+  --learn-neutral-100: var(--nudge-learn-neutral-100);
+  --learn-neutral-200: var(--nudge-learn-neutral-200);
+  --learn-neutral-300: var(--nudge-learn-neutral-300);
+  --learn-neutral-600: var(--nudge-learn-neutral-600);
+  min-height: 100vh;
+  background: var(--learn-canvas);
+  color: var(--learn-ink);
+  margin-inline: -1rem;
+}
+
+.mapLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.mapColumn {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+.worldHeader {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.15rem;
+  background: var(--learn-violet);
+  box-shadow: 0 5px 0 var(--nudge-learn-violet-800);
+  color: var(--learn-white);
+}
+.worldHeading {
+  min-width: 0;
+}
+.worldLabel,
+.worldTitle,
+.nextWorldText p,
+.nextWorldText h2,
+.introCard p,
+.introCard h2 {
+  margin: 0;
+}
+.worldLabel {
+  color: var(--nudge-learn-violet-200);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 18px;
+}
+.worldTitle {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 26px;
+}
+.worldCount {
+  align-self: start;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.worldProgress {
+  grid-column: 1 / -1;
+  height: 0.75rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--nudge-learn-violet-800);
+}
+.worldProgress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--learn-teal);
+  transition: width 250ms ease;
+}
+.introCard {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--learn-neutral-200);
+  border-radius: 1rem;
+  background: var(--learn-white);
+}
+.introCard p,
+.lessonLabel {
+  color: var(--learn-violet);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.introCard h2 {
+  margin-top: 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 750;
+}
+.introCard span {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--learn-neutral-600);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+.introActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.9rem;
+}
+.introActions a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--learn-violet);
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.trail {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin-top: 1rem;
+}
+.route {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.routeHalo,
+.routeLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.routeHalo {
+  stroke: color-mix(in oklab, var(--learn-white) 90%, transparent);
+  stroke-width: 7;
+}
+.routeLine {
+  stroke: var(--learn-neutral-200);
+  stroke-width: 2;
+  stroke-dasharray: 1 8;
+}
+.nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nodeRow {
+  position: relative;
+  height: 96px;
+  flex: 0 0 96px;
+}
+.nodeButton {
+  position: absolute;
+  top: 0;
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+.nodeButton:focus-visible,
+.lessonCta:focus-visible,
+.explore:focus-visible,
+.introActions a:focus-visible {
+  outline: 3px solid var(--learn-violet);
+  outline-offset: 3px;
+}
+.nodeFace {
+  display: grid;
+  width: 72px;
+  height: 68px;
+  place-items: center;
+  border-radius: 50%;
+  box-shadow: 0 6px 0 var(--learn-neutral-300);
+  transition: transform 150ms ease;
+}
+.nodeButton:hover .nodeFace {
+  transform: translateY(-2px);
+}
+.completed .nodeFace {
+  background: var(--learn-teal);
+  box-shadow: 0 6px 0 var(--nudge-learn-teal-500);
+}
+.current .nodeFace {
+  background: var(--learn-violet);
+  box-shadow: 0 6px 0 var(--nudge-learn-violet-800);
+}
+.locked .nodeFace {
+  background: var(--learn-neutral-200);
+}
+.selected {
+  border: 4px solid var(--nudge-learn-violet-300);
+}
+.locked img {
+  width: 24px;
+  height: 24px;
+}
+.mascot {
+  position: absolute;
+  top: -0.5rem;
+  left: 57%;
+  width: 130px;
+  height: 120px;
+  object-fit: contain;
+}
+.cardRow {
+  position: relative;
+  height: 268px;
+  flex: 0 0 268px;
+  padding-top: 10px;
+}
+.lessonCard {
+  position: relative;
+  width: 100%;
+  min-height: 258px;
+  padding: 1.15rem 1.25rem;
+  border: 2px solid var(--nudge-learn-violet-200);
+  border-radius: 20px;
+  background: var(--learn-white);
+  box-shadow: 0 4px 0 var(--nudge-learn-violet-200);
+}
+.pointer {
+  position: absolute;
+  top: -14px;
+  left: 28%;
+}
+
+.lessonLabel {
+  margin: 0 0 0.65rem;
+}
+.lessonTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.lessonDescription {
+  margin: 0.6rem 0 0;
+  color: var(--learn-neutral-600);
+  font-size: 0.88rem;
+  line-height: 20px;
+}
+.lessonTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.lessonTags li {
+  padding: 5px 0.55rem;
+  border-radius: 8px;
+  background: var(--nudge-learn-gold-100);
+  color: var(--nudge-learn-gold-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 16px;
+}
+.lessonTags li + li {
+  background: var(--learn-violet-soft);
+  color: var(--learn-violet);
+}
+.lockedExplanation {
+  margin: 0.55rem 0 0;
+  color: var(--learn-neutral-600);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+.lessonCta {
+  display: flex;
+  min-height: 3.15rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.45rem;
+  padding: 0.45rem 0.75rem;
+  border: 0;
+  border-radius: 16px;
+  background: var(--learn-violet);
+  box-shadow: 0 4px 0 var(--nudge-learn-violet-800);
+  color: var(--learn-white);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+.lessonCta svg {
+  width: 1rem;
+  height: 1rem;
+}
+.lessonCta:disabled {
+  background: var(--learn-neutral-100);
+  color: var(--learn-neutral-600);
+  cursor: not-allowed;
+}
+.pathSpacer {
+  height: 10px;
+  flex: 0 0 10px;
+}
+.rewardRow {
+  position: relative;
+  display: grid;
+  height: 96px;
+  flex: 0 0 96px;
+  justify-items: center;
+}
+.rewardNode {
+  position: absolute;
+  top: 0;
+  display: grid;
+  width: 72px;
+  height: 68px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--nudge-learn-gold-100);
+  box-shadow: 0 6px 0 var(--nudge-learn-gold);
+  transform: translateX(-50%);
+}
+.rewardRow p {
+  position: absolute;
+  top: 72px;
+  margin: 0;
+  color: var(--nudge-learn-gold-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.nextWorld {
+  display: grid;
+  width: 100%;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+  padding-top: 0.8rem;
+}
+.nextWorldHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+.nextWorldHeading::before,
+.nextWorldHeading::after {
+  height: 2px;
+  flex: 1;
+  background: var(--learn-neutral-300);
+  content: "";
+}
+.nextWorldIcon {
+  display: grid;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--learn-neutral-600);
+}
+.nextWorldIcon svg {
+  width: 1rem;
+  height: 1rem;
+}
+.nextWorldText {
+  min-width: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.explore {
+  display: flex;
+  grid-column: 1 / -1;
+  min-height: 3.35rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border: 2px solid var(--nudge-learn-violet-200);
+  border-radius: 12px;
+  background: var(--learn-white);
+  box-shadow: 0 4px 0 var(--nudge-learn-violet-200);
+  color: var(--learn-violet);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.explore svg {
+  width: 1rem;
+  height: 1rem;
+}
+.supportCards {
+  display: none;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .mapColumn {
+    max-width: 624px;
+    margin-inline: auto;
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page {
+    margin-inline: 0;
+  }
+  .mapColumn {
+    padding: 32px 32px;
+  }
+  .worldHeader,
+  .trail,
+  .nextWorld,
+  .introCard {
+    width: min(100%, 560px);
+  }
+  .worldHeader {
+    min-height: 112px;
+    padding: 16px 20px;
+    border-radius: 20px;
+  }
+  .worldTitle {
+    font-size: 1.25rem;
+  }
+  .supportCards {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+    padding: 32px 32px 32px 0;
+  }
+  .supportCard {
+    min-height: 114px;
+    padding: 20px 22px;
+    border: 1px solid var(--learn-neutral-200);
+    border-radius: 18px;
+    background: var(--learn-white);
+    box-shadow: 0 4px 0 var(--learn-neutral-200);
+  }
+  .supportCard h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.94rem;
+    font-weight: 800;
+  }
+  .supportCard strong {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+  }
+  .supportCard p {
+    margin: 0.35rem 0 0;
+    color: var(--learn-neutral-600);
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+  .supportMascot {
+    display: block;
+    width: 130px;
+    height: 120px;
+    margin: -0.35rem auto 0.4rem;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 389px) {
+  .lessonCard {
+    padding: 1rem;
+  }
+  .lessonTitle {
+    font-size: 1.08rem;
+  }
+  .lessonDescription {
+    font-size: 0.8rem;
+  }
+  .mascot {
+    left: 57%;
+    width: 104px;
+    height: 96px;
+  }
+  .supportCards {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .worldProgress span,
+  .nodeFace {
+    transition: none;
+  }
+}
