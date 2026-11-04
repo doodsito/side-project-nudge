@@ -1,10 +1,6 @@
 import { WorldOnePath } from "@/components/dashboard/world-one-path";
 import { FOUNDATION_LESSONS, foundationLessonHref } from "@/lib/course-worlds";
-import {
-  FOUNDATION_WORLD,
-  hasCompletedLesson,
-  type CourseProgress,
-} from "@/lib/course-progress";
+import { FOUNDATION_WORLD, hasCompletedLesson, type CourseProgress } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Track } from "@/lib/tracks";
 

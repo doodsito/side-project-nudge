@@ -33,7 +33,7 @@ export default async function DashboardPreviewPage({
   const localPreview =
     process.env.NODE_ENV === "development" &&
     /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host);
-  const vercelPreview = process.env.VERCEL_ENV === "preview";
+  const vercelPreview = process.env["VERCEL_ENV"] === "preview";
   if (!localPreview && !vercelPreview) notFound();
 
   const { track: requestedTrack, state } = await searchParams;

@@ -45,9 +45,7 @@
 .worldLabel,
 .worldTitle,
 .nextWorldText p,
-.nextWorldText h2,
-.introCard p,
-.introCard h2 {
+.nextWorldText h2 {
   margin: 0;
 }
 .worldLabel {
@@ -83,53 +81,10 @@
   background: var(--learn-teal);
   transition: width 250ms ease;
 }
-.introCard {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.85rem;
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--learn-neutral-200);
-  border-radius: 1rem;
-  background: var(--learn-white);
-}
-.introCard p,
 .lessonLabel {
   color: var(--learn-violet);
   font-size: 0.75rem;
   font-weight: 800;
-}
-.introCard h2 {
-  margin-top: 0.2rem;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 750;
-}
-.introCard span {
-  display: block;
-  margin-top: 0.25rem;
-  color: var(--learn-neutral-600);
-  font-size: 0.76rem;
-  line-height: 1.4;
-}
-.introActions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem 0.9rem;
-}
-.introActions a {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  color: var(--learn-violet);
-  font-size: 0.78rem;
-  font-weight: 750;
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
 }
 .trail {
   position: relative;
@@ -190,8 +145,7 @@
 }
 .nodeButton:focus-visible,
 .lessonCta:focus-visible,
-.explore:focus-visible,
-.introActions a:focus-visible {
+.explore:focus-visible {
   outline: 3px solid var(--learn-violet);
   outline-offset: 3px;
 }
@@ -444,8 +398,7 @@
   }
   .worldHeader,
   .trail,
-  .nextWorld,
-  .introCard {
+  .nextWorld {
     width: min(100%, 560px);
   }
   .worldHeader {
