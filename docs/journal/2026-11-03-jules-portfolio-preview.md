@@ -1,7 +1,7 @@
 # Preview the future virtual portfolio
 - **Date:** 2026-11-03
 - **Author:** Jules, with Codex
-- **Pull request:** Pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/79
 **Why:** The empty portfolio page did not show learners what the future practice feature will offer.
 **What changed:**
 - Added a clearly fictional portfolio preview in French and US English.
