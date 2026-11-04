@@ -1786,8 +1786,34 @@ export const us = {
     logOutPending: "Logging out…",
     usComingSoon: "More lessons for the US are coming soon.",
     portfolio: {
-      title: "Portfolio",
-      inDevelopment: "In development",
+      title: "Virtual portfolio",
+      comingSoon: "Coming soon",
+      headline: "Your investing practice space is on the way",
+      description:
+        "You’ll be able to build a portfolio with virtual money, follow how it changes and understand the consequences of your decisions — without risking a dollar.",
+      benefitsLabel: "What the virtual portfolio will offer",
+      virtualMoney: "100% virtual money",
+      noRealMoney: "No real money",
+      guidedLearning: "Guidance at every step",
+      unavailable:
+        "This feature isn’t available yet. This screen gives you a preview of the experience we’re building.",
+      action: "Keep learning",
+      previewLabel: "Virtual value",
+      previewValue: "$10,000",
+      previewValueNote: "Fictional practice balance",
+      fictionalBadge: "Fictional preview",
+      chartTitle: "Simulated change",
+      chartLabel: "Fictional example of a virtual portfolio changing over time",
+      chartStart: "Start",
+      chartEnd: "Today",
+      allocationTitle: "Example allocation",
+      allocations: [
+        { label: "Diversified stocks", value: "55%", percentage: 55 },
+        { label: "Bonds", value: "25%", percentage: 25 },
+        { label: "Cash", value: "20%", percentage: 20 },
+      ],
+      allocationDisclaimer:
+        "This allocation is entirely fictional and only illustrates the future interface. It isn’t a recommendation.",
     },
     account: {
       title: "Account",

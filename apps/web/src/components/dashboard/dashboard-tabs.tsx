@@ -18,11 +18,15 @@ export function DashboardTabs({
   tabsLabel,
   mobile = false,
   homeHref = "/dashboard",
+  portfolioHref = "/dashboard/portfolio",
+  activeTab,
 }: {
   tabs: Dictionary["dashboard"]["tabs"];
   tabsLabel: string;
   mobile?: boolean;
   homeHref?: string;
+  portfolioHref?: string;
+  activeTab?: (typeof TABS)[number]["tab"] | undefined;
 }) {
   const pathname = usePathname();
   return (
@@ -32,10 +36,11 @@ export function DashboardTabs({
     >
       <ul className={mobile ? "grid grid-cols-3" : "-mb-px flex gap-1 overflow-x-auto"}>
         {TABS.map(({ href, tab, icon: Icon }) => {
-          const targetHref = tab === "home" ? homeHref : href;
-          const current =
-            pathname === targetHref.split("?")[0] ||
-            (tab !== "home" && pathname.startsWith(`${href}/`));
+          const targetHref = tab === "home" ? homeHref : tab === "portfolio" ? portfolioHref : href;
+          const current = activeTab
+            ? tab === activeTab
+            : pathname === targetHref.split("?")[0] ||
+              (tab !== "home" && pathname.startsWith(`${href}/`));
           return (
             <li key={href}>
               <Link

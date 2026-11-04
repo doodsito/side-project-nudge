@@ -1838,8 +1838,34 @@ export const fr: Dictionary = {
     logOutPending: "Déconnexion…",
     usComingSoon: "D’autres leçons pour les États-Unis arrivent bientôt.",
     portfolio: {
-      title: "Portefeuille",
-      inDevelopment: "En développement",
+      title: "Portefeuille virtuel",
+      comingSoon: "Bientôt disponible",
+      headline: "Ton terrain d’entraînement arrive",
+      description:
+        "Tu pourras construire un portefeuille avec de l’argent fictif, suivre son évolution et comprendre les conséquences de tes décisions — sans risquer un euro.",
+      benefitsLabel: "Ce que permettra le portefeuille virtuel",
+      virtualMoney: "100 % argent virtuel",
+      noRealMoney: "Aucun argent réel",
+      guidedLearning: "Des explications à chaque étape",
+      unavailable:
+        "Cette fonctionnalité n’est pas encore disponible. Cet écran te donne un aperçu de l’expérience que nous préparons.",
+      action: "Continuer à apprendre",
+      previewLabel: "Valeur virtuelle",
+      previewValue: "10 000 €",
+      previewValueNote: "Solde d’entraînement fictif",
+      fictionalBadge: "Aperçu fictif",
+      chartTitle: "Évolution simulée",
+      chartLabel: "Exemple fictif d’évolution d’un portefeuille virtuel",
+      chartStart: "Départ",
+      chartEnd: "Aujourd’hui",
+      allocationTitle: "Exemple de répartition",
+      allocations: [
+        { label: "Actions diversifiées", value: "55 %", percentage: 55 },
+        { label: "Obligations", value: "25 %", percentage: 25 },
+        { label: "Liquidités", value: "20 %", percentage: 20 },
+      ],
+      allocationDisclaimer:
+        "Répartition entièrement fictive, présentée uniquement pour illustrer la future interface. Ce n’est pas une recommandation.",
     },
     account: {
       title: "Compte",
