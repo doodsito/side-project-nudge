@@ -1843,10 +1843,9 @@ export const us = {
     usComingSoon: "More lessons for the US are coming soon.",
     portfolio: {
       title: "Portfolio",
-      inDevelopment: "UNDER CONSTRUCTION",
-      headline: "Taking shape!",
-      description: "We’re polishing your portfolio.",
-      comeBack: "Come back soon :)",
+      headline: "Coming soon!",
+      descriptionLines: ["Complete lessons to earn virtual money,", "then invest it", "in stocks."],
+      comingSoon: "We’re getting it ready :) See you soon!",
       continueLearning: "CONTINUE LEARNING  →",
     },
     account: {

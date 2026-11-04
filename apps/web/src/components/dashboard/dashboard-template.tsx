@@ -2,7 +2,7 @@ import "@/components/layout/beta-colors.css";
 import { type ReactNode } from "react";
 import { SkipLink } from "@/components/layout/skip-link";
 import { DashboardTabs } from "@/components/dashboard/dashboard-tabs";
-import { FeedbackHeaderButton, FeedbackProvider } from "@/components/shared/feedback-widget";
+import { FeedbackProvider } from "@/components/shared/feedback-widget";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import type { Dictionary } from "@/lib/dictionaries";
 
@@ -29,7 +29,6 @@ export function DashboardTemplate({
         <div className="mx-auto flex max-w-5xl items-center justify-end gap-4">
           {!preview && signOut && (
             <div className="hidden items-center gap-2 sm:flex">
-              <FeedbackHeaderButton label={t.feedback.trigger} />
               <SignOutButton
                 action={signOut}
                 label={t.logOut}
