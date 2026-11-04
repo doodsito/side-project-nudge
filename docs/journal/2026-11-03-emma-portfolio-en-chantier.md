@@ -9,5 +9,5 @@
 - Retire le feedback en doublon et les cartes Learn map prévues plus tard.
 - Ajoute la notation par étoiles et les aperçus returning / lesson-feedback.
 **Files:** Dashboard, dictionnaires FR/US, icônes Figma et composants de profil.
-**Checked:** lint, typecheck et build passent ; aperçu à vérifier après push.
-**Next:** Vérifier l’aperçu puis fusionner la PR.
+**Checked:** lint, typecheck, build et preview Vercel du Profil vérifiés.
+**Next:** Fusionner cette PR sur main.
