@@ -13,7 +13,7 @@ import { GOOGLE_SIGN_IN_ENABLED } from "@/lib/auth-rules";
 import { type Member } from "@/lib/auth";
 import { BRAND } from "@/lib/brand";
 import { getDictionary, type Dictionary } from "@/lib/dictionaries";
-import { signInWithGoogle } from "./actions";
+import { signInWithGoogle, signUpWithGoogle } from "./actions";
 
 /** The `error` the auth callback and the actions add to the URL, explained. */
 export function ErrorBox({ code, t }: { code: unknown; t: Dictionary["auth"]["urlErrors"] }) {
@@ -28,11 +28,17 @@ export function ErrorBox({ code, t }: { code: unknown; t: Dictionary["auth"]["ur
   );
 }
 
-export function GoogleSignIn({ t }: { t: Dictionary["auth"]["form"] }) {
+export function GoogleSignIn({
+  t,
+  onboarding = false,
+}: {
+  t: Dictionary["auth"]["form"];
+  onboarding?: boolean;
+}) {
   if (!GOOGLE_SIGN_IN_ENABLED) return null;
   return (
     <>
-      <GoogleSignInButton action={signInWithGoogle} t={t} />
+      <GoogleSignInButton action={onboarding ? signUpWithGoogle : signInWithGoogle} t={t} />
       <div className="my-6 flex items-center gap-3 text-xs font-bold text-muted-foreground uppercase">
         <Separator className="flex-1" />
         {t.or}

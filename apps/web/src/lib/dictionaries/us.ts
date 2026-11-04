@@ -310,11 +310,31 @@ export const us = {
         `Lesson progress: step ${current} of ${total}`,
       leaveLesson: "Leave lesson",
       educationalNote: "Educational simulation only. Not investment advice.",
+      rating: {
+        lessonComplete: "LESSON COMPLETE!",
+        title: "How useful was this lesson?",
+        hint: "Tap a star to rate this lesson.",
+        low: "Not useful",
+        high: "Very useful",
+        continue: "CONTINUE LEARNING",
+        skip: "Skip feedback",
+        starLabel: (value: number, total: number) => `${value} of ${total} stars`,
+      },
     },
     courses: {
       yourCourses: "Your courses",
       nextLesson: "Next lesson",
       viewAllLessons: "View all lessons",
+      viewAllCourses: "Explore all courses",
+      homeSideCards: {
+        habitTitle: "Keep your learning going",
+        habitText: "A short lesson is enough to keep the habit going.",
+        rewardTitle: "World reward",
+        rewardText: "Finish all eight lessons to unlock the investing world.",
+        rewardUnlocked: "Investing unlocked",
+        portfolioTitle: "Your virtual portfolio is coming soon",
+        portfolioText: "Virtual money only. Nothing here is real.",
+      },
       roadmap: "Other worlds",
       journeyLabel: "Your learning journey",
       journeyTitle: "Nine worlds. One decision at a time.",
@@ -1793,6 +1813,7 @@ export const us = {
   dashboard: {
     home: "Learn",
     tabsLabel: "Dashboard",
+    streakLabel: "Keep learning",
     tabs: { home: "Learn", courses: "Courses", portfolio: "Portfolio", account: "Profile" },
     preview: {
       title: "Local Home preview",
@@ -1843,10 +1864,17 @@ export const us = {
     usComingSoon: "More lessons for the US are coming soon.",
     portfolio: {
       title: "Portfolio",
-      inDevelopment: "In development",
+      headline: "Coming soon!",
+      descriptionLines: ["Complete lessons to earn virtual money,", "then invest it", "in stocks."],
+      comingSoon: "We’re getting it ready :) See you soon!",
+      continueLearning: "CONTINUE LEARNING  →",
     },
     account: {
-      title: "Account",
+      title: "Profile",
+      myAccount: "My account",
+      personalInformation: "Personal information",
+      helpPrivacy: "Help and privacy",
+      actions: "Actions",
       passwordUpdated: "Password updated. Use it next time you log in.",
       details: "Your details",
       email: "Email",
@@ -1864,7 +1892,7 @@ export const us = {
       resetTitle: "Reset my progress",
       resetText:
         "Restart your courses from the beginning, as if you had just created your account. Your account, version and feedback stay the same.",
-      resetAction: "Reset my progress",
+      resetAction: "Reset progress",
       resetDialogTitle: "Reset your progress?",
       resetDialogText: (count: number) =>
         count === 0
@@ -1874,7 +1902,7 @@ export const us = {
       resetPending: "Resetting…",
       resetCancel: "Cancel",
       resetError: "We couldn’t reset your progress just now. Please try again.",
-      deleteTitle: "Delete your account",
+      deleteTitle: "Delete the account",
       deleteEmail: "Email",
       deleteFrom:
         "from the address above. We delete your account and its data within one month. See the",

@@ -315,11 +315,31 @@ export const fr: Dictionary = {
       lessonProgress: (current, total) => `Progression\u00a0: étape ${current} sur ${total}`,
       leaveLesson: "Quitter la leçon",
       educationalNote: "Simulation pédagogique uniquement. Ceci n’est pas un conseil financier.",
+      rating: {
+        lessonComplete: "LEÇON TERMINÉE !",
+        title: "Cette leçon t’a‑t‑elle été utile ?",
+        hint: "Touche une étoile pour noter cette leçon.",
+        low: "Pas utile",
+        high: "Très utile",
+        continue: "CONTINUER À APPRENDRE",
+        skip: "Passer le retour",
+        starLabel: (value: number, total: number) => `${value} sur ${total} étoiles`,
+      },
     },
     courses: {
       yourCourses: "Tes cours",
       nextLesson: "Prochaine leçon",
       viewAllLessons: "Voir toutes les leçons",
+      viewAllCourses: "Explorer tous les cours",
+      homeSideCards: {
+        habitTitle: "Garde ton rythme",
+        habitText: "Une courte leçon suffit à entretenir l’habitude.",
+        rewardTitle: "Récompense du monde",
+        rewardText: "Termine les huit leçons pour ouvrir l’univers de l’investissement.",
+        rewardUnlocked: "L’investissement débloqué",
+        portfolioTitle: "Ton portefeuille virtuel arrive bientôt",
+        portfolioText: "Uniquement de l’argent virtuel. Rien n’est réel ici.",
+      },
       roadmap: "Les autres mondes",
       journeyLabel: "Ton parcours d’apprentissage",
       journeyTitle: "Neuf mondes. Une décision à la fois.",
@@ -1844,6 +1864,7 @@ export const fr: Dictionary = {
   dashboard: {
     home: "Apprendre",
     tabsLabel: "Tableau de bord",
+    streakLabel: "Reste régulière",
     tabs: { home: "Apprendre", courses: "Cours", portfolio: "Portefeuille", account: "Profil" },
     preview: {
       title: "Aperçu local de l’accueil",
@@ -1895,10 +1916,21 @@ export const fr: Dictionary = {
     usComingSoon: "D’autres leçons pour les États-Unis arrivent bientôt.",
     portfolio: {
       title: "Portefeuille",
-      inDevelopment: "En développement",
+      headline: "En chantier !",
+      descriptionLines: [
+        "Valide des leçons, gagne de l’argent",
+        "virtuel, puis investis-le",
+        "dans des actions.",
+      ],
+      comingSoon: "On te prépare ça :) À très vite !",
+      continueLearning: "CONTINUER À APPRENDRE  →",
     },
     account: {
-      title: "Compte",
+      title: "Profil",
+      myAccount: "Mon compte",
+      personalInformation: "Informations personnelles",
+      helpPrivacy: "Aide et confidentialité",
+      actions: "Actions",
       passwordUpdated: "Mot de passe modifié. Utilise-le à ta prochaine connexion.",
       details: "Tes informations",
       email: "E-mail",
@@ -1916,7 +1948,7 @@ export const fr: Dictionary = {
       resetTitle: "Réinitialiser ma progression",
       resetText:
         "Recommence tes cours depuis le début, comme à la création de ton compte. Ton compte, ta version et tes retours ne changent pas.",
-      resetAction: "Réinitialiser ma progression",
+      resetAction: "Réinitialiser la progression",
       resetDialogTitle: "Réinitialiser ta progression\u00a0?",
       resetDialogText: (count: number) =>
         count === 0
@@ -1926,7 +1958,7 @@ export const fr: Dictionary = {
       resetPending: "Réinitialisation…",
       resetCancel: "Annuler",
       resetError: "Impossible de réinitialiser ta progression pour le moment. Réessaie.",
-      deleteTitle: "Supprimer ton compte",
+      deleteTitle: "Supprimer le compte",
       deleteEmail: "Écris à",
       deleteFrom:
         "depuis l’adresse ci-dessus. Nous supprimons ton compte et ses données sous un mois. Consulte la",

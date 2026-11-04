@@ -68,7 +68,7 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
       intro={t.pages.signupAccount.intro}
     >
       <ErrorBox code={params["error"]} t={t.urlErrors} />
-      <GoogleSignIn t={t.form} />
+      <GoogleSignIn t={t.form} onboarding />
       <PasswordForm mode="sign-up" action={signUpWithPassword} t={t.form} />
       <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
         {t.links.consentBefore}{" "}
