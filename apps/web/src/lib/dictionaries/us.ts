@@ -1870,7 +1870,11 @@ export const us = {
       continueLearning: "CONTINUE LEARNING  →",
     },
     account: {
-      title: "Account",
+      title: "Profile",
+      myAccount: "My account",
+      personalInformation: "Personal information",
+      helpPrivacy: "Help and privacy",
+      actions: "Actions",
       passwordUpdated: "Password updated. Use it next time you log in.",
       details: "Your details",
       email: "Email",
@@ -1888,7 +1892,7 @@ export const us = {
       resetTitle: "Reset my progress",
       resetText:
         "Restart your courses from the beginning, as if you had just created your account. Your account, version and feedback stay the same.",
-      resetAction: "Reset my progress",
+      resetAction: "Reset progress",
       resetDialogTitle: "Reset your progress?",
       resetDialogText: (count: number) =>
         count === 0
@@ -1898,7 +1902,7 @@ export const us = {
       resetPending: "Resetting…",
       resetCancel: "Cancel",
       resetError: "We couldn’t reset your progress just now. Please try again.",
-      deleteTitle: "Delete your account",
+      deleteTitle: "Delete the account",
       deleteEmail: "Email",
       deleteFrom:
         "from the address above. We delete your account and its data within one month. See the",

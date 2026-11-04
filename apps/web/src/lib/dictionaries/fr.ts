@@ -1926,7 +1926,11 @@ export const fr: Dictionary = {
       continueLearning: "CONTINUER À APPRENDRE  →",
     },
     account: {
-      title: "Compte",
+      title: "Profil",
+      myAccount: "Mon compte",
+      personalInformation: "Informations personnelles",
+      helpPrivacy: "Aide et confidentialité",
+      actions: "Actions",
       passwordUpdated: "Mot de passe modifié. Utilise-le à ta prochaine connexion.",
       details: "Tes informations",
       email: "E-mail",
@@ -1944,7 +1948,7 @@ export const fr: Dictionary = {
       resetTitle: "Réinitialiser ma progression",
       resetText:
         "Recommence tes cours depuis le début, comme à la création de ton compte. Ton compte, ta version et tes retours ne changent pas.",
-      resetAction: "Réinitialiser ma progression",
+      resetAction: "Réinitialiser la progression",
       resetDialogTitle: "Réinitialiser ta progression\u00a0?",
       resetDialogText: (count: number) =>
         count === 0
@@ -1954,7 +1958,7 @@ export const fr: Dictionary = {
       resetPending: "Réinitialisation…",
       resetCancel: "Annuler",
       resetError: "Impossible de réinitialiser ta progression pour le moment. Réessaie.",
-      deleteTitle: "Supprimer ton compte",
+      deleteTitle: "Supprimer le compte",
       deleteEmail: "Écris à",
       deleteFrom:
         "depuis l’adresse ci-dessus. Nous supprimons ton compte et ses données sous un mois. Consulte la",
