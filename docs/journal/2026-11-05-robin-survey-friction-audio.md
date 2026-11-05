@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-05
 - **Author:** Robin, with Claude Code
-- **Pull request:** to be added once opened
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/80
 
 **Why:** testers could already answer the last survey question by voice, but not "the most frustrating moment", where speaking is often easier.
 
