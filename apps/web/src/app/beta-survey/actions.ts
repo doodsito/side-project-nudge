@@ -14,7 +14,8 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
   const member = await requireMember();
   const answers = parseBetaSurveyAnswers(value);
   if (!answers) return { status: "error" };
-  if (answers.overallAudioPath && !isFeedbackAudioPath(answers.overallAudioPath, member.id)) {
+  const audioPaths = [answers.frictionAudioPath, answers.overallAudioPath];
+  if (audioPaths.some((path) => path && !isFeedbackAudioPath(path, member.id))) {
     return { status: "error" };
   }
 
@@ -32,6 +33,7 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
     usefulness_score: answers.usefulnessScore,
     usefulness_why: answers.usefulnessWhy,
     friction: answers.friction,
+    friction_audio_path: answers.frictionAudioPath,
     overall_message: answers.overallMessage,
     overall_audio_path: answers.overallAudioPath,
   });

@@ -16,6 +16,7 @@ export type BetaSurveyAnswers = {
   usefulnessScore: number;
   usefulnessWhy: string | null;
   friction: string | null;
+  frictionAudioPath: string | null;
   overallMessage: string | null;
   overallAudioPath: string | null;
 };
@@ -60,6 +61,7 @@ export function parseBetaSurveyAnswers(value: unknown): BetaSurveyAnswers | null
   const usefulnessWhy = optionalText(read("usefulnessWhy"));
   const friction = optionalText(read("friction"));
   const overallMessage = optionalText(read("overallMessage"));
+  const frictionAudioPath = read("frictionAudioPath") ?? null;
   const audioPath = read("overallAudioPath") ?? null;
   if (
     appearanceWhy === undefined ||
@@ -67,6 +69,8 @@ export function parseBetaSurveyAnswers(value: unknown): BetaSurveyAnswers | null
     usefulnessWhy === undefined ||
     friction === undefined ||
     overallMessage === undefined ||
+    (frictionAudioPath !== null && typeof frictionAudioPath !== "string") ||
+    (friction !== null && frictionAudioPath !== null) ||
     (audioPath !== null && typeof audioPath !== "string") ||
     (overallMessage !== null && audioPath !== null)
   ) {
@@ -84,6 +88,7 @@ export function parseBetaSurveyAnswers(value: unknown): BetaSurveyAnswers | null
     usefulnessScore,
     usefulnessWhy,
     friction,
+    frictionAudioPath,
     overallMessage,
     overallAudioPath: audioPath,
   };

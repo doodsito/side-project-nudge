@@ -52,3 +52,17 @@ test("text has a length limit and the overall answer is text or audio, never bot
     "a/b.webm",
   );
 });
+
+test("the friction answer is text or audio, never both", () => {
+  assert.equal(
+    parseBetaSurveyAnswers({ ...VALID, friction: "Long", frictionAudioPath: "a/b.webm" }),
+    null,
+  );
+  assert.equal(parseBetaSurveyAnswers({ ...VALID, frictionAudioPath: 12 }), null);
+  assert.equal(parseBetaSurveyAnswers(VALID).frictionAudioPath, null);
+  assert.equal(
+    parseBetaSurveyAnswers({ ...VALID, friction: " ", frictionAudioPath: "a/b.webm" })
+      .frictionAudioPath,
+    "a/b.webm",
+  );
+});

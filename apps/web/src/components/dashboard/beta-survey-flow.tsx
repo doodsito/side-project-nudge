@@ -211,6 +211,7 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
     usefulness: "",
   });
   const [friction, setFriction] = useState("");
+  const [frictionAudio, setFrictionAudio] = useState<Blob | null>(null);
   const [overall, setOverall] = useState("");
   const [audio, setAudio] = useState<Blob | null>(null);
   const [recording, setRecording] = useState(false);
@@ -229,20 +230,28 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
     window.scrollTo({ top: 0 });
   }
 
+  /** Returns the file's path, or null if the upload failed. */
+  async function uploadAudio(audio: Blob) {
+    const prepared = await prepareFeedbackAudio(audio.type);
+    if (!prepared) return null;
+    const { error } = await getSupabase()
+      .storage.from(FEEDBACK_AUDIO_BUCKET)
+      .uploadToSignedUrl(prepared.path, prepared.token, audio, { contentType: audio.type });
+    return error ? null : prepared.path;
+  }
+
   function send(overallMessage: string, overallAudio: Blob | null) {
     setFailed(false);
     startSending(async () => {
+      let frictionAudioPath: string | null = null;
+      if (frictionAudio) {
+        frictionAudioPath = await uploadAudio(frictionAudio);
+        if (!frictionAudioPath) return setFailed(true);
+      }
       let overallAudioPath: string | null = null;
       if (overallAudio) {
-        const prepared = await prepareFeedbackAudio(overallAudio.type);
-        if (!prepared) return setFailed(true);
-        const { error } = await getSupabase()
-          .storage.from(FEEDBACK_AUDIO_BUCKET)
-          .uploadToSignedUrl(prepared.path, prepared.token, overallAudio, {
-            contentType: overallAudio.type,
-          });
-        if (error) return setFailed(true);
-        overallAudioPath = prepared.path;
+        overallAudioPath = await uploadAudio(overallAudio);
+        if (!overallAudioPath) return setFailed(true);
       }
       const result = await submitBetaSurvey({
         device,
@@ -254,7 +263,8 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
         coursesWhy: reasons.courses,
         usefulnessScore: scores.usefulness,
         usefulnessWhy: reasons.usefulness,
-        friction,
+        friction: frictionAudio ? "" : friction,
+        frictionAudioPath,
         overallMessage,
         overallAudioPath,
       });
@@ -401,15 +411,28 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
               </>
             )}
             {step === "friction" && (
-              <Textarea
-                aria-labelledby="beta-survey-question"
-                value={friction}
-                onChange={(event) => setFriction(event.target.value)}
-                maxLength={BETA_SURVEY_TEXT_MAX_LENGTH}
-                rows={6}
-                placeholder={t.frictionPlaceholder}
-                className={TEXTAREA}
-              />
+              <>
+                {!frictionAudio && (
+                  <>
+                    <Textarea
+                      aria-labelledby="beta-survey-question"
+                      value={friction}
+                      onChange={(event) => setFriction(event.target.value)}
+                      maxLength={BETA_SURVEY_TEXT_MAX_LENGTH}
+                      rows={5}
+                      placeholder={t.frictionPlaceholder}
+                      className={TEXTAREA}
+                    />
+                    <p className="text-center text-sm font-bold text-muted-foreground">{t.or}</p>
+                  </>
+                )}
+                <FeedbackAudioRecorder
+                  t={dictionary.dashboard.feedback}
+                  disabled={sending}
+                  onRecordingChange={setRecording}
+                  onAudioChange={setFrictionAudio}
+                />
+              </>
             )}
             {step === "overall" && (
               <>
@@ -492,6 +515,7 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
                   send("", null);
                 } else {
                   setFriction("");
+                  setFrictionAudio(null);
                   next();
                 }
               }}
