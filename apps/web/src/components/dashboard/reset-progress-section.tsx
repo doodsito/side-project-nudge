@@ -109,11 +109,11 @@ export function ResetProgressSection({
           onClick={() => setOpen(true)}
         >
           <span className="grid size-[34px] shrink-0 place-items-center rounded-[10px] bg-white">
-            <Image src="/brand/learn-map/profile-reset.svg" alt="" width={20} height={20} />
+            <Image src="/brand/portfolio/profile-reset.svg" alt="" width={20} height={20} />
           </span>
           <span className="min-w-0 flex-1 text-left">{action}</span>
           <Image
-            src="/brand/learn-map/profile-chevron-right.svg"
+            src="/brand/portfolio/profile-open.svg"
             alt=""
             width={16}
             height={16}

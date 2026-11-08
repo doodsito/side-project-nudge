@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Symbole">
+<mask id="stroke0_0_55" fill="white">
+<path d="M10 9.584C11.6105 9.584 12.916 8.27801 12.916 6.667C12.916 5.05599 11.6105 3.75 10 3.75C8.38954 3.75 7.084 5.05599 7.084 6.667C7.084 8.27801 8.38954 9.584 10 9.584Z"/>
+</mask>
+<path id="Trac&#195;&#169;" d="M12.916 6.667C12.916 8.27801 11.6105 9.584 10 9.584C8.38954 9.584 7.084 8.27801 7.084 6.667C7.084 5.05599 8.38954 3.75 10 3.75C11.6105 3.75 12.916 5.05599 12.916 6.667Z" stroke-width="3.4" stroke-linecap="round" stroke="#522ACD" mask="url(#stroke0_0_55)"/>
+<path id="Trac&#195;&#169;_2" d="M4.166 17.5V15.8333C4.166 14.2862 4.78065 12.8025 5.87474 11.7085C6.96883 10.6146 8.45273 10 10 10C11.5473 10 13.0312 10.6146 14.1253 11.7085C15.2193 12.8025 15.834 14.2862 15.834 15.8333V17.5" stroke-width="1.7" stroke-linecap="round" stroke="#522ACD"/>
+</g>
+</svg>

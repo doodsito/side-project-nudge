@@ -32,7 +32,7 @@ function ProfileIcon({ src }: { src: string }) {
 function RowChevron() {
   return (
     <Image
-      src="/brand/learn-map/profile-chevron-right.svg"
+      src="/brand/portfolio/profile-open.svg"
       alt=""
       width={16}
       height={16}
@@ -68,7 +68,10 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
         : undefined;
 
   return (
-    <div className="mx-auto min-h-[calc(100svh-9rem-env(safe-area-inset-bottom))] max-w-2xl rounded-[28px] bg-[var(--nudge-learn-white)] px-5 py-6 sm:min-h-0 sm:px-8 sm:py-8">
+    <div
+      data-dashboard-hide-mobile-header
+      className="min-h-[calc(100svh-5rem-env(safe-area-inset-bottom))] bg-[var(--nudge-learn-white)] px-5 py-6 sm:mx-auto sm:min-h-0 sm:max-w-2xl sm:rounded-[28px] sm:px-8 sm:py-8"
+    >
       <div className="flex flex-col gap-5">
         <header className="flex flex-col gap-[18px]">
           <h1 className="font-display text-base leading-[22px] font-extrabold text-[var(--nudge-learn-violet-700)]">
@@ -113,7 +116,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               <summary
                 className={`${rowClassName} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
               >
-                <ProfileIcon src="/brand/learn-map/profile-person.svg" />
+                <ProfileIcon src="/brand/portfolio/profile-person.svg" />
                 <span className="flex min-w-0 flex-1 flex-col gap-[3px] text-xs leading-4 font-bold">
                   <span className="text-[var(--nudge-learn-violet-700)]">
                     {t.personalInformation}
@@ -142,7 +145,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               <summary
                 className={`${rowClassName} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
               >
-                <ProfileIcon src="/brand/learn-map/profile-globe.svg" />
+                <ProfileIcon src="/brand/portfolio/profile-version.svg" />
                 <span className="flex min-w-0 flex-1 flex-col gap-[3px] text-xs leading-4 font-bold">
                   <span className="text-[var(--nudge-learn-violet-700)]">{t.version}</span>
                   <span className="text-[var(--nudge-learn-neutral-600)]">{trackSummary}</span>
@@ -183,7 +186,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               href="/privacy-policy"
               className={`${rowClassName} text-[var(--nudge-learn-violet-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
             >
-              <ProfileIcon src="/brand/learn-map/profile-shield.svg" />
+              <ProfileIcon src="/brand/portfolio/profile-help.svg" />
               <span className="min-w-0 flex-1 text-xs leading-4 font-bold">{t.helpPrivacy}</span>
               <RowChevron />
             </Link>
@@ -216,7 +219,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               action={signOut}
               label={dictionary.dashboard.logOut}
               pendingLabel={dictionary.dashboard.logOutPending}
-              iconSrc="/brand/learn-map/profile-logout.svg"
+              iconSrc="/brand/portfolio/profile-logout.svg"
               mode="row"
               className="h-auto min-h-[60px] w-full justify-start gap-3 rounded-none px-0 py-[13px] text-xs leading-4 font-bold text-[var(--nudge-learn-violet-700)] hover:bg-transparent hover:text-[var(--nudge-learn-violet)]"
             />

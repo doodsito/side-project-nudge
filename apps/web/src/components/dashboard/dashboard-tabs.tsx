@@ -53,7 +53,9 @@ export function DashboardTabs({
                   "focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-ring",
                   current
                     ? mobile
-                      ? "bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
+                      ? tab === "portfolio"
+                        ? "border-2 border-[var(--nudge-learn-violet-300)] bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
+                        : "bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
                       : "border-[var(--nudge-learn-violet-300)] bg-[var(--nudge-learn-violet-100)] text-[var(--nudge-learn-violet-700)]"
                     : mobile
                       ? "text-muted-foreground hover:text-foreground"
