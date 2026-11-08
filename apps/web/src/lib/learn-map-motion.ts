@@ -22,3 +22,16 @@ export function recordLearnMapWorldCompletion(userId: string) {
     // Motion is decorative; storage failures must not affect lesson completion.
   }
 }
+
+/** Forgets this member's Learn state in this browser, once their progress has been reset. */
+export function clearLearnLocalState(userId: string) {
+  for (const storage of [window.localStorage, window.sessionStorage]) {
+    try {
+      Object.keys(storage)
+        .filter((key) => key.startsWith("nudge:") && key.endsWith(`:${userId}`))
+        .forEach((key) => storage.removeItem(key));
+    } catch {
+      // Unavailable storage holds nothing to forget.
+    }
+  }
+}

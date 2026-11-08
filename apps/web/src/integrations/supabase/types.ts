@@ -38,27 +38,98 @@ export type Database = {
         };
         Relationships: [];
       };
+      beta_survey_responses: {
+        Row: {
+          appearance_score: number;
+          appearance_why: string | null;
+          courses_score: number;
+          courses_why: string | null;
+          created_at: string;
+          device: string;
+          disappointment: string;
+          friction: string | null;
+          friction_audio_path: string | null;
+          id: number;
+          lessons_completed: number;
+          member_id: string;
+          nps: number;
+          overall_audio_path: string | null;
+          overall_message: string | null;
+          usefulness_score: number;
+          usefulness_why: string | null;
+        };
+        Insert: {
+          appearance_score: number;
+          appearance_why?: string | null;
+          courses_score: number;
+          courses_why?: string | null;
+          created_at?: string;
+          device: string;
+          disappointment: string;
+          friction?: string | null;
+          friction_audio_path?: string | null;
+          id?: never;
+          lessons_completed: number;
+          member_id: string;
+          nps: number;
+          overall_audio_path?: string | null;
+          overall_message?: string | null;
+          usefulness_score: number;
+          usefulness_why?: string | null;
+        };
+        Update: {
+          appearance_score?: number;
+          appearance_why?: string | null;
+          courses_score?: number;
+          courses_why?: string | null;
+          created_at?: string;
+          device?: string;
+          disappointment?: string;
+          friction?: string | null;
+          friction_audio_path?: string | null;
+          id?: never;
+          lessons_completed?: number;
+          member_id?: string;
+          nps?: number;
+          overall_audio_path?: string | null;
+          overall_message?: string | null;
+          usefulness_score?: number;
+          usefulness_why?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "beta_survey_responses_member_id_fkey";
+            columns: ["member_id"];
+            isOneToOne: true;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       feedback_submissions: {
         Row: {
+          audio_path: string | null;
           category: string;
           created_at: string;
           id: number;
           member_id: string;
-          message: string;
+          message: string | null;
         };
         Insert: {
+          audio_path?: string | null;
           category: string;
           created_at?: string;
           id?: never;
           member_id: string;
-          message: string;
+          message?: string | null;
         };
         Update: {
+          audio_path?: string | null;
           category?: string;
           created_at?: string;
           id?: never;
           member_id?: string;
-          message?: string;
+          message?: string | null;
         };
         Relationships: [
           {

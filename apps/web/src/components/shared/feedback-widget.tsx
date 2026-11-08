@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { CircleAlert, CircleCheck, MessageSquarePlus } from "lucide-react";
+import Image from "next/image";
 import { submitFeedback, type FeedbackFormState } from "@/app/dashboard/actions";
 import { SubmitButton } from "@/components/auth/submit-button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -157,11 +158,13 @@ export function FeedbackHeaderButton({
   className,
   variant = "outline",
   size = "default",
+  iconSrc,
 }: {
   label: string;
   className?: string;
   variant?: "default" | "outline";
   size?: ButtonProps["size"];
+  iconSrc?: string;
 }) {
   const openFeedback = useContext(openFeedbackContext);
   return (
@@ -172,7 +175,12 @@ export function FeedbackHeaderButton({
       onClick={() => openFeedback?.()}
       className={cn(size === "default" && "h-10 px-4 text-sm", className)}
     >
-      <MessageSquarePlus aria-hidden /> {label}
+      {iconSrc ? (
+        <Image src={iconSrc} alt="" width={24} height={24} />
+      ) : (
+        <MessageSquarePlus aria-hidden />
+      )}{" "}
+      {label}
     </Button>
   );
 }

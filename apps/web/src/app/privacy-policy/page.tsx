@@ -21,7 +21,7 @@ export default async function PrivacyPolicyPage() {
   const contact = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   if (track === "fr") {
     return (
-      <LegalTemplate track={track} title="Politique de confidentialité" updated="6 octobre 2026">
+      <LegalTemplate track={track} title="Politique de confidentialité" updated="3 novembre 2026">
         <p>
           Cette politique explique quelles données personnelles {BRAND} recueille sur{" "}
           {new URL(SITE_URL).host}, pourquoi, combien de temps nous les conservons et comment
@@ -54,6 +54,13 @@ export default async function PrivacyPolicyPage() {
             acceptes lors de la création du compte.
           </li>
           <li>
+            <strong>Tes retours.</strong> Lorsque tu envoies un retour depuis le tableau de bord,
+            nous conservons ton message écrit ou ton enregistrement vocal, sa catégorie, ton compte
+            et la date. Nous les utilisons uniquement pour améliorer {BRAND}. Le micro s’active
+            seulement après ton autorisation, quand tu lances un enregistrement. Base légale : ton
+            consentement, donné en envoyant le retour.
+          </li>
+          <li>
             <strong>Mesure d’audience.</strong> Si tu acceptes les cookies analytiques, Google
             Analytics enregistre ta visite : pages consultées, fonctionnalités utilisées (comme ton
             choix dans un exercice ou le profil choisi pour rejoindre la liste, jamais ton e-mail),
@@ -78,15 +85,16 @@ export default async function PrivacyPolicyPage() {
         </p>
         <h2>Destinataires</h2>
         <p>
-          Seule l’équipe {BRAND} peut consulter la liste d’accès anticipé et les comptes. Ces
-          prestataires traitent des données pour notre compte, dans le cadre d’un accord de
-          sous-traitance :
+          Seule l’équipe {BRAND} peut consulter la liste d’accès anticipé, les comptes et les
+          retours. Ces prestataires traitent des données pour notre compte, dans le cadre d’un
+          accord de sous-traitance :
         </p>
         <ul>
           <li>Vercel Inc., États-Unis : hébergement du site.</li>
           <li>
-            Supabase : connexion et base de données de la liste d’accès anticipé et des comptes,
-            hébergées dans l’Union européenne (Paris).
+            Supabase : connexion, base de données de la liste d’accès anticipé, des comptes et des
+            retours, et stockage des enregistrements vocaux, hébergés dans l’Union européenne
+            (Paris).
           </li>
           <li>
             Google Ireland Limited : Google Analytics uniquement si tu l’acceptes, et connexion avec
@@ -109,7 +117,8 @@ export default async function PrivacyPolicyPage() {
             Liste d’accès anticipé : jusqu’à ta demande de retrait, et au plus 3 ans après ton
             inscription.
           </li>
-          <li>Compte bêta : jusqu’à ta demande de suppression.</li>
+          <li>Compte bêta et retours écrits : jusqu’à ta demande de suppression.</li>
+          <li>Enregistrements vocaux : 12 mois au plus, ou jusqu’à ta demande de suppression.</li>
           <li>
             Google Analytics : ses cookies durent au plus 13 mois et les données recueillies sont
             conservées au plus 14 mois.
@@ -150,7 +159,7 @@ export default async function PrivacyPolicyPage() {
     );
   }
   return (
-    <LegalTemplate track={track} title="Privacy policy" updated="6 October 2026">
+    <LegalTemplate track={track} title="Privacy policy" updated="3 November 2026">
       <p>
         This policy explains what personal data {BRAND} collects on {new URL(SITE_URL).host}, why,
         how long we keep it and how to use your rights. We never sell your data and never use it for
@@ -189,6 +198,13 @@ export default async function PrivacyPolicyPage() {
           <Link href="/cookies">cookie policy</Link>.
         </li>
         <li>
+          <strong>Your feedback.</strong> When you send feedback from the dashboard or answer the
+          beta survey, we keep your answers, written message or voice recording, any category, your
+          account and the date. We use them only to improve {BRAND}. The microphone turns on only
+          with your permission, when you start a recording. Legal basis: your consent, given by
+          sending the feedback.
+        </li>
+        <li>
           <strong>Your cookie choice.</strong> We keep it in a cookie and in your browser’s local
           storage so we don’t ask on every page. It stays in your browser; we don’t receive it.
         </li>
@@ -205,14 +221,14 @@ export default async function PrivacyPolicyPage() {
 
       <h2>Who receives it</h2>
       <p>
-        Only the {BRAND} team can see the early access list and the accounts. These providers
-        process data on our behalf, under a data processing agreement:
+        Only the {BRAND} team can see the early access list, the accounts and the feedback. These
+        providers process data on our behalf, under a data processing agreement:
       </p>
       <ul>
         <li>Vercel Inc., United States: hosting of the site.</li>
         <li>
-          Supabase: sign-in and the database of the early access list and the accounts, stored in
-          the European Union (Paris).
+          Supabase: sign-in, the database of the early access list, the accounts and the feedback,
+          and storage of voice recordings, kept in the European Union (Paris).
         </li>
         <li>
           Google Ireland Limited: Google Analytics, only if you accept it, and Google sign-in, only
@@ -236,7 +252,8 @@ export default async function PrivacyPolicyPage() {
         <li>
           Early access list: until you ask us to remove you, and at most 3 years after you sign up.
         </li>
-        <li>Beta account: until you ask us to delete it.</li>
+        <li>Beta account and written feedback: until you ask us to delete them.</li>
+        <li>Voice recordings: 12 months at most, or until you ask us to delete them.</li>
         <li>
           Google Analytics: its cookies last 13 months at most, and the data it collects is kept 14
           months at most.

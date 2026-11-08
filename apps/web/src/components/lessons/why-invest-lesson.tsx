@@ -1,5 +1,6 @@
 "use client";
 
+import { LessonRating } from "@/components/lessons/lesson-rating";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import {
@@ -19,6 +20,7 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { formatMoney } from "@/lib/first-paycheque-lesson";
 import type { Track } from "@/lib/tracks";
 import {
+  calculateCompoundComparison,
   COMPOUND_EXAMPLE,
   RISK_EXAMPLE,
   WHY_INVEST_CORRECT_ANSWER,
@@ -124,10 +126,11 @@ export function WhyInvestLesson(props: Props) {
   }
 
   if (step === "compound") {
+    const comparison = calculateCompoundComparison(COMPOUND_EXAMPLE.years);
     const amounts = [
-      { label: copy.compound.start, value: COMPOUND_EXAMPLE.start },
-      { label: copy.compound.first, value: COMPOUND_EXAMPLE.afterTenYears },
-      { label: copy.compound.second, value: COMPOUND_EXAMPLE.afterTwentyYears },
+      { label: copy.compound.contributions, value: comparison.contributions },
+      { label: copy.compound.withoutReinvestment, value: comparison.valueWithoutReinvestment },
+      { label: copy.compound.withReinvestment, value: comparison.reinvestedValue },
     ];
     return (
       <LessonScreen
@@ -136,7 +139,9 @@ export function WhyInvestLesson(props: Props) {
         }
       >
         <Heading eyebrow={copy.compound.eyebrow} title={copy.compound.title} />
-        <p className="mt-4 text-muted-foreground">{copy.compound.intro}</p>
+        <p className="mt-4 text-muted-foreground">
+          {copy.compound.intro.replace("{amount}", money(COMPOUND_EXAMPLE.monthlyContribution))}
+        </p>
         <dl className="mt-6 grid gap-3 sm:grid-cols-3">
           {amounts.map((amount) => (
             <div
@@ -148,10 +153,10 @@ export function WhyInvestLesson(props: Props) {
             </div>
           ))}
         </dl>
-        <p className="mt-6 font-semibold leading-relaxed">{copy.compound.explanation}</p>
+        <p className="mt-6 font-semibold leading-relaxed">{copy.compound.snowball}</p>
         <p className="mt-4 flex items-start gap-3 rounded-2xl border border-market-up/25 bg-surface p-4 font-semibold leading-relaxed shadow-soft">
           <TrendingUp className="mt-1 size-5 shrink-0 text-market-up" aria-hidden="true" />
-          {copy.compound.comparison}
+          {copy.compound.comparisonNote}
         </p>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{copy.compound.caveat}</p>
       </LessonScreen>
@@ -289,16 +294,13 @@ export function WhyInvestLesson(props: Props) {
     );
   }
 
+  if (props.progressStatus === "saved")
+    return <LessonRating track={props.track} nextHref="/dashboard" />;
+
   return (
     <LessonScreen
       action={
-        props.progressStatus === "saved" ? (
-          <Button asChild size="xl" className="w-full sm:ml-auto sm:flex sm:w-fit">
-            <Link href="/dashboard">
-              {copy.complete.action} <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
-        ) : props.progressStatus === "error" ? (
+        props.progressStatus === "error" ? (
           <PrimaryAction onClick={props.onRetryProgress}>{copy.complete.retry}</PrimaryAction>
         ) : (
           <p className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-muted-foreground">
@@ -314,11 +316,7 @@ export function WhyInvestLesson(props: Props) {
         {copy.complete.next}
       </p>
       <p role="status" className="mt-5 text-sm font-semibold text-primary">
-        {props.progressStatus === "saved"
-          ? copy.complete.saved
-          : props.progressStatus === "error"
-            ? copy.complete.error
-            : copy.complete.saving}
+        {props.progressStatus === "error" ? copy.complete.error : copy.complete.saving}
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
         <a

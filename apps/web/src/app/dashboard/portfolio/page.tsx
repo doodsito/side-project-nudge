@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PortfolioPreview } from "@/components/dashboard/portfolio-preview";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionaries";
 
@@ -11,11 +12,11 @@ export default async function PortfolioPage() {
   const member = await requireMember();
   const t = getDictionary(member.track).dashboard.portfolio;
   return (
-    <>
-      <h1 className="font-display text-3xl font-extrabold text-balance">{t.title}</h1>
-      <section className="mt-8 rounded-3xl border border-border bg-surface p-6 sm:p-8">
-        <p className="font-display text-xl font-extrabold text-primary">{t.inDevelopment}</p>
-      </section>
-    </>
+    <section className="px-5 pt-6 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-8 sm:pt-10 sm:pb-20 lg:px-10">
+      <div className="mx-auto max-w-5xl">
+        <h1 className="font-display text-3xl font-extrabold text-balance">{t.title}</h1>
+        <PortfolioPreview copy={t} />
+      </div>
+    </section>
   );
 }

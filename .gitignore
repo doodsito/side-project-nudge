@@ -34,3 +34,4 @@ npm-debug.log*
 # Personal task notes and plans (never committed)
 tasks/
 perso/
+/.claude/worktrees/
