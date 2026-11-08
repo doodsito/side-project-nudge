@@ -1,0 +1,250 @@
+.screen {
+  display: flex;
+  min-height: calc(100svh - 5rem - env(safe-area-inset-bottom));
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: var(--nudge-learn-portfolio-canvas);
+  padding: 1.5rem;
+}
+
+.heading h1 {
+  margin: 0;
+  color: var(--nudge-learn-ink);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 2.25rem;
+}
+
+.message {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  text-align: center;
+}
+
+.message h2 {
+  margin: 0;
+  color: var(--nudge-learn-ink);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 1.875rem;
+  font-weight: 800;
+  line-height: 2.1875rem;
+}
+
+.message p {
+  max-width: 22rem;
+  margin: 0;
+  color: var(--nudge-learn-portfolio-muted);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer p {
+  margin: 0;
+  color: var(--nudge-learn-portfolio-muted);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.action {
+  width: 100%;
+  min-height: 3.5rem;
+  border-radius: 1.125rem;
+  background: var(--nudge-learn-violet);
+  box-shadow: 0 5px 0 var(--nudge-learn-violet-800);
+  color: var(--nudge-learn-white);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.action:hover {
+  background: var(--nudge-learn-violet-hover);
+}
+
+.illustration {
+  position: relative;
+  width: 15rem;
+  height: 11.5rem;
+  flex: 0 0 auto;
+}
+
+.halo,
+.shadow,
+.sparkle,
+.sparkleSmall,
+.hardhat,
+.smile,
+.eyeLeft,
+.eyeRight,
+.snap,
+.stitching {
+  position: absolute;
+  height: auto;
+}
+
+.halo {
+  left: 2.625rem;
+  top: 0.875rem;
+  width: 9.75rem;
+}
+.shadow {
+  left: 3.1875rem;
+  top: 9.8125rem;
+  width: 9.25rem;
+}
+.walletBack {
+  position: absolute;
+  left: 3.5625rem;
+  top: 3.5625rem;
+  width: 8rem;
+  height: 6.125rem;
+  border-radius: 1.375rem;
+  background: var(--nudge-learn-violet-800);
+}
+.walletInside {
+  position: absolute;
+  left: 3.8125rem;
+  top: 3.375rem;
+  width: 7.375rem;
+  height: 2.3125rem;
+  border-radius: 0.8125rem;
+  background: var(--nudge-learn-violet-300);
+}
+.card {
+  position: absolute;
+  left: 5.75rem;
+  top: 2.5rem;
+  display: grid;
+  width: 4.25rem;
+  height: 2.625rem;
+  place-items: center;
+  transform: rotate(-8deg);
+  border-radius: 0.5625rem;
+  background: var(--nudge-learn-teal);
+}
+.card i {
+  width: 2.25rem;
+  height: 0.1875rem;
+  border-radius: 999px;
+  background: var(--nudge-learn-teal-dark);
+  opacity: 0.6;
+}
+.walletBody {
+  position: absolute;
+  left: 3.375rem;
+  top: 4.3125rem;
+  width: 8.375rem;
+  height: 5.375rem;
+  border-radius: 1.375rem;
+  background: var(--nudge-learn-violet);
+  box-shadow: 0 5px 0 var(--nudge-learn-violet-800);
+}
+.sparkle {
+  left: 12.25rem;
+  top: 8.5625rem;
+  width: 0.9375rem;
+}
+.sparkleSmall {
+  left: 12.3125rem;
+  top: 3rem;
+  width: 0.4375rem;
+}
+.glint {
+  position: absolute;
+  left: 1.75rem;
+  top: 4.6875rem;
+  width: 0.4375rem;
+  height: 1.0625rem;
+  transform: rotate(-24deg);
+  border-radius: 0.1875rem;
+  background: var(--nudge-learn-teal);
+}
+.hardhat {
+  left: 4rem;
+  top: 1.375rem;
+  width: 4.875rem;
+}
+.hardhatBrim {
+  position: absolute;
+  left: 3.875rem;
+  top: 3.6875rem;
+  width: 5.125rem;
+  height: 0.625rem;
+  border-radius: 0.3125rem;
+  background: var(--nudge-learn-gold);
+  box-shadow: 0 3px 0 var(--nudge-learn-gold-dark);
+}
+.hardhatSeam {
+  position: absolute;
+  left: 6.1875rem;
+  top: 1.4375rem;
+  width: 0.5625rem;
+  height: 2.0625rem;
+  border-radius: 0.25rem;
+  background: var(--nudge-learn-gold-dark);
+}
+.smile {
+  left: 6.375rem;
+  top: 7.4375rem;
+  width: 1rem;
+}
+.eyeLeft {
+  left: 5.6875rem;
+  top: 6.375rem;
+  width: 0.4375rem;
+  height: 0.625rem;
+}
+.eyeRight {
+  left: 7.4375rem;
+  top: 6.375rem;
+  width: 0.4375rem;
+  height: 0.625rem;
+}
+.clasp {
+  position: absolute;
+  left: 10.3125rem;
+  top: 5.875rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.625rem;
+  background: var(--nudge-learn-teal);
+  box-shadow: 0 3px 0 var(--nudge-learn-teal-500);
+}
+.snap {
+  left: 11rem;
+  top: 6.5rem;
+  width: 0.625rem;
+}
+.stitching {
+  left: 3.9375rem;
+  top: 4.9375rem;
+  width: 7.0625rem;
+  height: 4rem;
+}
+
+@media (min-width: 640px) {
+  .screen {
+    min-height: calc(100svh - 5rem);
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 2.25rem;
+  }
+}

@@ -53,3 +53,15 @@ body:has([data-nudge-beta]) {
     0 0 5px var(--primary-soft),
     0 0 8px var(--primary-soft);
 }
+
+@media (max-width: 639px) {
+  body:has([data-dashboard-hide-mobile-header]) [data-dashboard-mobile-header] {
+    display: none;
+  }
+
+  main[data-nudge-beta]:has([data-dashboard-hide-mobile-header]) {
+    min-height: 100svh;
+    padding-inline: 0;
+    padding-top: 0;
+  }
+}
