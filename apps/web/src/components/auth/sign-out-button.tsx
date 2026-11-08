@@ -35,7 +35,7 @@ export function SignOutButton({
             </span>
             <span className="min-w-0 flex-1 text-left">{label}</span>
             <Image
-              src="/brand/learn-map/profile-chevron-right.svg"
+              src="/brand/portfolio/profile-open.svg"
               alt=""
               width={16}
               height={16}
