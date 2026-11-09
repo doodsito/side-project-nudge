@@ -105,10 +105,10 @@ export function ResetProgressSection({
         <Button
           type="button"
           variant="ghost"
-          className="flex h-auto min-h-[60px] w-full items-center justify-start gap-3 rounded-none px-0 py-[13px] text-xs leading-4 font-bold text-[var(--nudge-learn-violet-700)] hover:bg-transparent hover:text-[var(--nudge-learn-violet)]"
+          className="flex h-auto min-h-[60px] w-full items-center justify-start gap-3 rounded-none px-0 py-[13px] text-[15px] leading-[22px] font-extrabold text-[var(--nudge-learn-ink)] hover:bg-transparent hover:text-[var(--nudge-learn-violet)]"
           onClick={() => setOpen(true)}
         >
-          <span className="grid size-[34px] shrink-0 place-items-center rounded-[10px] bg-white">
+          <span className="grid size-[34px] shrink-0 place-items-center rounded-[10px] bg-[var(--nudge-learn-canvas)]">
             <Image src="/brand/learn-map/profile-reset.svg" alt="" width={20} height={20} />
           </span>
           <span className="min-w-0 flex-1 text-left">{action}</span>

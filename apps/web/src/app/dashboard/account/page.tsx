@@ -15,11 +15,11 @@ import { TRACK_INFO, TRACKS } from "@/lib/tracks";
 import { changeTrack, signOut } from "../actions";
 
 const listClassName =
-  "overflow-hidden rounded-2xl border border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-canvas)] px-3.5";
+  "overflow-hidden rounded-[20px] border-2 border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] px-3.5";
 const rowClassName =
   "flex min-h-[60px] w-full items-center gap-3 px-0 py-[13px] text-left no-underline";
 const iconClassName =
-  "grid size-[34px] shrink-0 place-items-center rounded-[10px] bg-[var(--nudge-learn-white)]";
+  "grid size-[34px] shrink-0 place-items-center rounded-[10px] bg-[var(--nudge-learn-canvas)]";
 
 function ProfileIcon({ src }: { src: string }) {
   return (
@@ -68,17 +68,17 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
         : undefined;
 
   return (
-    <div className="mx-auto min-h-[calc(100svh-9rem-env(safe-area-inset-bottom))] max-w-2xl rounded-[28px] bg-[var(--nudge-learn-white)] px-5 py-6 sm:min-h-0 sm:px-8 sm:py-8">
+    <div className="-mx-4 min-h-[calc(100svh-9rem-env(safe-area-inset-bottom))] px-5 py-6 lg:mx-auto lg:max-w-[430px]">
       <div className="flex flex-col gap-5">
         <header className="flex flex-col gap-[18px]">
-          <h1 className="font-display text-base leading-[22px] font-extrabold text-[var(--nudge-learn-violet-700)]">
+          <h1 className="font-display text-[26px] leading-8 font-extrabold text-[var(--nudge-learn-ink)]">
             {t.title}
           </h1>
           <div className="flex flex-col gap-[5px]">
-            <h2 className="font-display text-base leading-[22px] font-extrabold text-[var(--nudge-learn-violet-700)]">
+            <h2 className="font-display text-2xl leading-[30px] font-extrabold text-[var(--nudge-learn-ink)]">
               {displayName}
             </h2>
-            <p className="text-xs leading-4 font-bold break-words text-[var(--nudge-learn-violet-700)]">
+            <p className="text-[15px] leading-[22px] font-bold break-words text-[var(--nudge-learn-ink)]">
               {member.email}
             </p>
             <p className="text-xs leading-4 font-bold text-[var(--nudge-learn-neutral-600)]">
@@ -114,11 +114,11 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
                 className={`${rowClassName} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
               >
                 <ProfileIcon src="/brand/learn-map/profile-person.svg" />
-                <span className="flex min-w-0 flex-1 flex-col gap-[3px] text-xs leading-4 font-bold">
-                  <span className="text-[var(--nudge-learn-violet-700)]">
+                <span className="flex min-w-0 flex-1 flex-col gap-[3px] font-bold">
+                  <span className="text-[15px] leading-[22px] text-[var(--nudge-learn-ink)]">
                     {t.personalInformation}
                   </span>
-                  <span className="break-words text-[var(--nudge-learn-neutral-600)]">
+                  <span className="break-words text-[13px] leading-[18px] text-[var(--nudge-learn-neutral-600)]">
                     {t.code} · {member.accessCode}
                   </span>
                 </span>
@@ -143,9 +143,13 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
                 className={`${rowClassName} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
               >
                 <ProfileIcon src="/brand/learn-map/profile-globe.svg" />
-                <span className="flex min-w-0 flex-1 flex-col gap-[3px] text-xs leading-4 font-bold">
-                  <span className="text-[var(--nudge-learn-violet-700)]">{t.version}</span>
-                  <span className="text-[var(--nudge-learn-neutral-600)]">{trackSummary}</span>
+                <span className="flex min-w-0 flex-1 flex-col gap-[3px] font-bold">
+                  <span className="text-[15px] leading-[22px] text-[var(--nudge-learn-ink)]">
+                    {t.version}
+                  </span>
+                  <span className="text-[13px] leading-[18px] text-[var(--nudge-learn-neutral-600)]">
+                    {trackSummary}
+                  </span>
                 </span>
                 <RowChevron />
               </summary>
@@ -184,7 +188,9 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               className={`${rowClassName} text-[var(--nudge-learn-violet-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
             >
               <ProfileIcon src="/brand/learn-map/profile-shield.svg" />
-              <span className="min-w-0 flex-1 text-xs leading-4 font-bold">{t.helpPrivacy}</span>
+              <span className="min-w-0 flex-1 text-[15px] leading-[22px] font-extrabold text-[var(--nudge-learn-ink)]">
+                {t.helpPrivacy}
+              </span>
               <RowChevron />
             </Link>
           </div>
@@ -218,13 +224,13 @@ export default async function AccountPage({ searchParams }: PageProps<"/dashboar
               pendingLabel={dictionary.dashboard.logOutPending}
               iconSrc="/brand/learn-map/profile-logout.svg"
               mode="row"
-              className="h-auto min-h-[60px] w-full justify-start gap-3 rounded-none px-0 py-[13px] text-xs leading-4 font-bold text-[var(--nudge-learn-violet-700)] hover:bg-transparent hover:text-[var(--nudge-learn-violet)]"
+              className="h-auto min-h-[60px] w-full justify-start gap-3 rounded-none px-0 py-[13px] text-[15px] leading-[22px] font-extrabold text-[var(--nudge-learn-ink)] hover:bg-transparent hover:text-[var(--nudge-learn-violet)]"
             />
             <div className="ml-[46px] mr-0 h-px bg-[var(--nudge-learn-neutral-200)]" />
             <Link
               href={deleteRequest}
               aria-label={`${t.deleteTitle}. ${t.deleteEmail} ${CONTACT_EMAIL}. ${t.deleteFrom} ${t.deletePrivacy} ${t.deleteRights}`}
-              className={`${rowClassName} text-xs leading-4 font-bold text-[var(--nudge-learn-violet-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
+              className={`${rowClassName} text-[15px] leading-[22px] font-extrabold text-[var(--nudge-learn-ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
             >
               <ProfileIcon src="/brand/learn-map/profile-delete.svg" />
               <span className="min-w-0 flex-1">{t.deleteTitle}</span>

@@ -1865,7 +1865,7 @@ export const us = {
     portfolio: {
       title: "Virtual portfolio",
       comingSoon: "Coming soon",
-      headline: "Your investing practice space is on the way",
+      headline: "Virtual portfolio",
       description:
         "You’ll be able to build a portfolio with virtual money, follow how it changes and understand the consequences of your decisions — without risking a dollar.",
       benefitsLabel: "What the virtual portfolio will offer",
@@ -1877,7 +1877,7 @@ export const us = {
       action: "Keep learning",
       previewLabel: "Virtual value",
       previewValue: "$10,000",
-      previewValueNote: "Fictional practice balance",
+      previewValueNote: "Practice without risking a dollar.",
       fictionalBadge: "Fictional preview",
       chartTitle: "Simulated change",
       chartLabel: "Fictional example of a virtual portfolio changing over time",
@@ -1889,8 +1889,7 @@ export const us = {
         { label: "Bonds", value: "25%", percentage: 25 },
         { label: "Cash", value: "20%", percentage: 20 },
       ],
-      allocationDisclaimer:
-        "This allocation is entirely fictional and only illustrates the future interface. It isn’t a recommendation.",
+      allocationDisclaimer: "Fictional preview · no real money. This is not a recommendation.",
     },
     account: {
       title: "Profile",
