@@ -1,7 +1,7 @@
 # Refresh the Portfolio and Profile screens
 - **Date:** 2026-11-08
 - **Author:** Emma, with Codex
-- **Pull request:** pending
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/82
 
 **Why:** The beta Portfolio and Profile should match their current Figma screens.
 
