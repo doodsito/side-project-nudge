@@ -1917,7 +1917,7 @@ export const fr: Dictionary = {
     portfolio: {
       title: "Portefeuille virtuel",
       comingSoon: "Bientôt disponible",
-      headline: "Ton terrain d’entraînement arrive",
+      headline: "Portefeuille virtuel",
       description:
         "Tu pourras construire un portefeuille avec de l’argent fictif, suivre son évolution et comprendre les conséquences de tes décisions — sans risquer un euro.",
       benefitsLabel: "Ce que permettra le portefeuille virtuel",
@@ -1929,7 +1929,7 @@ export const fr: Dictionary = {
       action: "Continuer à apprendre",
       previewLabel: "Valeur virtuelle",
       previewValue: "10 000 €",
-      previewValueNote: "Solde d’entraînement fictif",
+      previewValueNote: "Entraîne-toi sans risquer un euro.",
       fictionalBadge: "Aperçu fictif",
       chartTitle: "Évolution simulée",
       chartLabel: "Exemple fictif d’évolution d’un portefeuille virtuel",
@@ -1941,8 +1941,7 @@ export const fr: Dictionary = {
         { label: "Obligations", value: "25 %", percentage: 25 },
         { label: "Liquidités", value: "20 %", percentage: 20 },
       ],
-      allocationDisclaimer:
-        "Répartition entièrement fictive, présentée uniquement pour illustrer la future interface. Ce n’est pas une recommandation.",
+      allocationDisclaimer: "Aperçu fictif · aucun argent réel. Ceci n’est pas une recommandation.",
     },
     account: {
       title: "Profil",

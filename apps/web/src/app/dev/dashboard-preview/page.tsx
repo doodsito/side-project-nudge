@@ -46,13 +46,15 @@ export default async function DashboardPreviewPage({
 
   return (
     <div lang={TRACK_INFO[track].lang}>
-      <aside
-        aria-label={t.dashboard.preview.label}
-        className="mx-auto mt-5 max-w-5xl rounded-2xl border border-primary/25 bg-primary-soft px-5 py-4 text-sm sm:mt-6"
-      >
-        <p className="font-bold text-primary">{t.dashboard.preview.label}</p>
-        <p className="mt-1 text-muted-foreground">{t.dashboard.preview.description}</p>
-      </aside>
+      {!showPortfolio && (
+        <aside
+          aria-label={t.dashboard.preview.label}
+          className="mx-auto mt-5 max-w-5xl rounded-2xl border border-primary/25 bg-primary-soft px-5 py-4 text-sm sm:mt-6"
+        >
+          <p className="font-bold text-primary">{t.dashboard.preview.label}</p>
+          <p className="mt-1 text-muted-foreground">{t.dashboard.preview.description}</p>
+        </aside>
+      )}
       <DashboardTemplate
         preview
         activeTab={showPortfolio ? "portfolio" : "home"}
@@ -62,13 +64,8 @@ export default async function DashboardPreviewPage({
         skipLink={t.skipLink}
       >
         {showPortfolio ? (
-          <section className="px-5 pt-6 pb-[calc(5rem+env(safe-area-inset-bottom))] sm:px-8 sm:pt-10 sm:pb-20 lg:px-10">
-            <div className="mx-auto max-w-5xl">
-              <h1 className="font-display text-3xl font-extrabold text-balance">
-                {t.dashboard.portfolio.title}
-              </h1>
-              <PortfolioPreview copy={t.dashboard.portfolio} learnHref={homeHref} />
-            </div>
+          <section className="-mx-4 px-4 pt-4 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:mx-0 lg:px-10 lg:pt-8">
+            <PortfolioPreview copy={t.dashboard.portfolio} learnHref={homeHref} />
           </section>
         ) : state === "lesson-feedback" ? (
           <LessonRating
