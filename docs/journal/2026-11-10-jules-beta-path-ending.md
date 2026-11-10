@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-10
 - **Author:** Jules, with Codex
-- **Pull request:** To open
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/83
 
 **Why:** The last trophy implied investing was unlocked, but the beta ends after these lessons.
 
