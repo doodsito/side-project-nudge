@@ -37,6 +37,7 @@ import type { ProgressStatus } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
 import { formatMoney } from "@/lib/first-paycheque-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type LessonCopy = Dictionary["lesson4"];
@@ -87,7 +88,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -312,7 +322,10 @@ export function BuildYourSafetyNetLesson(props: Props) {
       <LessonScreen
         action={
           props.factorAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("comparison")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("comparison")}
+            >
               {copy.factors.action}
             </PrimaryAction>
           ) : (
@@ -423,7 +436,10 @@ export function BuildYourSafetyNetLesson(props: Props) {
       <LessonScreen
         action={
           props.decisionAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("rebuild")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("rebuild")}
+            >
               {copy.decision.action}
             </PrimaryAction>
           ) : (
@@ -478,7 +494,10 @@ export function BuildYourSafetyNetLesson(props: Props) {
       <LessonScreen
         action={
           props.rebuildAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("complete")}
+            >
               {copy.rebuild.action}
             </PrimaryAction>
           ) : (

@@ -4,6 +4,7 @@ export const BETA_SURVEY_NPS_VALUES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as cons
 // Four choices on purpose: no middle answer, so testers have to take a side.
 export const BETA_SURVEY_SCORES = [1, 2, 3, 4] as const;
 export const BETA_SURVEY_TEXT_MAX_LENGTH = 2000;
+export const BETA_SURVEY_CONTACT_MAX_LENGTH = 100;
 
 export type BetaSurveyAnswers = {
   device: (typeof BETA_SURVEY_DEVICES)[number];
@@ -15,8 +16,6 @@ export type BetaSurveyAnswers = {
   coursesWhy: string | null;
   usefulnessScore: number;
   usefulnessWhy: string | null;
-  friction: string | null;
-  frictionAudioPath: string | null;
   overallMessage: string | null;
   overallAudioPath: string | null;
 };
@@ -59,18 +58,13 @@ export function parseBetaSurveyAnswers(value: unknown): BetaSurveyAnswers | null
   const appearanceWhy = optionalText(read("appearanceWhy"));
   const coursesWhy = optionalText(read("coursesWhy"));
   const usefulnessWhy = optionalText(read("usefulnessWhy"));
-  const friction = optionalText(read("friction"));
   const overallMessage = optionalText(read("overallMessage"));
-  const frictionAudioPath = read("frictionAudioPath") ?? null;
   const audioPath = read("overallAudioPath") ?? null;
   if (
     appearanceWhy === undefined ||
     coursesWhy === undefined ||
     usefulnessWhy === undefined ||
-    friction === undefined ||
     overallMessage === undefined ||
-    (frictionAudioPath !== null && typeof frictionAudioPath !== "string") ||
-    (friction !== null && frictionAudioPath !== null) ||
     (audioPath !== null && typeof audioPath !== "string") ||
     (overallMessage !== null && audioPath !== null)
   ) {
@@ -87,9 +81,14 @@ export function parseBetaSurveyAnswers(value: unknown): BetaSurveyAnswers | null
     coursesWhy,
     usefulnessScore,
     usefulnessWhy,
-    friction,
-    frictionAudioPath,
     overallMessage,
     overallAudioPath: audioPath,
   };
+}
+
+/** The name left on the thank-you screen. Returns null if it is empty or not allowed. */
+export function parseBetaSurveyContact(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const name = value.trim();
+  return name && name.length <= BETA_SURVEY_CONTACT_MAX_LENGTH ? name : null;
 }

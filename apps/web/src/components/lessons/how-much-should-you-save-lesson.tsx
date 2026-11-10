@@ -34,6 +34,7 @@ import {
   type HowMuchShouldYouSaveStep,
 } from "@/lib/how-much-should-you-save-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type LessonCopy = Dictionary["lesson3"];
@@ -84,7 +85,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -270,7 +280,10 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
       <LessonScreen
         action={
           props.referenceAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("comparison")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("comparison")}
+            >
               {copy.reference.action}
             </PrimaryAction>
           ) : (
@@ -398,7 +411,7 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
       <LessonScreen
         action={
           props.amountAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("stress")}>
+            <PrimaryAction auto={selected?.correct === true} onClick={() => props.onGoTo("stress")}>
               {copy.amount.action}
             </PrimaryAction>
           ) : (
@@ -451,7 +464,10 @@ export function HowMuchShouldYouSaveLesson(props: Props) {
       <LessonScreen
         action={
           props.stressAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("complete")}
+            >
               {copy.stress.action}
             </PrimaryAction>
           ) : (

@@ -42,6 +42,7 @@ export type Database = {
         Row: {
           appearance_score: number;
           appearance_why: string | null;
+          contact_name: string | null;
           courses_score: number;
           courses_why: string | null;
           created_at: string;
@@ -61,6 +62,7 @@ export type Database = {
         Insert: {
           appearance_score: number;
           appearance_why?: string | null;
+          contact_name?: string | null;
           courses_score: number;
           courses_why?: string | null;
           created_at?: string;
@@ -80,6 +82,7 @@ export type Database = {
         Update: {
           appearance_score?: number;
           appearance_why?: string | null;
+          contact_name?: string | null;
           courses_score?: number;
           courses_why?: string | null;
           created_at?: string;

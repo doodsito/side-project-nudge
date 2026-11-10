@@ -29,6 +29,7 @@ import {
   type SavingsVsInvestingStep,
 } from "@/lib/savings-vs-investing-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type LessonCopy = Dictionary["lesson8"];
@@ -82,7 +83,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -125,7 +135,9 @@ function QuestionScreen({
     <LessonScreen
       action={
         checked ? (
-          <PrimaryAction onClick={onNext}>{copy.action}</PrimaryAction>
+          <PrimaryAction auto={correctIndex >= 0 && correct} onClick={onNext}>
+            {copy.action}
+          </PrimaryAction>
         ) : answer ? (
           <PrimaryAction onClick={onCheck}>{copy.check ?? shared.check}</PrimaryAction>
         ) : (

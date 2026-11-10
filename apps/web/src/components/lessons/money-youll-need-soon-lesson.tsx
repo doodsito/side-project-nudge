@@ -38,6 +38,7 @@ import {
   type MoneyYoullNeedSoonStep,
 } from "@/lib/money-youll-need-soon-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type LessonCopy = Dictionary["lesson5"];
@@ -88,7 +89,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -329,7 +339,10 @@ export function MoneyYoullNeedSoonLesson(props: Props) {
       <LessonScreen
         action={
           props.roleAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("timeline")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("timeline")}
+            >
               {copy.classify.action}
             </PrimaryAction>
           ) : (
@@ -425,7 +438,7 @@ export function MoneyYoullNeedSoonLesson(props: Props) {
       <LessonScreen
         action={
           props.stabilityAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("change")}>
+            <PrimaryAction auto={selected?.correct === true} onClick={() => props.onGoTo("change")}>
               {copy.stability.action}
             </PrimaryAction>
           ) : (
@@ -480,7 +493,10 @@ export function MoneyYoullNeedSoonLesson(props: Props) {
       <LessonScreen
         action={
           props.changeAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("complete")}
+            >
               {copy.change.action}
             </PrimaryAction>
           ) : (

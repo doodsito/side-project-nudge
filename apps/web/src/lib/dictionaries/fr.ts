@@ -328,6 +328,7 @@ export const fr: Dictionary = {
     },
     courses: {
       yourCourses: "Tes cours",
+      backToLearn: "Retour à Apprendre",
       nextLesson: "Prochaine leçon",
       viewAllLessons: "Voir toutes les leçons",
       viewAllCourses: "Explorer tous les cours",
@@ -793,7 +794,7 @@ export const fr: Dictionary = {
         bill: "Forfait téléphone",
         label: "Une nouvelle situation",
         intro: (money) =>
-          `Sam est étudiant·e. Son travail d’été lui a rapporté ${money(600)}. Sam a dépensé ${money(475)}.`,
+          `Sam est étudiant·e. Son travail d’été lui a rapporté ${money(600)}. Sam a dépensé ${money(475)} et doit encore payer son forfait téléphone de ${money(25)} la semaine prochaine.`,
         question: "Combien Sam pourrait mettre de côté ?",
         feedback: [
           (money) =>
@@ -851,8 +852,6 @@ export const fr: Dictionary = {
         "Investir peut permettre une hausse, mais la valeur peut aussi baisser quand tu auras besoin de cette somme.",
         "Partager la somme peut concilier deux priorités, mais ne remplace pas une réserve disponible.",
       ],
-      feedbackInsight:
-        "Quand Alex aura-t-il besoin de cet argent ? Une somme utile le mois prochain n’a pas le même rôle qu’une somme prévue pour dans dix ans.",
       feedbackAction: "Voir l’investissement en action",
       growthAction: "Mais qu’en est-il du risque ?",
       riskAction: "Terminer le Monde 0",
@@ -1819,11 +1818,11 @@ export const fr: Dictionary = {
       device: "Tu as surtout suivi les leçons sur quoi\u00a0?",
       disappointment: `Si ${BRAND} disparaît demain, tu te sens comment\u00a0?`,
       nps: `De 0 à 10, à quel point tu recommanderais ${BRAND} à un ami\u00a0?`,
-      appearance: "L’appli, ça rend comment\u00a0?",
-      courses: "Et les cours, ils valent quoi\u00a0?",
-      usefulness: "C’est utile pour de vrai\u00a0? Ça t’a donné des trucs à faire\u00a0?",
-      friction: "Le moment le plus pénible, ou celui où tu as eu envie de lâcher\u00a0?",
-      overall: "Alors, ton avis global\u00a0?",
+      appearance: "Quelle note tu donnes au design de l’appli (couleurs, écrans, mascotte)\u00a0?",
+      courses: "Quelle note tu donnes aux leçons (explications, exemples, exercices)\u00a0?",
+      usefulness:
+        "Ce que tu as appris, ça va te servir pour gérer ton argent dans la vraie vie\u00a0?",
+      overall: `Dernière question\u00a0: dis-nous tout ce que tu penses de ${BRAND}. Ce que tu as aimé, ce qui t’a gêné, ce qui manque, ou autre chose à nous dire.`,
     },
     devices: { mobile: "Mobile", tablet: "Tablette", computer: "Ordi" },
     disappointments: {
@@ -1837,8 +1836,7 @@ export const fr: Dictionary = {
     scoreHigh: "Trop bien",
     whyLabel: "Pourquoi\u00a0? (facultatif)",
     whyPlaceholder: "Dis-nous en plus…",
-    frictionPlaceholder: "Raconte, on veut tout savoir…",
-    overallPlaceholder: `Ce que tu retiens de ${BRAND}, en quelques mots…`,
+    overallPlaceholder: "Écris librement, on lit tout…",
     or: "ou",
     reactions: {
       device: "C’est noté\u00a0!",
@@ -1846,7 +1844,7 @@ export const fr: Dictionary = {
       nps: "C’est dans la boîte\u00a0!",
       appearance: "Merci pour ta franchise\u00a0!",
       courses: "C’est reçu, merci\u00a0!",
-      usefulness: "Encore deux et c’est fini\u00a0!",
+      usefulness: "Plus qu’une et c’est fini\u00a0!",
     },
     continue: "Continuer",
     skip: "Passer",
@@ -1858,6 +1856,12 @@ export const fr: Dictionary = {
     done: {
       title: "Merci, tu gères\u00a0!",
       text: `Tes réponses vont nous aider à améliorer ${BRAND}.`,
+      contactLabel: "Ton prénom et ton nom, pour qu’on puisse te recontacter (facultatif)",
+      contactPlaceholder: "Prénom Nom",
+      contactSend: "Envoyer",
+      contactSending: "Envoi…",
+      contactSaved: "C’est noté, merci\u00a0!",
+      contactError: "Impossible d’enregistrer ton nom. Réessaie.",
       back: "Retour au tableau de bord",
     },
   },

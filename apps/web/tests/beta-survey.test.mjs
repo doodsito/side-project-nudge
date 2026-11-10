@@ -11,7 +11,7 @@ const compiled = ts.transpileModule(source, {
 const compiledModule = { exports: {} };
 runInNewContext(compiled, { module: compiledModule, exports: compiledModule.exports });
 
-const { parseBetaSurveyAnswers } = compiledModule.exports;
+const { parseBetaSurveyAnswers, parseBetaSurveyContact } = compiledModule.exports;
 
 const VALID = {
   device: "mobile",
@@ -23,9 +23,9 @@ const VALID = {
 };
 
 test("the required answers are enough and empty text becomes null", () => {
-  const answers = parseBetaSurveyAnswers({ ...VALID, friction: "   ", appearanceWhy: " Joli " });
+  const answers = parseBetaSurveyAnswers({ ...VALID, coursesWhy: "   ", appearanceWhy: " Joli " });
   assert.equal(answers.nps, 0);
-  assert.equal(answers.friction, null);
+  assert.equal(answers.coursesWhy, null);
   assert.equal(answers.appearanceWhy, "Joli");
   assert.equal(answers.overallAudioPath, null);
 });
@@ -41,8 +41,8 @@ test("a missing or out-of-scale answer is refused", () => {
 });
 
 test("text has a length limit and the overall answer is text or audio, never both", () => {
-  assert.equal(parseBetaSurveyAnswers({ ...VALID, friction: "a".repeat(2001) }), null);
-  assert.equal(parseBetaSurveyAnswers({ ...VALID, friction: 12 }), null);
+  assert.equal(parseBetaSurveyAnswers({ ...VALID, coursesWhy: "a".repeat(2001) }), null);
+  assert.equal(parseBetaSurveyAnswers({ ...VALID, coursesWhy: 12 }), null);
   assert.equal(
     parseBetaSurveyAnswers({ ...VALID, overallMessage: "Top", overallAudioPath: "a/b.webm" }),
     null,
@@ -53,16 +53,9 @@ test("text has a length limit and the overall answer is text or audio, never bot
   );
 });
 
-test("the friction answer is text or audio, never both", () => {
-  assert.equal(
-    parseBetaSurveyAnswers({ ...VALID, friction: "Long", frictionAudioPath: "a/b.webm" }),
-    null,
-  );
-  assert.equal(parseBetaSurveyAnswers({ ...VALID, frictionAudioPath: 12 }), null);
-  assert.equal(parseBetaSurveyAnswers(VALID).frictionAudioPath, null);
-  assert.equal(
-    parseBetaSurveyAnswers({ ...VALID, friction: " ", frictionAudioPath: "a/b.webm" })
-      .frictionAudioPath,
-    "a/b.webm",
-  );
+test("the contact name is trimmed, and refused when empty or too long", () => {
+  assert.equal(parseBetaSurveyContact("  Alex Martin "), "Alex Martin");
+  assert.equal(parseBetaSurveyContact("   "), null);
+  assert.equal(parseBetaSurveyContact(12), null);
+  assert.equal(parseBetaSurveyContact("a".repeat(101)), null);
 });
