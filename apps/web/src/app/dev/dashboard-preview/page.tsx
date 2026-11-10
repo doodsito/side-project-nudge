@@ -5,7 +5,12 @@ import { DashboardHome } from "@/components/dashboard/dashboard-home";
 import { PortfolioPreview } from "@/components/dashboard/portfolio-preview";
 import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
 import { LessonRating } from "@/components/lessons/lesson-rating";
-import { FOUNDATION_WORLD, INTRO_WORLD, type CourseProgress } from "@/lib/course-progress";
+import {
+  FOUNDATION_LESSON_COUNT,
+  FOUNDATION_WORLD,
+  INTRO_WORLD,
+  type CourseProgress,
+} from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { DEFAULT_TRACK, isTrack, TRACK_INFO } from "@/lib/tracks";
 
@@ -87,7 +92,17 @@ export default async function DashboardPreviewPage({
                     ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
                     : state === "returning"
                       ? { ...sampleProgress, worldZeroSkipped: true }
-                      : sampleProgress
+                      : state === "complete"
+                        ? {
+                            version: 1,
+                            completedLessons: {
+                              [FOUNDATION_WORLD]: Array.from(
+                                { length: FOUNDATION_LESSON_COUNT },
+                                (_, index) => index + 1,
+                              ),
+                            },
+                          }
+                        : sampleProgress
             }
             track={track}
             courseCopy={t.learning.courses}
