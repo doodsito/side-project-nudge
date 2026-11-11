@@ -10,6 +10,6 @@
 
 **Files:** `apps/web/src/app/dev/dashboard-preview/page.tsx`, `apps/web/src/app/dashboard/page.tsx`, `apps/web/src/components/dashboard/beta-survey-cta.tsx`, `apps/web/src/components/dashboard/dashboard-template.tsx`, `apps/web/src/components/layout/beta-colors.css`
 
-**Checked:** À vérifier avant la PR.
+**Checked:** lint et typecheck passent. Le build bloque sur Turbopack et l’accès réseau aux Google Fonts.
 
-**Next:** Relire l’aperçu mobile et mettre à jour la PR.
+**Next:** Relancer le build avec l’accès réseau requis, puis ouvrir la PR.
