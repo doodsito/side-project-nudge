@@ -486,7 +486,8 @@ body:has(.lesson-shell) .site-footer {
   }
 }
 
-.nudge-shimmer-button {
+button.nudge-shimmer-button,
+a.nudge-shimmer-button {
   background-image: linear-gradient(
     110deg,
     transparent 38%,
