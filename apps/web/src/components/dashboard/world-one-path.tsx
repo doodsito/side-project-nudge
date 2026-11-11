@@ -97,8 +97,9 @@ export function WorldOnePath({
   mascotAlt,
   nextWorldLabel,
   nextWorldTitle,
+  nextWorldDescription,
   exploreLabel,
-  rewardUnlockedLabel,
+  rewardLabel,
 }: {
   lessons: WorldLesson[];
   completedCount: number;
@@ -112,8 +113,9 @@ export function WorldOnePath({
   mascotAlt: string;
   nextWorldLabel: string;
   nextWorldTitle: string;
+  nextWorldDescription: string;
   exploreLabel: string;
-  rewardUnlockedLabel: string;
+  rewardLabel: string;
 }) {
   const firstCurrent = lessons.find(({ state }) => state === "current");
   const firstLocked = lessons.find(({ state }) => state === "locked");
@@ -237,20 +239,19 @@ export function WorldOnePath({
                 >
                   <Image src="/brand/learn-map/trophy.svg" alt="" width={30} height={30} />
                 </span>
-                <p>{rewardUnlockedLabel}</p>
+                <p>{rewardLabel}</p>
               </li>
             </ol>
           </section>
 
           <section className={styles["nextWorld"]}>
             <div className={styles["nextWorldHeading"]}>
-              <span className={styles["nextWorldIcon"]} aria-hidden="true">
-                <Image src="/brand/learn-map/icon-lock.svg" alt="" width={18} height={18} />
-              </span>
               <h2 className={styles["nextWorldText"]}>
-                {nextWorldLabel} · {nextWorldTitle}
+                <span className={styles["nextWorldBadge"]}>{nextWorldLabel}</span> ·{" "}
+                {nextWorldTitle}
               </h2>
             </div>
+            <p className={styles["nextWorldDescription"]}>{nextWorldDescription}</p>
             <Link href="/dashboard/courses" className={styles["explore"]}>
               {exploreLabel} <ArrowRight aria-hidden="true" />
             </Link>

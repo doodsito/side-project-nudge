@@ -331,10 +331,11 @@ export const us = {
         habitTitle: "Keep your learning going",
         habitText: "A short lesson is enough to keep the habit going.",
         rewardTitle: "World reward",
-        rewardText: "Finish all eight lessons to unlock the investing world.",
-        rewardUnlocked: "Investing unlocked",
-        portfolioTitle: "Your virtual portfolio is coming soon",
-        portfolioText: "Virtual money only. Nothing here is real.",
+        rewardPending: "End of the beta path",
+        rewardComplete: "Beta path complete 🎉",
+        portfolioTitle: "Your virtual portfolio",
+        portfolioText:
+          "In a future version, you’ll be able to practise investing with virtual money.",
       },
       roadmap: "Other worlds",
       journeyLabel: "Your learning journey",
@@ -350,6 +351,7 @@ export const us = {
       world: "World",
       ready: "Ready to explore",
       locked: "Locked",
+      comingSoon: "Coming soon",
       lessonsComplete: (completed: number, total: number) =>
         `${completed} of ${total} lessons complete · About 35 minutes`,
       worldProgress: (completed: number, total: number) =>

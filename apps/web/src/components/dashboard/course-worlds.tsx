@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, LockKeyhole } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COURSE_WORLDS } from "@/lib/course-worlds";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -28,7 +28,7 @@ export function CourseWorlds({ copy }: { copy: Dictionary["learning"]["courses"]
                   aria-hidden
                 />
                 <article
-                  aria-label={`${copy.world} ${world.number}: ${worldCopy.title}. ${copy.locked}.`}
+                  aria-label={`${copy.world} ${world.number}: ${worldCopy.title}. ${copy.comingSoon}.`}
                   className="flex min-h-16 items-center justify-between gap-3 rounded-2xl border border-border bg-surface-2 px-4 py-3"
                 >
                   <div className="min-w-0">
@@ -39,7 +39,9 @@ export function CourseWorlds({ copy }: { copy: Dictionary["learning"]["courses"]
                       {worldCopy.title}
                     </h3>
                   </div>
-                  <LockKeyhole className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                  <span className="shrink-0 rounded-full border border-border bg-surface px-2.5 py-1 text-[10px] font-extrabold uppercase text-muted-foreground">
+                    {copy.comingSoon}
+                  </span>
                 </article>
               </li>
             );

@@ -336,10 +336,11 @@ export const fr: Dictionary = {
         habitTitle: "Garde ton rythme",
         habitText: "Une courte leçon suffit à entretenir l’habitude.",
         rewardTitle: "Récompense du monde",
-        rewardText: "Termine les huit leçons pour ouvrir l’univers de l’investissement.",
-        rewardUnlocked: "L’investissement débloqué",
-        portfolioTitle: "Ton portefeuille virtuel arrive bientôt",
-        portfolioText: "Uniquement de l’argent virtuel. Rien n’est réel ici.",
+        rewardPending: "Fin du parcours bêta",
+        rewardComplete: "Parcours bêta terminé 🎉",
+        portfolioTitle: "Ton portefeuille virtuel",
+        portfolioText:
+          "Dans une prochaine version, tu pourras t’entraîner à investir avec de l’argent virtuel.",
       },
       roadmap: "Les autres mondes",
       journeyLabel: "Ton parcours d’apprentissage",
@@ -355,6 +356,7 @@ export const fr: Dictionary = {
       world: "Monde",
       ready: "Prêt à explorer",
       locked: "Verrouillé",
+      comingSoon: "À venir",
       lessonsComplete: (completed, total) =>
         `${completed} leçon${completed > 1 ? "s" : ""} sur ${total} terminée${completed > 1 ? "s" : ""} · Environ 35 minutes`,
       worldProgress: (completed, total) =>

@@ -334,18 +334,6 @@
   background: var(--learn-neutral-300);
   content: "";
 }
-.nextWorldIcon {
-  display: grid;
-  width: 1.15rem;
-  height: 1.15rem;
-  flex: 0 0 auto;
-  place-items: center;
-  color: var(--learn-neutral-600);
-}
-.nextWorldIcon svg {
-  width: 1rem;
-  height: 1rem;
-}
 .nextWorldText {
   min-width: 0;
   margin: 0;
@@ -353,7 +341,17 @@
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
-  white-space: nowrap;
+}
+.nextWorldBadge {
+  color: var(--learn-violet);
+}
+.nextWorldDescription {
+  max-width: 28rem;
+  margin: 0 auto;
+  color: var(--learn-neutral-600);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .explore {
