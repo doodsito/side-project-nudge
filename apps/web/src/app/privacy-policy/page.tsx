@@ -54,11 +54,13 @@ export default async function PrivacyPolicyPage() {
             acceptes lors de la création du compte.
           </li>
           <li>
-            <strong>Tes retours.</strong> Lorsque tu envoies un retour depuis le tableau de bord,
-            nous conservons ton message écrit ou ton enregistrement vocal, sa catégorie, ton compte
-            et la date. Nous les utilisons uniquement pour améliorer {BRAND}. Le micro s’active
-            seulement après ton autorisation, quand tu lances un enregistrement. Base légale : ton
-            consentement, donné en envoyant le retour.
+            <strong>Tes retours.</strong> Lorsque tu envoies un retour depuis le tableau de bord ou
+            réponds au questionnaire de la bêta, nous conservons tes réponses, ton message écrit ou
+            ton enregistrement vocal, sa catégorie, ton compte et la date. Si tu laisses ton nom à
+            la fin du questionnaire, nous le conservons pour te recontacter. Nous les utilisons
+            uniquement pour améliorer {BRAND}. Le micro s’active seulement après ton autorisation,
+            quand tu lances un enregistrement. Base légale : ton consentement, donné en envoyant le
+            retour.
           </li>
           <li>
             <strong>Mesure d’audience.</strong> Si tu acceptes les cookies analytiques, Google
