@@ -88,7 +88,7 @@ function LessonCard({
           </button>
         </>
       ) : (
-        <Link className={styles["lessonCta"]} href={lesson.href!}>
+        <Link className={`${styles["lessonCta"]} nudge-shimmer-button`} href={lesson.href!}>
           {lesson.state === "completed" ? lesson.reviewLabel : lesson.startLabel}
         </Link>
       )}
