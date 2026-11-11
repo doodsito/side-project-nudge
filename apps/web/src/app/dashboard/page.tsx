@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   const dictionary = getDictionary(member.track);
   const showBetaSurvey = !(await hasAnsweredBetaSurvey(member.id));
   return (
-    <>
+    <div data-dashboard-hide-mobile-header>
       {showBetaSurvey && (
         <div className="mx-auto max-w-7xl px-4 pt-4 lg:px-8">
           <BetaSurveyCta t={dictionary.betaSurvey.cta} />
@@ -27,6 +27,6 @@ export default async function DashboardPage() {
         courseCopy={dictionary.learning.courses}
         foundationCopy={dictionary.learning.courses.foundation}
       />
-    </>
+    </div>
   );
 }
