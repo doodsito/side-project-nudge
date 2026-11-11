@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="65" height="36" viewBox="0 0 65 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mare &#194;&#183; le long du sentier">
+<ellipse cx="32.5" cy="18" rx="32.5" ry="18" fill="#B8E6E0"/>
+<mask id="stroke0_0_190" fill="white">
+<path d="M65 18C65 27.9411 50.4493 36 32.5 36C14.5507 36 0 27.9411 0 18C0 8.05887 14.5507 0 32.5 0C50.4493 0 65 8.05887 65 18Z"/>
+</mask>
+<ellipse cx="32.5" cy="18" rx="32.5" ry="18" stroke-width="4" stroke="#8CCEC5" mask="url(#stroke0_0_190)"/>
+</g>
+</svg>
