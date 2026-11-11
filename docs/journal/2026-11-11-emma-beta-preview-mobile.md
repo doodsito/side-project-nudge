@@ -1,4 +1,4 @@
-# Compacte l’entrée de la bêta sur mobile
+# Compacte et anime les CTA de la bêta
 
 - **Date:** 2026-11-11
 - **Author:** Emma, with Codex
@@ -6,10 +6,10 @@
 
 **Why:** Le parcours devait démarrer plus directement sur téléphone, et la demande d’avis prenait trop de place.
 
-**What changed:** Le header mobile disparaît aussi dans l’aperçu du parcours. La carte d’avis tient sur une ligne, avec le texte secondaire masqué sur petit écran.
+**What changed:** Header mobile masqué dans l’aperçu; avis réduit; les CTA principaux ont un shimmer Nudge lent de 4 secondes, désactivé si l’utilisateur réduit les animations.
 
-**Files:** `apps/web/src/app/dev/dashboard-preview/page.tsx`, `apps/web/src/app/dashboard/page.tsx`, `apps/web/src/components/dashboard/beta-survey-cta.tsx`, `apps/web/src/components/dashboard/dashboard-template.tsx`, `apps/web/src/components/layout/beta-colors.css`
+**Files:** `apps/web/src/app/dev/dashboard-preview/page.tsx`, `apps/web/src/app/dashboard/page.tsx`, `apps/web/src/components/dashboard/beta-survey-cta.tsx`, `apps/web/src/components/dashboard/dashboard-template.tsx`, `apps/web/src/components/layout/beta-colors.css`, `apps/web/src/components/ui/button.tsx`, `apps/web/src/styles.css`
 
-**Checked:** lint et typecheck passent. Le build bloque sur Turbopack et l’accès réseau aux Google Fonts.
+**Checked:** lint et typecheck passent. Le build local bloque sur Turbopack et l’accès réseau aux Google Fonts.
 
-**Next:** Relancer le build avec l’accès réseau requis, puis ouvrir la PR.
+**Next:** Ouvrir la PR et vérifier ses checks.
