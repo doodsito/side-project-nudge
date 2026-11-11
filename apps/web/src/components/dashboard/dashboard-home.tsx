@@ -69,10 +69,15 @@ export function DashboardHome({
       lockedLabel={foundationCopy.locked}
       closePreviewLabel={foundationCopy.closePreview}
       mascotAlt={foundationCopy.mascotAlt}
-      nextWorldLabel={`${courseCopy.world} 2`}
-      nextWorldTitle={courseCopy.worlds[1]!.title}
+      nextWorldLabel={courseCopy.comingSoon}
+      nextWorldTitle={courseCopy.homeSideCards.portfolioTitle}
+      nextWorldDescription={courseCopy.homeSideCards.portfolioText}
       exploreLabel={courseCopy.viewAllCourses}
-      rewardUnlockedLabel={courseCopy.homeSideCards.rewardUnlocked}
+      rewardLabel={
+        completedCount === FOUNDATION_LESSONS.length
+          ? courseCopy.homeSideCards.rewardComplete
+          : courseCopy.homeSideCards.rewardPending
+      }
     />
   );
 }
