@@ -67,6 +67,7 @@ export function DashboardHome({
       practicalLabel={foundationCopy.practicalDecision}
       virtualMoneyLabel={foundationCopy.virtualMoney}
       lockedLabel={foundationCopy.locked}
+      closePreviewLabel={foundationCopy.closePreview}
       mascotAlt={foundationCopy.mascotAlt}
       nextWorldLabel={`${courseCopy.world} 2`}
       nextWorldTitle={courseCopy.worlds[1]!.title}

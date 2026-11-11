@@ -97,6 +97,10 @@
   --animate-float: float 7s ease-in-out infinite;
   --animate-draw: draw 1.6s ease-out forwards;
   --animate-caret: caret 1s steps(2) infinite;
+  --animate-learn-map-route: learn-map-route 24s linear infinite;
+  --animate-learn-map-node: learn-map-node 2.8s ease-in-out infinite;
+  --animate-learn-map-foliage: learn-map-foliage 7s ease-in-out infinite;
+  --animate-learn-map-card: learn-map-card 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 :root {
@@ -116,6 +120,10 @@
   --nudge-learn-teal-500: #118e8c;
   --nudge-learn-teal-soft: #edfcfa;
   --nudge-learn-teal-dark: #07474b;
+  --nudge-learn-map-ground: #e7f4e6;
+  --nudge-learn-map-road-edge: #76b889;
+  --nudge-learn-map-road: #fff8df;
+  --nudge-learn-map-road-dash: #b5d4a4;
   --nudge-learn-canvas: #f3f0ff;
   --nudge-learn-feedback-canvas: #faf9fd;
   --nudge-learn-feedback-border: #e5def3;
@@ -204,6 +212,10 @@
   --ring: oklch(0.66 0.19 288);
   --ink: oklch(0.16 0.03 275);
   --ink-foreground: oklch(0.97 0.008 285);
+  --nudge-learn-map-ground: #29392f;
+  --nudge-learn-map-road-edge: #6b9f79;
+  --nudge-learn-map-road: #465044;
+  --nudge-learn-map-road-dash: #a9c894;
 }
 
 @keyframes rise {
@@ -269,6 +281,43 @@
   }
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes learn-map-route {
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+
+@keyframes learn-map-node {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes learn-map-foliage {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes learn-map-card {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
