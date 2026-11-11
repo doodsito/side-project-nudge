@@ -10,6 +10,6 @@
 
 **Files:** `apps/web/src/components/dashboard/world-one-path.tsx`
 
-**Checked:** lint et typecheck passent; build local bloqué par une erreur interne Turbopack. CI et aperçu Vercel à vérifier.
+**Checked:** lint et typecheck passent; CI GitHub (build compris) passe. Aperçu vérifié sur ordinateur et mobile.
 
-**Next:** Vérifier les checks et l’aperçu de la PR.
+**Next:** Merger la PR.
