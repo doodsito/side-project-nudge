@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-11
 - **Author:** Robin, with Claude Code
-- **Pull request:** to be linked
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/86
 
 **Why:** the English privacy policy mentions the beta survey and the name a tester can leave at the end, but the French one did not, and France is our first track.
 
