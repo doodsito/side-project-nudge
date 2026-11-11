@@ -78,36 +78,38 @@ export default async function DashboardPreviewPage({
             nextHref={`/dev/dashboard-preview?track=${track}&state=returning`}
           />
         ) : (
-          <DashboardHome
-            progress={
-              state === "first-time"
-                ? { version: 1, completedLessons: {} }
-                : state === "skipped"
-                  ? {
-                      version: 1,
-                      completedLessons: {},
-                      worldZeroSkipped: true,
-                    }
-                  : state === "world-zero-complete"
-                    ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
-                    : state === "returning"
-                      ? { ...sampleProgress, worldZeroSkipped: true }
-                      : state === "complete"
-                        ? {
-                            version: 1,
-                            completedLessons: {
-                              [FOUNDATION_WORLD]: Array.from(
-                                { length: FOUNDATION_LESSON_COUNT },
-                                (_, index) => index + 1,
-                              ),
-                            },
-                          }
-                        : sampleProgress
-            }
-            track={track}
-            courseCopy={t.learning.courses}
-            foundationCopy={t.learning.courses.foundation}
-          />
+          <div data-dashboard-hide-mobile-header>
+            <DashboardHome
+              progress={
+                state === "first-time"
+                  ? { version: 1, completedLessons: {} }
+                  : state === "skipped"
+                    ? {
+                        version: 1,
+                        completedLessons: {},
+                        worldZeroSkipped: true,
+                      }
+                    : state === "world-zero-complete"
+                      ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
+                      : state === "returning"
+                        ? { ...sampleProgress, worldZeroSkipped: true }
+                        : state === "complete"
+                          ? {
+                              version: 1,
+                              completedLessons: {
+                                [FOUNDATION_WORLD]: Array.from(
+                                  { length: FOUNDATION_LESSON_COUNT },
+                                  (_, index) => index + 1,
+                                ),
+                              },
+                            }
+                          : sampleProgress
+              }
+              track={track}
+              courseCopy={t.learning.courses}
+              foundationCopy={t.learning.courses.foundation}
+            />
+          </div>
         )}
       </DashboardTemplate>
     </div>

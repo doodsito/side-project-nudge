@@ -11,6 +11,18 @@ body:has([data-nudge-beta]) {
   --chart-3: var(--secondary);
 }
 
+/* Give the learning map the full mobile viewport when it is the landing screen. */
+@media (max-width: 1023px) {
+  body:has(main[data-nudge-beta] [data-dashboard-hide-mobile-header])
+    [data-dashboard-mobile-header] {
+    display: none;
+  }
+
+  body:has(main[data-nudge-beta] [data-dashboard-hide-mobile-header]) main[data-nudge-beta] {
+    min-height: 100dvh;
+  }
+}
+
 /* Gold identifies educational labels; teal remains a progress signal. */
 [data-nudge-beta] .bg-ink .text-mint {
   color: var(--secondary);

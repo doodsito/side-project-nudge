@@ -74,7 +74,10 @@ export function DashboardTemplate({
           )}
         </aside>
         <div className="min-w-0">
-          <header className="flex h-16 items-center justify-between border-b-2 border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] px-4 pt-[env(safe-area-inset-top)] lg:hidden">
+          <header
+            data-dashboard-mobile-header
+            className="flex h-16 items-center justify-between border-b-2 border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] px-4 pt-[env(safe-area-inset-top)] lg:hidden"
+          >
             <Link
               href={homeHref}
               aria-label={`${BRAND} ${t.home}`}
