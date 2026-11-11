@@ -323,6 +323,7 @@ export const us = {
     },
     courses: {
       yourCourses: "Your courses",
+      backToLearn: "Back to Learn",
       nextLesson: "Next lesson",
       viewAllLessons: "View all lessons",
       viewAllCourses: "Explore all courses",
@@ -758,7 +759,7 @@ export const us = {
         bill: "Phone bill",
         label: "A new situation",
         intro: (money: (amount: number) => string) =>
-          `Sam is a student. A summer job paid ${money(600)}. Sam spent ${money(475)}.`,
+          `Sam is a student. A summer job paid ${money(600)}. Sam spent ${money(475)} and still has a ${money(25)} phone bill to pay next week.`,
         question: "How much could Sam set aside?",
         feedback: [
           (money: (amount: number) => string) =>
@@ -812,8 +813,6 @@ export const us = {
         "Investing can offer growth, but the value might fall when you need the money.",
         "Splitting can balance priorities, but it does not replace an accessible safety buffer.",
       ],
-      feedbackInsight:
-        "When will Alex need the money? Money for next month has a different job than money for ten years from now.",
       feedbackAction: "Show me how investing works",
       growthAction: "But what about risk?",
       riskAction: "Finish World 0",
@@ -1770,11 +1769,10 @@ export const us = {
       device: "Where did you mostly take the lessons?",
       disappointment: `If ${BRAND} disappeared tomorrow, how would you feel?`,
       nps: `From 0 to 10, how likely are you to recommend ${BRAND} to a friend?`,
-      appearance: "How does the app look to you?",
-      courses: "And the lessons, how good are they?",
-      usefulness: "Is it actually useful? Did it give you things to do?",
-      friction: "The most frustrating moment, or when you felt like quitting?",
-      overall: "So, your overall take?",
+      appearance: "How would you rate the app’s design (colors, screens, mascot)?",
+      courses: "How would you rate the lessons (explanations, examples, exercises)?",
+      usefulness: "Will what you learned help you manage your money in real life?",
+      overall: `Last question: tell us everything you think about ${BRAND}. What you liked, what bothered you, what’s missing, or anything else you want to say.`,
     },
     devices: { mobile: "Phone", tablet: "Tablet", computer: "Computer" },
     disappointments: {
@@ -1788,8 +1786,7 @@ export const us = {
     scoreHigh: "Love it",
     whyLabel: "Why? (optional)",
     whyPlaceholder: "Tell us more…",
-    frictionPlaceholder: "Tell us everything…",
-    overallPlaceholder: `What you take away from ${BRAND}, in a few words…`,
+    overallPlaceholder: "Write freely, we read everything…",
     or: "or",
     reactions: {
       device: "Got it!",
@@ -1797,7 +1794,7 @@ export const us = {
       nps: "In the bag!",
       appearance: "Thanks for being honest!",
       courses: "Got it, thanks!",
-      usefulness: "Two more and you're done!",
+      usefulness: "One more and you're done!",
     },
     continue: "Continue",
     skip: "Skip",
@@ -1809,6 +1806,12 @@ export const us = {
     done: {
       title: "Thanks, you rock!",
       text: `Your answers will help us make ${BRAND} better.`,
+      contactLabel: "Your first and last name, so we can get back to you (optional)",
+      contactPlaceholder: "First Last",
+      contactSend: "Send",
+      contactSending: "Sending…",
+      contactSaved: "Got it, thanks!",
+      contactError: "We couldn't save your name. Try again.",
       back: "Back to the dashboard",
     },
   },

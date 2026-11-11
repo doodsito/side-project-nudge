@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { ArrowRight, Check, Lightbulb, RefreshCcw, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PracticeTemplate } from "@/components/practice/practice-template";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import type { ProgressStatus } from "@/lib/course-progress";
 import { getDictionary } from "@/lib/dictionaries";
 import {
@@ -133,6 +134,8 @@ export function WhyInvestFlow({
   function finishQuiz() {
     setStage(4);
   }
+
+  useAutoContinue(stage === 3 && answer === WHY_INVEST_CORRECT_ANSWER, finishQuiz);
 
   async function continueToWorldOne() {
     if (alreadyCompleted || (await saveProgress())) {
@@ -288,10 +291,6 @@ export function WhyInvestFlow({
                 <h2>{onboarding.feedbackLabels[CHOICE_IDS.indexOf(choice)]}</h2>
                 <p>{onboarding.feedbackChoices[CHOICE_IDS.indexOf(choice)]}</p>
               </article>
-              <p className={styles["insight"]}>
-                <Lightbulb aria-hidden="true" />
-                <span>{onboarding.feedbackInsight}</span>
-              </p>
             </section>
           )}
 

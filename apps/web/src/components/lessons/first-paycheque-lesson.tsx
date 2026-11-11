@@ -45,6 +45,7 @@ import {
   type LessonView,
   type SkipQuizAnswers,
 } from "@/lib/first-paycheque-lesson";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 import type { ProgressStatus } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -102,7 +103,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -351,7 +361,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           correct ? (
-            <PrimaryAction onClick={props.onContinueExpense}>
+            <PrimaryAction auto onClick={props.onContinueExpense}>
               {props.expenseIndex === BUDGET_ITEMS.length - 1
                 ? copy.budget.lastAction
                 : copy.budget.nextAction}
@@ -444,7 +454,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           selected?.correct ? (
-            <PrimaryAction onClick={() => props.onGoTo("concept")}>
+            <PrimaryAction auto onClick={() => props.onGoTo("concept")}>
               {copy.conceptCheck.action}
             </PrimaryAction>
           ) : (
@@ -515,7 +525,7 @@ export function FirstPaychequeLesson(props: FirstPaychequeLessonProps) {
       <LessonScreen
         action={
           selected?.correct ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+            <PrimaryAction auto onClick={() => props.onGoTo("complete")}>
               {copy.transfer.action}
             </PrimaryAction>
           ) : (

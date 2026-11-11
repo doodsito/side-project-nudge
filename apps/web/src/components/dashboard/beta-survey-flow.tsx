@@ -13,14 +13,16 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import { submitBetaSurvey } from "@/app/beta-survey/actions";
+import { saveBetaSurveyContact, submitBetaSurvey } from "@/app/beta-survey/actions";
 import { prepareFeedbackAudio } from "@/app/dashboard/actions";
 import { FeedbackAudioRecorder } from "@/components/shared/feedback-audio-recorder";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { getSupabase } from "@/integrations/supabase/client";
 import {
+  BETA_SURVEY_CONTACT_MAX_LENGTH,
   BETA_SURVEY_DEVICES,
   BETA_SURVEY_DISAPPOINTMENTS,
   BETA_SURVEY_NPS_VALUES,
@@ -41,7 +43,6 @@ const STEPS = [
   "appearance",
   "courses",
   "usefulness",
-  "friction",
   "overall",
   "done",
 ] as const;
@@ -197,10 +198,10 @@ function ScaleInput({
 }
 
 /** The end-of-beta survey: one question per screen, like a lesson. Everything is sent at the end. */
-export function BetaSurveyFlow({ track }: { track: Track }) {
+export function BetaSurveyFlow({ track, answered }: { track: Track; answered: boolean }) {
   const dictionary = getDictionary(track);
   const t = dictionary.betaSurvey;
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(answered ? STEPS.length - 1 : 0);
   const [device, setDevice] = useState<BetaSurveyAnswers["device"]>();
   const [disappointment, setDisappointment] = useState<BetaSurveyAnswers["disappointment"]>();
   const [nps, setNps] = useState<number>();
@@ -210,13 +211,14 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
     courses: "",
     usefulness: "",
   });
-  const [friction, setFriction] = useState("");
-  const [frictionAudio, setFrictionAudio] = useState<Blob | null>(null);
   const [overall, setOverall] = useState("");
   const [audio, setAudio] = useState<Blob | null>(null);
   const [recording, setRecording] = useState(false);
   const [failed, setFailed] = useState(false);
   const [sending, startSending] = useTransition();
+  const [contactName, setContactName] = useState("");
+  const [contactStatus, setContactStatus] = useState<"idle" | "saved" | "error">("idle");
+  const [savingContact, startSavingContact] = useTransition();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   const step: Step = STEPS[stepIndex]!;
@@ -243,11 +245,6 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
   function send(overallMessage: string, overallAudio: Blob | null) {
     setFailed(false);
     startSending(async () => {
-      let frictionAudioPath: string | null = null;
-      if (frictionAudio) {
-        frictionAudioPath = await uploadAudio(frictionAudio);
-        if (!frictionAudioPath) return setFailed(true);
-      }
       let overallAudioPath: string | null = null;
       if (overallAudio) {
         overallAudioPath = await uploadAudio(overallAudio);
@@ -263,13 +260,18 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
         coursesWhy: reasons.courses,
         usefulnessScore: scores.usefulness,
         usefulnessWhy: reasons.usefulness,
-        friction: frictionAudio ? "" : friction,
-        frictionAudioPath,
         overallMessage,
         overallAudioPath,
       });
       if (result.status === "error") return setFailed(true);
       next();
+    });
+  }
+
+  function sendContact() {
+    startSavingContact(async () => {
+      const result = await saveBetaSurveyContact(contactName);
+      setContactStatus(result.status);
     });
   }
 
@@ -330,6 +332,48 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
             <p className="text-sm text-muted-foreground">
               {step === "intro" ? t.intro.text(QUESTION_COUNT) : t.done.text}
             </p>
+            {step === "done" &&
+              (contactStatus === "saved" ? (
+                <p role="status" className="font-display font-extrabold text-primary">
+                  {t.done.contactSaved}
+                </p>
+              ) : (
+                <form
+                  className="flex w-full max-w-sm flex-col gap-3 text-left"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    sendContact();
+                  }}
+                >
+                  <label htmlFor="beta-survey-contact" className="text-sm font-bold">
+                    {t.done.contactLabel}
+                  </label>
+                  <Input
+                    id="beta-survey-contact"
+                    value={contactName}
+                    onChange={(event) => setContactName(event.target.value)}
+                    maxLength={BETA_SURVEY_CONTACT_MAX_LENGTH}
+                    autoComplete="name"
+                    placeholder={t.done.contactPlaceholder}
+                    className="h-12 rounded-2xl border-2 bg-surface"
+                  />
+                  {contactStatus === "error" && (
+                    <Alert variant="destructive" aria-live="polite">
+                      <CircleAlert aria-hidden />
+                      <AlertDescription>{t.done.contactError}</AlertDescription>
+                    </Alert>
+                  )}
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    size="xl"
+                    disabled={savingContact || !contactName.trim()}
+                    className={SECONDARY_BUTTON}
+                  >
+                    {savingContact ? t.done.contactSending : t.done.contactSend}
+                  </Button>
+                </form>
+              ))}
           </>
         ) : (
           <>
@@ -410,30 +454,6 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
                 </div>
               </>
             )}
-            {step === "friction" && (
-              <>
-                {!frictionAudio && (
-                  <>
-                    <Textarea
-                      aria-labelledby="beta-survey-question"
-                      value={friction}
-                      onChange={(event) => setFriction(event.target.value)}
-                      maxLength={BETA_SURVEY_TEXT_MAX_LENGTH}
-                      rows={5}
-                      placeholder={t.frictionPlaceholder}
-                      className={TEXTAREA}
-                    />
-                    <p className="text-center text-sm font-bold text-muted-foreground">{t.or}</p>
-                  </>
-                )}
-                <FeedbackAudioRecorder
-                  t={dictionary.dashboard.feedback}
-                  disabled={sending}
-                  onRecordingChange={setRecording}
-                  onAudioChange={setFrictionAudio}
-                />
-              </>
-            )}
             {step === "overall" && (
               <>
                 {!audio && (
@@ -502,7 +522,7 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
           </div>
         </footer>
       )}
-      {(step === "friction" || step === "overall") && !recording && (
+      {step === "overall" && !recording && (
         <footer className="border-t-2 border-border bg-surface px-4 pt-3.5 pb-[calc(1.125rem+env(safe-area-inset-bottom))]">
           <div className="mx-auto grid max-w-[40rem] grid-cols-2 gap-3">
             <Button
@@ -510,15 +530,7 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
               size="xl"
               disabled={sending}
               className={SECONDARY_BUTTON}
-              onClick={() => {
-                if (step === "overall") {
-                  send("", null);
-                } else {
-                  setFriction("");
-                  setFrictionAudio(null);
-                  next();
-                }
-              }}
+              onClick={() => send("", null)}
             >
               {t.skip}
             </Button>
@@ -526,9 +538,9 @@ export function BetaSurveyFlow({ track }: { track: Track }) {
               size="xl"
               disabled={sending}
               className={PRIMARY_BUTTON}
-              onClick={() => (step === "overall" ? send(audio ? "" : overall, audio) : next())}
+              onClick={() => send(audio ? "" : overall, audio)}
             >
-              {sending ? t.sending : step === "overall" ? t.send : t.continue}
+              {sending ? t.sending : t.send}
             </Button>
           </div>
         </footer>

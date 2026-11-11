@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/integrations/supabase/server";
 import { requireMember } from "@/lib/auth";
-import { parseBetaSurveyAnswers } from "@/lib/beta-survey";
+import { parseBetaSurveyAnswers, parseBetaSurveyContact } from "@/lib/beta-survey";
 import { completedLessonCount, FOUNDATION_WORLD } from "@/lib/course-progress";
 import { isFeedbackAudioPath } from "@/lib/feedback-audio";
 
@@ -14,8 +14,7 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
   const member = await requireMember();
   const answers = parseBetaSurveyAnswers(value);
   if (!answers) return { status: "error" };
-  const audioPaths = [answers.frictionAudioPath, answers.overallAudioPath];
-  if (audioPaths.some((path) => path && !isFeedbackAudioPath(path, member.id))) {
+  if (answers.overallAudioPath && !isFeedbackAudioPath(answers.overallAudioPath, member.id)) {
     return { status: "error" };
   }
 
@@ -32,8 +31,6 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
     courses_why: answers.coursesWhy,
     usefulness_score: answers.usefulnessScore,
     usefulness_why: answers.usefulnessWhy,
-    friction: answers.friction,
-    friction_audio_path: answers.frictionAudioPath,
     overall_message: answers.overallMessage,
     overall_audio_path: answers.overallAudioPath,
   });
@@ -42,4 +39,21 @@ export async function submitBetaSurvey(value: unknown): Promise<{ status: "saved
 
   revalidatePath("/dashboard");
   return { status: "saved" };
+}
+
+/** Saves the name a member leaves on the thank-you screen, on their own survey row. */
+export async function saveBetaSurveyContact(
+  value: unknown,
+): Promise<{ status: "saved" | "error" }> {
+  const member = await requireMember();
+  const contactName = parseBetaSurveyContact(value);
+  if (!contactName) return { status: "error" };
+
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("beta_survey_responses")
+    .update({ contact_name: contactName })
+    .eq("member_id", member.id)
+    .select("id");
+  return error || data.length === 0 ? { status: "error" } : { status: "saved" };
 }

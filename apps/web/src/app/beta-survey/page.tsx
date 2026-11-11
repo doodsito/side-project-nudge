@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { BetaSurveyFlow } from "@/components/dashboard/beta-survey-flow";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { hasAnsweredBetaSurvey } from "@/lib/beta-survey-status";
@@ -16,11 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BetaSurveyPage() {
   const member = await requireMember();
-  if (await hasAnsweredBetaSurvey(member.id)) redirect("/dashboard");
+  // No redirect when already answered: sending the survey re-renders this page,
+  // and a redirect here would skip the thank-you screen.
+  const answered = await hasAnsweredBetaSurvey(member.id);
 
   return (
     <div lang={TRACK_INFO[member.track].lang}>
-      <BetaSurveyFlow track={member.track} />
+      <BetaSurveyFlow track={member.track} answered={answered} />
     </div>
   );
 }

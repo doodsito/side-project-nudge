@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { COURSE_WORLDS } from "@/lib/course-worlds";
 import type { Dictionary } from "@/lib/dictionaries";
 
@@ -5,6 +8,11 @@ import type { Dictionary } from "@/lib/dictionaries";
 export function CourseWorlds({ copy }: { copy: Dictionary["learning"]["courses"] }) {
   return (
     <div className="mx-auto max-w-2xl">
+      <Button asChild variant="ghost" className="mb-3 -ml-3 min-h-11">
+        <Link href="/dashboard">
+          <ArrowLeft aria-hidden /> {copy.backToLearn}
+        </Link>
+      </Button>
       <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{copy.yourCourses}</h1>
       <section aria-labelledby="course-roadmap-heading" className="mt-8">
         <h2 id="course-roadmap-heading" className="font-display text-lg font-bold">

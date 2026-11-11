@@ -35,6 +35,7 @@ import {
   type PayYourselfFirstStep,
 } from "@/lib/pay-yourself-first-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -77,7 +78,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -250,7 +260,10 @@ export function PayYourselfFirstLesson(props: Props) {
       <LessonScreen
         action={
           props.orderAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("consequence")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("consequence")}
+            >
               {props.copy.decision.action}
             </PrimaryAction>
           ) : (
@@ -439,7 +452,10 @@ export function PayYourselfFirstLesson(props: Props) {
       <LessonScreen
         action={
           props.changeAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("complete")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("complete")}
+            >
               {props.copy.change.action}
             </PrimaryAction>
           ) : (

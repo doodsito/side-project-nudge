@@ -44,6 +44,7 @@ import type { ProgressStatus } from "@/lib/course-progress";
 import type { Dictionary } from "@/lib/dictionaries";
 import { formatMoney } from "@/lib/first-paycheque-lesson";
 import type { Track } from "@/lib/tracks";
+import { useAutoContinue } from "@/hooks/use-auto-continue";
 import { cn } from "@/lib/utils";
 
 type LessonCopy = Dictionary["lesson7"];
@@ -98,7 +99,16 @@ function LessonScreen({
   );
 }
 
-function PrimaryAction({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+function PrimaryAction({
+  children,
+  onClick,
+  auto = false,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  auto?: boolean;
+}) {
+  useAutoContinue(auto, onClick);
   return (
     <Button size="xl" onClick={onClick} className="w-full sm:ml-auto sm:flex sm:w-fit sm:min-w-48">
       {children} <ArrowRight aria-hidden="true" />
@@ -300,7 +310,10 @@ export function CashIsntRiskFreeLesson(props: Props) {
       <LessonScreen
         action={
           props.inflationAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("price-example")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("price-example")}
+            >
               {copy.inflation.action}
             </PrimaryAction>
           ) : (
@@ -396,7 +409,10 @@ export function CashIsntRiskFreeLesson(props: Props) {
       <LessonScreen
         action={
           props.balanceAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("interest-example")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("interest-example")}
+            >
               {copy.balance.action}
             </PrimaryAction>
           ) : (
@@ -502,7 +518,10 @@ export function CashIsntRiskFreeLesson(props: Props) {
       <LessonScreen
         action={
           props.interestAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("near-term")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("near-term")}
+            >
               {copy.interest.action}
             </PrimaryAction>
           ) : (
@@ -546,7 +565,10 @@ export function CashIsntRiskFreeLesson(props: Props) {
       <LessonScreen
         action={
           props.nearTermAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("long-term")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("long-term")}
+            >
               {copy.nearTerm.action}
             </PrimaryAction>
           ) : (
@@ -601,7 +623,10 @@ export function CashIsntRiskFreeLesson(props: Props) {
       <LessonScreen
         action={
           props.longTermAnswer ? (
-            <PrimaryAction onClick={() => props.onGoTo("checklist")}>
+            <PrimaryAction
+              auto={selected?.correct === true}
+              onClick={() => props.onGoTo("checklist")}
+            >
               {copy.longTerm.action}
             </PrimaryAction>
           ) : (
