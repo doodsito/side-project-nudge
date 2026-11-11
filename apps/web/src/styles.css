@@ -478,11 +478,11 @@ body:has(.lesson-shell) .site-footer {
 
 @keyframes nudge-button-shimmer {
   0% {
-    background-position: 0% 0%;
+    background-position: 100% 0%;
   }
   80%,
   100% {
-    background-position: 100% 0%;
+    background-position: 0% 0%;
   }
 }
 
