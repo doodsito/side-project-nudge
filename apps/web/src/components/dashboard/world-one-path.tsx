@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import { ArrowRight, LockKeyhole } from "lucide-react";
+import { ArrowRight, LockKeyhole, X } from "lucide-react";
 import styles from "./world-one-path.module.css";
 
 type LessonState = "completed" | "current" | "locked";
@@ -42,16 +42,28 @@ function LessonCard({
   practicalLabel,
   virtualMoneyLabel,
   lockedLabel,
+  closePreviewLabel,
+  onClose,
 }: {
   lesson: WorldLesson;
   lessonLabel: string;
   practicalLabel: string;
   virtualMoneyLabel: string;
   lockedLabel: string;
+  closePreviewLabel: string;
+  onClose: () => void;
 }) {
   const locked = lesson.state === "locked" || !lesson.href;
   return (
     <article className={styles["lessonCard"]} aria-label={lesson.nodeLabel}>
+      <button
+        className={styles["closePreview"]}
+        type="button"
+        aria-label={closePreviewLabel}
+        onClick={onClose}
+      >
+        <X aria-hidden="true" />
+      </button>
       <Image
         src="/brand/learn-map/pointer.svg"
         alt=""
@@ -84,6 +96,227 @@ function LessonCard({
   );
 }
 
+function MapArtwork() {
+  return (
+    <div className={styles["mapArtwork"]} aria-hidden="true">
+      <div className={`${styles["artSet"]} ${styles["desktopArt"]}`}>
+        <Image
+          src="/brand/learn-map/forest/forest-upper-left.svg"
+          alt=""
+          width={214}
+          height={174}
+          className={`${styles["artItem"]} ${styles["islandUpperLeft"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/forest-upper-right.svg"
+          alt=""
+          width={218}
+          height={190}
+          className={`${styles["artItem"]} ${styles["islandUpperRight"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/pond-center.svg"
+          alt=""
+          width={98}
+          height={48}
+          className={`${styles["artItem"]} ${styles["pondCenter"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/forest-middle-left.svg"
+          alt=""
+          width={205}
+          height={178}
+          className={`${styles["artItem"]} ${styles["islandMiddleLeft"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/forest-middle-right.svg"
+          alt=""
+          width={230}
+          height={190}
+          className={`${styles["artItem"]} ${styles["islandMiddleRight"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/pond-end.svg"
+          alt=""
+          width={110}
+          height={54}
+          className={`${styles["artItem"]} ${styles["pondEnd"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_004.png"
+          alt=""
+          width={32}
+          height={90}
+          className={`${styles["tree"]} ${styles["treeTall"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_005.png"
+          alt=""
+          width={37}
+          height={75}
+          className={`${styles["tree"]} ${styles["treeSmall"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_010.png"
+          alt=""
+          width={68}
+          height={95}
+          className={`${styles["tree"]} ${styles["treeLarge"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_006.png"
+          alt=""
+          width={37}
+          height={90}
+          className={`${styles["tree"]} ${styles["treeRound"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_004.png"
+          alt=""
+          width={28}
+          height={80}
+          className={`${styles["tree"]} ${styles["treeTallSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_010.png"
+          alt=""
+          width={66}
+          height={92}
+          className={`${styles["tree"]} ${styles["treeLargeSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_005.png"
+          alt=""
+          width={35}
+          height={71}
+          className={`${styles["tree"]} ${styles["treeSmallSecondary"]}`}
+        />
+      </div>
+      <div className={`${styles["artSet"]} ${styles["mobileArt"]}`}>
+        <Image
+          src="/brand/learn-map/forest/forest-upper-left-mobile.svg"
+          alt=""
+          width={146}
+          height={126}
+          className={`${styles["artItem"]} ${styles["islandUpperLeft"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/clearing-upper-right-mobile.svg"
+          alt=""
+          width={126}
+          height={112}
+          className={`${styles["artItem"]} ${styles["islandUpperRight"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/pond-trail-mobile.svg"
+          alt=""
+          width={65}
+          height={36}
+          className={`${styles["artItem"]} ${styles["pondCenter"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/forest-middle-left-mobile.svg"
+          alt=""
+          width={132}
+          height={120}
+          className={`${styles["artItem"]} ${styles["islandMiddleLeft"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/forest-middle-right-mobile.svg"
+          alt=""
+          width={112}
+          height={125}
+          className={`${styles["artItem"]} ${styles["islandMiddleRight"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/pond-end-mobile.svg"
+          alt=""
+          width={83}
+          height={42}
+          className={`${styles["artItem"]} ${styles["pondEnd"]}`}
+        />
+        <Image
+          src="/brand/learn-map/forest/clearing-upper-right-mobile.svg"
+          alt=""
+          width={126}
+          height={112}
+          className={`${styles["artItem"]} ${styles["islandLowerLeft"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_004.png"
+          alt=""
+          width={28}
+          height={79}
+          className={`${styles["tree"]} ${styles["treeTall"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_006.png"
+          alt=""
+          width={23}
+          height={55}
+          className={`${styles["tree"]} ${styles["treeRound"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_010.png"
+          alt=""
+          width={41}
+          height={57}
+          className={`${styles["tree"]} ${styles["treeLarge"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_005.png"
+          alt=""
+          width={26}
+          height={53}
+          className={`${styles["tree"]} ${styles["treeSmall"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_010.png"
+          alt=""
+          width={39}
+          height={55}
+          className={`${styles["tree"]} ${styles["treeRoundSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_004.png"
+          alt=""
+          width={21}
+          height={59}
+          className={`${styles["tree"]} ${styles["treeTallSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_006.png"
+          alt=""
+          width={30}
+          height={72}
+          className={`${styles["tree"]} ${styles["treeRoundTertiary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_005.png"
+          alt=""
+          width={23}
+          height={46}
+          className={`${styles["tree"]} ${styles["treeSmallSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_010.png"
+          alt=""
+          width={40}
+          height={56}
+          className={`${styles["tree"]} ${styles["treeLargeSecondary"]}`}
+        />
+        <Image
+          src="/brand/learn-map/foliage/foliagePack_005.png"
+          alt=""
+          width={22}
+          height={45}
+          className={`${styles["tree"]} ${styles["treeSmallTertiary"]}`}
+        />
+      </div>
+    </div>
+  );
+}
+
 export function WorldOnePath({
   lessons,
   completedCount,
@@ -94,6 +327,7 @@ export function WorldOnePath({
   practicalLabel,
   virtualMoneyLabel,
   lockedLabel,
+  closePreviewLabel,
   mascotAlt,
   nextWorldLabel,
   nextWorldTitle,
@@ -110,6 +344,7 @@ export function WorldOnePath({
   practicalLabel: string;
   virtualMoneyLabel: string;
   lockedLabel: string;
+  closePreviewLabel: string;
   mascotAlt: string;
   nextWorldLabel: string;
   nextWorldTitle: string;
@@ -122,16 +357,19 @@ export function WorldOnePath({
   const defaultLesson = firstCurrent ?? firstLocked ?? lessons.at(-1) ?? lessons[0];
   const [selectedNumber, setSelectedNumber] = useState(defaultLesson?.lessonNumber ?? null);
   const selected =
-    lessons.find(({ lessonNumber }) => lessonNumber === selectedNumber) ?? defaultLesson;
-  const selectedIndex = lessons.findIndex(
-    ({ lessonNumber }) => lessonNumber === selected?.lessonNumber,
-  );
+    selectedNumber === null
+      ? undefined
+      : lessons.find(({ lessonNumber }) => lessonNumber === selectedNumber);
+  const selectedIndex = selected
+    ? lessons.findIndex(({ lessonNumber }) => lessonNumber === selected.lessonNumber)
+    : -1;
+  const previewExpansion = selected ? 290 : 0;
   const rowHeights = lessons.map(() => 96);
-  const rewardY = lessons.length * 102 + (selectedIndex < lessons.length - 1 ? 290 : 0) + 48;
+  const rewardY = lessons.length * 102 + previewExpansion + 48;
   const points = [
     ...lessons.map((_, index) => ({
       x: pathPositions[index] ?? 50,
-      y: index * 102 + (index > selectedIndex ? 290 : 0) + 48,
+      y: index * 102 + (selected && index > selectedIndex ? previewExpansion : 0) + 48,
     })),
     { x: 50, y: rewardY },
   ];
@@ -142,6 +380,7 @@ export function WorldOnePath({
     practicalLabel,
     virtualMoneyLabel,
     lockedLabel,
+    closePreviewLabel,
   };
 
   return (
@@ -169,6 +408,7 @@ export function WorldOnePath({
           </header>
 
           <section className={styles["trail"]} aria-label={progressLabel}>
+            <MapArtwork />
             <svg
               aria-hidden="true"
               className={styles["route"]}
@@ -177,6 +417,7 @@ export function WorldOnePath({
             >
               <path d={route} className={styles["routeHalo"]} />
               <path d={route} className={styles["routeLine"]} />
+              <path d={route} className={styles["routeFlow"]} />
             </svg>
             <ol className={styles["nodes"]}>
               {lessons.map((lesson, index) => {
@@ -201,7 +442,11 @@ export function WorldOnePath({
                         aria-current={lesson.state === "current" ? "step" : undefined}
                         className={`${styles["nodeButton"]} ${nodeClass} ${selectedRow ? styles["selected"] : ""}`}
                         style={{ left: `${points[index]?.x ?? 50}%` }}
-                        onClick={() => setSelectedNumber(lesson.lessonNumber)}
+                        onClick={() =>
+                          setSelectedNumber((current) =>
+                            current === lesson.lessonNumber ? null : lesson.lessonNumber,
+                          )
+                        }
                       >
                         <span className={styles["nodeFace"]}>
                           <Image
@@ -225,7 +470,11 @@ export function WorldOnePath({
                     </li>
                     {selectedRow && selected && (
                       <li className={styles["cardRow"]} aria-live="polite">
-                        <LessonCard lesson={selected} {...cardProps} />
+                        <LessonCard
+                          lesson={selected}
+                          {...cardProps}
+                          onClose={() => setSelectedNumber(null)}
+                        />
                       </li>
                     )}
                     {selectedRow && <li className={styles["pathSpacer"]} aria-hidden="true" />}
