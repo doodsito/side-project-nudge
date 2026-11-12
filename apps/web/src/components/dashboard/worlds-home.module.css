@@ -184,6 +184,24 @@
   object-fit: contain;
 }
 
+.walletComposition {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100%, 13rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.worldCard:hover .walletComposition {
+  transform: translate(-50%, -52%) scale(1.045);
+}
+
+.worldCard:hover .walletComposition .artImage {
+  transform: none;
+}
+
 .teslaLogo {
   top: 27%;
   left: 21%;
@@ -515,7 +533,8 @@
 
   .worldCard,
   .artImage,
-  .enterButton {
+  .enterButton,
+  .walletComposition {
     transition: none;
   }
 }

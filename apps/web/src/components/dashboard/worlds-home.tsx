@@ -42,30 +42,32 @@ export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
   if (worldNumber === 5) {
     return (
       <div className={`${styles["artStage"]} ${styles["walletStage"]}`} aria-hidden="true">
-        <Image
-          src={`/brand/learn-map/worlds/${source}`}
-          alt=""
-          fill
-          sizes="(max-width: 767px) 80vw, 30vw"
-          className={styles["artImage"]}
-        />
-        {walletLogos.map(({ src, className }) => (
+        <div className={styles["walletComposition"]}>
           <Image
-            key={src}
-            src={`/brand/learn-map/worlds/logos/${src}`}
+            src={`/brand/learn-map/worlds/${source}`}
             alt=""
-            width={80}
-            height={56}
-            className={`${styles["walletLogo"]} ${className}`}
+            fill
+            sizes="13rem"
+            className={styles["artImage"]}
           />
-        ))}
-        <Image
-          src="/brand/learn-map/worlds/pogo-encourage.png"
-          alt=""
-          width={100}
-          height={92}
-          className={styles["walletPogo"]}
-        />
+          {walletLogos.map(({ src, className }) => (
+            <Image
+              key={src}
+              src={`/brand/learn-map/worlds/logos/${src}`}
+              alt=""
+              width={80}
+              height={56}
+              className={`${styles["walletLogo"]} ${className}`}
+            />
+          ))}
+          <Image
+            src="/brand/learn-map/worlds/pogo-encourage.png"
+            alt=""
+            width={100}
+            height={92}
+            className={styles["walletPogo"]}
+          />
+        </div>
       </div>
     );
   }
