@@ -70,7 +70,7 @@ export function LandingContent({
             <div id="early-access" className="mt-8 scroll-mt-28">
               <div className="flex flex-wrap items-center gap-3">
                 <Button asChild size="lg">
-                  <Link href={signedIn ? "/dashboard" : "/signup"}>
+                  <Link href={signedIn ? "/dashboard/courses" : "/signup"}>
                     {t.cta}
                     <ArrowRight aria-hidden />
                   </Link>

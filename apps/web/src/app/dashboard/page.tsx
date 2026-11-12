@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BetaSurveyCta } from "@/components/dashboard/beta-survey-cta";
-import { DashboardHome } from "@/components/dashboard/dashboard-home";
+import { WorldsHome } from "@/components/dashboard/worlds-home";
 import { getMemberTrack, requireMember } from "@/lib/auth";
 import { hasAnsweredBetaSurvey } from "@/lib/beta-survey-status";
 import { getDictionary } from "@/lib/dictionaries";
@@ -21,12 +21,7 @@ export default async function DashboardPage() {
           <BetaSurveyCta t={dictionary.betaSurvey.cta} />
         </div>
       )}
-      <DashboardHome
-        progress={member.courseProgress}
-        track={member.track}
-        courseCopy={dictionary.learning.courses}
-        foundationCopy={dictionary.learning.courses.foundation}
-      />
+      <WorldsHome copy={dictionary.learning.courses} />
     </div>
   );
 }

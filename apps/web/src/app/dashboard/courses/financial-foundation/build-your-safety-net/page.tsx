@@ -16,7 +16,7 @@ export default async function BuildYourSafetyNetPage() {
     !isLessonFourAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 3)
   ) {
-    redirect("/dashboard");
+    redirect("/dashboard/courses");
   }
 
   redirect("/lessons/build-your-safety-net");

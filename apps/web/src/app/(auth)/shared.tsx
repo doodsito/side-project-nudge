@@ -69,7 +69,7 @@ export function AlreadySignedIn({ member }: { member: Member }) {
     >
       <div className="flex flex-col gap-3">
         <Button asChild size="lg" className="group w-full">
-          <Link href="/dashboard">
+          <Link href="/dashboard/courses">
             {t.open} {BRAND}{" "}
             <ArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden />
           </Link>

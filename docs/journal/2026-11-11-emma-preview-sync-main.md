@@ -1,14 +1,14 @@
-# Sync preview and remove beta header
+# Add the eight Nudge worlds to Home
 
 - **Date:** 2026-11-11
 - **Author:** Emma, with Codex
 - **Pull request:** https://github.com/doodsito/side-project-nudge/pull/91
 
-**Why:** `emma/preview` was 70 commits behind `main`. Keep its work while making the beta easier to use on mobile by removing the repeated top header.
+**Why:** Bring the preview branch up to date and make the beta’s eight worlds easier to explore, while keeping the current learning progress easy to resume.
 
-**What changed:** Sync the preview branch with current `main` and remove the mobile header from every beta dashboard section. Keep the bottom navigation and account content intact.
+**What changed:** Home/Accueil now shows the eight illustrated world cards. Learn/Apprendre keeps the current path and previews later worlds below it. Returning members land on their path; new accounts still start at lesson 0. The mobile header is removed across beta sections.
 
-**Files:** `apps/web/src/components/dashboard/dashboard-template.tsx`, `apps/web/src/components/layout/beta-colors.css`, `docs/journal/2026-11-11-emma-preview-sync-main.md`
+**Files:** `apps/web/src/app/dashboard/`, `apps/web/src/components/dashboard/`, `apps/web/src/lib/dictionaries/`
 
-**Checked:** lint and typecheck pass. Local build stops in Turbopack while starting a worker; GitHub checks will verify the pushed commit.
+**Checked:** format, lint and typecheck pass. Local production build stops when Turbopack starts a worker; GitHub checks will verify the pushed commit.
 **Next:** review the updated preview after its deployment completes.

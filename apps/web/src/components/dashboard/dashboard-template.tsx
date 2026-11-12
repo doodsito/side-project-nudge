@@ -17,19 +17,21 @@ export function DashboardTemplate({
   children,
   preview = false,
   homeHref = "/dashboard",
+  coursesHref = "/dashboard/courses",
   portfolioHref = "/dashboard/portfolio",
   activeTab,
 }: {
   t: Dictionary["dashboard"];
   skipLink: string;
   children: ReactNode;
+  coursesHref?: string;
 } & (
   | {
       preview: true;
       signOut?: never;
       homeHref: string;
       portfolioHref?: string | undefined;
-      activeTab?: "home" | "portfolio" | "account" | undefined;
+      activeTab?: "home" | "courses" | "portfolio" | "account" | undefined;
     }
   | {
       preview?: false;
@@ -58,6 +60,7 @@ export function DashboardTemplate({
             tabs={t.tabs}
             tabsLabel={t.tabsLabel}
             homeHref={homeHref}
+            coursesHref={coursesHref}
             portfolioHref={portfolioHref}
             activeTab={activeTab}
           />
@@ -87,6 +90,7 @@ export function DashboardTemplate({
               tabs={t.tabs}
               tabsLabel={t.tabsLabel}
               homeHref={homeHref}
+              coursesHref={coursesHref}
               portfolioHref={portfolioHref}
               activeTab={activeTab}
               mobile

@@ -323,6 +323,7 @@ export const us = {
     },
     courses: {
       yourCourses: "Your courses",
+      worldsHomeTitle: "Your worlds",
       backToLearn: "Back to Learn",
       nextLesson: "Next lesson",
       viewAllLessons: "View all lessons",
@@ -1819,7 +1820,7 @@ export const us = {
     home: "Learn",
     tabsLabel: "Dashboard",
     streakLabel: "Keep learning",
-    tabs: { home: "Learn", courses: "Courses", portfolio: "Portfolio", account: "Profile" },
+    tabs: { home: "Home", courses: "Learn", portfolio: "Portfolio", account: "Profile" },
     preview: {
       title: "Local Home preview",
       label: "Local preview · sample data",

@@ -9,7 +9,7 @@ export function PracticeHeader({
   current,
   total,
   copy,
-  exitHref = "/dashboard",
+  exitHref = "/dashboard/courses",
 }: {
   current: number;
   total: number;

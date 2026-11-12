@@ -295,7 +295,7 @@ export function WhyInvestLesson(props: Props) {
   }
 
   if (props.progressStatus === "saved")
-    return <LessonRating track={props.track} nextHref="/dashboard" />;
+    return <LessonRating track={props.track} nextHref="/dashboard/courses" />;
 
   return (
     <LessonScreen

@@ -501,7 +501,7 @@ export function WorldOnePath({
               </h2>
             </div>
             <p className={styles["nextWorldDescription"]}>{nextWorldDescription}</p>
-            <Link href="/dashboard/courses" className={styles["explore"]}>
+            <Link href="/dashboard" className={styles["explore"]}>
               {exploreLabel} <ArrowRight aria-hidden="true" />
             </Link>
           </section>

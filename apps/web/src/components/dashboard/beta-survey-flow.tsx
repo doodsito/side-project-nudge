@@ -288,7 +288,7 @@ export function BetaSurveyFlow({ track, answered }: { track: Track; answered: bo
       {isQuestion && (
         <header className="mx-auto flex w-full max-w-[40rem] items-center gap-3 px-4 pt-4 sm:pt-7">
           <Link
-            href="/dashboard"
+            href="/dashboard/courses"
             aria-label={t.close}
             className="grid size-8 shrink-0 place-items-center rounded-lg text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring"
           >
@@ -501,7 +501,7 @@ export function BetaSurveyFlow({ track, answered }: { track: Track; answered: bo
         <footer className="px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
           <div className="mx-auto max-w-[40rem]">
             <Button asChild size="xl" className={cn(PRIMARY_BUTTON, "w-full")}>
-              <Link href="/dashboard">{t.done.back}</Link>
+              <Link href="/dashboard/courses">{t.done.back}</Link>
             </Button>
           </div>
         </footer>

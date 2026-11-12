@@ -124,8 +124,9 @@ export function LessonRating({ track, nextHref }: { track: Track; nextHref: stri
           tabs={dictionary.dashboard.tabs}
           tabsLabel={dictionary.dashboard.tabsLabel}
           homeHref="/dashboard"
+          coursesHref="/dashboard/courses"
           mobile
-          activeTab="home"
+          activeTab="courses"
         />
       </nav>
     </div>
