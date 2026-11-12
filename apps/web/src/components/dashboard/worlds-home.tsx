@@ -9,9 +9,9 @@ const worldImageSources = [
   "world-02.png",
   "world-03.png",
   "world-04.png",
-  "world-05-wallet.svg",
+  "world-05-wallet-hd.png",
   "world-06.png",
-  "world-07-purchase.svg",
+  "world-07-purchase-hd.png",
   "world-08.png",
 ] as const;
 
@@ -39,7 +39,7 @@ export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
         src={`/brand/learn-map/worlds/${source}`}
         alt=""
         fill
-        sizes="(max-width: 767px) 80vw, 30vw"
+        sizes="(max-width: 767px) 88vw, 30vw"
         className={styles["artImage"]}
       />
     </div>
