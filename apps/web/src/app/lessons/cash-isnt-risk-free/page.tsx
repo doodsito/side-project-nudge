@@ -17,7 +17,7 @@ export default async function CashIsntRiskFreePage() {
     !isLessonSevenAvailable(member.track) ||
     !hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 6)
   ) {
-    redirect("/dashboard");
+    redirect("/dashboard/courses");
   }
 
   return (

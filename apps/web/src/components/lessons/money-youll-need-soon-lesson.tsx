@@ -567,7 +567,7 @@ export function MoneyYoullNeedSoonLesson(props: Props) {
             </Button>
           ) : (
             <Button asChild size="xl">
-              <Link href="/dashboard">
+              <Link href="/dashboard/courses">
                 {copy.complete.back} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

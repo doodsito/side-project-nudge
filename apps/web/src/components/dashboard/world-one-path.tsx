@@ -329,10 +329,6 @@ export function WorldOnePath({
   lockedLabel,
   closePreviewLabel,
   mascotAlt,
-  nextWorldLabel,
-  nextWorldTitle,
-  nextWorldDescription,
-  exploreLabel,
   rewardLabel,
 }: {
   lessons: WorldLesson[];
@@ -346,10 +342,6 @@ export function WorldOnePath({
   lockedLabel: string;
   closePreviewLabel: string;
   mascotAlt: string;
-  nextWorldLabel: string;
-  nextWorldTitle: string;
-  nextWorldDescription: string;
-  exploreLabel: string;
   rewardLabel: string;
 }) {
   const firstCurrent = lessons.find(({ state }) => state === "current");
@@ -491,19 +483,6 @@ export function WorldOnePath({
                 <p>{rewardLabel}</p>
               </li>
             </ol>
-          </section>
-
-          <section className={styles["nextWorld"]}>
-            <div className={styles["nextWorldHeading"]}>
-              <h2 className={styles["nextWorldText"]}>
-                <span className={styles["nextWorldBadge"]}>{nextWorldLabel}</span> ·{" "}
-                {nextWorldTitle}
-              </h2>
-            </div>
-            <p className={styles["nextWorldDescription"]}>{nextWorldDescription}</p>
-            <Link href="/dashboard/courses" className={styles["explore"]}>
-              {exploreLabel} <ArrowRight aria-hidden="true" />
-            </Link>
           </section>
         </section>
       </div>

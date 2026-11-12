@@ -24,5 +24,5 @@ export async function GET(request: NextRequest) {
 
   if (isReset) return redirectTo("/reset-password");
   if (!(await finishSignIn(supabase))) return redirectTo("/signup?error=access");
-  return redirectTo(isOnboarding ? "/lessons/why-invest" : "/dashboard");
+  return redirectTo(isOnboarding ? "/lessons/why-invest" : "/dashboard/courses");
 }

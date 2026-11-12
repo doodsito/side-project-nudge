@@ -48,7 +48,7 @@ export async function submitAccessCode(
     const { data: isMember, error } = await supabase.rpc("redeem_access_code", { code });
     if (error) return { error: error.code === CODES_LOCKED ? t.tooMany : t.codeCheck };
     if (!isMember) return { error: t.codeInvalid };
-    redirect("/dashboard");
+    redirect("/dashboard/courses");
   }
 
   const { data: isValid, error } = await supabase.rpc("check_access_code", { code });
@@ -139,7 +139,7 @@ export async function signInWithPassword(
     return { error: t.tryAgain };
   }
   if (!(await finishSignIn(supabase))) return { error: t.noAccess };
-  redirect("/dashboard");
+  redirect("/dashboard/courses");
 }
 
 export async function requestPasswordReset(

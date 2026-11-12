@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { DashboardHome } from "@/components/dashboard/dashboard-home";
 import { PortfolioPreview } from "@/components/dashboard/portfolio-preview";
+import { UpcomingWorlds, WorldsHome } from "@/components/dashboard/worlds-home";
 import { DashboardTemplate } from "@/components/dashboard/dashboard-template";
 import { LessonRating } from "@/components/lessons/lesson-rating";
 import {
@@ -46,8 +47,30 @@ export default async function DashboardPreviewPage({
   const track = isTrack(requestedTrack) ? requestedTrack : DEFAULT_TRACK;
   const t = getDictionary(track);
   const homeHref = `/dev/dashboard-preview?track=${track}`;
+  const coursesHref = `${homeHref}&view=learn`;
   const portfolioHref = `${homeHref}&view=portfolio`;
   const showPortfolio = view === "portfolio";
+  const showLearn = view === "learn";
+  const progress =
+    state === "first-time"
+      ? { version: 1 as const, completedLessons: {} }
+      : state === "skipped"
+        ? { version: 1 as const, completedLessons: {}, worldZeroSkipped: true }
+        : state === "world-zero-complete"
+          ? { version: 1 as const, completedLessons: { [INTRO_WORLD]: [1] } }
+          : state === "returning"
+            ? { ...sampleProgress, worldZeroSkipped: true }
+            : state === "complete"
+              ? {
+                  version: 1 as const,
+                  completedLessons: {
+                    [FOUNDATION_WORLD]: Array.from(
+                      { length: FOUNDATION_LESSON_COUNT },
+                      (_, index) => index + 1,
+                    ),
+                  },
+                }
+              : sampleProgress;
 
   return (
     <div lang={TRACK_INFO[track].lang}>
@@ -62,54 +85,34 @@ export default async function DashboardPreviewPage({
       )}
       <DashboardTemplate
         preview
-        activeTab={showPortfolio ? "portfolio" : "home"}
+        activeTab={showPortfolio ? "portfolio" : showLearn ? "courses" : "home"}
         homeHref={homeHref}
+        coursesHref={coursesHref}
         portfolioHref={portfolioHref}
         t={t.dashboard}
         skipLink={t.skipLink}
       >
         {showPortfolio ? (
           <section className="-mx-4 px-4 pt-4 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:mx-0 lg:px-10 lg:pt-8">
-            <PortfolioPreview copy={t.dashboard.portfolio} learnHref={homeHref} />
+            <PortfolioPreview copy={t.dashboard.portfolio} learnHref={coursesHref} />
           </section>
         ) : state === "lesson-feedback" ? (
           <LessonRating
             track={track}
             nextHref={`/dev/dashboard-preview?track=${track}&state=returning`}
           />
-        ) : (
-          <div data-dashboard-hide-mobile-header>
+        ) : showLearn ? (
+          <>
             <DashboardHome
-              progress={
-                state === "first-time"
-                  ? { version: 1, completedLessons: {} }
-                  : state === "skipped"
-                    ? {
-                        version: 1,
-                        completedLessons: {},
-                        worldZeroSkipped: true,
-                      }
-                    : state === "world-zero-complete"
-                      ? { version: 1, completedLessons: { [INTRO_WORLD]: [1] } }
-                      : state === "returning"
-                        ? { ...sampleProgress, worldZeroSkipped: true }
-                        : state === "complete"
-                          ? {
-                              version: 1,
-                              completedLessons: {
-                                [FOUNDATION_WORLD]: Array.from(
-                                  { length: FOUNDATION_LESSON_COUNT },
-                                  (_, index) => index + 1,
-                                ),
-                              },
-                            }
-                          : sampleProgress
-              }
+              progress={progress}
               track={track}
               courseCopy={t.learning.courses}
               foundationCopy={t.learning.courses.foundation}
             />
-          </div>
+            <UpcomingWorlds copy={t.learning.courses} />
+          </>
+        ) : (
+          <WorldsHome copy={t.learning.courses} learnHref={coursesHref} />
         )}
       </DashboardTemplate>
     </div>

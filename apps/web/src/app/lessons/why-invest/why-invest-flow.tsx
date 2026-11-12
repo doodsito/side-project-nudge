@@ -139,7 +139,7 @@ export function WhyInvestFlow({
 
   async function continueToWorldOne() {
     if (alreadyCompleted || (await saveProgress())) {
-      router.push("/dashboard");
+      router.push("/dashboard/courses");
     }
   }
 
@@ -190,7 +190,7 @@ export function WhyInvestFlow({
       </Button>
     ) : progressStatus === "saved" ? (
       <Button asChild size="xl" className={styles["action"]}>
-        <Link href="/dashboard">
+        <Link href="/dashboard/courses">
           {copy.complete.action} <ArrowRight aria-hidden="true" />
         </Link>
       </Button>
@@ -215,7 +215,7 @@ export function WhyInvestFlow({
       total={STAGE_COUNT}
       copy={dictionary.learning.shared}
       skipLink={dictionary.skipLink}
-      exitHref="/dashboard"
+      exitHref="/dashboard/courses"
     >
       <div ref={content} className={styles["flow"]}>
         <div className={styles["main"]} id="world-0-main" data-scroll-region tabIndex={-1}>

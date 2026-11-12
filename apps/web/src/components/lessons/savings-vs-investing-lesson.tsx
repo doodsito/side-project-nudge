@@ -429,7 +429,7 @@ export function SavingsVsInvestingLesson(props: Props) {
   }
 
   if (props.progressStatus === "saved")
-    return <LessonRating track={props.track} nextHref="/dashboard" />;
+    return <LessonRating track={props.track} nextHref="/dashboard/courses" />;
 
   return (
     <LessonScreen
@@ -437,7 +437,7 @@ export function SavingsVsInvestingLesson(props: Props) {
       action={
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
           <Button asChild variant="outline" size="xl">
-            <Link href="/dashboard">{copy.complete.dashboard}</Link>
+            <Link href="/dashboard/courses">{copy.complete.dashboard}</Link>
           </Button>
           <Button asChild size="xl" className="w-full sm:w-auto">
             <Link href="/beta-survey">{copy.complete.feedbackButton}</Link>

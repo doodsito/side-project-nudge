@@ -11,7 +11,7 @@ const allocationColors = [
 
 export function PortfolioPreview({
   copy,
-  learnHref = "/dashboard",
+  learnHref = "/dashboard/courses",
 }: {
   copy: Dictionary["dashboard"]["portfolio"];
   learnHref?: string;

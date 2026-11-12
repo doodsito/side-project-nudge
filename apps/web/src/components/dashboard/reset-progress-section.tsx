@@ -57,7 +57,7 @@ export function ResetProgressSection({
         return;
       }
       clearLearnLocalState(userId);
-      router.push("/dashboard");
+      router.push("/dashboard/courses");
     });
   }
 

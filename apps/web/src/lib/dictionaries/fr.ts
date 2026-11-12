@@ -328,6 +328,7 @@ export const fr: Dictionary = {
     },
     courses: {
       yourCourses: "Tes cours",
+      worldsHomeTitle: "Tes mondes",
       backToLearn: "Retour à Apprendre",
       nextLesson: "Prochaine leçon",
       viewAllLessons: "Voir toutes les leçons",
@@ -1871,7 +1872,7 @@ export const fr: Dictionary = {
     home: "Apprendre",
     tabsLabel: "Tableau de bord",
     streakLabel: "Reste régulière",
-    tabs: { home: "Apprendre", courses: "Cours", portfolio: "Portefeuille", account: "Profil" },
+    tabs: { home: "Accueil", courses: "Apprendre", portfolio: "Portefeuille", account: "Profil" },
     preview: {
       title: "Aperçu local de l’accueil",
       label: "Aperçu local · données fictives",

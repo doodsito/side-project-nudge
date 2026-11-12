@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 // Each tab is its own URL, so a tab can be bookmarked and the back button works.
 const TABS = [
   { href: "/dashboard", tab: "home", icon: "house" },
+  { href: "/dashboard/courses", tab: "courses", icon: "book" },
   { href: "/dashboard/portfolio", tab: "portfolio", icon: "wallet" },
   { href: "/dashboard/account", tab: "account", icon: "account" },
 ] as const;
@@ -18,6 +19,7 @@ export function DashboardTabs({
   tabsLabel,
   mobile = false,
   homeHref = "/dashboard",
+  coursesHref = "/dashboard/courses",
   portfolioHref = "/dashboard/portfolio",
   activeTab,
 }: {
@@ -25,6 +27,7 @@ export function DashboardTabs({
   tabsLabel: string;
   mobile?: boolean;
   homeHref?: string;
+  coursesHref?: string;
   portfolioHref?: string;
   activeTab?: (typeof TABS)[number]["tab"] | undefined;
 }) {
@@ -34,9 +37,16 @@ export function DashboardTabs({
       aria-label={tabsLabel}
       className={mobile ? "border-t border-border bg-surface px-1.5 py-2" : "w-full"}
     >
-      <ul className={mobile ? "grid grid-cols-3" : "grid gap-2"}>
+      <ul className={mobile ? "grid grid-cols-4" : "grid gap-2"}>
         {TABS.map(({ href, tab, icon }) => {
-          const targetHref = tab === "home" ? homeHref : tab === "portfolio" ? portfolioHref : href;
+          const targetHref =
+            tab === "home"
+              ? homeHref
+              : tab === "courses"
+                ? coursesHref
+                : tab === "portfolio"
+                  ? portfolioHref
+                  : href;
           const current = activeTab
             ? tab === activeTab
             : pathname === targetHref.split("?")[0] ||

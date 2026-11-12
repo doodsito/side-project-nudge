@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PayYourselfFirstPage() {
   const member = await requireMember();
   if (!hasCompletedLesson(member.courseProgress, FOUNDATION_WORLD, 1)) {
-    redirect("/dashboard");
+    redirect("/dashboard/courses");
   }
 
   return <PayYourselfFirstFlow track={member.track} />;

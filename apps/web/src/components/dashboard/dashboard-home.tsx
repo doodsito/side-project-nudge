@@ -69,10 +69,6 @@ export function DashboardHome({
       lockedLabel={foundationCopy.locked}
       closePreviewLabel={foundationCopy.closePreview}
       mascotAlt={foundationCopy.mascotAlt}
-      nextWorldLabel={courseCopy.comingSoon}
-      nextWorldTitle={courseCopy.homeSideCards.portfolioTitle}
-      nextWorldDescription={courseCopy.homeSideCards.portfolioText}
-      exploreLabel={courseCopy.viewAllCourses}
       rewardLabel={
         completedCount === FOUNDATION_LESSONS.length
           ? courseCopy.homeSideCards.rewardComplete
