@@ -20,19 +20,10 @@ const worldImageSources = [
   "world-02.png",
   "world-03.png",
   "world-04.png",
-  "world-05-wallet.png",
+  "world-05-wallet.svg",
   "world-06.png",
   "world-07.png",
   "world-08.png",
-] as const;
-
-const walletLogos = [
-  { src: "tesla-pure.svg", className: styles["teslaLogo"] },
-  { src: "google-g-2015.svg", className: styles["googleLogo"] },
-  { src: "meta-3.svg", className: styles["metaLogo"] },
-  { src: "microsoft-5.svg", className: styles["microsoftLogo"] },
-  { src: "nvidia.svg", className: styles["nvidiaLogo"] },
-  { src: "apple.svg", className: styles["appleLogo"] },
 ] as const;
 
 export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
@@ -41,33 +32,14 @@ export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
 
   if (worldNumber === 5) {
     return (
-      <div className={`${styles["artStage"]} ${styles["walletStage"]}`} aria-hidden="true">
-        <div className={styles["walletComposition"]}>
-          <Image
-            src={`/brand/learn-map/worlds/${source}`}
-            alt=""
-            fill
-            sizes="13rem"
-            className={styles["artImage"]}
-          />
-          {walletLogos.map(({ src, className }) => (
-            <Image
-              key={src}
-              src={`/brand/learn-map/worlds/logos/${src}`}
-              alt=""
-              width={80}
-              height={56}
-              className={`${styles["walletLogo"]} ${className}`}
-            />
-          ))}
-          <Image
-            src="/brand/learn-map/worlds/pogo-encourage.png"
-            alt=""
-            width={100}
-            height={92}
-            className={styles["walletPogo"]}
-          />
-        </div>
+      <div className={styles["artStage"]} aria-hidden="true">
+        <Image
+          src={`/brand/learn-map/worlds/${source}`}
+          alt=""
+          fill
+          sizes="13rem"
+          className={styles["artImage"]}
+        />
       </div>
     );
   }

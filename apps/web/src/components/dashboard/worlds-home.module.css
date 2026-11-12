@@ -37,8 +37,8 @@
 }
 
 .worldItem {
-  width: min(82vw, 21rem);
-  flex: 0 0 min(82vw, 21rem);
+  width: min(88vw, 24rem);
+  flex: 0 0 min(88vw, 24rem);
   scroll-snap-align: start;
   animation: world-card-in 440ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -174,86 +174,6 @@
 .comingSoon svg {
   width: 1rem;
   height: 1rem;
-}
-
-.walletLogo {
-  position: absolute;
-  z-index: 1;
-  width: 15%;
-  height: 12%;
-  object-fit: contain;
-}
-
-.walletComposition {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(100%, 13rem);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.worldCard:hover .walletComposition {
-  transform: translate(-50%, -52%) scale(1.045);
-}
-
-.worldCard:hover .walletComposition .artImage {
-  transform: none;
-}
-
-.teslaLogo {
-  top: 27%;
-  left: 21%;
-  width: 17%;
-  transform: rotate(-4deg);
-}
-
-.googleLogo {
-  top: 27%;
-  left: 39%;
-  width: 11%;
-  transform: rotate(3deg);
-}
-
-.metaLogo {
-  top: 27%;
-  left: 59%;
-  width: 16%;
-  transform: rotate(-2deg);
-}
-
-.microsoftLogo {
-  top: 27%;
-  left: 77%;
-  width: 11%;
-  transform: rotate(3deg);
-}
-
-.nvidiaLogo {
-  top: 56%;
-  left: 22%;
-  width: 21%;
-  height: 18%;
-  transform: rotate(-3deg);
-}
-
-.appleLogo {
-  top: 57%;
-  left: 64%;
-  width: 12%;
-  height: 17%;
-  transform: rotate(3deg);
-}
-
-.walletPogo {
-  position: absolute;
-  right: 4%;
-  bottom: 3%;
-  z-index: 2;
-  width: 23%;
-  height: auto;
-  object-fit: contain;
 }
 
 .purchaseStage {
@@ -408,11 +328,6 @@
   aspect-ratio: auto;
 }
 
-.upcomingArt .walletLogo,
-.upcomingArt .walletPogo {
-  transform: none;
-}
-
 .upcomingArt .receipt {
   gap: 0.2rem;
   padding: 0.4rem;
@@ -534,7 +449,4 @@
   .worldCard,
   .artImage,
   .enterButton,
-  .walletComposition {
-    transition: none;
-  }
 }
