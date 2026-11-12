@@ -448,5 +448,7 @@
 
   .worldCard,
   .artImage,
-  .enterButton,
+  .enterButton {
+    transition: none;
+  }
 }
