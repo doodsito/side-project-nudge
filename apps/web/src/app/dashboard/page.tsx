@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   const dictionary = getDictionary(member.track);
   const showBetaSurvey = !(await hasAnsweredBetaSurvey(member.id));
   return (
-    <div data-dashboard-hide-mobile-header>
+    <div>
       {showBetaSurvey && (
         <div className="mx-auto max-w-7xl px-4 pt-4 lg:px-8">
           <BetaSurveyCta t={dictionary.betaSurvey.cta} />

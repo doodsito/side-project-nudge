@@ -78,7 +78,7 @@ export default async function DashboardPreviewPage({
             nextHref={`/dev/dashboard-preview?track=${track}&state=returning`}
           />
         ) : (
-          <div data-dashboard-hide-mobile-header>
+          <div>
             <DashboardHome
               progress={
                 state === "first-time"

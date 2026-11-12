@@ -74,33 +74,11 @@ export function DashboardTemplate({
           )}
         </aside>
         <div className="min-w-0">
-          <header
-            data-dashboard-mobile-header
-            className="flex h-16 items-center justify-between border-b-2 border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] px-4 pt-[env(safe-area-inset-top)] lg:hidden"
-          >
-            <Link
-              href={homeHref}
-              aria-label={`${BRAND} ${t.home}`}
-              className="inline-flex items-center gap-2"
-            >
-              <Image src="/brand/learn-map/logo-mark.svg" alt="" width={32} height={32} />
-              <span className="font-display text-xl font-extrabold tracking-[-0.04em] text-foreground">
-                {BRAND.toLowerCase()}
-              </span>
-            </Link>
-            <span
-              aria-label={t.streakLabel}
-              title={t.streakLabel}
-              className="inline-flex h-10 w-[62px] items-center justify-center gap-1 rounded-xl border border-border bg-surface px-3 text-sm font-extrabold"
-            >
-              <Image src="/brand/learn-map/flame-mobile.svg" alt="" width={20} height={20} />
-            </span>
-          </header>
           <main
             id="main-content"
             data-nudge-beta
             tabIndex={-1}
-            className="min-h-[calc(100vh-4rem)] px-4 pt-0 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:min-h-screen lg:p-0"
+            className="min-h-screen px-4 pt-[env(safe-area-inset-top)] pb-[calc(5rem+env(safe-area-inset-bottom))] lg:p-0"
           >
             {children}
           </main>
