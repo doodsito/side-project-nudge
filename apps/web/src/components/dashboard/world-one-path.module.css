@@ -43,9 +43,7 @@
   min-width: 0;
 }
 .worldLabel,
-.worldTitle,
-.nextWorldText p,
-.nextWorldText h2 {
+.worldTitle {
   margin: 0;
 }
 .worldLabel {
@@ -470,67 +468,6 @@
   font-weight: 700;
   white-space: nowrap;
 }
-.nextWorld {
-  display: grid;
-  width: 100%;
-  gap: 0.8rem;
-  margin-top: 0.5rem;
-  padding-top: 0.8rem;
-}
-.nextWorldHeading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-}
-.nextWorldHeading::before,
-.nextWorldHeading::after {
-  height: 2px;
-  flex: 1;
-  background: var(--learn-neutral-300);
-  content: "";
-}
-.nextWorldText {
-  min-width: 0;
-  margin: 0;
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.2;
-  text-align: center;
-}
-.nextWorldBadge {
-  color: var(--learn-violet);
-}
-.nextWorldDescription {
-  max-width: 28rem;
-  margin: 0 auto;
-  color: var(--learn-neutral-600);
-  font-size: 0.75rem;
-  line-height: 1.4;
-  text-align: center;
-}
-
-.explore {
-  display: flex;
-  grid-column: 1 / -1;
-  min-height: 3.35rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.75rem;
-  border: 2px solid var(--nudge-learn-violet-200);
-  border-radius: 12px;
-  background: var(--learn-white);
-  box-shadow: 0 4px 0 var(--nudge-learn-violet-200);
-  color: var(--learn-violet);
-  font-size: 0.88rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-.explore svg {
-  width: 1rem;
-  height: 1rem;
-}
 @media (min-width: 640px) and (max-width: 1023px) {
   .mapColumn {
     max-width: 624px;
@@ -547,8 +484,7 @@
     padding: 32px 32px;
   }
   .worldHeader,
-  .trail,
-  .nextWorld {
+  .trail {
     width: min(100%, 560px);
   }
   .worldHeader {

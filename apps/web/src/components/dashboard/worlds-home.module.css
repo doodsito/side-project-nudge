@@ -73,30 +73,6 @@
   box-shadow: 0 8px 0 var(--nudge-learn-neutral-200);
 }
 
-.toneViolet {
-  --world-wash: var(--nudge-learn-violet-soft);
-}
-
-.toneGold {
-  --world-wash: var(--nudge-learn-gold-soft);
-}
-
-.toneMint {
-  --world-wash: var(--nudge-learn-teal-soft);
-}
-
-.toneField {
-  --world-wash: var(--nudge-learn-map-ground);
-}
-
-.tonePaper {
-  --world-wash: var(--nudge-learn-feedback-canvas);
-}
-
-.toneNeutral {
-  --world-wash: var(--nudge-learn-neutral-100);
-}
-
 .courseTitle {
   min-height: 3.75rem;
   padding: 1rem 1rem 0.5rem;
@@ -116,6 +92,10 @@
   overflow: hidden;
   background: var(--world-wash);
   isolation: isolate;
+}
+
+.worldCard .artStage {
+  background: var(--nudge-learn-white);
 }
 
 .artImage {

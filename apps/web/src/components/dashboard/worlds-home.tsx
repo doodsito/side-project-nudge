@@ -4,17 +4,6 @@ import { ArrowRight, LockKeyhole } from "lucide-react";
 import type { Dictionary } from "@/lib/dictionaries";
 import styles from "./worlds-home.module.css";
 
-const worldTones = [
-  styles["toneViolet"],
-  styles["toneGold"],
-  styles["toneMint"],
-  styles["toneField"],
-  styles["tonePaper"],
-  styles["toneNeutral"],
-  styles["toneGold"],
-  styles["toneMint"],
-] as const;
-
 const worldImageSources = [
   "world-01.png",
   "world-02.png",
@@ -22,7 +11,7 @@ const worldImageSources = [
   "world-04.png",
   "world-05-wallet.svg",
   "world-06.png",
-  "world-07.png",
+  "world-07-purchase.svg",
   "world-08.png",
 ] as const;
 
@@ -39,31 +28,6 @@ export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
           fill
           sizes="13rem"
           className={styles["artImage"]}
-        />
-      </div>
-    );
-  }
-
-  if (worldNumber === 7) {
-    return (
-      <div className={`${styles["artStage"]} ${styles["purchaseStage"]}`} aria-hidden="true">
-        <div className={styles["receipt"]}>
-          <span className={styles["receiptTitle"]}>ETF</span>
-          <span className={styles["receiptRule"]} />
-          <span className={styles["receiptLine"]} />
-          <span className={styles["receiptLineShort"]} />
-          <span className={styles["receiptRule"]} />
-          <span className={styles["receiptTotal"]}>
-            <span />
-            <span />
-          </span>
-        </div>
-        <Image
-          src={`/brand/learn-map/worlds/${source}`}
-          alt=""
-          width={128}
-          height={128}
-          className={styles["purchasePogo"]}
         />
       </div>
     );
@@ -109,7 +73,7 @@ export function WorldsHome({
                 {copy.world} {worldNumber}
               </p>
               <article
-                className={`${styles["worldCard"]} ${worldTones[index] ?? styles["toneViolet"]}`}
+                className={styles["worldCard"]}
                 aria-label={`${copy.world} ${worldNumber}: ${world.title}`}
               >
                 <h2 className={styles["courseTitle"]}>{world.title}</h2>
