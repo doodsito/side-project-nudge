@@ -21,6 +21,7 @@ import {
 import { EarlyAccessForm } from "@/components/marketing/early-access-form";
 import { Section } from "@/components/marketing/section";
 import { LandingLessonPreview } from "@/components/marketing/landing-lesson-preview";
+import { AnimatedPoggo } from "@/components/marketing/animated-poggo";
 import "./landing-refinement.css";
 import { landingCopy } from "@/lib/dictionaries/landing";
 import { useHasSession } from "@/hooks/use-has-session";
@@ -113,7 +114,7 @@ export function LandingContent({
               </div>
             ))}
             <div className="world-companion">
-              <Companion pose="encourage" className="h-auto w-full" />
+              <AnimatedPoggo className="h-auto w-full" />
             </div>
           </div>
         </div>
