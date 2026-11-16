@@ -21,7 +21,7 @@ export default async function PrivacyPolicyPage() {
   const contact = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   if (track === "fr") {
     return (
-      <LegalTemplate track={track} title="Politique de confidentialité" updated="3 novembre 2026">
+      <LegalTemplate track={track} title="Politique de confidentialité" updated="15 novembre 2026">
         <p>
           Cette politique explique quelles données personnelles {BRAND} recueille sur{" "}
           {new URL(SITE_URL).host}, pourquoi, combien de temps nous les conservons et comment
@@ -64,10 +64,12 @@ export default async function PrivacyPolicyPage() {
           </li>
           <li>
             <strong>Mesure d’audience.</strong> Si tu acceptes les cookies analytiques, Google
-            Analytics enregistre ta visite : pages consultées, fonctionnalités utilisées (comme ton
-            choix dans un exercice ou le profil choisi pour rejoindre la liste, jamais ton e-mail),
-            localisation approximative, appareil et navigateur. Base légale : ton consentement. Les
-            détails figurent dans la <Link href="/cookies">politique relative aux cookies</Link>.
+            Analytics et PostHog enregistrent ta visite : pages consultées, fonctionnalités
+            utilisées (comme ton choix dans un exercice ou le profil choisi pour rejoindre la liste,
+            jamais ton e-mail), localisation approximative, appareil et navigateur. PostHog
+            enregistre aussi le déroulé de la visite (clics, défilement) pour la revoir, sans ce que
+            tu tapes dans les champs. Base légale : ton consentement. Les détails figurent dans la{" "}
+            <Link href="/cookies">politique relative aux cookies</Link>.
           </li>
           <li>
             <strong>Ton choix de cookies.</strong> Nous le conservons dans un cookie et dans le
@@ -103,6 +105,10 @@ export default async function PrivacyPolicyPage() {
             Google uniquement si tu la choisis.
           </li>
           <li>
+            PostHog, Inc., États-Unis : mesure d’audience et revisionnage des visites, uniquement si
+            tu l’acceptes.
+          </li>
+          <li>
             Resend, Inc., États-Unis : envoi des e-mails du compte (confirmation de l’adresse,
             réinitialisation du mot de passe) depuis des serveurs dans l’Union européenne (Irlande).
           </li>
@@ -124,6 +130,10 @@ export default async function PrivacyPolicyPage() {
           <li>
             Google Analytics : ses cookies durent au plus 13 mois et les données recueillies sont
             conservées au plus 14 mois.
+          </li>
+          <li>
+            PostHog : ses cookies durent au plus 13 mois, les événements sont conservés au plus 12
+            mois et les enregistrements de visite au plus 30 jours.
           </li>
           <li>Ton choix de cookies : 6 mois, puis nous te redemandons.</li>
           <li>
@@ -161,7 +171,7 @@ export default async function PrivacyPolicyPage() {
     );
   }
   return (
-    <LegalTemplate track={track} title="Privacy policy" updated="3 November 2026">
+    <LegalTemplate track={track} title="Privacy policy" updated="15 November 2026">
       <p>
         This policy explains what personal data {BRAND} collects on {new URL(SITE_URL).host}, why,
         how long we keep it and how to use your rights. We never sell your data and never use it for
@@ -194,10 +204,11 @@ export default async function PrivacyPolicyPage() {
         </li>
         <li>
           <strong>Audience measurement.</strong> Only if you accept analytics cookies, Google
-          Analytics records your visit: pages viewed, features used (such as the decision you make
-          in the practice, or the profile you choose when you join the list, never your email),
-          approximate location, device and browser. Legal basis: your consent. Details are in the{" "}
-          <Link href="/cookies">cookie policy</Link>.
+          Analytics and PostHog record your visit: pages viewed, features used (such as the decision
+          you make in the practice, or the profile you choose when you join the list, never your
+          email), approximate location, device and browser. PostHog also records how the visit
+          unfolds (clicks, scrolling) so we can replay it, without what you type in fields. Legal
+          basis: your consent. Details are in the <Link href="/cookies">cookie policy</Link>.
         </li>
         <li>
           <strong>Your feedback.</strong> When you send feedback from the dashboard or answer the
@@ -238,6 +249,10 @@ export default async function PrivacyPolicyPage() {
           if you choose it.
         </li>
         <li>
+          PostHog, Inc., United States: audience measurement and visit replays, only if you accept
+          them.
+        </li>
+        <li>
           Resend, Inc., United States: sending of the account emails (confirming your address,
           resetting your password), from servers in the European Union (Ireland).
         </li>
@@ -260,6 +275,10 @@ export default async function PrivacyPolicyPage() {
         <li>
           Google Analytics: its cookies last 13 months at most, and the data it collects is kept 14
           months at most.
+        </li>
+        <li>
+          PostHog: its cookies last 13 months at most, events are kept 12 months at most and visit
+          replays 30 days at most.
         </li>
         <li>Your cookie choice: 6 months, then we ask again.</li>
         <li>Technical data: for the short period Vercel needs to run and secure the site.</li>
