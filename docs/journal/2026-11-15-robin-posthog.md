@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-15
 - **Author:** Robin, with Claude Code
-- **Pull request:** (link once opened)
+- **Pull request:** https://github.com/doodsito/side-project-nudge/pull/93
 
 **Why:** we want to see how visitors move through the site and where they get stuck, beyond the visit counts Google Analytics gives us.
 
