@@ -19,15 +19,42 @@ const POLICY_PAGES = ["/privacy-policy", "/cookies"];
 // CNIL: analytics cookies live 13 months at most, without being renewed on each visit.
 const THIRTEEN_MONTHS_IN_SECONDS = 60 * 60 * 24 * 395;
 
+// PostHog project, from the Vercel environment variables. Both values are public.
+const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
+const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
+
+// PostHog's official loader snippet, then its settings: page views on every navigation,
+// session replay with every typed value hidden, and a cookie of 13 months at most.
+// Skipped when the token is missing, for example locally without a .env.local.
+const posthogScripts = POSTHOG_TOKEN
+  ? [
+      {
+        id: "posthog",
+        category: "measurement" as const,
+        textContent: `
+          !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+          posthog.init(${JSON.stringify(POSTHOG_TOKEN)}, ${JSON.stringify({
+            api_host: POSTHOG_HOST,
+            person_profiles: "identified_only",
+            capture_pageview: "history_change",
+            cookie_expiration: 395,
+            session_recording: { maskAllInputs: true },
+          })});
+        `,
+      },
+    ]
+  : [];
+
 const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
   // Consent is stored in this browser only (a `c15t` cookie and localStorage): no server to run.
   mode: "offline",
   consentCategories: ["necessary", "measurement"],
   // The choice is asked again after about 6 months, as the CNIL recommends.
   storageConfig: { defaultExpiryDays: 182 },
-  // Google's gtag snippet, split in two. c15t adds both scripts only after the visitor
-  // accepts analytics, never before, and reloads the page if they withdraw consent later.
+  // Google's gtag snippet, split in two, and PostHog. c15t adds these scripts only after the
+  // visitor accepts analytics, never before, and reloads the page if they withdraw consent later.
   scripts: [
+    ...posthogScripts,
     {
       id: "google-analytics-config",
       category: "measurement",
@@ -66,7 +93,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         cookieBanner: {
           title: "🍪 Can we measure your visit?",
           description:
-            "With your permission, Google Analytics sets cookies to count visits and show which pages help people learn. Nothing is set unless you accept, and you can change your choice at any time from the footer.",
+            "With your permission, Google Analytics and PostHog set cookies to count visits, show which pages help people learn and replay visits with what you type hidden. Nothing is set unless you accept, and you can change your choice at any time from the footer.",
         },
         consentManagerDialog: {
           title: "Cookie settings",
@@ -81,7 +108,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
           measurement: {
             title: "Analytics",
             description:
-              "Google Analytics counts visits and shows which pages and features are used, so we can improve Nudge.",
+              "Google Analytics and PostHog count visits, show which pages and features are used and replay visits with what you type hidden, so we can improve Nudge.",
           },
         },
       },
@@ -96,7 +123,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         cookieBanner: {
           title: "🍪 Pouvons-nous mesurer ta visite\u00a0?",
           description:
-            "Avec ton accord, Google Analytics dépose des cookies pour compter les visites et voir quelles pages aident à apprendre. Rien n’est déposé sans ton accord, et tu peux changer d’avis à tout moment depuis le bas de page.",
+            "Avec ton accord, Google Analytics et PostHog déposent des cookies pour compter les visites, voir quelles pages aident à apprendre et revoir les visites sans ce que tu tapes. Rien n’est déposé sans ton accord, et tu peux changer d’avis à tout moment depuis le bas de page.",
         },
         consentManagerDialog: {
           title: "Réglages des cookies",
@@ -111,7 +138,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
           measurement: {
             title: "Mesure d’audience",
             description:
-              "Google Analytics compte les visites et montre quelles pages et fonctions sont utilisées, pour améliorer Nudge.",
+              "Google Analytics et PostHog comptent les visites, montrent quelles pages et fonctions sont utilisées et permettent de revoir les visites sans ce que tu tapes, pour améliorer Nudge.",
           },
         },
       },
