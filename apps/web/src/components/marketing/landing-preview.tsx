@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { landingPreviewTestimonials } from "@/lib/landing-preview-content";
 import { BRAND } from "@/lib/brand";
@@ -209,6 +209,96 @@ export function LandingPreview({
   curriculum: Dictionary["previewCurriculum"];
   testimonialSource: Dictionary["previewTestimonialsSource"];
 }) {
+  const [activePhoneIndex, setActivePhoneIndex] = useState(1);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const phoneSceneRef = useRef<HTMLDivElement>(null);
+  const activePhoneRef = useRef(1);
+  const touchStartXRef = useRef<number | null>(null);
+  const lastWheelChangeRef = useRef(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsAutoPlaying(false);
+      return;
+    }
+
+    const focusWorlds = window.setTimeout(() => {
+      activePhoneRef.current = 0;
+      setActivePhoneIndex(0);
+    }, 1000);
+    const focusLessonComplete = window.setTimeout(() => {
+      activePhoneRef.current = 2;
+      setActivePhoneIndex(2);
+    }, 2000);
+    const stopAutoPlay = window.setTimeout(() => setIsAutoPlaying(false), 3000);
+
+    return () => {
+      window.clearTimeout(focusWorlds);
+      window.clearTimeout(focusLessonComplete);
+      window.clearTimeout(stopAutoPlay);
+    };
+  }, [isAutoPlaying]);
+
+  useEffect(() => {
+    const phoneScene = phoneSceneRef.current;
+    if (!phoneScene) return;
+
+    function handleWheel(event: WheelEvent) {
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(delta) < 12) return;
+
+      const nextIndex = Math.max(
+        0,
+        Math.min(heroScreens.length - 1, activePhoneRef.current + Math.sign(delta)),
+      );
+      if (nextIndex === activePhoneRef.current) return;
+
+      event.preventDefault();
+      setIsAutoPlaying(false);
+      const now = Date.now();
+      if (now - lastWheelChangeRef.current < 650) return;
+
+      lastWheelChangeRef.current = now;
+      activePhoneRef.current = nextIndex;
+      setActivePhoneIndex(nextIndex);
+    }
+
+    phoneScene.addEventListener("wheel", handleWheel, { passive: false });
+    return () => phoneScene.removeEventListener("wheel", handleWheel);
+  }, []);
+
+  function movePhoneFocus(direction: -1 | 1) {
+    const nextIndex = Math.max(
+      0,
+      Math.min(heroScreens.length - 1, activePhoneRef.current + direction),
+    );
+    if (nextIndex === activePhoneRef.current) return;
+
+    setIsAutoPlaying(false);
+    activePhoneRef.current = nextIndex;
+    setActivePhoneIndex(nextIndex);
+  }
+
+  function handlePhoneKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      event.preventDefault();
+      movePhoneFocus(1);
+    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      movePhoneFocus(-1);
+    }
+  }
+
+  function handlePhoneTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    const startX = touchStartXRef.current;
+    const endX = event.changedTouches[0]?.clientX;
+    touchStartXRef.current = null;
+    if (startX === null || endX === undefined) return;
+
+    const distance = endX - startX;
+    if (Math.abs(distance) > 42) movePhoneFocus(distance < 0 ? 1 : -1);
+  }
+
   return (
     <div className={styles["preview"]}>
       <section className={styles["hero"]} aria-labelledby="preview-hero-title">
@@ -223,15 +313,31 @@ export function LandingPreview({
           </p>
           <HeroAction />
         </div>
-        <div className={styles["phone-scene"]}>
+        <div
+          aria-label="Trois écrans de Nudge. Faites défiler ou glissez pour passer de l’un à l’autre."
+          className={styles["phone-scene"]}
+          onKeyDown={handlePhoneKeyDown}
+          onTouchEnd={handlePhoneTouchEnd}
+          onTouchStart={(event) => {
+            touchStartXRef.current = event.touches[0]?.clientX ?? null;
+          }}
+          ref={phoneSceneRef}
+          role="region"
+          tabIndex={0}
+        >
           <div className={styles["phone-group"]}>
             {heroScreens.map((screen, index) => {
               const positionClass =
-                index === 1 ? "phone-center" : index === 0 ? "phone-left" : "phone-right";
+                index === activePhoneIndex
+                  ? "phone-center"
+                  : index === (activePhoneIndex + 1) % heroScreens.length
+                    ? "phone-right"
+                    : "phone-left";
 
               return (
                 <figure
                   className={`${styles["phone-card"]} ${styles[positionClass]}`}
+                  data-active={index === activePhoneIndex}
                   data-screen={index}
                   key={screen.src}
                   aria-label={screen.label}

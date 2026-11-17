@@ -86,6 +86,13 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1rem 0;
+  touch-action: pan-y;
+}
+
+.phone-scene:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 0.25rem;
+  border-radius: 1rem;
 }
 
 .phone-group {
