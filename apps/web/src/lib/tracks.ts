@@ -39,6 +39,29 @@ export function trackForCountry(country: string | null): Track {
   return FRENCH_TRACK_COUNTRIES.includes(country.toUpperCase()) ? "fr" : "us";
 }
 
+/** Choose the first supported language from the browser's Accept-Language header. */
+export function trackForLanguage(acceptLanguage: string | null): Track {
+  const preferred = acceptLanguage
+    ?.split(",")
+    .map((entry, index) => {
+      const parts = entry.trim().toLowerCase().split(";");
+      const language = parts[0] ?? "";
+      const quality = parts[1] ?? "q=1";
+      const qualityValue = Number(quality.replace(/^q=/, ""));
+      const track: Track | null = language.startsWith("fr")
+        ? "fr"
+        : language.startsWith("en")
+          ? "us"
+          : null;
+
+      return { track, quality: Number.isFinite(qualityValue) ? qualityValue : 0, index };
+    })
+    .filter((entry) => entry.track && entry.quality > 0)
+    .sort((a, b) => b.quality - a.quality || a.index - b.index)[0]?.track;
+
+  return preferred ?? DEFAULT_TRACK;
+}
+
 /** The track at the start of a path (/fr, /us/...), if any. */
 export function trackFromPath(pathname: string): Track | null {
   const first = pathname.split("/")[1];
