@@ -73,11 +73,10 @@ function CredibilityStrip({ copy }: { copy: string }) {
           className={styles["credibility-logo"]}
         />
         <Image
-          src="https://www.skema.edu/sites/default/files/2024-05/logo-skema-266x92px-cp-fond-blanc.jpg"
+          src="/brand/skema-business-school.png"
           alt=""
-          width={266}
-          height={92}
-          unoptimized
+          width={572}
+          height={151}
           sizes="(max-width: 639px) 120px, 220px"
           className={styles["credibility-logo"]}
         />
