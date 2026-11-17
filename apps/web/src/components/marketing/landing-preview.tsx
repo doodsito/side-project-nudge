@@ -216,10 +216,7 @@ export function LandingPreview({
   const lastWheelChangeRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsAutoPlaying(false);
-      return;
-    }
+    if (!isAutoPlaying || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const focusWorlds = window.setTimeout(() => {
       activePhoneRef.current = 0;
@@ -366,7 +363,7 @@ export function LandingPreview({
         <h2 id="preview-companion-title">{companion}</h2>
       </section>
       <TestimonialMarquee source={testimonialSource} />
-      <FAQSection t={faq} className="bg-card" layout="centered" />
+      <FAQSection t={faq} className={`${styles["faq"] ?? ""} bg-card`} layout="centered" />
       <ClosingAction copy={closingCopy} />
     </div>
   );
