@@ -76,6 +76,33 @@ test("new attempts draw independently, keep source options intact and allow repe
   }
 });
 
+test("V2 access requires an isolated opt-in and rejects production", () => {
+  const accessSource = read("../src/lib/v2-lesson-access.ts");
+  const accessCode = ts.transpileModule(accessSource, {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  function accessWith(env) {
+    const accessModule = { exports: {} };
+    runInNewContext(accessCode, {
+      module: accessModule,
+      exports: accessModule.exports,
+      require: () => undefined,
+      process: { env },
+    });
+    return accessModule.exports.canUseV2Lessons();
+  }
+  assert.equal(accessWith({ V2_LESSONS_ENABLED: "true" }), false);
+  assert.equal(accessWith({ V2_LESSONS_ENABLED: "true", V2_DATA_ISOLATED: "true" }), true);
+  assert.equal(
+    accessWith({
+      VERCEL_ENV: "production",
+      V2_LESSONS_ENABLED: "true",
+      V2_DATA_ISOLATED: "true",
+    }),
+    false,
+  );
+});
+
 test("the lesson remains hidden from beta and never saves from its local preview", () => {
   const route = read("../src/app/lessons/investment-basics/page.tsx");
   const action = read("../src/app/lessons/investment-basics/actions.ts");
