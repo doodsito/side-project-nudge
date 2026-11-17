@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter, Manrope, Space_Grotesk } from "next/font/google";
+import { headers } from "next/headers";
 import { ConsentManager } from "@/components/layout/consent-manager";
 import { Footer } from "@/components/layout/footer";
 import { readTrackCookie } from "@/lib/auth";
 import { llmsTxtAlternate } from "@/lib/metadata";
+import { trackForLanguage } from "@/lib/tracks";
 import "@/styles.css";
 
 const manrope = Manrope({
@@ -41,7 +43,8 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const initialTrack = await readTrackCookie();
+  const savedTrack = await readTrackCookie();
+  const initialTrack = savedTrack ?? trackForLanguage((await headers()).get("accept-language"));
   return (
     <html
       lang={initialTrack === "fr" ? "fr" : "en"}

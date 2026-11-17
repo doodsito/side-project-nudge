@@ -4,25 +4,16 @@ import { ConsentDialogLink } from "@c15t/nextjs/components/consent-dialog-link";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NudgeNextLogo } from "@/components/brand/nudge-next-mark";
-import { chooseTrack } from "@/app/track-actions";
-import { TrackFlag } from "@/components/shared/track-option";
-import { useTrackCookie } from "@/hooks/use-track-cookie";
 import { BRAND } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
-import { DEFAULT_TRACK, trackFromPath, TRACKS, type Track } from "@/lib/tracks";
-import { cn } from "@/lib/utils";
+import { DEFAULT_TRACK, trackFromPath, type Track } from "@/lib/tracks";
 
 const linkClass = "text-muted-foreground hover:text-foreground";
 
-/**
- * Shown on every page from the root layout, so the legal pages, the cookie
- * settings and the choice of version are always one click away. In the
- * language of the page's track, or of the visitor's choice elsewhere.
- */
+/** Shared legal links; use the page's language or the browser-derived default. */
 export function Footer({ initialTrack }: { initialTrack: Track | null }) {
   const pageTrack = trackFromPath(usePathname());
-  const savedTrack = useTrackCookie();
-  const current = pageTrack ?? savedTrack ?? initialTrack ?? DEFAULT_TRACK;
+  const current = pageTrack ?? initialTrack ?? DEFAULT_TRACK;
   const dictionary = getDictionary(current);
   const t = dictionary.footer;
   return (
@@ -37,7 +28,7 @@ export function Footer({ initialTrack }: { initialTrack: Track | null }) {
             © {new Date().getFullYear()} {BRAND}. {t.rights}
           </p>
         </div>
-        <div className="flex flex-col gap-6">
+        <div>
           <nav className="flex flex-wrap content-start gap-x-6 gap-y-3 text-sm" aria-label={t.nav}>
             {(
               [
@@ -56,26 +47,6 @@ export function Footer({ initialTrack }: { initialTrack: Track | null }) {
             <a href="/llms.txt" className={linkClass}>
               LLMs
             </a>
-          </nav>
-          <nav className="flex flex-wrap items-center gap-2 text-sm" aria-label={t.version}>
-            {TRACKS.map((track) => (
-              <form key={track} action={chooseTrack}>
-                <input type="hidden" name="track" value={track} />
-                <button
-                  type="submit"
-                  aria-current={track === current ? "true" : undefined}
-                  className={cn(
-                    "inline-flex min-h-9 items-center gap-2 rounded-full border px-3 font-semibold transition-colors",
-                    track === current
-                      ? "border-primary bg-primary-soft text-foreground"
-                      : "border-border text-muted-foreground hover:text-foreground",
-                  )}
-                >
-                  <TrackFlag track={track} small />
-                  {dictionary.tracks.options[track].country}
-                </button>
-              </form>
-            ))}
           </nav>
         </div>
       </div>

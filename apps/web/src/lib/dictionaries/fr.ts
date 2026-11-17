@@ -120,9 +120,61 @@ export const fr: Dictionary = {
     ],
     cta: "Essayer le cas pratique",
   },
+  previewClosingCta: {
+    title: "Prêt·e à explorer ?",
+    cta: "Entrer dans la bêta",
+  },
+  previewCredibility:
+    "Pensé par des étudiants de UC Berkeley et nourri par une expérience en investissement en capital-risque et en finance de marché.",
+  previewCompanion: "Poggo est là pour t’accompagner.",
+  previewTestimonialsSource: "Retours anonymes de notre V0.",
+  previewCurriculum: {
+    title: "Des bases financières à la diversification",
+    description:
+      "Comprends ton budget et ton épargne, puis explore l’investissement, ses risques et la diversification. Une progression pédagogique, sans portefeuille type ni recommandation individuelle.",
+    topicsLabel: "Les notions abordées",
+    steps: [
+      {
+        label: "Bases financières",
+        title: "Comprendre son budget et son épargne",
+        topics: [
+          "Dépenses et somme réellement disponible",
+          "Habitudes d’épargne et réserve de précaution",
+          "Objectifs et échéances à venir",
+        ],
+      },
+      {
+        label: "Placements",
+        title: "Découvrir les placements",
+        topics: [
+          "Épargne ou investissement : disponibilité et risque",
+          "Actions, obligations et ETF",
+          "Enveloppes d’investissement en France",
+        ],
+      },
+      {
+        label: "Repères",
+        title: "Relier risque, rendement et horizon",
+        topics: [
+          "Horizon de placement",
+          "Risque de perte et volatilité",
+          "Intérêts composés et frais",
+        ],
+      },
+      {
+        label: "Diversification",
+        title: "Explorer un portefeuille diversifié",
+        topics: [
+          "Répartition entre classes d’actifs",
+          "Diversification et ses limites",
+          "Portefeuille virtuel lié à un objectif",
+        ],
+      },
+    ],
+  },
   faq: {
     label: "Avant de commencer",
-    title: "Les bonnes questions méritent des réponses claires.",
+    title: "Questions fréquentes",
     text: `${BRAND} aide les débutants à se forger un jugement, pas à choisir leurs investissements à leur place.`,
     items: [
       [
@@ -173,8 +225,8 @@ export const fr: Dictionary = {
     continue: "Continuer",
     error: "Impossible de changer de version pour le moment. Réessaie.",
     options: {
-      fr: { country: "France", detail: "En français, en euros" },
-      us: { country: "États-Unis", detail: "En anglais, en dollars" },
+      fr: { country: "France", language: "Français", detail: "En français, en euros" },
+      us: { country: "États-Unis", language: "English", detail: "En anglais, en dollars" },
     },
   },
   footer: {
