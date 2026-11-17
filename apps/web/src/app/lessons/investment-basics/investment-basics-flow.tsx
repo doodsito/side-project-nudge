@@ -108,7 +108,7 @@ function Question({
             selected={answer === id}
             tabIndex={answer === id || (answer === null && index === 0) ? 0 : -1}
             onClick={() => onAnswer(id)}
-            disabled={checked}
+            disabled={checked && answer === correctId}
             className="min-h-16 gap-3 p-4 text-base font-semibold"
           >
             <ChoiceMarker selected={answer === id} className="size-7 text-xs">
@@ -197,7 +197,17 @@ export function InvestmentBasicsFlow({
     if (!preview) void saveProgress();
   }
 
+  function selectAnswer(id: string) {
+    setAnswer(id);
+    setChecked(false);
+  }
+
   function questionAction(isQuiz: boolean) {
+    const correctId = isQuiz
+      ? CORRECT_OPTIONS[QUIZ_IDS[quizIndex]!]
+      : step === 0
+        ? CORRECT_OPTIONS.hook
+        : CORRECT_OPTIONS.value;
     if (!checked) {
       return (
         <NextButton onClick={() => setChecked(true)} disabled={answer === null}>
@@ -205,7 +215,7 @@ export function InvestmentBasicsFlow({
         </NextButton>
       );
     }
-    if (isQuiz && answer !== CORRECT_OPTIONS[QUIZ_IDS[quizIndex]!]) {
+    if (answer !== correctId) {
       return (
         <NextButton
           onClick={() => {
@@ -246,11 +256,11 @@ export function InvestmentBasicsFlow({
           answer={answer}
           checked={checked}
           correctId={CORRECT_OPTIONS.hook}
-          onAnswer={setAnswer}
+          onAnswer={selectAnswer}
           correctLabel={copy.correct}
           rethinkLabel={copy.rethink}
         />
-        {checked && (
+        {checked && answer === CORRECT_OPTIONS.hook && (
           <p className="mt-4 text-sm font-semibold leading-relaxed">{copy.hook.takeaway}</p>
         )}
       </Screen>
@@ -361,11 +371,11 @@ export function InvestmentBasicsFlow({
           answer={answer}
           checked={checked}
           correctId={CORRECT_OPTIONS.value}
-          onAnswer={setAnswer}
+          onAnswer={selectAnswer}
           correctLabel={copy.correct}
           rethinkLabel={copy.rethink}
         />
-        {checked && (
+        {checked && answer === CORRECT_OPTIONS.value && (
           <p className="mt-4 text-sm font-semibold leading-relaxed">{copy.value.takeaway}</p>
         )}
       </Screen>
@@ -384,7 +394,7 @@ export function InvestmentBasicsFlow({
           answer={answer}
           checked={checked}
           correctId={CORRECT_OPTIONS[questionId]}
-          onAnswer={setAnswer}
+          onAnswer={selectAnswer}
           correctLabel={copy.correct}
           rethinkLabel={copy.rethink}
         />
