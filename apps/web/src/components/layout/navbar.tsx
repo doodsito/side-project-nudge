@@ -53,7 +53,7 @@ export function Navbar({
       }}
       className={cn(
         variant === "pill"
-          ? "fixed inset-x-0 top-0 z-40 px-5 pt-4 sm:px-8"
+          ? "fixed inset-x-0 top-0 z-40 px-5 pt-3 sm:px-8"
           : "fixed inset-x-0 top-0 z-40 px-5 transition-all duration-300 sm:px-8",
         variant === "default" &&
           (scrolled
@@ -63,9 +63,10 @@ export function Navbar({
     >
       <div
         className={cn(
-          "mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center",
           variant === "pill" &&
-            "w-full max-w-none rounded-full border border-border/70 bg-surface/95 px-5 shadow-soft backdrop-blur-xl sm:px-8",
+            "mx-auto grid h-14 w-full max-w-none grid-cols-[minmax(0,1fr)_auto] items-center rounded-full border border-border/70 bg-surface/95 px-5 shadow-soft backdrop-blur-xl sm:px-8",
+          variant !== "pill" &&
+            "mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center",
         )}
       >
         <Link
