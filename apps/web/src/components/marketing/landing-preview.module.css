@@ -636,7 +636,7 @@
 @media (min-width: 801px) and (max-width: 1920px) {
   .hero {
     gap: clamp(1.5rem, 2.2vw, 2rem);
-    padding-top: clamp(4.5rem, 7vh, 5rem);
+    padding-top: clamp(6rem, 8vh, 6.5rem);
     padding-bottom: 1.5rem;
   }
 
