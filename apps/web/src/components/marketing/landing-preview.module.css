@@ -633,26 +633,47 @@
   }
 }
 
-@media (min-width: 801px) and (max-width: 1440px) {
+@media (min-width: 801px) and (max-width: 1920px) {
   .hero {
-    gap: clamp(2rem, 3vw, 2.75rem);
-    padding-top: clamp(6rem, 8vh, 7rem);
+    gap: clamp(1.5rem, 2.2vw, 2rem);
+    padding-top: clamp(3.5rem, 5vh, 4.5rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-copy {
+    gap: 0.8rem;
   }
 
   .hero h1 {
-    font-size: clamp(2.7rem, 4.8vw, 4.2rem);
+    font-size: clamp(2.55rem, 3.4vw, 3.75rem);
   }
 
   .hero-copy p {
-    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    font-size: clamp(0.92rem, 1vw, 1.05rem);
+  }
+
+  .hero-action {
+    min-height: 3.125rem;
+    padding-inline: 1.3rem;
+    font-size: 0.95rem;
   }
 
   .phone-group {
-    height: clamp(23rem, min(48vw, 52svh), 26rem);
+    height: clamp(23rem, min(44vw, 49svh), 26rem);
   }
 
   .phone-card {
     width: clamp(10.75rem, min(14vw, 22svh), 12rem);
+  }
+
+  .phone-left {
+    transform: translateX(calc(-50% - clamp(9.5rem, 12vw, 10.5rem))) translateY(1.5rem)
+      rotate(-4deg) scale(0.94);
+  }
+
+  .phone-right {
+    transform: translateX(calc(-50% + clamp(9.5rem, 12vw, 10.5rem))) translateY(1.5rem) rotate(4deg)
+      scale(0.94);
   }
 
   .curriculum-heading h2,
