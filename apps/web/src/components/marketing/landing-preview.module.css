@@ -626,6 +626,39 @@
   }
 }
 
+@media (min-width: 801px) and (max-width: 1440px) {
+  .hero {
+    gap: clamp(2rem, 3vw, 2.75rem);
+    padding-top: clamp(6rem, 8vh, 7rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.7rem, 4.8vw, 4.2rem);
+  }
+
+  .hero-copy p {
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  }
+
+  .phone-group {
+    height: clamp(23rem, min(48vw, 52svh), 26rem);
+  }
+
+  .phone-card {
+    width: clamp(10.75rem, min(14vw, 22svh), 12rem);
+  }
+
+  .curriculum-heading h2,
+  .testimonial-heading h2,
+  .closing-title {
+    font-size: clamp(1.9rem, 3.5vw, 2.85rem);
+  }
+
+  .companion h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+  }
+}
+
 @media (max-width: 800px) {
   .phone-group {
     height: clamp(23rem, calc(100svh - 31rem), 24rem);
