@@ -49,6 +49,7 @@ export default async function DashboardPreviewPage({
   const homeHref = `/dev/dashboard-preview?track=${track}`;
   const coursesHref = `${homeHref}&view=learn`;
   const portfolioHref = `${homeHref}&view=portfolio`;
+  const worldTwoPreviewHref = `/dev/investment-basics-preview?track=${track}`;
   const showPortfolio = view === "portfolio";
   const showLearn = view === "learn";
   const progress =
@@ -109,10 +110,14 @@ export default async function DashboardPreviewPage({
               courseCopy={t.learning.courses}
               foundationCopy={t.learning.courses.foundation}
             />
-            <UpcomingWorlds copy={t.learning.courses} />
+            <UpcomingWorlds copy={t.learning.courses} worldTwoPreviewHref={worldTwoPreviewHref} />
           </>
         ) : (
-          <WorldsHome copy={t.learning.courses} learnHref={coursesHref} />
+          <WorldsHome
+            copy={t.learning.courses}
+            learnHref={coursesHref}
+            worldTwoPreviewHref={worldTwoPreviewHref}
+          />
         )}
       </DashboardTemplate>
     </div>

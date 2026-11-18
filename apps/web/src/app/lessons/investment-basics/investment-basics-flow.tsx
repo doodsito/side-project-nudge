@@ -434,6 +434,11 @@ export function InvestmentBasicsFlow({
       skipLink={dictionary.skipLink}
     >
       <div ref={content} className="flex min-h-0 flex-1 flex-col">
+        {preview && (
+          <p className="shrink-0 border-b border-border bg-primary-soft px-5 py-2 text-center text-xs font-semibold text-primary sm:px-8">
+            {copy.previewNotice}
+          </p>
+        )}
         {screen}
       </div>
     </PracticeTemplate>

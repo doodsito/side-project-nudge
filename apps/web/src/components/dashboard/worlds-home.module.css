@@ -338,7 +338,8 @@
   line-height: 1.25;
 }
 
-.upcomingCopy span {
+.upcomingCopy span,
+.upcomingCopy a {
   align-self: flex-start;
   margin-top: 0.2rem;
   border-radius: 999px;
@@ -348,6 +349,11 @@
   font-size: 0.62rem;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.upcomingCopy a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 @keyframes world-card-in {

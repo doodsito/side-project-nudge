@@ -50,9 +50,11 @@ export function WorldArtwork({ worldNumber }: { worldNumber: number }) {
 export function WorldsHome({
   copy,
   learnHref = "/dashboard/courses",
+  worldTwoPreviewHref,
 }: {
   copy: Dictionary["learning"]["courses"];
   learnHref?: string;
+  worldTwoPreviewHref?: string | undefined;
 }) {
   return (
     <section className={styles["page"]} aria-labelledby="worlds-home-heading">
@@ -62,7 +64,8 @@ export function WorldsHome({
       <div className={styles["worldScroller"]} aria-label={copy.mapLabel}>
         {copy.worlds.slice(0, 8).map((world, index) => {
           const worldNumber = index + 1;
-          const available = worldNumber === 1;
+          const href =
+            worldNumber === 1 ? learnHref : worldNumber === 2 ? worldTwoPreviewHref : undefined;
           return (
             <div
               key={worldNumber}
@@ -78,12 +81,10 @@ export function WorldsHome({
               >
                 <h2 className={styles["courseTitle"]}>{world.title}</h2>
                 <WorldArtwork worldNumber={worldNumber} />
-                {available ? (
-                  <Link
-                    href={learnHref}
-                    className={`${styles["enterButton"]} nudge-shimmer-button`}
-                  >
-                    {copy.enterWorld} <ArrowRight aria-hidden="true" />
+                {href ? (
+                  <Link href={href} className={`${styles["enterButton"]} nudge-shimmer-button`}>
+                    {worldNumber === 2 ? copy.previewLesson : copy.enterWorld}{" "}
+                    <ArrowRight aria-hidden="true" />
                   </Link>
                 ) : (
                   <span className={styles["comingSoon"]}>
@@ -100,7 +101,13 @@ export function WorldsHome({
 }
 
 /** Small, softly blurred previews of worlds that follow the current path. */
-export function UpcomingWorlds({ copy }: { copy: Dictionary["learning"]["courses"] }) {
+export function UpcomingWorlds({
+  copy,
+  worldTwoPreviewHref,
+}: {
+  copy: Dictionary["learning"]["courses"];
+  worldTwoPreviewHref?: string | undefined;
+}) {
   return (
     <section className={styles["upcomingSection"]} aria-labelledby="upcoming-worlds-heading">
       <h2 id="upcoming-worlds-heading" className={styles["upcomingHeading"]}>
@@ -119,7 +126,11 @@ export function UpcomingWorlds({ copy }: { copy: Dictionary["learning"]["courses
                   {copy.world} {worldNumber}
                 </p>
                 <h3>{world.title}</h3>
-                <span>{copy.comingSoon}</span>
+                {worldNumber === 2 && worldTwoPreviewHref ? (
+                  <Link href={worldTwoPreviewHref}>{copy.previewLesson}</Link>
+                ) : (
+                  <span>{copy.comingSoon}</span>
+                )}
               </div>
             </article>
           );

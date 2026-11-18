@@ -358,6 +358,7 @@ export const us = {
       worldProgress: (completed: number, total: number) =>
         `World 1 progress: ${completed} of ${total} lessons`,
       enterWorld: "Enter world",
+      previewLesson: "Preview lesson 1",
       worlds: [
         {
           title: "Build your financial foundation",
@@ -1629,6 +1630,7 @@ export const us = {
     saving: "Saving your progress…",
     saveError: "Your progress could not be saved. Try again.",
     previewDone: "Preview complete. No progress was saved.",
+    previewNotice: "Lesson preview · Your progress will not be saved.",
     hook: {
       eyebrow: "World 2 · Lesson 1",
       title: "You invest $100. Where does it go?",

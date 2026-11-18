@@ -103,7 +103,7 @@ test("V2 access requires an isolated opt-in and rejects production", () => {
   );
 });
 
-test("the lesson remains hidden from beta and never saves from its local preview", () => {
+test("the lesson stays gated while local and Vercel previews never save", () => {
   const route = read("../src/app/lessons/investment-basics/page.tsx");
   const action = read("../src/app/lessons/investment-basics/actions.ts");
   const preview = read("../src/app/dev/investment-basics-preview/page.tsx");
@@ -113,7 +113,9 @@ test("the lesson remains hidden from beta and never saves from its local preview
   assert.match(action, /requireMember\(\)/);
   assert.match(action, /canUseV2Lessons\(\)/);
   assert.match(action, /hasCompletedLesson\(member\.courseProgress, FOUNDATION_WORLD, 8\)/);
-  assert.match(preview, /NODE_ENV !== "development"/);
+  assert.match(preview, /VERCEL_ENV.*=== "preview"/);
   assert.match(preview, /localhost/);
+  assert.match(preview, /if \(!localPreview && !vercelPreview\) notFound\(\)/);
+  assert.match(preview, /preview \/>/);
   assert.match(flow, /if \(!preview\) void saveProgress\(\)/);
 });

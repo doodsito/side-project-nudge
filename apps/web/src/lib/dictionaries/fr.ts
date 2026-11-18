@@ -363,6 +363,7 @@ export const fr: Dictionary = {
       worldProgress: (completed, total) =>
         `Progression du monde 1\u00a0: ${completed} leçon${completed > 1 ? "s" : ""} sur ${total}`,
       enterWorld: "Entrer dans le monde",
+      previewLesson: "Voir la leçon 1",
       worlds: [
         {
           title: "Construis tes bases financières",
@@ -1675,6 +1676,7 @@ export const fr: Dictionary = {
     saving: "Enregistrement de ta progression…",
     saveError: "Ta progression n’a pas été enregistrée. Réessaie.",
     previewDone: "Prévisualisation terminée. Aucune progression n’a été enregistrée.",
+    previewNotice: "Aperçu de la leçon · Ta progression ne sera pas enregistrée.",
     hook: {
       eyebrow: "Monde 2 · Leçon 1",
       title: "Tu investis 100 €. Où va ton argent ?",

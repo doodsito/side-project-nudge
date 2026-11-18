@@ -11,9 +11,12 @@ export const metadata: Metadata = { robots: { index: false, follow: false } };
 export default async function InvestmentBasicsPreviewPage({
   searchParams,
 }: PageProps<"/dev/investment-basics-preview">) {
-  if (process.env.NODE_ENV !== "development") notFound();
   const host = (await headers()).get("host") ?? "";
-  if (!/^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host)) notFound();
+  const localPreview =
+    process.env.NODE_ENV === "development" &&
+    /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host);
+  const vercelPreview = process.env["VERCEL_ENV"] === "preview";
+  if (!localPreview && !vercelPreview) notFound();
   const { track: requestedTrack } = await searchParams;
   const track = isTrack(requestedTrack) ? requestedTrack : DEFAULT_TRACK;
 

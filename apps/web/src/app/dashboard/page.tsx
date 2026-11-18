@@ -21,7 +21,14 @@ export default async function DashboardPage() {
           <BetaSurveyCta t={dictionary.betaSurvey.cta} />
         </div>
       )}
-      <WorldsHome copy={dictionary.learning.courses} />
+      <WorldsHome
+        copy={dictionary.learning.courses}
+        worldTwoPreviewHref={
+          process.env["VERCEL_ENV"] === "preview"
+            ? `/dev/investment-basics-preview?track=${member.track}`
+            : undefined
+        }
+      />
     </div>
   );
 }
