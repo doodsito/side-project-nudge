@@ -51,7 +51,16 @@ export default async function HomePage({ params }: PageProps<"/[track]">) {
   return (
     <>
       <MarketingTemplate track={track} t={t} navVariant="pill">
-        <LandingPreview dictionary={t} />
+        <LandingPreview
+          faq={t.faq}
+          closingCopy={t.previewClosingCta}
+          credibility={t.previewCredibility}
+          companion={t.previewCompanion}
+          curriculum={t.previewCurriculum}
+          testimonialSource={t.previewTestimonialsSource}
+          heroCopy={t.previewHero}
+          ctaLabel={t.nav.signUp}
+        />
       </MarketingTemplate>
       <script
         type="application/ld+json"
