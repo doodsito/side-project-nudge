@@ -363,6 +363,7 @@ export const fr: Dictionary = {
       worldProgress: (completed, total) =>
         `Progression du monde 1\u00a0: ${completed} leçon${completed > 1 ? "s" : ""} sur ${total}`,
       enterWorld: "Entrer dans le monde",
+      previewLesson: "Voir la leçon 1",
       worlds: [
         {
           title: "Construis tes bases financières",
@@ -1663,6 +1664,153 @@ export const fr: Dictionary = {
       back: "Retour au Monde 1",
     },
   },
+  investmentBasics: {
+    metaTitle: "Que se passe-t-il quand tu investis ?",
+    next: "Continuer",
+    check: "Vérifier",
+    retry: "Réessayer",
+    correct: "Exactement",
+    rethink: "Pas tout à fait",
+    replay: "Rejouer la leçon",
+    exit: "Retour aux cours",
+    saving: "Enregistrement de ta progression…",
+    saveError: "Ta progression n’a pas été enregistrée. Réessaie.",
+    previewDone: "Prévisualisation terminée. Aucune progression n’a été enregistrée.",
+    previewNotice: "Aperçu de la leçon · Ta progression ne sera pas enregistrée.",
+    hook: {
+      eyebrow: "Monde 2 · Leçon 1",
+      title: "Tu investis 100 €. Où va ton argent ?",
+      body: "Imagine que tu achètes pour 100 € d’actions d’une entreprise cotée.",
+      prompt: "Qui reçoit généralement tes 100 € ?",
+      options: {
+        seller: "La personne qui vend les actions",
+        company: "L’entreprise elle-même",
+        app: "L’application d’investissement",
+      },
+      feedback: {
+        seller:
+          "Oui. Quand tu achètes des actions existantes, l’argent va généralement au vendeur.",
+        company:
+          "L’entreprise reçoit de l’argent quand elle émet de nouvelles actions. Ici, tu achètes des actions existantes à un autre investisseur.",
+        app: "L’application facilite l’achat. Le prix des actions existantes va généralement à leur vendeur.",
+      },
+      takeaway:
+        "Investir, c’est effectuer une transaction, pas seulement déposer de l’argent dans une application.",
+    },
+    discovery: {
+      eyebrow: "Qu’as-tu acheté ?",
+      title: "Un investissement, c’est quelque chose que tu détiens.",
+      body: "Tu achètes quelque chose qui a une valeur : un actif. Une action peut représenter une petite part d’entreprise. Une obligation peut représenter un prêt selon des conditions définies.",
+      note: "Sa valeur peut changer après ton achat.",
+    },
+    mechanisms: {
+      eyebrow: "Trois exemples courants",
+      title: "Posséder, prêter ou investir via un fonds",
+      own: {
+        label: "Posséder · Action",
+        body: "Une action te donne une petite part d’une entreprise.",
+      },
+      lend: {
+        label: "Prêter · Obligation",
+        body: "Une obligation représente de l’argent prêté à une entreprise ou à un État, selon des conditions définies.",
+      },
+      fund: {
+        label: "Investir via un fonds · Fonds / ETF",
+        body: "Tu achètes des parts d’un fonds qui investit dans d’autres actifs. Il peut détenir des actions ou des obligations.",
+      },
+      note: "Ce sont des exemples, pas toutes les façons d’investir. Les mécanismes peuvent se recouper : un fonds peut posséder des actions ou des obligations.",
+    },
+    matching: {
+      eyebrow: "À toi de jouer",
+      title: "Reconnais le mécanisme",
+      prompt: "Associe chaque phrase au meilleur mécanisme. Une erreur se corrige sans pénalité.",
+      items: {
+        companyPart: "Je détiens une partie d’une entreprise.",
+        stateLoan: "Je prête de l’argent à un État.",
+        fundPart: "Je détiens des parts d’un fonds regroupant plusieurs investissements.",
+      },
+      choices: {
+        own: "Posséder",
+        lend: "Prêter",
+        fund: "Investir via un fonds",
+      },
+      correct: "Exactement.",
+      wrong: "Réessaie. Pense à ce que tu détiens directement.",
+      done: "Tu as reconnu les trois exemples.",
+    },
+    value: {
+      eyebrow: "La valeur peut changer",
+      title: "Pourquoi la valeur d’un investissement évolue-t-elle ?",
+      body: "Elle dépend de nombreux facteurs : la situation des entreprises, l’économie, les marchés et bien d’autres éléments. Ton investissement peut prendre de la valeur, mais aussi en perdre.",
+      prompt: "Tu investis 100 €. Quelques mois plus tard, quelle affirmation est correcte ?",
+      options: {
+        floor: "Ton investissement vaut forcément au moins 100 €.",
+        vary: "Ton investissement peut valoir plus ou moins de 100 €.",
+        automatic: "Ton investissement augmente automatiquement avec le temps.",
+      },
+      feedback: {
+        floor: "Il n’y a pas de plancher à 100 €. Ton investissement peut perdre de la valeur.",
+        vary: "Oui. Sa valeur peut monter ou baisser.",
+        automatic: "Le temps seul ne fait pas augmenter un investissement.",
+      },
+      takeaway:
+        "Investir peut te permettre de faire fructifier ton argent, mais le gain n’est jamais garanti et tu peux subir des pertes.",
+    },
+    quiz: {
+      eyebrow: "Petit bilan",
+      title: "As-tu compris l’essentiel ?",
+      progress: (current, total) => "Question " + current + " sur " + total,
+      questions: {
+        quizShare: {
+          prompt: "Que signifie posséder une action ?",
+          options: {
+            ownership: "Détenir une petite partie d’une entreprise.",
+            loan: "Avoir prêté de l’argent à l’entreprise.",
+            guarantee: "Récupérer forcément l’argent investi.",
+          },
+          feedback: {
+            ownership: "Oui. Une action représente une part de propriété.",
+            loan: "Une obligation est un exemple de prêt. Une action représente une part de propriété.",
+            guarantee: "Une action ne garantit pas que tu récupéreras ton argent.",
+          },
+        },
+        quizMechanisms: {
+          prompt: "Quel lien un fonds peut-il avoir avec les actions et les obligations ?",
+          options: {
+            fundHolds: "Un fonds peut détenir des actions ou des obligations.",
+            fundLendsOnly: "Tous les fonds servent uniquement à prêter de l’argent.",
+            sameThing: "Un fonds, une action et une obligation sont la même chose.",
+          },
+          feedback: {
+            fundHolds:
+              "Exact. Tu détiens des parts du fonds, qui peut lui-même détenir des actions ou des obligations.",
+            fundLendsOnly: "Un fonds peut détenir des actions, des obligations ou d’autres actifs.",
+            sameThing:
+              "Une action représente une propriété, une obligation un prêt. Un fonds peut détenir les deux.",
+          },
+        },
+        quizRisk: {
+          prompt: "Que peut-il arriver à la valeur de ton investissement ?",
+          options: {
+            gainOrLoss: "Elle peut monter ou baisser ; aucun gain n’est garanti.",
+            alwaysGain: "Elle finira forcément par monter si tu attends.",
+            noLoss: "Elle ne peut pas descendre sous le montant investi.",
+          },
+          feedback: {
+            gainOrLoss: "Exactement. Un gain comme une perte sont possibles.",
+            alwaysGain: "Attendre ne garantit pas un gain.",
+            noLoss: "La valeur peut descendre sous le montant investi.",
+          },
+        },
+      },
+    },
+    complete: {
+      eyebrow: "Leçon terminée",
+      title: "Tu comprends ce que signifie investir.",
+      body: "Tu peux posséder une part d’entreprise, prêter avec une obligation ou investir via un fonds. La valeur peut monter ou baisser.",
+      next: "La leçon suivante du Monde 2 sera accessible lorsqu’elle existera et que ses conditions seront remplies.",
+    },
+  },
   lesson8: {
     metaTitle: "Épargner ou investir ?",
     feedback: {
@@ -1874,8 +2022,8 @@ export const fr: Dictionary = {
     streakLabel: "Reste régulière",
     tabs: { home: "Accueil", courses: "Apprendre", portfolio: "Portefeuille", account: "Profil" },
     preview: {
-      title: "Aperçu local de l’accueil",
-      label: "Aperçu local · données fictives",
+      title: "Aperçu de l’accueil",
+      label: "Aperçu · données fictives",
       description:
         "La progression fictive sert à tester l’interface. Les autres pages du tableau de bord demandent une connexion.",
     },

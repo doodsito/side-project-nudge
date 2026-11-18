@@ -358,6 +358,7 @@ export const us = {
       worldProgress: (completed: number, total: number) =>
         `World 1 progress: ${completed} of ${total} lessons`,
       enterWorld: "Enter world",
+      previewLesson: "Preview lesson 1",
       worlds: [
         {
           title: "Build your financial foundation",
@@ -1617,6 +1618,150 @@ export const us = {
       back: "Back to World 1",
     },
   },
+  investmentBasics: {
+    metaTitle: "What happens when you invest?",
+    next: "Continue",
+    check: "Check answer",
+    retry: "Try another answer",
+    correct: "That's right",
+    rethink: "Almost there",
+    replay: "Replay lesson",
+    exit: "Back to courses",
+    saving: "Saving your progress…",
+    saveError: "Your progress could not be saved. Try again.",
+    previewDone: "Preview complete. No progress was saved.",
+    previewNotice: "Lesson preview · Your progress will not be saved.",
+    hook: {
+      eyebrow: "World 2 · Lesson 1",
+      title: "You invest $100. Where does it go?",
+      body: "Imagine buying $100 of a publicly traded company's shares.",
+      prompt: "Who usually receives your $100?",
+      options: {
+        seller: "The person selling the shares",
+        company: "The company itself",
+        app: "The investing app",
+      },
+      feedback: {
+        seller: "Yes. When you buy existing shares, your money usually goes to the seller.",
+        company:
+          "The company receives money when it issues new shares. In this example, you buy existing shares from another investor.",
+        app: "The app helps arrange the trade. The purchase money usually goes to the seller of the existing shares.",
+      },
+      takeaway: "Investing means making a transaction, not just putting money into an app.",
+    },
+    discovery: {
+      eyebrow: "What did you buy?",
+      title: "An investment is something you hold.",
+      body: "You buy something with value, called an asset. A share can represent a small piece of a company. A bond can represent money lent under agreed terms.",
+      note: "Its value can change after you buy it.",
+    },
+    mechanisms: {
+      eyebrow: "Three common examples",
+      title: "Own, lend, or invest through a fund",
+      own: {
+        label: "Own · Stock",
+        body: "A share of stock gives you a small ownership stake in a company.",
+      },
+      lend: {
+        label: "Lend · Bond",
+        body: "A bond represents money lent to a company or government under defined terms.",
+      },
+      fund: {
+        label: "Invest through a fund · Fund / ETF",
+        body: "You buy shares of a fund that invests in other assets. A fund can hold stocks and bonds.",
+      },
+      note: "These are examples, not every way to invest. The mechanisms can overlap: a fund may own stocks or bonds.",
+    },
+    matching: {
+      eyebrow: "Your turn",
+      title: "Spot the mechanism",
+      prompt:
+        "Choose the best match for each statement. You can correct a mistake without penalty.",
+      items: {
+        companyPart: "I own part of a company.",
+        stateLoan: "I lend money to a government.",
+        fundPart: "I own shares of a fund holding several investments.",
+      },
+      choices: {
+        own: "Own",
+        lend: "Lend",
+        fund: "Invest through a fund",
+      },
+      correct: "Exactly.",
+      wrong: "Try again. Think about what you hold directly.",
+      done: "You recognized all three examples.",
+    },
+    value: {
+      eyebrow: "Value can change",
+      title: "Why can an investment's value move?",
+      body: "Its value depends on many things: companies, the economy, markets, and more. Your investment can gain value or lose it.",
+      prompt: "You invest $100. A few months later, which statement is true?",
+      options: {
+        floor: "It must be worth at least $100.",
+        vary: "It could be worth more or less than $100.",
+        automatic: "It automatically grows over time.",
+      },
+      feedback: {
+        floor: "There is no $100 floor. The investment can lose value.",
+        vary: "Yes. Its value may rise or fall.",
+        automatic: "Time alone does not make an investment grow.",
+      },
+      takeaway:
+        "Investing can help your money grow, but gains are never guaranteed and losses are possible.",
+    },
+    quiz: {
+      eyebrow: "Quick check",
+      title: "Did the essentials stick?",
+      progress: (current: number, total: number) => `Question ${current} of ${total}`,
+      questions: {
+        quizShare: {
+          prompt: "What does owning a share of stock mean?",
+          options: {
+            ownership: "You own a small part of a company.",
+            loan: "You have lent money to the company.",
+            guarantee: "The company guarantees your money back.",
+          },
+          feedback: {
+            ownership: "Yes. A share is an ownership stake.",
+            loan: "A bond is an example of lending. A share is ownership.",
+            guarantee: "A share has no guaranteed return of your money.",
+          },
+        },
+        quizMechanisms: {
+          prompt: "How does a fund fit with stocks and bonds?",
+          options: {
+            fundHolds: "A fund can hold stocks or bonds for its investors.",
+            fundLendsOnly: "Every fund only lends money.",
+            sameThing: "A fund, a stock, and a bond are the same thing.",
+          },
+          feedback: {
+            fundHolds: "Right. You own fund shares; the fund may hold stocks or bonds.",
+            fundLendsOnly: "Some funds hold stocks, and others hold bonds or other assets.",
+            sameThing: "A stock is ownership and a bond is lending. A fund can hold either.",
+          },
+        },
+        quizRisk: {
+          prompt: "Which outcome is possible after you invest?",
+          options: {
+            gainOrLoss: "The value may rise or fall; a gain is not guaranteed.",
+            alwaysGain: "The value must rise if you wait long enough.",
+            noLoss: "You cannot lose any of the amount invested.",
+          },
+          feedback: {
+            gainOrLoss: "Exactly. Both gains and losses are possible.",
+            alwaysGain: "Waiting does not guarantee a gain.",
+            noLoss: "The value can fall below the amount invested.",
+          },
+        },
+      },
+    },
+    complete: {
+      eyebrow: "Lesson complete",
+      title: "You know what investing can mean.",
+      body: "You can own part of a company, lend through a bond, or invest through a fund. The value can rise or fall.",
+      next: "The next World 2 lesson will become available when it is ready and its requirements are met.",
+    },
+  },
   lesson8: {
     metaTitle: "Savings vs investing",
     feedback: {
@@ -1822,8 +1967,8 @@ export const us = {
     streakLabel: "Keep learning",
     tabs: { home: "Home", courses: "Learn", portfolio: "Portfolio", account: "Profile" },
     preview: {
-      title: "Local Home preview",
-      label: "Local preview · sample data",
+      title: "Home preview",
+      label: "Preview · sample data",
       description: "Sample progress is shown for review. Other dashboard pages require sign-in.",
     },
     homeScreen: {

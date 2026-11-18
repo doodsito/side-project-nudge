@@ -29,7 +29,14 @@ export default async function CoursesPage() {
         courseCopy={courseCopy}
         foundationCopy={courseCopy.foundation}
       />
-      <UpcomingWorlds copy={courseCopy} />
+      <UpcomingWorlds
+        copy={courseCopy}
+        worldTwoPreviewHref={
+          process.env["VERCEL_ENV"] === "preview"
+            ? `/dev/investment-basics-preview?track=${member.track}`
+            : undefined
+        }
+      />
     </>
   );
 }
