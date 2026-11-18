@@ -201,16 +201,25 @@ function CurriculumSection({ curriculum }: { curriculum: Dictionary["previewCurr
   );
 }
 
-export function LandingPreview({ dictionary }: { dictionary: Dictionary }) {
-  const {
-    faq,
-    previewClosingCta: closingCopy,
-    previewCredibility: credibility,
-    previewCompanion: companion,
-    previewCurriculum: curriculum,
-    previewTestimonialsSource: testimonialSource,
-    previewHero,
-  } = dictionary;
+export function LandingPreview({
+  faq,
+  closingCopy,
+  credibility,
+  companion,
+  curriculum,
+  testimonialSource,
+  heroCopy,
+  ctaLabel,
+}: {
+  faq: Dictionary["faq"];
+  closingCopy: Dictionary["previewClosingCta"];
+  credibility: Dictionary["previewCredibility"];
+  companion: Dictionary["previewCompanion"];
+  curriculum: Dictionary["previewCurriculum"];
+  testimonialSource: Dictionary["previewTestimonialsSource"];
+  heroCopy: Dictionary["previewHero"];
+  ctaLabel: string;
+}) {
   const [activePhoneIndex, setActivePhoneIndex] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const phoneSceneRef = useRef<HTMLDivElement>(null);
@@ -303,14 +312,14 @@ export function LandingPreview({ dictionary }: { dictionary: Dictionary }) {
       <section className={styles["hero"]} id="top" aria-labelledby="preview-hero-title">
         <div className={styles["hero-copy"]}>
           <h1 id="preview-hero-title">
-            {previewHero.title}
-            <span> {previewHero.accent}</span>
+            {heroCopy.title}
+            <span> {heroCopy.accent}</span>
           </h1>
-          <p>{previewHero.description}</p>
-          <HeroAction label={dictionary.nav.signUp} />
+          <p>{heroCopy.description}</p>
+          <HeroAction label={ctaLabel} />
         </div>
         <div
-          aria-label={previewHero.phoneSceneLabel}
+          aria-label={heroCopy.phoneSceneLabel}
           className={styles["phone-scene"]}
           onKeyDown={handlePhoneKeyDown}
           onTouchEnd={handlePhoneTouchEnd}
@@ -336,12 +345,12 @@ export function LandingPreview({ dictionary }: { dictionary: Dictionary }) {
                   data-active={index === activePhoneIndex}
                   data-screen={index}
                   key={screen.src}
-                  aria-label={previewHero.phoneScreens[index]?.label ?? screen.label}
+                  aria-label={heroCopy.phoneScreens[index]?.label ?? screen.label}
                 >
                   <div className={styles["phone-frame"]}>
                     <Image
                       src={screen.src}
-                      alt={previewHero.phoneScreens[index]?.alt ?? screen.alt}
+                      alt={heroCopy.phoneScreens[index]?.alt ?? screen.alt}
                       width={screen.width}
                       height={screen.height}
                       unoptimized
@@ -357,16 +366,16 @@ export function LandingPreview({ dictionary }: { dictionary: Dictionary }) {
         </div>
       </section>
       <CurriculumSection curriculum={curriculum} />
-      <CredibilityStrip copy={credibility} label={previewHero.credibilityLabel} />
+      <CredibilityStrip copy={credibility} label={heroCopy.credibilityLabel} />
       <section className={styles["companion"]} aria-labelledby="preview-companion-title">
         <AnimatedPoggo className={styles["companion-poggo"] ?? ""} />
         <h2 id="preview-companion-title">{companion}</h2>
       </section>
       <TestimonialMarquee
         source={testimonialSource}
-        title={previewHero.testimonialsTitle}
-        testimonials={previewHero.testimonials}
-        ariaLabel={previewHero.testimonialsLabel}
+        title={heroCopy.testimonialsTitle}
+        testimonials={heroCopy.testimonials}
+        ariaLabel={heroCopy.testimonialsLabel}
       />
       <FAQSection t={faq} className={`${styles["faq"] ?? ""} bg-card`} layout="centered" />
       <ClosingAction copy={closingCopy} />
