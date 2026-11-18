@@ -115,9 +115,61 @@ export const us = {
     ] as Array<[string, string, string]>,
     cta: "Try the practice case",
   },
+  previewClosingCta: {
+    title: "Ready to explore?",
+    cta: "Enter the beta",
+  },
+  previewCredibility:
+    "Created by UC Berkeley students, informed by experience in venture capital and financial markets.",
+  previewCompanion: "Nudge is here to support you.",
+  previewTestimonialsSource: "Anonymous feedback from our V0.",
+  previewCurriculum: {
+    title: "From financial foundations to diversification",
+    description:
+      "Understand your budget and savings, then explore investing, its risks and diversification. An educational path, with no model portfolio or personal recommendation.",
+    topicsLabel: "Topics covered",
+    steps: [
+      {
+        label: "Foundations",
+        title: "Understand your budget and savings",
+        topics: [
+          "Spending and what is truly available",
+          "Saving habits and an emergency reserve",
+          "Goals and upcoming expenses",
+        ],
+      },
+      {
+        label: "Investments",
+        title: "Explore investment types",
+        topics: [
+          "Saving or investing: access and risk",
+          "Stocks, bonds and ETFs",
+          "U.S. investment accounts",
+        ],
+      },
+      {
+        label: "Key concepts",
+        title: "Connect risk, return and time horizon",
+        topics: [
+          "Investment time horizon",
+          "Risk of loss and volatility",
+          "Compound growth and fees",
+        ],
+      },
+      {
+        label: "Diversification",
+        title: "Explore a diversified portfolio",
+        topics: [
+          "Allocation across asset classes",
+          "Diversification and its limits",
+          "A virtual portfolio linked to a goal",
+        ],
+      },
+    ],
+  },
   faq: {
     label: "Before you begin",
-    title: "Good questions deserve clear answers.",
+    title: "Frequently asked questions",
     text: `${BRAND} is designed to help beginners build judgment, not to make investment choices for them.`,
     items: [
       [
@@ -168,8 +220,8 @@ export const us = {
     continue: "Continue",
     error: "We couldn’t switch versions just now. Please try again.",
     options: {
-      fr: { country: "France", detail: "In French, in euros" },
-      us: { country: "United States", detail: "In English, in dollars" },
+      fr: { country: "France", language: "Français", detail: "In French, in euros" },
+      us: { country: "United States", language: "English", detail: "In English, in dollars" },
     },
   },
   footer: {
