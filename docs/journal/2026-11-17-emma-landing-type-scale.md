@@ -14,6 +14,6 @@
 
 **Files:** `apps/web/src/components/marketing/landing-preview.module.css`, `apps/web/src/components/marketing/landing-preview.tsx`
 
-**Checked:** lint and typecheck pass; local production build stalled during compilation, Vercel checks pending.
+**Checked:** lint, typecheck and build pass. Build displays an existing Next.js security upgrade reminder.
 
-**Next:** Review the preview build before merge.
+**Next:** Open the pull request and review its Vercel preview before merge.
