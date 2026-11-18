@@ -2022,8 +2022,8 @@ export const fr: Dictionary = {
     streakLabel: "Reste régulière",
     tabs: { home: "Accueil", courses: "Apprendre", portfolio: "Portefeuille", account: "Profil" },
     preview: {
-      title: "Aperçu local de l’accueil",
-      label: "Aperçu local · données fictives",
+      title: "Aperçu de l’accueil",
+      label: "Aperçu · données fictives",
       description:
         "La progression fictive sert à tester l’interface. Les autres pages du tableau de bord demandent une connexion.",
     },

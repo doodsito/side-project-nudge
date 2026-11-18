@@ -1967,8 +1967,8 @@ export const us = {
     streakLabel: "Keep learning",
     tabs: { home: "Home", courses: "Learn", portfolio: "Portfolio", account: "Profile" },
     preview: {
-      title: "Local Home preview",
-      label: "Local preview · sample data",
+      title: "Home preview",
+      label: "Preview · sample data",
       description: "Sample progress is shown for review. Other dashboard pages require sign-in.",
     },
     homeScreen: {
