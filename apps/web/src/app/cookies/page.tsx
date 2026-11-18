@@ -65,6 +65,13 @@ const COOKIES = [
     duration: "13 months",
     category: "Analytics, only if you accept",
   },
+  {
+    name: "ph_phc_…_posthog",
+    purpose:
+      "PostHog: tells visits from the same browser apart and links the pages of a visit, to count visitors and replay visits. A copy is kept in your browser's local storage.",
+    duration: "13 months",
+    category: "Analytics, only if you accept",
+  },
 ];
 
 const FR_COOKIES = [
@@ -114,13 +121,24 @@ const FR_COOKIES = [
     duration: "13 mois",
     category: "Mesure d’audience, seulement avec ton accord",
   },
+  {
+    name: "ph_phc_…_posthog",
+    purpose:
+      "PostHog : distingue les visites provenant d’un même navigateur et relie les pages d’une visite, pour compter les visiteurs et revoir les visites. Une copie est conservée dans le stockage local de ton navigateur.",
+    duration: "13 mois",
+    category: "Mesure d’audience, seulement avec ton accord",
+  },
 ];
 
 export default async function CookiesPage() {
   const track = await getVisitorTrack();
   if (track === "fr") {
     return (
-      <LegalTemplate track={track} title="Politique relative aux cookies" updated="10 octobre 2026">
+      <LegalTemplate
+        track={track}
+        title="Politique relative aux cookies"
+        updated="15 novembre 2026"
+      >
         <p>
           Cette page explique quels cookies {new URL(SITE_URL).host} utilise, pourquoi et comment
           modifier ton choix à tout moment. Le reste des informations sur tes données personnelles
@@ -133,8 +151,8 @@ export default async function CookiesPage() {
             bêta, ce qui te permet de rester connecté.
           </li>
           <li>
-            Les cookies Google Analytics ne sont créés que si tu cliques sur « Tout accepter » ou
-            actives la mesure d’audience dans les réglages.
+            Les cookies Google Analytics et PostHog ne sont créés que si tu cliques sur « Tout
+            accepter » ou actives la mesure d’audience dans les réglages.
           </li>
           <li>Nous n’utilisons pas de cookies publicitaires.</li>
         </ul>
@@ -174,11 +192,20 @@ export default async function CookiesPage() {
           sont désactivés. Google peut traiter ces données hors de l’Union européenne ; consulte la{" "}
           <a href="https://policies.google.com/privacy">politique de confidentialité de Google</a>.
         </p>
+        <h2>PostHog</h2>
+        <p>
+          PostHog est fourni par PostHog, Inc., aux États-Unis. Comme Google Analytics, il compte
+          les visites et montre quelles pages et fonctionnalités sont utilisées. Il enregistre aussi
+          le déroulé des visites (clics, défilement, pages) pour que nous puissions les revoir et
+          repérer ce qui bloque : tout ce que tu tapes dans les champs est masqué avant l’envoi. Ses
+          cookies durent au plus 13 mois. Consulte la{" "}
+          <a href="https://posthog.com/privacy">politique de confidentialité de PostHog</a>.
+        </p>
         <h2>Modifier ton choix</h2>
         <p>
           Clique sur « Cookies » en bas de chaque page ou utilise le bouton ci-dessous. Si tu
-          retires ton consentement, la page se recharge et Google Analytics ne se charge plus. Tu
-          peux aussi supprimer les cookies dans les réglages de ton navigateur.
+          retires ton consentement, la page se recharge et Google Analytics et PostHog ne se
+          chargent plus. Tu peux aussi supprimer les cookies dans les réglages de ton navigateur.
         </p>
         <ConsentDialogLink asChild>
           <Button
@@ -198,7 +225,7 @@ export default async function CookiesPage() {
     );
   }
   return (
-    <LegalTemplate track={track} title="Cookie policy" updated="10 October 2026">
+    <LegalTemplate track={track} title="Cookie policy" updated="15 November 2026">
       <p>
         This page explains which cookies {new URL(SITE_URL).host} uses, why, and how to change your
         choice at any time. Everything else about your personal data is in our{" "}
@@ -212,8 +239,8 @@ export default async function CookiesPage() {
           beta, what keeps you signed in.
         </li>
         <li>
-          Google Analytics cookies are set only if you click “Accept all” or turn on Analytics in
-          the cookie settings.
+          Google Analytics and PostHog cookies are set only if you click “Accept all” or turn on
+          Analytics in the cookie settings.
         </li>
         <li>We don’t use advertising cookies.</li>
       </ul>
@@ -255,11 +282,20 @@ export default async function CookiesPage() {
         <a href="https://policies.google.com/privacy">Google’s privacy policy</a>.
       </p>
 
+      <h2>PostHog</h2>
+      <p>
+        PostHog is provided by PostHog, Inc., in the United States. Like Google Analytics, it counts
+        visits and shows which pages and features are used. It also records how a visit unfolds
+        (clicks, scrolling, pages) so we can replay it and spot what gets in the way: anything you
+        type in a field is hidden before it is sent. Its cookies last 13 months at most. See{" "}
+        <a href="https://posthog.com/privacy">PostHog’s privacy policy</a>.
+      </p>
+
       <h2>Change your choice</h2>
       <p>
         Click “Cookies” at the bottom of every page, or use the button below. If you withdraw your
-        consent, the page reloads and Google Analytics no longer loads. You can also delete cookies
-        from your browser settings.
+        consent, the page reloads and Google Analytics and PostHog no longer load. You can also
+        delete cookies from your browser settings.
       </p>
       <ConsentDialogLink asChild>
         <Button

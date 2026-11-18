@@ -6,8 +6,6 @@ import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { landingPreviewTestimonials } from "@/lib/landing-preview-content";
-import { BRAND } from "@/lib/brand";
 import { useHasSession } from "@/hooks/use-has-session";
 import { FAQSection } from "@/components/marketing/faq-section";
 import { AnimatedPoggo } from "@/components/marketing/animated-poggo";
@@ -38,22 +36,22 @@ const heroScreens = [
   },
 ] as const;
 
-function HeroAction() {
+function HeroAction({ label }: { label: string }) {
   const signedIn = useHasSession();
 
   return (
     <Button asChild size="lg" className={styles["hero-action"]}>
       <Link href={signedIn ? "/dashboard/courses" : "/signup"}>
-        Commencer à apprendre
+        {label}
         <ArrowRight aria-hidden />
       </Link>
     </Button>
   );
 }
 
-function CredibilityStrip({ copy }: { copy: string }) {
+function CredibilityStrip({ copy, label }: { copy: string; label: string }) {
   return (
-    <aside className={styles["credibility"]} aria-label={`À propos de l’équipe ${BRAND}`}>
+    <aside className={styles["credibility"]} aria-label={label}>
       <div className={styles["credibility-logos"]} aria-hidden="true">
         <Image
           src="/brand/berkeley-college-of-engineering.png"
@@ -88,23 +86,33 @@ function CredibilityStrip({ copy }: { copy: string }) {
   );
 }
 
-function TestimonialMarquee({ source }: { source: Dictionary["previewTestimonialsSource"] }) {
+function TestimonialMarquee({
+  source,
+  title,
+  testimonials,
+  ariaLabel,
+}: {
+  source: Dictionary["previewTestimonialsSource"];
+  title: string;
+  testimonials: Dictionary["previewHero"]["testimonials"];
+  ariaLabel: string;
+}) {
   return (
     <section className={styles["testimonials"]} aria-labelledby="preview-testimonials-title">
       <div className={styles["testimonial-heading"]}>
-        <h2 id="preview-testimonials-title">Ce qu’en pensent les personnes qui testent {BRAND}.</h2>
+        <h2 id="preview-testimonials-title">{title}</h2>
         <p className={styles["testimonial-source"]}>{source}</p>
       </div>
       <Marquee
         className={styles["testimonial-viewport"]}
         trackClassName={styles["testimonial-track"]}
         duplicateClassName={styles["testimonial-duplicate"]}
-        ariaLabel="Témoignages des personnes en bêta. Fais défiler horizontalement pour les lire."
+        ariaLabel={ariaLabel}
       >
-        {landingPreviewTestimonials.map((testimonial, index) => (
-          <figure className={styles["testimonial-card"]} key={testimonial.quote}>
+        {testimonials.map((quote, index) => (
+          <figure className={styles["testimonial-card"]} key={quote}>
             <div className={styles["testimonial-avatar"]} data-avatar={index % 4} aria-hidden />
-            <blockquote>{testimonial.quote}</blockquote>
+            <blockquote>{quote}</blockquote>
           </figure>
         ))}
       </Marquee>
@@ -193,21 +201,16 @@ function CurriculumSection({ curriculum }: { curriculum: Dictionary["previewCurr
   );
 }
 
-export function LandingPreview({
-  faq,
-  closingCopy,
-  credibility,
-  companion,
-  curriculum,
-  testimonialSource,
-}: {
-  faq: Dictionary["faq"];
-  closingCopy: Dictionary["previewClosingCta"];
-  credibility: Dictionary["previewCredibility"];
-  companion: Dictionary["previewCompanion"];
-  curriculum: Dictionary["previewCurriculum"];
-  testimonialSource: Dictionary["previewTestimonialsSource"];
-}) {
+export function LandingPreview({ dictionary }: { dictionary: Dictionary }) {
+  const {
+    faq,
+    previewClosingCta: closingCopy,
+    previewCredibility: credibility,
+    previewCompanion: companion,
+    previewCurriculum: curriculum,
+    previewTestimonialsSource: testimonialSource,
+    previewHero,
+  } = dictionary;
   const [activePhoneIndex, setActivePhoneIndex] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const phoneSceneRef = useRef<HTMLDivElement>(null);
@@ -216,10 +219,7 @@ export function LandingPreview({
   const lastWheelChangeRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsAutoPlaying(false);
-      return;
-    }
+    if (!isAutoPlaying || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const focusWorlds = window.setTimeout(() => {
       activePhoneRef.current = 0;
@@ -300,20 +300,17 @@ export function LandingPreview({
 
   return (
     <div className={styles["preview"]}>
-      <section className={styles["hero"]} aria-labelledby="preview-hero-title">
+      <section className={styles["hero"]} id="top" aria-labelledby="preview-hero-title">
         <div className={styles["hero-copy"]}>
           <h1 id="preview-hero-title">
-            Apprends à investir,
-            <span> simplement.</span>
+            {previewHero.title}
+            <span> {previewHero.accent}</span>
           </h1>
-          <p>
-            Des leçons courtes, des mondes à explorer et un portefeuille virtuel pour apprendre en
-            faisant.
-          </p>
-          <HeroAction />
+          <p>{previewHero.description}</p>
+          <HeroAction label={dictionary.nav.signUp} />
         </div>
         <div
-          aria-label="Trois écrans de Nudge. Faites défiler ou glissez pour passer de l’un à l’autre."
+          aria-label={previewHero.phoneSceneLabel}
           className={styles["phone-scene"]}
           onKeyDown={handlePhoneKeyDown}
           onTouchEnd={handlePhoneTouchEnd}
@@ -339,12 +336,12 @@ export function LandingPreview({
                   data-active={index === activePhoneIndex}
                   data-screen={index}
                   key={screen.src}
-                  aria-label={screen.label}
+                  aria-label={previewHero.phoneScreens[index]?.label ?? screen.label}
                 >
                   <div className={styles["phone-frame"]}>
                     <Image
                       src={screen.src}
-                      alt={screen.alt}
+                      alt={previewHero.phoneScreens[index]?.alt ?? screen.alt}
                       width={screen.width}
                       height={screen.height}
                       unoptimized
@@ -360,13 +357,18 @@ export function LandingPreview({
         </div>
       </section>
       <CurriculumSection curriculum={curriculum} />
-      <CredibilityStrip copy={credibility} />
+      <CredibilityStrip copy={credibility} label={previewHero.credibilityLabel} />
       <section className={styles["companion"]} aria-labelledby="preview-companion-title">
         <AnimatedPoggo className={styles["companion-poggo"] ?? ""} />
         <h2 id="preview-companion-title">{companion}</h2>
       </section>
-      <TestimonialMarquee source={testimonialSource} />
-      <FAQSection t={faq} className="bg-card" layout="centered" />
+      <TestimonialMarquee
+        source={testimonialSource}
+        title={previewHero.testimonialsTitle}
+        testimonials={previewHero.testimonials}
+        ariaLabel={previewHero.testimonialsLabel}
+      />
+      <FAQSection t={faq} className={`${styles["faq"] ?? ""} bg-card`} layout="centered" />
       <ClosingAction copy={closingCopy} />
     </div>
   );

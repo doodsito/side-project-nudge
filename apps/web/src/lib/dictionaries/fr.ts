@@ -120,6 +120,31 @@ export const fr: Dictionary = {
     ],
     cta: "Essayer le cas pratique",
   },
+  previewHero: {
+    title: "Apprends à investir,",
+    accent: "simplement.",
+    description:
+      "Des leçons courtes, des mondes à explorer et un portefeuille virtuel pour apprendre en faisant.",
+    testimonialsTitle: `Ce qu’en pensent les personnes qui testent ${BRAND}.`,
+    testimonialsLabel:
+      "Retours de personnes en bêta. Fais défiler horizontalement pour lire les avis.",
+    credibilityLabel: `À propos de l’équipe ${BRAND}`,
+    phoneSceneLabel: `Trois écrans de ${BRAND}. Fais défiler ou glisse pour passer de l’un à l’autre.`,
+    phoneScreens: [
+      { alt: `Écran des mondes d’apprentissage ${BRAND}`, label: "les mondes d’apprentissage" },
+      { alt: `Parcours d’apprentissage ${BRAND}`, label: "le parcours d’apprentissage" },
+      {
+        alt: "Écran de fin de leçon avec une évaluation par étoiles",
+        label: "la fin d’une leçon",
+      },
+    ],
+    testimonials: [
+      "« Très complet et très simple d’utilisation »",
+      "« C’est fluide c’est beau et c’est utile, continuez »",
+      "« Je trouve que le jeu est bien gamifié et c'est intéressant, c'est cool. »",
+      "« Tres cool la leçon du taux »",
+    ],
+  },
   previewClosingCta: {
     title: "Prêt·e à explorer ?",
     cta: "Entrer dans la bêta",
