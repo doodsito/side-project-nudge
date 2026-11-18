@@ -14,14 +14,7 @@ export default function LandingPreviewPage() {
   return (
     <MarketingTemplate track="fr" t={dictionary} navVariant="pill">
       <div className="min-h-screen">
-        <LandingPreview
-          faq={dictionary.faq}
-          closingCopy={dictionary.previewClosingCta}
-          credibility={dictionary.previewCredibility}
-          companion={dictionary.previewCompanion}
-          curriculum={dictionary.previewCurriculum}
-          testimonialSource={dictionary.previewTestimonialsSource}
-        />
+        <LandingPreview dictionary={dictionary} />
       </div>
     </MarketingTemplate>
   );

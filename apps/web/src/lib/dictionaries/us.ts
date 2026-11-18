@@ -115,6 +115,26 @@ export const us = {
     ] as Array<[string, string, string]>,
     cta: "Try the practice case",
   },
+  previewHero: {
+    title: "Learn to invest,",
+    accent: "simply.",
+    description: "Short lessons, worlds to explore and a virtual portfolio to learn by doing.",
+    testimonialsTitle: "What beta testers think of Nudge.",
+    testimonialsLabel: "Anonymous beta feedback. Scroll horizontally to read each review.",
+    credibilityLabel: `About the ${BRAND} team`,
+    phoneSceneLabel: `Three ${BRAND} screens. Scroll or swipe to move between them.`,
+    phoneScreens: [
+      { alt: `The ${BRAND} learning worlds screen`, label: "the learning worlds" },
+      { alt: `The ${BRAND} learning path screen`, label: "the learning path" },
+      { alt: "A lesson completion screen with a star rating", label: "the end of a lesson" },
+    ],
+    testimonials: [
+      "“Very complete and very easy to use.”",
+      "“It’s smooth, beautiful and useful. Keep going.”",
+      "“I like how gamified it is. It’s interesting and fun.”",
+      "“The lesson on interest rates is really cool.”",
+    ],
+  },
   previewClosingCta: {
     title: "Ready to explore?",
     cta: "Enter the beta",
