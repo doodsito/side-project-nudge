@@ -1,9 +1,11 @@
 // Site copy for the French track: French, amounts in euros.
 import { BRAND } from "@/lib/brand";
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "@/lib/auth-rules";
+import { onboardingFr } from "./onboarding-fr";
 import type { Dictionary } from "./us";
 
 export const fr: Dictionary = {
+  onboarding: onboardingFr,
   skipLink: "Aller au contenu",
   meta: {
     title: "T’entraîner à investir",

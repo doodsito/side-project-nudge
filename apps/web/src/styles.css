@@ -520,3 +520,134 @@ a.nudge-shimmer-button {
     transform: none !important;
   }
 }
+
+@theme inline {
+  --color-onboarding-surface: var(--onboarding-surface);
+  --color-onboarding-ink: var(--onboarding-ink);
+  --color-onboarding-muted: var(--onboarding-muted);
+  --color-onboarding-track: var(--onboarding-track);
+  --color-onboarding-primary: var(--onboarding-primary);
+  --color-onboarding-gold: var(--onboarding-gold);
+  --color-onboarding-mint: var(--onboarding-mint);
+  --color-onboarding-mint-foreground: var(--onboarding-mint-foreground);
+}
+
+:root {
+  --onboarding-surface: var(--nudge-learn-canvas);
+  --onboarding-ink: var(--nudge-learn-ink);
+  --onboarding-muted: var(--nudge-learn-ink);
+  --onboarding-track: var(--nudge-learn-neutral-200);
+  --onboarding-primary: var(--nudge-learn-violet);
+  --onboarding-primary-hover: var(--nudge-learn-violet-hover);
+  --onboarding-primary-active: var(--nudge-learn-violet-800);
+  --onboarding-primary-soft: var(--nudge-learn-violet-soft);
+  --onboarding-primary-foreground: var(--nudge-learn-white);
+  --onboarding-gold: var(--nudge-learn-gold);
+  --onboarding-mint: var(--nudge-learn-teal);
+  --onboarding-mint-foreground: var(--nudge-learn-ink);
+}
+
+.dark {
+  --onboarding-surface: var(--nudge-learn-canvas);
+  --onboarding-ink: var(--nudge-learn-ink);
+  --onboarding-muted: var(--nudge-learn-ink);
+  --onboarding-track: var(--nudge-learn-neutral-200);
+  --onboarding-primary: var(--nudge-learn-violet);
+  --onboarding-primary-hover: var(--nudge-learn-violet-hover);
+  --onboarding-primary-active: var(--nudge-learn-violet-800);
+  --onboarding-primary-soft: var(--nudge-learn-violet-soft);
+  --onboarding-primary-foreground: var(--nudge-learn-white);
+  --onboarding-gold: var(--nudge-learn-gold);
+  --onboarding-mint: var(--nudge-learn-teal);
+  --onboarding-mint-foreground: var(--nudge-learn-ink);
+}
+
+@layer components {
+  .onboarding-progress {
+    appearance: none;
+    background: var(--onboarding-track);
+  }
+
+  .onboarding-progress::-webkit-progress-bar {
+    background: var(--onboarding-track);
+  }
+
+  .onboarding-progress::-webkit-progress-value {
+    background: var(--onboarding-mint);
+    border-radius: inherit;
+  }
+
+  .onboarding-progress::-moz-progress-bar {
+    background: var(--onboarding-mint);
+    border-radius: inherit;
+  }
+
+  .onboarding-card {
+    background: var(--nudge-learn-white);
+    box-shadow: none;
+  }
+
+  .onboarding-card[aria-checked="true"],
+  .onboarding-card[aria-pressed="true"] {
+    border-color: var(--onboarding-primary);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    button.onboarding-card {
+      transition:
+        border-color 150ms,
+        scale 180ms,
+        box-shadow 180ms;
+    }
+
+    button.onboarding-card:hover {
+      scale: 1.01;
+    }
+
+    button.onboarding-card:active {
+      scale: 0.98;
+    }
+
+    .onboarding-card[aria-checked="true"],
+    .onboarding-card[aria-pressed="true"] {
+      box-shadow: 0 0 0 2px var(--onboarding-primary-soft);
+    }
+  }
+}
+
+.course-card-title {
+  font-family: var(--font-bitter-black), Georgia, serif;
+  font-weight: 900;
+}
+
+.onboarding-action {
+  background-color: var(--onboarding-primary);
+  color: var(--onboarding-primary-foreground);
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+}
+
+.onboarding-flow {
+  font-family: var(--font-inter), sans-serif;
+}
+
+.onboarding-title {
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.onboarding-card-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+}
+
+.onboarding-action:hover:not(:disabled) {
+  background-color: var(--onboarding-primary-hover);
+  color: var(--onboarding-primary-foreground);
+}
+
+.onboarding-action:active:not(:disabled) {
+  background-color: var(--onboarding-primary-active);
+  color: var(--onboarding-primary-foreground);
+}

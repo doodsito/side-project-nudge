@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter, Manrope, Space_Grotesk } from "next/font/google";
+import { Bitter, DM_Sans, Inter, Manrope, Roboto, Space_Grotesk } from "next/font/google";
 import { headers } from "next/headers";
 import { ConsentManager } from "@/components/layout/consent-manager";
 import { Footer } from "@/components/layout/footer";
@@ -18,6 +18,18 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: "700",
+});
+
+const bitter = Bitter({
+  variable: "--font-bitter-black",
+  subsets: ["latin"],
+  weight: "900",
 });
 
 const dmSans = DM_Sans({
@@ -49,7 +61,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={initialTrack === "fr" ? "fr" : "en"}
       data-scroll-behavior="smooth"
-      className={`${manrope.variable} ${inter.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}
+      className={`${manrope.variable} ${inter.variable} ${roboto.variable} ${bitter.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}
     >
       <body>
         <ConsentManager initialTrack={initialTrack}>
