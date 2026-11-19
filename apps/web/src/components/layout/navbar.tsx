@@ -20,7 +20,15 @@ import type { Dictionary } from "@/lib/dictionaries";
 import type { Track } from "@/lib/tracks";
 import { cn } from "@/lib/utils";
 
-export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
+export function Navbar({
+  track,
+  t,
+  variant = "default",
+}: {
+  track: Track;
+  t: Dictionary["nav"];
+  variant?: "default" | "pill";
+}) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -44,13 +52,23 @@ export function Navbar({ track, t }: { track: Track; t: Dictionary["nav"] }) {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
       className={cn(
-        "fixed inset-x-0 top-0 z-40 px-5 transition-all duration-300 sm:px-8",
-        scrolled
-          ? "border-b border-border/70 bg-background/85 shadow-soft backdrop-blur-xl"
-          : "bg-transparent",
+        variant === "pill"
+          ? "fixed inset-x-0 top-0 z-40 px-5 pt-3 sm:px-8"
+          : "fixed inset-x-0 top-0 z-40 px-5 transition-all duration-300 sm:px-8",
+        variant === "default" &&
+          (scrolled
+            ? "border-b border-border/70 bg-background/85 shadow-soft backdrop-blur-xl"
+            : "bg-transparent"),
       )}
     >
-      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center">
+      <div
+        className={cn(
+          variant === "pill" &&
+            "mx-auto grid h-14 w-full max-w-none grid-cols-[minmax(0,1fr)_auto] items-center rounded-full border border-border/70 bg-surface/95 px-5 shadow-soft backdrop-blur-xl sm:px-8",
+          variant !== "pill" &&
+            "mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center",
+        )}
+      >
         <Link
           href={`/${track}#top`}
           aria-label={`${BRAND} ${t.home}`}

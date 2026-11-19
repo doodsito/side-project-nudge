@@ -1,8 +1,7 @@
-import { LandingContent } from "@/components/marketing/landing-content";
-import { landingCopy } from "@/lib/dictionaries/landing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MarketingTemplate } from "@/components/layout/marketing-template";
+import { LandingPreview } from "@/components/marketing/landing-preview";
 import { BRAND, SITE_URL } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
 import { llmsTxtAlternate } from "@/lib/metadata";
@@ -43,7 +42,7 @@ export default async function HomePage({ params }: PageProps<"/[track]">) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     inLanguage: TRACK_INFO[track].lang,
-    mainEntity: landingCopy[track].faq.map(([name, text]) => ({
+    mainEntity: t.faq.items.map(([name, text]) => ({
       "@type": "Question",
       name,
       acceptedAnswer: { "@type": "Answer", text },
@@ -51,8 +50,17 @@ export default async function HomePage({ params }: PageProps<"/[track]">) {
   };
   return (
     <>
-      <MarketingTemplate track={track} t={t}>
-        <LandingContent track={track} earlyAccess={t.earlyAccess} />
+      <MarketingTemplate track={track} t={t} navVariant="pill">
+        <LandingPreview
+          faq={t.faq}
+          closingCopy={t.previewClosingCta}
+          credibility={t.previewCredibility}
+          companion={t.previewCompanion}
+          curriculum={t.previewCurriculum}
+          testimonialSource={t.previewTestimonialsSource}
+          heroCopy={t.previewHero}
+          ctaLabel={t.nav.signUp}
+        />
       </MarketingTemplate>
       <script
         type="application/ld+json"

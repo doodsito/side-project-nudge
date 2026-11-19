@@ -8,16 +8,18 @@ import type { Track } from "@/lib/tracks";
 export function MarketingTemplate({
   track,
   t,
+  navVariant,
   children,
 }: {
   track: Track;
   t: Dictionary;
+  navVariant?: "default" | "pill";
   children: ReactNode;
 }) {
   return (
     <>
       <SkipLink label={t.skipLink} />
-      <Navbar track={track} t={t.nav} />
+      <Navbar track={track} t={t.nav} variant={navVariant ?? "default"} />
       <main id="main-content" data-nudge-landing tabIndex={-1}>
         {children}
       </main>
