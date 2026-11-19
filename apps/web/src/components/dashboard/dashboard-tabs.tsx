@@ -18,6 +18,7 @@ export function DashboardTabs({
   tabs,
   tabsLabel,
   mobile = false,
+  prefetch = true,
   homeHref = "/dashboard",
   coursesHref = "/dashboard/courses",
   portfolioHref = "/dashboard/portfolio",
@@ -26,6 +27,7 @@ export function DashboardTabs({
   tabs: Dictionary["dashboard"]["tabs"];
   tabsLabel: string;
   mobile?: boolean;
+  prefetch?: boolean;
   homeHref?: string;
   coursesHref?: string;
   portfolioHref?: string;
@@ -55,6 +57,7 @@ export function DashboardTabs({
             <li key={href}>
               <Link
                 href={targetHref}
+                prefetch={prefetch}
                 aria-current={current ? "page" : undefined}
                 className={cn(
                   mobile

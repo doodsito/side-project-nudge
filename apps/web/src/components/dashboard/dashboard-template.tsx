@@ -59,6 +59,7 @@ export function DashboardTemplate({
           <DashboardTabs
             tabs={t.tabs}
             tabsLabel={t.tabsLabel}
+            prefetch={!preview}
             homeHref={homeHref}
             coursesHref={coursesHref}
             portfolioHref={portfolioHref}
@@ -89,6 +90,7 @@ export function DashboardTemplate({
             <DashboardTabs
               tabs={t.tabs}
               tabsLabel={t.tabsLabel}
+              prefetch={!preview}
               homeHref={homeHref}
               coursesHref={coursesHref}
               portfolioHref={portfolioHref}
