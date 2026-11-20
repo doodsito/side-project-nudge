@@ -440,7 +440,12 @@ export function OnboardingFlow({
                 </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" sideOffset={6} className="onboarding-reminder-menu">
+            <DropdownMenuContent
+              align="center"
+              side="bottom"
+              sideOffset={6}
+              className="onboarding-reminder-menu"
+            >
               <DropdownMenuRadioGroup
                 value={time}
                 aria-label={t.reminder.time}

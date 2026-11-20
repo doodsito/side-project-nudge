@@ -862,7 +862,6 @@ a.nudge-shimmer-button {
     button.onboarding-card:active {
       scale: 0.98;
     }
-
   }
 }
 
@@ -905,6 +904,19 @@ a.nudge-shimmer-button {
   flex-direction: column;
   margin-inline: auto;
   padding: var(--nudge-space-4) var(--nudge-space-6) var(--nudge-space-10);
+}
+
+@media (max-width: 639px) {
+  .onboarding-layout {
+    align-items: center;
+    justify-content: safe center;
+  }
+
+  .onboarding-step {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
 }
 
 .onboarding-step {
@@ -1137,7 +1149,7 @@ a.nudge-shimmer-button {
 
 .onboarding-reminder-menu [role="group"] {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.4rem;
 }
 
