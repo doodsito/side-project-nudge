@@ -310,9 +310,12 @@ export function OnboardingFlow({
         recommendationScores[firstObjectiveUniverse] === highestRecommendationScore
           ? firstObjectiveUniverse
           : recommendationScores.indexOf(highestRecommendationScore);
-      const selectedUniverse = LESSON_UNIVERSES.findIndex((universe) =>
-        universe.lessonNumbers.every((number) => selectedLessons.includes(number)),
-      );
+      const selectedUniverse =
+        selectedLessons.length === 0
+          ? -1
+          : LESSON_UNIVERSES.findIndex((universe) =>
+              universe.lessonNumbers.every((number) => selectedLessons.includes(number)),
+            );
       const universeOrder = [
         recommendedUniverse,
         ...LESSON_UNIVERSES.map((_, index) => index).filter(
@@ -375,7 +378,7 @@ export function OnboardingFlow({
                   <span className="onboarding-universe-heading-copy">
                     <span className="onboarding-universe-title">{copy.title}</span>
                     <span className="onboarding-universe-description">{copy.description}</span>
-                    {recommendedUniverse === index && (
+                    {recommendedUniverse === universeIndex && (
                       <span className="onboarding-universe-recommended">
                         {t.lessonChoice.recommended}
                       </span>
