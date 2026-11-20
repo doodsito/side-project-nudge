@@ -1068,8 +1068,9 @@ a.nudge-shimmer-button {
 
 @media (max-width: 639px) {
   .onboarding-ready-card[data-card="time"] {
-    width: max-content;
-    max-width: 100%;
+    width: min(100%, 18rem);
+    min-height: 11rem;
+    margin-inline: auto;
     justify-self: center;
     align-items: center;
     text-align: center;
