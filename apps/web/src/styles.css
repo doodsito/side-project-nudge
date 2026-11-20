@@ -1072,25 +1072,10 @@ a.nudge-shimmer-button {
     width: min(100%, 18rem);
     margin-inline: auto;
     justify-self: center;
-    align-items: center;
-    text-align: center;
   }
 
   .onboarding-ready-card[data-card="time"] {
     min-height: 11rem;
-  }
-
-  .onboarding-ready-card[data-card="time"] .onboarding-ready-label {
-    align-self: center;
-  }
-
-  .onboarding-ready-card[data-card="duration"] .onboarding-ready-label {
-    align-self: center;
-  }
-
-  .onboarding-ready-card[data-card="time"] .onboarding-ready-value,
-  .onboarding-ready-card[data-card="duration"] .onboarding-ready-value {
-    text-align: center;
   }
 }
 
