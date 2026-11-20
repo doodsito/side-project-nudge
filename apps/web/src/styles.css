@@ -1092,8 +1092,9 @@ a.nudge-shimmer-button {
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.75rem;
+  border: 1px solid var(--nudge-learn-violet-200);
   padding: 0.5rem 0.65rem;
-  background: var(--onboarding-track);
+  background: var(--nudge-learn-violet-100);
   color: var(--onboarding-primary);
   font-weight: 700;
 }
