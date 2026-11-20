@@ -639,19 +639,12 @@ a.nudge-shimmer-button {
     stroke-width: 2.5;
   }
 
-  .onboarding-lesson-carousel {
-    display: flex;
+  .onboarding-universe-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding: 0.15rem 0.1rem 0.75rem;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+    padding: 0.15rem;
     text-align: left;
-  }
-
-  .onboarding-lesson-carousel::-webkit-scrollbar {
-    display: none;
   }
 
   .onboarding-universe-heading {
@@ -1212,7 +1205,6 @@ a.nudge-shimmer-button {
 
 .onboarding-flow .onboarding-motivation-choices,
 .onboarding-flow .onboarding-topic-grid,
-.onboarding-flow .onboarding-lesson-carousel,
 .onboarding-flow .onboarding-pace-choices {
   gap: var(--nudge-space-3);
 }
@@ -1259,28 +1251,62 @@ a.nudge-shimmer-button {
 }
 
 .onboarding-flow button.onboarding-universe-card {
-  --universe-accent: var(--onboarding-primary);
-
   position: relative;
   display: flex;
-  flex: 0 0 min(86%, 24rem);
   min-width: 0;
-  min-height: 19rem;
+  min-height: 16rem;
   height: auto;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  gap: var(--nudge-space-3);
-  scroll-snap-align: start;
-  border: 1px solid var(--nudge-learn-violet-300);
+  gap: var(--nudge-space-4);
+  border: 1px solid var(--nudge-learn-neutral-300);
   border-radius: 1.25rem;
-  padding: var(--nudge-space-4);
-  background: var(--onboarding-universe-card-bg);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--onboarding-primary) 10%, transparent);
+  padding: var(--nudge-space-6);
+  background: var(--nudge-learn-white);
+  box-shadow: 0 5px 16px color-mix(in srgb, var(--onboarding-ink) 9%, transparent);
   color: var(--onboarding-ink);
   text-align: left;
   white-space: normal;
   overflow-wrap: anywhere;
+}
+
+.onboarding-flow button.onboarding-universe-card[data-recommended="true"] {
+  grid-row: span 2;
+  min-height: 100%;
+  border-color: var(--onboarding-primary);
+  background: var(--onboarding-primary);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--onboarding-primary) 24%, transparent);
+  color: var(--onboarding-primary-foreground);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"]
+  .onboarding-universe-title,
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"]
+  .onboarding-universe-lessons {
+  color: var(--onboarding-primary-foreground);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"]
+  .onboarding-universe-description {
+  color: var(--nudge-learn-violet-100);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"]
+  .onboarding-universe-recommended {
+  background: var(--nudge-learn-gold);
+  color: var(--onboarding-ink);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"]
+  .onboarding-universe-goal {
+  background: var(--onboarding-primary-soft);
+  color: var(--onboarding-primary-active);
 }
 
 .onboarding-flow button.onboarding-universe-card .onboarding-universe-title {
@@ -1289,19 +1315,26 @@ a.nudge-shimmer-button {
 
 .onboarding-flow button.onboarding-universe-card:hover:not([aria-checked="true"]) {
   border-color: var(--onboarding-primary);
-  background: var(--onboarding-universe-card-bg);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--onboarding-ink) 12%, transparent);
 }
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-check {
-  border-color: var(--universe-accent);
-  background: var(--universe-accent);
-  color: var(--nudge-learn-white);
+  border-color: var(--onboarding-primary);
+  background: var(--onboarding-primary);
+  color: var(--onboarding-primary-foreground);
 }
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] {
   border: 2px solid var(--onboarding-primary);
-  background: var(--onboarding-universe-card-bg);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--onboarding-primary) 16%, transparent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--onboarding-primary) 18%, transparent);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[data-recommended="true"][aria-checked="true"]
+  .onboarding-universe-check {
+  border-color: var(--onboarding-primary-foreground);
+  background: var(--onboarding-primary-foreground);
+  color: var(--onboarding-primary);
 }
 
 @media (min-width: 640px) {
@@ -1309,8 +1342,13 @@ a.nudge-shimmer-button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .onboarding-lesson-carousel {
-    gap: 1.25rem;
+  .onboarding-universe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(13rem, auto);
+  }
+
+  .onboarding-flow button.onboarding-universe-card[data-recommended="true"] {
+    min-height: 27rem;
   }
 }
 

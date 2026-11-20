@@ -310,16 +310,22 @@ export function OnboardingFlow({
       const selectedUniverse = LESSON_UNIVERSES.findIndex((universe) =>
         universe.lessonNumbers.every((number) => selectedLessons.includes(number)),
       );
+      const universeOrder = [
+        recommendedUniverse,
+        ...LESSON_UNIVERSES.map((_, index) => index).filter(
+          (index) => index !== recommendedUniverse,
+        ),
+      ];
       content = (
         <div
           role="radiogroup"
-          aria-orientation="horizontal"
           aria-labelledby="onboarding-title"
-          className="onboarding-lesson-carousel"
+          className="onboarding-universe-grid"
         >
-          {LESSON_UNIVERSES.map((universe, index) => {
-            const copy = t.lessonChoice.universes[index]!;
-            const selected = selectedUniverse === index;
+          {universeOrder.map((universeIndex, position) => {
+            const universe = LESSON_UNIVERSES[universeIndex]!;
+            const copy = t.lessonChoice.universes[universeIndex]!;
+            const selected = selectedUniverse === universeIndex;
             const lessonTitles = universe.lessonNumbers
               .map((number) => lessonCopy[number - 1]?.title)
               .filter((lessonTitle): lessonTitle is string => lessonTitle !== undefined);
@@ -330,9 +336,9 @@ export function OnboardingFlow({
                 variant="ghost"
                 role="radio"
                 aria-checked={selected}
-                tabIndex={selected || (selectedUniverse === -1 && index === 0) ? 0 : -1}
-                data-universe={index}
-                data-recommended={recommendedUniverse === index}
+                tabIndex={selected || (selectedUniverse === -1 && position === 0) ? 0 : -1}
+                data-universe={universeIndex}
+                data-recommended={universeIndex === recommendedUniverse}
                 onClick={() => {
                   setSelectedLessons([...universe.lessonNumbers]);
                   playSelection();
@@ -342,12 +348,14 @@ export function OnboardingFlow({
                   const backward = event.key === "ArrowLeft" || event.key === "ArrowUp";
                   if (!forward && !backward) return;
                   event.preventDefault();
-                  const nextIndex =
-                    (index + (forward ? 1 : LESSON_UNIVERSES.length - 1)) % LESSON_UNIVERSES.length;
-                  const nextUniverse = LESSON_UNIVERSES[nextIndex]!;
+                  const nextPosition =
+                    (position + (forward ? 1 : LESSON_UNIVERSES.length - 1)) %
+                    LESSON_UNIVERSES.length;
+                  const nextUniverseIndex = universeOrder[nextPosition]!;
+                  const nextUniverse = LESSON_UNIVERSES[nextUniverseIndex]!;
                   event.currentTarget.parentElement
                     ?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
-                    [nextIndex]?.focus();
+                    [nextPosition]?.focus();
                   setSelectedLessons([...nextUniverse.lessonNumbers]);
                   playSelection();
                 }}
