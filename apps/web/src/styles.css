@@ -962,8 +962,8 @@ a.nudge-shimmer-button {
 
 .onboarding-ready-bento {
   display: grid;
-  width: 100%;
-  max-width: 34rem;
+  width: calc(100% - var(--nudge-space-4));
+  max-width: 28rem;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--nudge-space-3);
   margin-inline: auto;
