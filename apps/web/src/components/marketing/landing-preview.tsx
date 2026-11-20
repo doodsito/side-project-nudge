@@ -4,7 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type KeyboardEvent,
+  type TouchEvent,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { landingPreviewTestimonials } from "@/lib/landing-preview-content";
 import { BRAND } from "@/lib/brand";
@@ -37,6 +44,22 @@ const heroScreens = [
     height: 775,
   },
 ] as const;
+
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+
+function subscribeToMotionPreference(onChange: () => void) {
+  const preference = window.matchMedia(reducedMotionQuery);
+  preference.addEventListener("change", onChange);
+  return () => preference.removeEventListener("change", onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(reducedMotionQuery).matches;
+}
+
+function getServerMotionSnapshot() {
+  return true;
+}
 
 function HeroAction() {
   const signedIn = useHasSession();
@@ -210,16 +233,18 @@ export function LandingPreview({
 }) {
   const [activePhoneIndex, setActivePhoneIndex] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const reducedMotion = useSyncExternalStore(
+    subscribeToMotionPreference,
+    getReducedMotionSnapshot,
+    getServerMotionSnapshot,
+  );
   const phoneSceneRef = useRef<HTMLDivElement>(null);
   const activePhoneRef = useRef(1);
   const touchStartXRef = useRef<number | null>(null);
   const lastWheelChangeRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsAutoPlaying(false);
-      return;
-    }
+    if (reducedMotion) return;
 
     const focusWorlds = window.setTimeout(() => {
       activePhoneRef.current = 0;
@@ -236,7 +261,7 @@ export function LandingPreview({
       window.clearTimeout(focusLessonComplete);
       window.clearTimeout(stopAutoPlay);
     };
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, reducedMotion]);
 
   useEffect(() => {
     const phoneScene = phoneSceneRef.current;
@@ -366,7 +391,7 @@ export function LandingPreview({
         <h2 id="preview-companion-title">{companion}</h2>
       </section>
       <TestimonialMarquee source={testimonialSource} />
-      <FAQSection t={faq} className="bg-card" layout="centered" />
+      <FAQSection t={faq} className={`${styles["faq"] ?? ""} bg-card`} layout="centered" />
       <ClosingAction copy={closingCopy} />
     </div>
   );

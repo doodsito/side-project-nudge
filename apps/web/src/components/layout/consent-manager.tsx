@@ -66,7 +66,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         cookieBanner: {
           title: "🍪 Can we measure your visit?",
           description:
-            "With your permission, Google Analytics sets cookies to count visits and show which pages help people learn. Nothing is set unless you accept, and you can change your choice at any time from the footer.",
+            "With your permission, Google Analytics and PostHog measure visits and show which pages and features help people learn. Nothing is set unless you accept, and you can change your choice at any time from the footer.",
         },
         consentManagerDialog: {
           title: "Cookie settings",
@@ -81,7 +81,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
           measurement: {
             title: "Analytics",
             description:
-              "Google Analytics counts visits and shows which pages and features are used, so we can improve Nudge.",
+              "Google Analytics and PostHog measure visits and show which pages and features are used, so we can improve Nudge.",
           },
         },
       },
@@ -96,7 +96,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
         cookieBanner: {
           title: "🍪 Pouvons-nous mesurer ta visite\u00a0?",
           description:
-            "Avec ton accord, Google Analytics dépose des cookies pour compter les visites et voir quelles pages aident à apprendre. Rien n’est déposé sans ton accord, et tu peux changer d’avis à tout moment depuis le bas de page.",
+            "Avec ton accord, Google Analytics et PostHog mesurent les visites et montrent quelles pages et fonctions aident à apprendre. Rien n’est déposé sans ton accord, et tu peux changer d’avis à tout moment depuis le bas de page.",
         },
         consentManagerDialog: {
           title: "Réglages des cookies",
@@ -111,7 +111,7 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
           measurement: {
             title: "Mesure d’audience",
             description:
-              "Google Analytics compte les visites et montre quelles pages et fonctions sont utilisées, pour améliorer Nudge.",
+              "Google Analytics et PostHog mesurent les visites et montrent quelles pages et fonctions sont utilisées, pour améliorer Nudge.",
           },
         },
       },
@@ -189,6 +189,54 @@ function ConsentLanguage({ language }: { language: Language }) {
   return null;
 }
 
+function PostHogAnalytics() {
+  const { has, isLoadingConsentInfo } = useConsentManager();
+  const hasMeasurementConsent = has("measurement");
+
+  useEffect(() => {
+    if (isLoadingConsentInfo) return;
+
+    let cancelled = false;
+    const projectToken = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
+    const host = process.env.NEXT_PUBLIC_POSTHOG_HOST;
+
+    if (!projectToken || !host) return;
+    const pendingEvents = window.__npEvents?.length ?? 0;
+
+    void import("posthog-js").then(({ default: posthog }) => {
+      if (cancelled) return;
+
+      if (!hasMeasurementConsent) {
+        if (posthog.__loaded) posthog.opt_out_capturing();
+        window.__npEvents = [];
+        return;
+      }
+
+      if (!posthog.__loaded) {
+        posthog.init(projectToken, {
+          api_host: host,
+          autocapture: false,
+          capture_pageview: true,
+        });
+      }
+
+      // c15t consent is the source of truth, even if PostHog retained an older opt-out.
+      posthog.opt_in_capturing();
+
+      for (const { event, props } of (window.__npEvents ?? []).slice(0, pendingEvents)) {
+        posthog.capture(event, props);
+      }
+      window.__npEvents = (window.__npEvents ?? []).slice(pendingEvents);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasMeasurementConsent, isLoadingConsentInfo]);
+
+  return null;
+}
+
 export function ConsentManager({
   children,
   initialTrack,
@@ -214,6 +262,7 @@ export function ConsentManager({
   return (
     <ConsentManagerProvider options={providerOptions}>
       <ConsentLanguage language={language} />
+      <PostHogAnalytics />
       {showBanner && (
         <ConsentBanner
           hideBranding

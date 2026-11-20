@@ -124,18 +124,6 @@ TypeScript settings or edit the CI. Fix the code, or stop and ask.
 - Use `BRAND` and `SITE_URL` from `apps/web/src/lib/brand.ts` instead of
   writing the name or the address by hand.
 
-
-## Marque Nudge
-
-Avant toute tâche de design, d’interface, de rédaction ou de communication
-pour Nudge, lis `docs/brand.md` et applique-le à tes choix.
-
-Prends `docs/design/references/Nudge_Colour_System_C_Only.pdf` comme
-référence pour les couleurs. Utilise le 60/30/10 comme repère visuel.
-Ajoute la couleur secondaire si elle aide à distinguer des détails.
-Garde le violet dominant et réserve le teal au bouton principal des e-mails. Pour la typographie, pars de
-16 px pour le texte et d’environ 26 px pour le titre, puis ajuste à l’œil.
-
 ## Journal
 
 Every pull request adds one file to `docs/journal/`, named

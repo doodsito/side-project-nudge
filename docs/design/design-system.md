@@ -1,6 +1,6 @@
 # Nudge — Design system (Colour System C)
 
-**Status:** Approved colour foundation, light mode only. Other design tokens require implementation audit and/or explicit approval.
+**Status:** Colour foundation, onboarding foundations and the lesson and course screen bases approved (20 November 2026), light mode only. Details below extend the C-only colour reference with founder-approved product decisions.
 
 **Source of truth:** `references/Nudge_Colour_System_C_Only.pdf` (five-page C-only colour reference). Keep the PDF in the repository alongside this document. If a rule here conflicts with the PDF, review and reconcile before changing the UI.
 
@@ -41,7 +41,10 @@
 | `action.secondary`           | Violet outline and violet text |
 | `action.secondary.hoverBg`   | Violet 50                      |
 | `action.secondary.pressedBg` | Violet 100                     |
-| `selection.bg`               | Violet 100                     |
+| `selection.card.bg`          | White                           |
+| `selection.card.border`      | Violet 600                      |
+| `selection.marker.bg`        | Violet 600                      |
+| `selection.marker.fg`        | White                           |
 | `selection.border`           | Violet 600                     |
 | `border.control`             | Neutral 500                    |
 | `border.subtle`              | Neutral 200                    |
@@ -75,6 +78,18 @@ The feedback backgrounds are shown in the C-only reference; their exact values a
 - Use labels, icons, markers, or patterns in addition to colour. Test mobile, zoom, charts and colour-vision differences.
 - **Light mode only.** Do not auto-generate a dark mode by inversion.
 
-## Not yet specified
+## Approved product foundations (20 November 2026)
 
-Approved font family/scale, spacing scale, breakpoints, radii, elevation, component API, and responsive layouts are **not defined in the colour PDF**. Audit the repository and propose them separately; do not present guesses as brand decisions.
+- **Typography:** Manrope for titles; Inter for body text, descriptions, options and buttons. Use 26 px titles on mobile and 32 px on desktop, 16 px body text, 14 px secondary text and Inter Semi Bold (600) for primary actions.
+- **Spacing:** use a 4 px base with recurring 8, 12, 16, 24, 32 and 40 px steps. Screens with the same purpose share a layout.
+- **Onboarding:** center titles and introductions on choice screens; keep option copy left-aligned. Selected cards are white with a violet outline and a check marker. Place the primary action after the content with measured spacing. Use Poggo only where the pose explains something or marks a moment.
+- **Lesson flow:** guide one phase at a time. Center the step title; align scenario text, explanations and choices to the left. Keep scenario text directly on lavender and reserve white surfaces for answer choices or content needing a distinct surface. Use one centered column, about 720 px maximum on desktop.
+- **Lesson interaction:** the learner selects an answer, then presses “Vérifier mon choix”. Keep choices visible when feedback appears below. Quiz feedback distinguishes “juste” and “à revoir” using an icon and clear label, without adding a colour; scenario feedback explains trade-offs without judging one choice as universally right. After “à revoir”, Continue is primary and Retry is a secondary text link.
+- **Lesson navigation:** show a discreet progress bar only. Provide separate controls to go back one phase and leave the lesson. Ask for confirmation before leaving; say the current session will not be kept and reassure the learner that the lesson can be restarted later.
+- **Lesson completion:** lead with the learning takeaway, then the next action. Poggo marks completion quietly. Show one primary action: go to the next lesson, or return to the course path after the last lesson in a world.
+- **Courses page:** put the current lesson’s title and “Reprendre” action first, without an extra description. Follow with one vertical course path. Give each world a heading, detail the current world and keep later worlds compact. Show locked lessons quietly with their specific unlock condition. Use lesson states to show progress; do not add a duplicate numeric counter. The current lesson uses a white surface, violet outline and violet “Reprendre” action.
+- **Motion and writing:** keep interaction feedback restrained, honor reduced motion, and use direct, specific copy without generic motivation or decorative motion.
+
+## Still to specify
+
+The colour reference does not define global breakpoints, radii, elevation or component APIs. The approved 720 px content widths apply to onboarding and lesson layouts; other surfaces need their own review before these foundations are extended.

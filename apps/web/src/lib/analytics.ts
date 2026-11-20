@@ -49,8 +49,10 @@ export function track(event: AnalyticsEvent, props: Props = {}) {
   if (typeof window === "undefined") return;
   const payload = { ...props, ts: new Date().toISOString() };
 
-  window.__npEvents = window.__npEvents ?? [];
-  window.__npEvents.push({ event, props: payload });
+  if (!window.posthog && !window.gtag) {
+    window.__npEvents = window.__npEvents ?? [];
+    window.__npEvents.push({ event, props: payload });
+  }
 
   try {
     window.posthog?.capture(event, payload);
