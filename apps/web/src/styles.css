@@ -1227,6 +1227,10 @@ a.nudge-shimmer-button {
   gap: var(--nudge-space-3);
 }
 
+.onboarding-flow button.onboarding-card {
+  background: var(--nudge-learn-white);
+}
+
 .onboarding-flow button.onboarding-topic-choice {
   display: flex;
   min-height: 4.5rem;
