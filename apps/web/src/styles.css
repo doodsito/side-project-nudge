@@ -562,6 +562,11 @@ a.nudge-shimmer-button {
   --onboarding-primary-foreground: var(--nudge-learn-white);
   --onboarding-selection-bg: var(--nudge-learn-violet-100);
   --onboarding-selection-border: var(--onboarding-primary);
+  --onboarding-universe-card-bg: var(--nudge-learn-violet-100);
+  --onboarding-universe-badge-bg: var(--onboarding-primary);
+  --onboarding-universe-badge-text: var(--onboarding-primary-foreground);
+  --onboarding-universe-goal-bg: var(--nudge-learn-violet-200);
+  --onboarding-universe-goal-text: var(--nudge-learn-violet-800);
   --onboarding-gold: var(--nudge-learn-gold);
   --onboarding-mint: var(--nudge-learn-teal);
   --onboarding-mint-foreground: var(--nudge-learn-ink);
@@ -678,27 +683,27 @@ a.nudge-shimmer-button {
   }
 
   .onboarding-universe-description {
-    color: var(--onboarding-muted);
+    color: var(--nudge-learn-neutral-700);
     font-size: 0.875rem;
     line-height: 1.35;
   }
 
   .onboarding-universe-lessons {
     display: grid;
-    gap: 0.3rem;
+    gap: 0.45rem;
     color: var(--onboarding-ink);
-    font-size: 0.875rem;
-    line-height: 1.35;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
   .onboarding-universe-recommended {
     align-self: flex-start;
     margin-top: 0.2rem;
     border-radius: 999px;
-    background: var(--onboarding-primary-soft);
-    padding: 0.25rem 0.55rem;
-    color: var(--onboarding-primary);
-    font-size: 0.7rem;
+    background: var(--onboarding-universe-badge-bg);
+    padding: 0.3rem 0.65rem;
+    color: var(--onboarding-universe-badge-text);
+    font-size: 0.75rem;
     font-weight: 700;
   }
 
@@ -725,11 +730,11 @@ a.nudge-shimmer-button {
   .onboarding-universe-goal {
     align-self: flex-start;
     border-radius: 0.65rem;
-    background: var(--onboarding-primary-soft);
-    padding: 0.5rem 0.65rem;
-    color: var(--onboarding-primary);
-    font-size: 0.75rem;
-    font-weight: 600;
+    background: var(--onboarding-universe-goal-bg);
+    padding: 0.6rem 0.8rem;
+    color: var(--onboarding-universe-goal-text);
+    font-size: 0.875rem;
+    font-weight: 700;
     line-height: 1.35;
   }
 
@@ -1267,11 +1272,11 @@ a.nudge-shimmer-button {
   justify-content: flex-start;
   gap: var(--nudge-space-3);
   scroll-snap-align: start;
-  border: 1px solid var(--nudge-learn-neutral-200);
+  border: 1px solid var(--nudge-learn-violet-300);
   border-radius: 1.25rem;
   padding: var(--nudge-space-4);
-  background: var(--nudge-learn-white);
-  box-shadow: none;
+  background: var(--onboarding-universe-card-bg);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--onboarding-primary) 10%, transparent);
   color: var(--onboarding-ink);
   text-align: left;
   white-space: normal;
@@ -1283,8 +1288,8 @@ a.nudge-shimmer-button {
 }
 
 .onboarding-flow button.onboarding-universe-card:hover:not([aria-checked="true"]) {
-  border-color: var(--nudge-learn-neutral-300);
-  background: var(--nudge-learn-white);
+  border-color: var(--onboarding-primary);
+  background: var(--onboarding-universe-card-bg);
 }
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-check {
@@ -1295,8 +1300,8 @@ a.nudge-shimmer-button {
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] {
   border: 2px solid var(--onboarding-primary);
-  background: var(--nudge-learn-white);
-  box-shadow: none;
+  background: var(--onboarding-universe-card-bg);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--onboarding-primary) 16%, transparent);
 }
 
 @media (min-width: 640px) {
