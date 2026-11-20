@@ -3,11 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Check, Volume2, VolumeX, X } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ChoiceButton } from "@/components/shared/choice-button";
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock3, X } from "lucide-react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+import { ChoiceButton, ChoiceMarker } from "@/components/shared/choice-button";
 import { OnboardingCelebration } from "@/components/onboarding/onboarding-celebration";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { getDictionary } from "@/lib/dictionaries";
 import { cn } from "@/lib/utils";
 import type { Track } from "@/lib/tracks";
@@ -17,24 +24,44 @@ const STEPS = [
   "motivation",
   "experience",
   "topics",
-  "paths",
+  "lessons",
   "pace",
   "reminder",
   "preparing",
   "ready",
 ] as const;
 const MINUTES = [5, 10, 20];
-const MOTIVATION_ICONS = ["motivation-basics", "motivation-decisions", "motivation-curiosity"];
+const REMINDER_TIMES = [
+  "07:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "12:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+];
 const WORLD_ZERO = "/lessons/why-invest";
+const LESSON_UNIVERSES = [
+  { topicIndexes: [0, 1], lessonNumbers: [1, 2, 3, 4], image: "world-01.png" },
+  { topicIndexes: [3], lessonNumbers: [5, 6], image: "world-02.png" },
+  { topicIndexes: [2], lessonNumbers: [7, 8], image: "world-03.png" },
+] as const;
+const TOPIC_TO_UNIVERSE = [0, 0, 2, 1] as const;
+
+function formatReminderTime(value: string | null, track: Track, fallback: string) {
+  if (!value) return fallback;
+  if (track !== "fr") return value;
+  const [hour, minute = "00"] = value.split(":");
+  return `${Number(hour)} h${minute === "00" ? "" : ` ${minute}`}`;
+}
+
 const MASCOTS: Partial<Record<(typeof STEPS)[number], string>> = {
   welcome: "/brand/mascot/nudge-welcome.webp",
-  motivation: "/brand/mascot/nudge-curious.webp",
   experience: "/brand/mascot/nudge-guide.webp",
-  topics: "/brand/mascot/nudge-curious-card-figma.png",
-  paths: "/brand/mascot/nudge-walk.webp",
-  pace: "/brand/mascot/nudge-encourage.webp",
-  reminder: "/brand/mascot/nudge-guide.webp",
-  preparing: "/brand/mascot/nudge-walk.webp",
+  lessons: "/brand/mascot/nudge-walk.webp",
 };
 
 export function OnboardingFlow({
@@ -47,41 +74,49 @@ export function OnboardingFlow({
   onPreviewFinish?: () => void;
 }) {
   const router = useRouter();
-  const t = getDictionary(track).onboarding;
+  const dictionary = getDictionary(track);
+  const t = dictionary.onboarding;
+  const lessonCopy = dictionary.learning.courses.foundation.lessons;
   const [index, setIndex] = useState(0);
   const [motivation, setMotivation] = useState<number | null>(null);
-  const [experience, setExperience] = useState(0);
+  const [experience, setExperience] = useState<number | null>(null);
   const [topics, setTopics] = useState<number[]>([]);
-  const [path, setPath] = useState<number | null>(null);
+  const [selectedLessons, setSelectedLessons] = useState<number[]>([]);
   const [pace, setPace] = useState(1);
   const [time, setTime] = useState("19:00");
   const [reminder, setReminder] = useState<string | null>(null);
-  const [soundEnabled, setSoundEnabled] = useState(true);
   const heading = useRef<HTMLHeadingElement>(null);
   const audioContext = useRef<AudioContext | null>(null);
   const step = STEPS[index] ?? "welcome";
   const minutes = MINUTES[pace] ?? 10;
-  const experienceSummary = t.experience.summaries[experience] ?? t.experience.summaries[0];
+  const experienceSummary = experience === null ? undefined : t.experience.summaries[experience];
   const progress = Math.round((index / 7) * 100);
   const isQuestion = index > 0 && index < 7;
   const isSummary = step === "preparing" || step === "ready";
   const mascot = MASCOTS[step];
-  const summary = (
-    <div className="onboarding-card grid gap-2 rounded-xl p-4 text-left">
-      <p className="text-xs font-bold uppercase text-onboarding-primary">{t.ritual}</p>
-      <p className="font-semibold">{t.daily.replace("{minutes}", String(minutes))}</p>
-      {reminder && (
-        <p className="text-sm text-onboarding-muted">
-          {t.preferredTime.replace("{time}", reminder)}
+  const reminderDisplay = formatReminderTime(reminder, track, t.ready.anytime);
+  const readySummary = (
+    <div className="onboarding-ready-bento">
+      <div className="onboarding-ready-card" data-card="duration">
+        <span className="onboarding-ready-label">{t.ready.durationLabel}</span>
+        <p className="onboarding-ready-value">
+          <span>{t.daily.replace("{minutes}", String(minutes))}</span>
+          <span className="onboarding-ready-unit">{t.ready.durationUnit}</span>
         </p>
-      )}
+      </div>
+      <div className="onboarding-ready-card" data-card="time">
+        <span className="onboarding-ready-label">{t.ready.timeLabel}</span>
+        <p className="onboarding-ready-value">
+          <span>{reminderDisplay}</span>
+        </p>
+      </div>
     </div>
   );
 
   useEffect(() => {
     if (index > 0) heading.current?.focus();
     if (step !== "preparing") return;
-    const timeout = window.setTimeout(() => setIndex(8), 800);
+    const timeout = window.setTimeout(() => setIndex(8), 1800);
     return () => window.clearTimeout(timeout);
   }, [index, step]);
 
@@ -91,16 +126,27 @@ export function OnboardingFlow({
     try {
       window.localStorage.setItem(
         storageKey,
-        JSON.stringify({ motivation, experience, topics, path, minutes, reminderTime }),
+        JSON.stringify({
+          motivation,
+          experience,
+          topics,
+          lessons: selectedLessons,
+          minutes,
+          reminderTime,
+        }),
       );
     } catch {
       // The lesson still opens if storage is disabled.
     }
   }
 
-  function playSelection() {
-    if (!soundEnabled) return;
+  function goBack() {
+    setIndex((current) =>
+      current === STEPS.length - 1 ? Math.max(0, current - 2) : Math.max(0, current - 1),
+    );
+  }
 
+  function playSelection() {
     try {
       const context = audioContext.current ?? new window.AudioContext();
       audioContext.current = context;
@@ -134,9 +180,12 @@ export function OnboardingFlow({
     case "motivation":
       ({ title, detail } = t.motivation);
       content = (
-        <div role="radiogroup" aria-labelledby="onboarding-title" className="grid gap-3">
+        <div
+          role="radiogroup"
+          aria-labelledby="onboarding-title"
+          className="onboarding-motivation-choices grid gap-3"
+        >
           {t.motivation.choices.map((choice, i) => {
-            const icon = MOTIVATION_ICONS[i];
             return (
               <ChoiceButton
                 key={choice}
@@ -147,18 +196,12 @@ export function OnboardingFlow({
                   setMotivation(i);
                   playSelection();
                 }}
-                className="onboarding-card min-h-16 gap-4 px-4 py-3 font-semibold"
+                className="onboarding-card min-h-16 justify-between gap-3 px-4 py-3 text-left text-base font-semibold"
               >
-                {icon && (
-                  <Image
-                    src={`/brand/onboarding/${icon}.svg`}
-                    alt=""
-                    width={48}
-                    height={48}
-                    unoptimized
-                  />
-                )}
                 {choice}
+                <ChoiceMarker selected={motivation === i} className="size-5 border-neutral-300">
+                  {motivation === i && <Check className="size-3" />}
+                </ChoiceMarker>
               </ChoiceButton>
             );
           })}
@@ -166,45 +209,56 @@ export function OnboardingFlow({
       );
       break;
     case "experience":
-      ({ title, detail } = t.experience);
+      title = t.experience.title;
+      detail = "";
       content = (
         <div className="grid gap-4">
-          <input
-            type="range"
-            min={0}
-            max={2}
-            step={1}
-            value={experience}
-            onChange={(e) => {
-              setExperience(e.currentTarget.valueAsNumber);
-              playSelection();
-            }}
+          <div
+            role="radiogroup"
             aria-labelledby="onboarding-title"
-            aria-valuetext={t.experience.choices[experience]}
-            className="h-6 w-full cursor-pointer accent-[var(--onboarding-primary)]"
-          />
-          <div
-            aria-hidden="true"
-            className="grid grid-cols-3 text-center text-xs text-onboarding-muted"
+            className="onboarding-level-picker"
+            data-selected={experience ?? "none"}
           >
-            {t.experience.choices.map((choice) => (
-              <span key={choice}>{choice}</span>
-            ))}
+            {t.experience.choices.map((choice, index) => {
+              const id = `onboarding-experience-${index}`;
+              return (
+                <Fragment key={choice}>
+                  <input
+                    id={id}
+                    type="radio"
+                    name="onboarding-experience"
+                    value={index}
+                    checked={experience === index}
+                    onChange={() => {
+                      setExperience(index);
+                      playSelection();
+                    }}
+                    className="onboarding-level-input"
+                  />
+                  <label htmlFor={id} className="onboarding-level-option">
+                    {choice}
+                  </label>
+                </Fragment>
+              );
+            })}
+            <span aria-hidden="true" className="onboarding-level-glider" />
           </div>
-          <div
-            aria-live="polite"
-            className="onboarding-card grid gap-1 rounded-xl border-onboarding-primary p-4 text-left"
-          >
-            <p className="font-bold">{experienceSummary?.title}</p>
-            <p className="text-sm text-onboarding-muted">{experienceSummary?.detail}</p>
-          </div>
+          {experienceSummary && (
+            <div
+              aria-live="polite"
+              data-experience={experience}
+              className="onboarding-card onboarding-experience-result rounded-xl border p-4 text-left"
+            >
+              <p className="text-sm">{experienceSummary.detail}</p>
+            </div>
+          )}
         </div>
       );
       break;
     case "topics":
       ({ title, detail } = t.topics);
       content = (
-        <div role="group" aria-labelledby="onboarding-title" className="grid gap-2">
+        <div role="group" aria-labelledby="onboarding-title" className="onboarding-topic-grid">
           {t.topics.choices.map((choice, i) => {
             const selected = topics.includes(i);
             return (
@@ -217,14 +271,15 @@ export function OnboardingFlow({
                   setTopics((current) =>
                     selected ? current.filter((item) => item !== i) : [...current, i],
                   );
+                  setSelectedLessons([]);
                   playSelection();
                 }}
-                className="onboarding-card h-auto min-h-14 justify-start gap-3 rounded-xl px-4 py-2 text-left whitespace-normal"
+                className="onboarding-card onboarding-topic-choice"
               >
                 <span
                   aria-hidden
                   className={cn(
-                    "grid size-5 shrink-0 place-items-center rounded border border-onboarding-primary",
+                    "onboarding-topic-check",
                     selected && "bg-onboarding-primary text-onboarding-primary-foreground",
                   )}
                 >
@@ -232,7 +287,7 @@ export function OnboardingFlow({
                 </span>
                 <span>
                   <span className="block font-bold">{choice.title}</span>
-                  <span className="block text-xs font-normal text-onboarding-muted">
+                  <span className="block text-sm font-normal text-onboarding-muted">
                     {choice.detail}
                   </span>
                 </span>
@@ -242,50 +297,107 @@ export function OnboardingFlow({
         </div>
       );
       break;
-    case "paths":
-      ({ title, detail } = t.paths);
+    case "lessons": {
+      ({ title, detail } = t.lessonChoice);
+      const recommendationScores = LESSON_UNIVERSES.map(
+        (universe) => universe.topicIndexes.filter((topic) => topics.includes(topic)).length,
+      );
+      const highestRecommendationScore = Math.max(...recommendationScores);
+      const firstObjectiveUniverse = TOPIC_TO_UNIVERSE[topics[0] ?? 0] ?? 0;
+      const recommendedUniverse =
+        recommendationScores[firstObjectiveUniverse] === highestRecommendationScore
+          ? firstObjectiveUniverse
+          : recommendationScores.indexOf(highestRecommendationScore);
+      const selectedUniverse = LESSON_UNIVERSES.findIndex((universe) =>
+        universe.lessonNumbers.every((number) => selectedLessons.includes(number)),
+      );
       content = (
         <div
-          aria-label={title}
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 text-left"
+          role="radiogroup"
+          aria-orientation="horizontal"
+          aria-labelledby="onboarding-title"
+          className="onboarding-lesson-carousel"
         >
-          {t.paths.choices.map((choice, i) => (
-            <article
-              key={choice.title}
-              className={cn(
-                "onboarding-card flex w-[86%] shrink-0 snap-start flex-col gap-3 rounded-xl border-t-4 p-4",
-                i === 1 ? "border-t-onboarding-gold" : "border-t-onboarding-mint",
-                path === i && "ring-2 ring-inset ring-[var(--onboarding-primary)]",
-              )}
-            >
-              <p className="text-xs font-bold uppercase text-onboarding-muted">{choice.label}</p>
-              <h2 className="onboarding-card-title text-xl">{choice.title}</h2>
-              <p className="text-sm text-onboarding-muted">{choice.detail}</p>
-              <p className="rounded-lg bg-onboarding-track p-3 text-sm">
-                <strong className="mb-1 block">{t.paths.topics}</strong>
-                {choice.topics}
-              </p>
+          {LESSON_UNIVERSES.map((universe, index) => {
+            const copy = t.lessonChoice.universes[index]!;
+            const selected = selectedUniverse === index;
+            const lessonTitles = universe.lessonNumbers
+              .map((number) => lessonCopy[number - 1]?.title)
+              .filter((lessonTitle): lessonTitle is string => lessonTitle !== undefined);
+            return (
               <Button
+                key={copy.title}
                 type="button"
-                variant="outline"
-                aria-pressed={path === i}
+                variant="ghost"
+                role="radio"
+                aria-checked={selected}
+                tabIndex={selected || (selectedUniverse === -1 && index === 0) ? 0 : -1}
+                data-universe={index}
+                data-recommended={recommendedUniverse === index}
                 onClick={() => {
-                  setPath(i);
+                  setSelectedLessons([...universe.lessonNumbers]);
                   playSelection();
                 }}
-                className="mt-auto h-auto whitespace-normal"
+                onKeyDown={(event) => {
+                  const forward = event.key === "ArrowRight" || event.key === "ArrowDown";
+                  const backward = event.key === "ArrowLeft" || event.key === "ArrowUp";
+                  if (!forward && !backward) return;
+                  event.preventDefault();
+                  const nextIndex =
+                    (index + (forward ? 1 : LESSON_UNIVERSES.length - 1)) % LESSON_UNIVERSES.length;
+                  const nextUniverse = LESSON_UNIVERSES[nextIndex]!;
+                  event.currentTarget.parentElement
+                    ?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
+                    [nextIndex]?.focus();
+                  setSelectedLessons([...nextUniverse.lessonNumbers]);
+                  playSelection();
+                }}
+                className="onboarding-card onboarding-universe-card"
               >
-                {path === i ? t.paths.selected : t.paths.choose}
+                <span className="onboarding-universe-heading">
+                  <Image
+                    src={`/brand/learn-map/worlds/${universe.image}`}
+                    alt=""
+                    width={88}
+                    height={88}
+                    className="onboarding-universe-art"
+                  />
+                  <span className="onboarding-universe-heading-copy">
+                    <span className="onboarding-universe-title">{copy.title}</span>
+                    <span className="onboarding-universe-description">{copy.description}</span>
+                    {recommendedUniverse === index && (
+                      <span className="onboarding-universe-recommended">
+                        {t.lessonChoice.recommended}
+                      </span>
+                    )}
+                  </span>
+                </span>
+                <span className="onboarding-universe-lessons" role="list">
+                  {lessonTitles.map((lessonTitle) => (
+                    <span key={lessonTitle} role="listitem">
+                      {lessonTitle}
+                    </span>
+                  ))}
+                </span>
+                <span className="onboarding-universe-goal">{copy.goal}</span>
+                <span aria-hidden="true" className="onboarding-universe-check">
+                  {selected && <Check />}
+                </span>
               </Button>
-            </article>
-          ))}
+            );
+          })}
         </div>
       );
       break;
+    }
     case "pace":
       ({ title, detail } = t.pace);
       content = (
-        <div role="radiogroup" aria-labelledby="onboarding-title" className="grid gap-3">
+        <div
+          role="radiogroup"
+          aria-labelledby="onboarding-title"
+          className="onboarding-pace-choices grid gap-3"
+        >
           {t.pace.choices.map((choice, i) => (
             <ChoiceButton
               key={choice}
@@ -296,10 +408,13 @@ export function OnboardingFlow({
                 setPace(i);
                 playSelection();
               }}
-              className="onboarding-card min-h-16 justify-between gap-3 px-4 py-3 font-semibold"
+              className="onboarding-card min-h-16 justify-between gap-3 px-4 py-3 text-left text-base font-semibold"
             >
               <span>{choice}</span>
               <span className="shrink-0 text-onboarding-muted">{MINUTES[i]} min</span>
+              <ChoiceMarker selected={pace === i} className="size-5 border-neutral-300">
+                {pace === i && <Check className="size-3" />}
+              </ChoiceMarker>
             </ChoiceButton>
           ))}
         </div>
@@ -309,45 +424,74 @@ export function OnboardingFlow({
       ({ title, detail } = t.reminder);
       content = (
         <div className="grid gap-3 text-left">
-          <label className="onboarding-card flex min-h-16 flex-wrap items-center justify-between gap-x-3 rounded-xl p-4 font-semibold">
-            {t.reminder.time}
-            <input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.currentTarget.value)}
-              className="rounded-md bg-onboarding-track px-2 py-1 text-onboarding-primary"
-            />
-          </label>
-          <p className="text-sm text-onboarding-muted">{t.reminderNote}</p>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className="onboarding-card onboarding-reminder-trigger"
+                aria-label={`${t.reminder.time}: ${time}`}
+              >
+                <span>{t.reminder.time}</span>
+                <span className="onboarding-reminder-value">
+                  <Clock3 aria-hidden />
+                  {time}
+                  <ChevronDown aria-hidden />
+                </span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" sideOffset={6} className="onboarding-reminder-menu">
+              <DropdownMenuRadioGroup
+                value={time}
+                aria-label={t.reminder.time}
+                onValueChange={(value) => {
+                  setTime(value);
+                  playSelection();
+                }}
+              >
+                {REMINDER_TIMES.map((reminderTime) => (
+                  <DropdownMenuRadioItem
+                    key={reminderTime}
+                    value={reminderTime}
+                    className="onboarding-reminder-option"
+                  >
+                    {reminderTime}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       );
       break;
     case "preparing":
       ({ title, detail } = t.preparing);
       content = (
-        <>
-          <div aria-hidden className="mb-6 flex justify-center gap-2">
-            {Array.from({ length: 5 }, (_, i) => (
-              <span
-                key={i}
-                className="size-1.5 rounded-full bg-onboarding-primary motion-safe:animate-pulse"
-              />
-            ))}
-          </div>
-          {summary}
-        </>
+        <div role="status" aria-label={detail} className="flex justify-center gap-2">
+          <span className="sr-only">{detail}</span>
+          {Array.from({ length: 3 }, (_, i) => (
+            <span
+              key={i}
+              aria-hidden="true"
+              className="onboarding-loading-dot size-2 rounded-full bg-onboarding-primary"
+              style={{ animationDelay: `${i * 180}ms` }}
+            />
+          ))}
+        </div>
       );
       break;
     case "ready":
-      ({ title, detail } = t.ready);
-      content = summary;
+      title = t.ready.title;
+      detail = "";
+      content = readySummary;
       break;
   }
 
   const disabled =
     (step === "motivation" && motivation === null) ||
+    (step === "experience" && experience === null) ||
     (step === "topics" && topics.length === 0) ||
-    (step === "paths" && path === null) ||
+    (step === "lessons" && selectedLessons.length === 0) ||
     (step === "reminder" && !time) ||
     step === "preparing";
   const label =
@@ -365,19 +509,30 @@ export function OnboardingFlow({
       lang={track === "fr" ? "fr" : "en"}
       className="onboarding-flow min-h-svh bg-onboarding-surface text-onboarding-ink"
     >
-      <div className="mx-auto flex min-h-svh w-full max-w-[434px] flex-col px-6 pt-4 pb-8 sm:max-w-[600px] lg:max-w-[760px]">
+      <div className="onboarding-layout">
         {isQuestion && (
-          <div className="flex flex-col gap-3">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="size-11 self-end text-onboarding-muted"
-              aria-label={t.close}
-              onClick={() => (onPreviewFinish ? onPreviewFinish() : router.push(WORLD_ZERO))}
-            >
-              <X aria-hidden />
-            </Button>
+          <div className="grid gap-3">
+            <div className="flex items-center justify-between">
+              <Button
+                type="button"
+                size="sm"
+                className="onboarding-action onboarding-back"
+                onClick={goBack}
+              >
+                <ArrowLeft aria-hidden />
+                {t.back}
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-11 text-onboarding-muted"
+                aria-label={t.close}
+                onClick={() => (onPreviewFinish ? onPreviewFinish() : router.push(WORLD_ZERO))}
+              >
+                <X aria-hidden />
+              </Button>
+            </div>
             <progress
               value={progress}
               max={100}
@@ -394,24 +549,26 @@ export function OnboardingFlow({
             className="onboarding-progress mt-10 h-1.5 w-full overflow-hidden rounded-full"
           />
         )}
-        <div className="flex min-h-11 items-center justify-end">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            aria-pressed={soundEnabled}
-            onClick={() => setSoundEnabled((current) => !current)}
-          >
-            {soundEnabled ? <Volume2 aria-hidden /> : <VolumeX aria-hidden />}
-            {soundEnabled ? t.soundMute : t.soundEnable}
-          </Button>
-        </div>
+        {step === "ready" && (
+          <div className="pb-2">
+            <Button
+              type="button"
+              size="sm"
+              className="onboarding-action onboarding-back"
+              onClick={goBack}
+            >
+              <ArrowLeft aria-hidden />
+              {t.back}
+            </Button>
+          </div>
+        )}
         <section
           key={step}
           aria-labelledby="onboarding-title"
           className={cn(
-            "flex flex-1 flex-col gap-5 pb-8 motion-safe:animate-rise",
-            step === "welcome" ? "justify-center text-center" : "pt-8",
+            "onboarding-step motion-safe:animate-rise",
+            step === "motivation" ? "onboarding-motivation-section" : "",
+            step === "welcome" ? "text-center" : "",
             isSummary ? "text-left" : "text-center",
           )}
         >
@@ -424,14 +581,14 @@ export function OnboardingFlow({
                   ? 150
                   : step === "experience"
                     ? 124
-                    : step === "paths" || step === "preparing"
-                      ? 82
-                      : step === "pace"
-                        ? 72
-                        : step === "reminder"
-                          ? 86
-                          : step === "ready"
-                            ? 120
+                    : step === "motivation"
+                      ? 132
+                      : step === "lessons" || step === "preparing"
+                        ? 82
+                        : step === "pace"
+                          ? 72
+                          : step === "reminder"
+                            ? 86
                             : 100
               }
               height={
@@ -439,14 +596,14 @@ export function OnboardingFlow({
                   ? 140
                   : step === "experience"
                     ? 109
-                    : step === "paths" || step === "preparing"
-                      ? 76
-                      : step === "pace"
-                        ? 66
-                        : step === "reminder"
-                          ? 80
-                          : step === "ready"
-                            ? 110
+                    : step === "motivation"
+                      ? 88
+                      : step === "lessons" || step === "preparing"
+                        ? 76
+                        : step === "pace"
+                          ? 66
+                          : step === "reminder"
+                            ? 80
                             : 92
               }
               priority={step === "welcome"}
@@ -454,7 +611,7 @@ export function OnboardingFlow({
                 "h-auto max-w-full object-contain",
                 step === "pace" || step === "reminder"
                   ? "self-start"
-                  : step === "paths" || step === "preparing"
+                  : step === "lessons" || step === "preparing"
                     ? "self-end"
                     : "mx-auto",
               )}
@@ -469,41 +626,43 @@ export function OnboardingFlow({
             >
               {title}
             </h1>
-            <p className="text-sm text-onboarding-muted">{detail}</p>
+            {detail && step === "welcome" && (
+              <p className="text-base leading-snug text-onboarding-muted">{detail}</p>
+            )}
           </header>
           {step === "ready" && <OnboardingCelebration />}
-          {isSummary ? <div className="my-auto">{content}</div> : content}
-        </section>
-        <div className="grid gap-1">
-          {step === "ready" && !onPreviewFinish ? (
-            <Button asChild size="lg" className="onboarding-action">
-              <Link href={WORLD_ZERO}>
+          {content}
+          <div className="onboarding-cta grid gap-3">
+            {step === "ready" && !onPreviewFinish ? (
+              <Button asChild size="lg" className="onboarding-action">
+                <Link href={WORLD_ZERO}>
+                  {label}
+                  <ArrowRight aria-hidden />
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                size="lg"
+                className="onboarding-action"
+                disabled={disabled}
+                onClick={() => {
+                  if (step === "reminder") prepare(time);
+                  else if (step === "ready") onPreviewFinish?.();
+                  else setIndex(index + 1);
+                }}
+              >
                 {label}
-                <ArrowRight aria-hidden />
-              </Link>
-            </Button>
-          ) : (
-            <Button
-              type="button"
-              size="lg"
-              className="onboarding-action"
-              disabled={disabled}
-              onClick={() => {
-                if (step === "reminder") prepare(time);
-                else if (step === "ready") onPreviewFinish?.();
-                else setIndex(index + 1);
-              }}
-            >
-              {label}
-              {step !== "preparing" && <ArrowRight aria-hidden />}
-            </Button>
-          )}
-          {step === "reminder" && (
-            <Button type="button" variant="ghost" size="lg" onClick={() => prepare(null)}>
-              {t.reminder.skip}
-            </Button>
-          )}
-        </div>
+                {step !== "preparing" && <ArrowRight aria-hidden />}
+              </Button>
+            )}
+            {step === "reminder" && (
+              <Button type="button" variant="ghost" size="lg" onClick={() => prepare(null)}>
+                {t.reminder.skip}
+              </Button>
+            )}
+          </div>
+        </section>
       </div>
     </main>
   );

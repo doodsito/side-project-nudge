@@ -5,10 +5,9 @@ export const onboardingFr = {
   welcomeDetail: "Quelques questions pour te proposer un parcours qui te ressemble.",
   start: "C’est parti",
   next: "Continuer",
+  back: "Retour",
   close: "Passer l’onboarding et ouvrir le Monde 0",
   progress: "Progression de l’onboarding",
-  soundMute: "Son activé · couper",
-  soundEnable: "Activer le son",
   motivation: {
     title: "Pourquoi veux-tu apprendre à investir ?",
     detail: "On adapte ton parcours à ce qui t’amène ici.",
@@ -23,15 +22,9 @@ export const onboardingFr = {
     detail: "Épargne ou investissement, indique le niveau qui te ressemble.",
     choices: ["Débutant", "Quelques notions", "J’investis déjà"],
     summaries: [
-      { title: "Je débute", detail: "Je n’ai pas encore investi et je veux comprendre les bases." },
-      {
-        title: "J’ai quelques notions",
-        detail: "Je connais les bases et je veux les mettre en pratique.",
-      },
-      {
-        title: "J’investis déjà",
-        detail: "Je veux approfondir mes connaissances et comparer mes options.",
-      },
+      { detail: "Je n’ai pas encore investi et je veux comprendre les bases." },
+      { detail: "Je connais les bases et je veux les mettre en pratique." },
+      { detail: "Je veux approfondir mes connaissances et comparer mes options." },
     ],
   },
   topics: {
@@ -44,30 +37,25 @@ export const onboardingFr = {
       { title: "Préparer mes projets", detail: "Faire des choix adaptés à mes objectifs" },
     ],
   },
-  paths: {
-    title: "Comment veux-tu explorer ?",
-    detail: "Fais défiler les parcours et choisis celui qui te ressemble.",
-    topics: "Tu exploreras",
-    choose: "Choisir ce parcours",
-    selected: "Parcours choisi",
-    choices: [
+  lessonChoice: {
+    title: "Quelles leçons veux-tu explorer ?",
+    detail: "Fais défiler et choisis ton univers.",
+    recommended: "Pour toi",
+    universes: [
       {
-        label: "Explorer",
-        title: "Un peu de tout",
-        detail: "Compare différentes façons de faire grandir ou de protéger une somme.",
-        topics: "Épargne · ETF · immobilier · crypto · actifs alternatifs",
+        title: "Mes bases",
+        description: "Budget, épargne, sécurité.",
+        goal: "Objectif : poser tes bases.",
       },
       {
-        label: "Poser les bases",
-        title: "À ton rythme",
-        detail: "Commence par les repères du quotidien avant de découvrir d’autres options.",
-        topics: "Budget · épargne · réserve · diversification",
+        title: "Mes projets",
+        description: "Projets, besoins, choix.",
+        goal: "Objectif : préparer tes projets.",
       },
       {
-        label: "Approfondir",
-        title: "Aller plus loin",
-        detail: "Pars de ce que tu connais déjà pour comparer les approches et leurs compromis.",
-        topics: "ETF · actions · obligations · portefeuille virtuel",
+        title: "Investir",
+        description: "Risque, placements, options.",
+        goal: "Objectif : comprendre le risque.",
       },
     ],
   },
@@ -78,7 +66,7 @@ export const onboardingFr = {
   },
   reminder: {
     title: "Choisis un moment qui te convient.",
-    detail: "Choisis quand recevoir un rappel sur ton adresse d’inscription.",
+    detail: "On t’enverra un rappel pour garder le rythme.",
     time: "Heure du rappel par e-mail",
     skip: "Sans rappel",
     finish: "Enregistrer mon heure",
@@ -89,12 +77,16 @@ export const onboardingFr = {
     action: "On y est presque",
   },
   ready: {
-    title: `Te voilà dans ${BRAND} !`,
+    title: "Te voilà prêt !",
     detail: "Tu vas apprendre en pratiquant, sans argent réel en jeu.",
     action: "Commencer le Monde 0",
+    durationLabel: "TON RYTHME",
+    durationUnit: "par jour",
+    timeLabel: "RAPPEL À",
+    anytime: "À ton rythme",
   },
   ritual: "Ton petit rendez-vous",
-  daily: "{minutes} min par jour",
+  daily: "{minutes} min",
   preferredTime: "Heure choisie · {time}",
   reminderNote:
     "L’heure est enregistrée sur cet appareil. L’envoi des rappels par e-mail est en préparation.",

@@ -1,6 +1,6 @@
 # Nudge — Design system (Colour System C)
 
-**Status:** Approved colour foundation, light mode only. Other design tokens require implementation audit and/or explicit approval.
+**Status:** Colour foundation and core onboarding foundations approved, light mode only (20 November 2026). Details below extend the colour reference with founder-approved product decisions.
 
 **Source of truth:** `references/Nudge_Colour_System_C_Only.pdf` (five-page C-only colour reference). Keep the PDF in the repository alongside this document. If a rule here conflicts with the PDF, review and reconcile before changing the UI.
 
@@ -75,6 +75,19 @@ The feedback backgrounds are shown in the C-only reference; their exact values a
 - Use labels, icons, markers, or patterns in addition to colour. Test mobile, zoom, charts and colour-vision differences.
 - **Light mode only.** Do not auto-generate a dark mode by inversion.
 
-## Not yet specified
+## Approved product foundations (20 November 2026)
 
-Approved font family/scale, spacing scale, breakpoints, radii, elevation, component API, and responsive layouts are **not defined in the colour PDF**. Audit the repository and propose them separately; do not present guesses as brand decisions.
+These decisions were reviewed with the founders and apply to the onboarding and learning screens in this iteration.
+
+- **Brand and mascot:** Nudge is the product; Poggo is its named mascot. Poggo helps explain or mark a moment and does not appear on every screen.
+- **Personality:** premium, playful and expressive in the interface, composition, illustrations and components. Keep the tone calm and reassuring for difficult or challenging decisions, especially the virtual portfolio.
+- **Typography:** Manrope for titles; Inter for body text, descriptions, options and buttons. Start body text at 16 px, secondary copy at 14 px, onboarding titles at 26 px on mobile and 32 px on desktop, and primary CTA text at Inter Semi Bold (600).
+- **Spacing:** use a 4 px base with 8, 12, 16, 24, 32 and 40 px steps. Keep repeated screens with the same purpose on a shared layout; onboarding uses a centered title and introduction on choice steps, left-aligned card content, and a CTA placed after the content with measured spacing.
+- **Onboarding selection:** selected cards stay white with a violet outline and a clear check/selection marker. The primary CTA stays solid violet with white text. The experience level uses its segmented selector.
+- **Mascot placement:** use Poggo on selected onboarding steps and milestone moments, with the pose serving that screen’s purpose.
+- **Interaction:** give controls restrained hover, focus and pressed feedback. Avoid decorative persistent sheen and animation without a functional role; honor reduced-motion preferences.
+- **Accessibility and writing:** keep focus visible, controls keyboard-operable, selection understandable without color alone, and use direct, specific copy without generic motivation.
+
+## Still to specify
+
+The colour reference does not define breakpoints, radii, elevation, or component APIs. The 4 px spacing and type scale above are approved starting points; exact values for other surfaces can be proposed through the product design review before wider rollout.

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { clearLearnLocalState } from "@/lib/learn-map-motion";
 
-/** The Account page's reset section: confirms, erases the progress, then restarts from the dashboard. */
+/** The Account page's reset section: clears this member's progress, then restarts onboarding. */
 export function ResetProgressSection({
   userId,
   title,
@@ -57,7 +57,7 @@ export function ResetProgressSection({
         return;
       }
       clearLearnLocalState(userId);
-      router.push("/dashboard/courses");
+      router.push("/onboarding");
     });
   }
 

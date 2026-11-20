@@ -1,71 +1,114 @@
 "use client";
 
 import Image from "next/image";
+import { createPortal } from "react-dom";
+import { useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
-const BILLS = [
-  { x: -126, y: -42, rotate: -17, color: "var(--nudge-learn-gold)" },
-  { x: -76, y: -72, rotate: 11, color: "var(--nudge-learn-teal)" },
-  { x: 84, y: -68, rotate: -10, color: "var(--nudge-learn-violet)" },
-  { x: 128, y: -20, rotate: 16, color: "var(--nudge-learn-gold)" },
-  { x: -118, y: 44, rotate: 12, color: "var(--nudge-learn-violet)" },
-  { x: 112, y: 52, rotate: -14, color: "var(--nudge-learn-teal)" },
-] as const;
-
-function Bill({ color }: { color: string }) {
-  return (
-    <svg viewBox="0 0 64 42" fill="none" className="h-auto w-full">
-      <rect x="1" y="1" width="62" height="40" rx="7" fill="white" stroke={color} strokeWidth="2" />
-      <rect x="6" y="6" width="52" height="30" rx="4" stroke={color} strokeWidth="1.5" />
-      <circle cx="32" cy="21" r="8" fill={color} fillOpacity="0.22" />
-      <path d="M11 14h7M46 28h7" stroke={color} strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
+function subscribeToClient() {
+  return () => {};
 }
+
+const CONFETTI = [
+  { x: 8, y: 12, drift: -18, color: "var(--nudge-learn-gold)" },
+  { x: 25, y: 7, drift: 14, color: "var(--nudge-learn-violet)" },
+  { x: 49, y: 13, drift: -12, color: "var(--nudge-learn-teal)" },
+  { x: 73, y: 8, drift: 20, color: "var(--nudge-learn-gold)" },
+  { x: 92, y: 16, drift: -16, color: "var(--nudge-learn-violet)" },
+  { x: 15, y: 28, drift: 12, color: "var(--nudge-learn-teal)" },
+  { x: 36, y: 25, drift: -16, color: "var(--nudge-learn-gold)" },
+  { x: 64, y: 29, drift: 18, color: "var(--nudge-learn-violet)" },
+  { x: 84, y: 27, drift: -12, color: "var(--nudge-learn-teal)" },
+  { x: 6, y: 43, drift: 16, color: "var(--nudge-learn-violet)" },
+  { x: 27, y: 46, drift: -14, color: "var(--nudge-learn-gold)" },
+  { x: 51, y: 42, drift: 12, color: "var(--nudge-learn-teal)" },
+  { x: 77, y: 47, drift: -20, color: "var(--nudge-learn-violet)" },
+  { x: 95, y: 44, drift: 14, color: "var(--nudge-learn-gold)" },
+  { x: 13, y: 62, drift: -14, color: "var(--nudge-learn-teal)" },
+  { x: 39, y: 64, drift: 17, color: "var(--nudge-learn-violet)" },
+  { x: 68, y: 61, drift: -12, color: "var(--nudge-learn-gold)" },
+  { x: 89, y: 66, drift: 16, color: "var(--nudge-learn-teal)" },
+  { x: 24, y: 83, drift: -16, color: "var(--nudge-learn-gold)" },
+  { x: 54, y: 88, drift: 13, color: "var(--nudge-learn-violet)" },
+  { x: 81, y: 82, drift: -18, color: "var(--nudge-learn-teal)" },
+] as const;
 
 export function OnboardingCelebration() {
   const reduceMotion = useReducedMotion();
+  const portalTarget = useSyncExternalStore(
+    subscribeToClient,
+    () => document.body,
+    () => null,
+  );
 
   return (
-    <div aria-hidden="true" className="relative mx-auto h-48 w-full max-w-[360px]">
-      {BILLS.map((bill, index) => (
+    <>
+      <div aria-hidden="true" className="relative mx-auto h-56 w-full max-w-[420px]">
         <motion.span
-          key={`${bill.x}-${bill.y}`}
-          className="absolute z-0 block w-12"
-          style={{
-            left: `calc(50% + ${bill.x}px)`,
-            top: `calc(50% + ${bill.y}px)`,
+          className="onboarding-celebration-glow absolute left-1/2 top-1/2 z-0 size-48 -translate-x-1/2 -translate-y-1/2 rounded-full"
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.72 }}
+          animate={{ opacity: 0.8, scale: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 1.2, delay: reduceMotion ? 0 : 0.08 }}
+        />
+        <motion.div
+          className="absolute inset-x-0 bottom-0 z-10 mx-auto h-56 w-56"
+          initial={reduceMotion ? false : { opacity: 0, y: 18, rotate: -6, scale: 0.72 }}
+          animate={{
+            opacity: 1,
+            y: [24, -10, 3, 0],
+            rotate: [-7, 4, -2, 0],
+            scale: [0.68, 1.12, 0.96, 1],
           }}
-          initial={
-            reduceMotion
-              ? false
-              : { opacity: 0, x: 0, y: 18, rotate: bill.rotate * -0.45, scale: 0.72 }
-          }
-          animate={{ opacity: 1, x: 0, y: 0, rotate: bill.rotate, scale: 1 }}
           transition={{
-            duration: reduceMotion ? 0 : 0.48,
-            delay: reduceMotion ? 0 : 0.04 + index * 0.065,
-            ease: "easeOut",
+            duration: reduceMotion ? 0 : 1.5,
+            delay: reduceMotion ? 0 : 0.12,
+            ease: [0.175, 0.885, 0.32, 1.275],
           }}
         >
-          <Bill color={bill.color} />
-        </motion.span>
-      ))}
-      <motion.div
-        className="absolute inset-x-0 bottom-0 z-10 mx-auto h-48 w-48"
-        initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-      >
-        <Image
-          src="/assets/poggo/poggo-onboarding-celebrate.png"
-          alt=""
-          fill
-          sizes="192px"
-          className="object-contain"
-          priority
-        />
-      </motion.div>
-    </div>
+          <Image
+            src="/assets/poggo/poggo-onboarding-celebrate.png"
+            alt=""
+            fill
+            sizes="224px"
+            className="object-contain"
+            priority
+          />
+        </motion.div>
+      </div>
+      {portalTarget &&
+        !reduceMotion &&
+        createPortal(
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 z-20 overflow-hidden"
+          >
+            {CONFETTI.map((piece, index) => (
+              <motion.span
+                key={`${piece.x}-${piece.y}`}
+                className="absolute block h-3 w-2 rounded-sm"
+                style={{
+                  left: `${piece.x}%`,
+                  top: `${piece.y}%`,
+                  backgroundColor: piece.color,
+                }}
+                initial={{ opacity: 0, y: -12, rotate: 0, scale: 0.4 }}
+                animate={{
+                  opacity: [0, 0.95, 0.8, 0],
+                  x: [0, piece.drift * 0.5, piece.drift],
+                  y: [-12, 14, 64],
+                  rotate: [0, 110, 245],
+                  scale: [0.4, 1.1, 0.8],
+                }}
+                transition={{
+                  duration: 2.6,
+                  delay: 0.1 + index * 0.13,
+                  ease: [0.2, 0.65, 0.35, 1],
+                }}
+              />
+            ))}
+          </div>,
+          portalTarget,
+        )}
+    </>
   );
 }

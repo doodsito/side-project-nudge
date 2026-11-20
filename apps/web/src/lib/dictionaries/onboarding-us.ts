@@ -5,10 +5,9 @@ export const onboardingUs = {
   welcomeDetail: "A few questions to find out what you’d like to learn.",
   start: "Let’s go",
   next: "Continue",
+  back: "Back",
   close: "Skip onboarding and open World 0",
   progress: "Onboarding progress",
-  soundMute: "Sound on · mute",
-  soundEnable: "Turn sound on",
   motivation: {
     title: "Why do you want to learn about investing?",
     detail: "Tell us what brought you here.",
@@ -19,18 +18,9 @@ export const onboardingUs = {
     detail: "Pick the level that fits your experience with saving or investing.",
     choices: ["Beginner", "Some experience", "Already investing"],
     summaries: [
-      {
-        title: "I’m just starting",
-        detail: "I haven’t invested yet and I want to understand the basics.",
-      },
-      {
-        title: "I know a little",
-        detail: "I understand the basics and want to put them into practice.",
-      },
-      {
-        title: "I already invest",
-        detail: "I want to build on what I know and compare my options.",
-      },
+      { detail: "I haven’t invested yet and want to understand the basics." },
+      { detail: "I know the basics and want to put them into practice." },
+      { detail: "I want to build on what I know and compare my options." },
     ],
   },
   topics: {
@@ -43,30 +33,25 @@ export const onboardingUs = {
       { title: "Plan for my goals", detail: "Make choices that fit my priorities" },
     ],
   },
-  paths: {
-    title: "How would you like to explore?",
-    detail: "Browse the paths and choose one that feels right.",
-    topics: "What you’ll explore",
-    choose: "Choose this path",
-    selected: "Path selected",
-    choices: [
+  lessonChoice: {
+    title: "Which lessons would you like to explore?",
+    detail: "Scroll and choose your universe.",
+    recommended: "For you",
+    universes: [
       {
-        label: "Explore",
-        title: "A bit of everything",
-        detail: "Compare different ways to grow or protect a sum of money.",
-        topics: "Savings · ETFs · real estate · crypto · alternative assets",
+        title: "My foundations",
+        description: "Budget, saving, safety.",
+        goal: "Goal: build your foundation.",
       },
       {
-        label: "Build the basics",
-        title: "At your own pace",
-        detail: "Start with everyday money decisions before exploring other options.",
-        topics: "Budgeting · savings · emergency funds · diversification",
+        title: "My plans",
+        description: "Goals, needs, choices.",
+        goal: "Goal: prepare for your plans.",
       },
       {
-        label: "Go deeper",
-        title: "Build on what you know",
-        detail: "Compare approaches and weigh their trade-offs.",
-        topics: "ETFs · stocks · bonds · virtual portfolio",
+        title: "Investing",
+        description: "Risk, investments, options.",
+        goal: "Goal: understand risk and options.",
       },
     ],
   },
@@ -77,7 +62,7 @@ export const onboardingUs = {
   },
   reminder: {
     title: "Pick a time that works for you.",
-    detail: "Choose when to receive a reminder at the email address you signed up with.",
+    detail: "We’ll send a reminder to help you keep the rhythm.",
     time: "Email reminder time",
     skip: "Skip reminders",
     finish: "Save my time",
@@ -88,12 +73,16 @@ export const onboardingUs = {
     action: "Almost there",
   },
   ready: {
-    title: `You’re in ${BRAND}!`,
+    title: "You’re ready!",
     detail: "You’ll learn by practicing without putting real money at risk.",
     action: "Start World 0",
+    durationLabel: "YOUR ROUTINE",
+    durationUnit: "per day",
+    timeLabel: "REMINDER AT",
+    anytime: "Whenever works",
   },
   ritual: "Your daily practice",
-  daily: "{minutes} min per day",
+  daily: "{minutes} min",
   preferredTime: "Preferred time · {time}",
   reminderNote:
     "Your time is saved on this device. Email reminders are coming in a future version.",
