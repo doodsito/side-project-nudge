@@ -563,8 +563,8 @@ a.nudge-shimmer-button {
   --onboarding-selection-bg: var(--nudge-learn-violet-100);
   --onboarding-selection-border: var(--onboarding-primary);
   --onboarding-universe-card-bg: var(--nudge-learn-violet-100);
-  --onboarding-universe-badge-bg: var(--nudge-learn-white);
-  --onboarding-universe-badge-text: var(--onboarding-primary);
+  --onboarding-universe-badge-bg: var(--onboarding-primary);
+  --onboarding-universe-badge-text: var(--onboarding-primary-foreground);
   --onboarding-universe-goal-bg: var(--nudge-learn-violet-200);
   --onboarding-universe-goal-text: var(--nudge-learn-violet-800);
   --onboarding-gold: var(--nudge-learn-gold);
@@ -692,7 +692,7 @@ a.nudge-shimmer-button {
   .onboarding-universe-recommended {
     align-self: flex-start;
     margin-top: 0.2rem;
-    border: 1px solid var(--nudge-learn-violet-200);
+    border: 1px solid var(--onboarding-primary);
     border-radius: 999px;
     background: var(--onboarding-universe-badge-bg);
     padding: 0.3rem 0.65rem;
@@ -1334,6 +1334,14 @@ a.nudge-shimmer-button {
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-goal {
   background: var(--onboarding-primary-soft);
   color: var(--onboarding-primary-active);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[aria-checked="true"]
+  .onboarding-universe-recommended {
+  border-color: var(--onboarding-primary-foreground);
+  background: var(--onboarding-primary-foreground);
+  color: var(--onboarding-primary);
 }
 
 @media (min-width: 640px) {
