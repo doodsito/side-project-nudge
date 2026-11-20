@@ -1291,39 +1291,6 @@ a.nudge-shimmer-button {
 .onboarding-flow button.onboarding-universe-card[data-recommended="true"] {
   grid-row: span 2;
   min-height: 100%;
-  border-color: var(--onboarding-primary);
-  background: var(--onboarding-primary);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--onboarding-primary) 24%, transparent);
-  color: var(--onboarding-primary-foreground);
-}
-
-.onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"]
-  .onboarding-universe-title,
-.onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"]
-  .onboarding-universe-lessons {
-  color: var(--onboarding-primary-foreground);
-}
-
-.onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"]
-  .onboarding-universe-description {
-  color: var(--nudge-learn-violet-100);
-}
-
-.onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"]
-  .onboarding-universe-recommended {
-  background: var(--nudge-learn-gold);
-  color: var(--onboarding-ink);
-}
-
-.onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"]
-  .onboarding-universe-goal {
-  background: var(--onboarding-primary-soft);
-  color: var(--onboarding-primary-active);
 }
 
 .onboarding-flow button.onboarding-universe-card .onboarding-universe-title {
@@ -1336,22 +1303,39 @@ a.nudge-shimmer-button {
 }
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-check {
-  border-color: var(--onboarding-primary);
-  background: var(--onboarding-primary);
-  color: var(--onboarding-primary-foreground);
+  border-color: var(--onboarding-primary-foreground);
+  background: var(--onboarding-primary-foreground);
+  color: var(--onboarding-primary);
 }
 
 .onboarding-flow button.onboarding-universe-card[aria-checked="true"] {
   border: 2px solid var(--onboarding-primary);
+  background: var(--onboarding-primary);
   box-shadow: 0 8px 24px color-mix(in srgb, var(--onboarding-primary) 18%, transparent);
+  color: var(--onboarding-primary-foreground);
+}
+
+.onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-title,
+.onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-lessons {
+  color: var(--onboarding-primary-foreground);
 }
 
 .onboarding-flow
-  button.onboarding-universe-card[data-recommended="true"][aria-checked="true"]
-  .onboarding-universe-check {
-  border-color: var(--onboarding-primary-foreground);
-  background: var(--onboarding-primary-foreground);
-  color: var(--onboarding-primary);
+  button.onboarding-universe-card[aria-checked="true"]
+  .onboarding-universe-description {
+  color: var(--nudge-learn-violet-100);
+}
+
+.onboarding-flow button.onboarding-universe-card[aria-checked="true"] .onboarding-universe-goal {
+  background: var(--onboarding-primary-soft);
+  color: var(--onboarding-primary-active);
+}
+
+.onboarding-flow
+  button.onboarding-universe-card[aria-checked="true"]
+  .onboarding-universe-recommended {
+  background: var(--nudge-learn-gold);
+  color: var(--onboarding-ink);
 }
 
 @media (min-width: 640px) {
