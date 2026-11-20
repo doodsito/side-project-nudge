@@ -1066,6 +1066,13 @@ a.nudge-shimmer-button {
   }
 }
 
+@media (max-width: 639px) {
+  .onboarding-ready-card[data-card="time"] {
+    width: min(100%, 22rem);
+    justify-self: center;
+  }
+}
+
 @keyframes onboarding-loading-dot {
   0%,
   60%,
