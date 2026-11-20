@@ -1068,8 +1068,19 @@ a.nudge-shimmer-button {
 
 @media (max-width: 639px) {
   .onboarding-ready-card[data-card="time"] {
-    width: min(100%, 22rem);
+    width: max-content;
+    max-width: 100%;
     justify-self: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .onboarding-ready-card[data-card="time"] .onboarding-ready-label {
+    align-self: center;
+  }
+
+  .onboarding-ready-card[data-card="time"] .onboarding-ready-value {
+    text-align: center;
   }
 }
 
