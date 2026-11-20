@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock3, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock3 } from "lucide-react";
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { ChoiceButton, ChoiceMarker } from "@/components/shared/choice-button";
 import { OnboardingCelebration } from "@/components/onboarding/onboarding-celebration";
@@ -90,8 +90,7 @@ export function OnboardingFlow({
   const step = STEPS[index] ?? "welcome";
   const minutes = MINUTES[pace] ?? 10;
   const experienceSummary = experience === null ? undefined : t.experience.summaries[experience];
-  const progress = Math.round((index / 7) * 100);
-  const isQuestion = index > 0 && index < 7;
+  const progress = Math.round((Math.min(index, 7) / 7) * 100);
   const isSummary = step === "preparing" || step === "ready";
   const mascot = MASCOTS[step];
   const reminderDisplay = formatReminderTime(reminder, track, t.ready.anytime);
@@ -514,59 +513,29 @@ export function OnboardingFlow({
       lang={track === "fr" ? "fr" : "en"}
       className="onboarding-flow min-h-svh bg-onboarding-surface text-onboarding-ink"
     >
+      <div className="onboarding-topbar">
+        {index > 0 ? (
+          <Button
+            type="button"
+            size="sm"
+            className="onboarding-action onboarding-back"
+            onClick={goBack}
+          >
+            <ArrowLeft aria-hidden />
+            {t.back}
+          </Button>
+        ) : (
+          <span aria-hidden="true" />
+        )}
+        <progress
+          value={progress}
+          max={100}
+          aria-label={t.progress}
+          className="onboarding-progress h-1.5 w-full overflow-hidden rounded-full"
+        />
+        <span aria-hidden="true" />
+      </div>
       <div className="onboarding-layout">
-        {isQuestion && (
-          <div className="grid gap-3">
-            <div className="flex items-center justify-between">
-              <Button
-                type="button"
-                size="sm"
-                className="onboarding-action onboarding-back"
-                onClick={goBack}
-              >
-                <ArrowLeft aria-hidden />
-                {t.back}
-              </Button>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="size-11 text-onboarding-muted"
-                aria-label={t.close}
-                onClick={() => (onPreviewFinish ? onPreviewFinish() : router.push(WORLD_ZERO))}
-              >
-                <X aria-hidden />
-              </Button>
-            </div>
-            <progress
-              value={progress}
-              max={100}
-              aria-label={t.progress}
-              className="onboarding-progress h-1.5 w-full overflow-hidden rounded-full"
-            />
-          </div>
-        )}
-        {step === "preparing" && (
-          <progress
-            value={100}
-            max={100}
-            aria-label={t.progress}
-            className="onboarding-progress mt-10 h-1.5 w-full overflow-hidden rounded-full"
-          />
-        )}
-        {step === "ready" && (
-          <div className="pb-2">
-            <Button
-              type="button"
-              size="sm"
-              className="onboarding-action onboarding-back"
-              onClick={goBack}
-            >
-              <ArrowLeft aria-hidden />
-              {t.back}
-            </Button>
-          </div>
-        )}
         <section
           key={step}
           aria-labelledby="onboarding-title"
