@@ -554,7 +554,7 @@ a.nudge-shimmer-button {
   --onboarding-surface: var(--nudge-learn-canvas);
   --onboarding-ink: var(--nudge-learn-ink);
   --onboarding-muted: var(--nudge-learn-neutral-600);
-  --onboarding-track: var(--nudge-learn-neutral-200);
+  --onboarding-track: var(--nudge-learn-white);
   --onboarding-primary: var(--nudge-learn-violet);
   --onboarding-primary-hover: var(--nudge-learn-violet-hover);
   --onboarding-primary-active: var(--nudge-learn-violet-800);
@@ -576,7 +576,7 @@ a.nudge-shimmer-button {
   --onboarding-surface: var(--nudge-learn-canvas);
   --onboarding-ink: var(--nudge-learn-ink);
   --onboarding-muted: var(--nudge-learn-neutral-600);
-  --onboarding-track: var(--nudge-learn-neutral-200);
+  --onboarding-track: var(--nudge-learn-white);
   --onboarding-primary: var(--nudge-learn-violet);
   --onboarding-primary-hover: var(--nudge-learn-violet-hover);
   --onboarding-primary-active: var(--nudge-learn-violet-800);
