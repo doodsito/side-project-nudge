@@ -96,17 +96,20 @@ export function OnboardingFlow({
   const reminderDisplay = formatReminderTime(reminder, track, t.ready.anytime);
   const readySummary = (
     <div className="onboarding-ready-bento">
+      <div className="onboarding-ready-card" data-card="time">
+        <span className="onboarding-ready-icon" aria-hidden="true">
+          <Clock3 />
+        </span>
+        <span className="onboarding-ready-label">{t.ready.timeLabel}</span>
+        <p className="onboarding-ready-value">
+          <span>{reminderDisplay}</span>
+        </p>
+      </div>
       <div className="onboarding-ready-card" data-card="duration">
         <span className="onboarding-ready-label">{t.ready.durationLabel}</span>
         <p className="onboarding-ready-value">
           <span>{t.daily.replace("{minutes}", String(minutes))}</span>
           <span className="onboarding-ready-unit">{t.ready.durationUnit}</span>
-        </p>
-      </div>
-      <div className="onboarding-ready-card" data-card="time">
-        <span className="onboarding-ready-label">{t.ready.timeLabel}</span>
-        <p className="onboarding-ready-value">
-          <span>{reminderDisplay}</span>
         </p>
       </div>
     </div>
