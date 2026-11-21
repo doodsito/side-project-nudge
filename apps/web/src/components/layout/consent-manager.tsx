@@ -147,18 +147,18 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
   colorScheme: "light",
   theme: {
     colors: {
-      primary: "var(--primary)",
-      primaryHover: "color-mix(in oklab, var(--primary) 90%, var(--background))",
-      surface: "var(--surface)",
-      surfaceHover: "var(--surface-2)",
-      border: "var(--border)",
-      borderHover: "var(--border-strong)",
-      text: "var(--foreground)",
-      textMuted: "var(--muted-foreground)",
-      textOnPrimary: "var(--primary-foreground)",
-      switchTrack: "var(--border-strong)",
-      switchTrackActive: "var(--primary)",
-      switchThumb: "var(--surface)",
+      primary: "var(--nudge-learn-violet)",
+      primaryHover: "var(--nudge-learn-violet-hover)",
+      surface: "var(--nudge-learn-white)",
+      surfaceHover: "var(--nudge-learn-white)",
+      border: "var(--nudge-learn-neutral-200)",
+      borderHover: "var(--nudge-learn-neutral-300)",
+      text: "var(--nudge-learn-ink)",
+      textMuted: "var(--nudge-learn-neutral-600)",
+      textOnPrimary: "var(--nudge-learn-white)",
+      switchTrack: "var(--nudge-learn-neutral-300)",
+      switchTrackActive: "var(--nudge-learn-violet)",
+      switchThumb: "var(--nudge-learn-white)",
     },
     typography: { fontFamily: "var(--font-inter), ui-sans-serif, system-ui, sans-serif" },
     radius: {
@@ -171,7 +171,20 @@ const options: ComponentProps<typeof ConsentManagerProvider>["options"] = {
       // c15t's wrapper grows to the full width of the screen and used to catch clicks
       // next to the card (a "Sign in" button could not be pressed): only the card does now.
       consentBanner: "pointer-events-none",
-      consentBannerCard: "pointer-events-auto",
+      consentBannerCard: {
+        className:
+          "pointer-events-auto overflow-hidden rounded-3xl border border-[var(--nudge-learn-neutral-200)] shadow-lift",
+        style: { width: "calc(100% - 2rem)", maxWidth: "42rem" },
+      },
+      consentBannerFooter:
+        "border-t border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] px-6 py-5",
+      consentBannerTitle: "font-display font-semibold tracking-tight text-onboarding-ink",
+      consentBannerDescription: "font-sans leading-relaxed",
+      consentDialogCard:
+        "overflow-hidden rounded-3xl border border-[var(--nudge-learn-neutral-200)] bg-[var(--nudge-learn-white)] shadow-lift",
+      consentDialogTitle: "font-display font-semibold tracking-tight text-onboarding-ink",
+      buttonPrimary: "h-12 rounded-xl px-5 font-sans font-semibold",
+      buttonSecondary: "h-12 rounded-xl px-5 font-sans font-semibold",
     },
   },
 };

@@ -13,9 +13,9 @@ export function CourseWorlds({ copy }: { copy: Dictionary["learning"]["courses"]
           <ArrowLeft aria-hidden /> {copy.backToLearn}
         </Link>
       </Button>
-      <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{copy.yourCourses}</h1>
+      <h1 className="course-card-title text-2xl sm:text-3xl">{copy.yourCourses}</h1>
       <section aria-labelledby="course-roadmap-heading" className="mt-8">
-        <h2 id="course-roadmap-heading" className="font-display text-lg font-bold">
+        <h2 id="course-roadmap-heading" className="course-card-title text-lg">
           {copy.roadmap}
         </h2>
         <ol className="mt-4 border-l-2 border-border pl-5">
@@ -35,7 +35,7 @@ export function CourseWorlds({ copy }: { copy: Dictionary["learning"]["courses"]
                     <p className="text-xs font-semibold text-muted-foreground">
                       {copy.world} {world.number}
                     </p>
-                    <h3 className="font-semibold text-foreground/80 text-balance">
+                    <h3 className="course-card-title text-foreground/80 text-balance">
                       {worldCopy.title}
                     </h3>
                   </div>

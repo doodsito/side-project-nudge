@@ -15,7 +15,7 @@ import { getDictionary } from "@/lib/dictionaries";
 
 // Where Supabase sends people back after Google or an email link. The
 // address must be allowed in Supabase (Authentication > URL Configuration).
-async function callbackUrl(next?: "/lessons/why-invest") {
+async function callbackUrl(next?: "/onboarding") {
   const origin = (await headers()).get("origin") ?? SITE_URL;
   const url = new URL("/auth/callback", origin);
   if (next) url.searchParams.set("next", next);
@@ -69,7 +69,7 @@ export async function changeAccessCode() {
   redirect("/signup");
 }
 
-async function googleSignIn(next?: "/lessons/why-invest") {
+async function googleSignIn(next?: "/onboarding") {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -84,7 +84,7 @@ export async function signInWithGoogle() {
 }
 
 export async function signUpWithGoogle() {
-  await googleSignIn("/lessons/why-invest");
+  await googleSignIn("/onboarding");
 }
 
 export async function signUpWithPassword(
@@ -106,7 +106,7 @@ export async function signUpWithPassword(
     // or in another browser. It is only an input: redeem_access_code() checks it.
     // The track picks the language of the confirmation email.
     options: {
-      emailRedirectTo: await callbackUrl("/lessons/why-invest"),
+      emailRedirectTo: await callbackUrl("/onboarding"),
       data: { access_code: code, track: await getVisitorTrack() },
     },
   });
@@ -120,7 +120,7 @@ export async function signUpWithPassword(
   // the account starts once the link in the email is opened.
   if (!data.session) return { sentTo: email };
   if (!(await finishSignIn(supabase))) return { error: t.noAccess };
-  redirect("/lessons/why-invest");
+  redirect("/onboarding");
 }
 
 export async function signInWithPassword(

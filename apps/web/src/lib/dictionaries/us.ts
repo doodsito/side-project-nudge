@@ -3,7 +3,10 @@
 import { BRAND } from "@/lib/brand";
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "@/lib/auth-rules";
 
+import { onboardingUs } from "./onboarding-us";
+
 export const us = {
+  onboarding: onboardingUs,
   skipLink: "Skip to content",
   meta: {
     title: "Practice Investing Decisions",
