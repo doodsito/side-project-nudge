@@ -220,7 +220,7 @@ export function WhyInvestFlow({
       <div ref={content} className={styles["flow"]}>
         <div className={styles["main"]} id="world-0-main" data-scroll-region tabIndex={-1}>
           {stage === 0 && (
-            <section className={styles["screen"]} key="decision">
+            <section className={styles["screen"]} data-step="decision" key="decision">
               <p className={styles["eyebrow"]}>{onboarding.decisionEyebrow}</p>
               <h1 className={styles["title"]}>
                 {copyWithAmount(onboarding.decisionTitle, amount)}
@@ -273,7 +273,12 @@ export function WhyInvestFlow({
           )}
 
           {stage === 1 && choice !== null && (
-            <section className={styles["screen"]} key="feedback" aria-live="polite">
+            <section
+              className={styles["screen"]}
+              data-step="feedback"
+              key="feedback"
+              aria-live="polite"
+            >
               <p className={styles["eyebrow"]}>{onboarding.feedbackEyebrow}</p>
               <h1 className={styles["title"]}>{onboarding.feedbackTitle}</h1>
               <div className={`${styles["mascotStage"]} ${styles["smallMascot"]}`}>
@@ -295,7 +300,7 @@ export function WhyInvestFlow({
           )}
 
           {stage === 2 && (
-            <section className={styles["screen"]} key="growth">
+            <section className={styles["screen"]} data-step="growth" key="growth">
               <p className={styles["eyebrow"]}>{copy.compound.eyebrow}</p>
               <h1 className={styles["title"]}>{copy.compound.title}</h1>
               <p className={styles["subtitle"]}>
@@ -400,7 +405,7 @@ export function WhyInvestFlow({
           )}
 
           {stage === 3 && (
-            <section className={styles["screen"]} key="risk">
+            <section className={styles["screen"]} data-step="risk" key="risk">
               <p className={styles["eyebrow"]}>{copy.risk.eyebrow}</p>
               <h1 className={styles["title"]}>{copy.risk.title}</h1>
               <p className={styles["subtitle"]}>{copy.risk.intro}</p>
@@ -498,7 +503,11 @@ export function WhyInvestFlow({
           )}
 
           {stage === 4 && (
-            <section className={`${styles["screen"]} ${styles["complete"]}`} key="complete">
+            <section
+              className={`${styles["screen"]} ${styles["complete"]}`}
+              data-step="complete"
+              key="complete"
+            >
               <p className={styles["eyebrow"]}>{copy.complete.eyebrow}</p>
               <div className={styles["celebration"]}>
                 <Image
